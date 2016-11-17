@@ -1,5 +1,5 @@
 worker_processes 2
-APP_PATH = "/home/rails/lgcare/"
+APP_PATH = "/home/janustabuser/lgcare/"
 working_directory APP_PATH + "current/"
 
 preload_app true

@@ -4,7 +4,7 @@ lock '3.6.1'
 set :application, 'lgcare'
 set :repo_url, 'https://github.com/ShakeJ/LGCNP.git'
 # set :repo_tree, 'server/cnp'
-set :default_environment, {
+set :default_env, {
   'LD_LIBRARY_PATH' => "/usr/lib/oracle/12.1/client64/lib/"
 }
 # set :rbenv_ruby, '2.2.3'
@@ -75,5 +75,9 @@ namespace :deploy do
       #   execute :rake, 'cache:clear'
       # end
     end
+  end
+
+  desc "No ActiveRecord override"
+  task :migrate do
   end
 end
