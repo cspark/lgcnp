@@ -6,15 +6,15 @@
 
 
 set :stage, :production
-set :deploy_to, "/home/rails/lgcare"
+set :deploy_to, "/home/janustabuser/lgcare"
 
-server 'rails@lgcare.mintshop.com', port: 10022, roles: %w{web app db}
+server 'janustabuser@203.247.132.107', port: 10022, roles: %w{web app db}
 
 set :branch, 'master'
 set :rails_env, 'production'
 set :unicorn_rack_env, "production"
-set :unicorn_pid, '/home/rails/lgcare/shared/pids/unicorn.pid'
-set :unicorn_config_path, '/home/rails/lgcare/current/config/unicorn/production.rb'
+set :unicorn_pid, '/home/rails/janustabuser/shared/pids/unicorn.pid'
+set :unicorn_config_path, '/home/rails/janustabuser/current/config/unicorn/production.rb'
 set :unicorn_restart_sleep_time, 5
 
 #
