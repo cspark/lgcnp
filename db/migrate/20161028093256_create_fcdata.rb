@@ -1,0 +1,101 @@
+class CreateFcdata < ActiveRecord::Migration[5.0]
+  def change
+    create_table :fcdata do |t|
+      t.string :CUSTSERIAL,  null:false
+      t.string :FACENO
+      t.string :MEASUREDATE
+      t.integer :MEASURENO
+      t.string :UPTDATE
+      t.float :MO_1
+      t.float :MO_7
+      t.float :MO_8
+      t.integer :PR_1
+      t.integer :PR_2
+      t.integer :PR_7
+      t.integer :PR_8
+      t.integer :PR_avr
+      t.integer :WR_3
+      t.integer :WR_4
+      t.integer :WR_5
+      t.integer :WR_6
+      t.integer :WR_avr
+      t.integer :EL_7
+      t.integer :EL_8
+      t.integer :EL_avr
+      t.float :EL_angle_7
+      t.float :EL_angle_8
+      t.integer :SB_1
+      t.integer :SB_2
+      t.integer :SB_7
+      t.integer :SB_8
+      t.integer :SB_avr
+      t.integer :PP_1
+      t.integer :PP_2
+      t.integer :PP_7
+      t.integer :PP_8
+      t.integer :PP_avr
+      t.integer :PP_Ratio_1
+      t.integer :PP_Ratio_2
+      t.integer :PP_Ratio_7
+      t.integer :PP_Ratio_8
+      t.integer :PP_Ratio_avr
+      t.integer :SP_PL_1
+      t.integer :SP_PL_2
+      t.integer	:SP_PL_3
+      t.integer :SP_PL_4
+      t.integer :SP_PL_5
+      t.integer :SP_PL_6
+      t.integer :SP_PL_7
+      t.integer :SP_PL_8
+      t.integer :SP_PL_avr
+      t.integer :SP_UV_1
+      t.integer :SP_UV_2
+      t.integer :SP_UV_3
+      t.integer :SP_UV_4
+      t.integer :SP_UV_5
+      t.integer :SP_UV_6
+      t.integer :SP_UV_7
+      t.integer :SP_UV_8
+      t.integer :SP_UV_avr
+      t.integer	:SK_C_1
+      t.integer :SK_C_2
+      t.integer :SK_C_4
+      t.integer :SK_C_6
+      t.integer :SK_C_7
+      t.integer	:SK_C_8
+      t.integer	:SK_C_avr
+      t.integer	:SK_R_1
+      t.integer	:SK_R_2
+      t.integer	:SK_R_4
+      t.integer	:SK_R_6
+      t.integer	:SK_R_7
+      t.integer :SK_R_8
+      t.integer :SK_R_avr
+      t.integer	:SK_G_1
+      t.integer	:SK_G_2
+      t.integer	:SK_G_4
+      t.integer	:SK_G_6
+      t.integer	:SK_G_7
+      t.integer :SK_G_8
+      t.integer	:SK_G_avr
+      t.integer	:SK_B_1
+      t.integer	:SK_B_2
+      t.integer	:SK_B_4
+      t.integer	:SK_B_6
+      t.integer	:SK_B_7
+      t.integer	:SK_B_8
+      t.integer	:SK_B_avr
+      t.float	:Lab_L
+      t.float :Lab_a
+      t.float :Lab_b
+      t.integer :COLORTYPE
+      t.integer :SUNTYPE
+      t.integer :SKINTYPE
+      t.integer :SCORE_R
+      t.integer :SCORE_L
+      t.integer :YANUS_STATUS, :default => 1
+
+      t.timestamps
+    end
+  end
+end
