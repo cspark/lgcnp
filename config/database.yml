@@ -22,13 +22,10 @@ test:
 
 staging:
     adapter: oracle_enhanced
-    encoding: utf-8
-    pool: 5
     username: janus
     password: janus!123
     host: 165.244.88.37
     port: 1521
-    database: VDLDBDEV
 
 production:
   <<: *default
