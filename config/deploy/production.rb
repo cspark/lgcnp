@@ -1,22 +1,14 @@
-# Simple Role Syntax
-# ==================
-# Supports bulk-adding hosts to roles, the primary server in each group
-# is considered to be the first unless any hosts have the primary
-# property set.  Don't declare `role :all`, it's a meta role.
-
-
-set :stage, :production
+set :stage, :staging
 set :deploy_to, "/home/janustabuser/lgcare"
 
-server 'janustabuser@203.247.132.107', port: 10022, roles: %w{web app db}
+server 'janustabuser@203.247.132.107', roles: %w{web app db}
 
 set :branch, 'master'
 set :rails_env, 'production'
 set :unicorn_rack_env, "production"
-set :unicorn_pid, '/home/rails/janustabuser/shared/pids/unicorn.pid'
-set :unicorn_config_path, '/home/rails/janustabuser/current/config/unicorn/production.rb'
+set :unicorn_pid, '/home/janustabuser/lgcare/shared/pids/unicorn.pid'
+set :unicorn_config_path, '/home/janustabuser/lgcare/current/config/unicorn/staging.rb'
 set :unicorn_restart_sleep_time, 5
-
 #
 # set :sidekiq_queue, [
 #    'please_push_notification',
