@@ -30,7 +30,8 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'activerecord-oracle_enhanced-adapter', '~> 1.7.0'
-
+gem 'ruby-oci8', '~> 2.2.2' # only for CRuby users
+gem 'rack'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -56,13 +57,11 @@ end
 group :staging, :development do
   gem 'rack-cors', :require => 'rack/cors'
   gem 'unicorn'
-  gem 'ruby-oci8', '~> 2.2.2' # only for CRuby users
 end
 
-group :production, :staging do
+group :production, :development do
   gem 'rack-cors', :require => 'rack/cors'
   gem 'unicorn'
-  gem 'ruby-oci8', '~> 2.2.2' # only for CRuby users
 end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
