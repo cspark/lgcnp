@@ -4,7 +4,7 @@ set :deploy_to, "/home/janustabuser/lgcare"
 server 'janustabuser@203.247.132.106', roles: %w{web app db}
 
 set :branch, 'master'
-set :rails_env, 'production'
+set :rails_env, 'staging'
 set :unicorn_rack_env, "production"
 set :unicorn_pid, '/home/janustabuser/lgcare/shared/pids/unicorn.pid'
 set :unicorn_config_path, '/home/janustabuser/lgcare/current/config/unicorn/staging.rb'
