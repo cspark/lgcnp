@@ -24,14 +24,28 @@ staging:
     adapter: oracle_enhanced
     username: janus
     password: janus!123
-    database: VDLDBDEV
-    host: 165.244.88.37
-    port: 1521
+    database: "(DESCRIPTION=
+      (ADDRESS=
+        (PROTOCOL=TCP)
+        (HOST=165.244.88.37)
+        (PORT=1521)
+      )
+      (CONNECT_DATA=
+        (SERVICE_NAME=VDLDBDEV)
+      )
+    )"
 
 production:
     adapter: oracle_enhanced
     username: janus
     password: janus!123
-    database: VDLDBDEV
-    host: 165.244.88.37
-    port: 1521
+    database: "(DESCRIPTION=
+      (ADDRESS=
+        (PROTOCOL=TCP)
+        (HOST=165.244.88.37)
+        (PORT=1521)
+      )
+      (CONNECT_DATA=
+        (SERVICE_NAME=VDLDBDEV)
+      )
+    )"
