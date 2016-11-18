@@ -54,6 +54,7 @@ group :development do
 end
 
 group :staging, :staging do
+  gem 'rack-cors', :require => 'rack/cors'
   gem 'unicorn'
   gem 'ruby-oci8', '~> 2.2.2' # only for CRuby users
 end
