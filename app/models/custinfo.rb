@@ -12,7 +12,7 @@ class Custinfo < ApplicationRecord
       birthmm: birthmm,
       birthdd: birthdd,
       phone: phone,
-      uptdate: update
+      update: uptdate
     }
   end
 end
