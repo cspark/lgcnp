@@ -26,7 +26,7 @@ class FcdatasController < ApplicationController
 
     face_data = Fcdata.where(custserial: serial).first
     if face_data.present?
-      render :text => face_data.YANUS_STATUS, status: 200
+      render :text => face_data.status, status: 200
     else
       render :text => "cannot check yanus status", status: 404
     end
