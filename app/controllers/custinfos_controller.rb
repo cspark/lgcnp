@@ -51,44 +51,44 @@ class CustinfosController < ApplicationController
     uptdate = time.year.to_s + "/" + time.month.to_s + "/" + time.day.to_s
 
     custinfo = Custinfo.new
-    custinfo.SERIAL = SecureRandom.random_number(9999999999999999999999999999999999999999)
-    custinfo.CUSTNAME = name
-    custinfo.SEX = sex
-    custinfo.AGE = age
-    custinfo.BIRTHYY = birthyy
-    custinfo.BIRTHMM = birthmm
-    custinfo.BIRTHDD = birthdd
-    custinfo.PHONE = phone
-    custinfo.UPTDATE = uptdate
+    custinfo.custserial = SecureRandom.random_number(999999999999)
+    custinfo.custname = name
+    custinfo.sex = sex
+    custinfo.age = age
+    custinfo.birthyy = birthyy
+    custinfo.birthmm = birthmm
+    custinfo.birthdd = birthdd
+    custinfo.phone = phone
+    custinfo.update = uptdate
 
     custinfo.save
 
     #temp value
     #uptdate = "2015/12/31"
-    generate_random_data(custinfo.SERIAL, uptdate)
+    generate_random_data(custinfo.custserial, uptdate)
 
   end
 
   def generate_random_data(inputserial, inputuptdate)
     fcdata = Fcdata.new
-    fcdata.CUSTSERIAL = inputserial
-    fcdata.UPTDATE = inputuptdate
+    fcdata.custserial = inputserial
+    fcdata.update = inputuptdate
     fcdata.input_random_number
     fcdata.save
 
     fcpos = Fcpos.new
-    fcpos.CUSTSERIAL = inputserial
-    fcpos.UPTDATE = inputuptdate
+    fcpos.custserial = inputserial
+    fcpos.update = inputuptdate
     fcpos.input_random_number
     fcpos.save
 
     fcinterview = Fcinterview.new
-    fcinterview.CUSTSERIAL = inputserial
-    fcinterview.UPTDATE = inputuptdate
+    fcinterview.custserial = inputserial
+    fcinterview.update = inputuptdate
     fcinterview.save
 
     fctabletinterview = Fctabletinterview.new
-    fctabletinterview.CUSTSERIAL = inputserial
+    fctabletinterview.custserial = inputserial
     fctabletinterview.save
 
     render :text => inputserial

@@ -1,18 +1,18 @@
 class Custinfo < ApplicationRecord
   self.table_name = "custinfo"
-  
+
   def to_api_hash
     {
       id: id,
-      serial: self.SERIAL,
-      custname: self.CUSTNAME,
-      sex: self.SEX,
-      age: self.AGE,
-      birthyy: self.BIRTHYY,
-      birthmm: self.BIRTHMM,
-      birthdd: self.BIRTHDD,
-      phone: self.PHONE,
-      uptdate: self.UPTDATE
+      serial: custserial,
+      custname: custname,
+      sex: sex,
+      age: age,
+      birthyy: birthyy,
+      birthmm: birthmm,
+      birthdd: birthdd,
+      phone: phone,
+      uptdate: update
     }
   end
 end
