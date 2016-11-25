@@ -1,4 +1,6 @@
 class Custinfo < ApplicationRecord
+  self.table_name = "custinfo"
+  
   def to_api_hash
     {
       id: id,

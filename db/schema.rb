@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 20161104052616) do
 
   create_table "custinfos", force: :cascade do |t|
-    t.string   "SERIAL",       null: false
+    t.integer  "SERIAL",       null: false
     t.string   "CUSTNAME"
     t.string   "SEX"
     t.string   "BIRTHYY"
@@ -22,16 +22,16 @@ ActiveRecord::Schema.define(version: 20161104052616) do
     t.string   "AGE"
     t.string   "PHONE"
     t.string   "ADDRESS"
-    t.string   "EMAIL"
+    t.string   "EAMIL"
     t.string   "LASTANALDATE"
     t.string   "MEASURENO"
-    t.string   "UPTDATE"
+    t.string   "UPDATE"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
 
   create_table "fcdata", force: :cascade do |t|
-    t.string   "CUSTSERIAL",               null: false
+    t.integer  "CUSTSERIAL",   null: false
     t.string   "FACENO"
     t.string   "MEASUREDATE"
     t.integer  "MEASURENO"
@@ -123,13 +123,12 @@ ActiveRecord::Schema.define(version: 20161104052616) do
     t.integer  "SKINTYPE"
     t.integer  "SCORE_R"
     t.integer  "SCORE_L"
-    t.integer  "YANUS_STATUS", default: 1
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "fcinterviews", force: :cascade do |t|
-    t.string   "CUSTSERIAL",  null: false
+    t.integer  "CUSTSERIAL",  null: false
     t.string   "FACENO"
     t.string   "MEASUREDATE"
     t.integer  "MEASURENO"
@@ -147,7 +146,7 @@ ActiveRecord::Schema.define(version: 20161104052616) do
   end
 
   create_table "fcpos", force: :cascade do |t|
-    t.string   "CUSTSERIAL",  null: false
+    t.integer  "CUSTSERIAL",  null: false
     t.string   "FACENO"
     t.string   "MEASUREDATE"
     t.integer  "MEASURENO"
