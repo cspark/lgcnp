@@ -1,7 +1,7 @@
 require 'securerandom'
 
 class CustinfosController < ApplicationController
-  # skip_before_filter :verify_authenticity_token, :only => :create
+  skip_before_filter :verify_authenticity_token, :only => :create
 
   def index
     custinfos = Custinfo.all
@@ -60,6 +60,7 @@ class CustinfosController < ApplicationController
     custinfo.phone = phone
     custinfo.update = uptdate
 
+    custinfo.save
     if custinfo.save
       render json: custinfo.to_api_hash, status: 200
     else
