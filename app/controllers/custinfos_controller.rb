@@ -8,14 +8,15 @@ class CustinfosController < ApplicationController
     render json: api_hash_for_list(custinfos), status: :ok
   end
 
-#이름 + 생년월일로 검색
+  #이름 + 생년월일로 검색
   def find_user
     name = params[:name]
+    Rails.logger.info params[:name]
     yy = params[:birthyy]
     mm = params[:birthmm]
     dd = params[:birthdd]
 
-    find_user = Custinfo.where(custname:name).where(birthyy:yy).where(birthmm:mm).where(birthdd:dd).first
+    find_user = Custinfo.where(custname: name).where(birthyy: yy).where(birthmm: mm).where(birthdd: dd).first
     if find_user.present?
       render json: find_user.to_api_hash, status: 200
     else
