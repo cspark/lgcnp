@@ -58,7 +58,7 @@ class CustinfosController < ApplicationController
     custinfo.birthmm = birthmm
     custinfo.birthdd = birthdd
     custinfo.phone = phone
-    custinfo.update = uptdate
+    custinfo.uptdate = uptdate
 
     custinfo.save
     if custinfo.save
