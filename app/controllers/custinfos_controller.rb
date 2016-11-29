@@ -60,12 +60,14 @@ class CustinfosController < ApplicationController
     custinfo.phone = phone
     custinfo.update = uptdate
 
-    custinfo.save
-
+    if custinfo.save
+      render json: custinfo.to_api_hash, status: 200
+    else
+      render json: "", status: 404
+    end
     #temp value
     #uptdate = "2015/12/31"
-    generate_random_data(custinfo.custserial, uptdate)
-
+    # generate_random_data(custinfo.custserial, uptdate)
   end
 
   def generate_random_data(inputserial, inputuptdate)
