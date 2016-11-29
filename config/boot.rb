@@ -1,4 +1,4 @@
-ENV['NLS_LANG'] = 'AMERICAN_AMERICA.KO16MSWIN949'
+ENV['NLS_LANG'] = 'AMERICAN_AMERICA.UTF8'
 
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../Gemfile', __dir__)
 
