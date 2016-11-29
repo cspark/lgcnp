@@ -8,7 +8,6 @@ class CustinfosController < ApplicationController
     render json: api_hash_for_list(custinfos), status: :ok
   end
 
-  #이름 + 생년월일로 검색
   def find_user
     name = params[:name]
     Rails.logger.info params[:name]
@@ -39,7 +38,6 @@ class CustinfosController < ApplicationController
   end
 
   def create
-    Rails.logger.info "TEST!!"
     Rails.logger.info params.inspect
     name = params[:name]
     sex = params[:sex]

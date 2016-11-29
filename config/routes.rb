@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :custinfos do
   end
+  get "create_user" => "custinfos#create"
   get "find_user" => "custinfos#find_user"
   get "find_users" => "custinfos#find_users"
 
