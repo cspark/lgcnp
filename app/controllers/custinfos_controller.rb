@@ -50,7 +50,7 @@ class CustinfosController < ApplicationController
     uptdate = time.year.to_s + "/" + time.month.to_s + "/" + time.day.to_s
 
     custinfo = Custinfo.new
-    custinfo.custserial = SecureRandom.random_number(999999999999)
+    custinfo.custserial = rand(9999999999).to_s.center(10, rand(9).to_s).to_i
     custinfo.custname = name
     custinfo.sex = sex
     custinfo.age = age
@@ -60,7 +60,7 @@ class CustinfosController < ApplicationController
     custinfo.phone = phone
     custinfo.uptdate = uptdate
 
-    custinfo.save
+    # custinfo.save
     if custinfo.save
       render json: custinfo.to_api_hash, status: 200
     else
