@@ -9,7 +9,8 @@ class CustinfosController < ApplicationController
   end
 
   def find_user
-    name = params[:name].encode("UTF-8")
+    name = params[:name]
+    name = name.force_encoding("utf-8")
     Rails.logger.info "Find User!"
     Rails.logger.info name
     yy = params[:birthyy]

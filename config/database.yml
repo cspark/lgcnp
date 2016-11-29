@@ -25,6 +25,7 @@ staging:
     username: janus
     password: janus!123
     host: 165.244.88.37
+    encoding: utf-8
     port: 1521
     database: VDLDBDEV
 
@@ -32,13 +33,7 @@ production:
     adapter: oracle_enhanced
     username: janus
     password: janus!123
-    database: "(DESCRIPTION=
-      (ADDRESS=
-        (PROTOCOL=TCP)
-        (HOST=165.244.88.37)
-        (PORT=1521)
-      )
-      (CONNECT_DATA=
-        (SERVICE_NAME=VDLDBDEV)
-      )
-    )"
+    host: 165.244.88.37
+    encoding: utf-8
+    port: 1521
+    database: VDLDBDEV
