@@ -24,7 +24,7 @@ class FctabletinterviewsController < ApplicationController
 
   def update_interviews
     serial = params[:custserial]
-    existed_interview = Fctabletinterview.where(custserial: serial).first
+    existed_interview = Fctabletinterview.where(custserial: serial).last
     existed_interview.update(permitted_param)
   end
 
