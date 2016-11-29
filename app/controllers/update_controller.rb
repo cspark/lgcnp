@@ -5,7 +5,7 @@ class UpdateController < ApplicationController
     current_version_code = 12
 
     if version_code < current_version_code
-      url_json = "{"download_url" : "http://203.247.132.106/app.apk"}"
+      url_json = "{'download_url' : 'http://203.247.132.106/app.apk'}"
       render json: url_json.to_json, status: 404
     else
       render json: "", status: 200
