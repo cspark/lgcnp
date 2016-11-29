@@ -23,13 +23,13 @@ class FctabletinterviewsController < ApplicationController
   end
 
   def update_interviews
-    serial = params[:custserial]
-    existed_interview = Fctabletinterview.where(custserial: serial).last
+    Rails.logger.info params[:custserial]
+    existed_interview = Fctabletinterview.where(custserial: params[:custserial]).last
     existed_interview.update(permitted_param)
   end
 
   def permitted_param
-    permitted = params.permit(:custserial, :a_1, :a_2,:a_3,:b_1,:b_2,:b_3,:b_4,:c_1,:d_1,:d_2,:d_3,:d_4,:d_5,:d_6,:d_7,:d_8,:d_9,:d_10,
+    permitted = params.permit(:custserial,:a_1,:a_2,:a_3,:b_1,:b_2,:b_3,:b_4,:c_1,:d_1,:d_2,:d_3,:d_4,:d_5,:d_6,:d_7,:d_8,:d_9,:d_10,
     :skin_type,:before_solution_1,:after_solution_1,:before_solution_2,:after_solution_2,
     :before_serum,:after_serum,:before_ample_1,:after_ample_1,:before_ample_2,:after_ample_2,
     :before_made_cosmetic,:after_made_cosmetic,:ch_cd)
