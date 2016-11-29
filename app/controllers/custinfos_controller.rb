@@ -10,7 +10,6 @@ class CustinfosController < ApplicationController
 
   def find_user
     name = params[:name]
-    name = name.force_encoding("utf-8")
     Rails.logger.info "Find User!"
     Rails.logger.info name
     yy = params[:birthyy]
@@ -70,34 +69,5 @@ class CustinfosController < ApplicationController
     else
       render json: "", status: 404
     end
-    #temp value
-    #uptdate = "2015/12/31"
-    # generate_random_data(custinfo.custserial, uptdate)
-  end
-
-  def generate_random_data(inputserial, inputuptdate)
-    fcdata = Fcdata.new
-    fcdata.custserial = inputserial
-    fcdata.update = inputuptdate
-    fcdata.input_random_number
-    fcdata.save
-
-    fcpos = Fcpos.new
-    fcpos.custserial = inputserial
-    fcpos.update = inputuptdate
-    fcpos.input_random_number
-    fcpos.save
-
-    fcinterview = Fcinterview.new
-    fcinterview.custserial = inputserial
-    fcinterview.update = inputuptdate
-    fcinterview.save
-
-    fctabletinterview = Fctabletinterview.new
-    fctabletinterview.custserial = inputserial
-    fctabletinterview.save
-
-    render :text => inputserial
-
   end
 end
