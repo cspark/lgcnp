@@ -1,5 +1,6 @@
 class Fctabletinterview < ApplicationRecord
   self.table_name = "fctabletinterview"
+  self.primary_key = :tablet_interview_id
 
   def to_api_hash
     {

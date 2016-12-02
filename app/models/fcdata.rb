@@ -37,7 +37,7 @@ class Fcdata < ApplicationRecord
        pp_8: pp_8,
        pp_avr: pp_avr,
        pp_ratio_1: pp_ratio_1,
-       pp_rtio_2: pp_rtio_2,
+       pp_ratio_2: pp_ratio_2,
        pp_ratio_7: pp_ratio_7,
        pp_ratio_8: pp_ratio_8,
        pp_ratio_avr: pp_ratio_avr,
