@@ -1,6 +1,6 @@
 class Custinfo < ApplicationRecord
   self.table_name = "custinfo"
-  self.primary_key "custserial"
+  set_primary_key :custserial
 
   def to_api_hash
     {
