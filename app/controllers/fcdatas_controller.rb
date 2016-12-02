@@ -8,11 +8,8 @@ class FcdatasController < ApplicationController
   end
 
   def find_histroy
-    #TODO : history 있으면, 목록을 내려보내주고, 없으면, 404
-    # serial params
-    serial = params[:serial]
-
-    fcdata = Fcdata.where(custserial: serial).first
+    #일단 첫번쨰께 내려가도록
+    fcdata = Fcdata.all.first
     if fcdata.present?
       render json: fcdata.to_api_hash, status: 200
     else
