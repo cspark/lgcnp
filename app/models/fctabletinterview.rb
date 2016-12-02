@@ -5,7 +5,7 @@ class Fctabletinterview < ApplicationRecord
   def to_api_hash
     {
       custserial: custserial,
-      interview_id: tablet_interview_id,
+      tablet_interview_id: tablet_interview_id,
       a_1: a_1,
       a_2: a_2,
       a_3: a_3,
