@@ -1,9 +1,9 @@
 class Custinfo < ApplicationRecord
   self.table_name = "custinfo"
-
+  self.set_primary_key "alias"
+  
   def to_api_hash
     {
-      id: id,
       serial: custserial,
       custname: custname,
       sex: sex,

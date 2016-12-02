@@ -52,7 +52,7 @@ class CustinfosController < ApplicationController
     uptdate = time.year.to_s + "/" + time.month.to_s + "/" + time.day.to_s
 
     custinfo = Custinfo.new
-    custinfo.custserial = rand(9999999999).to_s.center(10, rand(9).to_s).to_i
+    custinfo.custserial = Custinfo.all.count
     custinfo.ch_cd = "CNP"
     custinfo.custname = name
     custinfo.sex = sex

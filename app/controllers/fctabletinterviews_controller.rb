@@ -19,6 +19,10 @@ class FctabletinterviewsController < ApplicationController
 
   def create
     tabletinterview = Fctabletinterview.new(permitted_param)
+    tabletinterview.tablet_interview_id = Fctabletinterview.all.count
+    t = Time.now
+    tabletinterview.uptdate = t.strftime("%Y %m %d")
+    
     tabletinterview.save
   end
 
