@@ -7,19 +7,9 @@ class FcdatasController < ApplicationController
     render json: api_hash_for_list(fcdatas), status: :ok
   end
 
-  def find_histroy
-    #일단 첫번쨰께 내려가도록
-    fcdata = Fcdata.all.first
-    if fcdata.present?
-      render json: fcdata.to_api_hash, status: 200
-    else
-      render json: "", status:404
-    end
-
-  end
-
   def get_before_fcdata_count
     serial = params[:serial]
+
     face_datas_count = Fcdata.where(custserial: serial).count
     render :text => face_datas_count, status: 200
   end
@@ -29,11 +19,19 @@ class FcdatasController < ApplicationController
     before_count = params[:before_count]
 
     face_datas_count = Fcdata.where(custserial: serial).count
-    if before_count < face_datas_count
-      render :text => face_data.status, status: 200
+    # if before_count.to_i < face_datas_count.to_i
+    #   render :text => face_data.status, status: 200
+    # else
+    #   render :text => "cannot check yanus status", status: 404
+    # end
+
+    #Test
+    fcdata = Fcdata.all.first
+    if fcdata.present?
+      render json: fcdata.to_api_hash, status: 200
     else
-      render :text => "cannot check yanus status", status: 404
-    end
+      render json: "", status:404
+    end    
   end
 
   def face_data
