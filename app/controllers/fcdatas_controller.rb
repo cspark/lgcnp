@@ -18,11 +18,18 @@ class FcdatasController < ApplicationController
 
   end
 
+  def get_before_fcdata_count
+    serial = params[:serial]
+    face_datas_count = Fcdata.where(custserial: serial).count
+    render :text => face_datas_count, status: 200
+  end
+
   def check_yanus_status
     serial = params[:serial]
+    before_count = params[:before_count]
 
-    face_data = Fcdata.where(custserial: serial).first
-    if face_data.present?
+    face_datas_count = Fcdata.where(custserial: serial).count
+    if before_count < face_datas_count
       render :text => face_data.status, status: 200
     else
       render :text => "cannot check yanus status", status: 404

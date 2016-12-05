@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   resources :fcdatas do
   end
+  get "get_before_fcdata_count" => "fcdatas#get_before_fcdata_count"
   get "check_yanus_status" => "fcdatas#check_yanus_status"
   get "find_history" => "fcdatas#find_histroy"
   get "face_data" => "fcdatas#face_data"
