@@ -38,7 +38,7 @@ class Fctabletinterview < ApplicationRecord
       before_made_cosmetic: before_made_cosmetic,
       after_made_cosmetic: after_made_cosmetic,
       uptdate: uptdate,
-      measureno: fcdatat_id
+      measureno: fcdata_id
     }
   end
 end
