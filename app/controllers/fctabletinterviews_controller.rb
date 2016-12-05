@@ -9,9 +9,9 @@ class FctabletinterviewsController < ApplicationController
 
   def find_interviews
     serial = params[:custserial]
-    tabletinterview = Fctabletinterview.where(custserial: serial).first
-    if tabletinterview.present?
-      render json: tabletinterview.to_api_hash, status: :ok
+    tabletinterviews = Fctabletinterview.where(custserial: serial)
+    if tabletinterviews.count > 1
+      render json: api_hash_for_list(tabletinterviews), status: :ok
     else
       render json: "", status: 404
     end
