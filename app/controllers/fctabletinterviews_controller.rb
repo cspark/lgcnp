@@ -21,7 +21,7 @@ class FctabletinterviewsController < ApplicationController
     tabletinterview = Fctabletinterview.new(permitted_param)
     tabletinterview.tablet_interview_id = Fctabletinterview.all.count
     t = Time.now
-    tabletinterview.uptdate = t.strftime("%Y-%m-%d-%H-%m")
+    tabletinterview.uptdate = t.strftime("%Y-%m-%d-%H-%M")
 
     if tabletinterview.save
       render json: tabletinterview.to_api_hash, status: :ok
