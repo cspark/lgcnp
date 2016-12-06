@@ -38,6 +38,19 @@ class CustinfosController < ApplicationController
     end
   end
 
+  def update_phone_number
+      phone = params[:phone]
+      serial = params[:serial]
+
+      custinfo = Custinfo.where(custserial: serial).first
+      custinfo.phone = phone
+      if custinfo.save
+        render json: custinfo.to_api_hash, status: 200
+      else
+        render json: "", status: 404
+      end
+  end
+
   def create
     Rails.logger.info params.inspect
     name = params[:name]

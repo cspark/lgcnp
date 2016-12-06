@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   end
   get "find_user" => "custinfos#find_user"
   get "find_users" => "custinfos#find_users"
-
+  get "update_phone_number" => "custinfos#update_phone_number"
   resources :fcinterviews do
   end
 
