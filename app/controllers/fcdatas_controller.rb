@@ -19,26 +19,26 @@ class FcdatasController < ApplicationController
     before_count = params[:before_count]
 
     face_datas_count = Fcdata.where(custserial: serial).count
-    # if before_count.to_i < face_datas_count.to_i
-    #   render :text => face_data.status, status: 200
-    # else
-    #   render :text => "cannot check yanus status", status: 404
-    # end
+    if before_count.to_i < face_datas_count.to_i
+      render :text => face_data.status, status: 200
+    else
+      render :text => "cannot check yanus status", status: 404
+    end
 
     #Test
-    fcdata = Fcdata.all.first
-    if fcdata.present?
-      render json: fcdata.to_api_hash, status: 200
-    else
-      render json: "", status:404
-    end
+    # fcdata = Fcdata.all.first
+    # if fcdata.present?
+    #   render json: fcdata.to_api_hash, status: 200
+    # else
+    #   render json: "", status:404
+    # end
   end
 
   def face_data
     serial = params[:serial]
 
-    # face_data = Fcdata.where(custserial: serial).last
-    face_data = Fcdata.all.first
+    face_data = Fcdata.where(custserial: serial).last
+    # face_data = Fcdata.all.first
     if face_data.present?
       render json: face_data.to_api_hash, status: 200
     else
@@ -50,8 +50,8 @@ class FcdatasController < ApplicationController
     serial = params[:serial]
     measureno = params[:measureno]
 
-    # face_data = Fcdata.where(custserial: serial).where(measureno: measureno).last
-    face_data = Fcdata.all.first
+    face_data = Fcdata.where(custserial: serial).where(measureno: measureno).last
+    # face_data = Fcdata.all.first
     if face_data.present?
       render json: face_data.to_api_hash, status: 200
     else
