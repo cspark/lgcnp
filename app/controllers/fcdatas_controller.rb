@@ -8,7 +8,7 @@ class FcdatasController < ApplicationController
   end
 
   def get_before_fcdata_count
-    serial = params[:serial]
+    serial = params[:custserial]
 
     face_datas_count = Fcdata.where(custserial: serial).count
     render :text => face_datas_count, status: 200
