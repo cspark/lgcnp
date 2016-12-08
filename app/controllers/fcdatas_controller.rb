@@ -51,8 +51,8 @@ class FcdatasController < ApplicationController
     serial = params[:custserial]
     measureno = params[:measureno]
 
-    face_data = Fcdata.where(custserial: serial).where(measureno: measureno).last
-    # face_data = Fcdata.all.first
+    # face_data = Fcdata.where(custserial: serial).where(measureno: measureno).last
+    face_data = Fcdata.all.first
     if face_data.present?
       render json: face_data.to_api_hash, status: 200
     else

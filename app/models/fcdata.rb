@@ -104,11 +104,6 @@ class Fcdata < ApplicationRecord
   end
 
   def get_graph_data(type: nil)
-    # 5가지 그래프 값 도출
-    # FCAVGDATA 의 나이연령대별 평균  / UV 가 아닌  PL 값으로 판별
-    # FCDATA 의 평균값
-    # FCAVGDAT 의 나이연령대별 평균의 Grade 를 가지고 1~5점을 판별
-
     # 수분은 높을 수록 좋은 것
     if self.custserial.nil?
       return 0
@@ -282,9 +277,10 @@ class Fcdata < ApplicationRecord
 
   end
 
-  def get_averaget_graph
+  def get_average_graph
     # FCAVGDATA 의 Grade 2 와 3의 평균
     # min - max 는 AgeAll
+
   end
 
   def test
