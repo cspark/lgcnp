@@ -15,7 +15,7 @@ class Fcdata < ApplicationRecord
        pr_2: pr_2,
        pr_7: pr_7,
        pr_8: pr_8,
-       pr_avr: pr_avr,
+       pr_avr: get_graph_data(pore),
        wr_3: wr_3,
        wr_4: wr_4,
        wr_5: wr_5,
@@ -96,5 +96,41 @@ class Fcdata < ApplicationRecord
        score_r: score_r,
        score_l: score_l,
     }
+  end
+
+  def get_graph_data(type: nil)
+    # 5가지 그래프 값 도출
+    # FCAVGDATA 의 나이연령대별 평균  / UV 가 아닌  PL 값으로 판별
+    # FCDATA 의 평균값
+    # FCAVGDAT 의 나이연령대별 평균의 Grade 를 가지고 1~5점을 판별
+
+    # 수분은 높을 수록 좋은 것
+    user = Custinfo.where(custserial: self.custserial).first
+    age = user.age
+
+    if type == "pore"
+      
+    end
+  end
+
+  def get_mo_data
+    # AVG Data 의 Moisture Grade 3, 2 번을 참고
+  end
+
+  def get_averaget_graph
+    # FCAVGDATA 의 Grade 2 와 3의 평균
+    # min - max 는 AgeAll
+  end
+
+  def
+    # PR_1, PR_2
+    # 1번 이마, 2번이 코, 3번ㅇ
+  end
+
+  def
+    #탄력 각도 ; EL_ANGLE_7 이 오른쪽 볼, 8이 왼쪽
+
+  end
+
   end
 end

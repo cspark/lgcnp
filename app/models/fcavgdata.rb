@@ -1,0 +1,2 @@
+class Fcavgdata < ApplicationRecord
+end
