@@ -8,9 +8,9 @@ class Fcdata < ApplicationRecord
        measuredate: measuredate,
        measureno: measureno,
        uptdate: uptdate,
-       mo_1: mo_1,
-       mo_7: mo_7,
-       mo_8: mo_8,
+       mo_1: get_mo_to_five(value: mo_1),
+       mo_7: get_mo_to_five(value: mo_7),
+       mo_8: get_mo_to_five(value: mo_8),
        pr_1: pr_1,
        pr_2: pr_2,
        pr_7: pr_7,
@@ -124,6 +124,7 @@ class Fcdata < ApplicationRecord
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
     avg_grade_4_field_name = generate_age_data_field(age: age).concat("4")
     #abcd123456!
+
     if type == "pore"
       avr = self.pr_avr
       Rails.logger.info avg_grade_1_field_name
@@ -261,8 +262,23 @@ class Fcdata < ApplicationRecord
     end
   end
 
-  def get_mo_data
+  def get_mo_to_five(value: value)
     # AVG Data 의 Moisture Grade 3, 2 번을 참고
+
+    low = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_i
+    high = Fcavgdata.where(age: "AgeALL_Grade4").first.moisture.to_i
+
+    if value.to_i < low
+      return 0
+    end
+
+    if value.to_i > low && value.to_i < high
+      return 2
+    end
+
+    if value.to_i > high
+      return 5
+    end
 
   end
 
