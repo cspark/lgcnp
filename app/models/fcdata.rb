@@ -98,8 +98,8 @@ class Fcdata < ApplicationRecord
        colortype: colortype,
        suntype: suntype,
        skintype: skintype,
-       score_r: score_r,
-       score_l: score_l,
+       score_r: score_r.to_i - 5,
+       score_l: score_l.to_i - 5,
     }
   end
 
