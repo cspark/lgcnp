@@ -179,23 +179,23 @@ class Fcdata < ApplicationRecord
   end
 
   def convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
-    if avr < avr_1
+    if avr < avr1
       return 1
     end
 
-    if avr > avr_1 && avr < avr_2
+    if avr > avr1 && avr < avr2
       return 2
     end
 
-    if avr > avr_2 && avr < avr_3
+    if avr > avr2 && avr < avr3
       return 3
     end
 
-    if avr > avr_3 && avr < avr_4
+    if avr > avr3 && avr < avr4
       return 4
     end
 
-    if avr > avr_4
+    if avr > avr4
       return 5
     end
   end
