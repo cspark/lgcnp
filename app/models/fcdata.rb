@@ -189,7 +189,7 @@ class Fcdata < ApplicationRecord
     end
 
     if type == "wr"
-      return (Fcavgdata.where(age: avg_grade_2_field_name).first.wrinkle.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.wrinkle.pore.to_i) / 2
+      return (Fcavgdata.where(age: avg_grade_2_field_name).first.wrinkle.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.wrinkle.to_i) / 2
     end
 
     if type == "el"
