@@ -112,7 +112,9 @@ class Fcdata < ApplicationRecord
     # 수분은 높을 수록 좋은 것
     if self.custserial.nil?
       return 0
-      
+    end
+
+
     user = Custinfo.where(custserial: self.custserial).first
     age = user.age
 
