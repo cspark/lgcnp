@@ -127,30 +127,30 @@ class Fcdata < ApplicationRecord
     if type == "pore"
       avr = self.pr_avr
       Rails.logger.info avg_grade_1_field_name
-      avr_1 = Fcavgdata.where(age: avg_grade_1_field_name).first.pore.to_i
-      avr_2 = Fcavgdata.where(age: avg_grade_2_field_name).first.pore.to_i
-      avr_3 = Fcavgdata.where(age: avg_grade_3_field_name).first.pore.to_i
-      avr_4 = Fcavgdata.where(age: avg_grade_4_field_name).first.pore.to_i
+      avr1 = Fcavgdata.where(age: avg_grade_1_field_name).first.pore.to_i
+      avr2 = Fcavgdata.where(age: avg_grade_2_field_name).first.pore.to_i
+      avr3 = Fcavgdata.where(age: avg_grade_3_field_name).first.pore.to_i
+      avr4 = Fcavgdata.where(age: avg_grade_4_field_name).first.pore.to_i
 
       return convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
     end
 
     if type == "wr"
       avr = self.wr_avr
-      avr_1 = Fcavgdata.where(age: avg_grade_1_field_name).first.wrinkle.to_i
-      avr_2 = Fcavgdata.where(age: avg_grade_2_field_name).first.wrinkle.to_i
-      avr_3 = Fcavgdata.where(age: avg_grade_3_field_name).first.wrinkle.to_i
-      avr_4 = Fcavgdata.where(age: avg_grade_4_field_name).first.wrinkle.to_i
+      avr1 = Fcavgdata.where(age: avg_grade_1_field_name).first.wrinkle.to_i
+      avr2 = Fcavgdata.where(age: avg_grade_2_field_name).first.wrinkle.to_i
+      avr3 = Fcavgdata.where(age: avg_grade_3_field_name).first.wrinkle.to_i
+      avr4 = Fcavgdata.where(age: avg_grade_4_field_name).first.wrinkle.to_i
 
       return convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
     end
 
     if type == "el"
       avr = self.wr_avr
-      avr_1 = Fcavgdata.where(age: avg_grade_1_field_name).first.elasticity.to_i
-      avr_2 = Fcavgdata.where(age: avg_grade_2_field_name).first.elasticity.to_i
-      avr_3 = Fcavgdata.where(age: avg_grade_3_field_name).first.elasticity.to_i
-      avr_4 = Fcavgdata.where(age: avg_grade_4_field_name).first.elasticity.to_i
+      avr1 = Fcavgdata.where(age: avg_grade_1_field_name).first.elasticity.to_i
+      avr2 = Fcavgdata.where(age: avg_grade_2_field_name).first.elasticity.to_i
+      avr3 = Fcavgdata.where(age: avg_grade_3_field_name).first.elasticity.to_i
+      avr4 = Fcavgdata.where(age: avg_grade_4_field_name).first.elasticity.to_i
 
       return convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
     end
@@ -158,10 +158,10 @@ class Fcdata < ApplicationRecord
     if type == "sb"
       # E_PORPHYTRIN_T	E_PORPHYTRIN_U 평균값
       avr = self.wr_avr
-      avr_1 = Fcavgdata.where(age: avg_grade_1_field_name).first.porphyrin_ratio.to_i
-      avr_2 = Fcavgdata.where(age: avg_grade_2_field_name).first.porphyrin_ratio.to_i
-      avr_3 = Fcavgdata.where(age: avg_grade_3_field_name).first.porphyrin_ratio.to_i
-      avr_4 = Fcavgdata.where(age: avg_grade_4_field_name).first.porphyrin_ratio.to_i
+      avr1 = Fcavgdata.where(age: avg_grade_1_field_name).first.porphyrin_ratio.to_i
+      avr2 = Fcavgdata.where(age: avg_grade_2_field_name).first.porphyrin_ratio.to_i
+      avr3 = Fcavgdata.where(age: avg_grade_3_field_name).first.porphyrin_ratio.to_i
+      avr4 = Fcavgdata.where(age: avg_grade_4_field_name).first.porphyrin_ratio.to_i
 
       return convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
     end
@@ -169,10 +169,10 @@ class Fcdata < ApplicationRecord
     if type == "pp"
       # 색소침착 SPOT_PL
       avr = self.wr_avr
-      avr_1 = Fcavgdata.where(age: avg_grade_1_field_name).first.porphyrin_ratio.to_i
-      avr_2 = Fcavgdata.where(age: avg_grade_2_field_name).first.porphyrin_ratio.to_i
-      avr_3 = Fcavgdata.where(age: avg_grade_3_field_name).first.porphyrin_ratio.to_i
-      avr_4 = Fcavgdata.where(age: avg_grade_4_field_name).first.porphyrin_ratio.to_i
+      avr1 = Fcavgdata.where(age: avg_grade_1_field_name).first.porphyrin_ratio.to_i
+      avr2 = Fcavgdata.where(age: avg_grade_2_field_name).first.porphyrin_ratio.to_i
+      avr3 = Fcavgdata.where(age: avg_grade_3_field_name).first.porphyrin_ratio.to_i
+      avr4 = Fcavgdata.where(age: avg_grade_4_field_name).first.porphyrin_ratio.to_i
 
       return convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
     end
