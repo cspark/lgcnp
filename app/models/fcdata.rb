@@ -1,5 +1,6 @@
 class Fcdata < ApplicationRecord
   self.table_name = "fcdata"
+  # 1 이마 2 코 3 오른쪽 눈옆 4 오른쪽 눈밑 5 왼쪽 눈옆 6 왼쪽 눈밑 7 오른쪽 볼 8 왼쪽 볼
 
   def to_api_hash
     {
@@ -17,16 +18,28 @@ class Fcdata < ApplicationRecord
        pr_8: pr_8,
        pr_avr: pr_avr,
        pr_graph: get_graph_data(type: "pore"),
+       pr_graph_min: get_vertical_graph_min(type: "pore"),
+       pr_graph_max: get_vertical_graph_max(type: "pore"),
+       pr_graph_avr: get_vertical_graph_avr(type: "pore"),
+       pr_graph_me: pr_avr,
        wr_3: wr_3,
        wr_4: wr_4,
        wr_5: wr_5,
        wr_6: wr_6,
        wr_avr: wr_avr,
        wr_graph: get_graph_data(type: "wr"),
+       wr_graph_min: get_vertical_graph_min(type: "wr"),
+       wr_graph_max: get_vertical_graph_max(type: "wr"),
+       wr_graph_avr: get_vertical_graph_avr(type: "wr"),
+       wr_graph_me: wr_avr,
        el_7: el_7,
        el_8: el_8,
        el_avr: el_avr,
        el_graph: get_graph_data(type: "el"),
+       el_graph_min: get_vertical_graph_min(type: "el"),
+       el_graph_max: get_vertical_graph_max(type: "el"),
+       el_graph_avr: get_vertical_graph_avr(type: "el"),
+       el_graph_me: el_avr,
        el_angle_7: el_angle_7,
        el_angle_8: el_angle_8,
        sb_1: sb_1,
@@ -35,6 +48,10 @@ class Fcdata < ApplicationRecord
        sb_8: sb_8,
        sb_avr: sb_avr,
        sb_graph: get_graph_data(type: "sb"),
+       sb_graph_min: get_vertical_graph_min(type: "sb"),
+       sb_graph_max: get_vertical_graph_max(type: "sb"),
+       sb_graph_avr: get_vertical_graph_avr(type: "sb"),
+       sb_graph_me: sb_avr,
        pp_1: pp_1,
        pp_2: pp_2,
        pp_7: pp_7,
@@ -46,6 +63,10 @@ class Fcdata < ApplicationRecord
        pp_ratio_8: pp_ratio_8,
        pp_ratio_avr: pp_ratio_avr,
        pp_graph: get_graph_data(type: "pp"),
+       pp_graph_min: get_vertical_graph_min(type: "pp"),
+       pp_graph_max: get_vertical_graph_max(type: "pp"),
+       pp_graph_avr: get_vertical_graph_avr(type: "pp"),
+       pp_graph_me: pp_ratio_avr,
        sp_pl_1: sp_pl_1,
        sp_pl_2: sp_pl_2,
        sp_pl_3: sp_pl_3,
@@ -103,17 +124,90 @@ class Fcdata < ApplicationRecord
     }
   end
 
+  #Vertical / Horizontal Graph
+  def get_vertical_graph_min(type: nil)
+    if type == "pore"
+      return Fcavgdata.where(age: "AgeALL_Min").first.pore.to_i
+    end
+
+    if type == "sb"
+      # 트러블
+      return (Fcavgdata.where(age: "AgeALL_Min").first.e_porphyrin_u.to_i + Fcavgdata.where(age: "AgeALL_Min").first.e_porphyrin_t.to_i) / 2
+    end
+
+    if type == "wr"
+      return Fcavgdata.where(age: "AgeALL_Min").first.wrinkle.to_i
+    end
+
+    if type == "el"
+      return Fcavgdata.where(age: "AgeALL_Min").first.elasticity.to_i
+    end
+
+    if type == "pp"
+      return Fcavgdata.where(age: "AgeALL_Min").first.spot_pl.to_i
+    end
+  end
+
+  def get_vertical_graph_max(type: nil)
+    if type == "pore"
+        return Fcavgdata.where(age: "AgeALL_Max").first.pore.to_i
+    end
+
+    if type == "sb"
+      # 트러블
+      return (Fcavgdata.where(age: "AgeALL_Max").first.e_porphyrin_u.to_i + Fcavgdata.where(age: "AgeALL_Max").first.e_porphyrin_t.to_i) / 2
+    end
+
+    if type == "wr"
+      return Fcavgdata.where(age: "AgeALL_Max").first.wrinkle.to_i
+    end
+
+    if type == "el"
+      return Fcavgdata.where(age: "AgeALL_Max").first.elasticity.to_i
+    end
+
+    if type == "pp"
+      return Fcavgdata.where(age: "AgeALL_Max").first.spot_pl.to_i
+    end
+  end
+
+  def get_vertical_graph_avr(type: nil)
+    if self.custserial.nil?
+      return 0
+    end
+    user = Custinfo.where(custserial: self.custserial).first
+    age = user.age
+    avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
+    avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
+
+    if type == "pore"
+        return (Fcavgdata.where(age: avg_grade_2_field_name).first.pore.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.pore.to_i) / 2
+    end
+
+    if type == "sb"
+        return (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_i) / 2
+    end
+
+    if type == "wr"
+      return (Fcavgdata.where(age: avg_grade_2_field_name).first.wrinkle.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.wrinkle.pore.to_i) / 2
+    end
+
+    if type == "el"
+      return (Fcavgdata.where(age: avg_grade_2_field_name).first.elasticity.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.elasticity.to_i) / 2
+    end
+
+    if type == "pp"
+      return (Fcavgdata.where(age: avg_grade_2_field_name).first.spot_pl.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.spot_pl.to_i) / 2
+    end
+  end
+
   def get_graph_data(type: nil)
     # 수분은 높을 수록 좋은 것
     if self.custserial.nil?
       return 0
     end
-
-
     user = Custinfo.where(custserial: self.custserial).first
     age = user.age
-
-
     avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
     avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
@@ -157,7 +251,7 @@ class Fcdata < ApplicationRecord
       avr = self.sb_avr
 
       avr1 = (Fcavgdata.where(age: avg_grade_1_field_name).first.e_porphyrin_u.to_i + Fcavgdata.where(age: avg_grade_1_field_name).first.e_porphyrin_t.to_i) / 2
-      avr2 =(Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_i + Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_i) / 2
+      avr2 = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_i + Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_i) / 2
       avr3 = (Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_i) / 2
       avr4 = (Fcavgdata.where(age: avg_grade_4_field_name).first.e_porphyrin_u.to_i + Fcavgdata.where(age: avg_grade_4_field_name).first.e_porphyrin_t.to_i) / 2
 
@@ -277,7 +371,8 @@ class Fcdata < ApplicationRecord
 
   end
 
-  def get_average_graph
+  def convert_face_data
+
     # FCAVGDATA 의 Grade 2 와 3의 평균
     # min - max 는 AgeAll
 
