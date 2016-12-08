@@ -124,6 +124,7 @@ class Fcdata < ApplicationRecord
     avg_grade_2_field_name = avg_field_name.to_s.concat("2")
     avg_grade_3_field_name = avg_field_name.to_s.concat("3")
     avg_grade_4_field_name = avg_field_name.to_s.concat("4")
+    Rails.logger.info avg_grade_1_field_name
     if type == "pore"
       avr = self.pr_avr
       avr_1 = Fcavgdata.where(age: avg_grade_1_field_name).first.pore.to_i
