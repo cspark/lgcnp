@@ -118,16 +118,14 @@ class Fcdata < ApplicationRecord
     user = Custinfo.where(custserial: self.custserial).first
     age = user.age
 
-    avg_field_name = generate_age_data_field(age: age)
 
-    avg_grade_1_field_name = avg_field_name.to_s.concat("1")
-    avg_grade_2_field_name = avg_field_name.to_s.concat("2")
-    avg_grade_3_field_name = avg_field_name.to_s.concat("3")
-    avg_grade_4_field_name = avg_field_name.to_s.concat("4")
+    avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
+    avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
+    avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
+    avg_grade_4_field_name = generate_age_data_field(age: age).concat("4")
     #abcd123456!
     if type == "pore"
       avr = self.pr_avr
-      Rails.logger.info "field_name"
       Rails.logger.info avg_grade_1_field_name
       avr_1 = Fcavgdata.where(age: avg_grade_1_field_name).first.pore.to_i
       avr_2 = Fcavgdata.where(age: avg_grade_2_field_name).first.pore.to_i
