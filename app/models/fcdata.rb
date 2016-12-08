@@ -124,9 +124,10 @@ class Fcdata < ApplicationRecord
     avg_grade_2_field_name = avg_field_name.to_s.concat("2")
     avg_grade_3_field_name = avg_field_name.to_s.concat("3")
     avg_grade_4_field_name = avg_field_name.to_s.concat("4")
-    Rails.logger.info avg_grade_1_field_name
+
     if type == "pore"
       avr = self.pr_avr
+      Rails.logger.info avg_grade_1_field_name
       avr_1 = Fcavgdata.where(age: avg_grade_1_field_name).first.pore.to_i
       avr_2 = Fcavgdata.where(age: avg_grade_2_field_name).first.pore.to_i
       avr_3 = Fcavgdata.where(age: avg_grade_3_field_name).first.pore.to_i
@@ -156,6 +157,7 @@ class Fcdata < ApplicationRecord
     end
 
     if type == "sb"
+      # E_PORPHYTRIN_T	E_PORPHYTRIN_U 평균값
       avr = self.wr_avr
       avr_1 = Fcavgdata.where(age: avg_grade_1_field_name).first.porphyrin_ratio.to_i
       avr_2 = Fcavgdata.where(age: avg_grade_2_field_name).first.porphyrin_ratio.to_i
@@ -166,6 +168,7 @@ class Fcdata < ApplicationRecord
     end
 
     if type == "pp"
+      # 색소침착 SPOT_PL
       avr = self.wr_avr
       avr_1 = Fcavgdata.where(age: avg_grade_1_field_name).first.porphyrin_ratio.to_i
       avr_2 = Fcavgdata.where(age: avg_grade_2_field_name).first.porphyrin_ratio.to_i
@@ -264,11 +267,10 @@ class Fcdata < ApplicationRecord
 
   def test
     # PR_1, PR_2
-    # 1번 이마, 2번이 코, 3번ㅇ
+    # 1번 이마, 2번이 코, 3번
   end
 
   def test2
     #탄력 각도 ; EL_ANGLE_7 이 오른쪽 볼, 8이 왼쪽
-
   end
 end
