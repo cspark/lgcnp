@@ -159,7 +159,7 @@ class Fcdata < ApplicationRecord
       # 트러블
       # E_PORPHYTRIN_T	E_PORPHYTRIN_U 평균값
       avr = self.wr_avr
-      E_PORPHYTRIN_T
+      
       avr1 = (Fcavgdata.where(age: avg_grade_1_field_name).first.e_porphyrin_u.to_i + Fcavgdata.where(age: avg_grade_1_field_name).first.e_porphyrin_t.to_i) / 2
       avr2 =(Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_i + Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_i) / 2
       avr3 = (Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_i) / 2
