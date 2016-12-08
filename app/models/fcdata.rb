@@ -109,9 +109,17 @@ class Fcdata < ApplicationRecord
     age = user.age
 
     if type == "pore"
-      
+      # Fcavgdata.
+
     end
   end
+
+  # def generate_age_data_field(age: age)
+  #   field_name = "age"
+  #   if age.to_i < 10
+  #
+  #   end
+  # end
 
   def get_mo_data
     # AVG Data 의 Moisture Grade 3, 2 번을 참고
@@ -122,15 +130,13 @@ class Fcdata < ApplicationRecord
     # min - max 는 AgeAll
   end
 
-  def
+  def test
     # PR_1, PR_2
     # 1번 이마, 2번이 코, 3번ㅇ
   end
 
-  def
+  def test2
     #탄력 각도 ; EL_ANGLE_7 이 오른쪽 볼, 8이 왼쪽
-
-  end
 
   end
 end
