@@ -124,9 +124,10 @@ class Fcdata < ApplicationRecord
     avg_grade_2_field_name = avg_field_name.to_s.concat("2")
     avg_grade_3_field_name = avg_field_name.to_s.concat("3")
     avg_grade_4_field_name = avg_field_name.to_s.concat("4")
-
+    #abcd123456!
     if type == "pore"
       avr = self.pr_avr
+      Rails.logger.info "field_name"
       Rails.logger.info avg_grade_1_field_name
       avr_1 = Fcavgdata.where(age: avg_grade_1_field_name).first.pore.to_i
       avr_2 = Fcavgdata.where(age: avg_grade_2_field_name).first.pore.to_i
@@ -204,55 +205,55 @@ class Fcdata < ApplicationRecord
   def generate_age_data_field(age: age)
     field_name = "Age"
     if age.to_i < 10
-      field_name.concat("1-10_Grade")
+      return field_name.concat("1-10_Grade")
     end
 
     if age.to_i > 10 && age.to_i < 16
-      field_name.concat("11-15_Grade")
+      return field_name.concat("11-15_Grade")
     end
 
     if age.to_i > 15 && age.to_i < 21
-      field_name.concat("16-20_Grade")
+      return field_name.concat("16-20_Grade")
     end
 
     if age.to_i > 20 && age.to_i < 26
-      field_name.concat("21-25_Grade")
+      return field_name.concat("21-25_Grade")
     end
 
     if age.to_i > 25 && age.to_i < 31
-      field_name.concat("26-30_Grade")
+      return field_name.concat("26-30_Grade")
     end
 
     if age.to_i > 30 && age.to_i < 36
-      field_name.concat("31-35_Grade")
+      return field_name.concat("31-35_Grade")
     end
 
     if age.to_i > 35 && age.to_i < 41
-      field_name.concat("36-40_Grade")
+      return field_name.concat("36-40_Grade")
     end
 
     if age.to_i > 40 && age.to_i < 46
-      field_name.concat("41-45_Grade")
+      return field_name.concat("41-45_Grade")
     end
 
     if age.to_i > 45 && age.to_i < 51
-      field_name.concat("46-50_Grade")
+      return field_name.concat("46-50_Grade")
     end
 
     if age.to_i > 50 && age.to_i < 56
-      field_name.concat("51-55_Grade")
+      return field_name.concat("51-55_Grade")
     end
 
     if age.to_i > 55 && age.to_i < 61
-      field_name.concat("56-60_Grade")
+      return field_name.concat("56-60_Grade")
     end
 
     if age.to_i > 60 && age.to_i < 71
-      field_name.concat("61-70_Grade")
+      return field_name.concat("61-70_Grade")
     end
 
     if age.to_i > 70
-      field_name.concat("71_Grade")
+      return field_name.concat("71_Grade")
     end
   end
 
