@@ -121,11 +121,43 @@ class Fcdata < ApplicationRecord
        skintype: skintype,
        score_r: score_r.to_i - 5,
        score_l: score_l.to_i - 5,
+       e_sebum_t: e_sebum_t,
+       e_sebum_t_graph_min: get_vertical_graph_min(type: "e_sebum_t"),
+       e_sebum_t_graph_max: get_vertical_graph_max(type: "e_sebum_t"),
+       e_sebum_t_graph_avr: get_vertical_graph_avr(type: "e_sebum_t"),
+       e_sebum_u: e_sebum_u,
+       e_sebum_u_graph_min: get_vertical_graph_min(type: "e_sebum_u"),
+       e_sebum_u_graph_max: get_vertical_graph_max(type: "e_sebum_u"),
+       e_sebum_u_graph_avr: get_vertical_graph_avr(type: "e_sebum_u"),
+       e_porphyrin_t: e_porphyrin_t,
+       e_porphyrin_t_graph_min: get_vertical_graph_min(type: "e_porphyrin_t"),
+       e_porphyrin_t_graph_max: get_vertical_graph_max(type: "e_porphyrin_t"),
+       e_porphyrin_t_graph_avr: get_vertical_graph_avr(type: "e_porphyrin_t"),
+       e_porphyrin_u: e_porphyrin_u,
+       e_porphyrin_u_graph_min: get_vertical_graph_min(type: "e_porphyrin_u"),
+       e_porphyrin_u_graph_max: get_vertical_graph_max(type: "e_porphyrin_u"),
+       e_porphyrin_u_graph_avr: get_vertical_graph_avr(type: "e_porphyrin_u"),
     }
   end
 
   #Vertical / Horizontal Graph
   def get_vertical_graph_min(type: nil)
+    if type == "e_sebum_t"
+      return Fcavgdata.where(age: "AgeALL_Min").first.e_sebum_t.to_i
+    end
+
+    if type == "e_sebum_u"
+      return Fcavgdata.where(age: "AgeALL_Min").first.e_sebum_u.to_i
+    end
+
+    if type == "e_porphyrin_t"
+      return Fcavgdata.where(age: "AgeALL_Min").first.e_porphyrin_t.to_i
+    end
+
+    if type == "e_porphyrin_u"
+      return Fcavgdata.where(age: "AgeALL_Min").first.e_porphyrin_u.to_i
+    end
+
     if type == "pore"
       return Fcavgdata.where(age: "AgeALL_Min").first.pore.to_i
     end
@@ -149,6 +181,22 @@ class Fcdata < ApplicationRecord
   end
 
   def get_vertical_graph_max(type: nil)
+    if type == "e_sebum_t"
+      return Fcavgdata.where(age: "AgeALL_Max").first.e_sebum_t.to_i
+    end
+
+    if type == "e_sebum_u"
+      return Fcavgdata.where(age: "AgeALL_Max").first.e_sebum_u.to_i
+    end
+
+    if type == "e_porphyrin_t"
+      return Fcavgdata.where(age: "AgeALL_Max").first.e_porphyrin_t.to_i
+    end
+
+    if type == "e_porphyrin_u"
+      return Fcavgdata.where(age: "AgeALL_Max").first.e_porphyrin_u.to_i
+    end
+
     if type == "pore"
         return Fcavgdata.where(age: "AgeALL_Max").first.pore.to_i
     end
@@ -179,6 +227,22 @@ class Fcdata < ApplicationRecord
     age = user.age
     avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
+
+    if type == "e_sebum_t"
+      return (Fcavgdata.where(age: avg_grade_2_field_name).first.e_sebum_t.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.e_sebum_t.to_i) / 2
+    end
+
+    if type == "e_sebum_u"
+      return (Fcavgdata.where(age: avg_grade_2_field_name).first.e_sebum_u.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.e_sebum_u.to_i) / 2
+    end
+
+    if type == "e_porphyrin_t"
+      return (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_i) / 2
+    end
+
+    if type == "e_porphyrin_u"
+      return (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_i) / 2
+    end
 
     if type == "pore"
         return (Fcavgdata.where(age: avg_grade_2_field_name).first.pore.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.pore.to_i) / 2
