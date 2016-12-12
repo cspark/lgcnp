@@ -15,8 +15,9 @@ class CustinfosController < ApplicationController
     yy = params[:birthyy]
     mm = params[:birthmm]
     dd = params[:birthdd]
+    phone = params[:phone]
 
-    find_user = Custinfo.where(custname: name).where(birthyy: yy).where(birthmm: mm).where(birthdd: dd).first
+    find_user = Custinfo.where(custname: name).where(birthyy: yy).where(birthmm: mm).where(birthdd: dd).where(phone: phone).first
     if find_user.present?
       render json: find_user.to_api_hash, status: 200
     else
