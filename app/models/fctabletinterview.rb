@@ -39,7 +39,7 @@ class Fctabletinterview < ApplicationRecord
       after_made_cosmetic: after_made_cosmetic,
       uptdate: uptdate,
       measureno: fcdata_id,
-      base_lot: bast_lot,
+      base_lot: base_lot,
       ampule_1_lot: ampule_1_lot,
       ampule_2_lot: ampule_2_lot,
       mixer_name: mixer_name,
