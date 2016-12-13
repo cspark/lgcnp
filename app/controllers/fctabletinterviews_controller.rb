@@ -8,7 +8,7 @@ class FctabletinterviewsController < ApplicationController
   end
 
   def find_interviews
-    serial = params[:custserial]
+    serial = params[:custserial].to_s
     tabletinterviews = Fctabletinterview.where(custserial: serial)
     Rails.logger.info tabletinterviews.count
     if tabletinterviews.count > 1
