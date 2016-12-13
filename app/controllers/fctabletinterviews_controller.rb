@@ -31,6 +31,16 @@ class FctabletinterviewsController < ApplicationController
     end
   end
 
+  def fctabletinterviews_update_lots
+    Rails.logger.info params[:tablet_interview_id]
+    existed_interview = Fctabletinterview.where(tablet_interview_id: params[:tablet_interview_id]).last
+    if existed_interview.update(permitted_param)
+      render json: existed_interview.to_api_hash, status: :ok
+    else
+      render json: "", status: 404
+    end
+  end
+
   def create
     tabletinterview = Fctabletinterview.new(permitted_param)
     tabletinterview.tablet_interview_id = Fctabletinterview.all.count
@@ -52,7 +62,6 @@ class FctabletinterviewsController < ApplicationController
     else
       render json: "", status: 404
     end
-
   end
 
   def permitted_param
