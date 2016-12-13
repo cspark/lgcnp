@@ -26,7 +26,7 @@ class FctabletinterviewsController < ApplicationController
     tabletinterview.is_quick_mode = "T"
 
     tabletinterview.is_make_up = "T"
-    if tabletinterview.a_2 == "2.0"
+    if tabletinterview.a_1 == "2.0"
       tabletinterview.is_make_up = "F"
     end
 
