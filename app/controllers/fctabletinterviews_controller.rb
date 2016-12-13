@@ -25,6 +25,11 @@ class FctabletinterviewsController < ApplicationController
     tabletinterview.uptdate = t.strftime("%Y-%m-%d-%H-%M")
     tabletinterview.is_quick_mode = "T"
 
+    tabletinterview.is_make_up = "T"
+    if tabletinterview.a_2 == "2.0"
+      tabletinterview.is_make_up = "F"
+    end
+    
     if tabletinterview.save
       render json: tabletinterview.to_api_hash, status: :ok
     else
