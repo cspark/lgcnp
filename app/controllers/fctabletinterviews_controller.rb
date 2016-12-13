@@ -4,14 +4,14 @@ class FctabletinterviewsController < ApplicationController
 
   def index
     tabletinterview = Fctabletinterview.all
-    render json: api_hash_for_list(tabletinterview, page:1), status: :ok
+    render json: api_hash_for_list(tabletinterview, page: 1), status: :ok
   end
 
   def find_interviews
     serial = params[:custserial].to_s
     tabletinterviews = Fctabletinterview.where(custserial: serial)
     Rails.logger.info tabletinterviews.count
-    if tabletinterviews.count.to_i > 1
+    if tabletinterviews.count.to_i > 0
       render json: api_hash_for_list(tabletinterviews), status: :ok
     else
       render json: "", status: 404
