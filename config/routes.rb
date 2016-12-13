@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   end
   get "find_interviews" => "fctabletinterviews#find_interviews"
   post "update_interviews" => "fctabletinterviews#update_interviews"
+  post "fctabletinterviews_quickmode" => "fctabletinterviews#fctabletinterviews_quickmode"
 
   get "is_update" => "update#is_update"
 end

@@ -39,6 +39,7 @@ class Fctabletinterview < ApplicationRecord
       after_made_cosmetic: after_made_cosmetic,
       uptdate: uptdate,
       measureno: fcdata_id,
+      is_quick_mode: is_quick_mode,
       base_lot: base_lot,
       ampoule_1_lot: ampoule_1_lot,
       ampoule_2_lot: ampoule_2_lot,
