@@ -66,7 +66,7 @@ class CustinfosController < ApplicationController
     uptdate = time.year.to_s + "/" + time.month.to_s + "/" + time.day.to_s
 
     custinfo = Custinfo.new
-    custinfo.custserial = Custinfo.last.custserial + 1
+    custinfo.custserial = Custinfo.all.order('custserial ASC').last.custserial + 1
     custinfo.ch_cd = "CNP"
     custinfo.custname = name
     custinfo.sex = sex
