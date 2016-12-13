@@ -9,7 +9,7 @@ class FctabletinterviewsController < ApplicationController
 
   def find_interviews
     serial = params[:custserial].to_s
-    tabletinterviews = Fctabletinterview.where(custserial: serial)
+    tabletinterviews = Fctabletinterview.where(custserial: serial).where(is_quick_mode: "F")
     Rails.logger.info tabletinterviews.count
     if tabletinterviews.count.to_i > 0
       render json: api_hash_for_list(tabletinterviews), status: :ok
@@ -29,7 +29,7 @@ class FctabletinterviewsController < ApplicationController
     if tabletinterview.a_2 == "2.0"
       tabletinterview.is_make_up = "F"
     end
-    
+
     if tabletinterview.save
       render json: tabletinterview.to_api_hash, status: :ok
     else

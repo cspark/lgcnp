@@ -140,6 +140,9 @@ class Fcdata < ApplicationRecord
     }
   end
 
+  #TZone 이마 수분 측정 평균값 : Moisture 본인값 : MO_1
+  #UZone 양볼 수분 측정 평균값 : Moisture 본인값 : MO_7 / 8 의 평균
+
   #Vertical / Horizontal Graph
   def get_vertical_graph_min(type: nil)
     if type == "e_sebum_t"
