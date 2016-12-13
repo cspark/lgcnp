@@ -133,10 +133,14 @@ class Fcdata < ApplicationRecord
        e_porphyrin_t_graph_min: get_vertical_graph_min(type: "e_porphyrin_t"),
        e_porphyrin_t_graph_max: get_vertical_graph_max(type: "e_porphyrin_t"),
        e_porphyrin_t_graph_avr: get_vertical_graph_avr(type: "e_porphyrin_t"),
-       e_porphyrin_u: e_porphyrin_u,
-       e_porphyrin_u_graph_min: get_vertical_graph_min(type: "e_porphyrin_u"),
-       e_porphyrin_u_graph_max: get_vertical_graph_max(type: "e_porphyrin_u"),
-       e_porphyrin_u_graph_avr: get_vertical_graph_avr(type: "e_porphyrin_u"),
+       dry_t: mo_1,
+       dry_t_graph_min: get_vertical_graph_min(type: "moisture"),
+       dry_t_graph_max: get_vertical_graph_max(type: "moisture"),
+       dry_t_graph_avr: get_vertical_graph_avr(type: "moisture"),
+       dry_u: mo_1,
+       dry_u_graph_min: get_vertical_graph_min(type: "moisture"),
+       dry_u_graph_max: get_vertical_graph_max(type: "moisture"),
+       dry_u_graph_avr: get_vertical_graph_avr(type: "moisture"),
     }
   end
 
@@ -145,6 +149,10 @@ class Fcdata < ApplicationRecord
 
   #Vertical / Horizontal Graph
   def get_vertical_graph_min(type: nil)
+    if type == "moisture"
+      return Fcavgdata.where(age: "AgeALL_Min").first.moisture.to_i
+    end
+
     if type == "e_sebum_t"
       return Fcavgdata.where(age: "AgeALL_Min").first.e_sebum_t.to_i
     end
@@ -184,6 +192,10 @@ class Fcdata < ApplicationRecord
   end
 
   def get_vertical_graph_max(type: nil)
+    if type == "moisture"
+      return Fcavgdata.where(age: "AgeALL_Max").first.moisture.to_i
+    end
+
     if type == "e_sebum_t"
       return Fcavgdata.where(age: "AgeALL_Max").first.e_sebum_t.to_i
     end
@@ -230,6 +242,10 @@ class Fcdata < ApplicationRecord
     age = user.age
     avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
+
+    if type == "moisture"
+      return (Fcavgdata.where(age: "AgeALL_Grade3").first.e_sebum_t.to_i + Fcavgdata.where(age: "AgeALL_Grade2").first.e_sebum_t.to_i) / 2
+    end
 
     if type == "e_sebum_t"
       return (Fcavgdata.where(age: avg_grade_2_field_name).first.e_sebum_t.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.e_sebum_t.to_i) / 2
