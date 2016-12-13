@@ -10,6 +10,7 @@ class FctabletinterviewsController < ApplicationController
   def find_interviews
     serial = params[:custserial]
     tabletinterviews = Fctabletinterview.where(custserial: serial)
+    Rails.logger.info tabletinterviews.count
     if tabletinterviews.count > 1
       render json: api_hash_for_list(tabletinterviews), status: :ok
     else
