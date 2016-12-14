@@ -51,14 +51,35 @@ class FcdatasController < ApplicationController
 
     ftp_path = "ftp://165.244.88.27/CNP/"
     ftp_path << sub_folder_name.to_s
+
     ftp_path << "/"
     ftp_path << user.custserial.to_i.to_s
     ftp_path << "-"
     ftp_path << face_data.measureno.to_i.to_s + "/2-1_F_FM_PL_1.jpg"
     Rails.logger.info ftp_path
     # system("wget http://www.hotel-r.net/im/hotel/de/d-d.gif -P public/CNP/")
+
+
+    system("echo FILE Download")
     file_get_command = "wget --user janus --password pielgahn2012#1 "
     file_get_command << ftp_path
+    file_get_command << " -P "
+
+    make_dir_command = "mkdir "
+    make_dir_command << "public/CNP/"
+    make_dir_command << sub_folder_name
+    Rails.logger.info make_dir_command
+    system(make_dir_command)
+
+    make_dir_command << user.custserial.to_i.to_s
+    make_dir_command << "-"
+    make_dir_command << face_data.measureno.to_i.to_s
+    Rails.logger.info make_dir_command
+    system(make_dir_command)
+
+    file_get_command << "public/CNP/"
+    file_get_command << sub_folder_name
+
     system(file_get_command)
     #
 
