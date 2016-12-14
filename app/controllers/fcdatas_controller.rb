@@ -55,7 +55,12 @@ class FcdatasController < ApplicationController
     ftp_path << "/"
     ftp_path << user.custserial.to_i.to_s
     ftp_path << "-"
-    ftp_path << face_data.measureno.to_i.to_s + "/2-1_F_FM_PL_1.jpg"
+    ftp_path << face_data.measureno.to_i.to_s
+    ftp_path << "/"
+    ftp_path << user.custserial.to_i.to_s
+    ftp_path << "-"
+    ftp_path << face_data.measureno.to_i.to_s
+    ftp_path << "_F_FM_PL_1.jpg"
     Rails.logger.info ftp_path
     # system("wget http://www.hotel-r.net/im/hotel/de/d-d.gif -P public/CNP/")
 
@@ -83,7 +88,7 @@ class FcdatasController < ApplicationController
 
     file_get_command << "public/CNP/"
     file_get_command << sub_folder_name
-
+    Rails.logger.info file_get_command
     system(file_get_command)
     #
 
