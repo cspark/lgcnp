@@ -46,12 +46,13 @@ class FcdatasController < ApplicationController
     Rails.logger.info serial
     user = Custinfo.where(custserial: serial).first
     sub_folder_name = ((user.custserial.to_i / 100) * 100) + 100
+    sub_folder_name << "-P"
     Rails.logger.info sub_folder_name
 
     ftp_path = "ftp://165.244.88.27/CNP/"
-    ftp_path << sub_folder_name
+    ftp_path << sub_folder_name.to_s
     ftp_path << "/"
-    ftp_path << user.custserial.to_i.to_s
+    ftp_path << (user.custserial.to_i * 10).to_s
     ftp_path << "-"
     ftp_path << face_data.measureno.to_s + "/2-1_F_FM_PL_1.jpg"
     Rails.logger.info ftp_path
