@@ -88,6 +88,10 @@ class FcdatasController < ApplicationController
 
     file_get_command << "public/CNP/"
     file_get_command << sub_folder_name
+    file_get_command << "/"
+    file_get_command << user.custserial.to_i.to_s
+    file_get_command << "-"
+    file_get_command << face_data.measureno.to_i.to_s
     Rails.logger.info file_get_command
     system(file_get_command)
     #
