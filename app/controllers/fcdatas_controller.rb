@@ -45,7 +45,7 @@ class FcdatasController < ApplicationController
 
     Rails.logger.info serial
     user = Custinfo.where(custserial: serial).first
-    sub_folder_name = ((user.custserial.to_i / 100) * 100) + 100
+    sub_folder_name = (((user.custserial.to_i / 100) * 100) + 100).to_s
     sub_folder_name << "-P"
     Rails.logger.info sub_folder_name
 
