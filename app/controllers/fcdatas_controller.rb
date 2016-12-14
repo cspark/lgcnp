@@ -67,6 +67,9 @@ class FcdatasController < ApplicationController
 
     make_dir_command = "mkdir "
     make_dir_command << "public/CNP/"
+    Rails.logger.info make_dir_command
+    system(make_dir_command)
+
     make_dir_command << sub_folder_name
     Rails.logger.info make_dir_command
     system(make_dir_command)
