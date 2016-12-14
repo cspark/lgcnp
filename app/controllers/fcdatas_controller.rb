@@ -36,10 +36,25 @@ class FcdatasController < ApplicationController
   end
 
   def face_data
-    serial = params[:custserial]
+    serial = params[:custserial].to_s
 
     # face_data = Fcdata.where(custserial: serial).last
     face_data = Fcdata.all.first
+
+    #이미지 가져오기
+
+    Rails.logger.info serial
+    user = Custinfo.where(custserial: serial).first
+    sub_folder_name = ((user.custserial.to_i / 100) * 100) + 100
+    Rails.logger.info sub_folder_name
+
+    ftp_path = "ftp://165.244.88.27/CNP/" + sub_folder_name + "/"+ user.custserial.to_i + "-" + face_data.measureno + "/2-1_F_FM_PL_1.jpg"
+    Rails.logger.logger ftp_path
+    # system("wget http://www.hotel-r.net/im/hotel/de/d-d.gif -P public/CNP/")
+    system("wget --user janus --password pielgahn2012#1 " + ftp_path)
+    #
+
+
     if face_data.present?
       render json: face_data.to_api_hash, status: 200
     else
