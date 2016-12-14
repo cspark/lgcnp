@@ -85,6 +85,10 @@ class FcdatasController < ApplicationController
     image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_PL_")
     image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_PL_")
     image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_PL_")
+    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_PL_UVC_")
+    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_PL_UVC_")
+    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_PL_UVC_")
+    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_PL_UVC_")
 
     image_download(serial: serial, face_data: face_data, number: nil, type: "_F_FM_WH_PWC_W")
     image_download(serial: serial, face_data: face_data, number: nil, type: "_F_FM_WH_E")
@@ -147,7 +151,7 @@ class FcdatasController < ApplicationController
     system("echo FILE Download")
     file_get_command = "wget --user janus --password pielgahn2012#1 "
     file_get_command << ftp_path
-    file_get_command << " -P "
+    file_get_command << " -O "
 
     make_dir_command = "mkdir "
     make_dir_command << "public/CNP/"
