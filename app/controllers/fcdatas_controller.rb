@@ -48,7 +48,7 @@ class FcdatasController < ApplicationController
     sub_folder_name = ((user.custserial.to_i / 100) * 100) + 100
     Rails.logger.info sub_folder_name
 
-    ftp_path = "ftp://165.244.88.27/CNP/" + sub_folder_name + "/"+ user.custserial.to_i + "-" + face_data.measureno + "/2-1_F_FM_PL_1.jpg"
+    ftp_path = "ftp://165.244.88.27/CNP/" + sub_folder_name + "/" + user.custserial.to_i.to_s + "-" + face_data.measureno.to_s + "/2-1_F_FM_PL_1.jpg"
     Rails.logger.logger ftp_path
     # system("wget http://www.hotel-r.net/im/hotel/de/d-d.gif -P public/CNP/")
     system("wget --user janus --password pielgahn2012#1 " + ftp_path)
