@@ -41,8 +41,86 @@ class FcdatasController < ApplicationController
     # face_data = Fcdata.where(custserial: serial).last
     face_data = Fcdata.all.first
 
-    #이미지 가져오기
+    image_download(serial: serial, face_data: face_data, number: "1", type: "_Sym_L_")
+    image_download(serial: serial, face_data: face_data, number: "2", type: "_Sym_L_")
+    image_download(serial: serial, face_data: face_data, number: "3", type: "_Sym_L_")
+    image_download(serial: serial, face_data: face_data, number: "4", type: "_Sym_L_")
+    image_download(serial: serial, face_data: face_data, number: "1", type: "_Sym_R_")
+    image_download(serial: serial, face_data: face_data, number: "2", type: "_Sym_R_")
+    image_download(serial: serial, face_data: face_data, number: "3", type: "_Sym_R_")
+    image_download(serial: serial, face_data: face_data, number: "4", type: "_Sym_R_")
 
+    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_UV_")
+    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_UV_")
+    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_UV_")
+    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_UV_")
+
+    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_WH_PWC_")
+    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_WH_PWC_")
+    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_WH_PWC_")
+    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_WH_PWC_")
+    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_WH_")
+    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_WH_")
+    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_WH_")
+    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_WH_")
+
+    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_UVGR_SBC_")
+    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_UVGR_SBC_")
+    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_UVGR_SBC_")
+    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_UVGR_SBC_")
+    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_UV_GR_")
+    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_UV_GR_")
+    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_UV_GR_")
+    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_UV_GR_")
+
+    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_PL_PLC_")
+    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_PL_PLC_")
+    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_PL_PLC_")
+    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_PL_PLC_")
+    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_UVGR_UVC_")
+    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_UVGR_UVC_")
+    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_UVGR_UVC_")
+    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_UVGR_UVC_")
+    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_PL_")
+    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_PL_")
+    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_PL_")
+    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_PL_")
+
+    image_download(serial: serial, face_data: face_data, number: nil, type: "_F_FM_WH_PWC_W")
+    image_download(serial: serial, face_data: face_data, number: nil, type: "_F_FM_WH_E")
+    image_download(serial: serial, face_data: face_data, number: nil, type: "_Sp_Pore_Cust")
+    image_download(serial: serial, face_data: face_data, number: nil, type: "_Sp_Wr_Cust")
+
+
+    if face_data.present?
+      render json: face_data.to_api_hash, status: 200
+    else
+      render json: "", status: 404
+    end
+  end
+
+  def face_data_existed
+    serial = params[:custserial]
+    measureno = params[:measureno]
+
+    # face_data = Fcdata.where(custserial: serial).where(measureno: measureno).last
+    face_data = Fcdata.all.first
+    if face_data.present?
+      render json: face_data.to_api_hash, status: 200
+    else
+      render json: "", status: 404
+    end
+  end
+
+  def create
+    fcdata = Fcdata.new(permitted_param)
+    fcdata.save
+
+    render :text => "create Complete", status: 200
+  end
+
+  def image_download(serial: nil, face_data: nil, number: nil, type: nil)
+    #이미지 가져오기
     Rails.logger.info serial
     user = Custinfo.where(custserial: serial).first
     sub_folder_name = (((user.custserial.to_i / 100) * 100) + 100).to_s
@@ -60,10 +138,11 @@ class FcdatasController < ApplicationController
     ftp_path << user.custserial.to_i.to_s
     ftp_path << "-"
     ftp_path << face_data.measureno.to_i.to_s
-    ftp_path << "_F_FM_PL_1.jpg"
+    ftp_path << type
+    ftp_path << number if !number.nil?
+    ftp_path << ".jpg"
     Rails.logger.info ftp_path
     # system("wget http://www.hotel-r.net/im/hotel/de/d-d.gif -P public/CNP/")
-
 
     system("echo FILE Download")
     file_get_command = "wget --user janus --password pielgahn2012#1 "
@@ -95,33 +174,6 @@ class FcdatasController < ApplicationController
     Rails.logger.info file_get_command
     system(file_get_command)
     #
-
-
-    if face_data.present?
-      render json: face_data.to_api_hash, status: 200
-    else
-      render json: "", status: 404
-    end
-  end
-
-  def face_data_existed
-    serial = params[:custserial]
-    measureno = params[:measureno]
-
-    # face_data = Fcdata.where(custserial: serial).where(measureno: measureno).last
-    face_data = Fcdata.all.first
-    if face_data.present?
-      render json: face_data.to_api_hash, status: 200
-    else
-      render json: "", status: 404
-    end
-  end
-
-  def create
-    fcdata = Fcdata.new(permitted_param)
-    fcdata.save
-
-    render :text => "create Complete", status: 200
   end
 
   def permitted_param
