@@ -151,7 +151,7 @@ class FcdatasController < ApplicationController
     system("echo FILE Download")
     file_get_command = "wget --user janus --password pielgahn2012#1 "
     file_get_command << ftp_path
-    file_get_command << " -O "
+    file_get_command << " -N -P "
 
     make_dir_command = "mkdir "
     make_dir_command << "public/CNP/"
