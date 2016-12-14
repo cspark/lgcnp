@@ -74,6 +74,7 @@ class FcdatasController < ApplicationController
     Rails.logger.info make_dir_command
     system(make_dir_command)
 
+    make_dir_command << "/"
     make_dir_command << user.custserial.to_i.to_s
     make_dir_command << "-"
     make_dir_command << face_data.measureno.to_i.to_s
