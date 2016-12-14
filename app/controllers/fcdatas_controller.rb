@@ -56,7 +56,9 @@ class FcdatasController < ApplicationController
     ftp_path << face_data.measureno.to_s + "/2-1_F_FM_PL_1.jpg"
     Rails.logger.logger ftp_path
     # system("wget http://www.hotel-r.net/im/hotel/de/d-d.gif -P public/CNP/")
-    system("wget --user janus --password pielgahn2012#1 " + ftp_path)
+    file_get_command = "wget --user janus --password pielgahn2012#1 "
+    file_get_command << ftp_path
+    system(file_get_command)
     #
 
 
