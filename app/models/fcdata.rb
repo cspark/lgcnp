@@ -369,15 +369,15 @@ class Fcdata < ApplicationRecord
       return 4
     end
 
-    if avr > avr1 && avr =< avr2
+    if avr > avr1 && avr <= avr2
       return 3
     end
 
-    if avr > avr2 && avr =< avr3
+    if avr > avr2 && avr <= avr3
       return 2
     end
 
-    if avr > avr3 && avr =< avr4
+    if avr > avr3 && avr <= avr4
       return 1
     end
 
