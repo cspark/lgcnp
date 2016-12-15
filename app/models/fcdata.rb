@@ -356,6 +356,9 @@ class Fcdata < ApplicationRecord
       avr2 = Fcavgdata.where(age: avg_grade_2_field_name).first.spot_pl.to_i
       avr3 = Fcavgdata.where(age: avg_grade_3_field_name).first.spot_pl.to_i
       avr4 = Fcavgdata.where(age: avg_grade_4_field_name).first.spot_pl.to_i
+      Rails.logger.info "PPPP"
+      Rails.logger.info avr2
+      Rails.logger.info avr3
 
       return convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
     end
@@ -366,15 +369,15 @@ class Fcdata < ApplicationRecord
       return 4
     end
 
-    if avr > avr1 && avr < avr2
+    if avr > avr1 && avr =< avr2
       return 3
     end
 
-    if avr > avr2 && avr < avr3
+    if avr > avr2 && avr =< avr3
       return 2
     end
 
-    if avr > avr3 && avr < avr4
+    if avr > avr3 && avr =< avr4
       return 1
     end
 
