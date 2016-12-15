@@ -18,10 +18,12 @@ class Fcdata < ApplicationRecord
        pr_8: pr_8,
        pr_avr: pr_avr,
        pr_graph: get_graph_data(type: "pore"),
-       pr_graph_min: get_vertical_graph_min(type: "pore"),
-       pr_graph_max: get_vertical_graph_max(type: "pore"),
+      #  pr_graph_min: get_vertical_graph_min(type: "pore"),
+      #  pr_graph_max: get_vertical_graph_max(type: "pore"),
+       pr_graph_min: 0,
+       pr_graph_max: 100,
        pr_graph_avr: get_vertical_graph_avr(type: "pore"),
-       pr_graph_me: pr_avr,
+       pr_graph_me: get_vertical_graph_me(type: "pore"),
        wr_3: wr_3,
        wr_4: wr_4,
        wr_5: wr_5,
@@ -119,8 +121,8 @@ class Fcdata < ApplicationRecord
        colortype: colortype,
        suntype: suntype,
        skintype: skintype,
-       score_r: score_r.to_i - 5,
-       score_l: score_l.to_i - 5,
+       score_r: score_l.to_i - 5,
+       score_l: score_r.to_i - 5,
        e_sebum_t: e_sebum_t,
        e_sebum_t_graph_min: get_vertical_graph_min(type: "e_sebum_t"),
        e_sebum_t_graph_max: get_vertical_graph_max(type: "e_sebum_t"),
@@ -238,14 +240,17 @@ class Fcdata < ApplicationRecord
     end
   end
 
-  def get_vertical_graph_avr(type: nil)
+  def get_vertical_graph_me(type: nil)
     if self.custserial.nil?
       return 0
     end
+
     user = Custinfo.where(custserial: self.custserial).first
     age = user.age
+    avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
     avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
+    avg_grade_4_field_name = generate_age_data_field(age: age).concat("4")
 
     if type == "moisture"
       return (Fcavgdata.where(age: "AgeALL_Grade3").first.e_sebum_t.to_i + Fcavgdata.where(age: "AgeALL_Grade2").first.e_sebum_t.to_i) / 2
@@ -268,7 +273,94 @@ class Fcdata < ApplicationRecord
     end
 
     if type == "pore"
-        return (Fcavgdata.where(age: avg_grade_2_field_name).first.pore.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.pore.to_i) / 2
+        me = pr_avr
+        min_value = get_vertical_graph_min(type: type)
+        max_value = get_vertical_graph_max(type: type)
+        first_split_point = Fcavgdata.where(age: avg_grade_2_field_name).first.pore.to_i
+        second_split_point = Fcavgdata.where(age: avg_grade_3_field_name).first.pore.to_i
+
+        if me < first_split_point
+          me = (me / first_split_point - min_value) * 33.3
+        end
+
+        if me >= first_split_point && me < second_split_point
+          me = (age_avr / second_split_point - first_split_point) * 33.3
+        end
+
+        if me >= second_split_point
+          me = (me / max_value - second_split_point) * 33.3
+        end
+        return me
+    end
+
+    if type == "sb"
+        return (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_i) / 2
+    end
+
+    if type == "wr"
+      return (Fcavgdata.where(age: avg_grade_2_field_name).first.wrinkle.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.wrinkle.to_i) / 2
+    end
+
+    if type == "el"
+      return (Fcavgdata.where(age: avg_grade_2_field_name).first.elasticity.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.elasticity.to_i) / 2
+    end
+
+    if type == "pp"
+      return (Fcavgdata.where(age: avg_grade_2_field_name).first.spot_pl.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.spot_pl.to_i) / 2
+    end
+  end
+
+  def get_vertical_graph_avr(type: nil)
+    if self.custserial.nil?
+      return 0
+    end
+
+    user = Custinfo.where(custserial: self.custserial).first
+    age = user.age
+    avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
+    avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
+    avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
+    avg_grade_4_field_name = generate_age_data_field(age: age).concat("4")
+
+    if type == "moisture"
+      return (Fcavgdata.where(age: "AgeALL_Grade3").first.e_sebum_t.to_i + Fcavgdata.where(age: "AgeALL_Grade2").first.e_sebum_t.to_i) / 2
+    end
+
+    if type == "e_sebum_t"
+      return (Fcavgdata.where(age: avg_grade_2_field_name).first.e_sebum_t.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.e_sebum_t.to_i) / 2
+    end
+
+    if type == "e_sebum_u"
+      return (Fcavgdata.where(age: avg_grade_2_field_name).first.e_sebum_u.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.e_sebum_u.to_i) / 2
+    end
+
+    if type == "e_porphyrin_t"
+      return (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_i) / 2
+    end
+
+    if type == "e_porphyrin_u"
+      return (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_i) / 2
+    end
+
+    if type == "pore"
+        age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.pore.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.pore.to_i) / 2
+        min_value = get_vertical_graph_min(type: type)
+        max_value = get_vertical_graph_max(type: type)
+        first_split_point = Fcavgdata.where(age: avg_grade_2_field_name).first.pore.to_i
+        second_split_point = Fcavgdata.where(age: avg_grade_3_field_name).first.pore.to_i
+
+        if age_avr < first_split_point
+          age_avr = (age_avr / first_split_point - min_value) * 33.3
+        end
+
+        if age_avr >= first_split_point && age_avr < second_split_point
+          age_avr = (age_avr / second_split_point - first_split_point) * 33.3
+        end
+
+        if age_avr >= second_split_point
+          age_avr = (age_avr / max_value - second_split_point) * 33.3
+        end
+        return age_avr
     end
 
     if type == "sb"
