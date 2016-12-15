@@ -351,7 +351,7 @@ class Fcdata < ApplicationRecord
 
     if type == "pp"
       # 색소침착 SPOT_PL
-      avr = self.pp_ratio_avr
+      avr = self.sp_pl_avr
       avr1 = Fcavgdata.where(age: avg_grade_1_field_name).first.spot_pl.to_i
       avr2 = Fcavgdata.where(age: avg_grade_2_field_name).first.spot_pl.to_i
       avr3 = Fcavgdata.where(age: avg_grade_3_field_name).first.spot_pl.to_i
