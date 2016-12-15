@@ -280,15 +280,15 @@ class Fcdata < ApplicationRecord
         second_split_point = Fcavgdata.where(age: avg_grade_3_field_name).first.pore.to_i
 
         if me < first_split_point
-          me = (me / (first_split_point - min_value)) * 33.3
+          me = (me / (first_split_point - min_value)) / 33.3
         end
 
         if me >= first_split_point && me < second_split_point
-          me = (me / (second_split_point - first_split_point)) * 33.3
+          me = ((me / (second_split_point - first_split_point)) / 33.3) + 33.3
         end
 
         if me >= second_split_point
-          me = (me / (max_value - second_split_point)) * 33.3
+          me = ((me / (max_value - second_split_point)) / 33.3) + 66.6
         end
         return me
     end
@@ -344,21 +344,22 @@ class Fcdata < ApplicationRecord
 
     if type == "pore"
         age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.pore.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.pore.to_i) / 2
-        min_value = get_vertical_graph_min(type: type)
-        max_value = get_vertical_graph_max(type: type)
-        first_split_point = Fcavgdata.where(age: avg_grade_2_field_name).first.pore.to_i
-        second_split_point = Fcavgdata.where(age: avg_grade_3_field_name).first.pore.to_i
+        #43
+        min_value = get_vertical_graph_min(type: type) #17
+        max_value = get_vertical_graph_max(type: type) #73
+        first_split_point = Fcavgdata.where(age: avg_grade_2_field_name).first.pore.to_i  #41
+        second_split_point = Fcavgdata.where(age: avg_grade_3_field_name).first.pore.to_i #46
 
         if age_avr < first_split_point
-          age_avr = (age_avr / (first_split_point - min_value)) * 33.3
+          age_avr = (age_avr / (first_split_point - min_value)) / 33.3
         end
 
         if age_avr >= first_split_point && age_avr < second_split_point
-          age_avr = (age_avr / (second_split_point - first_split_point)) * 33.3
+          age_avr = ((age_avr / (second_split_point - first_split_point)) / 33.3) + 33.3
         end
 
         if age_avr >= second_split_point
-          age_avr = (age_avr / (max_value - second_split_point)) * 33.3
+          age_avr = ((age_avr / (max_value - second_split_point))) / 33.3 + 66.6
         end
         return age_avr
     end
