@@ -284,7 +284,7 @@ class Fcdata < ApplicationRecord
         end
 
         if me >= first_split_point && me < second_split_point
-          me = (age_avr / second_split_point - first_split_point) * 33.3
+          me = (me / second_split_point - first_split_point) * 33.3
         end
 
         if me >= second_split_point
