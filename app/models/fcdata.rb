@@ -350,15 +350,15 @@ class Fcdata < ApplicationRecord
         second_split_point = Fcavgdata.where(age: avg_grade_3_field_name).first.pore.to_i
 
         if age_avr < first_split_point
-          age_avr = (age_avr / first_split_point - min_value) * 33.3
+          age_avr = (age_avr / (first_split_point - min_value)) * 33.3
         end
 
         if age_avr >= first_split_point && age_avr < second_split_point
-          age_avr = (age_avr / second_split_point - first_split_point) * 33.3
+          age_avr = (age_avr / (second_split_point - first_split_point)) * 33.3
         end
 
         if age_avr >= second_split_point
-          age_avr = (age_avr / max_value - second_split_point) * 33.3
+          age_avr = (age_avr / (max_value - second_split_point)) * 33.3
         end
         return age_avr
     end
