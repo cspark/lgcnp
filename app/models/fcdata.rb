@@ -381,6 +381,8 @@ class Fcdata < ApplicationRecord
     if avr > avr4
       return 0
     end
+
+    return 0
   end
 
   def generate_age_data_field(age: age)
