@@ -20,7 +20,7 @@ class Fcdata < ApplicationRecord
        pr_graph: get_graph_data(type: "pore"),
        pr_graph_min: 0,
        pr_graph_max: 100,
-       pr_graph_avr: (type: "pore"),
+       pr_graph_avr: get_vertical_graph_avr(type: "pore"),
        pr_graph_me: get_vertical_graph_me(type: "pore"),
        wr_3: wr_3,
        wr_4: wr_4,
@@ -30,7 +30,7 @@ class Fcdata < ApplicationRecord
        wr_graph: get_graph_data(type: "wr"),
        wr_graph_min: 0,
        wr_graph_max: 100,
-       wr_graph_avr: (type: "wr"),
+       wr_graph_avr: get_vertical_graph_avr(type: "wr"),
        wr_graph_me: get_vertical_graph_me(type: "wr"),
        el_7: el_7,
        el_8: el_8,
@@ -38,7 +38,7 @@ class Fcdata < ApplicationRecord
        el_graph: get_graph_data(type: "el"),
        el_graph_min: 0,
        el_graph_max: 100,
-       el_graph_avr: (type: "el"),
+       el_graph_avr: get_vertical_graph_avr(type: "el"),
        el_graph_me: get_vertical_graph_me(type: "el"),
        el_angle_7: el_angle_7,
        el_angle_8: el_angle_8,
@@ -50,7 +50,7 @@ class Fcdata < ApplicationRecord
        sb_graph: get_graph_data(type: "sb"),
        sb_graph_min: 0,
        sb_graph_max: 100,
-       sb_graph_avr: (type: "sb"),
+       sb_graph_avr: get_vertical_graph_avr(type: "sb"),
        sb_graph_me: get_vertical_graph_me(type: "sb"),
        pp_1: pp_1,
        pp_2: pp_2,
@@ -65,7 +65,7 @@ class Fcdata < ApplicationRecord
        pp_graph: get_graph_data(type: "pp"),
        pp_graph_min: 0,
        pp_graph_max: 100,
-       pp_graph_avr: (type: "pp"),
+       pp_graph_avr: get_vertical_graph_avr(type: "pp"),
        pp_graph_me: get_vertical_graph_me(type: "pp"),
        sp_pl_1: sp_pl_1,
        sp_pl_2: sp_pl_2,
@@ -124,19 +124,19 @@ class Fcdata < ApplicationRecord
        e_sebum_t: get_vertical_graph_me(type: "e_sebum_t"),
        e_sebum_t_graph_min: 0,
        e_sebum_t_graph_max: 100,
-       e_sebum_t_graph_avr: (type: "e_sebum_t"),
+       e_sebum_t_graph_avr: get_vertical_graph_avr(type: "e_sebum_t"),
        e_sebum_u: get_vertical_graph_me(type: "e_sebum_u"),
        e_sebum_u_graph_min: 0,
        e_sebum_u_graph_max: 100,
-       e_sebum_u_graph_avr: (type: "e_sebum_u"),
+       e_sebum_u_graph_avr: get_vertical_graph_avr(type: "e_sebum_u"),
        e_porphyrin_t: get_vertical_graph_me(type: "e_porphyrin_t"),
        e_porphyrin_t_graph_min: 0,
        e_porphyrin_t_graph_max: 100,
-       e_porphyrin_t_graph_avr: (type: "e_porphyrin_t"),
+       e_porphyrin_t_graph_avr: get_vertical_graph_avr(type: "e_porphyrin_t"),
        e_porphyrin_u: get_vertical_graph_me(type: "e_porphyrin_u"),
        e_porphyrin_u_graph_min: 0,
        e_porphyrin_u_graph_max: 100,
-       e_porphyrin_u_graph_avr: (type: "e_porphyrin_u"),
+       e_porphyrin_u_graph_avr: get_vertical_graph_avr(type: "e_porphyrin_u"),
        dry_t: mo_1,
        dry_t_graph_min: 0,
        dry_t_graph_max: 100,
@@ -339,7 +339,7 @@ class Fcdata < ApplicationRecord
     return convert_graph_max_100(value: my_position, min_value: min_value, max_value: max_value, first_split_point: first_split_point, second_split_point: second_split_point)
   end
 
-  def (type: nil)
+  def get_vertical_graph_avr(type: nil)
     if self.custserial.nil?
       return 0
     end
