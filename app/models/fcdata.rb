@@ -446,11 +446,17 @@ class Fcdata < ApplicationRecord
 
   def self.convert_graph_max_100(value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil)
     if value.to_f < first_split_point.to_f
-      value = ((value.to_f - min_value.to_f) / (first_split_point.to_f - min_value.to_f)) * 33.3
+      denominator = (first_split_point.to_f - min_value.to_f)
+      denominator = 1 if denominator == 0
+      value = ((value.to_f - min_value.to_f) / denominator) * 33.3
     elsif value.to_f >= first_split_point.to_f && value.to_f < second_split_point.to_f
-      value = (((value.to_f - first_split_point.to_f) / (second_split_point.to_f - first_split_point.to_f)) * 33.3) + 33.3
+      denominator = (second_split_point.to_f - first_split_point.to_f)
+      denominator = 1 if denominator == 0
+      value = (((value.to_f - first_split_point.to_f) / denominator) * 33.3) + 33.3
     elsif value.to_f >= second_split_point.to_f
-      value = (((value.to_f - second_split_point.to_f) / (max_value.to_f - second_split_point.to_f)) * 33.3) + 66.6
+      denominator = (max_value.to_f - second_split_point.to_f)
+      denominator = 1 if denominator == 0
+      value = (((value.to_f - second_split_point.to_f) / denominator) * 33.3) + 66.6
     end
 
     if value > max_value
