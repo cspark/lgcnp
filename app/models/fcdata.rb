@@ -419,6 +419,10 @@ class Fcdata < ApplicationRecord
       max_value = get_vertical_graph_max(type: type)
       first_split_point = Fcavgdata.where(age: avg_grade_2_field_name).first.wrinkle.to_i
       second_split_point = Fcavgdata.where(age: avg_grade_3_field_name).first.wrinkle.to_i
+      Rails.logger.info "Wrinkle Avr"
+      Rails.logger.info age_avr
+      Rails.logger.info first_split_point
+      Rails.logger.info second_split_point
     end
 
     if type == "el"
