@@ -268,7 +268,7 @@ class Fcdata < ApplicationRecord
       my_position = e_sebum_t
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: "AgeALL_Grade ").first.e_sebum_t.to_i
+      first_split_point = Fcavgdata.where(age: "AgeALL_Grade_2").first.e_sebum_t.to_i
       second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.e_sebum_t.to_i
     end
 
