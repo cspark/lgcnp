@@ -444,18 +444,17 @@ class Fcdata < ApplicationRecord
     return convert_graph_max_100(value: age_avr, min_value: min_value, max_value: max_value, first_split_point: first_split_point, second_split_point: second_split_point)
   end
 
-  def convert_graph_max_100(value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil)
-    if value < first_split_point
-      # value = (value / (first_split_point - min_value)) / 33.3
-      value = ((value - min_value) / (first_split_point - min_value)) * 33.3
+  def self.convert_graph_max_100(value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil)
+    if value.to_f < first_split_point.to_f
+      value = ((value.to_f - min_value.to_f) / (first_split_point.to_f - min_value.to_f)) * 33.3
+    elsif value.to_f >= first_split_point.to_f && value.to_f < second_split_point.to_f
+      value = (((value.to_f - first_split_point.to_f) / (second_split_point.to_f - first_split_point.to_f)) * 33.3) + 33.3
+    elsif value.to_f >= second_split_point.to_f
+      value = (((value.to_f - second_split_point.to_f) / (max_value.to_f - second_split_point.to_f)) * 33.3) + 66.6
     end
 
-    if value >= first_split_point && value < second_split_point
-      value = ((value - first_split_point) / (second_split_point - first_split_point)) * 33.3 + 33.3
-    end
-
-    if value >= second_split_point
-      value = ((value - second_split_point) / (max_value - second_split_point)) * 33.3 + 66.6
+    if value > max_value
+      value = 99.9
     end
     return value
   end
