@@ -336,7 +336,7 @@ class Fcdata < ApplicationRecord
       second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.spot_pl.to_i
     end
 
-    return convert_graph_max_100(value: my_position, min_value: min_value, max_value: max_value, first_split_point: first_split_point, second_split_point: second_split_point)
+    return convert_graph_max_100(type: type, value: my_position, min_value: min_value, max_value: max_value, first_split_point: first_split_point, second_split_point: second_split_point)
   end
 
   def get_vertical_graph_avr(type: nil)
@@ -441,10 +441,10 @@ class Fcdata < ApplicationRecord
       second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.spot_pl.to_i
     end
 
-    return convert_graph_max_100(value: age_avr, min_value: min_value, max_value: max_value, first_split_point: first_split_point, second_split_point: second_split_point)
+    return convert_graph_max_100(type: type, value: age_avr, min_value: min_value, max_value: max_value, first_split_point: first_split_point, second_split_point: second_split_point)
   end
 
-  def convert_graph_max_100(value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil)
+  def convert_graph_max_100(type: nil, value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil)
     if value.to_f < first_split_point.to_f
       denominator = (first_split_point.to_f - min_value.to_f)
       denominator = 1 if denominator == 0
@@ -463,7 +463,15 @@ class Fcdata < ApplicationRecord
       value = 99.9
     end
 
-    value = 99.9 - value
+    if type != 'moisture'
+      value = 99.9 - value
+    end
+
+    if type == 'pore' || type == 'sb' || type == 'wr' || type == 'el' || type == 'pp'
+      if get_graph_data(type: type) == 2
+        value = 50
+      end
+    end
     return value
   end
 
