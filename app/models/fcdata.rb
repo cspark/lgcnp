@@ -140,11 +140,11 @@ class Fcdata < ApplicationRecord
        dry_t: mo_1,
        dry_t_graph_min: 0,
        dry_t_graph_max: 100,
-       dry_t_graph_avr: (type: "moisture"),
+       dry_t_graph_avr: get_vertical_graph_avr(type: "moisture"),
        dry_u: (mo_7 + mo_8) / 2,
        dry_u_graph_min: 0,
        dry_u_graph_max: 100,
-       dry_u_graph_avr: (type: "moisture"),
+       dry_u_graph_avr: get_vertical_graph_avr(type: "moisture"),
     }
   end
 
