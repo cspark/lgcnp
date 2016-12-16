@@ -329,7 +329,7 @@ class Fcdata < ApplicationRecord
     end
 
     if type == "pp"
-      my_position = pp_ratio_avr
+      my_position = sp_pl_avr
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
       first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.spot_pl.to_i
@@ -444,7 +444,7 @@ class Fcdata < ApplicationRecord
     return convert_graph_max_100(value: age_avr, min_value: min_value, max_value: max_value, first_split_point: first_split_point, second_split_point: second_split_point)
   end
 
-  def convert_graph_max_100(value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil)
+  def self.convert_graph_max_100(value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil)
     if value.to_f < first_split_point.to_f
       denominator = (first_split_point.to_f - min_value.to_f)
       denominator = 1 if denominator == 0
