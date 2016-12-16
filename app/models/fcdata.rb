@@ -336,7 +336,7 @@ class Fcdata < ApplicationRecord
       second_split_point = Fcavgdata.where(age: avg_grade_3_field_name).first.spot_pl.to_i
     end
 
-    return convert_graph_max_100(value: age_avr, min_value: min_value, max_value: max_value, first_split_point: first_split_point, second_split_point: second_split_point)
+    return convert_graph_max_100(value: my_position, min_value: min_value, max_value: max_value, first_split_point: first_split_point, second_split_point: second_split_point)
   end
 
   def get_vertical_graph_avr(type: nil)
