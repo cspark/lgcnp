@@ -358,11 +358,11 @@ class Fcdata < ApplicationRecord
     second_split_point = 66
 
     if type == "moisture"
-      age_avr = (Fcavgdata.where(age: "AgeALL_Grade3").first.moisture.to_i + Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_i) / 2
+      age_avr = (Fcavgdata.where(age: avg_grade_3_field_name).first.moisture.to_i + Fcavgdata.where(age: avg_grade_2_field_name).first.moisture.to_i) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_i
-      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.moisture.to_i
+      first_split_point = Fcavgdata.where(age: avg_grade_2_field_name).first.moisture.to_i
+      second_split_point = Fcavgdata.where(age: avg_grade_3_field_name).first.moisture.to_i
     end
 
     if type == "e_sebum_t"
