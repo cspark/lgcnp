@@ -18,8 +18,6 @@ class Fcdata < ApplicationRecord
        pr_8: pr_8,
        pr_avr: pr_avr,
        pr_graph: get_graph_data(type: "pore"),
-      #  pr_graph_min: get_vertical_graph_min(type: "pore"),
-      #  pr_graph_max: get_vertical_graph_max(type: "pore"),
        pr_graph_min: 0,
        pr_graph_max: 100,
        pr_graph_avr: get_vertical_graph_avr(type: "pore"),
@@ -358,6 +356,7 @@ class Fcdata < ApplicationRecord
     max_value = 100
     first_split_point = 33
     second_split_point = 66
+
     if type == "moisture"
       age_avr = (Fcavgdata.where(age: "AgeALL_Grade3").first.e_sebum_t.to_i + Fcavgdata.where(age: "AgeALL_Grade2").first.e_sebum_t.to_i) / 2
       min_value = get_vertical_graph_min(type: type)
@@ -446,7 +445,7 @@ class Fcdata < ApplicationRecord
       value = (value / (first_split_point - min_value)) / 33.3
     end
 
-    if value >= first_split_point && me < second_split_point
+    if value >= first_split_point && value < second_split_point
       value = ((value / (second_split_point - first_split_point)) / 33.3) + 33.3
     end
 
