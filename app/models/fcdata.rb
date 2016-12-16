@@ -444,7 +444,7 @@ class Fcdata < ApplicationRecord
     return convert_graph_max_100(value: age_avr, min_value: min_value, max_value: max_value, first_split_point: first_split_point, second_split_point: second_split_point)
   end
 
-  def self.convert_graph_max_100(value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil)
+  def convert_graph_max_100(value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil)
     if value.to_f < first_split_point.to_f
       denominator = (first_split_point.to_f - min_value.to_f)
       denominator = 1 if denominator == 0
