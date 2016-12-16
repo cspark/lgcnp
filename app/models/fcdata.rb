@@ -292,8 +292,8 @@ class Fcdata < ApplicationRecord
       my_position = e_porphyrin_u
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: avg_grade_2_field_name).e_porphyrin_u.pore.to_i
-      second_split_point = Fcavgdata.where(age: avg_grade_3_field_name).e_porphyrin_u.pore.to_i
+      first_split_point = Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_i
+      second_split_point = Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_i
     end
 
     if type == "pore"
