@@ -462,6 +462,8 @@ class Fcdata < ApplicationRecord
     if value > 99.9
       value = 99.9
     end
+
+    value = 99.9 - value
     return value
   end
 
