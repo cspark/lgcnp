@@ -522,17 +522,13 @@ class Fcdata < ApplicationRecord
     if type == "sb"
       # 트러블
       # E_PORPHYTRIN_T	E_PORPHYTRIN_U 평균값
-      avr = self.sb_avr
+      avr = self.e_porphyrin_u
 
       avr1 = (Fcavgdata.where(age: avg_grade_1_field_name).first.e_porphyrin_u.to_i + Fcavgdata.where(age: avg_grade_1_field_name).first.e_porphyrin_t.to_i) / 2
       avr2 = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_i + Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_i) / 2
       avr3 = (Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_i + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_i) / 2
       avr4 = (Fcavgdata.where(age: avg_grade_4_field_name).first.e_porphyrin_u.to_i + Fcavgdata.where(age: avg_grade_4_field_name).first.e_porphyrin_t.to_i) / 2
 
-      Rails.logger.info "sb avr4"
-      Rails.logger.info Fcavgdata.where(age: avg_grade_4_field_name).first.e_porphyrin_u.to_i
-      Rails.logger.info Fcavgdata.where(age: avg_grade_4_field_name).first.e_porphyrin_t.to_i
-      Rails.logger.info avr4
       return convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
     end
 
