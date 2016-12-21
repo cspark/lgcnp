@@ -39,6 +39,7 @@ class FcdatasController < ApplicationController
     serial = params[:custserial].to_s
 
     face_data = Fcdata.where(custserial: serial).last
+    measureno = face_data.measureno
     # face_data = Fcdata.all.first
 
     image_download(serial: serial, measureno: measureno, number: "1", type: "_Sym_L_")
