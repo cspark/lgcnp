@@ -633,7 +633,7 @@ class Fcdata < ApplicationRecord
     # AVG Data 의 Moisture Grade 3, 2 번을 참고
 
     low = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_i
-    high = Fcavgdata.where(age: "AgeALL_Grade4").first.moisture.to_i
+    high = Fcavgdata.where(age: "AgeALL_Grade3").first.moisture.to_i
 
     if value.to_i < low
       return 0
