@@ -110,60 +110,60 @@ class FcdatasController < ApplicationController
     face_data = Fcdata.where(custserial: serial).where(measureno: measureno).last
     # face_data = Fcdata.all.first
 
-    image_download(serial: serial, face_data: face_data, number: "1", type: "_Sym_L_")
-    image_download(serial: serial, face_data: face_data, number: "2", type: "_Sym_L_")
-    image_download(serial: serial, face_data: face_data, number: "3", type: "_Sym_L_")
-    image_download(serial: serial, face_data: face_data, number: "4", type: "_Sym_L_")
-    image_download(serial: serial, face_data: face_data, number: "1", type: "_Sym_R_")
-    image_download(serial: serial, face_data: face_data, number: "2", type: "_Sym_R_")
-    image_download(serial: serial, face_data: face_data, number: "3", type: "_Sym_R_")
-    image_download(serial: serial, face_data: face_data, number: "4", type: "_Sym_R_")
+    image_download(serial: serial, measureno: measureno, number: "1", type: "_Sym_L_")
+    image_download(serial: serial, measureno: measureno, number: "2", type: "_Sym_L_")
+    image_download(serial: serial, measureno: measureno, number: "3", type: "_Sym_L_")
+    image_download(serial: serial, measureno: measureno, number: "4", type: "_Sym_L_")
+    image_download(serial: serial, measureno: measureno, number: "1", type: "_Sym_R_")
+    image_download(serial: serial, measureno: measureno, number: "2", type: "_Sym_R_")
+    image_download(serial: serial, measureno: measureno, number: "3", type: "_Sym_R_")
+    image_download(serial: serial, measureno: measureno, number: "4", type: "_Sym_R_")
 
-    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_UV_")
-    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_UV_")
-    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_UV_")
-    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_UV_")
+    image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UV_")
+    image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UV_")
+    image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UV_")
+    image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UV_")
 
-    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_WH_PWC_")
-    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_WH_PWC_")
-    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_WH_PWC_")
-    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_WH_PWC_")
-    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_WH_")
-    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_WH_")
-    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_WH_")
-    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_WH_")
+    image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_WH_PWC_")
+    image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_WH_PWC_")
+    image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_WH_PWC_")
+    image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_WH_PWC_")
+    image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_WH_")
+    image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_WH_")
+    image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_WH_")
+    image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_WH_")
 
-    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_UVGR_SBC_")
-    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_UVGR_SBC_")
-    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_UVGR_SBC_")
-    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_UVGR_SBC_")
-    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_UV_GR_")
-    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_UV_GR_")
-    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_UV_GR_")
-    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_UV_GR_")
+    image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UVGR_SBC_")
+    image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UVGR_SBC_")
+    image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UVGR_SBC_")
+    image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UVGR_SBC_")
+    image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UV_GR_")
+    image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UV_GR_")
+    image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UV_GR_")
+    image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UV_GR_")
 
-    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_PL_PLC_")
-    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_PL_PLC_")
-    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_PL_PLC_")
-    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_PL_PLC_")
-    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_UVGR_UVC_")
-    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_UVGR_UVC_")
-    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_UVGR_UVC_")
-    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_UVGR_UVC_")
-    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_PL_")
-    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_PL_")
-    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_PL_")
-    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_PL_")
-    image_download(serial: serial, face_data: face_data, number: "1", type: "_F_FM_PL_UVC_")
-    image_download(serial: serial, face_data: face_data, number: "2", type: "_F_FM_PL_UVC_")
-    image_download(serial: serial, face_data: face_data, number: "3", type: "_F_FM_PL_UVC_")
-    image_download(serial: serial, face_data: face_data, number: "4", type: "_F_FM_PL_UVC_")
+    image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_PL_PLC_")
+    image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_PL_PLC_")
+    image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_PL_PLC_")
+    image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_PL_PLC_")
+    image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UVGR_UVC_")
+    image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UVGR_UVC_")
+    image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UVGR_UVC_")
+    image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UVGR_UVC_")
+    image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_PL_")
+    image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_PL_")
+    image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_PL_")
+    image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_PL_")
+    image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_PL_UVC_")
+    image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_PL_UVC_")
+    image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_PL_UVC_")
+    image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_PL_UVC_")
 
-    image_download(serial: serial, face_data: face_data, number: nil, type: "_F_FM_WH_PWC_W")
-    image_download(serial: serial, face_data: face_data, number: nil, type: "_F_FM_WH_E")
-    image_download(serial: serial, face_data: face_data, number: nil, type: "_Sp_Pore_Cust")
-    image_download(serial: serial, face_data: face_data, number: nil, type: "_Sp_Spot_Cust")
-    image_download(serial: serial, face_data: face_data, number: nil, type: "_Sp_Wr_Cust")
+    image_download(serial: serial, measureno: measureno, number: nil, type: "_F_FM_WH_PWC_W")
+    image_download(serial: serial, measureno: measureno, number: nil, type: "_F_FM_WH_E")
+    image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Pore_Cust")
+    image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Spot_Cust")
+    image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Wr_Cust")
 
     if face_data.present?
       render json: face_data.to_api_hash, status: 200
@@ -179,7 +179,7 @@ class FcdatasController < ApplicationController
     render :text => "create Complete", status: 200
   end
 
-  def image_download(serial: nil, face_data: nil, number: nil, type: nil)
+  def image_download(serial: nil, measureno: nil, number: nil, type: nil)
     #이미지 가져오기
     Rails.logger.info serial
     user = Custinfo.where(custserial: serial).first
@@ -194,11 +194,11 @@ class FcdatasController < ApplicationController
     ftp_path << "/"
     ftp_path << user.custserial.to_i.to_s
     ftp_path << "-"
-    ftp_path << face_data.measureno.to_i.to_s
+    ftp_path << measureno.to_i.to_s
     ftp_path << "/"
     ftp_path << user.custserial.to_i.to_s
     ftp_path << "-"
-    ftp_path << face_data.measureno.to_i.to_s
+    ftp_path << measureno.to_i.to_s
     ftp_path << type
     ftp_path << number if !number.nil?
     ftp_path << ".jpg"
@@ -221,7 +221,7 @@ class FcdatasController < ApplicationController
     make_dir_command << "/"
     make_dir_command << user.custserial.to_i.to_s
     make_dir_command << "-"
-    make_dir_command << face_data.measureno.to_i.to_s
+    make_dir_command << measureno.to_i.to_s
     Rails.logger.info make_dir_command
     system(make_dir_command)
 
@@ -230,7 +230,7 @@ class FcdatasController < ApplicationController
     file_get_command << "/"
     file_get_command << user.custserial.to_i.to_s
     file_get_command << "-"
-    file_get_command << face_data.measureno.to_i.to_s
+    file_get_command << measureno.to_i.to_s
     Rails.logger.info file_get_command
     system(file_get_command)
   end

@@ -636,7 +636,7 @@ class Fcdata < ApplicationRecord
       return 0
     end
 
-    if value.to_i > low && value.to_i < high
+    if value.to_i >= low && value.to_i <= high
       return 2
     end
 
