@@ -7,7 +7,7 @@ class Fcdata < ApplicationRecord
        custserial: custserial,
        faceno: faceno,
        measuredate: measuredate,
-       measureno: measureno,
+       measureno: measureno.to_i,
        uptdate: uptdate,
        mo_1_origin: mo_1,
        mo_7_origin: mo_7,
