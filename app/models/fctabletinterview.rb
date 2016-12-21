@@ -47,7 +47,8 @@ class Fctabletinterview < ApplicationRecord
       is_make_up: is_make_up,
       is_agree_privacy: is_agree_privacy,
       is_agree_thirdparty_info: is_agree_thirdparty_info,
-      is_agree_marketing: is_agree_marketing
+      is_agree_marketing: is_agree_marketing,
+      memo: memo
     }
   end
 end
