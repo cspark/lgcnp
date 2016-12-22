@@ -509,17 +509,17 @@ class Fcdata < ApplicationRecord
     end
 
     description << "평균값은 "
-    description << age_avr
+    description << age_avr.to_s
     description << " MIN VALUE는 "
-    description << min_value
+    description << min_value.to_s
     description << " MAX VALUE는 "
-    description << max_value
+    description << max_value.to_s
     description << " First Split point는 "
-    description << first_split_point
+    description << first_split_point.to_s
     description << " Second Split point는 "
-    description << second_split_point
+    description << second_split_point.to_s
     description << " // 나의 값은 "
-    description << my_position
+    description << my_position.to_s
   end
 
   def convert_graph_max_100(type: nil, value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil)
