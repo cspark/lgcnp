@@ -470,6 +470,7 @@ class Fcdata < ApplicationRecord
     first_split_point = 33
     second_split_point = 66
 
+    description = ""
     description << type
     description << "은 "
 
@@ -480,15 +481,6 @@ class Fcdata < ApplicationRecord
       max_value = get_vertical_graph_max(type: type)
       first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.e_sebum_t.to_f
       second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.e_sebum_t.to_f
-
-      description << "평균값은 "
-      description << age_avr.to_s
-      description << " First Split point는 "
-      description << first_split_point.to_s
-      description << " Second Split point는 "
-      description << second_split_point.to_s
-      description << " // 나의 값은 "
-      description << my_position.to_f.to_s
     end
 
     if type.to_s == "e_sebum_u"
@@ -498,15 +490,6 @@ class Fcdata < ApplicationRecord
       max_value = get_vertical_graph_max(type: type)
       first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.e_sebum_u.to_f
       second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.e_sebum_u.to_f
-
-      description << "평균값은 "
-      description << age_avr.to_s
-      description << " First Split point는 "
-      description << first_split_point.to_s
-      description << " Second Split point는 "
-      description << second_split_point.to_s
-      description << " // 나의 값은 "
-      description << my_position.to_f.to_s
     end
 
     if type.to_s == "e_porphyrin_t"
@@ -516,15 +499,6 @@ class Fcdata < ApplicationRecord
       max_value = get_vertical_graph_max(type: type)
       first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_t.to_f
       second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.e_porphyrin_t.to_f
-
-      description << "평균값은 "
-      description << age_avr.to_s
-      description << " First Split point는 "
-      description << first_split_point.to_s
-      description << " Second Split point는 "
-      description << second_split_point.to_s
-      description << " // 나의 값은 "
-      description << my_position.to_f.to_s
     end
 
     if type.to_s == "e_porphyrin_u"
@@ -534,17 +508,16 @@ class Fcdata < ApplicationRecord
       max_value = get_vertical_graph_max(type: type)
       first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_u.to_f
       second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.e_porphyrin_u.to_f
-
-      description << "평균값은 "
-      description << age_avr.to_s
-      description << " First Split point는 "
-      description << first_split_point.to_s
-      description << " Second Split point는 "
-      description << second_split_point.to_s
-      description << " // 나의 값은 "
-      description << my_position.to_f.to_s
     end
 
+    description << "평균값은 "
+    description << age_avr.to_s
+    description << " First Split point는 "
+    description << first_split_point.to_s
+    description << " Second Split point는 "
+    description << second_split_point.to_s
+    description << " // 나의 값은 "
+    description << my_position.to_f.to_s
     description
   end
 
