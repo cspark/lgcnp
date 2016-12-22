@@ -470,10 +470,10 @@ class Fcdata < ApplicationRecord
     first_split_point = 33
     second_split_point = 66
 
-    description = type
+    description << type
     description << "은 "
 
-    if type == "e_sebum_t"
+    if type.to_s == "e_sebum_t"
       my_position = e_sebum_t
       age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_sebum_t.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_sebum_t.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
@@ -491,7 +491,7 @@ class Fcdata < ApplicationRecord
       description << my_position.to_f.to_s
     end
 
-    if type == "e_sebum_u"
+    if type.to_s == "e_sebum_u"
       my_position = e_sebum_u
       age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_sebum_u.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_sebum_u.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
@@ -509,7 +509,7 @@ class Fcdata < ApplicationRecord
       description << my_position.to_f.to_s
     end
 
-    if type == "e_porphyrin_t"
+    if type.to_s == "e_porphyrin_t"
       my_position = e_porphyrin_t
       age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
@@ -527,7 +527,7 @@ class Fcdata < ApplicationRecord
       description << my_position.to_f.to_s
     end
 
-    if type == "e_porphyrin_u"
+    if type.to_s == "e_porphyrin_u"
       my_position = e_porphyrin_u
       age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
