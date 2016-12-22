@@ -12,7 +12,10 @@ class Custinfo < ApplicationRecord
       birthmm: birthmm,
       birthdd: birthdd,
       phone: phone,
-      update: uptdate
+      update: uptdate,
+      is_agree_privacy: is_agree_privacy,
+      is_agree_thirdparty_info: is_agree_thirdparty_info,
+      is_agree_marketing: is_agree_marketing,
     }
   end
 end

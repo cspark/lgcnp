@@ -45,9 +45,6 @@ class Fctabletinterview < ApplicationRecord
       ampoule_2_lot: ampoule_2_lot,
       mixer_name: mixer_name,
       is_make_up: is_make_up,
-      is_agree_privacy: is_agree_privacy,
-      is_agree_thirdparty_info: is_agree_thirdparty_info,
-      is_agree_marketing: is_agree_marketing,
       memo: memo
     }
   end
