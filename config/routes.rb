@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get "find_user" => "custinfos#find_user"
   get "find_users" => "custinfos#find_users"
   get "update_phone_number" => "custinfos#update_phone_number"
+  get "update_agreement" => "custinfos#update_agreement"
+
   resources :fcinterviews do
   end
 

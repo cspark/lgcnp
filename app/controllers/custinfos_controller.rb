@@ -52,6 +52,21 @@ class CustinfosController < ApplicationController
       end
   end
 
+  def update_agreement
+      is_agree_marketing = params[:is_agree_marketing]
+      is_agree_thirdparty_info = params[:is_agree_thirdparty_info]
+      serial = params[:serial]
+
+      custinfo = Custinfo.where(custserial: serial).first
+      custinfo.is_agree_marketing = is_agree_marketing
+      custinfo.is_agree_thirdparty_info = is_agree_thirdparty_info
+      if custinfo.save
+        render json: custinfo.to_api_hash, status: 200
+      else
+        render json: "", status: 404
+      end
+  end
+
   def create
     Rails.logger.info params.inspect
     name = params[:name]
