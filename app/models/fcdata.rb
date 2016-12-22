@@ -472,6 +472,7 @@ class Fcdata < ApplicationRecord
 
     description = type
     description << "은 "
+
     if type == "e_sebum_t"
       my_position = e_sebum_t
       age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_sebum_t.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_sebum_t.to_f) / 2
@@ -510,16 +511,12 @@ class Fcdata < ApplicationRecord
 
     description << "평균값은 "
     description << age_avr.to_s
-    description << " MIN VALUE는 "
-    description << min_value.to_s
-    description << " MAX VALUE는 "
-    description << max_value.to_s
     description << " First Split point는 "
     description << first_split_point.to_s
     description << " Second Split point는 "
     description << second_split_point.to_s
     description << " // 나의 값은 "
-    description << my_position.to_s
+    description << my_position.to_f.to_s
   end
 
   def convert_graph_max_100(type: nil, value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil)
