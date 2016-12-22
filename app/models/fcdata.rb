@@ -128,18 +128,22 @@ class Fcdata < ApplicationRecord
        e_sebum_t_graph_min: 0,
        e_sebum_t_graph_max: 100,
        e_sebum_t_graph_avr: get_vertical_graph_avr(type: "e_sebum_t"),
+       e_sebum_t_graph_description: get_vertical_graph_description(type: "e_sebum_t"),
        e_sebum_u: get_vertical_graph_me(type: "e_sebum_u"),
        e_sebum_u_graph_min: 0,
        e_sebum_u_graph_max: 100,
        e_sebum_u_graph_avr: get_vertical_graph_avr(type: "e_sebum_u"),
+       e_sebum_u_graph_description: get_vertical_graph_description(type: "e_sebum_u"),
        e_porphyrin_t: get_vertical_graph_me(type: "e_porphyrin_t"),
        e_porphyrin_t_graph_min: 0,
        e_porphyrin_t_graph_max: 100,
        e_porphyrin_t_graph_avr: get_vertical_graph_avr(type: "e_porphyrin_t"),
+       e_porphyrin_t_graph_description: get_vertical_graph_description(type: "e_porphyrin_t"),
        e_porphyrin_u: get_vertical_graph_me(type: "e_porphyrin_u"),
        e_porphyrin_u_graph_min: 0,
        e_porphyrin_u_graph_max: 100,
        e_porphyrin_u_graph_avr: get_vertical_graph_avr(type: "e_porphyrin_u"),
+       e_porphyrin_u_graph_description: get_vertical_graph_description(type: "e_porphyrin_u"),
        dry_t: mo_1,
        dry_t_graph_min: 0,
        dry_t_graph_max: 100,
@@ -445,6 +449,77 @@ class Fcdata < ApplicationRecord
     end
 
     return convert_graph_max_100(type: type, value: age_avr, min_value: min_value, max_value: max_value, first_split_point: first_split_point, second_split_point: second_split_point)
+  end
+
+  def get_vertical_graph_description(type: nil)
+    if self.custserial.nil?
+      return 0
+    end
+
+    user = Custinfo.where(custserial: self.custserial).first
+    age = user.age
+    avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
+    avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
+    avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
+    avg_grade_4_field_name = generate_age_data_field(age: age).concat("4")
+
+    my_position = 0
+    age_avr = 0
+    min_value = 0
+    max_value = 100
+    first_split_point = 33
+    second_split_point = 66
+
+    description = type
+    description << "은 "
+    if type == "e_sebum_t"
+      my_position = e_sebum_t
+      age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_sebum_t.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_sebum_t.to_f) / 2
+      min_value = get_vertical_graph_min(type: type)
+      max_value = get_vertical_graph_max(type: type)
+      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.e_sebum_t.to_f
+      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.e_sebum_t.to_f
+    end
+
+    if type == "e_sebum_u"
+      my_position = e_sebum_u
+      age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_sebum_u.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_sebum_u.to_f) / 2
+      min_value = get_vertical_graph_min(type: type)
+      max_value = get_vertical_graph_max(type: type)
+      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.e_sebum_u.to_f
+      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.e_sebum_u.to_f
+    end
+
+    if type == "e_porphyrin_t"
+      my_position = e_porphyrin_t
+      age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_f) / 2
+      min_value = get_vertical_graph_min(type: type)
+      max_value = get_vertical_graph_max(type: type)
+      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_t.to_f
+      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.e_porphyrin_t.to_f
+    end
+
+    if type == "e_porphyrin_u"
+      my_position = e_porphyrin_u
+      age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_f) / 2
+      min_value = get_vertical_graph_min(type: type)
+      max_value = get_vertical_graph_max(type: type)
+      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_u.to_f
+      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.e_porphyrin_u.to_f
+    end
+
+    description << "평균값은 "
+    description << age_avr
+    description << " MIN VALUE는 "
+    description << min_value
+    description << " MAX VALUE는 "
+    description << max_value
+    description << " First Split point는 "
+    description << first_split_point
+    description << " Second Split point는 "
+    description << second_split_point
+    description << " // 나의 값은 "
+    description << my_position
   end
 
   def convert_graph_max_100(type: nil, value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil)
