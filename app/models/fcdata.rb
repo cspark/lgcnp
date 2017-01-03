@@ -450,7 +450,7 @@ class Fcdata < ApplicationRecord
       second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.spot_pl.to_f
     end
 
-    return convert_graph_max_100(type: type, value: age_avr, min_value: min_value, max_value: max_value, first_split_point: first_split_point, second_split_point: second_split_point)
+    return convert_graph_max_100(type: type, value: age_avr, min_value: min_value, max_value: max_value, first_split_point: first_split_point, second_split_point: second_split_point, is_avr: true)
   end
 
   def get_vertical_graph_description(type: nil)
@@ -523,7 +523,7 @@ class Fcdata < ApplicationRecord
     description
   end
 
-  def convert_graph_max_100(type: nil, value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil)
+  def convert_graph_max_100(type: nil, value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil, is_avr: false)
     if value.to_f < first_split_point.to_f
       denominator = (first_split_point.to_f - min_value.to_f)
       denominator = 1 if denominator == 0
@@ -546,7 +546,7 @@ class Fcdata < ApplicationRecord
       value = 99.9 - value
     end
 
-    if type == 'pore' || type == 'sb' || type == 'wr' || type == 'el' || type == 'pp'
+    if (type == 'pore' || type == 'sb' || type == 'wr' || type == 'el' || type == 'pp') && !is_avr
       if get_graph_data(type: type) == 2
         value = get_vertical_graph_avr(type: type)
       end
