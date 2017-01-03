@@ -546,11 +546,11 @@ class Fcdata < ApplicationRecord
       value = 99.9 - value
     end
 
-    # if type == 'pore' || type == 'sb' || type == 'wr' || type == 'el' || type == 'pp'
-    #   if get_graph_data(type: type) == 2
-    #     value = 50
-    #   end
-    # end
+    if type == 'pore' || type == 'sb' || type == 'wr' || type == 'el' || type == 'pp'
+      if get_graph_data(type: type) == 2
+        value = get_vertical_graph_avr(type: type)
+      end
+    end
     return value
   end
 
