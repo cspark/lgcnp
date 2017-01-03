@@ -1,6 +1,8 @@
 class Fcdata < ApplicationRecord
   self.table_name = "fcdata"
-  # 1 이마 2 코 3 오른쪽 눈옆 4 오른쪽 눈밑 5 왼쪽 눈옆 6 왼쪽 눈밑 7 오른쪽 볼 8 왼쪽 볼
+  # TZone 1 이마 2 코
+  # UZone 7 오른쪽 볼 8 왼쪽 볼
+  # 3 오른쪽 눈옆 4 오른쪽 눈밑 5 왼쪽 눈옆 6 왼쪽 눈밑
 
   def to_api_hash
     {
@@ -544,11 +546,11 @@ class Fcdata < ApplicationRecord
       value = 99.9 - value
     end
 
-    if type == 'pore' || type == 'sb' || type == 'wr' || type == 'el' || type == 'pp'
-      if get_graph_data(type: type) == 2
-        value = 50
-      end
-    end
+    # if type == 'pore' || type == 'sb' || type == 'wr' || type == 'el' || type == 'pp'
+    #   if get_graph_data(type: type) == 2
+    #     value = 50
+    #   end
+    # end
     return value
   end
 
