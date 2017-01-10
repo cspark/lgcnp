@@ -71,20 +71,18 @@ class CustinfosController < ApplicationController
       end
   end
 
+  def update_email
+      email = params[:email]
+      serial = params[:serial]
 
-    def update_email
-        email = params[:email]
-        serial = params[:serial]
-
-        custinfo = Custinfo.where(custserial: serial).first
-        custinfo.email = email
-        if custinfo.save
-          render json: custinfo.to_api_hash, status: 200
-        else
-          render json: "", status: 404
-        end
-    end
-
+      custinfo = Custinfo.where(custserial: serial).first
+      custinfo.email = email
+      if custinfo.save
+        render json: custinfo.to_api_hash, status: 200
+      else
+        render json: "", status: 404
+      end
+  end
 
   def update_agreement
       is_agree_marketing = params[:is_agree_marketing]
