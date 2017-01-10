@@ -58,6 +58,20 @@ class CustinfosController < ApplicationController
       end
   end
 
+  def update_after_service
+      is_agree_after_service = params[:is_agree_after_service]
+      serial = params[:serial]
+
+      custinfo = Custinfo.where(custserial: serial).first
+      custinfo.is_agree_after_service = is_agree_after_service
+      if custinfo.save
+        render json: custinfo.to_api_hash, status: 200
+      else
+        render json: "", status: 404
+      end
+  end
+
+
   def update_agreement
       is_agree_marketing = params[:is_agree_marketing]
       is_agree_thirdparty_info = params[:is_agree_thirdparty_info]
