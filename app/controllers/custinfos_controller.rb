@@ -8,6 +8,10 @@ class CustinfosController < ApplicationController
     render json: api_hash_for_list(custinfos), status: :ok
   end
 
+  def get_api_key
+    render json: { api_key: "5I04JE4EMH" }, status: :ok
+  end
+
   def find_user
     name = params[:name]
     Rails.logger.info "Find User!"

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :custinfos do
   end
+  get "get_api_key" => "custinfos#get_api_key"
   get "find_user" => "custinfos#find_user"
   get "find_users" => "custinfos#find_users"
   get "update_phone_number" => "custinfos#update_phone_number"
