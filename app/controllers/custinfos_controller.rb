@@ -73,10 +73,15 @@ class CustinfosController < ApplicationController
 
   def update_email
       email = params[:email]
+      gene_barcode = params[:gene_barcode]
       serial = params[:serial]
 
       custinfo = Custinfo.where(custserial: serial).first
       custinfo.email = email
+      if params.has_key?(:gene_barcode)
+        custinfo.gene_barcode = gene_barcode
+      end
+
       if custinfo.save
         render json: custinfo.to_api_hash, status: 200
       else
