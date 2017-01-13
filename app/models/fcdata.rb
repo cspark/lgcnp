@@ -562,7 +562,7 @@ class Fcdata < ApplicationRecord
       value = 99.9
     end
 
-    if type != 'moisture' && type != 'pore' && type != 'sb' && type != 'pp' || type != 'dry_t' || type != 'dry_u'
+    if type != 'moisture' && type != 'pore' && type != 'sb' && type != 'pp'
       value = 99.9 - value
     end
 
