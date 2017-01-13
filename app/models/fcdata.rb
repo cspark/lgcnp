@@ -146,11 +146,11 @@ class Fcdata < ApplicationRecord
        e_porphyrin_u_graph_max: 100,
        e_porphyrin_u_graph_avr: get_vertical_graph_avr(type: "e_porphyrin_u"),
        e_porphyrin_u_graph_description: get_vertical_graph_description(type: "e_porphyrin_u"),
-       dry_t: mo_1,
+       dry_t: get_vertical_graph_me("dry_t"),
        dry_t_graph_min: 0,
        dry_t_graph_max: 100,
        dry_t_graph_avr: get_vertical_graph_avr(type: "moisture"),
-       dry_u: (mo_7 + mo_8) / 2,
+       dry_u: get_vertical_graph_me("dry_u"),
        dry_u_graph_min: 0,
        dry_u_graph_max: 100,
        dry_u_graph_avr: get_vertical_graph_avr(type: "moisture"),
@@ -269,6 +269,22 @@ class Fcdata < ApplicationRecord
       my_position = sp_pl_avr
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
+      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.pore.to_f
+      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.pore.to_f
+    end
+
+    if type == "dry_t"
+      my_position = mo_1
+      min_value = get_vertical_graph_min(type: "moisture")
+      max_value = get_vertical_graph_max(type: "moisture")
+      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.pore.to_f
+      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.pore.to_f
+    end
+
+    if type == "dry_u"
+      my_position = (mo_7 + mo_8) / 2
+      min_value = get_vertical_graph_min(type: "moisture")
+      max_value = get_vertical_graph_max(type: "moisture")
       first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.pore.to_f
       second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.pore.to_f
     end
