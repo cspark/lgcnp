@@ -147,12 +147,12 @@ class Fcdata < ApplicationRecord
        e_porphyrin_u_graph_avr: get_vertical_graph_avr(type: "e_porphyrin_u"),
        e_porphyrin_u_graph_description: get_vertical_graph_description(type: "e_porphyrin_u"),
        dry_t: get_vertical_graph_me(type: "dry_t"),
-       dry_t_graph_min: get_vertical_graph_min("moisture"),
-       dry_t_graph_max: get_vertical_graph_max("moisture"),
+       dry_t_graph_min: 0,
+       dry_t_graph_max: 100,
        dry_t_graph_avr: get_vertical_graph_avr(type: "moisture"),
        dry_u: get_vertical_graph_me(type: "dry_u"),
-       dry_u_graph_min: get_vertical_graph_min("moisture"),
-       dry_u_graph_max: get_vertical_graph_max("moisture"),
+       dry_u_graph_min: 0,
+       dry_u_graph_max: 100,
        dry_u_graph_avr: get_vertical_graph_avr(type: "moisture"),
     }
   end
