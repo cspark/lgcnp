@@ -274,7 +274,7 @@ class Fcdata < ApplicationRecord
     end
 
     if type == "dry_t"
-      my_position = mo_1
+      my_position = (mo_7 + mo_8) / 2
       min_value = get_vertical_graph_min(type: "moisture")
       max_value = get_vertical_graph_max(type: "moisture")
       first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_f
@@ -282,7 +282,7 @@ class Fcdata < ApplicationRecord
     end
 
     if type == "dry_u"
-      my_position = (mo_7 + mo_8) / 2
+      my_position = mo_1
       min_value = get_vertical_graph_min(type: "moisture")
       max_value = get_vertical_graph_max(type: "moisture")
       first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_f
