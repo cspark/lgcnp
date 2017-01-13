@@ -1,5 +1,6 @@
 class Fcdata < ApplicationRecord
   self.table_name = "fcdata"
+
   # TZone 1 이마 2 코
   # UZone 7 오른쪽 볼 8 왼쪽 볼
   # 3 오른쪽 눈옆 4 오른쪽 눈밑 5 왼쪽 눈옆 6 왼쪽 눈밑
@@ -253,7 +254,7 @@ class Fcdata < ApplicationRecord
     end
 
     user = Custinfo.where(custserial: self.custserial).first
-    age = user.age
+    age = Date.current.year - user.birthyy.to_i
     avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
     avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
@@ -282,7 +283,7 @@ class Fcdata < ApplicationRecord
     end
 
     if type == "dry_u"
-      my_position = (mo_7 + mo_8) / 2 #40
+      my_position = (mo_7 + mo_8) / 2 #25
       min_value = get_vertical_graph_min(type: "moisture") #0.0
       max_value = get_vertical_graph_max(type: "moisture") #65.0
       first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_f #28.0
@@ -370,7 +371,7 @@ class Fcdata < ApplicationRecord
     end
 
     user = Custinfo.where(custserial: self.custserial).first
-    age = user.age
+    age = Date.current.year - user.birthyy.to_i
     avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
     avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
@@ -475,7 +476,7 @@ class Fcdata < ApplicationRecord
     end
 
     user = Custinfo.where(custserial: self.custserial).first
-    age = user.age
+    age = Date.current.year - user.birthyy.to_i
     avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
     avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
@@ -586,7 +587,8 @@ class Fcdata < ApplicationRecord
       return 0
     end
     user = Custinfo.where(custserial: self.custserial).first
-    age = user.age
+    age = Date.current.year - user.birthyy.to_i
+    
     avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
     avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
