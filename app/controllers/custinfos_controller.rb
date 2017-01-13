@@ -23,7 +23,7 @@ class CustinfosController < ApplicationController
     dd = params[:birthdd]
     phone = params[:phone]
 
-    find_user = Custinfo.where(custname: name).where(birthyy: yy).where(birthmm: mm).where(birthdd: dd).where(phone: phone).first
+    find_user = Custinfo.where(custname: name).where(birthyy: yy).where(birthmm: mm).where(birthdd: dd).where(phone: phone).where(ch_cd: "CNP").first
     if find_user.present?
       render json: find_user.to_api_hash, status: 200
     else
@@ -37,7 +37,7 @@ class CustinfosController < ApplicationController
     mm = params[:birthmm]
     dd = params[:birthdd]
 
-    find_users = Custinfo.where(custname:name).where(birthyy:yy).where(birthmm:mm).where(birthdd:dd)
+    find_users = Custinfo.where(custname:name).where(birthyy:yy).where(birthmm:mm).where(birthdd:dd).where(ch_cd: "CNP")
     if find_users.present?
       render json: api_hash_for_list(find_users), status: 200
     else
@@ -49,7 +49,7 @@ class CustinfosController < ApplicationController
       phone = params[:phone]
       serial = params[:serial]
 
-      custinfo = Custinfo.where(custserial: serial).first
+      custinfo = Custinfo.where(custserial: serial).where(ch_cd: "CNP").first
       custinfo.phone = phone
       if custinfo.save
         render json: custinfo.to_api_hash, status: 200
@@ -62,7 +62,7 @@ class CustinfosController < ApplicationController
       is_agree_after = params[:is_agree_after_service]
       serial = params[:serial]
 
-      custinfo = Custinfo.where(custserial: serial).first
+      custinfo = Custinfo.where(custserial: serial).where(ch_cd: "CNP").first
       custinfo.is_agree_after = is_agree_after
       if custinfo.save
         render json: custinfo.to_api_hash, status: 200
@@ -76,7 +76,7 @@ class CustinfosController < ApplicationController
       gene_barcode = params[:gene_barcode]
       serial = params[:serial]
 
-      custinfo = Custinfo.where(custserial: serial).first
+      custinfo = Custinfo.where(custserial: serial).where(ch_cd: "CNP").first
       if params.has_key?(:email)
         custinfo.email = email
       end
@@ -97,7 +97,7 @@ class CustinfosController < ApplicationController
       is_agree_thirdparty_info = params[:is_agree_thirdparty_info]
       serial = params[:serial]
 
-      custinfo = Custinfo.where(custserial: serial).first
+      custinfo = Custinfo.where(custserial: serial).where(ch_cd: "CNP").first
       custinfo.is_agree_marketing = is_agree_marketing
       custinfo.is_agree_thirdparty_info = is_agree_thirdparty_info
       if custinfo.save
