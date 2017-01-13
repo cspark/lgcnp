@@ -269,24 +269,24 @@ class Fcdata < ApplicationRecord
       my_position = sp_pl_avr
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.pore.to_f
-      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.pore.to_f
+      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_f
+      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.moisture.to_f
     end
 
     if type == "dry_t"
       my_position = mo_1
       min_value = get_vertical_graph_min(type: "moisture")
       max_value = get_vertical_graph_max(type: "moisture")
-      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.pore.to_f
-      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.pore.to_f
+      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_f
+      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.moisture.to_f
     end
 
     if type == "dry_u"
       my_position = (mo_7 + mo_8) / 2
       min_value = get_vertical_graph_min(type: "moisture")
       max_value = get_vertical_graph_max(type: "moisture")
-      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.pore.to_f
-      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.pore.to_f
+      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_f
+      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.moisture.to_f
     end
 
     if type == "e_sebum_t"
