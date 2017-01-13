@@ -556,8 +556,6 @@ class Fcdata < ApplicationRecord
       value = (((value.to_f - second_split_point.to_f) / denominator) * 33.3) + 66.6
     end
 
-    ((40 - 38) / 27)
-
     if value > 99.9
       value = 99.9
     end
