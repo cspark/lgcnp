@@ -274,7 +274,7 @@ class Fcdata < ApplicationRecord
     end
 
     if type == "dry_t"
-      my_position = (mo_7 + mo_8) / 2
+      my_position = mo_1
       min_value = get_vertical_graph_min(type: "moisture")
       max_value = get_vertical_graph_max(type: "moisture")
       first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_f
@@ -282,11 +282,11 @@ class Fcdata < ApplicationRecord
     end
 
     if type == "dry_u"
-      my_position = mo_1
-      min_value = get_vertical_graph_min(type: "moisture")
-      max_value = get_vertical_graph_max(type: "moisture")
-      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_f
-      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.moisture.to_f
+      my_position = (mo_7 + mo_8) / 2 #40
+      min_value = get_vertical_graph_min(type: "moisture") #0.0
+      max_value = get_vertical_graph_max(type: "moisture") #65.0
+      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_f #28.0
+      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.moisture.to_f #38.0
     end
 
     if type == "e_sebum_t"
@@ -548,17 +548,21 @@ class Fcdata < ApplicationRecord
       denominator = (second_split_point.to_f - first_split_point.to_f)
       denominator = 1 if denominator == 0
       value = (((value.to_f - first_split_point.to_f) / denominator) * 33.3) + 33.3
+
+      # 0 28 38 (40) 65
     elsif value.to_f >= second_split_point.to_f
       denominator = (max_value.to_f - second_split_point.to_f)
       denominator = 1 if denominator == 0
       value = (((value.to_f - second_split_point.to_f) / denominator) * 33.3) + 66.6
     end
 
+    ((40 - 38) / 27)
+
     if value > 99.9
       value = 99.9
     end
 
-    if type != 'moisture' && type != 'pore' && type != 'sb' && type != 'pp'
+    if type != 'moisture' && type != 'pore' && type != 'sb' && type != 'pp' || type != 'dry_t' || type != 'dry_u'
       value = 99.9 - value
     end
 
