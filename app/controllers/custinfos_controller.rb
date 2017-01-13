@@ -77,7 +77,10 @@ class CustinfosController < ApplicationController
       serial = params[:serial]
 
       custinfo = Custinfo.where(custserial: serial).first
-      custinfo.email = email
+      if params.has_key?(:email)
+        custinfo.email = email
+      end
+
       if params.has_key?(:gene_barcode)
         custinfo.gene_barcode = gene_barcode
       end
