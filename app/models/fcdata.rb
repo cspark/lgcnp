@@ -548,8 +548,6 @@ class Fcdata < ApplicationRecord
       denominator = (second_split_point.to_f - first_split_point.to_f)
       denominator = 1 if denominator == 0
       value = (((value.to_f - first_split_point.to_f) / denominator) * 33.3) + 33.3
-
-      # 0 28 38 (40) 65
     elsif value.to_f >= second_split_point.to_f
       denominator = (max_value.to_f - second_split_point.to_f)
       denominator = 1 if denominator == 0
@@ -562,6 +560,16 @@ class Fcdata < ApplicationRecord
 
     if type != 'moisture' && type != 'pore' && type != 'sb' && type != 'pp'
       value = 99.9 - value
+    end
+
+    if type == "dry_t"
+      Rails.logger.info "dry_t!!!"
+      Rails.logger.info value
+    end
+
+    if type == "dry_u"
+      Rails.logger.info "dry_u!!!"
+      Rails.logger.info value
     end
 
     if (type == 'pore' || type == 'sb' || type == 'wr' || type == 'el' || type == 'pp') && !is_avr
