@@ -588,7 +588,7 @@ class Fcdata < ApplicationRecord
     end
     user = Custinfo.where(custserial: self.custserial).first
     age = Date.current.year - user.birthyy.to_i
-    
+
     avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
     avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
@@ -655,19 +655,19 @@ class Fcdata < ApplicationRecord
   end
 
   def convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
-    if avr <= avr1
+    if avr < avr1
       return 4
     end
 
-    if avr > avr1 && avr < avr2
+    if avr >= avr1 && avr < avr2
       return 3
     end
 
-    if avr >= avr2 && avr < avr3
+    if avr >= avr2 && avr <= avr3
       return 2
     end
 
-    if avr >= avr3 && avr < avr4
+    if avr > avr3 && avr <= avr4
       return 1
     end
 
