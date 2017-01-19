@@ -31,9 +31,8 @@ staging:
 
 production:
     adapter: oracle_enhanced
-    username: JANUS
+    username: janus
     password: janus!123
     host: 165.244.88.138
-    encoding: utf-8
     port: 1536
     database: LGGIN
