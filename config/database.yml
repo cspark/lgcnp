@@ -36,4 +36,4 @@ production:
     host: 165.244.88.138
     encoding: utf-8
     port: 1536
-    database: VDLDBDEV
+    database: LGGIN
