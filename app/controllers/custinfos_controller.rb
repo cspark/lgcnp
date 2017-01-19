@@ -63,7 +63,7 @@ class CustinfosController < ApplicationController
       serial = params[:serial]
 
       custinfo = Custinfo.where(custserial: serial).where(ch_cd: "CNP").first
-      custinfo.name = name
+      custinfo.custname = name
       if custinfo.save
         render json: custinfo.to_api_hash, status: 200
       else
