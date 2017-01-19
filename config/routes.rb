@@ -31,4 +31,9 @@ Rails.application.routes.draw do
   post "fctabletinterviews_quickmode" => "fctabletinterviews#fctabletinterviews_quickmode"
   post "fctabletinterviews_update_lots" => "fctabletinterviews#fctabletinterviews_update_lots"
   get "is_update" => "update#is_update"
+
+  get 'admin' => 'admins#index'
+  post 'login' => 'admins#login'
+  get 'admin_login' => 'admins#login'
+
 end

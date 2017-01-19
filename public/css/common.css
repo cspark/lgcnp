@@ -1,0 +1,368 @@
+/*PLUS CSS*/
+.main {
+    max-width: 320px;
+    margin: 0 auto;
+}
+.login-or {
+    position: relative;
+    font-size: 18px;
+    color: #aaa;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.span-or {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: -2px;
+    margin-left: -25px;
+    background-color: #fff;
+    width: 50px;
+    text-align: center;
+}
+.hr-or {
+    background-color: #cdcdcd;
+    height: 1px;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+h3 {
+    text-align: center;
+    line-height: 300%;
+}
+
+/* 기존 please CSS*/
+@import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body {
+  font-family:'맑은고딕' 'NanumGothic', 'MalgunGothic';
+}
+
+.profile-image {
+  /*background-image: url("img/ic_launcher.png");*/
+  background-size: 31px 31px;
+  background-repeat: no-repeat;
+}
+
+ul
+{
+  list-style:none;
+  padding-left:0px;
+  margin-left: 0px;
+}
+
+.mouseHover:hover{
+  cursor: pointer;
+}
+
+#radioBtn .notActive{
+    color: #3276b1;
+    background-color: #fff;
+}
+
+#filter-view {
+  background-color: #fcbd0f;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#all-task-filter-view {
+  background-color: #fcbd0f;
+  color: #fff;
+  padding: 10px;
+}
+
+.header {
+  height: 40px;
+  background-color: #fcbd0f;
+  color: #fff;
+  padding: 4px;
+  font-size: 15pt;
+}
+
+.content {
+  height: 120px;
+  background-color: #CEECF5;
+  padding: 15px;
+}
+.content_text{
+  font-size: 20pt;
+}
+.buttons{
+  background-color: #F2F2F2;
+}
+
+a.task_status
+{
+  color: #fff;
+}
+
+.red-circle {
+    border-radius: 50%/50%;
+    width: 20px;
+    height: 20px;
+    background: red;
+
+    color: #fff;
+}
+
+.spacer-height {
+  height: 20vh;
+}
+
+.profile-image {
+  width: 40px;
+  height: 40px;
+}
+
+.gi-2x {
+  font-size: 2em;
+}
+
+.gi-3x {
+  font-size: 3em;
+}
+
+.gi-4x {
+  font-size: 4em;
+}
+
+.gi-5x {
+  font-size: 5em;
+}
+.popup {
+  position:relative;
+}
+
+.popup-edit-profile {
+  margin-left: 5%;
+  margin-top: 30%;
+}
+
+.popup-input {
+  margin-left: 40%;
+  margin-top: 20%;
+}
+
+.chatting-image {
+  border-radius: 50%
+  width: 20px;
+  height: 20px;
+}
+
+.profile-icon {
+  width:30px;
+  height:30px;
+}
+
+.margin-top10 {
+  margin-top: 10px;
+}
+.margin-top20 {
+  margin-top: 20px;
+}
+.margin-top30 {
+  margin-top: 30px;
+}
+.margin-top40 {
+  margin-top: 40px;
+}
+.margin-top50 {
+  margin-top: 50px;
+}
+.margin-left10 {
+  margin-left: 10px;
+}
+.margin-left30 {
+  margin-left: 30px;
+}
+.margin-left50 {
+  margin-left: 50px;
+}
+.margin-right10 {
+  margin-right: 10px;
+}
+.margin-right20 {
+  margin-right: 20px;
+}
+.margin-right30 {
+  margin-right: 30px;
+}
+.padding-left10 {
+  padding-left: 10px;
+}
+
+/* progressbar */
+#progressbar_chattingbar {
+  position:fixed;
+  z-index:1000;
+  top:30%;
+  left:52%;
+  width: 30px;
+  height: 30px;
+  margin: auto;
+}
+
+#progressbar_friend {
+  position:fixed;
+  z-index:1000;
+  top:20%;
+  left:10%;
+  width: 30px;
+  height: 30px;
+  margin: auto;
+}
+
+#progressbar_chat_room {
+  position:fixed;
+  z-index:1000;
+  top:40%;
+  left:50%;
+  width: 30px;
+  height: 30px;
+  margin: auto;
+}
+
+#progressbar_task_list {
+  position:fixed;
+  z-index:1000;
+  top:35%;
+  right:15%;
+  width: 30px;
+  height: 30px;
+  margin: auto;
+}
+
+#progressbar_calendar {
+  position:fixed;
+  z-index:1000;
+  top:22%;
+  left:75%;
+  width: 30px;
+  height: 30px;
+  margin: auto;
+}
+
+.btn-file {
+position: relative;
+overflow: hidden;
+}
+.btn-file input[type=file] {
+position: absolute;
+top: 0;
+right: 0;
+min-width: 100%;
+min-height: 100%;
+font-size: 100px;
+text-align: right;
+filter: alpha(opacity=0);
+opacity: 0;
+outline: none;
+background: white;
+cursor: inherit;
+display: block;
+}
+
+#img_change {
+    position: relative;
+    z-index: 999;
+    left: 80px;
+    top: 250px
+}
+#img_change:hover {
+    cursor: pointer;
+}
+
+#profile_container:hover {
+    cursor: pointer;
+}
+
+#add_friend_button:hover {
+    cursor: pointer;
+}
+
+#chat_unfavorite:hover {
+    cursor: pointer;
+}
+
+#chat_favorite:hover {
+    cursor: pointer;
+}
+
+#unread_message_count {
+    position: absolute;
+    top: 32px;
+    right: 20px;
+}
+
+#unread_message_count_task_zero {
+    position: absolute;
+    top: 32px;
+    right: 0px;
+}
+
+#backbutton:hover{
+  cursor: pointer;
+}
+
+#multi_language_container {
+  margin-right: 20px;
+  margin-top: 5px;
+}
+
+/* ========= list checkBox ========*/
+#instead-ckeckbox:hover{
+  cursor: pointer;
+}
+
+input[type=checkbox]
+{
+  -ms-transform: scale(1.2); /* IE */
+  -moz-transform: scale(1.2); /* FF */
+  -webkit-transform: scale(1.2); /* Safari and Chrome */
+  -o-transform: scale(1.2); /* Opera */
+  padding: 10px;
+}
+
+/* ========= assignee ========*/
+#assignee_name:hover{
+  cursor: pointer;
+}
+
+#owner_name:hover{
+  cursor: pointer;
+}
+
+#doAgain {
+  background-color: red;
+  color: #fff;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 1px;
+  font-size: 10pt;
+}
+
+/* ========= main ========*/
+
+#main-chatting-unread-red-circle-container:hover{
+  cursor: pointer;
+}
+
+#main-schedule-unread-red-circle-container:hover{
+  cursor: pointer;
+}
+
+.last-message-body{
+  font-size:15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  word-wrap:break-word;
+  line-height: 1.2em;
+  height: 3.6em;
+}
