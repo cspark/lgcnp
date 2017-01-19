@@ -5,8 +5,7 @@ set :application, 'lgcare'
 set :repo_url, 'https://github.com/ShakeJ/LGCNP.git'
 # set :repo_tree, 'server/cnp'
 set :default_env, {
-  'LD_LIBRARY_PATH' => "/usr/lib/oracle/11.2/client64/lib/",
-  'TNS_ADMIN' => "/usr/lib/oracle/11.2/client64/network/admin/"
+  'LD_LIBRARY_PATH' => "/usr/lib/oracle/11.2/client64/lib/"
 }
 # set :rbenv_ruby, '2.2.3'
 set :rbenv_ruby, '2.3.1'
