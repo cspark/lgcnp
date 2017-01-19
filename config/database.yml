@@ -30,7 +30,7 @@ staging:
     database: VDLDBDEV
 
 production:
-    adapter: oracle_enhanced
+    adapter: orcale
     username: janus
     password: janus!123
     host: 165.244.88.137
