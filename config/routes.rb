@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "find_user" => "custinfos#find_user"
   get "find_users" => "custinfos#find_users"
   get "update_phone_number" => "custinfos#update_phone_number"
+  get "update_name" => "custinfos#update_name"
   get "update_email" => "custinfos#update_email"
   get "update_after_service" => "custinfos#update_after_service"
   get "update_agreement" => "custinfos#update_agreement"

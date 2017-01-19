@@ -58,6 +58,19 @@ class CustinfosController < ApplicationController
       end
   end
 
+  def update_name
+      name = params[:name]
+      serial = params[:serial]
+
+      custinfo = Custinfo.where(custserial: serial).where(ch_cd: "CNP").first
+      custinfo.name = name
+      if custinfo.save
+        render json: custinfo.to_api_hash, status: 200
+      else
+        render json: "", status: 404
+      end
+  end
+
   def update_after_service
       is_agree_after = params[:is_agree_after_service]
       serial = params[:serial]
