@@ -1,1 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CNP Admin tool</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.js"></script>
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/css/common.css" rel="stylesheet">
+        <link href="/css/main.css" rel="stylesheet">
+
+        <script type="text/javascript" src="/js/views/main.js"></script>
+        <script type="text/javascript" src="/js/views/edit_profile.js"></script>
+        <script type="text/javascript" src="/js/views/lang.js"></script>
+        <script type="text/javascript" src="/js/views/reminder_summary_activity_main.js"></script>
+        <script type="text/javascript" src="/js/views/translate.js"></script>
+
+        <script>
+          function show_feedback(){
+            console.log("show_feedback");
+            $.ajax({
+              url : "/show_feedback",
+              success: function(data) {
+                $("#content").html(data);
+              }
+            });
+          }
+
+          function show_users(){
+
+          }
+
+          function show_setting(){
+
+          }
+        </script>
+
+</head>
+
+<body style="background-color: #404040;">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">CNP Admin tool</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#" onClick="show_feedback()">Feedback</a></li>
+            <li><a href="#" onClick="show_users()">User</a></li>
+            <li><a href="#" onClick="show_setting()">Setting</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div id="content"/>
+</body>
+</html>

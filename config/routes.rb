@@ -34,7 +34,8 @@ Rails.application.routes.draw do
   get "is_update" => "update#is_update"
 
   get 'admin' => 'admins#index'
-  post 'login' => 'admins#login'
-  get 'admin_login' => 'admins#login'
+  post 'login' => 'admins#admin_login'
+  get 'admin_login' => 'admins#admin_login'
+  get 'show_feedback' => 'admins#show_feedback'
 
 end
