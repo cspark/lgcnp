@@ -33,7 +33,16 @@ production:
     adapter: oracle_enhanced
     username: janus
     password: janus!123
-    host: 165.244.88.138
+    host: 165.244.88.37
     encoding: utf-8
-    port: 1536
-    database: LGGIN
+    port: 1521
+    database: VDLDBDEV
+
+
+    # adapter: oracle_enhanced
+    # username: janus
+    # password: janus!123
+    # host: 165.244.88.138
+    # encoding: utf-8
+    # port: 1536
+    # database: LGGIN
