@@ -39,4 +39,5 @@ Rails.application.routes.draw do
   get 'admin_login' => 'admins#admin_login'
   get 'show_feedback' => 'admins#show_feedback'
 
+  get 'calculate' => 'Fctabletinterview#calculate'
 end
