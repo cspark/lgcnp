@@ -49,7 +49,7 @@ class Fctabletinterview < ApplicationRecord
         if calculate_value >= 17
           if sensitive_value >= 13 && sensitive_value <= 20
             fctabletinterview.skin_type = "skin_type_jisung_senstive"
-          elsif (senstiveSum >= 5 && senstiveSum <= 12) {
+          elsif (senstiveSum >= 5 && senstiveSum <= 12)
             fctabletinterview.skin_type = "skin_type_jisung"
           end
         end
@@ -57,7 +57,7 @@ class Fctabletinterview < ApplicationRecord
         if calculate_value >= 13 && calculate_value <= 16
           if sensitive_value >= 13 && sensitive_value <= 20
             fctabletinterview.skin_type = "skin_type_jisung_boghab_senstive"
-          elsif (senstiveSum >= 5 && senstiveSum <= 12) {
+          elsif (senstiveSum >= 5 && senstiveSum <= 12)
             fctabletinterview.skin_type = "skin_type_jisung_boghab"
           end
         end
@@ -65,7 +65,7 @@ class Fctabletinterview < ApplicationRecord
         if calculate_value >= 10 && calculate_value <= 12
           if sensitive_value >= 13 && sensitive_value <= 20
             fctabletinterview.skin_type = "skin_type_gun_boggab_senstive"
-          elsif (senstiveSum >= 5 && senstiveSum <= 12) {
+          elsif (senstiveSum >= 5 && senstiveSum <= 12)
             fctabletinterview.skin_type = "skin_type_gun_boggab"
           end
         end
@@ -73,7 +73,7 @@ class Fctabletinterview < ApplicationRecord
         if calculate_value >= 5 && calculate_value <= 9
           if sensitive_value >= 13 && sensitive_value <= 20
             fctabletinterview.skin_type = "skin_type_gunsung_senstive"
-          elsif (senstiveSum >= 5 && senstiveSum <= 12) {
+          elsif (senstiveSum >= 5 && senstiveSum <= 12)
             fctabletinterview.skin_type = "skin_type_gunsung"
           end
         end
@@ -81,7 +81,7 @@ class Fctabletinterview < ApplicationRecord
         if (fctabletinterview.d4 == 5 && fctabletinterview.d5 == 5) || (fctabletinterview.a2 == 4 && ((fctabletinterview.d4 == 2 && fctabletinterview.d5 == 3) || (fctabletinterview.d4 == 2 && fctabletinterview.d5 == 5) || (fctabletinterview.d4 == 5 && fctabletinterview.d5 == 2)))
           if sensitive_value >= 13 && sensitive_value <= 20
             fctabletinterview.skin_type = "skin_type_jungsung_senstive"
-          elsif (senstiveSum >= 5 && senstiveSum <= 12) {
+          elsif (senstiveSum >= 5 && senstiveSum <= 12) 
             fctabletinterview.skin_type = "skin_type_jungsung"
           end
         end
