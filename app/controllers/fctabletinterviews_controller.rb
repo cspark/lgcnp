@@ -145,7 +145,7 @@ class FctabletinterviewsController < ApplicationController
           end
         end
 
-        if (fctabletinterview.d4 == 5 && fctabletinterview.d5 == 5) || (fctabletinterview.a2 == 4 && ((fctabletinterview.d4 == 2 && fctabletinterview.d5 == 3) || (fctabletinterview.d4 == 2 && fctabletinterview.d5 == 5) || (fctabletinterview.d4 == 5 && fctabletinterview.d5 == 2)))
+        if (fctabletinterview.d_4 == 5 && fctabletinterview.d_5 == 5) || (fctabletinterview.a_2 == 4 && ((fctabletinterview.d_4 == 2 && fctabletinterview.d_5 == 3) || (fctabletinterview.d_4 == 2 && fctabletinterview.d_5 == 5) || (fctabletinterview.d_4 == 5 && fctabletinterview.d_5 == 2)))
           if sensitive_value >= 13 && sensitive_value <= 20
             fctabletinterview.skin_type = "skin_type_jungsung_senstive"
           elsif (sensitive_value >= 5 && sensitive_value <= 12)
