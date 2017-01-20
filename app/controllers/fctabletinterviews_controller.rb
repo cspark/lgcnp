@@ -88,7 +88,8 @@ class FctabletinterviewsController < ApplicationController
   end
 
   def calculate
-    Fctabletinterview.where(skin_type: nil).each do |fctabletinterview|
+    Fctabletinterview.all.each do |fctabletinterview|
+      if fctabletinterview.skin_type == nil || fctabletinterview.skin_type == "null"
         calculate_value = 0
         calculate_value = calculate_value + get_answer(value: fctabletinterview.d_1)
         calculate_value = calculate_value + get_answer(value: fctabletinterview.d_2)
@@ -113,6 +114,7 @@ class FctabletinterviewsController < ApplicationController
         sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_9)
         sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_10)
 
+        fctabletinterview.skin_type = ""
         if calculate_value >= 17
           if sensitive_value >= 13 && sensitive_value <= 20
             fctabletinterview.skin_type = "skin_type_jisung_senstive"
@@ -155,6 +157,7 @@ class FctabletinterviewsController < ApplicationController
 
         fctabletinterview.save
       end
+    end
   end
 
   def permitted_param
