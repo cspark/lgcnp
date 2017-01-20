@@ -89,24 +89,14 @@ class FctabletinterviewsController < ApplicationController
 
   def calculate
     Fctabletinterview.all.each do |fctabletinterview|
-      if fctabletinterview.skin_type == nil || fctabletinterview.skin_type == "null"
+      # if fctabletinterview.skin_type == nil || fctabletinterview.skin_type == "null"
         calculate_value = 0
         calculate_value = calculate_value + get_answer(value: fctabletinterview.d_1)
         calculate_value = calculate_value + get_answer(value: fctabletinterview.d_2)
         calculate_value = calculate_value + get_answer(value: fctabletinterview.d_3)
         calculate_value = calculate_value + get_answer(value: fctabletinterview.d_4)
-        calculate_value = calculate_value + get_answer(value: fctabletinterview.d_5)
-        calculate_value = calculate_value + get_answer(value: fctabletinterview.d_6)
-        calculate_value = calculate_value + get_answer(value: fctabletinterview.d_7)
-        calculate_value = calculate_value + get_answer(value: fctabletinterview.d_8)
-        calculate_value = calculate_value + get_answer(value: fctabletinterview.d_9)
-        calculate_value = calculate_value + get_answer(value: fctabletinterview.d_10)
 
         sensitive_value = 0
-        sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_1)
-        sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_2)
-        sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_3)
-        sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_4)
         sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_5)
         sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_6)
         sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_7)
@@ -156,7 +146,7 @@ class FctabletinterviewsController < ApplicationController
         end
 
         fctabletinterview.save
-      end
+      # end
     end
   end
 
