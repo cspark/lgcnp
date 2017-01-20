@@ -19,8 +19,8 @@ class Fctabletinterview < ApplicationRecord
     end
   end
 
-  def self.calculate
-    Fctabletinterview.each do |fctabletinterview|
+  def self.calculate()
+    Fctabletinterview.all.each do |fctabletinterview|
       if fctabletinterview.skin_type.nil? || fctabletinterview.skin_type == "null"
         calculate_value = 0
         calculate_value = calculate_value + Fctabletinterview.get_answer(value: fctabletinterview.d_1)
@@ -81,7 +81,7 @@ class Fctabletinterview < ApplicationRecord
         if (fctabletinterview.d4 == 5 && fctabletinterview.d5 == 5) || (fctabletinterview.a2 == 4 && ((fctabletinterview.d4 == 2 && fctabletinterview.d5 == 3) || (fctabletinterview.d4 == 2 && fctabletinterview.d5 == 5) || (fctabletinterview.d4 == 5 && fctabletinterview.d5 == 2)))
           if sensitive_value >= 13 && sensitive_value <= 20
             fctabletinterview.skin_type = "skin_type_jungsung_senstive"
-          elsif (senstiveSum >= 5 && senstiveSum <= 12) 
+          elsif (senstiveSum >= 5 && senstiveSum <= 12)
             fctabletinterview.skin_type = "skin_type_jungsung"
           end
         end
