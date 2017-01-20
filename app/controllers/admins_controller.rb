@@ -21,6 +21,6 @@ class AdminsController < ApplicationController
   end
 
   def show_feedback
-    
+    render :partial => "/admins/show_feedback"
   end
 end

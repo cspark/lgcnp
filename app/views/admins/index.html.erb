@@ -23,7 +23,10 @@
 
         <script>
           function show_feedback(){
-            console.log("show_feedback");
+            $("#content").attr('class','active');
+            $("#nav_user").attr('class','');
+            $("#nav_setting").attr('class','');
+
             $.ajax({
               url : "/show_feedback",
               success: function(data) {
@@ -33,12 +36,20 @@
           }
 
           function show_users(){
+            $("#content").attr('class','');
+            $("#nav_user").attr('class','active');
+            $("#nav_setting").attr('class','');
 
           }
 
           function show_setting(){
+            $("#content").attr('class','');
+            $("#nav_user").attr('class','');
+            $("#nav_setting").attr('class','active');
 
           }
+
+          show_feedback();
         </script>
 
 </head>
@@ -50,9 +61,9 @@
             <a class="navbar-brand" href="#">CNP Admin tool</a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#" onClick="show_feedback()">Feedback</a></li>
-            <li><a href="#" onClick="show_users()">User</a></li>
-            <li><a href="#" onClick="show_setting()">Setting</a></li>
+            <li id="nav_feedback"><a href="#" onClick="show_feedback()">Feedback</a></li>
+            <li id="nav_user"><a href="#" onClick="show_users()">User</a></li>
+            <li id="nav_setting"><a href="#" onClick="show_setting()">Setting</a></li>
           </ul>
         </div>
       </nav>

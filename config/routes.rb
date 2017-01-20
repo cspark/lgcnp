@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   post "fctabletinterviews_update_lots" => "fctabletinterviews#fctabletinterviews_update_lots"
   get "is_update" => "update#is_update"
 
+  #Related Admin
   get 'admin' => 'admins#index'
   post 'login' => 'admins#admin_login'
   get 'admin_login' => 'admins#admin_login'
