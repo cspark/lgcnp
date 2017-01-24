@@ -1,6 +1,6 @@
 class Custinfo < ApplicationRecord
-  self.table_name = "custinfo"
-  self.primary_key = :custserial
+  self.table_name = "custinfo" if Rails.env.production?
+  self.primary_key = :custserial if Rails.env.production?
 
   def to_api_hash
     {
@@ -16,6 +16,7 @@ class Custinfo < ApplicationRecord
       is_agree_privacy: is_agree_privacy,
       is_agree_thirdparty_info: is_agree_thirdparty_info,
       is_agree_marketing: is_agree_marketing,
+      is_agree_after: is_agree_after
     }
   end
 end

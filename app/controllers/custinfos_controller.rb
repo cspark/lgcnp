@@ -132,6 +132,7 @@ class CustinfosController < ApplicationController
     is_agree_privacy = params[:is_agree_privacy]
     is_agree_thirdparty_info = params[:is_agree_thirdparty_info]
     is_agree_marketing = params[:is_agree_marketing]
+    is_agree_after = params[:is_agree_after]
 
     time = Time.new
     uptdate = time.year.to_s + "/" + time.month.to_s + "/" + time.day.to_s
