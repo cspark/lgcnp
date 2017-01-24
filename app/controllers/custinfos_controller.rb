@@ -144,6 +144,7 @@ class CustinfosController < ApplicationController
     custinfo.is_agree_privacy = is_agree_privacy
     custinfo.is_agree_thirdparty_info = is_agree_thirdparty_info
     custinfo.is_agree_marketing = is_agree_marketing
+    custinfo.is_agree_after = is_agree_after
     custinfo.sex = sex
     custinfo.age = age
     custinfo.birthyy = birthyy
