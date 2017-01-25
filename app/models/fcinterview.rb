@@ -1,5 +1,5 @@
 class Fcinterview < ApplicationRecord
-  self.table_name = "fcinterview"
+  self.table_name = "fcinterview" if Rails.env.production? 
 
   def to_api_hash
     {

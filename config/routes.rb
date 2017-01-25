@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :custinfos do
   end
@@ -34,10 +36,5 @@ Rails.application.routes.draw do
   get "is_update" => "update#is_update"
 
   #Related Admin
-  get 'admin' => 'admins#index'
-  post 'login' => 'admins#admin_login'
-  get 'admin_login' => 'admins#admin_login'
-  get 'show_feedback' => 'admins#show_feedback'
-
   get 'calculate' => 'fctabletinterviews#calculate'
 end

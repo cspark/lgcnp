@@ -1,6 +1,6 @@
 class Fcpos < ApplicationRecord
-  self.table_name = "fcpos"
-  
+  self.table_name = "fcpos" if Rails.env.production? 
+
   def to_api_hash
     {
       custserial: custserial,

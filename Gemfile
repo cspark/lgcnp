@@ -31,6 +31,10 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'activerecord-oracle_enhanced-adapter', '~> 1.7.0'
 gem 'ruby-oci8', '~> 2.2.2' # only for CRuby users
+gem 'devise'
+
+gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+gem 'activeadmin', github: 'activeadmin'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
