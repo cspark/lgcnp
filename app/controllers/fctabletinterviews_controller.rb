@@ -95,9 +95,9 @@ class FctabletinterviewsController < ApplicationController
         calculate_value = calculate_value + get_answer(value: fctabletinterview.d_2)
         calculate_value = calculate_value + get_answer(value: fctabletinterview.d_3)
         calculate_value = calculate_value + get_answer(value: fctabletinterview.d_4)
+        calculate_value = calculate_value + get_answer(value: fctabletinterview.d_5)
 
         sensitive_value = 0
-        sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_5)
         sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_6)
         sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_7)
         sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_8)
