@@ -48,19 +48,25 @@
 
     <div>
       <h3>하루 전 진단자</h3>
-      <% @tablet_interviews_1_days_ago.each do |tabletinterview| %>
-        <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>
-      <% end %>
+      <div>
+        <% @tablet_interviews_1_days_ago.each do |tabletinterview| %>
+          <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>
+        <% end %>
+      </div>
 
       <h3>2주 전 진단자</h3>
-      <% @tablet_interviews_2_weeks_ago.each do |tabletinterview| %>
-        <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>
-      <% end %>
+      <div>
+        <% @tablet_interviews_2_weeks_ago.each do |tabletinterview| %>
+          <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>
+        <% end %>
+      </div>
 
       <h3>3개월 전 진단자</h3>
-      <% @tablet_interviews_3_months_ago.each do |tabletinterview| %>
-        <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>
-      <% end %>
+      <div>
+        <% @tablet_interviews_3_months_ago.each do |tabletinterview| %>
+          <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>
+        <% end %>
+      </div>
     </div>
   </body>
 </html>
