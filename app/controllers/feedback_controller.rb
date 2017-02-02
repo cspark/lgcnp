@@ -7,7 +7,7 @@ class FeedbackController < ApplicationController
   def index
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
 
-    if Rails.env.production?
+    if Rails.env.production? || Rails.env.staging?
       @tablet_interviews_2_weeks_ago = Fctabletinterview.where("to_date(uptdate) >= ? AND to_date(uptdate) <= ?", (Date.today - 2.weeks - 1.days), (Date.today - 2.weeks + 1.days)).first.uptdate
       @tablet_interviews_3_months_ago = Fctabletinterview.where("to_date(uptdate) >= ? AND to_date(uptdate) <= ?", (Date.today - 3.months - 1.days), (Date.today - 3.months + 1.days)).first.uptdate
     else
