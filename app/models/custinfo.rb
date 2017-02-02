@@ -1,6 +1,6 @@
 class Custinfo < ApplicationRecord
-  self.table_name = "custinfo" if Rails.env.production?
-  self.primary_key = :custserial if Rails.env.production?
+  self.table_name = "custinfo" if Rails.env.production? || Rails.env.staging?
+  self.primary_key = :custserial if Rails.env.production? || Rails.env.staging?
 
   def to_api_hash
     {

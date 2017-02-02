@@ -1,6 +1,6 @@
 class Fctabletinterview < ApplicationRecord
-  self.table_name = "fctabletinterview" if Rails.env.production?
-  self.primary_key = :tablet_interview_id if Rails.env.production? 
+  self.table_name = "fctabletinterview" if Rails.env.production? || Rails.env.staging?
+  self.primary_key = :tablet_interview_id if Rails.env.production?  || Rails.env.staging?
 
   def to_api_hash
     {
