@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :custinfos do
   end
 
+  get "user_list"  => "user#index"
   get "feedback"  => "feedback#index"
   get "get_api_key" => "custinfos#get_api_key"
   get "find_user" => "custinfos#find_user"
