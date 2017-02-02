@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170123032340) do
+ActiveRecord::Schema.define(version: 20170202085354) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -30,12 +30,12 @@ ActiveRecord::Schema.define(version: 20170123032340) do
   end
 
   create_table "custinfos", force: :cascade do |t|
-    t.string   "custserial",   null: false
+    t.string   "custserial",               null: false
     t.string   "custname"
     t.string   "sex"
     t.string   "birthyy"
     t.string   "birthmm"
-    t.string   "brithdd"
+    t.string   "birthdd"
     t.string   "age"
     t.string   "phone"
     t.string   "address"
@@ -43,8 +43,12 @@ ActiveRecord::Schema.define(version: 20170123032340) do
     t.string   "lastanaldate"
     t.string   "measureno"
     t.string   "uptdate"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "is_agree_privacy"
+    t.string   "is_agree_after"
+    t.string   "is_agree_marketing"
+    t.string   "is_agree_thirdparty_info"
   end
 
   create_table "fcavgdata", force: :cascade do |t|

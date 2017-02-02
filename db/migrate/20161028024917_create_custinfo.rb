@@ -6,7 +6,7 @@ class CreateCustinfo < ActiveRecord::Migration[5.0]
       t.string :sex
       t.string :birthyy
       t.string :birthmm
-      t.string :brithdd
+      t.string :birthdd
       t.string :age
       t.string :phone
       t.string :address

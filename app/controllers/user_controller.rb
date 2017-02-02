@@ -1,3 +1,5 @@
+require 'iconv'
+
 class UserController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:index, :calculate]
   skip_before_action :verify_authenticity_token
