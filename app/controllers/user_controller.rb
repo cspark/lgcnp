@@ -7,7 +7,9 @@ class UserController < ApplicationController
   before_action :is_admin
 
   def index
+    Rails.logger.info "User count"
     @users = Custinfo.all
+    Rails.logger.info @users.count
   end
 
   def is_admin
