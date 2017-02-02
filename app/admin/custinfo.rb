@@ -25,3 +25,9 @@ ActiveAdmin.register Custinfo do
   filter :email, label: '이메일'
   filter :created_at, label: '진단 날짜'
 end
+
+# ActiveAdmin.register_page "Custinfo" do
+#  content do
+#    render partial: "custinfo"
+#  end
+# end
