@@ -7,10 +7,13 @@ class FeedbackController < ApplicationController
   def index
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
 
+    @date_1days_ago = (@date - 1.days).strftime("%F")
+    @date_2weeks_ago = (@date - 2.weeks).strftime("%F")
+    @date_3months_ago = (@date - 3.months).strftime("%F")
     if Rails.env.production? || Rails.env.staging?
-      @tablet_interviews_1_days_ago = Fctabletinterview.where("to_date(uptdate) >= ? AND to_date(uptdate) <= ?", (@date - 2.days), (@date))
-      @tablet_interviews_2_weeks_ago = Fctabletinterview.where("to_date(uptdate) >= ? AND to_date(uptdate) <= ?", (@date - 2.weeks - 1.days), (@date - 2.weeks + 1.days))
-      @tablet_interviews_3_months_ago = Fctabletinterview.where("to_date(uptdate) >= ? AND to_date(uptdate) <= ?", (@date - 3.months - 1.days), (@date - 3.months + 1.days))
+      @tablet_interviews_1_days_ago = Fctabletinterview.where("to_date(uptdate) = ?", (@date - 1.days))
+      @tablet_interviews_2_weeks_ago = Fctabletinterview.where("to_date(uptdate) = ?", (@date - 2.weeks))
+      @tablet_interviews_3_months_ago = Fctabletinterview.where("to_date(uptdate) = ?", (@date - 3.months))
     else
       @tablet_interviews_1_days_ago = Fctabletinterview.all
       @tablet_interviews_2_weeks_ago = Fctabletinterview.all

@@ -48,6 +48,7 @@
 
     <div>
       <h3>하루 전 진단자</h3>
+      <%= @date_1days_ago %><br>
       <div>
         <% @tablet_interviews_1_days_ago.each do |tabletinterview| %>
           <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>
@@ -55,6 +56,7 @@
       </div>
 
       <h3>2주 전 진단자</h3>
+      <%= @date_2weeks_ago %><br>
       <div>
         <% @tablet_interviews_2_weeks_ago.each do |tabletinterview| %>
           <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>
@@ -62,6 +64,7 @@
       </div>
 
       <h3>3개월 전 진단자</h3>
+      <%= @date_3months_ago %><br>
       <div>
         <% @tablet_interviews_3_months_ago.each do |tabletinterview| %>
           <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>

@@ -20,7 +20,7 @@
       </script>
     </head>
     <body>
-      <div style="display:table; height:50px; width: 100%; float:left;">
+      <div style="display:table; height:50px; width: 100%; float:left; background: #F0F8FF; margin: 2px; padding: 8px;">
         <% custinfo = Custinfo.find tabletinterview.custserial %>
         <font size="4"><div id="name_<%= user.custserial.to_i %>"></div></font>
         시리얼 : <%= tabletinterview.custserial %> / 진단 날짜 : <%= tabletinterview.uptdate %>
