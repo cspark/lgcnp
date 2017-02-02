@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <script>
+        $(function () {
+          <% user = Custinfo.find tabletinterview.custserial %>
+          try
+          {
+            $('#name_<%= user.custserial.to_i %>').append(decode_utf8('<%= user.custname %>'));
+          }
+          catch(err)
+          {
+            $('#name_<%= user.custserial.to_i %>').append('<%= user.custname %>');
+          }
+        });
+
+        function decode_utf8(s) {
+          return decodeURI(s);
+        }
+      </script>
     </head>
     <body>
-      <div style="display:table; height:40px; width: 500px; float:left;">
+      <div style="display:table; height:50px; width: 100%; float:left;">
         <% custinfo = Custinfo.find tabletinterview.custserial %>
-        <%= tabletinterview.custserial %>
-        <%= custinfo.custname %>
-        <%= tabletinterview.uptdate %>
+        <font size="4"><div id="name_<%= user.custserial.to_i %>"></div></font>
+        시리얼 : <%= tabletinterview.custserial %> / 진단 날짜 : <%= tabletinterview.uptdate %>
       </div>
     </body>
 </html>
