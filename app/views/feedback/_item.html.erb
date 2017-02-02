@@ -20,10 +20,14 @@
       </script>
     </head>
     <body>
-      <div style="display:table; height:50px; width: 100%; float:left; background: #F0F8FF; margin: 2px; padding: 8px;">
-        <% custinfo = Custinfo.find tabletinterview.custserial %>
+      <div style="display:table; height:50px; width: 100%; float:left; background: #ffe6ee; margin: 2px; padding: 8px;">
+        <% custinfo = Custinfo.find tabletinterview.custserial.to_i %>
         <font size="4"><div id="name_<%= user.custserial.to_i %>"></div></font>
-        시리얼 : <%= tabletinterview.custserial %> / 진단 날짜 : <%= tabletinterview.uptdate %>
+        <font size="2">
+          시리얼 : <%= tabletinterview.custserial %> / 진단 날짜 : <%= tabletinterview.uptdate %> / 전화번호 : <%= custinfo.phone %> <br>
+          사후 마케팅 동의 : <%= custinfo.is_agree_after %> 
+
+        </font>
       </div>
     </body>
 </html>

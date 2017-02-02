@@ -2,6 +2,9 @@
   <head>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
     <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
 
@@ -47,24 +50,21 @@
     <input type="text" id="datepicker" style="width:100%; margin-top:10px;">
 
     <div>
-      <h3>하루 전 진단자</h3>
-      <%= @date_1days_ago %><br>
+      <h4>하루 전 진단자 (<%= @date_1days_ago %>)</h4>
       <div>
         <% @tablet_interviews_1_days_ago.each do |tabletinterview| %>
           <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>
         <% end %>
       </div>
 
-      <h3>2주 전 진단자</h3>
-      <%= @date_2weeks_ago %><br>
+      <h4>2주 전 진단자 (<%= @date_2weeks_ago %>)</h4>
       <div>
         <% @tablet_interviews_2_weeks_ago.each do |tabletinterview| %>
           <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>
         <% end %>
       </div>
 
-      <h3>3개월 전 진단자</h3>
-      <%= @date_3months_ago %><br>
+      <h4>3개월 전 진단자 (<%= @date_3months_ago %>)</h4>
       <div>
         <% @tablet_interviews_3_months_ago.each do |tabletinterview| %>
           <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>
