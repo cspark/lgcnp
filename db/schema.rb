@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170202092920) do
+ActiveRecord::Schema.define(version: 20170202102329) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -50,6 +50,17 @@ ActiveRecord::Schema.define(version: 20170202092920) do
     t.string   "is_agree_marketing"
     t.string   "is_agree_thirdparty_info"
     t.string   "ch_cd"
+  end
+
+  create_table "fc_after_interview_tables", force: :cascade do |t|
+    t.string  "custserial",          null: false
+    t.integer "tablet_interview_id"
+    t.integer "after_interview_id"
+    t.integer "a1"
+    t.integer "a2"
+    t.integer "a3"
+    t.integer "a4"
+    t.text    "a5"
   end
 
   create_table "fcavgdata", force: :cascade do |t|

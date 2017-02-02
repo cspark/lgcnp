@@ -8,7 +8,12 @@ class UserController < ApplicationController
 
   def index
     Rails.logger.info "User count"
-    @users = Custinfo.where(ch_cd: "CNP").page(params[:page]).per(6)
+    if params.has_key?(:search) && params[:search].length != 0
+      Rails.logger.info params[:search]
+      @users = Custinfo.where(ch_cd: "CNP").where("custname LIKE ?", "%#{params[:search]}%").page(params[:page]).per(6)
+    else
+      @users = Custinfo.where(ch_cd: "CNP").page(params[:page]).per(6)
+    end
   end
 
   def is_admin

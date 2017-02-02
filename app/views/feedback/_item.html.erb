@@ -24,8 +24,8 @@
         <% custinfo = Custinfo.find tabletinterview.custserial.to_i %>
         <font size="4"><div id="name_<%= user.custserial.to_i %>"></div></font>
         <font size="2">
-          시리얼 : <%= tabletinterview.custserial %> / 진단 날짜 : <%= tabletinterview.uptdate %> / 전화번호 : <%= custinfo.phone %> <br>
-          사후 마케팅 동의 : <%= custinfo.is_agree_after %> 
+          시리얼 : <%= tabletinterview.custserial.to_i %> / 진단 날짜 : <%= tabletinterview.uptdate %> / 전화번호 : <%= custinfo.phone %> <br>
+          사후 마케팅 동의 : <%= custinfo.is_agree_after %>
 
         </font>
       </div>
