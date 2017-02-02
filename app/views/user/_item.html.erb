@@ -3,10 +3,14 @@
     <head>
       <script>
         $(function () {
-          console.log('<%= user.custname %>');
-          console.log(decode_utf8('<%= user.custname %>'));
-
-          $('#name_<%= user.custserial.to_i %>').append(decode_utf8('<%= user.custname %>'));
+          try
+          {
+            $('#name_<%= user.custserial.to_i %>').append(decode_utf8('<%= user.custname %>'));
+          }
+          catch(err)
+          {
+            $('#name_<%= user.custserial.to_i %>').append('<%= user.custname %>');
+          }
         });
 
         function decode_utf8(s) {
@@ -17,9 +21,9 @@
     <body>
       <!-- <h3>유저목록< -->
       <div style="display:table; height:60px; width: 750px; float:left; background: #F0F8FF; margin: 2px; padding: 8px;">
-        <font size="4"><div id="name_<%= user.custserial.to_i %>"></div></font>
+        <font size="4"><div id="name_<%= user.custserial.to_i %>"> (가입날짜 : <%= user.uptdate %>)</div></font>
         <div><font size="2">
-          <b>시리얼</b> <%= user.custserial %> / <b>전화번호</b> <%= user.phone %> / <b>성별</b> <%= user.sex %> / <b>생년월일</b> <%= user.birthyy %>-<%= user.birthmm %>-<%= user.birthdd %><br>
+          <b>시리얼</b> <%= user.custserial.to_i %> / <b>전화번호</b> <%= user.phone %> / <b>성별</b> <%= user.sex %> / <b>생년월일</b> <%= user.birthyy %>-<%= user.birthmm %>-<%= user.birthdd %><br>
           <b>개인정보 이용동의</b> <%= user.is_agree_privacy %> / <b>제 3자 정보 제공 동의</b> <%= user.is_agree_thirdparty_info %> / <b>마케팅 정보 동의</b> <%= user.is_agree_marketing %> / <b>사후 관리 서비스 동의</b> <%= user.is_agree_after %>
 
         </font>
