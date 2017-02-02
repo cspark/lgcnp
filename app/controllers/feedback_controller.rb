@@ -11,9 +11,9 @@ class FeedbackController < ApplicationController
     @date_2weeks_ago = (@date - 2.weeks).strftime("%F")
     @date_3months_ago = (@date - 3.months).strftime("%F")
     if Rails.env.production? || Rails.env.staging?
-      @tablet_interviews_1_days_ago = Fctabletinterview.where("to_date(uptdate) = ?", (@date - 1.days))
-      @tablet_interviews_2_weeks_ago = Fctabletinterview.where("to_date(uptdate) = ?", (@date - 2.weeks))
-      @tablet_interviews_3_months_ago = Fctabletinterview.where("to_date(uptdate) = ?", (@date - 3.months))
+      @tablet_interviews_1_days_ago = Fctabletinterview.where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (Date.today.to_s))
+      @tablet_interviews_2_weeks_ago = Fctabletinterview.where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((Date.today - 2.weeks).to_s))
+      @tablet_interviews_3_months_ago = Fctabletinterview.where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((Date.today - 3.months).to_s))
     else
       @tablet_interviews_1_days_ago = Fctabletinterview.all
       @tablet_interviews_2_weeks_ago = Fctabletinterview.all
