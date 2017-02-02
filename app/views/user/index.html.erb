@@ -15,9 +15,13 @@
   <body>
     <h2>고객정보</h2>
     <div>
+
       <% @users.each do |user| %>
         <%= render partial: "user/item", locals: { user: user } %>
       <% end %>
+      <div>
+        <%= paginate @users %>
+      </div>
     </div>
   </body>
 </html>

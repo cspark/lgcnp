@@ -8,8 +8,7 @@ class UserController < ApplicationController
 
   def index
     Rails.logger.info "User count"
-    @users = Custinfo.all
-    Rails.logger.info @users.count
+    @users = Custinfo.where(ch_cd: "CNP").page(params[:page]).per(6)
   end
 
   def is_admin
