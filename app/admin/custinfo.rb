@@ -4,7 +4,7 @@ ActiveAdmin.register Custinfo do
     selectable_column
     id_column
     column "시리얼", :custserial
-    column "이름", :custname
+    column "이름", self
     column "성별", :sex
     column "생일 연도", :birthyy
     column "생일 월", :birthmm

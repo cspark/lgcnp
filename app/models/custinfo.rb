@@ -19,4 +19,8 @@ class Custinfo < ApplicationRecord
       is_agree_after: is_agree_after
     }
   end
+
+  def decode_name
+    custname
+  end
 end
