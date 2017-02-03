@@ -12,7 +12,7 @@ class UserController < ApplicationController
       Rails.logger.info params[:search]
       @users = Custinfo.where(ch_cd: "CNP").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc").page(params[:page]).per(6)
     else
-      @users = Custinfo.where(ch_cd: "CNP").order("lastanaldate desc").page(params[:page]).per(6)
+      @users = Custinfo.where(ch_cd: "CNP").where.not(lastanaldate: nil).order("lastanaldate desc").page(params[:page]).per(6)
     end
   end
 
