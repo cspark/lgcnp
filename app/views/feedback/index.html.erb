@@ -50,9 +50,9 @@
     <input type="text" id="datepicker" style="width:100%; margin-top:10px;">
 
     <div>
-      <h4>하루 전 진단자 (<%= @date_1days_ago %>)</h4>
+      <h4>당일 진단자 (<%= @date_today %>)</h4>
       <div>
-        <% @tablet_interviews_1_days_ago.each do |tabletinterview| %>
+        <% @tablet_interviews_today.each do |tabletinterview| %>
           <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>
         <% end %>
       </div>

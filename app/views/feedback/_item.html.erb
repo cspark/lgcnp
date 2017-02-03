@@ -6,11 +6,11 @@
           <% user = Custinfo.find tabletinterview.custserial %>
           try
           {
-            $('#name_<%= user.custserial.to_i %>').append(decode_utf8('<%= user.custname %>'));
+            $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(decode_utf8('<%= user.custname %>'));
           }
           catch(err)
           {
-            $('#name_<%= user.custserial.to_i %>').append('<%= user.custname %>');
+            $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append('<%= user.custname %>');
           }
         });
 
@@ -22,10 +22,10 @@
     <body>
       <div style="display:table; height:50px; width: 100%; float:left; background: #ffe6ee; margin: 2px; padding: 8px;">
         <% custinfo = Custinfo.find tabletinterview.custserial.to_i %>
-        <font size="4"><div id="name_<%= user.custserial.to_i %>"></div></font>
+        <font size="4"><div id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
         <font size="2">
           시리얼 : <%= tabletinterview.custserial.to_i %> / 진단 날짜 : <%= tabletinterview.uptdate %> / 전화번호 : <%= custinfo.phone %> <br>
-          사후 마케팅 동의 : <%= custinfo.is_agree_after %>
+          사후 피드백 서비스 : <%= custinfo.is_agree_after %>
 
         </font>
       </div>

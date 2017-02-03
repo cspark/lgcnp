@@ -10,9 +10,9 @@ class UserController < ApplicationController
     Rails.logger.info "User count"
     if params.has_key?(:search) && params[:search].length != 0
       Rails.logger.info params[:search]
-      @users = Custinfo.where(ch_cd: "CNP").where("custname LIKE ?", "%#{params[:search]}%").page(params[:page]).per(6)
+      @users = Custinfo.where(ch_cd: "CNP").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc").page(params[:page]).per(6)
     else
-      @users = Custinfo.where(ch_cd: "CNP").page(params[:page]).per(6)
+      @users = Custinfo.where(ch_cd: "CNP").order("lastanaldate desc").page(params[:page]).per(6)
     end
   end
 

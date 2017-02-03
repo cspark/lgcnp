@@ -16,13 +16,17 @@
             }
         });
       });
+
+      function show_all(){
+        location.href = "/user_list";
+      }
     </script>
   </head>
 
   <body>
     <h2>고객정보</h2>
     <div>
-      <input type="text" name="search" id="search"> 현재는 이름으로 검색이 가능합니다
+      <input type="text" name="search" id="search"> 현재는 이름으로 검색이 가능합니다 <button class="btn" id="show_all" onclick="show_all()">전체보기</button>
     </div>
     <div>
 
