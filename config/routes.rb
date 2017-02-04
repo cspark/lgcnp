@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   end
   get "find_interviews" => "fctabletinterviews#find_interviews"
   post "update_interviews" => "fctabletinterviews#update_interviews"
+  post "update_interviews_just_refund" => "fctabletinterviews#update_interviews_just_refund"
   post "fctabletinterviews_quickmode" => "fctabletinterviews#fctabletinterviews_quickmode"
   post "fctabletinterviews_update_lots" => "fctabletinterviews#fctabletinterviews_update_lots"
   get "is_update" => "update#is_update"
