@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+      <script type="text/javascript" src="../js/jquery.js"></script>
+      <script type="text/javascript" src="../js/bootstrap.js"></script>
+
+      <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+      <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+      
       <script>
         $(function () {
           <% user = Custinfo.where(custserial: after_interview.custserial).first %>
@@ -28,8 +36,8 @@
         <font size="2">
           진단 날짜 : <%= tabletinterview.uptdate %> / 성별 : <%= custinfo.sex %> / 나이 : <%= custinfo.age %>
           베이스 : <%= tabletinterview.after_serum %> / 앰플 1 : <%= tabletinterview.after_ample_1 %> / 앰플 2 : <%= tabletinterview.after_ample_2 %> <br>
-          설문 1 : <%= after_interview.a1 %> / 설문 2 : <%= after_interview.a2 %> / 설문 3 : <%= after_interview.a3 %> / 설문 4 : <%= after_interview.a4 %> <br>
-          설문 5 : <%= after_interview.a5 %>
+          설문 1 : <%= after_interview.a1.to_i %> / 설문 2 : <%= after_interview.a2.to_i %> / 설문 3 : <%= after_interview.a3.to_i %> / 설문 4 : <%= after_interview.a4.to_i %> <br>
+          기타의견 : <%= after_interview.a5 %>
         </font>
       </div>
     </body>

@@ -10,7 +10,8 @@
 
     <script>
       $(function () {
-        $("#datepicker").datepicker({
+
+        $("#start_date").datepicker({
                     dateFormat: 'yy-mm-dd',
                     dayNamesMin: [
                         '일',
@@ -38,12 +39,62 @@
                     currentText: '오늘 날짜',
                     changeMonth: true
                 });
-          $("#datepicker").datepicker('setDate', '<%= @date %>');
-          $('#datepicker').change(function () {
-              location.href = "/feedback?date=" + $('#datepicker').val()
+            $("#end_date").datepicker({
+                        dateFormat: 'yy-mm-dd',
+                        dayNamesMin: [
+                            '일',
+                            '월',
+                            '화',
+                            '수',
+                            '목',
+                            '금',
+                            '토'
+                        ],
+                        monthNamesShort: [
+                            '1월',
+                            '2월',
+                            '3월',
+                            '4월',
+                            '5월',
+                            '6월',
+                            '7월',
+                            '8월',
+                            '9월',
+                            '10월',
+                            '11월',
+                            '12월'
+                        ],
+                        currentText: '오늘 날짜',
+                        changeMonth: true
+                    });
+          $("#start_date").datepicker('setDate', '<%= @start_date %>');
+          $("#end_date").datepicker('setDate', '<%= @end_date %>');
+
+          document.getElementById("start_age").value = "20"
+          document.getElementById("end_age").value = "30"
+
+          $('#submit').click(function(){
+            load();
           });
+
       });
 
+      function load(){
+        var select_base = document.getElementById("select_base").options[document.getElementById("select_base").selectedIndex].value;
+        var select_ample1 = document.getElementById("select_ample_1").options[document.getElementById("select_ample_1").selectedIndex].value;
+        var select_ample2 = document.getElementById("select_ample_2").options[document.getElementById("select_ample_2").selectedIndex].value;
+        var select_sex = document.getElementById("select_sex").options[document.getElementById("select_sex").selectedIndex].value;
+
+        url = ""
+        url += "/feedback_list?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
+        url += "&sex=" + select_sex;
+        url += "&start_age=" + document.getElementById("start_age").value;
+        url += "&end_age=" + document.getElementById("end_age").value;
+        url += "&select_base=" + select_base;
+        url += "&select_ample1=" + select_ample1;
+        url += "&select_ample2=" + select_ample2;
+        location.href = url;
+      }
     </script>
   </head>
 
@@ -53,7 +104,7 @@
     <br>
 
     성별 :
-    <select>
+    <select id="select_sex">
       <option value="F">F</option>
       <option value="M">M</option>
     </select>
@@ -64,7 +115,7 @@
     <br><br>
 
     베이스제품 :
-    <select>
+    <select id="select_base">
       <option value="all">All</option>
       <option value="skin control">skin control</option>
       <option value="deep humect">deep humect</option>
@@ -72,7 +123,7 @@
     </select>
 
     앰플 1 :
-    <select>
+    <select id="select_ample_1">
       <option value="all">All</option>
       <option value="pore clinic ampoule">pore clinic ampoule</option>
       <option value="carming ampoule">carming ampoule</option>
@@ -82,7 +133,7 @@
     </select>
 
     앰플 2 :
-    <select>
+    <select id="select_ample_2">
       <option value="all">All</option>
       <option value="pore clinic ampoule">pore clinic ampoule</option>
       <option value="carming ampoule">carming ampoule</option>
@@ -91,8 +142,10 @@
       <option value="perming ampoule">perming ampoule</option>
     </select>
 
+    <button id="submit">조회</button>
     <div>
       <div>
+        총 인원 수 : <%= @count %> / 설문 1의 평균 점수 : <%= @average_a1 %> / 설문 2의 평균 점수 : <%= @average_a2 %> / 설문 3의 평균 점수 : <%= @average_a3 %> / 설문 4의 평균 점수 : <%= @average_a4 %><br>
         <% @after_interviews.each do |after_interview| %>
           <%= render partial: "feedback/after_item", locals: { after_interview: after_interview } %>
         <% end %>

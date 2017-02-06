@@ -58,12 +58,86 @@ class FeedbackController < ApplicationController
   def list
     @start_date = Date.today
     @end_date = Date.today
+
+    @average_a1 = 0
+    @average_a2 = 0
+    @average_a3 = 0
+    @average_a4 = 0
+
+    select_sex = params[:sex]
+    start_date = params[:start_date]
+    end_date = params[:start_age]
+    start_age = params[:start_age]
+    end_age = params[:end_age]
+    select_base = params[:select_base]
+    select_ample1 = params[:select_ample1]
+    select_ample2 = params[:select_ample2]
+
+    @start_date = start_date.to_time
+    @end_date = end_date.to_time
+
     @after_interviews = []
     if Rails.env.production? || Rails.env.staging?
-      @after_interviews = Fcafterinterview.where.not(a1: nil)
-      tablet_interviews = Fctabletinterview.where("to_date(uptdate) >= ? AND to_date(uptdate) <= ?", @start_date, @end_date).order("uptdate desc")
-      tablet_interviews.each do |tablet_interview|
+      temp_after_interviews = Fcafterinterview.where.not(a1: nil)
+      temp_after_interviews.each do |after_interview|
+        is_contain = true
+        custinfo = Custinfo.where(custserial: after_interview.custserial).first
+        if custinfo.sex != select_sex
+          is_contain = false
+        end
+        temp_age = Time.current.year - custinfo.birthyy
+        if temp_age < start_age || temp_age > end_age
+          is_contain = false
+        end
+
+        tablet_interview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first
+        if tablet_interview.uptdate.to_date < @start_date || tablet_interview.uptdate.to_date > @end_date
+          is_contain = false
+        end
+
+        if select_base != "all"
+          if tablet_interview.solution_after_serum != select_base
+            is_contain = false
+          end
+        end
+
+        if select_ample1 != "all"
+          if tablet_interview.solution_after_ample_1 != select_ample1
+            is_contain = false
+          end
+        end
+
+        if select_ample2 != "all"
+          if tablet_interview.solution_after_ample_2 != select_ample2
+            is_contain = false
+          end
+        end
       end
+    end
+
+    @after_interviews.each do |interview|
+      @average_a1 = @average_a1 + interview.a1.to_i
+      @average_a2 = @average_a2 + interview.a2.to_i
+      @average_a3 = @average_a3 + interview.a3.to_i
+      @average_a4 = @average_a4 + interview.a4.to_i
+    end
+
+    @count = @after_interviews.count
+    divider = 0
+    if @count != 0
+      divider = @count
+    end
+    if @average_a1 != 0
+      @average_a1 = (@average_a1 / divider).to_f
+    end
+    if @average_a2 != 0
+      @average_a2 = (@average_a2 / divider).to_f
+    end
+    if @average_a3 != 0
+      @average_a3 = (@average_a3 / divider).to_f
+    end
+    if @average_a4 != 0
+      @average_a4 = (@average_a4 / divider).to_f
     end
     render 'list'
   end
