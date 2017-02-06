@@ -1,0 +1,102 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+      $(function () {
+        $("#datepicker").datepicker({
+                    dateFormat: 'yy-mm-dd',
+                    dayNamesMin: [
+                        '일',
+                        '월',
+                        '화',
+                        '수',
+                        '목',
+                        '금',
+                        '토'
+                    ],
+                    monthNamesShort: [
+                        '1월',
+                        '2월',
+                        '3월',
+                        '4월',
+                        '5월',
+                        '6월',
+                        '7월',
+                        '8월',
+                        '9월',
+                        '10월',
+                        '11월',
+                        '12월'
+                    ],
+                    currentText: '오늘 날짜',
+                    changeMonth: true
+                });
+          $("#datepicker").datepicker('setDate', '<%= @date %>');
+          $('#datepicker').change(function () {
+              location.href = "/feedback?date=" + $('#datepicker').val()
+          });
+      });
+
+    </script>
+  </head>
+
+  <body>
+    진단 날짜 : <input type="text" id="start_date" style="width:100px; margin-top:10px;">
+    <input type="text" id="end_date" style="width:100px; margin-top:10px;">
+    <br>
+
+    성별 :
+    <select>
+      <option value="F">F</option>
+      <option value="M">M</option>
+    </select>
+
+    나이 :
+    <input type="text" id="start_age" style="width:100px; margin-top:10px;">
+    <input type="text" id="end_age" style="width:100px; margin-top:10px;">
+    <br><br>
+
+    베이스제품 :
+    <select>
+      <option value="all">All</option>
+      <option value="skin control">skin control</option>
+      <option value="deep humect">deep humect</option>
+      <option value="rebalencing">rebalencing</option>
+    </select>
+
+    앰플 1 :
+    <select>
+      <option value="all">All</option>
+      <option value="pore clinic ampoule">pore clinic ampoule</option>
+      <option value="carming ampoule">carming ampoule</option>
+      <option value="luminus ampoule">luminus ampoule</option>
+      <option value="regenerating ampoule">regenerating ampoule</option>
+      <option value="perming ampoule">perming ampoule</option>
+    </select>
+
+    앰플 2 :
+    <select>
+      <option value="all">All</option>
+      <option value="pore clinic ampoule">pore clinic ampoule</option>
+      <option value="carming ampoule">carming ampoule</option>
+      <option value="luminus ampoule">luminus ampoule</option>
+      <option value="regenerating ampoule">regenerating ampoule</option>
+      <option value="perming ampoule">perming ampoule</option>
+    </select>
+
+    <div>
+      <div>
+        <% @after_interviews.each do |after_interview| %>
+          <%= render partial: "feedback/after_item", locals: { after_interview: after_interview } %>
+        <% end %>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 class FeedbackController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:index, :calculate]
   skip_before_action :verify_authenticity_token
-  skip_before_action :authenticate, :only => [:index]
+  skip_before_action :authenticate, :only => [:index, :list]
   before_action :is_admin
 
   def index
@@ -56,6 +56,16 @@ class FeedbackController < ApplicationController
   end
 
   def list
+    @start_date = Date.today
+    @end_date = Date.today
+    @after_interviews = []
+    if Rails.env.production? || Rails.env.staging?
+      @after_interviews = Fcafterinterview.where.not(a1: nil)
+      tablet_interviews = Fctabletinterview.where("to_date(uptdate) >= ? AND to_date(uptdate) <= ?", @start_date, @end_date).order("uptdate desc")
+      tablet_interviews.each do |tablet_interview|
+      end
+    end
+    render 'list'
   end
 
   def is_admin
