@@ -55,6 +55,7 @@ class FeedbackController < ApplicationController
     end
   end
 
+
   def is_admin
     if current_admin_user == nil
       redirect_to '/'
