@@ -100,19 +100,19 @@ class FeedbackController < ApplicationController
         end
 
         if select_base != "all"
-          if tablet_interview.solution_after_serum != select_base
+          if tablet_interview.after_serum != select_base
             is_contain = false
           end
         end
 
         if select_ample1 != "all"
-          if tablet_interview.solution_after_ample_1 != select_ample1
+          if tablet_interview.after_ample_1 != select_ample1
             is_contain = false
           end
         end
 
         if select_ample2 != "all"
-          if tablet_interview.solution_after_ample_2 != select_ample2
+          if tablet_interview.after_ample_2 != select_ample2
             is_contain = false
           end
         end
