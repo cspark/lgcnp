@@ -79,6 +79,24 @@ class FeedbackController < ApplicationController
     if !end_date.nil?
       @end_date = end_date.to_time
     end
+    if !select_sex.nil?
+      @sex = select_sex
+    end
+    if !start_age.nil?
+      @start_age = start_age
+    end
+    if !end_age.nil?
+      @end_age = end_age
+    end
+    if !select_base.nil?
+      @select_base = select_base
+    end
+    if !select_ample1.nil?
+      @select_ample1 = select_ample1
+    end
+    if !select_ample2.nil?
+      @select_ample2 = select_ample2
+    end
 
     @after_interviews = []
     if Rails.env.production? || Rails.env.staging?

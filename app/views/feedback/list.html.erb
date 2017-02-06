@@ -73,6 +73,45 @@
           document.getElementById("start_age").value = "20"
           document.getElementById("end_age").value = "30"
 
+          <% if !@start_age.nil? %>
+            document.getElementById("start_age").value = '<%= @start_age %>'
+          <% end %>
+          <% if !@end_age.nil? %>
+            document.getElementById("end_age").value = '<%= @end_age %>'
+          <% end %>
+
+          <% if !@sex.nil? %>
+            $('#select_sex').each(function() {
+                if($(this).val() == '<%= @sex %>') {
+                    $(this).prop("selected", true);
+                }
+            });
+          <% end %>
+
+          <% if !@select_base.nil? %>
+            $('#select_base').each(function() {
+                if($(this).val() == '<%= @select_base %>') {
+                    $(this).prop("selected", true);
+                }
+            });
+          <% end %>
+
+          <% if !@select_ample1.nil? %>
+            $('#select_ample_1').each(function() {
+                if($(this).val() == '<%= @select_ample1 %>') {
+                    $(this).prop("selected", true);
+                }
+            });
+          <% end %>
+
+          <% if !@select_ample2.nil? %>
+            $('#select_ample_2').each(function() {
+                if($(this).val() == '<%= @select_ample2 %>') {
+                    $(this).prop("selected", true);
+                }
+            });
+          <% end %>
+
           $('#submit').click(function(){
             load();
           });
