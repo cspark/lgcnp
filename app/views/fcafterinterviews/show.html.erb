@@ -37,11 +37,18 @@
         });
 
         $('#submit').click(function(){
-            $('input[name="' + this.name + '"]')
+            $('input[name="' + this.name + '"]');
+
+            var a1 = 1;
+            
         });
 
-        
+
       });
+
+      function decode_utf8(s) {
+        return decodeURI(s);
+      }
     </script>
   </head>
 
