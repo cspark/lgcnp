@@ -10,6 +10,28 @@
 
     <script>
       $(function () {
+        <% user = Custinfo.where(custserial: @after_interview.custserial).first %>
+        <% fctabletinterview = Fctabletinterview.where(custserial: @after_interview.custserial).where(tablet_interview_id: @after_interview.tablet_interview_id).first %>
+
+        try
+        {
+          $('#name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append( decode_utf8('<%= user.custname %>'));
+        }
+        catch(err)
+        {
+          $('#name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append('<%= user.custname %>');
+        }
+
+        try
+        {
+          $('#memo_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append( decode_utf8('<%= fctabletinterview.memo %>'));
+        }
+        catch(err)
+        {
+          $('#memo_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append('<%= fctabletinterview.memo %>');
+        }
+
+
         $('input[type="checkbox"]').on('change', function() {
             $('input[name="' + this.name + '"]').not(this).prop('checked', false);
         });
@@ -17,6 +39,8 @@
         $('#submit').click(function(){
             $('input[name="' + this.name + '"]')
         });
+
+        
       });
     </script>
   </head>
@@ -31,7 +55,7 @@
         <b>전화번호</b> <%= user.phone %> <br>
         <b>맞춤일자</b> <%= fctabletinterview.uptdate %> <br>
         <b>맞춤제품</b> <%= fctabletinterview.after_serum %> / <%= fctabletinterview.after_ample_1 %> / <%= fctabletinterview.after_ample_2 %> <br>
-        <b>메모</b> <%= fctabletinterview.memo %> <br>
+        <b>메모</b> <div id="memo_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></b></div> <br>
       </font>
       <br>
       <div>
