@@ -113,7 +113,7 @@ class FeedbackController < ApplicationController
         end
 
         tablet_interview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first
-        if tablet_interview.uptdate.to_date < @start_date || tablet_interview.uptdate.to_date > @end_date
+        if !(tablet_interview.uptdate.to_date >= @start_date && tablet_interview.uptdate.to_date <= @end_date)
           is_contain = false
         end
 
