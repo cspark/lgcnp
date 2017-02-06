@@ -10,22 +10,62 @@
 
     <script>
       $(function () {
+        $('input[type="checkbox"]').on('change', function() {
+            $('input[name="' + this.name + '"]').not(this).prop('checked', false);
+        });
 
+        $('#submit').click(function(){
+            $('input[name="' + this.name + '"]')
+        });
       });
     </script>
   </head>
 
   <body>
-    <input type="text" id="datepicker" style="width:100%; margin-top:10px;">
-
     <div>
-      <h4>구입 후 <%= @after_interview.after_interview_id + 1 %>차 설문</h4>
+      <% user = Custinfo.where(custserial: @after_interview.custserial).first %>
+      <% fctabletinterview = Fctabletinterview.where(custserial: 2).where(tablet_interview_id: @after_interview.tablet_interview_id).first %>
+      <font size="5"><b><div id="name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></b></div></font>
+
+      <div><font size="4">
+        <b>전화번호</b> <%= user.phone %> <br>
+        <b>맞춤일자</b> <%= fctabletinterview.uptdate %> <br>
+        <b>맞춤제품</b> <%= fctabletinterview.after_serum %> / <%= fctabletinterview.after_ample_1 %> / <%= fctabletinterview.after_ample_2 %> <br>
+        <b>메모</b> <%= fctabletinterview.memo %> <br>
+      </font>
+      <br>
       <div>
         1. 일주일 중 제품 사용 빈도를 선택해주시기 바랍니다.<br>
-        <input type="checkbox" name="group1[]" /> 7일
-        <input type="checkbox" name="group1[]" /> 5~6일
-        <input type="checkbox" name="group1[]" /> 3~4일
-        <input type="checkbox" name="group1[]" /> 사용하지 않음
+        <input type="checkbox" name="group1[]" id="a1_1"/> 7일
+        <input type="checkbox" name="group1[]" id="a1_2"/> 5~6일
+        <input type="checkbox" name="group1[]" id="a1_3"/> 3~4일
+        <input type="checkbox" name="group1[]" id="a1_4"/> 1~2일
+        <input type="checkbox" name="group1[]" id="a1_5"/> 사용하지 않음
+        <br><br>
+        2. 구입하신 세럼의 만족도를 선택해주시기 바랍니다.<br>
+        <input type="checkbox" name="group2[]" id="a2_1"/> 매우 불만족
+        <input type="checkbox" name="group2[]" id="a2_2"/> 불만족
+        <input type="checkbox" name="group2[]" id="a2_3"/> 보통
+        <input type="checkbox" name="group2[]" id="a2_4"/> 만족
+        <input type="checkbox" name="group2[]" id="a2_5"/> 매우 만족
+        <br><br>
+        3. 구입하신 세럼의 효능 체감 만족도를 선택해주시기 바랍니다.<br>
+        <input type="checkbox" name="group3[]" id="a3_1"/> 매우 불만족
+        <input type="checkbox" name="group3[]" id="a3_2" /> 불만족
+        <input type="checkbox" name="group3[]" id="a3_3" /> 보통
+        <input type="checkbox" name="group3[]" id="a3_4" /> 만족
+        <input type="checkbox" name="group3[]" id="a3_5" /> 매우 만족
+        <br><br>
+        4. 기존 제품과의 차별성이 느껴지십니까?<br>
+        <input type="checkbox" name="group4[]" id="a4_1"/> 확실히 차별성 있음
+        <input type="checkbox" name="group4[]" id="a4_2"/> 비슷하지만 차별성 있음
+        <input type="checkbox" name="group4[]" id="a4_3"/> 차별성 없음
+        <input type="checkbox" name="group4[]" id="a4_4"/> 잘 모르겠음
+        <br><br>
+        5. 기타의견<br>구입하신 세럼을 사용하면서 좋았던 점이나 개선해야 할 사항에 대하여 의견을 주시면 감사하겠습니다.<br>
+        <input type="text" style="width: 500px; height: 200px;" id="a5"/>
+        <br>
+        <input id="submit" type="submit" value="Submit">
       </div>
     </div>
   </body>

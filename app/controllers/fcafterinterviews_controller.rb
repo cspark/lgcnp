@@ -10,6 +10,13 @@ class FcafterinterviewsController < ApplicationController
     after_interview_id = params[:after_interview_id]
 
     @after_interview = Fcafterinterview.where(custserial: custserial).where(tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).first
+  end
+
+  def update
+    custserial = params[:custserial]
+    tablet_interview_id = params[:tablet_interview_id]
+    after_interview_id = params[:after_interview_id]
+
 
   end
 
