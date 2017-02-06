@@ -30,7 +30,7 @@ class FeedbackController < ApplicationController
       if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).count == 0
         after_interview = Fcafterinterview.new
         after_interview.custserial = tabletinterview.custserial
-        after_interview.tablet_interview_id = tablet_interview_id
+        after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
         after_interview.after_interview_id = 0
         after_interview.save
         after_interview.after_interview_id = 1
