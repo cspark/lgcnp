@@ -25,7 +25,7 @@
         try
         {
           var temp_memo = decode_utf8('<%= fctabletinterview.memo %>');
-          temp_memo = temp_memo.gsub('+', ' ');
+          temp_memo = temp_memo.replace(/\+/gi, " ");
           $('#memo_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append(temp_memo);
         }
         catch(err)
