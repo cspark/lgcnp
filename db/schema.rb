@@ -63,6 +63,17 @@ ActiveRecord::Schema.define(version: 20170206080606) do
     t.text    "a5"
   end
 
+  create_table "fcafterinterviews", force: :cascade do |t|
+    t.string  "custserial",          null: false
+    t.integer "tablet_interview_id"
+    t.integer "after_interview_id"
+    t.integer "a1"
+    t.integer "a2"
+    t.integer "a3"
+    t.integer "a4"
+    t.text    "a5"
+  end
+
   create_table "fcavgdata", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -277,17 +288,6 @@ ActiveRecord::Schema.define(version: 20170206080606) do
     t.string   "solution_after_ready_made_cosmetic"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-  end
-
-  create_table "table_fc_after_interviews", force: :cascade do |t|
-    t.string  "custserial",          null: false
-    t.integer "tablet_interview_id"
-    t.integer "after_interview_id"
-    t.integer "a1"
-    t.integer "a2"
-    t.integer "a3"
-    t.integer "a4"
-    t.text    "a5"
   end
 
 end

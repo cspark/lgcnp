@@ -43,6 +43,10 @@
               location.href = "/feedback?date=" + $('#datepicker').val()
           });
       });
+
+      function show_after_interview(after_interview_id, tablet_interview_id, custserial){
+        window.open("/after_interview?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "/after_interview?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "scrollbars=1,resizable=1,height=500,width=600");
+      }
     </script>
   </head>
 

@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+      $(function () {
+
+      });
+    </script>
+  </head>
+
+  <body>
+    <input type="text" id="datepicker" style="width:100%; margin-top:10px;">
+
+    <div>
+      <h4>구입 후 <%= @after_interview.after_interview_id + 1 %>차 설문</h4>
+      <div>
+        1. 일주일 중 제품 사용 빈도를 선택해주시기 바랍니다.<br>
+        <input type="checkbox" name="group1[]" /> 7일
+        <input type="checkbox" name="group1[]" /> 5~6일
+        <input type="checkbox" name="group1[]" /> 3~4일
+        <input type="checkbox" name="group1[]" /> 사용하지 않음
+      </div>
+    </div>
+  </body>
+</html>

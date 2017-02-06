@@ -1,6 +1,6 @@
 class CreateTableFcAfterInterview < ActiveRecord::Migration[5.0]
   def change
-    create_table :table_fc_after_interviews do |t|
+    create_table :fcafterinterviews do |t|
       t.string :custserial,  null:false
       t.integer :tablet_interview_id
       t.integer :after_interview_id
