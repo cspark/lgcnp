@@ -84,10 +84,10 @@
           <% end %>
 
           <% if !@after_interview.a5.nil? %>
-            $('#a5').value = @after_interview.a5;
+            $('#a5').value = '<%= @after_interview.a5 %>';
           <% end %>
         <% end %>
-        
+
         $('#submit').click(function(){
             console.log("Click");
 
