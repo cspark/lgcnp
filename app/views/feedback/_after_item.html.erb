@@ -33,6 +33,13 @@
         <% custinfo = Custinfo.where(custserial: after_interview.custserial).first %>
         <% tabletinterview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first %>
         <font size="4"><div id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
+        <% if after_interview.after_interview_id == 0 %>
+          <b>당일 설문</b>
+        <% elsif after_interview.after_interview_id == 1 %>
+          <b>2주 후 설문</b>
+        <% elsif after_interview.after_interview_id == 2 %>
+          <b>3개월 후 설문</b>
+        <% end %>
         <font size="2">
           진단 날짜 : <%= tabletinterview.uptdate %> / 성별 : <%= custinfo.sex %> / 나이 : <%= custinfo.age %>
           <% after_serum = tabletinterview.after_serum %>

@@ -72,6 +72,7 @@ class FeedbackController < ApplicationController
     select_base = params[:select_base]
     select_ample1 = params[:select_ample1]
     select_ample2 = params[:select_ample2]
+    select_interview = params[:select_interview]
 
     if !start_date.nil?
       @start_date = start_date.to_time
@@ -97,20 +98,38 @@ class FeedbackController < ApplicationController
     if !select_ample2.nil?
       @select_ample2 = select_ample2
     end
+    if !select_interview.nil?
+      @select_interview = select_interview
+    end
+
 
     @after_interviews = []
     if Rails.env.production? || Rails.env.staging?
       temp_after_interviews = Fcafterinterview.where.not(a1: nil)
+      if select_interview != "all"
+        if select_interview == "today"
+          temp_after_interviews = temp_after_interviews.where(after_interview_id: 0)
+        elsif select_interview == "2weeks_ago"
+          temp_after_interviews = temp_after_interviews.where(after_interview_id: 1)
+        elsif select_interview == "3months_ago"
+          temp_after_interviews = temp_after_interviews.where(after_interview_id: 2)
+        end
+      end
+
       temp_after_interviews.each do |after_interview|
         is_contain = true
         custinfo = Custinfo.where(custserial: after_interview.custserial).first
-        if custinfo.sex != select_sex
-          is_contain = false
+        if select_sex != "all"
+          if custinfo.sex != select_sex
+            is_contain = false
+          end
         end
+
         temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
         if temp_age < start_age.to_i || temp_age > end_age.to_i
           is_contain = false
         end
+
 
         tablet_interview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first
         if !(tablet_interview.uptdate.to_date >= @start_date && tablet_interview.uptdate.to_date <= @end_date)
