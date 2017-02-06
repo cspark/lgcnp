@@ -8,7 +8,7 @@
 
       <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
       <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
-      
+
       <script>
         $(function () {
           <% user = Custinfo.where(custserial: after_interview.custserial).first %>
@@ -35,7 +35,38 @@
         <font size="4"><div id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
         <font size="2">
           진단 날짜 : <%= tabletinterview.uptdate %> / 성별 : <%= custinfo.sex %> / 나이 : <%= custinfo.age %>
-          베이스 : <%= tabletinterview.after_serum %> / 앰플 1 : <%= tabletinterview.after_ample_1 %> / 앰플 2 : <%= tabletinterview.after_ample_2 %> <br>
+          <% if tabletinterview.after_serum == "skin control" %>
+            <% after_serum == "스킨 컨트롤 세럼" %>
+          <% elsif tabletinterview.after_serum == "deep humect" %>
+            <% after_serum == "딥 휴멕트 세럼" %>
+          <% elsif tabletinterview.after_serum == "rebalencing" %>
+            <% after_serum == "듀얼 밸런스 세럼" %>
+          <% end %>
+          베이스 : <%= after_serum %> / 앰플 1 :
+          <% if tabletinterview.after_ample_1 == "pore clinic ampoule" %>
+            <% after_ample_1 == "포어 클리닉 앰플" %>
+          <% elsif tabletinterview.after_ample_1 == "carming ampoule" %>
+            <% after_ample_1 == "카밍 앰플" %>
+          <% elsif tabletinterview.after_ample_1 == "luminus ampoule" %>
+            <% after_ample_1 == "루미너스 앰플" %>
+          <% elsif tabletinterview.after_ample_1 == "regenerating ampoule" %>
+            <% after_ample_1 == "리제네리이팅 앰플" %>
+          <% elsif tabletinterview.after_ample_1 == "perming ampoule" %>
+            <% after_ample_1 == "퍼밍 앰플" %>
+          <% end %>
+          <%= after_ample_1 %> / 앰플 2 :
+          <% if tabletinterview.after_ample_2 == "pore clinic ampoule" %>
+            <% after_ample_2 == "포어 클리닉 앰플" %>
+          <% elsif tabletinterview.after_ample_2 == "carming ampoule" %>
+            <% after_ample_2 == "카밍 앰플" %>
+          <% elsif tabletinterview.after_ample_2 == "luminus ampoule" %>
+            <% after_ample_2 == "루미너스 앰플" %>
+          <% elsif tabletinterview.after_ample_2 == "regenerating ampoule" %>
+            <% after_ample_2 == "리제네리이팅 앰플" %>
+          <% elsif tabletinterview.after_ample_2 == "perming ampoule" %>
+            <% after_ample_2 == "퍼밍 앰플" %>
+          <% end %>
+          <%= tabletinterview.after_ample_2 %> <br>
           설문 1 : <%= after_interview.a1.to_i %> / 설문 2 : <%= after_interview.a2.to_i %> / 설문 3 : <%= after_interview.a3.to_i %> / 설문 4 : <%= after_interview.a4.to_i %> <br>
           기타의견 : <%= after_interview.a5 %>
         </font>
