@@ -35,6 +35,7 @@
         <font size="4"><div id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
         <font size="2">
           진단 날짜 : <%= tabletinterview.uptdate %> / 성별 : <%= custinfo.sex %> / 나이 : <%= custinfo.age %>
+          <% after_serum == tabletinterview.after_serum %>
           <% if tabletinterview.after_serum == "skin control" %>
             <% after_serum == "스킨 컨트롤 세럼" %>
           <% elsif tabletinterview.after_serum == "deep humect" %>
@@ -43,6 +44,7 @@
             <% after_serum == "듀얼 밸런스 세럼" %>
           <% end %>
           베이스 : <%= after_serum %> / 앰플 1 :
+          <% after_ample_1 == tabletinterview.after_ample_1 %>
           <% if tabletinterview.after_ample_1 == "pore clinic ampoule" %>
             <% after_ample_1 == "포어 클리닉 앰플" %>
           <% elsif tabletinterview.after_ample_1 == "carming ampoule" %>
@@ -55,6 +57,7 @@
             <% after_ample_1 == "퍼밍 앰플" %>
           <% end %>
           <%= after_ample_1 %> / 앰플 2 :
+          <% after_ample_2 == tabletinterview.after_ample_2 %>
           <% if tabletinterview.after_ample_2 == "pore clinic ampoule" %>
             <% after_ample_2 == "포어 클리닉 앰플" %>
           <% elsif tabletinterview.after_ample_2 == "carming ampoule" %>
