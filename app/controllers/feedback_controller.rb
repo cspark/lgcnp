@@ -116,6 +116,10 @@ class FeedbackController < ApplicationController
             is_contain = false
           end
         end
+
+        if is_contain == true
+          @after_interviews << after_interview
+        end
       end
     end
 
