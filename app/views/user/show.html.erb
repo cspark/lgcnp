@@ -11,11 +11,11 @@
     $ (function () {
         try
         {
-          $('#name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append( decode_utf8('<%= user.custname %>'));
+          $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append( decode_utf8('<%= @user.custname %>'));
         }
         catch(err)
         {
-          $('#name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append('<%= user.custname %>');
+          $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append('<%= @user.custname %>');
         }
       });
 
