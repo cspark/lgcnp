@@ -73,8 +73,12 @@ class FeedbackController < ApplicationController
     select_ample1 = params[:select_ample1]
     select_ample2 = params[:select_ample2]
 
-    @start_date = start_date.to_time
-    @end_date = end_date.to_time
+    if !start_date.nil?
+      @start_date = start_date.to_time
+    end
+    if !end_date.nil?
+      @end_date = end_date.to_time
+    end
 
     @after_interviews = []
     if Rails.env.production? || Rails.env.staging?
