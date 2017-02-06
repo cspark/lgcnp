@@ -24,7 +24,9 @@
 
         try
         {
-          $('#memo_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append( decode_utf8('<%= fctabletinterview.memo %>'));
+          var temp_memo = decode_utf8('<%= fctabletinterview.memo %>');
+          temp_memo = temp_memo.gsub('+', ' ');
+          $('#memo_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append(temp_memo);
         }
         catch(err)
         {
