@@ -90,7 +90,7 @@ class FeedbackController < ApplicationController
           is_contain = false
         end
         temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
-        if temp_age < start_age || temp_age > end_age
+        if temp_age < start_age.to_i || temp_age > end_age.to_i
           is_contain = false
         end
 
