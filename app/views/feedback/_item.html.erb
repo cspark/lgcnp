@@ -27,7 +27,7 @@
           시리얼 : <%= tabletinterview.custserial.to_i %> / 진단 날짜 : <%= tabletinterview.uptdate %> / 전화번호 : <%= custinfo.phone %> <br>
           사후 피드백 서비스 : <%= custinfo.is_agree_after %>
           <br>
-          <% if tabletinterview.is_agree_after == "T" %>
+          <% if custinfo.is_agree_after == "T" %>
             <% f1 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(after_interview_id: 0).first %>
             <% if f1.a1.nil? %>
               <% is_feed_back_ok_1 = "F" %>
@@ -49,7 +49,7 @@
               <% is_feed_back_ok_3 = "T" %>
             <% end %>
             <a onClick="show_after_interview(<%= f3.after_interview_id %>, <%= f3.tablet_interview_id %>, <%= f3.custserial %>)">3차 설문 여부 : <%= is_feed_back_ok_3 %></a>
-          <% end %>  
+          <% end %>
         </font>
       </div>
     </body>
