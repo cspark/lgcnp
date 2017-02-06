@@ -89,7 +89,7 @@ class FeedbackController < ApplicationController
         if custinfo.sex != select_sex
           is_contain = false
         end
-        temp_age = Time.current.year - custinfo.birthyy
+        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
         if temp_age < start_age || temp_age > end_age
           is_contain = false
         end
