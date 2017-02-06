@@ -84,7 +84,7 @@
           <% end %>
 
           <% if !@after_interview.a5.nil? %>
-            $('#a5').value = '<%= @after_interview.a5 %>';
+            document.getElementById("a5").value = '<%= @after_interview.a5 %>';
           <% end %>
         <% end %>
 
