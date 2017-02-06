@@ -3,6 +3,7 @@
     <head>
       <script>
         $(function () {
+          <% user = Custinfo.find tabletinterview.custserial.to_i %>
           try
           {
             var userName = decode_utf8('<%= user.custname %>')
