@@ -27,30 +27,33 @@ class FeedbackController < ApplicationController
 
   def create_new_fcafterservice(relation)
     relation.each do |tabletinterview|
-      if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).count == 0
-        if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).where(after_interview_id: 0).count == 0
-          after_interview = Fcafterinterview.new
-          after_interview.custserial = tabletinterview.custserial
-          after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
-          after_interview.after_interview_id = 0
-          after_interview.save
-        end
+      begin
+        if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).count == 0
+          if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).where(after_interview_id: 0).count == 0
+            after_interview = Fcafterinterview.new
+            after_interview.custserial = tabletinterview.custserial
+            after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
+            after_interview.after_interview_id = 0
+            after_interview.save
+          end
 
-        if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).where(after_interview_id: 1).count == 0
-          after_interview = Fcafterinterview.new
-          after_interview.custserial = tabletinterview.custserial
-          after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
-          after_interview.after_interview_id = 1
-          after_interview.save
-        end
+          if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).where(after_interview_id: 1).count == 0
+            after_interview = Fcafterinterview.new
+            after_interview.custserial = tabletinterview.custserial
+            after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
+            after_interview.after_interview_id = 1
+            after_interview.save
+          end
 
-        if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).where(after_interview_id: 2).count == 0
-          after_interview = Fcafterinterview.new
-          after_interview.custserial = tabletinterview.custserial
-          after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
-          after_interview.after_interview_id = 2
-          after_interview.save
+          if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).where(after_interview_id: 2).count == 0
+            after_interview = Fcafterinterview.new
+            after_interview.custserial = tabletinterview.custserial
+            after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
+            after_interview.after_interview_id = 2
+            after_interview.save
+          end
         end
+      rescue
       end
     end
   end
