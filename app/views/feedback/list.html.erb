@@ -80,6 +80,10 @@
             document.getElementById("end_age").value = '<%= @end_age %>'
           <% end %>
 
+          <% if !@name.nil? %>
+            document.getElementById("name").value = '<%= @name %>'
+          <% end %>
+
           <% if !@sex.nil? %>
             $('select[id="select_sex"]').val('<%= @sex %>');
           <% end %>
@@ -99,6 +103,8 @@
           <% if !@select_interview.nil? %>
             $('select[id="select_interview"]').val('<%= @select_interview %>');
           <% end %>
+
+
 
           $('#submit').click(function(){
             load();
@@ -122,14 +128,18 @@
         url += "&select_ample1=" + select_ample1;
         url += "&select_ample2=" + select_ample2;
         url += "&select_interview=" + select_interview;
+        url += "&name=" + encodeURI(document.getElementById("name").value);
         location.href = url;
       }
     </script>
   </head>
 
   <body>
-    진단 날짜 : <input type="text" id="start_date" style="width:100px; margin-top:10px;">
-    <input type="text" id="end_date" style="width:100px; margin-top:10px;">
+    진단 날짜 : <input type="text" id="start_date" style="width:100px;">
+    <input type="text" id="end_date" style="width:100px;">
+    이름 :
+    <input type="text" id="name" style="width:100px;">
+
     유형 :
     <select id="select_interview">
       <option value="all">All</option>

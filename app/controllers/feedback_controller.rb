@@ -27,7 +27,6 @@ class FeedbackController < ApplicationController
 
   def create_new_fcafterservice(relation)
     relation.each do |tabletinterview|
-      if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).count == 0
         if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).where(after_interview_id: 0).count == 0
           after_interview = Fcafterinterview.new
           after_interview.custserial = tabletinterview.custserial
@@ -51,7 +50,6 @@ class FeedbackController < ApplicationController
           after_interview.after_interview_id = 2
           after_interview.save
         end
-      end
     end
   end
 
@@ -73,6 +71,7 @@ class FeedbackController < ApplicationController
     select_ample1 = params[:select_ample1]
     select_ample2 = params[:select_ample2]
     select_interview = params[:select_interview]
+    name = params[:name]
 
     if !start_date.nil?
       @start_date = start_date.to_time
@@ -101,6 +100,9 @@ class FeedbackController < ApplicationController
     if !select_interview.nil?
       @select_interview = select_interview
     end
+    if !name.nil?
+      @name = name
+    end
 
 
     @after_interviews = []
@@ -119,6 +121,12 @@ class FeedbackController < ApplicationController
       temp_after_interviews.each do |after_interview|
         is_contain = true
         custinfo = Custinfo.where(custserial: after_interview.custserial).first
+        if !name.nil?
+          if !custinfo.custname.include? name
+             is_contain = false
+          end
+        end
+
         if select_sex != "all"
           if custinfo.sex != select_sex
             is_contain = false
