@@ -17,6 +17,11 @@
         });
       });
 
+      function showDetail(userId){
+        console.log(userId);
+         window.open("/users/detail?userId=" + userId, "/users/detail?userId=" + userId, "scrollbars=1,resizable=1,height=500,width=600");
+      }
+
       function show_all(){
         location.href = "/user_list";
       }

@@ -3,7 +3,7 @@ require 'iconv'
 class UserController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:index, :calculate]
   skip_before_action :verify_authenticity_token
-  skip_before_action :authenticate, :only => [:index]
+  skip_before_action :authenticate, :only => [:index, :show]
   before_action :is_admin
 
   def index
@@ -14,6 +14,11 @@ class UserController < ApplicationController
     else
       @users = Custinfo.where(ch_cd: "CNP").where.not(lastanaldate: nil).order("lastanaldate desc").page(params[:page]).per(6)
     end
+  end
+
+  def show
+    userId = params[:userId]
+    @user = Custinfo.where(custserial: userId).first
   end
 
   def is_admin

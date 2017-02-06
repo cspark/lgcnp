@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+      $(function () {
+
+      });
+
+    </script>
+  </head>
+
+  <body>
+    <h2>고객정보</h2>
+
+    <font size="4"><div id="name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>"></div></font>
+
+    <div><font size="4">
+      (가입날짜 : <%= @user.uptdate %> \ 마지막 진단 날짜 : <%= @user.lastanaldate %>)<br>
+      <b>시리얼</b> <%= @user.custserial.to_i %> <br>
+      <b>전화번호</b> <%= @user.phone %> <br>
+      <b>성별</b> <%= @user.sex %> <br>
+       <b>생년월일</b> <%= @user.birthyy %>-<%= @user.birthmm %>-<%= @user.birthdd %><br><br>
+      <b>개인정보 이용동의</b> <%= @user.is_agree_privacy %> <br>
+       <b>제 3자 정보 제공 동의</b> <%= @user.is_agree_thirdparty_info %> <br>
+       <b>마케팅 정보 동의</b> <%= @user.is_agree_marketing %> <br>
+        <b>사후 피드백 서비스</b> <%= @user.is_agree_after %> <br>
+         <b>과거 측정 횟수</b> <%= Fctabletinterview.where(custserial: @user.custserial).count %>
+    </font>
+
+  </body>
+</html>

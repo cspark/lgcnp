@@ -19,6 +19,26 @@ class FeedbackController < ApplicationController
       @tablet_interviews_2_weeks_ago = Fctabletinterview.all
       @tablet_interviews_3_months_ago = Fctabletinterview.all
     end
+
+    create_new_fcafterservice(@tablet_interviews_today)
+    create_new_fcafterservice(@tablet_interviews_2_weeks_ago)
+    create_new_fcafterservice(@tablet_interviews_3_months_ago)
+  end
+
+  def create_new_fcafterservice(relation)
+    relation.each do |tabletinterview|
+      if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).count == 0
+        after_interview = Fcafterinterview.new
+        after_interview.custserial = tabletinterview.custserial
+        after_interview.tablet_interview_id = tablet_interview_id
+        after_interview.after_interview_id = 0
+        after_interview.save
+        after_interview.after_interview_id = 1
+        after_interview.save
+        after_interview.after_interview_id = 2
+        after_interview.save
+      end
+    end
   end
 
   def is_admin
