@@ -81,35 +81,19 @@
           <% end %>
 
           <% if !@sex.nil? %>
-            $('#select_sex').each(function() {
-                if($(this).val() == '<%= @sex %>') {
-                    $(this).prop("selected", true);
-                }
-            });
+            $('select[id="select_sex"]').val('<%= @sex %>');
           <% end %>
 
           <% if !@select_base.nil? %>
-            $('#select_base').each(function() {
-                if($(this).val() == '<%= @select_base %>') {
-                    $(this).prop("selected", true);
-                }
-            });
+            $('select[id="select_base"]').val('<%= @select_base %>');
           <% end %>
 
           <% if !@select_ample1.nil? %>
-            $('#select_ample_1').each(function() {
-                if($(this).val() == '<%= @select_ample1 %>') {
-                    $(this).prop("selected", true);
-                }
-            });
+            $('select[id="select_ample_1"]').val('<%= @select_ample1 %>');
           <% end %>
 
           <% if !@select_ample2.nil? %>
-            $('#select_ample_2').each(function() {
-                if($(this).val() == '<%= @select_ample2 %>') {
-                    $(this).prop("selected", true);
-                }
-            });
+            $('select[id="select_ample_2"]').val('<%= @select_ample2 %>');
           <% end %>
 
           $('#submit').click(function(){
