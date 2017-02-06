@@ -55,6 +55,8 @@ class FeedbackController < ApplicationController
     end
   end
 
+  def list
+  end
 
   def is_admin
     if current_admin_user == nil

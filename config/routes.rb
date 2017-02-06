@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "user_list"  => "user#index"
   get "users/detail"  => "user#show"
   get "feedback"  => "feedback#index"
+  get "feedback_list"  => "feedback#list"
   get "get_api_key" => "custinfos#get_api_key"
   get "find_user" => "custinfos#find_user"
   get "find_users" => "custinfos#find_users"
