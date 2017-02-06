@@ -1,8 +1,8 @@
 <html>
   <head>
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
     <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
@@ -29,7 +29,7 @@
   <body>
     <h2>고객정보</h2>
 
-    <font size="4"><div id="name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>"></div></font>
+    <font size="5"><b><div id="name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>"></b></div></font>
 
     <div><font size="4">
       (가입날짜 : <%= @user.uptdate %> \ 마지막 진단 날짜 : <%= @user.lastanaldate %>)<br>
