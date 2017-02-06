@@ -36,6 +36,58 @@
             $('input[name="' + this.name + '"]').not(this).prop('checked', false);
         });
 
+        <% if !@after_interview.a1.nil? %>
+          <% if @after_interview.a1 == 1 %>
+            $('#a1_1').checked = true;
+          <% elsif @after_interview.a1 == 2 %>
+            $('#a1_2').checked = true;
+          <% elsif @after_interview.a1 == 3 %>
+            $('#a1_3').checked = true;
+          <% elsif @after_interview.a1 == 4 %>
+            $('#a1_4').checked = true;
+          <% elsif @after_interview.a1 == 5 %>
+            $('#a1_5').checked = true;
+          <% end %>
+
+          <% if @after_interview.a2 == 1 %>
+            $('#a2_1').checked = true;
+          <% elsif @after_interview.a2 == 2 %>
+            $('#a2_2').checked = true;
+          <% elsif @after_interview.a2 == 3 %>
+            $('#a2_3').checked = true;
+          <% elsif @after_interview.a2 == 4 %>
+            $('#a2_4').checked = true;
+          <% elsif @after_interview.a2 == 5 %>
+            $('#a2_5').checked = true;
+          <% end %>
+
+          <% if @after_interview.a3 == 1 %>
+            $('#a3_1').checked = true;
+          <% elsif @after_interview.a3 == 2 %>
+            $('#a3_2').checked = true;
+          <% elsif @after_interview.a3 == 3 %>
+            $('#a3_3').checked = true;
+          <% elsif @after_interview.a3 == 4 %>
+            $('#a3_4').checked = true;
+          <% elsif @after_interview.a3 == 5 %>
+            $('#a3_5').checked = true;
+          <% end %>
+
+          <% if @after_interview.a4 == 1 %>
+            $('#a4_1').checked = true;
+          <% elsif @after_interview.a4 == 2 %>
+            $('#a4_2').checked = true;
+          <% elsif @after_interview.a4 == 3 %>
+            $('#a4_3').checked = true;
+          <% elsif @after_interview.a4 == 4 %>
+            $('#a4_4').checked = true;
+          <% end %>
+
+          <% if !@after_interview.a5.nil? %>
+            $('#a5').value = @after_interview.a5;
+          <% end %>
+        <% end %>
+        
         $('#submit').click(function(){
             console.log("Click");
 
