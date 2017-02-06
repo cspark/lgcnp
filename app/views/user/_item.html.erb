@@ -57,7 +57,26 @@
 
         <div><font size="2">
           (가입날짜 : <%= user.uptdate %> / 마지막 진단 날짜 : <%= user.lastanaldate %>) <b>시리얼</b> <%= user.custserial.to_i %> / <b>전화번호</b> <div id="phone_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></div> / <b>성별</b> <%= user.sex %> / <b>생년월일</b> <%= user.birthyy %>-<%= user.birthmm %>-<%= user.birthdd %><br>
-          <b>개인정보 이용동의</b> <%= user.is_agree_privacy %> / <b>제 3자 정보 제공 동의</b> <%= user.is_agree_thirdparty_info %> / <b>마케팅 정보 동의</b> <%= user.is_agree_marketing %> / <b>사후 피드백 서비스</b> <%= user.is_agree_after %> / <b>측정 횟수</b> <%= Fctabletinterview.where(custserial: user.custserial).count %>
+          <% is_agree_privacy = "X" %>
+          <% if user.is_agree_privacy == "T" %>
+            <% is_agree_privacy = "O" %>
+          <% end %>
+          <b>개인정보 이용동의</b> <%= is_agree_privacy %> /
+          <% is_agree_thirdparty = "X" %>
+          <% if user.is_agree_thirdparty_info == "T" %>
+            <% is_agree_thirdparty = "O" %>
+          <% end %>
+          <b>제 3자 정보 제공 동의</b> <%= is_agree_thirdparty %> /
+          <% is_agree_marketing = "X" %>
+          <% if user.is_agree_marketing == "T" %>
+            <% is_agree_marketing = "O" %>
+          <% end %>
+          <b>마케팅 정보 동의</b> <%= is_agree_marketing %> /
+          <% is_agree_after = "X" %>
+          <% if user.is_agree_after == "T" %>
+            <% is_agree_after = "O" %>
+          <% end %>
+           <b>사후 피드백 서비스</b> <%= is_agree_after %> / <b>측정 횟수</b> <%= Fctabletinterview.where(custserial: user.custserial).count %>
         </font>
         </div>
       </div>
