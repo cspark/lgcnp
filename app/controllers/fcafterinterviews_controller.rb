@@ -16,8 +16,16 @@ class FcafterinterviewsController < ApplicationController
     custserial = params[:custserial]
     tablet_interview_id = params[:tablet_interview_id]
     after_interview_id = params[:after_interview_id]
+    order = params[:order]
 
-    after_interview = Fcafterinterview.where(custserial: custserial).where(tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).first
+    Rails.logger.info "!! Update "
+    Rails.logger.info custserial
+    Rails.logger.info tablet_interview_id
+    Rails.logger.info after_interview_id
+    after_interview = Fcafterinterview.where(custserial: custserial).where(tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).where(order: order).first
+
+    Rails.logger.info Fcafterinterview.where(custserial: custserial).where(tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).where(order: order).count
+
     after_interview.a1 = params[:a1]
     after_interview.a2 = params[:a2]
     after_interview.a3 = params[:a3]

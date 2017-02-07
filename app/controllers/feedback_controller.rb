@@ -27,29 +27,27 @@ class FeedbackController < ApplicationController
 
   def create_new_fcafterservice(relation)
     relation.each do |tabletinterview|
-        if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).where(after_interview_id: 0).count == 0
-          after_interview = Fcafterinterview.new
-          after_interview.custserial = tabletinterview.custserial
-          after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
-          after_interview.after_interview_id = 0
-          after_interview.save
-        end
+      if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).count == 0
+        after_interview = Fcafterinterview.new
+        after_interview.custserial = tabletinterview.custserial
+        after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
+        after_interview.after_interview_id = Fcafterinterview.all.count
+        after_interview.order = 0
+        after_interview.save
 
-        if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).where(after_interview_id: 1).count == 0
-          after_interview = Fcafterinterview.new
-          after_interview.custserial = tabletinterview.custserial
-          after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
-          after_interview.after_interview_id = 1
-          after_interview.save
-        end
+        after_interview = Fcafterinterview.new
+        after_interview.custserial = tabletinterview.custserial
+        after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
+        after_interview.after_interview_id = Fcafterinterview.all.count
+        after_interview.order = 1
+        after_interview.save
 
-        if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).where(after_interview_id: 2).count == 0
-          after_interview = Fcafterinterview.new
-          after_interview.custserial = tabletinterview.custserial
-          after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
-          after_interview.after_interview_id = 2
-          after_interview.save
-        end
+        after_interview = Fcafterinterview.new
+        after_interview.custserial = tabletinterview.custserial
+        after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
+        after_interview.after_interview_id = Fcafterinterview.all.count
+        after_interview.order = 2
+        after_interview.save
     end
   end
 
@@ -110,11 +108,11 @@ class FeedbackController < ApplicationController
       temp_after_interviews = Fcafterinterview.where.not(a1: nil)
       if select_interview != "all"
         if select_interview == "today"
-          temp_after_interviews = temp_after_interviews.where(after_interview_id: 0)
+          temp_after_interviews = temp_after_interviews.where(order: 0)
         elsif select_interview == "2weeks_ago"
-          temp_after_interviews = temp_after_interviews.where(after_interview_id: 1)
+          temp_after_interviews = temp_after_interviews.where(order: 1)
         elsif select_interview == "3months_ago"
-          temp_after_interviews = temp_after_interviews.where(after_interview_id: 2)
+          temp_after_interviews = temp_after_interviews.where(order: 2)
         end
       end
 
