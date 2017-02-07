@@ -48,6 +48,7 @@ class FeedbackController < ApplicationController
         after_interview.after_interview_id = Fcafterinterview.all.count
         after_interview.order = 2
         after_interview.save
+      end
     end
   end
 

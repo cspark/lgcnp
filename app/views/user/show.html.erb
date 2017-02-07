@@ -57,7 +57,7 @@
        <% is_agree_after = "O" %>
       <% end %>
       <b>사후 피드백 서비스</b> <%= is_agree_after %> <br>
-      <b>과거 측정 횟수</b> <%= Fctabletinterview.where(custserial: @user.custserial).count %>
+      <b>측정 횟수</b> <%= Fctabletinterview.where(custserial: @user.custserial).count %>
     </font>
 
   </body>
