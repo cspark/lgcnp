@@ -198,7 +198,7 @@
               <% elsif fctabletinterview.after_serum == "rebalencing" %>
                 <% after_serum = "듀얼 밸런스 세럼" %>
               <% end %>
-              <b>맞춤제품</b> <%= after_serum %> /
+              <b>맞춤제품</b> <%= after_serum %> (<%= fctabletinterview.base_lot %>) /
               <% after_ample_1 = fctabletinterview.after_ample_1 %>
               <% if fctabletinterview.after_ample_1 == "pore clinic ampoule" %>
                 <% after_ample_1 = "포어 클리닉 앰플" %>
@@ -211,7 +211,8 @@
               <% elsif fctabletinterview.after_ample_1 == "perming ampoule" %>
                 <% after_ample_1 = "퍼밍 앰플" %>
               <% end %>
-              <%= after_ample_1 %> /
+              <%= after_ample_1 %> (<%= fctabletinterview.ampoule_1_lot %>) /
+
               <% after_ample_2 = fctabletinterview.after_ample_2 %>
               <% if fctabletinterview.after_ample_2 == "pore clinic ampoule" %>
                 <% after_ample_2 = "포어 클리닉 앰플" %>
@@ -224,7 +225,7 @@
               <% elsif fctabletinterview.after_ample_2 == "perming ampoule" %>
                 <% after_ample_2 = "퍼밍 앰플" %>
               <% end %>
-              <%= after_ample_2 %> <br>
+              <%= after_ample_2 %>  (<%= fctabletinterview.ampoule_2_lot %>) <br>
 
               <% is_purchase = "X" %>
               <% if !fctabletinterview.base_lot.nil? %>
