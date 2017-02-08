@@ -25,9 +25,9 @@
         try
         {
 
-          $('#base_lot').append( (decode_utf8('<%= fctabletinterview.base_lot %>')).replace("+", " "));
-          $('#ampoule_1_lot').append( (decode_utf8('<%= fctabletinterview.ampoule_1_lot %>')).replace("+", " "));
-          $('#ampoule_2_lot').append( (decode_utf8('<%= fctabletinterview.ampoule_2_lot %>')).replace("+", " "));
+          $('#base_lot').append( (decode_utf8('<%= fctabletinterview.base_lot %>')).replace(/\+/g, " "));
+          $('#ampoule_1_lot').append( (decode_utf8('<%= fctabletinterview.ampoule_1_lot %>')).replace(/\+/g, " "));
+          $('#ampoule_2_lot').append( (decode_utf8('<%= fctabletinterview.ampoule_2_lot %>')).replace(/\+/g, " "));
         }
         catch(err)
         {
