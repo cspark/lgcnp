@@ -63,14 +63,16 @@
           <% end %>
           사후 피드백 서비스 : <%= is_agree %>
           <br>
-          <% if custinfo.is_agree_after == "T" %>
-            <% f1 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 0).first %>
-            <% if f1.a1.nil? %>
-              <% is_feed_back_ok_1 = "X" %>
-            <% else %>
-              <% is_feed_back_ok_1 = "O" %>
-            <% end %>
-            <a onClick="show_after_interview(<%= f1.after_interview_id %>, <%= f1.tablet_interview_id %>, <%= f1.custserial %>)">1차 설문 여부 : <%= is_feed_back_ok_1 %></a> /
+          <!-- 1차설문 조건에 상관없이 보임 -->
+          <% f1 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 0).first %>
+          <% if f1.a1.nil? %>
+            <% is_feed_back_ok_1 = "X" %>
+          <% else %>
+            <% is_feed_back_ok_1 = "O" %>
+          <% end %>
+          <a onClick="show_after_interview(<%= f1.after_interview_id %>, <%= f1.tablet_interview_id %>, <%= f1.custserial %>)">1차 설문 여부 : <%= is_feed_back_ok_1 %></a> /
+
+          <% if custinfo.is_agree_after == "T" && !tabletinterview.base_lot.nil? %>
             <% f2 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 1).first %>
             <% if f2.a1.nil? %>
               <% is_feed_back_ok_2 = "X" %>

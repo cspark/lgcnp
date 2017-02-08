@@ -225,6 +225,13 @@
                 <% after_ample_2 = "퍼밍 앰플" %>
               <% end %>
               <%= after_ample_2 %> <br>
+
+              <% is_purchase = "X" %>
+              <% if !fctabletinterview.base_lot.nil? %>
+                <% is_purchase = "O" %>
+              <% end %>
+              <b>제품 구매 여부</b> <%= is_purchase %>
+
               <b>메모</b> <div id="memo_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></b></div> <br>
             </font>
           </div>
@@ -260,7 +267,7 @@
         <input type="checkbox" name="group4[]" id="a4_4"/> 잘 모르겠음
         <br><br>
         5. 기타의견<br>구입하신 세럼을 사용하면서 좋았던 점이나 개선해야 할 사항에 대하여 의견을 주시면 감사하겠습니다.<br>
-        <input type="text" style="width: 500px; height: 200px;" id="a5"/>
+        <textarea type="text" style="width: 500px; height: 200px;" id="a5"/>
         <br>
         <button id="submit" type="submit" value="Submit">입력</button>
       </div>

@@ -12,8 +12,8 @@ class FeedbackController < ApplicationController
     @date_3months_ago = (@date - 3.months).strftime("%F")
     if Rails.env.production? || Rails.env.staging?
       @tablet_interviews_today = Fctabletinterview.where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
-      @tablet_interviews_2_weeks_ago = Fctabletinterview.where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).where.not(base_lot: nil).order("uptdate desc")
-      @tablet_interviews_3_months_ago = Fctabletinterview.where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).where.not(base_lot: nil).order("uptdate desc")
+      @tablet_interviews_2_weeks_ago = Fctabletinterview.where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
+      @tablet_interviews_3_months_ago = Fctabletinterview.where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
     else
       @tablet_interviews_today = Fctabletinterview.all
       @tablet_interviews_2_weeks_ago = Fctabletinterview.all
@@ -63,7 +63,7 @@ class FeedbackController < ApplicationController
 
     select_sex = params[:sex]
     start_date = params[:start_date]
-    end_date = params[:start_age]
+    end_date = params[:end_date]
     start_age = params[:start_age]
     end_age = params[:end_age]
     select_base = params[:select_base]

@@ -140,7 +140,7 @@ class CustinfosController < ApplicationController
     custinfo.custserial = Custinfo.all.order('custserial ASC').last.custserial + 1
     custinfo.ch_cd = "CNP"
     custinfo.custname = name
-    custinfo.is_agree_privacy = is_agree_privacy
+    custinfo.is_agree_privacy = "T"
     custinfo.is_agree_thirdparty_info = is_agree_thirdparty_info
     custinfo.is_agree_marketing = is_agree_marketing
     custinfo.is_agree_after = is_agree_after
