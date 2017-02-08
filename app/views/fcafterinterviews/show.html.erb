@@ -24,6 +24,18 @@
 
         try
         {
+          $('#base_lot').append( decode_utf8('<%= fctabletinterview.base_lot %>'));
+          $('#ampoule_1_lot').append( decode_utf8('<%= fctabletinterview.ampoule_1_lot %>'));
+          $('#ampoule_2_lot').append( decode_utf8('<%= fctabletinterview.ampoule_2_lot %>'));
+        }
+        catch(err)
+        {
+          // $('#name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append('<%= user.custname %>');
+        }
+
+
+        try
+        {
           var temp_memo = decode_utf8('<%= fctabletinterview.memo %>');
           temp_memo = temp_memo.replace(/\+/gi, " ");
           $('#memo_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append(temp_memo);
@@ -198,7 +210,7 @@
               <% elsif fctabletinterview.after_serum == "rebalencing" %>
                 <% after_serum = "듀얼 밸런스 세럼" %>
               <% end %>
-              <b>맞춤제품</b> <%= after_serum %> (<%= fctabletinterview.base_lot %>) /
+              <b>맞춤제품</b> <%= after_serum %> (<font id="base_lot"></font>) /
               <% after_ample_1 = fctabletinterview.after_ample_1 %>
               <% if fctabletinterview.after_ample_1 == "pore clinic ampoule" %>
                 <% after_ample_1 = "포어 클리닉 앰플" %>
@@ -211,7 +223,7 @@
               <% elsif fctabletinterview.after_ample_1 == "perming ampoule" %>
                 <% after_ample_1 = "퍼밍 앰플" %>
               <% end %>
-              <%= after_ample_1 %> (<%= fctabletinterview.ampoule_1_lot %>) /
+              <%= after_ample_1 %> (<font id="ampoule_1_lot"></font>) /
 
               <% after_ample_2 = fctabletinterview.after_ample_2 %>
               <% if fctabletinterview.after_ample_2 == "pore clinic ampoule" %>
@@ -225,13 +237,7 @@
               <% elsif fctabletinterview.after_ample_2 == "perming ampoule" %>
                 <% after_ample_2 = "퍼밍 앰플" %>
               <% end %>
-              <%= after_ample_2 %>  (<%= fctabletinterview.ampoule_2_lot %>) <br>
-
-              <% is_purchase = "X" %>
-              <% if !fctabletinterview.base_lot.nil? %>
-                <% is_purchase = "O" %>
-              <% end %>
-              <b>제품 구매 여부</b> <%= is_purchase %>
+              <%= after_ample_2 %>  (<font id="ampoule_2_lot"></font>) <br>
 
               <b>메모</b> <div id="memo_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></b></div> <br>
             </font>
