@@ -58,7 +58,7 @@
         <font size="2">
           시리얼 : <%= tabletinterview.custserial.to_i %> / 진단 날짜 : <%= tabletinterview.uptdate %> / 전화번호 : <div id="phone_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div> <br>
           <% is_agree = "X" %>
-          <% if custinfo.is_agree_after == "T" %>
+          <% if custinfo.is_agree_after == "T" && !tabletinterview.base_lot.blank? %>
             <% is_agree = "O" %>
           <% end %>
           사후 피드백 서비스 : <%= is_agree %>
