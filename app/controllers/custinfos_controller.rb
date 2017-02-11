@@ -72,14 +72,15 @@ class CustinfosController < ApplicationController
 
   def update_after_service
       is_agree_after = params[:is_agree_after_service]
+      tablet_interview_id = params[:tabletInterviewId]
       serial = params[:serial]
 
       custinfo = Custinfo.where(custserial: serial).where(ch_cd: "CNP").first
       custinfo.is_agree_after = is_agree_after
       if custinfo.save
         begin
-          fc = Fctabletinterview.where(custserial: custinfo.custserial).last
-          fc.is_agree_after = custinof.is_agree_after
+          fc = Fctabletinterview.where(custserial: custinfo.custserial).where(tablet_interview_id: tablet_interview_id).first
+          fc.is_agree_after = custinfo.is_agree_after
           fc.save
         rescue
         end
