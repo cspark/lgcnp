@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get "update_after_service" => "custinfos#update_after_service"
   get "update_agreement" => "custinfos#update_agreement"
   get "after_interview" => "fcafterinterviews#show"
+  get "after_interview_1" => "fcafterinterviews#show_1"
   post "update_after_interview" => "fcafterinterviews#update"
   resources :fcinterviews do
   end

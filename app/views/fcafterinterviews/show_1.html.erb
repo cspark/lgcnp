@@ -1,0 +1,284 @@
+<html>
+  <head>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+      $(function () {
+        <% user = Custinfo.where(custserial: @after_interview.custserial).first %>
+        <% fctabletinterview = Fctabletinterview.where(custserial: @after_interview.custserial).where(tablet_interview_id: @after_interview.tablet_interview_id).first %>
+
+        try
+        {
+          $('#name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append( decode_utf8('<%= user.custname %>'));
+        }
+        catch(err)
+        {
+          $('#name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append('<%= user.custname %>');
+        }
+
+        try
+        {
+
+          $('#base_lot').append( (decode_utf8('<%= fctabletinterview.base_lot %>')).replace(/\+/g, " "));
+          $('#ampoule_1_lot').append( (decode_utf8('<%= fctabletinterview.ampoule_1_lot %>')).replace(/\+/g, " "));
+          $('#ampoule_2_lot').append( (decode_utf8('<%= fctabletinterview.ampoule_2_lot %>')).replace(/\+/g, " "));
+        }
+        catch(err)
+        {
+          // $('#name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append('<%= user.custname %>');
+        }
+
+
+        try
+        {
+          var temp_memo = decode_utf8('<%= fctabletinterview.memo %>');
+          temp_memo = temp_memo.replace(/\+/gi, " ");
+          $('#memo_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append(temp_memo);
+        }
+        catch(err)
+        {
+          $('#memo_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append('<%= fctabletinterview.memo %>');
+        }
+
+        $('input[type="checkbox"]').on('change', function() {
+            console.log("Changed")
+            $('input[name="' + this.name + '"]').not(this).prop('checked', false);
+        });
+
+        <% if !@after_interview.a1.nil? %>
+          document.getElementById("a1_1").disabled = true;
+          document.getElementById("a1_2").disabled = true;
+          document.getElementById("a1_3").disabled = true;
+          document.getElementById("a1_4").disabled = true;
+          document.getElementById("a1_5").disabled = true;
+          document.getElementById("a1_6").disabled = true;
+
+          document.getElementById("a2_1").disabled = true;
+          document.getElementById("a2_2").disabled = true;
+          document.getElementById("a2_3").disabled = true;
+          document.getElementById("a2_4").disabled = true;
+          document.getElementById("a2_5").disabled = true;
+
+          document.getElementById("a3_1").disabled = true;
+          document.getElementById("a3_2").disabled = true;
+          document.getElementById("a3_3").disabled = true;
+          document.getElementById("a3_4").disabled = true;
+          document.getElementById("a3_5").disabled = true;
+
+          <% if @after_interview.a1 == 1 %>
+            $('#a1_1').prop('checked', true);
+          <% elsif @after_interview.a1 == 2 %>
+            $('#a1_2').prop('checked', true);
+          <% elsif @after_interview.a1 == 3 %>
+            $('#a1_3').prop('checked', true);
+          <% elsif @after_interview.a1 == 4 %>
+            $('#a1_4').prop('checked', true);
+          <% elsif @after_interview.a1 == 5 %>
+            $('#a1_5').prop('checked', true);
+          <% elsif @after_interview.a1 == 6 %>
+            $('#a1_6').prop('checked', true);
+          <% end %>
+
+          <% if !@after_interview.a1_1.nil? %>
+            document.getElementById("a1_6_text").value = "<%= @after_interview.a1_1.to_s.gsub(/\r\n/, " ") %>";
+          <% end %>
+
+          <% if @after_interview.a2 == 1 %>
+            $('#a2_1').prop('checked', true);
+          <% elsif @after_interview.a2 == 2 %>
+            $('#a2_2').prop('checked', true);
+          <% elsif @after_interview.a2 == 3 %>
+            $('#a2_3').prop('checked', true);
+          <% elsif @after_interview.a2 == 4 %>
+            $('#a2_4').prop('checked', true);
+          <% elsif @after_interview.a2 == 5 %>
+            $('#a2_5').prop('checked', true);
+          <% end %>
+
+          <% if @after_interview.a3 == 1 %>
+            $('#a3_1').prop('checked', true);
+          <% elsif @after_interview.a3 == 2 %>
+            $('#a3_2').prop('checked', true);
+          <% elsif @after_interview.a3 == 3 %>
+            $('#a3_3').prop('checked', true);
+          <% elsif @after_interview.a3 == 4 %>
+            $('#a3_4').prop('checked', true);
+          <% elsif @after_interview.a3 == 5 %>
+            $('#a3_5').prop('checked', true);
+          <% end %>
+
+          <% if !@after_interview.a5.nil? %>
+            document.getElementById("a5").value = "<%= @after_interview.a5.to_s.gsub(/\r\n/, " ") %>";
+          <% end %>
+        <% end %>
+
+        $('#submit').click(function(){
+            console.log("Click");
+
+            var a1 = -1;
+            if ($('#a1_1').is(":checked"))
+              a1 = 1
+            else if ($('#a1_2').is(":checked"))
+              a1 = 2
+            else if ($('#a1_3').is(":checked"))
+              a1 = 3
+            else if ($('#a1_4').is(":checked"))
+              a1 = 4
+            else if ($('#a1_5').is(":checked"))
+              a1 = 5
+            else if ($('#a1_6').is(":checked"))
+              a1 = 6
+
+            var a2 = -1;
+            if ($('#a2_1').is(":checked"))
+              a2 = 1
+            else if ($('#a2_2').is(":checked"))
+              a2 = 2
+            else if ($('#a2_3').is(":checked"))
+              a2 = 3
+            else if ($('#a2_4').is(":checked"))
+              a2 = 4
+
+            var a3 = -1;
+            if ($('#a3_1').is(":checked"))
+              a3 = 1
+            else if ($('#a3_2').is(":checked"))
+              a3 = 2
+            else if ($('#a3_3').is(":checked"))
+              a3 = 3
+            else if ($('#a3_4').is(":checked"))
+              a3 = 4
+            else if ($('#a3_5').is(":checked"))
+              a3 = 5
+
+            if(a1 != -1 && a2 != -1 && a3 != -1 && a4 != -1){
+              var formData = new FormData($(this)[0]);
+              formData.append("custserial", '<%= @after_interview.custserial.to_i %>');
+              formData.append("tablet_interview_id", '<%= @after_interview.tablet_interview_id.to_i %>');
+              formData.append("after_interview_id", '<%= @after_interview.after_interview_id.to_i %>');
+              formData.append("order", '<%= @after_interview.order.to_i %>');
+              formData.append("a1", a1);
+              formData.append("a1_1", $('#a1_6_text').val());
+              formData.append("a2", a2);
+              formData.append("a3", a3);
+              formData.append("a5", $('#a5').val());
+
+              $.ajax({
+                  url: "/update_after_interview",
+                  type: 'POST',
+                  data: formData,
+                  async: false,
+                  cache: false,
+                  contentType: false,
+                  processData: false,
+                  success: function (returndata) {
+                    opener.location.reload();
+                    window.close();
+                  },
+                  error: function (returndata) {}
+              });
+            }else{
+              alert("모든 값을 체크한 후 입력을 눌러주세요");
+            }
+        });
+
+
+      });
+
+      function decode_utf8(s) {
+        return decodeURI(s);
+      }
+    </script>
+  </head>
+
+  <body>
+    <div>
+        <% user = Custinfo.where(custserial: @after_interview.custserial).first %>
+        <% fctabletinterview = Fctabletinterview.where(custserial: @after_interview.custserial).where(tablet_interview_id: @after_interview.tablet_interview_id).first %>
+        <div style="background: #ffe6ee;">
+          <font size="5"><b><div id="name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></b></div></font>
+
+          <div>
+            <font size="4">
+              <b>전화번호</b> <%= user.phone %> <br>
+              <b>맞춤일자</b> <%= fctabletinterview.uptdate %> <br>
+              <% after_serum = fctabletinterview.after_serum %>
+              <% if fctabletinterview.after_serum == "skin control" %>
+                <% after_serum = "스킨 컨트롤 세럼" %>
+              <% elsif fctabletinterview.after_serum == "deep humect" %>
+                <% after_serum = "딥 휴멕트 세럼" %>
+              <% elsif fctabletinterview.after_serum == "rebalencing" %>
+                <% after_serum = "듀얼 밸런스 세럼" %>
+              <% end %>
+              <b>맞춤제품</b> <%= after_serum %> (<font id="base_lot"></font>)<br>
+              <% after_ample_1 = fctabletinterview.after_ample_1 %>
+              <% if fctabletinterview.after_ample_1 == "pore clinic ampoule" %>
+                <% after_ample_1 = "포어 클리닉 앰플" %>
+              <% elsif fctabletinterview.after_ample_1 == "carming ampoule" %>
+                <% after_ample_1 = "카밍 앰플" %>
+              <% elsif fctabletinterview.after_ample_1 == "luminus ampoule" %>
+                <% after_ample_1 = "루미너스 앰플" %>
+              <% elsif fctabletinterview.after_ample_1 == "regenerating ampoule" %>
+                <% after_ample_1 = "리제네리이팅 앰플" %>
+              <% elsif fctabletinterview.after_ample_1 == "perming ampoule" %>
+                <% after_ample_1 = "퍼밍 앰플" %>
+              <% end %>
+              <%= after_ample_1 %> (<font id="ampoule_1_lot"></font>)<br>
+
+              <% after_ample_2 = fctabletinterview.after_ample_2 %>
+              <% if fctabletinterview.after_ample_2 == "pore clinic ampoule" %>
+                <% after_ample_2 = "포어 클리닉 앰플" %>
+              <% elsif fctabletinterview.after_ample_2 == "carming ampoule" %>
+                <% after_ample_2 = "카밍 앰플" %>
+              <% elsif fctabletinterview.after_ample_2 == "luminus ampoule" %>
+                <% after_ample_2 = "루미너스 앰플" %>
+              <% elsif fctabletinterview.after_ample_2 == "regenerating ampoule" %>
+                <% after_ample_2 = "리제네리이팅 앰플" %>
+              <% elsif fctabletinterview.after_ample_2 == "perming ampoule" %>
+                <% after_ample_2 = "퍼밍 앰플" %>
+              <% end %>
+              <%= after_ample_2 %>  (<font id="ampoule_2_lot"></font>) <br>
+
+              <b>메모</b> <div id="memo_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></b></div> <br>
+            </font>
+          </div>
+          <br>
+        </div>
+        <div>
+
+        1. 르메디 맞춤형 매장을 방문하게 된 경로를 선택해 주시기 바랍니다.<br>
+        <input type="checkbox" name="group1[]" id="a1_1"/> CNP 또는 LG생건 관계자 및 추천
+        <input type="checkbox" name="group1[]" id="a1_2"/> 홍보물(배너, 문자)
+        <input type="checkbox" name="group1[]" id="a1_3"/> 홈페이지 또는 인터넷
+        <input type="checkbox" name="group1[]" id="a1_4"/> 기 진단 받은 고객 추천
+        <input type="checkbox" name="group1[]" id="a1_5"/> 매장 직원 추천
+        <input type="checkbox" name="group1[]" id="a1_6"/> 기타
+        <textarea type="text" rows="1" style="width: 300px;" id="a1_6_text"></textarea>
+        <br><br>
+        2. 피부진단 카운셀링에 대한 내용 이해도를 선택해 주시기 바랍니다.<br>
+        <input type="checkbox" name="group2[]" id="a2_1"/> 쉽게 이해
+        <input type="checkbox" name="group2[]" id="a2_2"/> 그냥 그렇다
+        <input type="checkbox" name="group2[]" id="a2_3"/> 잘 이해하지 못한다
+        <input type="checkbox" name="group2[]" id="a2_4"/> 전혀 이해하지 못한다
+        <br><br>
+        3. 르메디 맞춤형 화장품 (피부진단, 제품구매 등 전체적인 프로세스)에 대한 만족도를 선택해 주시기 바랍니다.<br>
+        <input type="checkbox" name="group3[]" id="a3_1"/> 매우 만족
+        <input type="checkbox" name="group3[]" id="a3_2" /> 만족
+        <input type="checkbox" name="group3[]" id="a3_3" /> 보통
+        <input type="checkbox" name="group3[]" id="a3_4" /> 그냥 그렇다
+        <input type="checkbox" name="group3[]" id="a3_5" /> 불만족
+        <br><br>
+        4. 특이사항<br>르메디 맞춤형 프로세스 중 어려운 점이나 불필요한 사항 및 기타 요청 사항을 자유롭게 기재해 주시기 바랍니다.<br>
+        <textarea type="text" rows="5" style="width: 500px;" id="a5"></textarea>
+        <br>
+        <button id="submit" type="submit" value="Submit">입력</button>
+      </div>
+    </div>
+  </body>
+</html>

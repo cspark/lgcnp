@@ -12,6 +12,15 @@ class FcafterinterviewsController < ApplicationController
     @after_interview = Fcafterinterview.where(custserial: custserial).where(tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).first
   end
 
+  def show_1
+    custserial = params[:custserial]
+    tablet_interview_id = params[:tablet_interview_id]
+    after_interview_id = params[:after_interview_id]
+
+    @after_interview = Fcafterinterview.where(custserial: custserial).where(tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).first
+    render 'show_1'
+  end
+
   def update
     custserial = params[:custserial]
     tablet_interview_id = params[:tablet_interview_id]
@@ -29,8 +38,16 @@ class FcafterinterviewsController < ApplicationController
     after_interview.a1 = params[:a1]
     after_interview.a2 = params[:a2]
     after_interview.a3 = params[:a3]
-    after_interview.a4 = params[:a4]
+
+    if params.has_key?(:a4)
+      after_interview.a4 = params[:a4]
+    end
+
     after_interview.a5 = params[:a5]
+
+    if params.has_key?(:a1_1)
+      after_interview.a1_1 = params[:a1_1]
+    end
     after_interview.save
   end
 

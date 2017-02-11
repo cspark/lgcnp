@@ -72,11 +72,13 @@
             <% is_agree_marketing = "O" %>
           <% end %>
           <b>마케팅 정보 동의</b> <%= is_agree_marketing %> /
-          <% is_agree_after = "X" %>
+          <!-- <% is_agree_after = "X" %>
           <% if user.is_agree_after == "T" %>
             <% is_agree_after = "O" %>
-          <% end %>
-           <b>사후 피드백 서비스</b> <%= is_agree_after %> / <b>측정 횟수</b> <%= Fctabletinterview.where(custserial: user.custserial).count %>
+          <% end %> -->
+           <!-- <b>사후 피드백 서비스</b> <%= is_agree_after %>  -->
+           <!-- / -->
+            <b>측정 횟수</b> <%= Fctabletinterview.where(custserial: user.custserial).count %>
         </font>
         </div>
       </div>
