@@ -77,6 +77,12 @@ class CustinfosController < ApplicationController
       custinfo = Custinfo.where(custserial: serial).where(ch_cd: "CNP").first
       custinfo.is_agree_after = is_agree_after
       if custinfo.save
+        begin
+          fc = Fctabletinterview.where(custserial: custinfo.custserial).last
+          fc.is_agree_after = custinof.is_agree_after
+          fc.save
+        rescue
+        end
         render json: custinfo.to_api_hash, status: 200
       else
         render json: "", status: 404

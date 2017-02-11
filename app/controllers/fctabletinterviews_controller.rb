@@ -52,7 +52,7 @@ class FctabletinterviewsController < ApplicationController
     tabletinterview.tablet_interview_id = Fctabletinterview.all.count
     t = Time.now
     tabletinterview.uptdate = t.strftime("%Y-%m-%d-%H-%M")
-
+    tabletinterview.is_agree_after = "T"
     if tabletinterview.save
       render json: tabletinterview.to_api_hash, status: :ok
     else
