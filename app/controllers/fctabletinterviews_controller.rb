@@ -2,6 +2,17 @@ class FctabletinterviewsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:create, :calculate]
   skip_before_action :verify_authenticity_token
 
+  def self.calculate_push_is_agree
+    custinfos = Custinfo.all
+    custinfos.each do |custinfo|
+      interviews = Fctabletinterview.where(custserial: custinfo.custserial).all
+      interviews.each do |interview|
+        interview.is_agree_after = custinfo.is_agree_after
+        interview.save
+      end
+    end
+  end
+
   def index
     tabletinterview = Fctabletinterview.all
     render json: api_hash_for_list(tabletinterview, page: 1), status: :ok
