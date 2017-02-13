@@ -7,7 +7,6 @@ class AdminController < AdminApplicationController
 
 
   def index
-
   end
 
   def admin_login

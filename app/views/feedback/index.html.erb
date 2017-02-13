@@ -56,24 +56,25 @@
   </head>
 
   <body>
+    <%= render "admin/header" %>
     <input type="text" id="datepicker" style="width:100%; margin-top:10px;">
 
     <div>
-      <h4>당일 진단자 (<%= @date_today %>)</h4>
+      <h4 style="background: #b1cbbb; padding: 8px;">당일 진단자 (<%= @date_today %>)</h4>
       <div>
         <% @tablet_interviews_today.each do |tabletinterview| %>
           <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>
         <% end %>
       </div>
 
-      <h4>2주 전 진단자 (<%= @date_2weeks_ago %>)</h4>
+      <h4 style="background: #b1cbbb; padding: 8px;">2주 전 진단자 (<%= @date_2weeks_ago %>)</h4>
       <div>
         <% @tablet_interviews_2_weeks_ago.each do |tabletinterview| %>
           <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>
         <% end %>
       </div>
 
-      <h4>3개월 전 진단자 (<%= @date_3months_ago %>)</h4>
+      <h4 style="background: #b1cbbb; padding: 8px;">3개월 전 진단자 (<%= @date_3months_ago %>)</h4>
       <div>
         <% @tablet_interviews_3_months_ago.each do |tabletinterview| %>
           <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>

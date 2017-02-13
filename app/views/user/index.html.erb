@@ -11,13 +11,8 @@
       $(function () {
         $(document).keyup(function (e) {
             if ($("#search").is(":focus") && (e.keyCode == 13)) {
-              $.ajax({
-                 url: "/user_list?search=" + encodeURI(encodeURI($("#search").val())),
-                 cache: false,
-                 success: function(html){
-                  //  $("#container").html(html);
-                 }
-              });
+                console.log(encodeURI($("#search").val()));
+                location.href = "/user_list?search=" + encodeURI(encodeURI($("#search").val()));
             }
         });
       });
@@ -27,30 +22,23 @@
       }
 
       function show_all(){
-        $.ajax({
-           url: "/user_list",
-           cache: false,
-           success: function(html){
-            //  $("#container").html(html);
-           }
-        });
+        location.href = "/user_list";
       }
     </script>
   </head>
 
   <body>
-    <div id="container">
-      <div>
-        <input type="text" name="search" id="search"> 현재는 이름으로 검색이 가능합니다 <button class="btn btn-waring" id="show_all" onclick="show_all()">전체보기</button>
-      </div>
-      <div>
+    <%= render "admin/header" %>
+    <div style="background: #b1cbbb; padding: 8px;">
+      <input type="text" name="search" id="search" placeholder="이름으로 검색" style="width: 200px;"> <button class="btn btn-warning" id="show_all" onclick="show_all()">전체보기</button>
+    </div>
+    <div>
 
-        <% @users.each do |user| %>
-          <%= render partial: "user/item", locals: { user: user } %>
-        <% end %>
-        <div>
-          <%= paginate @users %>
-        </div>
+      <% @users.each do |user| %>
+        <%= render partial: "user/item", locals: { user: user } %>
+      <% end %>
+      <div>
+        <%= paginate @users %>
       </div>
     </div>
   </body>
