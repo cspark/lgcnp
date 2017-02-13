@@ -1,4 +1,4 @@
-class FcafterinterviewsController < ApplicationController
+class FcafterinterviewsController < AdminApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:create, :calculate]
   skip_before_action :verify_authenticity_token
   skip_before_action :authenticate, :only => [:show, :show_1, :update]
@@ -49,11 +49,5 @@ class FcafterinterviewsController < ApplicationController
       after_interview.a1_1 = params[:a1_1]
     end
     after_interview.save
-  end
-
-  def is_admin
-    if current_admin_user == nil
-      redirect_to '/'
-    end
   end
 end
