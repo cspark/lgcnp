@@ -1,0 +1,101 @@
+<html>
+  <head>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+      $(function () {
+
+        $(".nav a").on("click", function(){
+           $(".nav").find(".active").removeClass("active");
+           $(this).parent().addClass("active");
+        });
+
+        $("#custinfos").click(function(){
+          $.ajax({
+             url: "/user_list",
+             cache: false,
+             success: function(html){
+               $("#contents").html(html);
+             }
+          });
+        });
+
+        $.ajax({
+           url: "/user_list",
+           cache: false,
+           success: function(html){
+             $("#contents").html(html);
+           }
+        });
+        
+        $("#feedback_list").click(function(){
+          $.ajax({
+             url: "/feedback_list",
+             cache: false,
+             success: function(html){
+               $("#contents").html(html);
+             }
+          });
+        });
+
+        $("#input_feedback").click(function(){
+          $.ajax({
+             url: "/feedback",
+             cache: false,
+             success: function(html){
+               $("#contents").html(html);
+             }
+          });
+        });
+
+        $("#logout").click(function(){
+          var formData = new FormData($(this)[0]);
+
+          $.ajax({
+              url: "/admin_logout",
+              type: 'DELETE',
+              data: formData,
+              async: false,
+              cache: false,
+              contentType: false,
+              processData: false,
+              success: function (returndata) {
+                window.location.href = "/admin_login"
+              },
+              error: function (returndata) {}
+          });
+        });
+      });
+
+    </script>
+  </head>
+
+  <body style="padding:10px;">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">CNP Report</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#" id="custinfos">고객정보</a></li>
+          <li id="feedback_list"><a href="#">피드백 리스트</a></li>
+          <li id="input_feedback"><a href="#">피드백 입력</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+           <li id="logout"><a href="#"><span class="glyphicon glyphicon-log-in"></span>로그아웃</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="contents">
+
+    </div>
+
+  </body>
+</html>

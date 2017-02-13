@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+  # devise_for :admin_users, ActiveAdmin::Devise.config
+  # ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get "admin"  => "admin#index"
+  get "admin_login"  => "admin#admin_login"
+  post "admin_login"  => "admin#login"
+  delete "admin_logout" => "admin#logout"
+  
+  resources :admin_users do
+  end
 
   resources :custinfos do
   end

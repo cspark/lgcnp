@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+      $(function () {
+        $("#login").click(function(){
+          var formData = new FormData($(this)[0]);
+          formData.append("email", $('#ID').val());
+          formData.append("password", $('#Password').val());
+
+          $.ajax({
+              url: "/admin_login",
+              type: 'POST',
+              data: formData,
+              async: false,
+              cache: false,
+              contentType: false,
+              processData: false,
+              success: function (returndata) {
+                window.location.href = "/admin"
+              },
+              error: function (returndata) {}
+          });
+        });
+      });
+
+    </script>
+  </head>
+
+  <body style="padding:10px;" >
+    <h4>CNP Report</h4>
+    <input type="text" class="form-control" id="ID" style="width:300px; margin-top:10px;" placeholder="ID">
+    <input type="password" class="form-control password" id="Password" style="width:300px; margin-top:10px;" placeholder="PW">
+    <button class="btn btn-primary" id="login" style="width:300px; margin-top:10px;" >로그인</button>
+  </body>
+</html>

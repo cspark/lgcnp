@@ -30,4 +30,10 @@ class ApplicationController < ActionController::Base
       Rails.logger.info token
     end
   end
+
+  def is_admin
+    if session[:admin_user] == nil
+      redirect_to '/admin_login'
+    end
+  end
 end
