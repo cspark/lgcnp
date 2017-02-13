@@ -49,14 +49,15 @@
         $('input[type="checkbox"]').on('change', function() {
             console.log("Changed " + this.id);
 
-            if(this.id == "a1_6"){
+            if(this.id == "a1_6" && $('input[id="' + this.id + '"]').is(":checked")){
               document.getElementById("a1_6_text").disabled = false;
             }else{
               document.getElementById("a1_6_text").value = "";
               document.getElementById("a1_6_text").disabled = true;
             }
-            $('input[name="' + this.name + '"]').not(this).prop('checked', false);
         });
+
+        document.getElementById("a1_6_text").disabled = true;
 
         <% if !@after_interview.a1.nil? %>
           document.getElementById("a1_1").disabled = true;
@@ -65,7 +66,6 @@
           document.getElementById("a1_4").disabled = true;
           document.getElementById("a1_5").disabled = true;
           document.getElementById("a1_6").disabled = true;
-          document.getElementById("a1_6_text").disabled = true;
 
           document.getElementById("a2_1").disabled = true;
           document.getElementById("a2_2").disabled = true;

@@ -71,13 +71,13 @@
           $("#date_init").click(function(){
             $("#start_date").datepicker('setDate', '2017-01-25');
             $("#end_date").datepicker('setDate', '<%= @today %>');
-            load();
+            // load();
           });
 
           $("#age_init").click(function(){
             document.getElementById("start_age").value = '<%= @min_age %>'
             document.getElementById("end_age").value = '<%= @max_age %>'
-            load();
+            // load();
           });
 
           $("#start_date").datepicker('setDate', '<%= @start_date %>');
