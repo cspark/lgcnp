@@ -1,7 +1,6 @@
 class FcafterinterviewsController < AdminApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:create, :calculate]
   skip_before_action :verify_authenticity_token
-  skip_before_action :authenticate, :only => [:show, :show_1, :update]
   before_action :is_admin
 
   def show
