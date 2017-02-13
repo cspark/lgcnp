@@ -47,9 +47,9 @@
         }
 
         $('input[type="checkbox"]').on('change', function() {
-            console.log("Changed " + this.name);
+            console.log("Changed " + this.id);
 
-            if(this.name == "a1_6"){
+            if(this.id == "a1_6"){
               document.getElementById("a1_6_text").disabled = false;
             }else{
               document.getElementById("a1_6_text").value = "";
