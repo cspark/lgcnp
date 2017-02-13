@@ -48,6 +48,12 @@
 
         $('input[type="checkbox"]').on('change', function() {
             console.log("Changed")
+            if(this.name == "a1_6"){
+              document.getElementById("a1_6_text").disabled = false;
+            }else{
+              document.getElementById("a1_6_text").value = "";
+              document.getElementById("a1_6_text").disabled = true;
+            }
             $('input[name="' + this.name + '"]').not(this).prop('checked', false);
         });
 
@@ -58,6 +64,7 @@
           document.getElementById("a1_4").disabled = true;
           document.getElementById("a1_5").disabled = true;
           document.getElementById("a1_6").disabled = true;
+          document.getElementById("a1_6_text").disabled = true;
 
           document.getElementById("a2_1").disabled = true;
           document.getElementById("a2_2").disabled = true;
@@ -200,7 +207,7 @@
     <div>
         <% user = Custinfo.where(custserial: @after_interview.custserial).first %>
         <% fctabletinterview = Fctabletinterview.where(custserial: @after_interview.custserial).where(tablet_interview_id: @after_interview.tablet_interview_id).first %>
-        <div style="background: #ffe6ee;">
+        <div style="background: #b1cbbb; padding: 8px;">
           <font size="5"><b><div id="name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></b></div></font>
 
           <div>
@@ -252,31 +259,32 @@
         <div>
 
         1. 르메디 맞춤형 매장을 방문하게 된 경로를 선택해 주시기 바랍니다.<br>
-        <input type="checkbox" name="group1[]" id="a1_1"/> CNP 또는 LG생건 관계자 및 추천
-        <input type="checkbox" name="group1[]" id="a1_2"/> 홍보물(배너, 문자)
-        <input type="checkbox" name="group1[]" id="a1_3"/> 홈페이지 또는 인터넷
-        <input type="checkbox" name="group1[]" id="a1_4"/> 기 진단 받은 고객 추천
-        <input type="checkbox" name="group1[]" id="a1_5"/> 매장 직원 추천
-        <input type="checkbox" name="group1[]" id="a1_6"/> 기타
+        <input class="form-control" type="checkbox" name="group1[]" id="a1_1"/> CNP 또는 LG생건 관계자 및 추천
+        <input class="form-control" type="checkbox" name="group1[]" id="a1_2"/> 홍보물(배너, 문자)
+        <input class="form-control" type="checkbox" name="group1[]" id="a1_3"/> 홈페이지 또는 인터넷
+        <input class="form-control" type="checkbox" name="group1[]" id="a1_4"/> 기 진단 받은 고객 추천
+        <input class="form-control" type="checkbox" name="group1[]" id="a1_5"/> 매장 직원 추천
+        <br>
+        <input class="form-control" type="checkbox" name="group1[]" id="a1_6"/> 기타
         <textarea type="text" rows="1" style="width: 300px;" id="a1_6_text"></textarea>
         <br><br>
         2. 피부진단 카운셀링에 대한 내용 이해도를 선택해 주시기 바랍니다.<br>
-        <input type="checkbox" name="group2[]" id="a2_1"/> 쉽게 이해
-        <input type="checkbox" name="group2[]" id="a2_2"/> 그냥 그렇다
-        <input type="checkbox" name="group2[]" id="a2_3"/> 잘 이해하지 못한다
-        <input type="checkbox" name="group2[]" id="a2_4"/> 전혀 이해하지 못한다
+        <input class="form-control" type="checkbox" name="group2[]" id="a2_1"/> 쉽게 이해
+        <input class="form-control" type="checkbox" name="group2[]" id="a2_2"/> 그냥 그렇다
+        <input class="form-control" type="checkbox" name="group2[]" id="a2_3"/> 잘 이해하지 못한다
+        <input class="form-control" type="checkbox" name="group2[]" id="a2_4"/> 전혀 이해하지 못한다
         <br><br>
         3. 르메디 맞춤형 화장품 (피부진단, 제품구매 등 전체적인 프로세스)에 대한 만족도를 선택해 주시기 바랍니다.<br>
-        <input type="checkbox" name="group3[]" id="a3_1"/> 매우 만족
-        <input type="checkbox" name="group3[]" id="a3_2" /> 만족
-        <input type="checkbox" name="group3[]" id="a3_3" /> 보통
-        <input type="checkbox" name="group3[]" id="a3_4" /> 그냥 그렇다
-        <input type="checkbox" name="group3[]" id="a3_5" /> 불만족
+        <input class="form-control" type="checkbox" name="group3[]" id="a3_1"/> 매우 만족
+        <input class="form-control" type="checkbox" name="group3[]" id="a3_2" /> 만족
+        <input class="form-control" type="checkbox" name="group3[]" id="a3_3" /> 보통
+        <input class="form-control" type="checkbox" name="group3[]" id="a3_4" /> 그냥 그렇다
+        <input class="form-control" type="checkbox" name="group3[]" id="a3_5" /> 불만족
         <br><br>
         4. 특이사항<br>르메디 맞춤형 프로세스 중 어려운 점이나 불필요한 사항 및 기타 요청 사항을 자유롭게 기재해 주시기 바랍니다.<br>
         <textarea type="text" rows="5" style="width: 500px;" id="a5"></textarea>
         <br>
-        <button id="submit" type="submit" value="Submit">입력</button>
+        <button class="btn btn-danger" id="submit" type="submit" value="Submit">입력</button>
       </div>
     </div>
   </body>

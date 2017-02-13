@@ -55,6 +55,12 @@ class FeedbackController < ApplicationController
   def list
     @start_date = Date.today
     @end_date = Date.today
+    @today = Date.today
+
+    min_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy desc").first
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
+    max_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy asc").first
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
 
     @average_a1 = 0
     @average_a2 = 0
