@@ -55,6 +55,8 @@
               document.getElementById("a1_6_text").value = "";
               document.getElementById("a1_6_text").disabled = true;
             }
+
+            $('input[name="' + this.name + '"]').not(this).prop('checked', false);
         });
 
         document.getElementById("a1_6_text").disabled = true;
