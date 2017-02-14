@@ -99,6 +99,9 @@
         <% @tabletinterviews.each do |tabletinterview| %>
           <%= render partial: "admin/tabletinterview/item", locals: { tabletinterview: tabletinterview } %>
         <% end %>
+        <div>
+          <%= paginate @tabletinterviews %>
+        </div>
       </div>
     </div>
 
