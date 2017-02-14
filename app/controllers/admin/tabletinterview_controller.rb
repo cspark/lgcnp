@@ -3,7 +3,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
   before_action :is_admin
 
   def index
-    @tabletinterviews = Fctabletinterview.all
+    @tabletinterviews = Fctabletinterview.all.order("uptdate desc")
   end
 
 end

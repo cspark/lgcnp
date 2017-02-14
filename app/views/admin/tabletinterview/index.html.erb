@@ -96,9 +96,6 @@
 
     <div>
       <div>
-        <div id="avr" style="background: #eea29a; padding: 8px;">
-        
-        </div>
         <% @tabletinterviews.each do |tabletinterview| %>
           <%= render partial: "admin/tabletinterview/item", locals: { tabletinterview: tabletinterview } %>
         <% end %>
