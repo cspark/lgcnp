@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     get "users/detail"  => "user#show"
     get "feedback"  => "feedback#index"
     get "feedback_list"  => "feedback#list"
-
+    get "tabletinterview" => "tabletinterview#index"
     resources :admin_users do
     end
   end

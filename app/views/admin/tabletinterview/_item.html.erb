@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script type="text/javascript" src="../js/jquery.js"></script>
+      <script type="text/javascript" src="../js/bootstrap.js"></script>
+
+      <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+      <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+      <script>
+        $(function () {
+          <% user = Custinfo.where(custserial: tabletinterview.custserial).first %>
+          try
+          {
+            $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(decode_utf8('<%= user.custname %>'));
+          }
+          catch(err)
+          {
+            $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append('<%= user.custname %>');
+          }
+        });
+
+        function decode_utf8(s) {
+          return decodeURI(s);
+        }
+      </script>
+    </head>
+    <body>
+      <div style="display:table; height:50px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
+        <% custinfo = Custinfo.where(custserial: tabletinterview.custserial).first %>
+        <font size="4"><div id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
+        시리얼 : <%= tabletinterview.custserial.to_i %> / 진단 날짜 : <%= tabletinterview.uptdate %><br>
+        피부타입 : <%= tabletinterview.skin_type %><br>
+        진단으로 나온 솔루션 1 : <%= tabletinterview.before_solution_1 %> / 최종으로 선택된 솔루션 1 : <%= tabletinterview.after_solution_1 %> <br>
+      </div>
+    </body>
+</html>
