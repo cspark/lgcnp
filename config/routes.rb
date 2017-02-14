@@ -2,22 +2,23 @@ Rails.application.routes.draw do
   # devise_for :admin_users, ActiveAdmin::Devise.config
   # ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get "admin"  => "admin#index"
-  get "admin_login"  => "admin#admin_login"
-  post "admin_login"  => "admin#login"
-  delete "admin_logout" => "admin#logout"
-  
-  resources :admin_users do
+  namespace :admin do
+    get "/"  => "admin#index"
+    get "admin_login"  => "admin#admin_login"
+    post "admin_login"  => "admin#login"
+    delete "admin_logout" => "admin#logout"
+
+    get "user_list"  => "user#index"
+    get "users/detail"  => "user#show"
+    get "feedback"  => "feedback#index"
+    get "feedback_list"  => "feedback#list"
+
+    resources :admin_users do
+    end
   end
 
-  resources :custinfos do
-  end
 
 
-  get "user_list"  => "user#index"
-  get "users/detail"  => "user#show"
-  get "feedback"  => "feedback#index"
-  get "feedback_list"  => "feedback#list"
   get "get_api_key" => "custinfos#get_api_key"
   get "find_user" => "custinfos#find_user"
   get "find_users" => "custinfos#find_users"
@@ -29,6 +30,9 @@ Rails.application.routes.draw do
   get "after_interview" => "fcafterinterviews#show"
   get "after_interview_1" => "fcafterinterviews#show_1"
   post "update_after_interview" => "fcafterinterviews#update"
+  resources :custinfos do
+  end
+
   resources :fcinterviews do
   end
 

@@ -1,9 +1,9 @@
 <html>
   <head>
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
     <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
@@ -40,16 +40,16 @@
                 });
           $("#datepicker").datepicker('setDate', '<%= @date %>');
           $('#datepicker').change(function () {
-              location.href = "/feedback?date=" + $('#datepicker').val()
+              location.href = "/admin/feedback?date=" + $('#datepicker').val()
           });
       });
 
       function show_after_interview(after_interview_id, tablet_interview_id, custserial){
-        window.open("/after_interview?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "/after_interview?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "scrollbars=1,resizable=1,height=800,width=700");
+        window.open("/admin/after_interview?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "/after_interview?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "scrollbars=1,resizable=1,height=800,width=700");
       }
 
       function show_after_interview_1(after_interview_id, tablet_interview_id, custserial){
-        window.open("/after_interview_1?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "/after_interview?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "scrollbars=1,resizable=1,height=800,width=700");
+        window.open("/admin/after_interview_1?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "/after_interview?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "scrollbars=1,resizable=1,height=800,width=700");
       }
 
     </script>
@@ -63,21 +63,21 @@
       <h4 style="background: #b1cbbb; padding: 8px;">당일 진단자 (<%= @date_today %>)</h4>
       <div>
         <% @tablet_interviews_today.each do |tabletinterview| %>
-          <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>
+          <%= render partial: "admin/feedback/item", locals: { tabletinterview: tabletinterview } %>
         <% end %>
       </div>
 
       <h4 style="background: #b1cbbb; padding: 8px;">2주 전 진단자 (<%= @date_2weeks_ago %>)</h4>
       <div>
         <% @tablet_interviews_2_weeks_ago.each do |tabletinterview| %>
-          <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>
+          <%= render partial: "admin/feedback/item", locals: { tabletinterview: tabletinterview } %>
         <% end %>
       </div>
 
       <h4 style="background: #b1cbbb; padding: 8px;">3개월 전 진단자 (<%= @date_3months_ago %>)</h4>
       <div>
         <% @tablet_interviews_3_months_ago.each do |tabletinterview| %>
-          <%= render partial: "feedback/item", locals: { tabletinterview: tabletinterview } %>
+          <%= render partial: "admin/feedback/item", locals: { tabletinterview: tabletinterview } %>
         <% end %>
       </div>
     </div>

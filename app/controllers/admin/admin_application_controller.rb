@@ -1,4 +1,4 @@
-class AdminApplicationController < ActionController::Base
+class Admin::AdminApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   protect_from_forgery with: :null_session
 
@@ -6,7 +6,7 @@ class AdminApplicationController < ActionController::Base
 
   def is_admin
     if session[:admin_user] == nil
-      redirect_to '/admin_login'
+      redirect_to '/admin/admin_login'
     end
   end
 end

@@ -1,22 +1,22 @@
 require 'securerandom'
 
-class AdminController < AdminApplicationController
+class Admin::AdminController < Admin::AdminApplicationController
   skip_before_action :verify_authenticity_token, :only => [:login, :admin_login, :logout]
   before_action :is_admin
   skip_before_action :is_admin, :only => [:admin_login, :login, :logout]
 
   def index
-    redirect_to '/user_list'
+    redirect_to '/admin/user_list'
   end
 
   def admin_login
-    render 'login'
+    render '/admin/login'
   end
 
   def login
     if params[:email] == "mint" && params[:password] == "mint"
       session[:admin_user] = "user"
-      return 
+      return
     end
 
     user = AdminUser.where(email: params[:email]).first

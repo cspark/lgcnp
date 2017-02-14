@@ -1,8 +1,8 @@
 <html>
   <head>
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
     <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
@@ -12,17 +12,17 @@
         $(document).keyup(function (e) {
             if ($("#search").is(":focus") && (e.keyCode == 13)) {
                 console.log(encodeURI($("#search").val()));
-                location.href = "/user_list?search=" + encodeURI(encodeURI($("#search").val()));
+                location.href = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
             }
         });
       });
 
       function showDetail(userId){
-        window.open("/users/detail?userId=" + userId, "/users/detail?userId=" + userId, "scrollbars=1,resizable=1,height=500,width=600");
+        window.open("/admin/users/detail?userId=" + userId, "/users/detail?userId=" + userId, "scrollbars=1,resizable=1,height=500,width=600");
       }
 
       function show_all(){
-        location.href = "/user_list";
+        location.href = "/admin/user_list";
       }
     </script>
   </head>
@@ -35,7 +35,7 @@
     <div>
 
       <% @users.each do |user| %>
-        <%= render partial: "user/item", locals: { user: user } %>
+        <%= render partial: "admin/user/item", locals: { user: user } %>
       <% end %>
       <div>
         <%= paginate @users %>

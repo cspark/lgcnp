@@ -133,7 +133,7 @@
         var select_interview = document.getElementById("select_interview").options[document.getElementById("select_interview").selectedIndex].value;
 
         url = ""
-        url += "/feedback_list?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
+        url += "/admin/feedback_list?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
         url += "&sex=" + select_sex;
         url += "&start_age=" + document.getElementById("start_age").value;
         url += "&end_age=" + document.getElementById("end_age").value;
@@ -222,7 +222,7 @@
           총 인원 수 : <%= @count %> / 설문 1의 평균 점수 : <%= @average_a1 %> / 설문 2의 평균 점수 : <%= @average_a2 %> / 설문 3의 평균 점수 : <%= @average_a3 %> / 설문 4의 평균 점수 : <%= @average_a4 %><br>
         </div>
         <% @after_interviews.each do |after_interview| %>
-          <%= render partial: "feedback/after_item", locals: { after_interview: after_interview } %>
+          <%= render partial: "admin/feedback/after_item", locals: { after_interview: after_interview } %>
         <% end %>
       </div>
     </div>
