@@ -42,11 +42,11 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     min_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy desc").first
     @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
     @min_birthyy = min_age_custinfo.birthyy
-    @min_birthmm = min_age_custinfo.birthmm
+    @min_birthmm = 1
     max_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy asc").first
     @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
     @max_birthyy = max_age_custinfo.birthyy
-    @max_birthmm = max_age_custinfo.birthmm
+    @max_birthmm = 12
 
     @tabletinterviews = []
     if Rails.env.production? || Rails.env.staging?
