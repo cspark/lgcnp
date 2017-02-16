@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     get "after_interview_1" => "fcafterinterviews#show_1"
     post "update_after_interview" => "fcafterinterviews#update"
     delete "after_interview" => "fcafterinterviews#delete"
+    get "fcavg_list" => "fcavgdata#list"
     resources :admin_users do
     end
   end

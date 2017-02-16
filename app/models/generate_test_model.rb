@@ -32,4 +32,23 @@ class GenerateTestModel < ApplicationRecord
     f.is_quick_mode = "F"
     f.save
   end
+
+  def self.generate_test_fcavgdata
+    f = Fcavgdata.new
+
+    f.n_index = 1
+    f.age = "1"
+    f.pore = 1.0
+    f.wrinkle = 1.0
+    f.spot_pl = 1.0
+    f.spot_uv = 1.0
+    f.elasticity = 1.0
+    f.porphyrin_ratio = 1.0
+    f.e_sebum_t = 1.0
+    f.e_sebum_u = 1.0
+    f.moisture = 1.0
+    f.e_porphyrin_t = 1.0
+    f.e_porphyrin_u = 1.0
+    f.save
+  end
 end

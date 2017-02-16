@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script type="text/javascript" src="../js/jquery.js"></script>
+      <script type="text/javascript" src="../js/bootstrap.js"></script>
+
+      <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+      <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+      <script>
+        $(function () {
+        });
+        function decode_utf8(s) {
+          try{
+            return decodeURI(s);
+          }catch(err){
+            console.log(err);
+            return s;
+          }
+        }
+      </script>
+    </head>
+    <body>
+      <div style="display:table; height:150px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
+        <font><%= fcavgdata.n_index %></font><br>
+        나이 : <font><%= fcavgdata.age.to_i %> / 모공 : <font><%= fcavgdata.pore %></font> / 탄력 : <font><%= fcavgdata.wrinkle %></font><br>
+        색소침착 : <font><%= fcavgdata.spot_pl %></font> / 색소 : <font><%= fcavgdata.spot_uv %></font> / 탄력 : <font><%= fcavgdata.elasticity %></font><br>
+        포르피린1 : <font><%= fcavgdata.porphyrin_ratio %></font> / 피지1 : <font><%= fcavgdata.e_sebum_t %></font> / 피지2 : <font><%= fcavgdata.e_sebum_u %></font><br>
+        수분 : <font><%= fcavgdata.moisture %></font> / 포르피린2 : <font><%= fcavgdata.e_porphyrin_t %></font> / 포르피린3 : <font><%= fcavgdata.e_porphyrin_u %></font><br>
+      </div>
+    </body>
+</html>
