@@ -21,31 +21,55 @@
             $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append('<%= user.custname %>');
           }
 
+          //피부타입 한글로 변경
+          $('#skin_type_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(translate_skin_type('<%= tabletinterview.skin_type %>'));
           //솔루션 한글로 변경
-          try
-          {
-            $('#before_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(translate_solution('<%= tabletinterview.before_solution_1 %>'));
-          }
-          catch(err)
-          {
-            $('#before_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append('<%= tabletinterview.before_solution_1 %>');
-          }
+          $('#before_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(translate_solution('<%= tabletinterview.before_solution_1 %>'));
+          $('#after_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(translate_solution('<%= tabletinterview.after_solution_1 %>'));
+
 
         });
 
-        function translate_solution(value){
-            if(value == "elasticity solution")
-              return "탄력 솔루션"
-            else if(value == "pigment solution")
-              return "색소침착 솔루션"
-            else if(value == "pore solution")
-              return "모공 솔루션"
-            else if(value == "trouble solution")
-              return "트러블 솔루션"
-            else if(value == "wrinkle solution")
-              return "주름 솔루션"
-            else
+        function translate_skin_type(value){
+            var skin_type = ""
+            try{
+              if(value.includes("skin_type_gunsung"))
+                skin_type = "건성"
+              else if(value.includes("skin_type_gun_boggab"))
+                skin_type = "건복합성"
+              else if(value.includes("skin_type_jisung"))
+                skin_type = "지성"
+              else if(value.includes("skin_type_jisung_boghab"))
+                skin_type = "지복합성"
+              else if(value.includes("skin_type_jungsung"))
+                skin_type = "중성"
+
+              if(value.includes("senstive"))
+                skin_type = skin_type + " (민감성)";
+            }catch(err){
               return value
+            }
+
+            return skin_type;
+        }
+
+        function translate_solution(value){
+            try{
+              if(value == "elasticity solution")
+                return "탄력 솔루션"
+              else if(value == "pigment solution")
+                return "색소침착 솔루션"
+              else if(value == "pore solution")
+                return "모공 솔루션"
+              else if(value == "trouble solution")
+                return "트러블 솔루션"
+              else if(value == "wrinkle solution")
+                return "주름 솔루션"
+              else
+                return value
+            }catch(err){
+              return value
+            }
         }
 
         function decode_utf8(s) {
@@ -58,8 +82,8 @@
         <% custinfo = Custinfo.where(custserial: tabletinterview.custserial).first %>
         <font size="4"><div id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
         시리얼 : <%= tabletinterview.custserial.to_i %> / 진단 날짜 : <%= tabletinterview.uptdate %><br>
-        피부타입 : <%= tabletinterview.skin_type %><br>
-        진단으로 나온 솔루션 1 : <font id="before_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 솔루션 1 : <%= tabletinterview.after_solution_1 %> <br>
+        피부타입 : <font id="skin_type_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/><%= tabletinterview.skin_type %><br>
+        진단으로 나온 솔루션 1 : <font id="before_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 솔루션 1 : <font id="after_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/>  <br>
       </div>
     </body>
 </html>
