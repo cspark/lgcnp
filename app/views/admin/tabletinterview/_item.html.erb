@@ -39,26 +39,31 @@
           $('#after_ampoule_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(translate_ampoule('<%= tabletinterview.after_ample_1 %>'));
           $('#before_ampoule_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(translate_ampoule('<%= tabletinterview.before_ample_2 %>'));
           $('#after_ampoule_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(translate_ampoule('<%= tabletinterview.after_ample_2 %>'));
+
+          //제품 한글 변경
+          $('#before_made_cosmetic_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(translate_serum('<%= tabletinterview.before_made_cosmetic %>') + "Ex");
+          $('#after_made_cosmetic_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(translate_serum('<%= tabletinterview.after_made_cosmetic %>') + "Ex");
+
         });
 
         function translate_skin_type(value){
             var skin_type = ""
             try{
               if(value.includes("skin_type_gunsung"))
-                skin_type = "건성"
+                skin_type = "건성";
               else if(value.includes("skin_type_gun_boggab"))
-                skin_type = "건복합성"
+                skin_type = "건복합성";
               else if(value.includes("skin_type_jisung"))
-                skin_type = "지성"
+                skin_type = "지성";
               else if(value.includes("skin_type_jisung_boghab"))
-                skin_type = "지복합성"
+                skin_type = "지복합성";
               else if(value.includes("skin_type_jungsung"))
-                skin_type = "중성"
+                skin_type = "중성";
 
               if(value.includes("senstive"))
                 skin_type = skin_type + " (민감성)";
             }catch(err){
-              return value
+              return value;
             }
 
             return skin_type;
@@ -67,58 +72,62 @@
         function translate_solution(value){
             try{
               if(value == "elasticity solution")
-                return "탄력 솔루션"
+                return "탄력 솔루션";
               else if(value == "pigment solution")
-                return "색소침착 솔루션"
+                return "색소침착 솔루션";
               else if(value == "pore solution")
-                return "모공 솔루션"
+                return "모공 솔루션";
               else if(value == "trouble solution")
-                return "트러블 솔루션"
+                return "트러블 솔루션";
               else if(value == "wrinkle solution")
-                return "주름 솔루션"
+                return "주름 솔루션";
               else
-                return value
+                return value;
             }catch(err){
-              return value
+              return value;
             }
         }
 
         function translate_serum(value){
             try{
               if(value == "deep humect")
-                return "딥 휴멕트 세럼"
+                return "딥 휴멕트 세럼";
               else if(value == "skin control")
-                return "스킨 컨트롤 세럼"
+                return "스킨 컨트롤 세럼";
               else if(value == "rebalencing")
-                return "리밸런싱 세럼"
+                return "리밸런싱 세럼";
               else
-                return value
+                return value;
             }catch(err){
-              return value
+              return value;
             }
         }
 
         function translate_ampoule(value){
             try{
               if(value == "pore clinic ampoule")
-                return "포어클리닉 앰플"
+                return "포어클리닉 앰플";
               else if(value == "carming ampoule")
-                return "카밍 앰플"
+                return "카밍 앰플";
               else if(value == "luminus ampoule")
-                return "루미너스 앰플"
+                return "루미너스 앰플";
               else if(value == "regenerating ampoule")
-                return "리제네레이팅 앰플"
+                return "리제네레이팅 앰플";
               else if(value == "perming ampoule")
-                return "퍼밍 앰플"
+                return "퍼밍 앰플";
               else
-                return value
+                return value;
             }catch(err){
-              return value
+              return value;
             }
         }
 
         function decode_utf8(s) {
-          return decodeURI(s);
+          try{
+            return decodeURI(s);
+          }catch(err){
+            retrun s;
+          }
         }
       </script>
     </head>
@@ -127,12 +136,13 @@
         <% custinfo = Custinfo.where(custserial: tabletinterview.custserial).first %>
         <font size="4"><div id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
         시리얼 : <%= tabletinterview.custserial.to_i %> / 진단 날짜 : <%= tabletinterview.uptdate %><br>
-        피부타입 : <font id="skin_type_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/><%= tabletinterview.skin_type %><br>
-        진단으로 나온 솔루션 1 : <font id="before_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 솔루션 1 : <font id="after_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/>  <br>
-        진단으로 나온 솔루션 2 : <font id="before_solution_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 솔루션 2 : <font id="after_solution_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/>  <br>
-        진단으로 나온 세럼 : <font id="before_serum_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 세럼 : <font id="after_serum_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/>  <br>
-        진단으로 나온 앰플 1 : <font id="before_ampoule_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 앰플 1 : <font id="after_ampoule_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/>  <br>
-        진단으로 나온 앰플 2 : <font id="before_ampoule_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 앰플 2 : <font id="after_ampoule_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/>  <br>
+        피부타입 : <div id="skin_type_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/><%= tabletinterview.skin_type %><br>
+        진단으로 나온 솔루션 1 : <div id="before_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 솔루션 1 : <div id="after_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/>  <br>
+        진단으로 나온 솔루션 2 : <div id="before_solution_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 솔루션 2 : <div id="after_solution_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/>  <br>
+        진단으로 나온 세럼 : <div id="before_serum_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 세럼 : <div id="after_serum_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/>  <br>
+        진단으로 나온 앰플 1 : <div id="before_ampoule_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 앰플 1 : <div id="after_ampoule_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/>  <br>
+        진단으로 나온 앰플 2 : <div id="before_ampoule_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 앰플 2 : <div id="after_ampoule_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/>  <br>
+        진단으로 나온 화장품 : <div id="before_made_cosmetic_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 화장품 : <div id="after_made_cosmetic_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/>  <br>
       </div>
     </body>
 </html>
