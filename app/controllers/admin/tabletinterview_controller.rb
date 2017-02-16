@@ -122,9 +122,10 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
         end
       end
 
-      Rails.logger.info @tabletinterviews.count
+      @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(3)
     else
       @tabletinterviews = Fctabletinterview.all
+      @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(3)
     end
   end
 

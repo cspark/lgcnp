@@ -147,11 +147,7 @@
         B1 : <%= tabletinterview.b_1 %> / B2 : <%= tabletinterview.b_2 %> / B3 : <%= tabletinterview.b_3 %> / B4 : <%= tabletinterview.b_4 %> <br>
         C1 : <%= tabletinterview.c_1 %> / D1 : <%= tabletinterview.d_2 %> / D2 : <%= tabletinterview.d_2 %> / D3 : <%= tabletinterview.d_3 %>
         / D4 : <%= tabletinterview.d_4 %> / D5 : <%= tabletinterview.d_5 %> / D6 : <%= tabletinterview.d_6 %> / D7 : <%= tabletinterview.d_7 %> / D8 : <%= tabletinterview.d_8 %> / D9 : <%= tabletinterview.d_9 %> / D10 : <%= tabletinterview.d_10 %> <br>
-        <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
-        <% if !fcdata.nil? %>
-          <% fcdata = fcdata.to_api_hash %>
-          [그래프] 모공 점수 : <%= fcdata[:pr_graph].to_i %> / 트러블 점수 : <%= fcdata[:sb_graph].to_i %> / 색소침착 점수 : <%= fcdata[:pp_graph].to_i %> / 주름 점수 : <%= fcdata[:wr_graph].to_i %> / 탄력 점수 : <%= fcdata[:el_graph].to_i %>
-        <% end %>
+        
       </div>
     </body>
 </html>
