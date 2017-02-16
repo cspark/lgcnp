@@ -52,8 +52,10 @@
             if(this.id == "a1_6" && $('input[id="' + this.id + '"]').is(":checked")){
               document.getElementById("a1_6_text").disabled = false;
             }else{
-              document.getElementById("a1_6_text").value = "";
-              document.getElementById("a1_6_text").disabled = true;
+              if(this.name.includes("group1")){
+                document.getElementById("a1_6_text").value = "";
+                document.getElementById("a1_6_text").disabled = true;
+              }
             }
 
             $('input[name="' + this.name + '"]').not(this).prop('checked', false);
@@ -269,7 +271,7 @@
         <input type="checkbox" name="group1[]" id="a1_5"/> 매장 직원 추천
         <br>
         <input type="checkbox" name="group1[]" id="a1_6"/> 기타
-        <textarea type="text" rows="1" style="width: 300px;" id="a1_6_text"></textarea>
+        <textarea type="text" rows="1" style="width: 300px;" id="a1_6_text" onfocus="this.value = this.value;"></textarea>
         <br><br>
         2. 피부진단 카운셀링에 대한 내용 이해도를 선택해 주시기 바랍니다.<br>
         <input type="checkbox" name="group2[]" id="a2_1"/> 쉽게 이해
@@ -285,7 +287,7 @@
         <input type="checkbox" name="group3[]" id="a3_5" /> 불만족
         <br><br>
         4. 특이사항<br>르메디 맞춤형 프로세스 중 어려운 점이나 불필요한 사항 및 기타 요청 사항을 자유롭게 기재해 주시기 바랍니다.<br>
-        <textarea type="text" rows="5" style="width: 500px;" id="a5"></textarea>
+        <textarea type="text" rows="5" style="width: 500px;" id="a5" onfocus="this.value = this.value;" ></textarea>
         <br>
         <button class="btn btn-danger" id="submit" type="submit" value="Submit">입력</button>
       </div>
