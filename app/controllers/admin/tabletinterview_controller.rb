@@ -50,66 +50,68 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @start_age = @min_age if @start_age.nil?
     @end_age = @max_age if @end_age.nil?
 
-    @start_birthyy = @min_birthyy if @start_birthyy.nil?
-    @end_birthyy = @max_birthyy if @end_birthyy.nil?
+    @start_birthyy = @max_birthyy if @start_birthyy.nil?
+    @end_birthyy = @min_birthyy if @end_birthyy.nil?
 
-    @start_birthmm = @start_birthmm if @start_birthmm.nil?
-    @end_birthmm = @end_birthmm if @end_birthmm.nil?
+    @start_birthmm = 1 if @start_birthmm.nil?
+    @end_birthmm = 12 if @end_birthmm.nil?
 
-    scoped = Fctabletinterview.all
-    temp_end_date = @end_date.to_date + 1.day
-    scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
-    scoped = scoped.where(custserial: @custserial) if !@custserial.nil?
-    scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.nil?
+    if Rails.env.production? || Rails.env.staging?
+      scoped = Fctabletinterview.all
+      temp_end_date = @end_date.to_date + 1.day
+      scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
+      scoped = scoped.where(custserial: @custserial) if !@custserial.nil?
+      scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.nil?
 
-    if !@select_mode.nil?
-      if @select_mode == "quick"
-        scoped = scoped.where(is_quick_mode: "T")
-      end
-    end
-
-    if !@select_makeup.nil?
-      if @select_makeup != "All"
-        scoped = scoped.where(is_make_up: @select_makeup)
-      end
-    end
-
-    @tabletinterviews = Array.new
-    scoped = scoped.order("uptdate desc")
-
-    scoped.each do |tabletinterview|
-      custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
-      is_conatin = true
-
-      if !@name.nil?
-        if !custinfo.custname.include? @name
-           is_contain = false
+      if !@select_mode.nil?
+        if @select_mode == "quick"
+          scoped = scoped.where(is_quick_mode: "T")
         end
       end
 
-      if @select_sex != "all"
-        if custinfo.sex != @select_sex
+      if !@select_makeup.nil?
+        if @select_makeup != "All"
+          scoped = scoped.where(is_make_up: @select_makeup)
+        end
+      end
+
+      @tabletinterviews = Array.new
+      scoped = scoped.order("uptdate desc")
+
+      scoped.each do |tabletinterview|
+        custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
+        is_conatin = true
+
+        if !@name.nil?
+          if !custinfo.custname.include? @name
+             is_contain = false
+          end
+        end
+
+        if @select_sex != "all"
+          if custinfo.sex != @select_sex
+            is_contain = false
+          end
+        end
+
+        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
+        if temp_age < @start_age.to_i || temp_age > @end_age.to_i
           is_contain = false
         end
-      end
 
-      temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
-      if temp_age < @start_age.to_i || temp_age > @end_age.to_i
-        is_contain = false
-      end
+        if custinfo.birthyy >= @start_birthyy.to_i || custinfo.birthyy <= @end_birthyy.to_i
+          is_contain = false
+        end
 
-      if custinfo.birthyy <= @start_birthyy.to_i || custinfo.birthyy >= @end_birthyy.to_i
-        is_contain = false
-      end
+        if custinfo.birthmm >= @start_birthmm.to_i || custinfo.birthmm <= @end_birthmm.to_i
+          is_contain = false
+        end
 
-      if custinfo.birthmm <= @start_birthmm.to_i || custinfo.birthmm >= @end_birthmm.to_i
-        is_contain = false
+        @tabletinterviews << tabletinterview if is_contain
       end
-
-      @tabletinterviews << tabletinterview if is_contain
+    else
+      @tabletinterviews = Fctabletinterview.all
     end
-
-    
   end
 
 end
