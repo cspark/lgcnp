@@ -8,8 +8,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @today = Date.today
 
     select_sex = params[:sex]
-    start_date = params[:start_date]
-    end_date = params[:end_date]
+    start_date = params[:start_date] if params.has_key?(:start_date)
+    end_date = params[:end_date] if params.has_key?(:end_date)
     start_age = params[:start_age]
     end_age = params[:end_age]
     name = params[:name]
