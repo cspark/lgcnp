@@ -24,10 +24,10 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     select_area = params[:select_area]
 
     @select_sex = select_sex
-    @start_date = start_date if !start_date.empty?
-    @end_date = end_date  if !end_date.empty?
-    @start_age = start_age
-    @end_age = end_age
+    @start_date = start_date if !start_date.blank?
+    @end_date = end_date  if !end_date.blank?
+    @start_age = start_age if !start_age.blank?
+    @end_age = end_age if !end_age.blank?
     @name = name
     @custserial = custserial
     @start_birthyy = start_birthyy
@@ -48,17 +48,14 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @max_birthyy = max_age_custinfo.birthyy
     @max_birthmm = max_age_custinfo.birthmm
 
-    @start_age = @min_age if @start_age.empty?
-    @end_age = @max_age if @end_age.empty?
-
     if Rails.env.production? || Rails.env.staging?
       scoped = Fctabletinterview.all
       temp_end_date = @end_date.to_date + 1.day
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
-      scoped = scoped.where(custserial: @custserial) if !@custserial.empty?
-      scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.empty? && @select_channel.downcase != "all"
+      scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
+      scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank? && @select_channel.downcase != "all"
 
-      if !@select_mode.empty?
+      if !@select_mode.blank?
         if @select_mode.downcase != "all"
           if @select_mode == "quick"
             scoped = scoped.where(is_quick_mode: "T")
@@ -66,7 +63,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
         end
       end
 
-      if !@select_makeup.empty?
+      if !@select_makeup.blank?
         if @select_makeup.downcase != "all"
           scoped = scoped.where(is_make_up: @select_makeup)
         end
@@ -80,7 +77,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
         Rails.logger.info custinfo.custname
         is_conatin = true
 
-        if !@name.empty?
+        if !@name.blank?
           if !custinfo.custname.include? @name
             Rails.logger.info "NAME FALSE"
             is_contain = false
