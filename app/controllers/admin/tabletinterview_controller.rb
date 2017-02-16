@@ -6,7 +6,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @start_date = Date.today
     @end_date = Date.today
     @today = Date.today
-    
+
     select_sex = params[:sex]
     start_date = params[:start_date]
     end_date = params[:end_date]
@@ -24,8 +24,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     select_area = params[:select_area]
 
     @select_sex = select_sex
-    @start_date = start_date if !start_date.nil?
-    @end_date = end_date  if !end_date.nil?
+    @start_date = start_date if !start_date.empty?
+    @end_date = end_date  if !end_date.empty?
     @start_age = start_age
     @end_age = end_age
     @name = name
@@ -48,29 +48,29 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @max_birthyy = max_age_custinfo.birthyy
     @max_birthmm = max_age_custinfo.birthmm
 
-    @start_age = @min_age if @start_age.nil?
-    @end_age = @max_age if @end_age.nil?
+    @start_age = @min_age if @start_age.empty?
+    @end_age = @max_age if @end_age.empty?
 
-    @start_birthyy = @max_birthyy if @start_birthyy.nil?
-    @end_birthyy = @min_birthyy if @end_birthyy.nil?
+    @start_birthyy = @max_birthyy if @start_birthyy.empty?
+    @end_birthyy = @min_birthyy if @end_birthyy.empty?
 
-    @start_birthmm = 1 if @start_birthmm.nil?
-    @end_birthmm = 12 if @end_birthmm.nil?
+    @start_birthmm = 1 if @start_birthmm.empty?
+    @end_birthmm = 12 if @end_birthmm.empty?
 
     if Rails.env.production? || Rails.env.staging?
       scoped = Fctabletinterview.all
       temp_end_date = @end_date.to_date + 1.day
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
-      scoped = scoped.where(custserial: @custserial) if !@custserial.nil?
-      scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.nil?
+      scoped = scoped.where(custserial: @custserial) if !@custserial.empty?
+      scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.empty?
 
-      if !@select_mode.nil?
+      if !@select_mode.empty?
         if @select_mode == "quick"
           scoped = scoped.where(is_quick_mode: "T")
         end
       end
 
-      if !@select_makeup.nil?
+      if !@select_makeup.empty?
         if @select_makeup != "All"
           scoped = scoped.where(is_make_up: @select_makeup)
         end
@@ -83,7 +83,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
         custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
         is_conatin = true
 
-        if !@name.nil?
+        if !@name.empty?
           if !custinfo.custname.include? @name
              is_contain = false
           end
