@@ -143,6 +143,12 @@
         진단으로 나온 앰플 1 : <font id="before_ampoule_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font> / 최종으로 선택된 앰플 1 : <font id="after_ampoule_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font>  <br>
         진단으로 나온 앰플 2 : <font id="before_ampoule_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font> / 최종으로 선택된 앰플 2 : <font id="after_ampoule_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font>  <br>
         진단으로 나온 화장품 : <font id="before_made_cosmetic_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font> / 최종으로 선택된 화장품 : <font id="after_made_cosmetic_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font>  <br>
+        A1 : <%= tabletinterview.a1 %> / A2 : <%= tabletinterview.a2 %> / A3 : <%= tabletinterview.a3 %> <br>
+        B1 : <%= tabletinterview.b1 %> / B2 : <%= tabletinterview.b2 %> / B3 : <%= tabletinterview.b3 %> / B4 : <%= tabletinterview.b4 %> <br>
+        C1 : <%= tabletinterview.c1 %> / D1 : <%= tabletinterview.d2 %> / D2 : <%= tabletinterview.d2 %> / D3 : <%= tabletinterview.d3 %>
+        / D4 : <%= tabletinterview.d4 %> / D5 : <%= tabletinterview.d5 %> / D6 : <%= tabletinterview.d6 %> / D7 : <%= tabletinterview.d7 %> / D8 : <%= tabletinterview.d8 %> / D9 : <%= tabletinterview.d9 %> / D10 : <%= tabletinterview.d10 %> <br>
+        <% fcdata = Fcdata.where(measureno: tabletinterview.fcdata_id).first.to_api_hash %>
+        [그래프] 모공 점수 : <%= fcdata.pr_graph.to_i %> / 트러블 점수 : <%= fcdata.sb_graph.to_i %> / 색소침착 점수 : <%= fcdata.pp_graph.to_i %> / 주름 점수 : <%= fcdata.wr_graph.to_i %> / 탄력 점수 : <%= fcdata.el_graph.to_i %>
       </div>
     </body>
 </html>
