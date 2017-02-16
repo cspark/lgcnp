@@ -109,7 +109,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       @tabletinterviews << tabletinterview if is_contain
     end
 
-    Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(3)
+    
   end
 
 end
