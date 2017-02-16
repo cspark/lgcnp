@@ -51,12 +51,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @start_age = @min_age if @start_age.empty?
     @end_age = @max_age if @end_age.empty?
 
-    @start_birthyy = @max_birthyy if @start_birthyy.empty?
-    @end_birthyy = @min_birthyy if @end_birthyy.empty?
-
-    @start_birthmm = 1 if @start_birthmm.empty?
-    @end_birthmm = 12 if @end_birthmm.empty?
-
     if Rails.env.production? || Rails.env.staging?
       scoped = Fctabletinterview.all
       temp_end_date = @end_date.to_date + 1.day
@@ -83,30 +77,36 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
       scoped.each do |tabletinterview|
         custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
+        Rails.logger.info custinfo.custname
         is_conatin = true
 
         if !@name.empty?
           if !custinfo.custname.include? @name
-             is_contain = false
+            Rails.logger.info "NAME FALSE"
+            is_contain = false
           end
         end
 
         if @select_sex != "all"
           if custinfo.sex != @select_sex
+            Rails.logger.info "SEX FALSE"
             is_contain = false
           end
         end
 
         temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
         if temp_age < @start_age.to_i || temp_age > @end_age.to_i
+          Rails.logger.info "AGE FALSE"
           is_contain = false
         end
 
         if custinfo.birthyy.to_i >= @start_birthyy.to_i || custinfo.birthyy.to_i <= @end_birthyy.to_i
+          Rails.logger.info "BIRTHYY FALSE"
           is_contain = false
         end
 
         if custinfo.birthmm.to_i >= @start_birthmm.to_i || custinfo.birthmm.to_i <= @end_birthmm.to_i
+          Rails.logger.info "BIRTHMM FALSE"
           is_contain = false
         end
 
