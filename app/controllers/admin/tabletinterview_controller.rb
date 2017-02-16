@@ -62,16 +62,18 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       temp_end_date = @end_date.to_date + 1.day
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
       scoped = scoped.where(custserial: @custserial) if !@custserial.empty?
-      scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.empty?
+      scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.empty? && @select_channel.downcase != "all"
 
       if !@select_mode.empty?
-        if @select_mode == "quick"
-          scoped = scoped.where(is_quick_mode: "T")
+        if @select_mode.downcase != "all"
+          if @select_mode == "quick"
+            scoped = scoped.where(is_quick_mode: "T")
+          end
         end
       end
 
       if !@select_makeup.empty?
-        if @select_makeup != "All"
+        if @select_makeup.downcase != "all"
           scoped = scoped.where(is_make_up: @select_makeup)
         end
       end
