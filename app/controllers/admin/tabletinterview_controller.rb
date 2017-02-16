@@ -77,7 +77,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       scoped.each do |tabletinterview|
         custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
         Rails.logger.info custinfo.custname
-        is_conatin = true
+        is_contain = true
 
         if !@name.blank?
           if !custinfo.custname.include? @name
