@@ -61,7 +61,8 @@
             $('input[name="' + this.name + '"]').not(this).prop('checked', false);
         });
 
-        document.getElementById("a1_6_text").disabled = true;
+        if ($('#a1_6').is(":checked") == false)
+          document.getElementById("a1_6_text").disabled = true;
 
         <% if !@after_interview.a1.nil? %>
           // document.getElementById("a1_1").disabled = true;
