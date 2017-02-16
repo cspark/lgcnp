@@ -9,6 +9,114 @@
 
     <script>
       $(function () {
+            $("#start_date").datepicker({
+                    dateFormat: 'yy-mm-dd',
+                    dayNamesMin: [
+                        '일',
+                        '월',
+                        '화',
+                        '수',
+                        '목',
+                        '금',
+                        '토'
+                    ],
+                    monthNamesShort: [
+                        '1월',
+                        '2월',
+                        '3월',
+                        '4월',
+                        '5월',
+                        '6월',
+                        '7월',
+                        '8월',
+                        '9월',
+                        '10월',
+                        '11월',
+                        '12월'
+                    ],
+                    currentText: '오늘 날짜',
+                    changeMonth: true
+                });
+            $("#end_date").datepicker({
+                        dateFormat: 'yy-mm-dd',
+                        dayNamesMin: [
+                            '일',
+                            '월',
+                            '화',
+                            '수',
+                            '목',
+                            '금',
+                            '토'
+                        ],
+                        monthNamesShort: [
+                            '1월',
+                            '2월',
+                            '3월',
+                            '4월',
+                            '5월',
+                            '6월',
+                            '7월',
+                            '8월',
+                            '9월',
+                            '10월',
+                            '11월',
+                            '12월'
+                        ],
+                        currentText: '오늘 날짜',
+                        changeMonth: true
+                    });
+
+                    $("#start_date").datepicker('setDate', '<%= @start_date %>');
+                    $("#end_date").datepicker('setDate', '<%= @end_date %>');
+
+                    <% if !@name.nil? %>
+                      document.getElementById("name").value = '<%= @name %>'
+                    <% end %>
+
+                    <% if !@custserial.nil? %>
+                      document.getElementById("custserial").value = '<%= @custserial %>'
+                    <% end %>
+
+                    <% if !@select_sex.nil? %>
+                      $('select[id="select_sex"]').val('<%= @select_sex %>');
+                    <% end %>
+
+                    <% if !@start_age.nil? %>
+                      document.getElementById("start_age").value = '<%= @start_age %>'
+                    <% end %>
+                    <% if !@end_age.nil? %>
+                      document.getElementById("end_age").value = '<%= @end_age %>'
+                    <% end %>
+
+                    <% if !@start_birthyy.nil? %>
+                      document.getElementById("start_birthyy").value = '<%= @start_birthyy %>'
+                    <% end %>
+                    <% if !@end_birthyy.nil? %>
+                      document.getElementById("end_birthyy").value = '<%= @end_birthyy %>'
+                    <% end %>
+
+                    <% if !@start_birthmm.nil? %>
+                      document.getElementById("start_birthmm").value = '<%= @start_birthmm %>'
+                    <% end %>
+                    <% if !@end_birthmm.nil? %>
+                      document.getElementById("end_birthmm").value = '<%= @end_birthmm %>'
+                    <% end %>
+
+                    <% if !@select_channel.nil? %>
+                      $('select[id="select_channel"]').val('<%= @select_channel %>');
+                    <% end %>
+
+                    <% if !@select_mode.nil? %>
+                      $('select[id="select_mode"]').val('<%= @select_mode %>');
+                    <% end %>
+
+                    <% if !@select_makeup.nil? %>
+                      $('select[id="select_makeup"]').val('<%= @select_makeup %>');
+                    <% end %>
+
+                    <% if !@select_area.nil? %>
+                      $('select[id="select_area"]').val('<%= @select_area %>');
+                    <% end %>
       });
     </script>
   </head>
@@ -77,8 +185,8 @@
         메이크업 유무 :
         <select class="form-control" id="select_makeup">
           <option value="all">All</option>
-          <option value="yes">유</option>
-          <option value="no">무</option>
+          <option value="T">유</option>
+          <option value="F">무</option>
         </select>
 
         측정부위 :
