@@ -74,7 +74,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       end
     end
 
-    @tabletinterviews = []
+    @tabletinterviews = Array.new
     scoped = scoped.order("uptdate desc")
 
     scoped.each do |tabletinterview|
