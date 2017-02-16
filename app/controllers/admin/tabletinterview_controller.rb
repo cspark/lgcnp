@@ -69,7 +69,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
         end
       end
 
-      @tabletinterviews = Array.new
+      @tabletinterviews = []
       scoped = scoped.order("uptdate desc")
 
       scoped.each do |tabletinterview|
@@ -113,8 +113,12 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
           end
         end
 
-        @tabletinterviews << tabletinterview if is_contain
+        if is_contain == true
+          @tabletinterviews << tabletinterview
+        end
       end
+
+      Rails.logger.info @tabletinterviews.count
     else
       @tabletinterviews = Fctabletinterview.all
     end
