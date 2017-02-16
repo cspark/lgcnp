@@ -102,11 +102,11 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
           is_contain = false
         end
 
-        if custinfo.birthyy >= @start_birthyy.to_i || custinfo.birthyy <= @end_birthyy.to_i
+        if custinfo.birthyy.to_i >= @start_birthyy.to_i || custinfo.birthyy.to_i <= @end_birthyy.to_i
           is_contain = false
         end
 
-        if custinfo.birthmm >= @start_birthmm.to_i || custinfo.birthmm <= @end_birthmm.to_i
+        if custinfo.birthmm.to_i >= @start_birthmm.to_i || custinfo.birthmm.to_i <= @end_birthmm.to_i
           is_contain = false
         end
 

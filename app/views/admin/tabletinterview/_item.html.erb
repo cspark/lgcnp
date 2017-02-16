@@ -24,14 +24,21 @@
           //솔루션 한글로 변경
           try
           {
-            $('#before_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(decode_utf8('<%= user.custname %>'));
+            $('#before_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(decode_utf8('<%= tabletinterview.before_solution_1 %>'));
           }
           catch(err)
           {
-            $('#before_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append('<%= user.custname %>');
+            $('#before_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append('<%= tabletinterview.before_solution_1 %>');
           }
 
         });
+
+        function translate_solution(value){
+            if(value == "elasticity solution")
+              return "탄력 솔루션"
+            else if(value == "elasticity solution")
+              return "탄력 솔루션"
+        }
 
         function decode_utf8(s) {
           return decodeURI(s);
@@ -44,7 +51,7 @@
         <font size="4"><div id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
         시리얼 : <%= tabletinterview.custserial.to_i %> / 진단 날짜 : <%= tabletinterview.uptdate %><br>
         피부타입 : <%= tabletinterview.skin_type %><br>
-        진단으로 나온 솔루션 1 : <font id="before_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/><%= tabletinterview.before_solution_1 %> / 최종으로 선택된 솔루션 1 : <%= tabletinterview.after_solution_1 %> <br>
+        진단으로 나온 솔루션 1 : <font id="before_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 솔루션 1 : <%= tabletinterview.after_solution_1 %> <br>
       </div>
     </body>
 </html>
