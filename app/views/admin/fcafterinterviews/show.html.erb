@@ -52,29 +52,6 @@
         });
 
         <% if !@after_interview.a1.nil? %>
-          // document.getElementById("a1_1").disabled = true;
-          // document.getElementById("a1_2").disabled = true;
-          // document.getElementById("a1_3").disabled = true;
-          // document.getElementById("a1_4").disabled = true;
-          // document.getElementById("a1_5").disabled = true;
-          //
-          // document.getElementById("a2_1").disabled = true;
-          // document.getElementById("a2_2").disabled = true;
-          // document.getElementById("a2_3").disabled = true;
-          // document.getElementById("a2_4").disabled = true;
-          // document.getElementById("a2_5").disabled = true;
-          //
-          // document.getElementById("a3_1").disabled = true;
-          // document.getElementById("a3_2").disabled = true;
-          // document.getElementById("a3_3").disabled = true;
-          // document.getElementById("a3_4").disabled = true;
-          // document.getElementById("a3_5").disabled = true;
-          //
-          // document.getElementById("a4_1").disabled = true;
-          // document.getElementById("a4_2").disabled = true;
-          // document.getElementById("a4_3").disabled = true;
-          // document.getElementById("a4_4").disabled = true;
-
           <% if @after_interview.a1 == 1 %>
             $('#a1_1').prop('checked', true);
           <% elsif @after_interview.a1 == 2 %>
@@ -126,6 +103,31 @@
           <% end %>
         <% end %>
 
+        $('#delete').click(function(){
+          var r = confirm("정말 삭제하시겠습니까?")
+          if(r){
+            var formData = new FormData($(this)[0]);
+            formData.append("custserial", '<%= @after_interview.custserial.to_i %>');
+            formData.append("tablet_interview_id", '<%= @after_interview.tablet_interview_id.to_i %>');
+            formData.append("after_interview_id", '<%= @after_interview.after_interview_id.to_i %>');
+            formData.append("order", '<%= @after_interview.order.to_i %>');
+
+            $.ajax({
+                url: "/admin/after_interview",
+                type: 'DELETE',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (returndata) {
+                  opener.location.reload();
+                  window.close();
+                },
+                error: function (returndata) {}
+            });
+          }
+        });
         $('#submit').click(function(){
             console.log("Click");
 
@@ -188,7 +190,7 @@
               formData.append("a5", $('#a5').val());
 
               $.ajax({
-                  url: "/update_after_interview",
+                  url: "/admin/update_after_interview",
                   type: 'POST',
                   data: formData,
                   async: false,
@@ -300,7 +302,8 @@
         5. 기타의견<br>구입하신 세럼을 사용하면서 좋았던 점이나 개선해야 할 사항에 대하여 의견을 주시면 감사하겠습니다.<br>
         <textarea type="text" rows="5" style="width: 500px;" id="a5" onfocus="this.value = this.value;"></textarea>
         <br>
-        <button id="submit" type="submit" value="Submit">입력</button>
+        <button class="btn btn-primary" id="submit" type="submit" value="Submit">입력</button>
+        <button class="btn btn-danger" id="delete">삭제</button>
       </div>
     </div>
   </body>

@@ -65,24 +65,6 @@
         document.getElementById("a1_6_text").disabled = true;
 
         <% if !@after_interview.a1.nil? %>
-          // document.getElementById("a1_1").disabled = true;
-          // document.getElementById("a1_2").disabled = true;
-          // document.getElementById("a1_3").disabled = true;
-          // document.getElementById("a1_4").disabled = true;
-          // document.getElementById("a1_5").disabled = true;
-          // document.getElementById("a1_6").disabled = true;
-          //
-          // document.getElementById("a2_1").disabled = true;
-          // document.getElementById("a2_2").disabled = true;
-          // document.getElementById("a2_3").disabled = true;
-          // document.getElementById("a2_4").disabled = true;
-          //
-          // document.getElementById("a3_1").disabled = true;
-          // document.getElementById("a3_2").disabled = true;
-          // document.getElementById("a3_3").disabled = true;
-          // document.getElementById("a3_4").disabled = true;
-          // document.getElementById("a3_5").disabled = true;
-
           <% if @after_interview.a1 == 1 %>
             $('#a1_1').prop('checked', true);
           <% elsif @after_interview.a1 == 2 %>
@@ -131,6 +113,32 @@
           <% end %>
         <% end %>
 
+        $('#delete').click(function(){
+          var r = confirm("정말 삭제하시겠습니까?")
+          if(r){
+            var formData = new FormData($(this)[0]);
+            formData.append("custserial", '<%= @after_interview.custserial.to_i %>');
+            formData.append("tablet_interview_id", '<%= @after_interview.tablet_interview_id.to_i %>');
+            formData.append("after_interview_id", '<%= @after_interview.after_interview_id.to_i %>');
+            formData.append("order", '<%= @after_interview.order.to_i %>');
+
+            $.ajax({
+                url: "/admin/after_interview",
+                type: 'DELETE',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (returndata) {
+                  opener.location.reload();
+                  window.close();
+                },
+                error: function (returndata) {}
+            });
+          }
+        });
+        
         $('#submit').click(function(){
             console.log("Click");
 
@@ -291,7 +299,8 @@
         4. 특이사항<br>르메디 맞춤형 프로세스 중 어려운 점이나 불필요한 사항 및 기타 요청 사항을 자유롭게 기재해 주시기 바랍니다.<br>
         <textarea type="text" rows="5" style="width: 500px;" id="a5" onfocus="this.value = this.value;" ></textarea>
         <br>
-        <button class="btn btn-danger" id="submit" type="submit" value="Submit">입력</button>
+        <button class="btn btn-primary" id="submit" type="submit" value="Submit">입력</button>
+        <button class="btn btn-danger" id="delete">삭제</button>
       </div>
     </div>
   </body>

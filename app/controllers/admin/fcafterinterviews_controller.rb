@@ -49,4 +49,22 @@ class Admin::FcafterinterviewsController < Admin::AdminApplicationController
     end
     after_interview.save
   end
+
+  def delete
+    custserial = params[:custserial]
+    tablet_interview_id = params[:tablet_interview_id]
+    after_interview_id = params[:after_interview_id]
+    order = params[:order]
+
+    after_interview = Fcafterinterview.where(custserial: custserial).where(tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).where(order: order).first
+
+    after_interview.a1 = nil
+    after_interview.a1_1 = nil
+    after_interview.a2 = nil
+    after_interview.a3 = nil
+    after_interview.a4 = nil
+    after_interview.a5 = nil
+
+    after_interview.save
+  end
 end
