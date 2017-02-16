@@ -33,6 +33,12 @@
           //세럼 한글 변경
           $('#before_serum_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(translate_serum('<%= tabletinterview.before_serum %>'));
           $('#after_serum_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(translate_serum('<%= tabletinterview.after_serum %>'));
+
+          //앰플 한글 변경
+          $('#before_ampoule_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(translate_ampoule('<%= tabletinterview.before_ample_1 %>'));
+          $('#after_ampoule_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(translate_ampoule('<%= tabletinterview.after_ample_1 %>'));
+          $('#before_ampoule_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(translate_ampoule('<%= tabletinterview.before_ample_2 %>'));
+          $('#after_ampoule_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(translate_ampoule('<%= tabletinterview.after_ample_2 %>'));
         });
 
         function translate_skin_type(value){
@@ -92,6 +98,25 @@
             }
         }
 
+        function translate_ampoule(value){
+            try{
+              if(value == "pore clinic ampoule")
+                return "포어클리닉 앰플"
+              else if(value == "carming ampoule")
+                return "카밍 앰플"
+              else if(value == "luminus ampoule")
+                return "루미너스 앰플"
+              else if(value == "regenerating ampoule")
+                return "리제네레이팅 앰플"
+              else if(value == "perming ampoule")
+                return "퍼밍 앰플"
+              else
+                return value
+            }catch(err){
+              return value
+            }
+        }
+
         function decode_utf8(s) {
           return decodeURI(s);
         }
@@ -106,6 +131,8 @@
         진단으로 나온 솔루션 1 : <font id="before_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 솔루션 1 : <font id="after_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/>  <br>
         진단으로 나온 솔루션 2 : <font id="before_solution_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 솔루션 2 : <font id="after_solution_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/>  <br>
         진단으로 나온 세럼 : <font id="before_serum_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 세럼 : <font id="after_serum_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/>  <br>
+        진단으로 나온 앰플 1 : <font id="before_ampoule_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 앰플 1 : <font id="after_ampoule_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/>  <br>
+        진단으로 나온 앰플 2 : <font id="before_ampoule_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/> / 최종으로 선택된 앰플 2 : <font id="after_ampoule_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"/>  <br>
       </div>
     </body>
 </html>

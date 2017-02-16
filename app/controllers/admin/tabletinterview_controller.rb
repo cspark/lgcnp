@@ -48,6 +48,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @max_birthyy = max_age_custinfo.birthyy
     @max_birthmm = max_age_custinfo.birthmm
 
+    @tabletinterviews = []
     if Rails.env.production? || Rails.env.staging?
       scoped = Fctabletinterview.all
       temp_end_date = @end_date.to_date + 1.day
@@ -69,8 +70,9 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
         end
       end
 
-      @tabletinterviews = []
       scoped = scoped.order("uptdate desc")
+
+      Rails.logger.info scoped.count
 
       scoped.each do |tabletinterview|
         custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
@@ -115,6 +117,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
         if is_contain == true
           @tabletinterviews << tabletinterview
+          Rails.logger.info "INSERT to array"
+          Rails.logger.info @tabletinterviews.count
         end
       end
 
