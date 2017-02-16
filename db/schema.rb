@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170206080606) do
+ActiveRecord::Schema.define(version: 20170216080622) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -50,17 +50,6 @@ ActiveRecord::Schema.define(version: 20170206080606) do
     t.string   "is_agree_marketing"
     t.string   "is_agree_thirdparty_info"
     t.string   "ch_cd"
-  end
-
-  create_table "fc_after_interview_tables", force: :cascade do |t|
-    t.string  "custserial",          null: false
-    t.integer "tablet_interview_id"
-    t.integer "after_interview_id"
-    t.integer "a1"
-    t.integer "a2"
-    t.integer "a3"
-    t.integer "a4"
-    t.text    "a5"
   end
 
   create_table "fcafterinterviews", force: :cascade do |t|
@@ -254,7 +243,7 @@ ActiveRecord::Schema.define(version: 20170206080606) do
   end
 
   create_table "fctabletinterviews", force: :cascade do |t|
-    t.string   "custserial",                          null: false
+    t.string   "custserial",           null: false
     t.integer  "a_1"
     t.integer  "a_2"
     t.integer  "a_3"
@@ -274,20 +263,21 @@ ActiveRecord::Schema.define(version: 20170206080606) do
     t.integer  "d_9"
     t.integer  "d_10"
     t.string   "skin_type"
-    t.string   "solution_before_solution_1"
-    t.string   "solution_after_solution_1"
-    t.string   "solution_before_solution_2"
-    t.string   "solution_after_solution_2"
-    t.string   "solution_before_serum"
-    t.string   "solution_after_serum"
-    t.string   "solution_before_ample_1"
-    t.string   "solution_after_ample_1"
-    t.string   "solution_before_ample_2"
-    t.string   "solution_after_ample_2"
-    t.string   "solution_before_ready_made_cosmetic"
-    t.string   "solution_after_ready_made_cosmetic"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.string   "before_solution_1"
+    t.string   "after_solution_1"
+    t.string   "before_solution_2"
+    t.string   "after_solution_2"
+    t.string   "before_serum"
+    t.string   "after_serum"
+    t.string   "before_ample_1"
+    t.string   "after_ample_1"
+    t.string   "before_ample_2"
+    t.string   "after_ample_2"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "uptdate"
+    t.string   "before_made_cosmetic"
+    t.string   "after_made_cosmetic"
   end
 
 end

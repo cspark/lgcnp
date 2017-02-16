@@ -21,18 +21,18 @@ class CreateFctabletinterviews < ActiveRecord::Migration[5.0]
       t.integer :d_9
       t.integer :d_10
       t.string :skin_type
-      t.string :solution_before_solution_1
-      t.string :solution_after_solution_1
-      t.string :solution_before_solution_2
-      t.string :solution_after_solution_2
-      t.string :solution_before_serum
-      t.string :solution_after_serum
-      t.string :solution_before_ample_1
-      t.string :solution_after_ample_1
-      t.string :solution_before_ample_2
-      t.string :solution_after_ample_2
-      t.string :solution_before_ready_made_cosmetic
-      t.string :solution_after_ready_made_cosmetic
+      t.string :before_solution_1
+      t.string :after_solution_1
+      t.string :before_solution_2
+      t.string :after_solution_2
+      t.string :before_serum
+      t.string :after_serum
+      t.string :before_ample_1
+      t.string :after_ample_1
+      t.string :before_ample_2
+      t.string :after_ample_2
+      t.string :before_ready_made_cosmetic
+      t.string :after_ready_made_cosmetic
 
       t.timestamps
     end
