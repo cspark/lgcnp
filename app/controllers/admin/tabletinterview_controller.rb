@@ -5,11 +5,10 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
   def index
     @start_date = Date.today
     @end_date = Date.today
-    @today = Date.today
 
     select_sex = params[:sex]
-    start_date = params[:start_date] if params.has_key?(:start_date)
-    end_date = params[:end_date] if params.has_key?(:end_date)
+    start_date = params[:start_date]
+    end_date = params[:end_date]
     start_age = params[:start_age]
     end_age = params[:end_age]
     name = params[:name]
@@ -24,16 +23,16 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     select_area = params[:select_area]
 
     @select_sex = select_sex
-    @start_date = start_date
-    @end_date = end_date
+    @start_date = start_date if !start_date.nil?
+    @end_date = end_date  if !end_date.nil?
     @start_age = start_age
     @end_age = end_age
     @name = name
     @custserial = custserial
-    @start_birthyy = start_birthyy # CUSTINFO
-    @end_birthyy = end_birthyy # CUSTINFO
-    @start_birthmm = start_birthmm # CUSTINFO
-    @end_birthmm = end_birthmm # CUSTINFO
+    @start_birthyy = start_birthyy
+    @end_birthyy = end_birthyy
+    @start_birthmm = start_birthmm
+    @end_birthmm = end_birthmm
     @select_channel = select_channel
     @select_mode = select_mode
     @select_makeup = select_makeup
@@ -61,7 +60,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     temp_end_date = @end_date.to_date + 1.day
     scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
     scoped = scoped.where(custserial: @custserial) if !@custserial.nil?
-    scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.nil?
     scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.nil?
 
     if !@select_mode.nil?
