@@ -58,8 +58,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @end_birthmm = @end_birthmm if @end_birthmm.nil?
 
     scoped = Fctabletinterview.all
-    temp_end_date = @end_date + 1.day
-    scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date, temp_end_date)
+    temp_end_date = @end_date.to_date + 1.day
+    scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
     scoped = scoped.where(custserial: @custserial) if !@custserial.nil?
     scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.nil?
     scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.nil?
