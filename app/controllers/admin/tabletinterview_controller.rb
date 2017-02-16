@@ -7,7 +7,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @end_date = Date.today
     @today = Date.today
 
-    select_sex = params[:sex]
+    select_sex = params[:select_sex]
     start_date = params[:start_date]
     end_date = params[:end_date]
     start_age = params[:start_age]
@@ -91,20 +91,26 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
           end
         end
 
-        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
-        if temp_age < @start_age.to_i || temp_age > @end_age.to_i
-          Rails.logger.info "AGE FALSE"
-          is_contain = false
+        if !@start_age.blank? && !@end_age.blank?
+          temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
+          if temp_age < @start_age.to_i || temp_age > @end_age.to_i
+            Rails.logger.info "AGE FALSE"
+            is_contain = false
+          end
         end
 
-        if custinfo.birthyy.to_i < @start_birthyy.to_i || custinfo.birthyy.to_i > @end_birthyy.to_i
-          Rails.logger.info "BIRTHYY FALSE"
-          is_contain = false
+        if !@start_birthyy.blank? && !@end_birthyy.blank?
+          if custinfo.birthyy.to_i < @start_birthyy.to_i || custinfo.birthyy.to_i > @end_birthyy.to_i
+            Rails.logger.info "BIRTHYY FALSE"
+            is_contain = false
+          end
         end
 
-        if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
-          Rails.logger.info "BIRTHMM FALSE"
-          is_contain = false
+        if !@start_birthmm.blank? && !@end_birthmm.blank?
+          if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
+            Rails.logger.info "BIRTHMM FALSE"
+            is_contain = false
+          end
         end
 
         @tabletinterviews << tabletinterview if is_contain
