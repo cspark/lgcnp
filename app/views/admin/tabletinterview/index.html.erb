@@ -138,8 +138,37 @@
             document.getElementById("end_birthmm").value = '<%= @min_birthmm %>';
           });
 
-
+          $('#submit').click(function(){
+            load();
+          });
       });
+
+      function load(){
+        var select_sex = document.getElementById("select_sex").options[document.getElementById("select_sex").selectedIndex].value;
+
+        var select_channel = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
+        var select_mode = document.getElementById("select_mode").options[document.getElementById("select_mode").selectedIndex].value;
+        var select_makeup = document.getElementById("select_makeup").options[document.getElementById("select_makeup").selectedIndex].value;
+        var select_area = document.getElementById("select_area").options[document.getElementById("select_area").selectedIndex].value;
+
+        url = ""
+        url += "/admin/tabletinterview?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
+        url += "&select_sex=" + select_sex;
+        url += "&start_age=" + document.getElementById("start_age").value;
+        url += "&end_age=" + document.getElementById("end_age").value;
+        url += "&name=" + document.getElementById("name").value;
+        url += "&custserial=" + document.getElementById("custserial").value;
+        url += "&start_birthyy=" + document.getElementById("start_birthyy").value;
+        url += "&end_birthyy=" + document.getElementById("end_birthyy").value;
+        url += "&start_birthmm=" + document.getElementById("start_birthmm").value;
+        url += "&end_birthmm=" + document.getElementById("end_birthmm").value;
+        url += "&select_channel=" + select_channel;
+        url += "&select_mode=" + select_mode;
+        url += "&select_makeup=" + select_makeup;
+        url += "&select_area=" + select_area;
+
+        location.href = url;
+      }
     </script>
   </head>
 

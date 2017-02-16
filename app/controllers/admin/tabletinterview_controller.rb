@@ -5,7 +5,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
   def index
     @start_date = Date.today
     @end_date = Date.today
-
+    @today = Date.today
+    
     select_sex = params[:sex]
     start_date = params[:start_date]
     end_date = params[:end_date]
