@@ -5,7 +5,7 @@ class Admin::FcavgdataController < Admin::AdminApplicationController
   def list
     @select_option = params[:select]
 
-    if params.has_key?(:select)
+    if @select_option.blank?
       @select_option = "all"
     end
 
