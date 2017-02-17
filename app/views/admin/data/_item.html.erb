@@ -26,7 +26,7 @@
       <% custinfo = Custinfo.where(custserial: fcdata.custserial).first %>
       <div style="display:table; height:130px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
         <font size="4">이름 : <%= custinfo.custname %></font> / <font size="4">분석 횟수: <%= fcdata.measureno %></font><br>
-        <font size="2">채널구분: </font> / <font size="2">전면,좌/우측면: <%= fcdata.faceno %></font> / <font size="2">분석 일: <%= fcdata.measuredate %></font><br>
+        <font size="2">채널구분: </font> / <font size="2">전면,좌,우측면: <%= fcdata.faceno %></font> / <font size="2">분석 일: <%= fcdata.measuredate %></font><br>
         <font size="2">업데이트 일: <%= fcdata.uptdate %></font> / <font size="2">measureno: <%= fcdata.measureno %></font><br>
         <font size="2">수분 측정 Data: <%= fcdata.mo_1 %></font> / <font size="2"><%= fcdata.mo_7 %></font> / <font size="2"><%= fcdata.mo_8 %></font><br>
         <font size="2">모공 측정 Data: <%= fcdata.pr_1 %></font> / <font size="2"><%= fcdata.pr_2 %></font> / <font size="2"><%= fcdata.pr_7 %></font> / <font size="2"><%= fcdata.pr_8 %></font> / / <font size="2"><%= fcdata.pr_avr %></font><br>
