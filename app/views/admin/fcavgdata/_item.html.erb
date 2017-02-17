@@ -25,12 +25,12 @@
     <body>
       <h2><%= fcavgdata.first.n_index.to_i %> ~ <%= fcavgdata.last.n_index.to_i %> 세 이하</h2>
       <% fcavgdata.reverse_each do |data| %>
-        <div style="display:table; height:150px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
-          나이: <font><%= data.n_index.to_i %> 세</font><br>
-          모공 : <font><%= data.pore %></font> / 탄력 : <font><%= data.wrinkle %></font><br>
-          색소침착 편광 : <font><%= data.spot_pl %></font> / 색소침착 UV광  : <font><%= data.spot_uv %></font> / 탄력 : <font><%= data.elasticity %></font><br>
-          포피린 Ratio : <font><%= data.porphyrin_ratio %></font> / T존 피지 E값 : <font><%= data.e_sebum_t %></font> / U존 피지 E값 : <font><%= data.e_sebum_u %></font><br>
-          수분 : <font><%= data.moisture %></font> / 포피린_t : <font><%= data.e_porphyrin_t %></font> / 포피린_u : <font><%= data.e_porphyrin_u %></font><br>
+        <div style="display:table; height:130px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
+          <font size="4">나이: <%= data.n_index.to_i %> 세</font><br>
+          <font size="2">모공 : <%= data.pore %></font> / <font size="2">주름 : <%= data.wrinkle %></font><br>
+          <font size="2">색소침착 편광 : <%= data.spot_pl %></font> / <font size="2">색소침착 UV광  : <%= data.spot_uv %></font> / <font size="2">탄력 : <%= data.elasticity %></font><br>
+          <font size="2">포피린 Ratio : <%= data.porphyrin_ratio %></font> / <font size="2">T존 피지 E값 : <%= data.e_sebum_t %></font> / <font size="2">U존 피지 E값 : <%= data.e_sebum_u %></font><br>
+          <font size="2">수분 : <%= data.moisture %></font> / <font size="2">포피린_t : <%= data.e_porphyrin_t %></font> / <font size="2">포피린_u : <%= data.e_porphyrin_u %></font><br>
         </div>
       <% end %>
     </body>
