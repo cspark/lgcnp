@@ -71,18 +71,18 @@
         <font size="2">채널구분: </font> / <font size="2">전면,좌,우측면: <%= fcdata.faceno %></font><br>
         <font size="2">분석 일: <%= fcdata.measuredate %></font> / <font size="2">업데이트 일: <%= fcdata.uptdate %></font><br>
         <font size="2">수분 측정 Data: <%= fcdata.mo_1 %></font> / <font size="2"><%= fcdata.mo_7 %></font> / <font size="2"><%= fcdata.mo_8 %></font><br>
-        <font size="2">모공 측정 Data: <%= fcdata.pr_1 %></font> / <font size="2"><%= fcdata.pr_2 %></font> / <font size="2"><%= fcdata.pr_7 %></font> / <font size="2"><%= fcdata.pr_8 %></font> / / <font size="2"><%= fcdata.pr_avr %></font><br>
-        <font size="2">주름 측정 Data: <%= fcdata.wr_3 %></font> / <font size="2"><%= fcdata.wr_4 %></font> / <font size="2"><%= fcdata.wr_6 %></font> / <font size="2"><%= fcdata.wr_avr %></font><br>
-        <font size="2">탄력 측정 Data: <%= fcdata.el_7 %></font> / <font size="2"><%= fcdata.el_8 %></font> / <font size="2"><%= fcdata.el_avr %></font> / <font size="2"><%= fcdata.el_angle_7 %></font> / <font size="2"><%= fcdata.el_angle_8 %></font><br>
-        <font size="2">피지 측정 Data: <%= fcdata.sb_1 %></font> / <font size="2"><%= fcdata.sb_2 %></font> / <font size="2"><%= fcdata.sb_7 %></font> / <font size="2"><%= fcdata.sb_8 %></font> / <font size="2"><%= fcdata.sb_avr %></font><br>
-        <font size="2">포피린 측정 Data: <%= fcdata.pp_1 %></font> / <font size="2"><%= fcdata.pp_2 %></font> / <font size="2"><%= fcdata.pp_7 %></font> / <font size="2"><%= fcdata.pp_8 %></font> / <font size="2"><%= fcdata.pp_avr %></font><br>
-        <font size="2">포피린 비 측정 Data: <%= fcdata.pp_ratio_1 %></font> / <font size="2"><%= fcdata.pp_ratio_2 %></font> / <font size="2"><%= fcdata.pp_ratio_7 %></font> / <font size="2"><%= fcdata.pp_ratio_8 %></font> / <font size="2"><%= fcdata.pp_ratio_avr %></font><br>
-        <font size="2">편광 색소침착 측정 Data: <%= fcdata.sp_pl_1 %></font> / <font size="2"><%= fcdata.sp_pl_2 %></font> / <font size="2"><%= fcdata.sp_pl_3 %></font> / <font size="2"><%= fcdata.sp_pl_4 %></font> / <font size="2"><%= fcdata.sp_pl_5 %></font> /
-        <font size="2"><%= fcdata.sp_pl_6 %></font> / <font size="2"><%= fcdata.sp_pl_7 %></font> / <font size="2"><%= fcdata.sp_pl_8 %></font> / <font size="2"><%= fcdata.sp_pl_avr %></font><br>
-        <font size="2">UV광 색소침착 측정 Data: <%= fcdata.sp_uv_1 %></font> / <font size="2"><%= fcdata.sp_uv_2 %></font> / <font size="2"><%= fcdata.sp_uv_3 %></font> / <font size="2"><%= fcdata.sp_uv_4 %></font> / <font size="2"><%= fcdata.sp_uv_5 %></font> /
-        <font size="2"><%= fcdata.sp_uv_6 %></font> / <font size="2"><%= fcdata.sp_uv_7 %></font> / <font size="2"><%= fcdata.sp_uv_8 %></font> / <font size="2"><%= fcdata.sp_uv_avr %></font><br>
-        <font size="2">피부톤 측정 Data: <%= fcdata.sk_g_1 %></font> / <font size="2"><%= fcdata.sk_g_2 %></font> / <font size="2"><%= fcdata.sk_g_4 %></font> / <font size="2"><%= fcdata.sk_g_6 %></font> / <font size="2"><%= fcdata.sk_g_7 %></font>  /
-        <font size="2"><%= fcdata.sk_g_8 %></font> / <font size="2"><%= fcdata.sk_g_avr %></font><br>
+        <font size="2">모공 측정 Data: <%= fcdata.pr_1.to_i %></font> / <font size="2"><%= fcdata.pr_2.to_i %></font> / <font size="2"><%= fcdata.pr_7.to_i %></font> / <font size="2"><%= fcdata.pr_8.to_i %></font> / / <font size="2"><%= fcdata.pr_avr.to_i %></font><br>
+        <font size="2">주름 측정 Data: <%= fcdata.wr_3.to_i %></font> / <font size="2"><%= fcdata.wr_4.to_i %></font> / <font size="2"><%= fcdata.wr_6.to_i %></font> / <font size="2"><%= fcdata.wr_avr.to_i %></font><br>
+        <font size="2">탄력 측정 Data: <%= fcdata.el_7.to_i %></font> / <font size="2"><%= fcdata.el_8.to_i %></font> / <font size="2"><%= fcdata.el_avr.to_i %></font> / <font size="2"><%= fcdata.el_angle_7 %></font> / <font size="2"><%= fcdata.el_angle_8 %></font><br>
+        <font size="2">피지 측정 Data: <%= fcdata.sb_1.to_i %></font> / <font size="2"><%= fcdata.sb_2.to_i %></font> / <font size="2"><%= fcdata.sb_7.to_i %></font> / <font size="2"><%= fcdata.sb_8.to_i %></font> / <font size="2"><%= fcdata.sb_avr.to_i %></font><br>
+        <font size="2">포피린 측정 Data: <%= fcdata.pp_1.to_i %></font> / <font size="2"><%= fcdata.pp_2.to_i %></font> / <font size="2"><%= fcdata.pp_7.to_i %></font> / <font size="2"><%= fcdata.pp_8.to_i %></font> / <font size="2"><%= fcdata.pp_avr.to_i %></font><br>
+        <font size="2">포피린 비 측정 Data: <%= fcdata.pp_ratio_1.to_i %></font> / <font size="2"><%= fcdata.pp_ratio_2.to_i %></font> / <font size="2"><%= fcdata.pp_ratio_7.to_i %></font> / <font size="2"><%= fcdata.pp_ratio_8.to_i %></font> / <font size="2"><%= fcdata.pp_ratio_avr.to_i %></font><br>
+        <font size="2">편광 색소침착 측정 Data: <%= fcdata.sp_pl_1.to_i %></font> / <font size="2"><%= fcdata.sp_pl_2.to_i %></font> / <font size="2"><%= fcdata.sp_pl_3.to_i %></font> / <font size="2"><%= fcdata.sp_pl_4.to_i %></font> / <font size="2"><%= fcdata.sp_pl_5.to_i %></font> /
+        <font size="2"><%= fcdata.sp_pl_6.to_i %></font> / <font size="2"><%= fcdata.sp_pl_7.to_i %></font> / <font size="2"><%= fcdata.sp_pl_8.to_i %></font> / <font size="2"><%= fcdata.sp_pl_avr.to_i %></font><br>
+        <font size="2">UV광 색소침착 측정 Data: <%= fcdata.sp_uv_1.to_i %></font> / <font size="2"><%= fcdata.sp_uv_2.to_i %></font> / <font size="2"><%= fcdata.sp_uv_3.to_i %></font> / <font size="2"><%= fcdata.sp_uv_4.to_i %></font> / <font size="2"><%= fcdata.sp_uv_5.to_i %></font> /
+        <font size="2"><%= fcdata.sp_uv_6.to_i %></font> / <font size="2"><%= fcdata.sp_uv_7.to_i %></font> / <font size="2"><%= fcdata.sp_uv_8.to_i %></font> / <font size="2"><%= fcdata.sp_uv_avr.to_i %></font><br>
+        <font size="2">피부톤 측정 Data: <%= fcdata.sk_g_1.to_i %></font> / <font size="2"><%= fcdata.sk_g_2.to_i %></font> / <font size="2"><%= fcdata.sk_g_4.to_i %></font> / <font size="2"><%= fcdata.sk_g_6.to_i %></font> / <font size="2"><%= fcdata.sk_g_7.to_i %></font>  /
+        <font size="2"><%= fcdata.sk_g_8.to_i %></font> / <font size="2"><%= fcdata.sk_g_avr.to_i %></font><br>
       </div>
     </body>
 </html>
