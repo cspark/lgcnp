@@ -10,8 +10,14 @@
 
     <script>
       $(function () {
+        document.getElementById("select_age").addEventListener("change", function() {
+            var select_option = document.getElementById("select_age").options[document.getElementById("select_age").selectedIndex].value
+            location.href = "/admin/fcavg_list?select=" + select_option;
+        });
 
-
+        <% if !@select_option.nil? %>
+          $('select[id="select_age"]').val('<%= @select_option %>');
+        <% end %>
       });
 
     </script>
@@ -20,12 +26,25 @@
   <body>
     <%= render "admin/header" %>
 
-    <h2> 구현중입니다. 테스트 중입니다 </h2>
-    <% @fcavgdatas_list.reverse_each do |fcavgdata| %>
-      <%= render partial: "admin/fcavgdata/item", locals: { fcavgdata: fcavgdata } %>
+    <select class="form-control" id="select_age">
+      <option value="all">전체연령</option>
+      <option value="1-10">1~10살</option>
+      <option value="11-15">11~15살</option>
+      <option value="16-20">16~20살</option>
+      <option value="21-25">21~25살</option>
+      <option value="26-30">26~30살</option>
+      <option value="31-35">31~35살</option>
+      <option value="36-40">36~40살</option>
+      <option value="41-45">41~45살</option>
+      <option value="46-50">46~50살</option>
+      <option value="51-55">51~55살</option>
+      <option value="56-60">56~60살</option>
+      <option value="61-70">61~70살</option>
+      <option value="71">71살</option>
+    </select>
+
+    <% @fcavgdatas_list.each do |fcavgdata| %>
+      <%= render partial: "admin/fcavgdata/item", locals: { data: fcavgdata } %>
     <% end %>
-    <div>
-      <%= paginate @fcavgdatas_list %>
-    </div>
   </body>
 </html>
