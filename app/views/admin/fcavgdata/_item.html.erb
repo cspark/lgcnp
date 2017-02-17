@@ -26,7 +26,7 @@
 
       <div style="display:table; height:130px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
         <% title = data.age %>
-        <% temp1 = title[0, title.split("-")[0].length-1] %>
+        <% temp1 = title[0, title.split("-")[0].length-2] %>
         <% grade = title[title.length-6, title.length] %>
         <% title = temp1+grade %>
         <% title = title.gsub("_Age","").gsub("Age","").gsub("ALL_Grade","").gsub("ALL_","").gsub("MiLL_","").gsub("MaLL_","").gsub("_"," ") %>

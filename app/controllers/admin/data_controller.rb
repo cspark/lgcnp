@@ -59,8 +59,8 @@ class Admin::DataController < Admin::AdminApplicationController
 
       Rails.logger.info scoped.count
 
-      scoped.each do |tabletinterview|
-        custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
+      scoped.each do |fcdata|
+        custinfo = Custinfo.where(custserial: fcdata.custserial).first
         is_contain = true
 
         if !@name.blank?
