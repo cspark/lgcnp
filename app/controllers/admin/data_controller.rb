@@ -14,6 +14,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end_age = params[:end_age]
     name = params[:name]
     custserial = params[:custserial]
+    measureno = params[:measureno]
     start_birthyy = params[:start_birthyy]
     end_birthyy = params[:end_birthyy]
     start_birthmm = params[:start_birthmm]
@@ -35,6 +36,7 @@ class Admin::DataController < Admin::AdminApplicationController
     @end_age = end_age if !end_age.blank?
     @name = name
     @custserial = custserial
+    @measureno = measureno
     @start_birthyy = start_birthyy
     @end_birthyy = end_birthyy
     @start_birthmm = start_birthmm
@@ -63,7 +65,12 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped = Fcdata.all
       temp_end_date = @end_date.to_date + 1.day
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
+      scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date) if
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
+      scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
+      scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
+      scoped = scoped.where(skintype: @select_skin_type_device) if !@select_skin_type_device.blank?
+      # scoped = scoped.where(faceno: @select_area.to_i) if !@select_area.blank? && @select_area.downcase != "all"
 
       scoped = scoped.order("uptdate desc")
 
@@ -72,6 +79,21 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped.each do |fcdata|
         custinfo = Custinfo.where(custserial: fcdata.custserial).first
         is_contain = true
+
+        # 필드 추가
+        # if !@select_mode.blank?
+        #   if @select_mode.downcase != "all"
+        #     if @select_mode == "quick"
+        #       scoped = scoped.where(is_quick_mode: "T")
+        #     end
+        #   end
+        # end
+
+        # if !@select_makeup.blank?
+        #   if @select_makeup.downcase != "all"
+        #     scoped = scoped.where(is_make_up: @select_makeup)
+        #   end
+        # end
 
         if !@name.blank?
           if !custinfo.custname.include? @name
@@ -100,6 +122,12 @@ class Admin::DataController < Admin::AdminApplicationController
 
         if !@start_birthmm.blank? && !@end_birthmm.blank?
           if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
+            is_contain = false
+          end
+        end
+
+        if @select_channel != "all"
+          if custinfo.ch_cd != @select_channel
             is_contain = false
           end
         end
