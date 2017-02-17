@@ -159,8 +159,8 @@
         });
 
         $("#birthmm_init").click(function(){
-          document.getElementById("start_birthmm").value = '<%= @max_birthmm %>';
-          document.getElementById("end_birthmm").value = '<%= @min_birthmm %>';
+          document.getElementById("start_birthmm").value = '<%= @min_birthmm %>';
+          document.getElementById("end_birthmm").value = '<%= @max_birthmm %>';
         });
 
         $('#submit').click(function(){
@@ -256,7 +256,7 @@
           <option value="cnp">CNP</option>
           <option value="mart">마트</option>
           <option value="nc">NC</option>
-          <option value="baut">보떼</option>
+          <option value="beau">보떼</option>
           <option value="cnprx">CNPRX</option>
         </select>
       </div>
@@ -280,9 +280,9 @@
         측정부위 :
         <select class="form-control" id="select_area">
           <option value="all">All</option>
-          <option value="1">전면</option>
-          <option value="2">좌</option>
-          <option value="3">우</option>
+          <option value="F">전면</option>
+          <option value="L">좌</option>
+          <option value="R">우</option>
         </select>
 
         피부타입(기기) :

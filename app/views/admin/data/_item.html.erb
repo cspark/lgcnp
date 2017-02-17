@@ -67,11 +67,11 @@
     <body>
       <% custinfo = Custinfo.where(custserial: fcdata.custserial).first %>
       <div style="display:table; height:130px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
-        <div id="name_<%= user.custserial.to_i %>_<%= fcdata.uptdate %>"></div>
-        <font size="4">분석 횟수: <%= fcdata.measureno %> / 채널구분: / <%= user.ch_cd %> / 전면,좌,우측면: <%= fcdata.faceno %></font><br>
+        <font size="2"><div id="name_<%= user.custserial.to_i %>_<%= fcdata.uptdate %>"></div></font>
+        <font size="2">분석 횟수: <%= fcdata.measureno.to_i %> / 채널구분: <%= user.ch_cd %> / 전면,좌,우측면: <%= fcdata.faceno %></font><br>
         <font size="2">분석 일: <%= fcdata.measuredate %></font> / <font size="2">업데이트 일: <%= fcdata.uptdate %></font><br>
         <font size="2">수분 측정 Data: <%= fcdata.mo_1 %></font> / <font size="2"><%= fcdata.mo_7 %></font> / <font size="2"><%= fcdata.mo_8 %></font><br>
-        <font size="2">모공 측정 Data: <%= fcdata.pr_1.to_i %></font> / <font size="2"><%= fcdata.pr_2.to_i %></font> / <font size="2"><%= fcdata.pr_7.to_i %></font> / <font size="2"><%= fcdata.pr_8.to_i %></font> / / <font size="2"><%= fcdata.pr_avr.to_i %></font><br>
+        <font size="2">모공 측정 Data: <%= fcdata.pr_1.to_i %></font> / <font size="2"><%= fcdata.pr_2.to_i %></font> / <font size="2"><%= fcdata.pr_7.to_i %></font> / <font size="2"><%= fcdata.pr_8.to_i %></font> / <font size="2"><%= fcdata.pr_avr.to_i %></font><br>
         <font size="2">주름 측정 Data: <%= fcdata.wr_3.to_i %></font> / <font size="2"><%= fcdata.wr_4.to_i %></font> / <font size="2"><%= fcdata.wr_6.to_i %></font> / <font size="2"><%= fcdata.wr_avr.to_i %></font><br>
         <font size="2">탄력 측정 Data: <%= fcdata.el_7.to_i %></font> / <font size="2"><%= fcdata.el_8.to_i %></font> / <font size="2"><%= fcdata.el_avr.to_i %></font> / <font size="2"><%= fcdata.el_angle_7 %></font> / <font size="2"><%= fcdata.el_angle_8 %></font><br>
         <font size="2">피지 측정 Data: <%= fcdata.sb_1.to_i %></font> / <font size="2"><%= fcdata.sb_2.to_i %></font> / <font size="2"><%= fcdata.sb_7.to_i %></font> / <font size="2"><%= fcdata.sb_8.to_i %></font> / <font size="2"><%= fcdata.sb_avr.to_i %></font><br>
@@ -89,7 +89,7 @@
         <font size="2"><%= fcdata.sk_g_8.to_i %></font> / <font size="2"><%= fcdata.sk_g_avr.to_i %></font><br>
         <font size="2">피부톤 Blue Data: <%= fcdata.sk_b_1.to_i %></font> / <font size="2"><%= fcdata.sk_b_2.to_i %></font> / <font size="2"><%= fcdata.sk_b_4.to_i %></font> / <font size="2"><%= fcdata.sk_b_6.to_i %></font> / <font size="2"><%= fcdata.sk_b_7.to_i %></font>  /
         <font size="2"><%= fcdata.sk_b_8.to_i %></font> / <font size="2"><%= fcdata.sk_b_avr.to_i %></font><br>
-        <font size="2">피부톤 칼라 타입: <%= fcdata.colortype %> / 선 민감도: <%= fcdata.suntype %> / 동안각도 점수 우측: <%= fcdata.score_r %> / 동안각도 점수 좌측: <%= fcdata.score_l %> / 동안각도 점수 좌측: <%= fcdata.score_l %></font><br>
+        <font size="2">피부톤 칼라 타입: <%= fcdata.colortype %> / 선 민감도: <%= fcdata.suntype %> / 동안각도 점수 우측: <%= fcdata.score_r %> / 동안각도 점수 좌측: <%= fcdata.score_l %> / 피부타입 : <%= fcdata.skintype %></font><br>
       </div>
     </body>
 </html>

@@ -60,6 +60,25 @@ class Admin::DataController < Admin::AdminApplicationController
     @max_birthyy = max_age_custinfo.birthyy
     @max_birthmm = 12
 
+    if !@select_skin_type_device.blank? && @select_skin_type_device != "all"
+      if @select_skin_type_device == "gunsung"
+        skin_type_device_min_val = 0
+        skin_type_device_max_val = 10
+      elsif @select_skin_type_device == "jungsung"
+        skin_type_device_min_val = 10
+        skin_type_device_max_val = 20
+      elsif @select_skin_type_device == "jisung"
+        skin_type_device_min_val = 20
+        skin_type_device_max_val = 30
+      elsif @select_skin_type_device == "t_zone_boghab"
+        skin_type_device_min_val = 30
+        skin_type_device_max_val = 40
+      elsif @select_skin_type_device == "u_zone_boghab"
+        skin_type_device_min_val = 40
+        skin_type_device_max_val = 50
+      end
+    end
+
     @fcdatas = []
     if Rails.env.production? || Rails.env.staging?
       scoped = Fcdata.all
@@ -67,9 +86,9 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
       scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
-      scoped = scoped.where(skintype: @select_skin_type_device) if !@select_skin_type_device.blank? && @select_skin_type_device != "all"
       scoped = scoped.where(faceno: @select_area.to_i) if !@select_area.blank? && @select_area.downcase != "all"
 
+      scoped = scoped.where("skintype >= ? AND skintype < ?", skin_type_device_min_val, skin_type_device_max_val) if !@select_skin_type_device.blank? && @select_skin_type_device != "all"
       # scoped = scoped.where(skintype: @select_skin_type_survey) if !@select_skin_type_survey.blank? && @select_skin_type_survey != "all"
 
       scoped = scoped.order("uptdate desc")
