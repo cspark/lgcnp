@@ -29,7 +29,7 @@
         <% temp1 = title[0, title.split("-")[0].length-1] %>
         <% grade = title[title.length-6, title.length] %>
         <% title = temp1+grade %>
-        <% title = title.gsub("_Age","").gsub("Age","").gsub("ALL_Grade","").gsub("ALL_","") %>
+        <% title = title.gsub("_Age","").gsub("Age","").gsub("ALL_Grade","").gsub("ALL_","").gsub("MiLL_","").gsub("MaLL_","").gsub("_"," ") %>
         <% if title.include?("Male") %>
           <% title = title.gsub("Male","") %>
           <% title = "남자 "+title %>
