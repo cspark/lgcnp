@@ -26,7 +26,17 @@
 
       <div style="display:table; height:130px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
         <% title = data.age %>
-
+        <% temp1 = title.split("_")[0] %>
+        <% if title.split("_")[2].nil? %>
+          <% grade = title.split("_")[1] %>
+        <% else %>
+          <% grade = title.split("_")[2] %>
+        <% end %>
+        <% if temp1.include?("Male") %>
+          <% title = "남자 "+grade %>
+        <% else %>
+          <% title = "여자 "+grade %>
+        <% end %>
         <h4><%= title %></h4>
         <font size="2">
           모공 : <%= data.pore %> / 주름 : <%= data.wrinkle %> / 색소침착 편광 : <%= data.spot_pl %> / 색소침착 UV광  : <%= data.spot_uv %> / 탄력 : <%= data.elasticity %><br>
