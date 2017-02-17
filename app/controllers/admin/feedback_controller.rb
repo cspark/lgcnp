@@ -61,6 +61,11 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     max_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy asc").first
     @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
 
+    begin
+      @start_date = Fctabletinterview.all.minimum(:uptdate).to_date
+    rescue
+    end
+
     @average_a1 = 0
     @average_a2 = 0
     @average_a3 = 0
@@ -172,8 +177,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       end
     end
 
-    @after_interviews = Kaminari.paginate_array(@after_interviews).page(params[:page]).per(5)
-
     @after_interviews.each do |interview|
       @average_a1 = @average_a1 + interview.a1.to_i
       @average_a2 = @average_a2 + interview.a2.to_i
@@ -198,6 +201,8 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     if @average_a4 != 0
       @average_a4 = (@average_a4 / divider).to_f
     end
+
+    @after_interviews = Kaminari.paginate_array(@after_interviews).page(params[:page]).per(5)
     render 'list'
   end
 end
