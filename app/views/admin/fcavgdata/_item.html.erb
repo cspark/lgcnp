@@ -23,7 +23,7 @@
       </script>
     </head>
     <body>
-      <h2><%= fcavgdata.first.n_index %> ~ <%= fcavgdata.last.n_index %> 세 이하</h2>
+      <h2><%= fcavgdata.first.n_index.to_i %> ~ <%= fcavgdata.last.n_index.to_i %> 세 이하</h2>
       <% fcavgdata.reverse_each do |data| %>
         <div style="display:table; height:150px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
           나이: <font><%= data.n_index %> 세</font><br>
