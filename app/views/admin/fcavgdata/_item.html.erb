@@ -39,8 +39,8 @@
         <% end %>
         <h4><%= title %></h4>
         <font size="2">
-          모공 : <%= data.pore %> / 주름 : <%= data.wrinkle %> / 색소침착 편광 : <%= data.spot_pl %> / 색소침착 UV광  : <%= data.spot_uv %> / 탄력 : <%= data.elasticity %><br>
-          포피린 비율 : <%= data.porphyrin_ratio %> / T존 피지 : <%= data.e_sebum_t %> / U존 피지 : <%= data.e_sebum_u %> / 수분 : <%= data.moisture %> / T존 포피린 : <%= data.e_porphyrin_t %> / U존 포피린 : <%= data.e_porphyrin_u %><br>
+          모공 : <%= data.pore.to_i %> / 주름 : <%= data.wrinkle.to_i %> / 색소침착 편광 : <%= data.spot_pl.to_i %> / 색소침착 UV광  : <%= data.spot_uv.to_i %> / 탄력 : <%= data.elasticity.to_i %><br>
+          포피린 비율 : <%= data.porphyrin_ratio.to_i %> / T존 피지 : <%= data.e_sebum_t %> / U존 피지 : <%= data.e_sebum_u %> / 수분 : <%= data.moisture %> / T존 포피린 : <%= data.e_porphyrin_t %> / U존 포피린 : <%= data.e_porphyrin_u %><br>
         </font>
       </div>
 
