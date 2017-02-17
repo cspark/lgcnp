@@ -23,12 +23,15 @@
       </script>
     </head>
     <body>
-      <div style="display:table; height:150px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
-        <font><%= fcavgdata.n_index %></font><br>
-        나이 : <font><%= fcavgdata.age.to_i %> / 모공 : <font><%= fcavgdata.pore %></font> / 탄력 : <font><%= fcavgdata.wrinkle %></font><br>
-        색소침착 : <font><%= fcavgdata.spot_pl %></font> / 색소 : <font><%= fcavgdata.spot_uv %></font> / 탄력 : <font><%= fcavgdata.elasticity %></font><br>
-        포르피린1 : <font><%= fcavgdata.porphyrin_ratio %></font> / 피지1 : <font><%= fcavgdata.e_sebum_t %></font> / 피지2 : <font><%= fcavgdata.e_sebum_u %></font><br>
-        수분 : <font><%= fcavgdata.moisture %></font> / 포르피린2 : <font><%= fcavgdata.e_porphyrin_t %></font> / 포르피린3 : <font><%= fcavgdata.e_porphyrin_u %></font><br>
-      </div>
+      <h2><%= fcavgdata.first.n_index %> ~ <%= fcavgdata.last.n_index %> 세 이하</h2>
+      <% fcavgdata.reverse_each do |data| %>
+        <div style="display:table; height:150px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
+          나이: <font><%= data.n_index %> 세</font><br>
+          모공 : <font><%= data.pore %></font> / 탄력 : <font><%= data.wrinkle %></font><br>
+          색소침착 : <font><%= data.spot_pl %></font> / 색소 : <font><%= data.spot_uv %></font> / 탄력 : <font><%= data.elasticity %></font><br>
+          포르피린 비율 : <font><%= data.porphyrin_ratio %></font> / 피지t : <font><%= data.e_sebum_t %></font> / 피지u : <font><%= data.e_sebum_u %></font><br>
+          수분 : <font><%= data.moisture %></font> / 포르피린t : <font><%= data.e_porphyrin_t %></font> / 포르피린u : <font><%= data.e_porphyrin_u %></font><br>
+        </div>
+      <% end %>
     </body>
 </html>

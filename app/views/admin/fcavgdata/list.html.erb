@@ -21,13 +21,11 @@
     <%= render "admin/header" %>
 
     <h2> 구현중입니다. 테스트 중입니다 </h2>
-
-    <% @fcavgdatas.each do |fcavgdata| %>
+    <% @fcavgdatas_list.reverse_each do |fcavgdata| %>
       <%= render partial: "admin/fcavgdata/item", locals: { fcavgdata: fcavgdata } %>
     <% end %>
-
     <div>
-      <%= paginate @fcavgdatas %>
+      <%= paginate @fcavgdatas_list %>
     </div>
   </body>
 </html>
