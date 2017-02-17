@@ -62,20 +62,15 @@ class Admin::DataController < Admin::AdminApplicationController
 
     if !@select_skin_type_device.blank? && @select_skin_type_device != "all"
       if @select_skin_type_device == "gunsung"
-        skin_type_device_min_val = 0
-        skin_type_device_max_val = 10
+        @select_skin_type_device = 0
       elsif @select_skin_type_device == "jungsung"
-        skin_type_device_min_val = 10
-        skin_type_device_max_val = 20
+        @select_skin_type_device = 1
       elsif @select_skin_type_device == "jisung"
-        skin_type_device_min_val = 20
-        skin_type_device_max_val = 30
+        @select_skin_type_device = 2
       elsif @select_skin_type_device == "t_zone_boghab"
-        skin_type_device_min_val = 30
-        skin_type_device_max_val = 40
+        @select_skin_type_device = 3
       elsif @select_skin_type_device == "u_zone_boghab"
-        skin_type_device_min_val = 40
-        skin_type_device_max_val = 50
+        @select_skin_type_device = 4
       end
     end
 
@@ -87,8 +82,7 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
       scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
       scoped = scoped.where(faceno: @select_area.to_i) if !@select_area.blank? && @select_area.downcase != "all"
-
-      scoped = scoped.where("skintype >= ? AND skintype < ?", skin_type_device_min_val, skin_type_device_max_val) if !@select_skin_type_device.blank? && @select_skin_type_device != "all"
+      scoped = scoped.where("skintype LIKE ?", "%#{@select_skin_type_device}%") if !@select_skin_type_device.blank? && @select_skin_type_device != "all"
       # scoped = scoped.where(skintype: @select_skin_type_survey) if !@select_skin_type_survey.blank? && @select_skin_type_survey != "all"
 
       scoped = scoped.order("uptdate desc")
