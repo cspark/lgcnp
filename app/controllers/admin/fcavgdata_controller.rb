@@ -5,6 +5,6 @@ class Admin::FcavgdataController < Admin::AdminApplicationController
   def list
     @select_option = params[:select]
 
-    @fcavgdatas_list = Fcavgdata.all.where("age LIKE '%?%'", @select_option)
+    @fcavgdatas_list = Fcavgdata.all.where("age LIKE ?", "%#{@select_option}%")
   end
 end
