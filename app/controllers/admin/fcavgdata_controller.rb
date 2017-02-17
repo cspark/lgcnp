@@ -4,8 +4,7 @@ class Admin::FcavgdataController < Admin::AdminApplicationController
 
   def list
     @select_option = params[:select]
-    temp_age = @select_option
-    @fcavgdatas_list = Fcavgdata.all.where("age LIKE '%" + temp_age+ "%'")
-    Rails.logger.info @fcavgdatas_list.count
+
+    @fcavgdatas_list = Fcavgdata.all.where("age LIKE '%?%'", @select_option)
   end
 end

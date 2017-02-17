@@ -1,6 +1,6 @@
 class Fcavgdata < ApplicationRecord
   self.table_name = "fcavgdata" if Rails.env.production? || Rails.env.staging?
-
+  
   def to_api_hash
     {
        n_index: n_index,
