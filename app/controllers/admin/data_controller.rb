@@ -67,10 +67,10 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
       scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
-      scoped = scoped.where(skintype: @select_skin_type_device) if !@select_skin_type_device.blank? || @select_skin_type_device != "all"
+      scoped = scoped.where(skintype: @select_skin_type_device) if !@select_skin_type_device.blank? && @select_skin_type_device != "all"
       scoped = scoped.where(faceno: @select_area.to_i) if !@select_area.blank? && @select_area.downcase != "all"
 
-      # scoped = scoped.where(skintype: @select_skin_type_survey) if !@select_skin_type_survey.blank?
+      # scoped = scoped.where(skintype: @select_skin_type_survey) if !@select_skin_type_survey.blank? && @select_skin_type_survey != "all"
 
       scoped = scoped.order("uptdate desc")
 
