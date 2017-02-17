@@ -36,6 +36,10 @@
           location.href = "/admin/fcavg_list"
         });
 
+        $("#fcdata_list").click(function(){
+          location.href = "/admin/data_list"
+        });
+
         $("#logout").click(function(){
           var formData = new FormData($(this)[0]);
 
@@ -70,6 +74,7 @@
           <li id="feedback_list"><a href="#">피드백 리스트</a></li>
           <li id="tabletinterview"><a href="#">태블릿 인터뷰</a></li>
           <li id="fcavg_list"><a href="#">연령별 성별 평균</a></li>
+          <li id="fcdata_list"><a href="#">야누스 측정 데이터</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
            <li id="logout"><a href="#"><span class="glyphicon glyphicon-log-in"></span>로그아웃</a></li>

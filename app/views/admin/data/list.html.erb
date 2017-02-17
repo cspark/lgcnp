@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+      $(function () {
+        $('#submit').click(function(){
+          load();
+        });
+
+      });
+
+      function load(){
+        url = ""
+        url += "/admin/data?&name=" + document.getElementById("name").value;
+        location.href = url;
+      }
+    </script>
+  </head>
+
+  <body>
+    <%= render "admin/header" %>
+
+    <h2> 구현중입니다. 테스트 중입니다 </h2>
+    <div id="filter" style="background: #b1cbbb; padding: 8px;">
+      <div class="form-inline">
+        이름 :
+        <input class="form-control" type="text" id="name" style="width:100px;">
+        <button class="btn btn-warning" id="submit">조회</button>
+      </div>
+    </div>
+
+    <% @fcdatas.each do |fcdata| %>
+      <%= render partial: "admin/data/item", locals: { fcdata: fcdata } %>
+    <% end %>
+    <div>
+      <%= paginate @fcdatas %>
+    </div>
+  </body>
+</html>

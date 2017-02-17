@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     post "update_after_interview" => "fcafterinterviews#update"
     delete "after_interview" => "fcafterinterviews#delete"
     get "fcavg_list" => "fcavgdata#list"
+    get "data_list" => "data#list"
     resources :admin_users do
     end
   end
@@ -50,7 +51,6 @@ Rails.application.routes.draw do
   get "check_yanus_status" => "fcdatas#check_yanus_status"
   get "face_data" => "fcdatas#face_data"
   get "face_data_existed" => "fcdatas#face_data_existed"
-
 
   resources :fctabletinterviews do
   end

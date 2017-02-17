@@ -1,6 +1,7 @@
 class FcdatasController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :create
   skip_before_action :verify_authenticity_token
+  before_action :is_admin
 
   def index
     fcdatas = Fcdata.all
