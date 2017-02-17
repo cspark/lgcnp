@@ -224,6 +224,9 @@
         <% @after_interviews.each do |after_interview| %>
           <%= render partial: "admin/feedback/after_item", locals: { after_interview: after_interview } %>
         <% end %>
+        <div>
+          <%= paginate @after_interviews %>
+        </div>
       </div>
     </div>
   </body>

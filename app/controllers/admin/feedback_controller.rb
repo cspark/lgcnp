@@ -172,6 +172,8 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       end
     end
 
+    @after_interviews = Kaminari.paginate_array(@after_interviews).page(params[:page]).per(5)
+
     @after_interviews.each do |interview|
       @average_a1 = @average_a1 + interview.a1.to_i
       @average_a2 = @average_a2 + interview.a2.to_i
