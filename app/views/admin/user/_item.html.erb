@@ -56,7 +56,14 @@
         <font size="4" onClick="showDetail(<%= user.custserial.to_i %>)"><div id="name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></div></font>
 
         <div><font size="2">
-          (가입날짜 : <%= user.uptdate %> / 마지막 진단 날짜 : <%= user.lastanaldate %>) <b>시리얼</b> <%= user.custserial.to_i %> / <b>전화번호</b> <div id="phone_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></div> / <b>성별</b> <%= user.sex %> / <b>생년월일</b> <%= user.birthyy %>-<%= user.birthmm %>-<%= user.birthdd %><br>
+          (가입날짜 : <%= user.uptdate %> / 마지막 진단 날짜 : <%= user.lastanaldate %>) <b>시리얼</b> <%= user.custserial.to_i %> / <b>전화번호</b> <div id="phone_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></div> /
+          <% translate_sex = "남" %>
+          <% if user.sex == "F" %>
+            <% translate_sex = "여" %>
+          <% end %>
+          <b>성별</b> <%= translate_sex %> /
+
+          <b>생년월일</b> <%= user.birthyy %>-<%= user.birthmm %>-<%= user.birthdd %><br>
           <% is_agree_privacy = "X" %>
           <% if user.is_agree_privacy == "T" %>
             <% is_agree_privacy = "O" %>

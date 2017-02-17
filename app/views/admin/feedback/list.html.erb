@@ -83,9 +83,6 @@
           $("#start_date").datepicker('setDate', '<%= @start_date %>');
           $("#end_date").datepicker('setDate', '<%= @end_date %>');
 
-          document.getElementById("start_age").value = "20"
-          document.getElementById("end_age").value = "30"
-
           <% if !@start_age.nil? %>
             document.getElementById("start_age").value = '<%= @start_age %>'
           <% end %>

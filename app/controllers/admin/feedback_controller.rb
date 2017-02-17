@@ -93,9 +93,14 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     end
     if !start_age.nil?
       @start_age = start_age
+    else
+      @start_age = @min_age
     end
+
     if !end_age.nil?
       @end_age = end_age
+    else
+      @start_age = @max_age
     end
     if !select_base.nil?
       @select_base = select_base
