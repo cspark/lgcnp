@@ -6,7 +6,7 @@ class Admin::FcavgdataController < Admin::AdminApplicationController
     @select_option = params[:select]
 
     if @select_option.blank?
-      @select_option = "all"
+      @select_option = "ALL"
     end
 
     @fcavgdatas_list = Fcavgdata.all.where("age LIKE ?", "%#{@select_option}%")
