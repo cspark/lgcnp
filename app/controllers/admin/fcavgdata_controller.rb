@@ -4,5 +4,6 @@ class Admin::FcavgdataController < Admin::AdminApplicationController
 
   def list
     @fcavgdatas = Fcavgdata.all
+    @fcavgdatas = Kaminari.paginate_array(@fcavgdatas).page(params[:page]).per(3)
   end
 end
