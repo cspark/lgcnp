@@ -75,9 +75,6 @@ class Admin::DataController < Admin::AdminApplicationController
 
       scoped = scoped.order("uptdate desc")
 
-      Rails.logger.info scoped.countskin_type
-
-
       scoped.each do |fcdata|
         custinfo = Custinfo.where(custserial: fcdata.custserial).first
         is_contain = true
