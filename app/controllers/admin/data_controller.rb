@@ -95,7 +95,7 @@ class Admin::DataController < Admin::AdminApplicationController
         end
 
         if is_contain == true
-          @fcdatas << fcdatas
+          @fcdatas << fcdata
         end
       end
 
