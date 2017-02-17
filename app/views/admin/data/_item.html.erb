@@ -24,11 +24,11 @@
               else
                 tempUserName += "*"
             }
-            $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(tempUserName);
+            $('#name_<%= user.custserial.to_i %>_<%= fcdata.uptdate %>').append(tempUserName);
           }
           catch(err)
           {
-            $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append('<%= user.custname %>');
+            $('#name_<%= user.custserial.to_i %>_<%= fcdata.uptdate %>').append('<%= user.custname %>');
           }
 
           try
@@ -46,11 +46,11 @@
               else
                 tempPhone += "*"
             }
-            $('#phone_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(tempPhone);
+            $('#phone_<%= user.custserial.to_i %>_<%= fcdata.uptdate %>').append(tempPhone);
           }
           catch(err)
           {
-            $('#phone_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append('<%= user.phone %>');
+            $('#phone_<%= user.custserial.to_i %>_<%= fcdata.uptdate %>').append('<%= user.phone %>');
           }
         });
 

@@ -22,6 +22,11 @@ class Admin::DataController < Admin::AdminApplicationController
     select_mode = params[:select_mode]
     select_makeup = params[:select_makeup]
     select_area = params[:select_area]
+    select_skin_type_device = params[:select_skin_type_device]
+    select_skin_type_survey = params[:select_skin_type_survey]
+    select_senstive = params[:select_senstive]
+    select_skin_anxiety1 = params[:select_skin_anxiety1]
+    select_skin_anxiety2 = params[:select_skin_anxiety2]
 
     @select_sex = select_sex
     @start_date = start_date if !start_date.blank?
@@ -38,6 +43,11 @@ class Admin::DataController < Admin::AdminApplicationController
     @select_mode = select_mode
     @select_makeup = select_makeup
     @select_area = select_area
+    @select_skin_type_device = select_skin_type_device
+    @select_skin_type_survey = select_skin_type_survey
+    @select_senstive = select_senstive
+    @select_skin_anxiety1 = select_skin_anxiety1
+    @select_skin_anxiety2 = select_skin_anxiety2
 
     min_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy desc").first
     @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
@@ -102,6 +112,11 @@ class Admin::DataController < Admin::AdminApplicationController
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
     else
       @fcdatas = Fcdata.all
+      Rails.logger.info "development???"
+      Rails.logger.info @fcdatas.count
+
+      Rails.logger.info "development???"
+      Rails.logger.info Custinfo.all.count
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
     end
 

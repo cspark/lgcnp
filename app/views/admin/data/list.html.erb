@@ -119,6 +119,26 @@
           $('select[id="select_area"]').val('<%= @select_area %>');
         <% end %>
 
+        <% if !@select_skin_type_device.nil? %>
+          $('select[id="select_skin_type_device"]').val('<%= @select_skin_type_device %>');
+        <% end %>
+
+        <% if !@select_skin_type_survey.nil? %>
+          $('select[id="select_skin_type_survey"]').val('<%= @select_skin_type_survey %>');
+        <% end %>
+
+        <% if !@select_senstive.nil? %>
+          $('select[id="select_senstive"]').val('<%= @select_senstive %>');
+        <% end %>
+
+        <% if !@select_skin_anxiety1.nil? %>
+          $('select[id="select_skin_anxiety1"]').val('<%= @select_skin_anxiety1 %>');
+        <% end %>
+
+        <% if !@select_skin_anxiety2.nil? %>
+          $('select[id="select_skin_anxiety2"]').val('<%= @select_skin_anxiety2 %>');
+        <% end %>
+
         $("#date_init").click(function(){
           $("#start_date").datepicker('setDate', '2017-01-25');
           $("#end_date").datepicker('setDate', '<%= @today %>');
@@ -148,9 +168,13 @@
       function load(){
         var select_sex = document.getElementById("select_sex").options[document.getElementById("select_sex").selectedIndex].value;
         var select_channel = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
-        var select_mode = document.getElementById("select_mode").options[document.getElementById("select_mode").selectedIndex].value;
         var select_makeup = document.getElementById("select_makeup").options[document.getElementById("select_makeup").selectedIndex].value;
         var select_area = document.getElementById("select_area").options[document.getElementById("select_area").selectedIndex].value;
+        var select_skin_type_device = document.getElementById("select_skin_type_device").options[document.getElementById("select_skin_type_device").selectedIndex].value;
+        var select_skin_type_survey = document.getElementById("select_skin_type_survey").options[document.getElementById("select_skin_type_survey").selectedIndex].value;
+        var select_senstive = document.getElementById("select_senstive").options[document.getElementById("select_senstive").selectedIndex].value;
+        var select_skin_anxiety1 = document.getElementById("select_skin_anxiety1").options[document.getElementById("select_skin_anxiety1").selectedIndex].value;
+        var select_skin_anxiety2 = document.getElementById("select_skin_anxiety2").options[document.getElementById("select_skin_anxiety2").selectedIndex].value;
 
         url = ""
         url += "/admin/data_list?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
@@ -164,7 +188,6 @@
         url += "&start_birthmm=" + document.getElementById("start_birthmm").value;
         url += "&end_birthmm=" + document.getElementById("end_birthmm").value;
         url += "&select_channel=" + select_channel;
-        url += "&select_mode=" + select_mode;
         url += "&select_makeup=" + select_makeup;
         url += "&select_area=" + select_area;
 
@@ -189,6 +212,9 @@
         <input class="form-control" type="text" id="name" style="width:100px;">
 
         시리얼키 :
+        <input class="form-control" type="text" id="custserial" style="width:100px;">
+
+        분석횟수 :
         <input class="form-control" type="text" id="custserial" style="width:100px;">
 
         성별 :
@@ -225,14 +251,6 @@
       </div>
 
       <div class="form-inline">
-        모드 :
-        <select class="form-control" id="select_mode">
-          <option value="all">All</option>
-          <option value="total">종합모드</option>
-          <option value="quick">간편모드</option>
-          <option value="makeup">메이크업모드</option>
-        </select>
-
         메이크업 유무 :
         <select class="form-control" id="select_makeup">
           <option value="all">All</option>
@@ -246,6 +264,57 @@
           <option value="face">전면</option>
           <option value="left">좌</option>
           <option value="right">우</option>
+        </select>
+
+        피부타입(기기) :
+        <select class="form-control" id="select_skin_type_device">
+          <option value="all">All</option>
+          <option value="">건성</option>
+          <option value="F">중성</option>
+          <option value="M">지성</option>
+          <option value="t_zone">T존 복합</option>
+          <option value="u_zone">U존 복합</option>
+        </select>
+
+        피부타입(설문) :
+        <select class="form-control" id="select_skin_type_survey">
+          <option value="all">All</option>
+          <option value="">건복합성</option>
+          <option value="">지복합성</option>
+          <option value="">복합성</option>
+          <option value="F">중성</option>
+          <option value="M">지성</option>
+        </select>
+
+        민감성 :
+        <select class="form-control" id="select_senstive">
+          <option value="all">All</option>
+          <option value="Y">예</option>
+          <option value="N">아니오</option>
+        </select>
+
+        피부고민1 :
+        <select class="form-control" id="select_skin_anxiety1">
+          <option value="all">All</option>
+          <option value="Y">주름</option>
+          <option value="N">탄력</option>
+          <option value="Y">모공</option>
+          <option value="N">트러블</option>
+          <option value="Y">건조</option>
+          <option value="N">색소침착</option>
+          <option value="N">피지</option>
+        </select>
+
+        피부고민2 :
+        <select class="form-control" id="select_skin_anxiety2">
+          <option value="all">All</option>
+          <option value="Y">주름</option>
+          <option value="N">탄력</option>
+          <option value="Y">모공</option>
+          <option value="N">트러블</option>
+          <option value="Y">건조</option>
+          <option value="N">색소침착</option>
+          <option value="N">피지</option>
         </select>
 
         <button class="btn btn-warning" id="submit">조회</button>
