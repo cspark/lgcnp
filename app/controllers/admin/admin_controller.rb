@@ -10,7 +10,7 @@ class Admin::AdminController < Admin::AdminApplicationController
   end
 
   def admin_login
-    render '/admin/admin_login'
+    render '/admin/login'
   end
 
   def login
