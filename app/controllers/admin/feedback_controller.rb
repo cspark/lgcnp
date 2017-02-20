@@ -31,6 +31,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
         after_interview.custserial = tabletinterview.custserial
         after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
         after_interview.after_interview_id = Fcafterinterview.all.count
+        after_interview.tablet_interview_update = tabletinterview.uptdate
         after_interview.order = 0
         after_interview.save
 
@@ -38,6 +39,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
         after_interview.custserial = tabletinterview.custserial
         after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
         after_interview.after_interview_id = Fcafterinterview.all.count
+        after_interview.tablet_interview_update = tabletinterview.uptdate
         after_interview.order = 1
         after_interview.save
 
@@ -45,6 +47,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
         after_interview.custserial = tabletinterview.custserial
         after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
         after_interview.after_interview_id = Fcafterinterview.all.count
+        after_interview.tablet_interview_update = tabletinterview.uptdate
         after_interview.order = 2
         after_interview.save
       end

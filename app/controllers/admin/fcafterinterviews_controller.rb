@@ -38,6 +38,22 @@ class Admin::FcafterinterviewsController < Admin::AdminApplicationController
     after_interview.a2 = params[:a2]
     after_interview.a3 = params[:a3]
 
+    t = Time.now
+
+    time_string = t.strftime("%H")
+    time_string = time_string.concat("-")
+    time_string = time_string.concat(t.strftime("%m"))
+    time_string = time_string.concat("-")
+    time_string = time_string.concat(t.strftime("%d"))
+    time_string = time_string.concat("-")
+    time_string = time_string.concat(t.strftime("%H"))
+    time_string = time_string.concat("-")
+    time_string = time_string.concat(t.strftime("%M"))
+    time_string = time_string.concat("-")
+    time_string = time_string.concat(t.strftime("%S"))
+
+    after_interview.uptdate = time_string
+    
     if params.has_key?(:a4)
       after_interview.a4 = params[:a4]
     end
