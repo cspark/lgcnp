@@ -183,4 +183,66 @@ class GenerateTestModel < ApplicationRecord
     end
   end
 
+  def self.generate_test_fcpos
+    num = 10
+    (1..num).each do |i|
+       f = Fcpos.new
+       f.custserial = i.to_s
+       f.faceno = i.to_s+"이름"
+       f.measuredate = "measuredate"
+       f.measureno = i
+       f.uptdate = "2017-02-01"
+       f.fh_x = i
+       f.fh_y = i
+       f.fh_w = i
+       f.fh_h = i
+       f.ns_x = i
+       f.ns_y = i
+       f.ns_w = i
+       f.ns_h = i
+       f.res_x = i
+       f.res_y = i
+       f.res_w = i
+       f.res_h = i
+       f.reu_x = i
+       f.reu_y = i
+       f.reu_w = i
+       f.reu_h = i
+       f.les_x = i
+       f.les_y = i
+       f.les_w = i
+       f.les_h = i
+       f.leu_x = i
+       f.leu_y = i
+       f.leu_w = i
+       f.leu_h = i
+       f.rs_x = i
+       f.rs_y = i
+       f.rs_w = i
+       f.rs_h = i
+       f.ls_x = i
+       f.ls_y = i
+       f.ls_w = i
+       f.ls_h = i
+       f.rt_re_l = i
+       f.rt_re_t = i
+       f.rt_re_r = i
+       f.rt_re_b = i
+       f.rt_le_l = i
+       f.rt_le_t = i
+       f.rt_le_r = i
+       f.rt_le_b = i
+       f.rt_lip_l = i
+       f.rt_lip_t = i
+       f.rtrt_lip_r_re_r = i
+       f.rt_lip_b = i
+       f.rt_res_x = i
+       f.rt_res_y = i
+       f.rt_les_x = i
+       f.rt_les_y = i
+       f.save
+       i +=1;
+    end
+  end
+
 end
