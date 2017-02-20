@@ -1,4 +1,4 @@
-class CreateFcschedule < ActiveRecord::Migration[5.0]
+class CreateFcschedules < ActiveRecord::Migration[5.0]
   def change
     create_table :fcschedules do |t|
       t.string :ch_cd, null:false

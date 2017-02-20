@@ -1,0 +1,2 @@
+class Fcschedule < ApplicationRecord
+end
