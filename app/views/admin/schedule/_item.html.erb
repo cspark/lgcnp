@@ -45,7 +45,7 @@
       </script>
     </head>
     <body>
-      <div style="display:table; height:130px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
+      <div style="display:table; height:100px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
         <% mmdd = data.reserve_mmdd[0, 2] + "-" +data.reserve_mmdd[2, 4]%>
         <% hhmm = data.reserve_hhmm[0, 2] + ":" +data.reserve_hhmm[2, 4]%>
         <font size="2">채널구분: <%= data.ch_cd %> / 매장 구분: <%= data.shop_cd %> / 예약 시간: <%= data.reserve_yyyy %>-<%= mmdd %> / <%= hhmm %></font><br>
