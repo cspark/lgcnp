@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170216113125) do
+ActiveRecord::Schema.define(version: 20170220095337) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -253,6 +253,22 @@ ActiveRecord::Schema.define(version: 20170216113125) do
     t.integer  "rt_les_y"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "fcschedules", force: :cascade do |t|
+    t.string   "ch_cd",        null: false
+    t.string   "shop_cd",      null: false
+    t.string   "reserve_yyyy", null: false
+    t.string   "reserve_mmdd", null: false
+    t.string   "reserve_hhmm", null: false
+    t.string   "custname"
+    t.string   "phone"
+    t.string   "reserve_yn"
+    t.string   "memo"
+    t.string   "uptdate"
+    t.string   "purchase_yn"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "fctabletinterviews", force: :cascade do |t|

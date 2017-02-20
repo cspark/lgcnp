@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script type="text/javascript" src="../js/jquery.js"></script>
+      <script type="text/javascript" src="../js/bootstrap.js"></script>
+
+      <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+      <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+      <script>
+        $(function () {
+          try
+          {
+            var phone = '<%= data.phone %>'
+            tempPhone = ""
+            for(var i = 0; i < phone.length; i++){
+              if(i == 0 || i == 1 || (i > phone.length - 5 && i != phone.length - 1))
+                continue
+
+              if(i == 2)
+                tempPhone += phone.slice(0, 3)
+              else if(i == phone.length - 1)
+                tempPhone += phone.slice(phone.length - 4, phone.length)
+              else
+                tempPhone += "*"
+            }
+            $('#phone_<%= data.phone %>_<%= data.uptdate %>').append(tempPhone);
+          }
+          catch(err)
+          {
+            $('#phone_<%= data.phone %>_<%= data.uptdate %>').append('<%= data.phone %>');
+          }
+        });
+
+        function decode_utf8(s) {
+          try{
+            return decodeURI(s);
+          }catch(err){
+            console.log(err);
+            return s;
+          }
+        }
+      </script>
+    </head>
+    <body>
+      <div style="display:table; height:130px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
+        <% mmdd = data.reserve_mmdd[0, 2] + "-" +data.reserve_mmdd[2, 4]%>
+        <% hhmm = data.reserve_hhmm[0, 2] + ":" +data.reserve_hhmm[2, 4]%>
+        <font size="2">채널구분: <%= data.ch_cd %> / 매장 구분: <%= data.shop_cd %> / 예약 시간: <%= data.reserve_yyyy %> - <%= mmdd %> / <%= hhmm %></font><br>
+        <font size="2">고객 이름: <%= data.custname %> / 전화번호: <div id="phone_<%= data.phone %>_<%= data.uptdate %>"></div> / 예약 여부: <%= data.reserve_yn %></font><br>
+        <font size="2">메모: <%= data.memo %> / 등록날짜: <%= data.uptdate %> / 구매 여부: <%= data.purchase_yn %></font><br>
+      </div>
+    </body>
+</html>
