@@ -1,4 +1,4 @@
-class Api::Beau::BeauController < ApplicationController
+class Api::Beau::UserController < ApplicationController
   def index
     # list = Custinfo.list(page: params[:page], per: params[:per], n_cust_id: params[:n_cust_id])
   end
