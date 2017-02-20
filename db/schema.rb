@@ -68,17 +68,17 @@ ActiveRecord::Schema.define(version: 20170220105147) do
     t.datetime "updated_at",      null: false
     t.integer  "n_index"
     t.string   "age"
-    t.float    "pore"
-    t.float    "wrinkle"
-    t.float    "spot_pl"
-    t.float    "spot_uv"
-    t.float    "elasticity"
-    t.float    "porphyrin_ratio"
+    t.integer  "pore"
+    t.integer  "wrinkle"
+    t.integer  "spot_pl"
+    t.integer  "spot_uv"
+    t.integer  "elasticity"
+    t.integer  "porphyrin_ratio"
     t.float    "e_sebum_t"
     t.float    "e_sebum_u"
-    t.float    "moisture"
-    t.integer  "e_porphyrin_t"
-    t.integer  "e_porphyrin_u"
+    t.integer  "moisture"
+    t.float    "e_porphyrin_t"
+    t.float    "e_porphyrin_u"
   end
 
   create_table "fcdata", force: :cascade do |t|
