@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20170220105147) do
 
   create_table "custinfos", force: :cascade do |t|
     t.string   "custserial",               null: false
+    t.string   "n_cust_id"
     t.string   "custname"
     t.string   "sex"
     t.string   "birthyy"
@@ -43,7 +44,6 @@ ActiveRecord::Schema.define(version: 20170220105147) do
     t.string   "lastanaldate"
     t.string   "measureno"
     t.string   "uptdate"
-    t.integer  "n_cust_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.string   "is_agree_privacy"

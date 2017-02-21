@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     namespace :beau do
       resources :user do
         collection do
-          post 'integrated_create'
+          get 'lcare_user_list'
           put 'measure_update'
         end
       end
