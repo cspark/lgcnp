@@ -14,8 +14,8 @@ class Api::Beau::UserController < Api::ApplicationController
   def create
     # 고객정보를 insert 하기 위하여 Max(CUSTSERIAL) 값을 구하여 +1
     user = Custinfo.new(permitted_params)
-    custserial = Custinfo.all.order('custserial desc').first.custserial.to_i + 1
-    user.custserial = custserial.to_s
+    # custserial = Custinfo.last.custserial.to_i + 1
+    # user.custserial = custserial.to_s
     user.save
     render json: user.to_api_hash
   end

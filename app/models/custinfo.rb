@@ -5,6 +5,7 @@ class Custinfo < ApplicationRecord
   def to_api_hash
     {
       serial: custserial,
+      n_cust_id: n_cust_id,
       custname: custname,
       sex: sex,
       age: age,
