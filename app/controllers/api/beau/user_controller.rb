@@ -3,12 +3,12 @@ class Api::Beau::UserController < Api::ApplicationController
     # user = Custinfo.list(page: params[:page], per: params[:per], n_cust_id: params[:n_cust_id])
     # L-Care Serial 조건으로 Janus3 DB에 해당 L-Care 회원이 존재하는지 확인
     user = Custinfo.where(n_cust_id: params[:n_cust_id]).first
-    render json: api_hash_for_list(user)
+    render json: user.to_api_hash
   end
 
   def show
     user = Custinfo.where(custserial: params[:custserial]).first
-    render json: api_hash_for_list(user)
+    render json: user.to_api_hash
   end
 
   def create
@@ -17,14 +17,14 @@ class Api::Beau::UserController < Api::ApplicationController
     custserial = Custinfo.all.order('custserial desc').first.custserial.to_i + 1
     user.custserial = custserial.to_s
     user.save
-    render json: api_hash_for_list(user)
+    render json: user.to_api_hash
   end
 
   def integrated_create
     # L-care 조회하여 받은 회원 정보로 janus3 회원정보 insert
     user = Custinfo.new(permitted_params)
     user.save
-    render json: api_hash_for_list(user)
+    render json: user.to_api_hash
   end
 
   def update
@@ -33,7 +33,7 @@ class Api::Beau::UserController < Api::ApplicationController
     if user.count > 0
       user.phone = params[:phone]
       user.save
-      render json: api_hash_for_list(user)
+      render json: user.to_api_hash
     else
       render_error(errors: user.errors.full_messages)
     end
@@ -51,7 +51,7 @@ class Api::Beau::UserController < Api::ApplicationController
     user.lastanaldate = yymmdd+ "-" +hhmmss
 
     user.save
-    render json: api_hash_for_list(user)
+    render json: user.to_api_hash
   end
 
   private
