@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170220105147) do
     t.string   "lastanaldate"
     t.string   "measureno"
     t.string   "uptdate"
+    t.integer  "n_cust_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.string   "is_agree_privacy"

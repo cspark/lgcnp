@@ -26,7 +26,16 @@ Rails.application.routes.draw do
     end
   end
 
-
+  namespace :api do
+    namespace :beau do
+      resources :user do
+        collection do
+          post 'integrated_create'
+          put 'measure_update'
+        end
+      end
+    end
+  end
 
   get "get_api_key" => "custinfos#get_api_key"
   get "find_user" => "custinfos#find_user"

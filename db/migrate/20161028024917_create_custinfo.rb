@@ -14,6 +14,7 @@ class CreateCustinfo < ActiveRecord::Migration[5.0]
       t.string :lastanaldate
       t.string :measureno
       t.string :uptdate
+      t.integer :n_cust_id
 
       t.timestamps null: false
     end
