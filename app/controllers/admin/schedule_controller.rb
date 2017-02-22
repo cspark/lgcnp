@@ -16,7 +16,7 @@ class Admin::ScheduleController < Admin::AdminApplicationController
     scoped = Fcschedule.all
     scoped = scoped.where("reserve_yyyy = ?", select_year)
     scoped = scoped.where("reserve_mmdd = ?", select_mmdd)
-    @fcschedules = scoped.order("reserve_hhmm desc")
+    @fcschedules = scoped.order("reserve_hhmm asc")
 
     @fcschedules = Kaminari.paginate_array(@fcschedules).page(params[:page]).per(10)
   end
