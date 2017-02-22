@@ -13,6 +13,25 @@
         $(function () {
           try
           {
+            var userName = decode_utf8('<%= data.custname %>')
+            tempUserName = ""
+            for(var i = 0; i < userName.length; i++){
+              if(i == 0)
+                tempUserName += userName.slice(0, 1)
+              else if(i == userName.length - 1)
+                tempUserName += userName.slice(userName.length - 1, userName.length)
+              else
+                tempUserName += "*"
+            }
+            $('#name_<%= data.custname %>_<%= user.reserve_hhmm %>').append(tempUserName);
+          }
+          catch(err)
+          {
+            $('#name_<%= user.custname %>_<%= user.reserve_hhmm %>').append('<%= user.custname %>');
+          }
+
+          try
+          {
             var phone = '<%= data.phone %>'
             tempPhone = ""
             for(var i = 0; i < phone.length; i++){
@@ -26,11 +45,11 @@
               else
                 tempPhone += "*"
             }
-            $('#phone_<%= data.phone %>_<%= data.uptdate %>').append(tempPhone);
+            $('#phone_<%= data.custname %>_<%= data.reserve_hhmm %>').append(tempPhone);
           }
           catch(err)
           {
-            $('#phone_<%= data.phone %>_<%= data.uptdate %>').append('<%= data.phone %>');
+            $('#phone_<%= data.custname %>_<%= data.reserve_hhmm %>').append('<%= data.phone %>');
           }
         });
 
@@ -46,10 +65,11 @@
     </head>
     <body>
       <div style="display:table; height:100px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
+        <font size="4"><div id="name_<%= data.custname %>_<%= data.reserve_hhmm %>"></div></font>
         <% mmdd = data.reserve_mmdd[0, 2] + "-" +data.reserve_mmdd[2, 4]%>
         <% hhmm = data.reserve_hhmm[0, 2] + ":" +data.reserve_hhmm[2, 4]%>
-        <font size="2">채널구분: <%= data.ch_cd %> / 매장 구분: <%= data.shop_cd %> / 예약 시간: <%= data.reserve_yyyy %>-<%= mmdd %> / <%= hhmm %></font><br>
-        <font size="2">고객 이름: <%= data.custname %> / 전화번호: </font><font size="2" id="phone_<%= data.phone %>_<%= data.uptdate %>"></font><font size="2"> / 예약 여부: <%= data.reserve_yn %></font><br>
+        <font size="2">채널구분: <%= data.ch_cd %> / 매장 구분: <%= data.shop_cd %> / 예약 시간: <%= data.reserve_yyyy %>-<%= mmdd %> , <%= hhmm %></font><br>
+        <font size="2" id="phone_<%= data.custname %>_<%= data.reserve_hhmm %>">전화번호: </font><font size="2"> / 예약 여부: <%= data.reserve_yn %></font><br>
         <font size="2">메모: <%= data.memo %> / 등록날짜: <%= data.uptdate %> / 구매 여부: <%= data.purchase_yn %></font><br>
       </div>
     </body>

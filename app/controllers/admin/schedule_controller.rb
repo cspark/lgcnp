@@ -18,6 +18,6 @@ class Admin::ScheduleController < Admin::AdminApplicationController
     scoped = scoped.where("reserve_mmdd = ?", select_mmdd)
     @fcschedules = scoped.order("uptdate desc")
 
-    @fcschedules = Kaminari.paginate_array(@fcschedules).page(params[:page]).per(3)
+    @fcschedules = Kaminari.paginate_array(@fcschedules).page(params[:page]).per(10)
   end
 end
