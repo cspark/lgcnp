@@ -4,7 +4,7 @@ class Admin::PosController < Admin::AdminApplicationController
 
   def list
     if params.has_key?(:search) && params[:search].length != 0
-      users = Custinfo.where(ch_cd: "CNP").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc").page(params[:page]).per(6)
+      users = Custinfo.where(ch_cd: "CNP").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
       user_custserials = []
       users.each do |user|
         user_custserials.push(user.custserial)
