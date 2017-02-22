@@ -16,7 +16,19 @@
               location.href = "/admin/fcpos_list?search=" + encodeURI(encodeURI($("#search").val()));
           }
       });
+      if (encodeURI('<%= @search_name %>').length != 0) {
+        $("#search").val(decode_utf8('<%= @search_name %>'));
+      }
     });
+
+    function decode_utf8(s) {
+      try{
+        return decodeURI(s);
+      }catch(err){
+        console.log(err);
+        return s;
+      }
+    }
 
     function show_all(){
       location.href = "/admin/fcpos_list";
