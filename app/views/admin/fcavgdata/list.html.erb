@@ -26,7 +26,7 @@
   <body>
     <%= render "admin/header" %>
 
-    <select class="form-control" id="select_age">
+    <select class="form-control" id="select_age" style="float:left; width: 80%;">
       <option value="ALL">전체연령</option>
       <option value="1-10">1~10살</option>
       <option value="11-15">11~15살</option>
@@ -42,6 +42,11 @@
       <option value="61-70">61~70살</option>
       <option value="71">71살</option>
     </select>
+
+    <p style="width: 15%; float:right; margin-right:20px;">
+      Download:
+      <%= link_to "Excel", admin_fcavg_list_path(format: "xls", :select => @select_option, :isExcel => true) %>
+    </p>
 
     <% @fcavgdatas_list.each do |fcavgdata| %>
       <%= render partial: "admin/fcavgdata/item", locals: { data: fcavgdata } %>
