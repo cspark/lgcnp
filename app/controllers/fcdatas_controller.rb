@@ -252,7 +252,6 @@ class FcdatasController < ApplicationController
       file_get_command << "public/CNP/"
     end
 
-
     file_get_command << sub_folder_name
     file_get_command << "/"
     file_get_command << user.custserial.to_i.to_s
