@@ -15,7 +15,7 @@ class Admin::UserController < Admin::AdminApplicationController
     end
 
     @users.each do |user|
-      user.decode_utf8_b64(user.custname)
+      user.custname = user.decode_utf8_b64(user.custname)
     end
 
     respond_to do |format|
