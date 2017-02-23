@@ -14,9 +14,13 @@ class Admin::UserController < Admin::AdminApplicationController
       @users = Custinfo.where(ch_cd: "CNP").where.not(lastanaldate: nil).order("lastanaldate desc").page(params[:page]).per(6)
     end
 
+    @users.each do |user|
+      user.decode_utf8_b64(user.custname)
+    end
+
     respond_to do |format|
       format.html
-      format.csv { send_data Custinfo.to_csv(@users) }
+      # format.csv { send_data Custinfo.to_csv(@users) }
       format.xls
     end
   end

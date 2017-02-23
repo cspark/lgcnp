@@ -51,8 +51,8 @@ class Custinfo < ApplicationRecord
     CSV.generate(options) do |csv|
       csv << column_names
       users.each do |user|
-        decode_utf8_b64(user.custname)
         csv << user.attributes.values_at(*column_names)
+        csv << decode_utf8_b64(user.custname)
       end
     end
   end
