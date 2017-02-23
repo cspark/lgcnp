@@ -7,10 +7,17 @@ class Admin::UserController < Admin::AdminApplicationController
 
   def index
     if params.has_key?(:search) && params[:search].length != 0
-      Rails.logger.info params[:search]
+      @search = params[:search]
       @users = Custinfo.where(ch_cd: "CNP").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc").page(params[:page]).per(6)
     else
+      @search = ""
       @users = Custinfo.where(ch_cd: "CNP").where.not(lastanaldate: nil).order("lastanaldate desc").page(params[:page]).per(6)
+    end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data Custinfo.to_csv(@users) }
+      format.xls
     end
   end
 
