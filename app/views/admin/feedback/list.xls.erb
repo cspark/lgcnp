@@ -1,5 +1,5 @@
 이름, 시리얼, 진단 날짜, 전화번호, 사후 피드백 서비스, 1차 설문여부 , 2차 설문여부, 3차 설문여부
-<% @after_interviews.each do |tabletinterview| %>
+<% @after_interviews_excel.each do |tabletinterview| %>
 <% if tabletinterview.is_agree_after == "T" && !tabletinterview.base_lot.blank? %>
   <% is_agree = "O" %>
 <% end %>

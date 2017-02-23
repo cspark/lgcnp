@@ -94,7 +94,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     if !select_sex.nil?
       @sex = select_sex
     end
-    
+
     if !start_age.nil?
       @start_age = start_age
     end
@@ -213,9 +213,10 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     end
 
     @after_interviews = Kaminari.paginate_array(@after_interviews).page(params[:page]).per(5)
+    @after_interviews_excel = Kaminari.paginate_array(@after_interviews)
 
     if params.has_key?(:isExcel) && params[:isExcel] == 'true'
-      @after_interviews.each do |tabletinterview|
+      @after_interviews_excel.each do |tabletinterview|
         user = Custinfo.find tabletinterview.custserial.to_i
         tabletinterview.custname = URI.decode(user.custname)
       end
