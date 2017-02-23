@@ -220,7 +220,15 @@ class FcdatasController < ApplicationController
     file_get_command << " -N -P "
 
     make_dir_command = "mkdir "
-    make_dir_command << "public/CNP/"
+    # make_dir_command << "public/CNP/"
+    if !user.ch_cd.nil?
+      make_dir_command << "public/"
+      make_dir_command << user.ch_cd.to_s
+      make_dir_command << "/"
+    else
+      make_dir_command << "public/CNP/"
+    end
+
     Rails.logger.info make_dir_command
     system(make_dir_command)
 
@@ -235,7 +243,16 @@ class FcdatasController < ApplicationController
     Rails.logger.info make_dir_command
     system(make_dir_command)
 
-    file_get_command << "public/CNP/"
+    # file_get_command << "public/CNP/"
+    if !user.ch_cd.nil?
+      file_get_command << "public/"
+      file_get_command << user.ch_cd.to_s
+      file_get_command << "/"
+    else
+      file_get_command << "public/CNP/"
+    end
+
+
     file_get_command << sub_folder_name
     file_get_command << "/"
     file_get_command << user.custserial.to_i.to_s
