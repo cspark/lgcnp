@@ -69,7 +69,7 @@
                     });
 
           $("#date_init").click(function(){
-            $("#start_date").datepicker('setDate', '2017-01-25');
+            $("#start_date").datepicker('setDate', '<%= @start_date %>');
             $("#end_date").datepicker('setDate', '<%= @today %>');
             // load();
           });

@@ -218,7 +218,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     if params.has_key?(:isExcel) && params[:isExcel] == 'true'
       @after_interviews_excel.each do |tabletinterview|
         user = Custinfo.find tabletinterview.custserial.to_i
-        tabletinterview.custname = URI.decode(user.custname)
+        tabletinterview.custname << URI.decode(user.custname)
       end
     end
 
