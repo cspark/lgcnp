@@ -16,7 +16,9 @@ class Admin::UserController < Admin::AdminApplicationController
 
     if params.has_key?(:isExcel) && params[:isExcel] == 'true'
       @users.each do |user|
-        user.custname = user.decode_utf8_b64(user.custname)
+        Rails.logger.info "!!!!"
+        Rails.logger.info user.custname
+        user.custname = URI.decode(user.custname)
         if user.sex.include?("M")
           user.sex = "남자"
         else
