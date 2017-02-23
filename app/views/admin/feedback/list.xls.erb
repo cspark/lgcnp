@@ -1,25 +1,44 @@
-이름, 시리얼, 진단 날짜, 전화번호, 1차 설문여부 , 2차 설문여부, 3차 설문여부
-<% @after_interviews_excel.each do |tabletinterview| %>
-<% f1 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 0).first %>
-<% if f1.a1.nil? %>
-  <% is_feed_back_ok_1 = "X" %>
-<% else %>
-  <% is_feed_back_ok_1 = "O" %>
+이름, 설문시기, 진단 날짜, 성별, 나이, 베이스 , 앰플1, 앰플2, 설문1, 설문2, 설문3, 설문4, 기타의견
+<% @after_interviews_excel.each do |after_interview| %>
+<% custinfo = Custinfo.where(custserial: after_interview.custserial).first %>
+<% if after_interview.order == 0 %>
+  <% order = "당일 설문" %>
+<% elsif after_interview.order == 1 %>
+  <% order = "2주 후 설문" %>
+<% elsif after_interview.order == 2 %>
+  <% order = "3개월 후 설문" %>
 <% end %>
-<% if (tabletinterview.is_agree_after == "T" && !tabletinterview.base_lot.blank?) || !f2.a1.nil? %>
-  <% if f2.a1.nil? %>
-    <% is_feed_back_ok_2 = "X" %>
-  <% else %>
-    <% is_feed_back_ok_2 = "O" %>
-  <% end %>
+<% after_serum = tabletinterview.after_serum %>
+<% if tabletinterview.after_serum == "skin control" %>
+  <% after_serum = "스킨 컨트롤 세럼" %>
+<% elsif tabletinterview.after_serum == "deep humect" %>
+  <% after_serum = "딥 휴멕트 세럼" %>
+<% elsif tabletinterview.after_serum == "rebalencing" %>
+  <% after_serum = "리밸런싱 세럼" %>
 <% end %>
-<% if tabletinterview.is_agree_after == "T" && !tabletinterview.base_lot.blank? %>
-  <% f3 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 2).first %>
-  <% if f3.a1.nil? %>
-    <% is_feed_back_ok_3 = "X" %>
-  <% else %>
-    <% is_feed_back_ok_3 = "O" %>
-  <% end %>
+<% after_ample_1 = tabletinterview.after_ample_1 %>
+<% if tabletinterview.after_ample_1 == "pore clinic ampoule" %>
+  <% after_ample_1 = "포어 클리닉 앰플" %>
+<% elsif tabletinterview.after_ample_1 == "carming ampoule" %>
+  <% after_ample_1 = "카밍 앰플" %>
+<% elsif tabletinterview.after_ample_1 == "luminus ampoule" %>
+  <% after_ample_1 = "루미너스 앰플" %>
+<% elsif tabletinterview.after_ample_1 == "regenerating ampoule" %>
+  <% after_ample_1 = "리제네리이팅 앰플" %>
+<% elsif tabletinterview.after_ample_1 == "perming ampoule" %>
+  <% after_ample_1 = "퍼밍 앰플" %>
 <% end %>
-<%= tabletinterview.custname %>, <%= tabletinterview.custserial.to_i %>, <%= tabletinterview.uptdate %>, <%= tabletinterview.phone %>, <%= is_feed_back_ok_1 %>, <%= is_feed_back_ok_2 %>-<%= is_feed_back_ok_3 %>
+<% after_ample_2 = tabletinterview.after_ample_2 %>
+<% if tabletinterview.after_ample_2 == "pore clinic ampoule" %>
+  <% after_ample_2 = "포어 클리닉 앰플" %>
+<% elsif tabletinterview.after_ample_2 == "carming ampoule" %>
+  <% after_ample_2 = "카밍 앰플" %>
+<% elsif tabletinterview.after_ample_2 == "luminus ampoule" %>
+  <% after_ample_2 = "루미너스 앰플" %>
+<% elsif tabletinterview.after_ample_2 == "regenerating ampoule" %>
+  <% after_ample_2 = "리제네리이팅 앰플" %>
+<% elsif tabletinterview.after_ample_2 == "perming ampoule" %>
+  <% after_ample_2 = "퍼밍 앰플" %>
+<% end %>
+<%= tabletinterview.custname %>, <%= order %>, <%= tabletinterview.uptdate %>, <%= custinfo.sex %>, <%= custinfo.age %>, <%= after_serum %>, <%= after_ample_1 %>, <%= after_ample_2 %>, <%= after_interview.a1.to_i %>, <%= after_interview.a2.to_i %>, <%= after_interview.a3.to_i %>, <%= after_interview.a4.to_i %>, <%= after_interview.a5 %>
 <% end %>
