@@ -189,7 +189,16 @@ class FcdatasController < ApplicationController
     sub_folder_name << "-P"
     Rails.logger.info sub_folder_name
 
-    ftp_path = "ftp://165.244.88.27/CNP/"
+
+    ftp_path = ""
+    if !user.ch_cd.nil?
+      ftp_path = "ftp://165.244.88.27/"
+      ftp_path << user.ch_cd.to_s
+      ftp_path << "/"
+    else
+      ftp_path = "ftp://165.244.88.27/CNP/"
+    end
+
     ftp_path << sub_folder_name.to_s
 
     ftp_path << "/"

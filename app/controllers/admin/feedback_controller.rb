@@ -94,17 +94,15 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     if !select_sex.nil?
       @sex = select_sex
     end
+    
     if !start_age.nil?
       @start_age = start_age
-    else
-      @start_age = @min_age
     end
 
     if !end_age.nil?
       @end_age = end_age
-    else
-      @start_age = @max_age
     end
+
     if !select_base.nil?
       @select_base = select_base
     end
@@ -142,6 +140,10 @@ class Admin::FeedbackController < Admin::AdminApplicationController
           if !custinfo.custname.include? name
              is_contain = false
           end
+        end
+
+        if custinfo.ch_cd.nil? || custinfo.ch_cd != "CNP"
+          is_contain = false
         end
 
         if select_sex != "all"

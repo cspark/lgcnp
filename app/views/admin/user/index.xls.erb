@@ -1,5 +1,5 @@
 이름, 가입 날짜, 마지막 진단 날짜, 시리얼, 연락처, 성별, 생년월일, 개인정보 이용 동의, 제3자 정보 제공 동의, 마케팅 정보 동의, 측정횟수
-<% @users.each do |user| %>
+<% @all_users.each do |user| %>
 <% if user.sex.include?("M") %>
   <% user.sex = "남" %>
 <% else %>

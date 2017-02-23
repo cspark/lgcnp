@@ -9,13 +9,15 @@ class Admin::UserController < Admin::AdminApplicationController
     if params.has_key?(:search) && params[:search].length != 0
       @search = params[:search]
       @users = Custinfo.where(ch_cd: "CNP").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc").page(params[:page]).per(6)
+      @all_users = Custinfo.where(ch_cd: "CNP").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
     else
       @search = ""
       @users = Custinfo.where(ch_cd: "CNP").where.not(lastanaldate: nil).order("lastanaldate desc").page(params[:page]).per(6)
+      @all_users = Custinfo.where(ch_cd: "CNP").where.not(lastanaldate: nil).order("lastanaldate desc")
     end
 
     if params.has_key?(:isExcel) && params[:isExcel] == 'true'
-      @users.each do |user|
+      @all_users.each do |user|
         user.custname = URI.decode(user.custname)
       end
     end

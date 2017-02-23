@@ -135,7 +135,7 @@
       <div style="display:table; height:150px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
         <% custinfo = Custinfo.where(custserial: tabletinterview.custserial).first %>
         <font size="4"><div id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
-        시리얼 : <%= tabletinterview.custserial.to_i %> / 진단 날짜 : <%= tabletinterview.uptdate %><br>
+        시리얼 : <%= tabletinterview.custserial.to_i %> / 진단 날짜 : <%= tabletinterview.uptdate %> / 채널 : <%= custinfo.ch_cd %><br>
         피부타입 : <font id="skin_type_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font> <br>
         진단으로 나온 솔루션 1 : <font id="before_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font> / 최종으로 선택된 솔루션 1 : <font id="after_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font>  <br>
         진단으로 나온 솔루션 2 : <font id="before_solution_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font> / 최종으로 선택된 솔루션 2 : <font id="after_solution_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font>  <br>

@@ -69,7 +69,7 @@
         <% mmdd = data.reserve_mmdd[0, 2] + "-" +data.reserve_mmdd[2, 4]%>
         <% hhmm = data.reserve_hhmm[0, 2] + ":" +data.reserve_hhmm[2, 4]%>
         <font size="2">채널구분: <%= data.ch_cd %> / 매장 구분: <%= data.shop_cd %> / 예약 시간: <%= data.reserve_yyyy %>-<%= mmdd %> , <%= hhmm %></font><br>
-        <font size="2" id="phone_<%= data.custname %>_<%= data.reserve_hhmm %>">전화번호: </font><font size="2"> / 예약 여부: <%= data.reserve_yn %></font><br>
+        <font size="2" id="phone_<%= data.custname %>_<%= data.reserve_hhmm %>">전화번호: </font><font size="2"> / 상담 여부: <%= data.reserve_yn %></font><br>
         <font size="2">메모: <%= data.memo %> / 등록날짜: <%= data.uptdate %> / 구매 여부: <%= data.purchase_yn %></font><br>
       </div>
     </body>
