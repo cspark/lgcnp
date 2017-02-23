@@ -18,18 +18,18 @@ class Admin::UserController < Admin::AdminApplicationController
       @users.each do |user|
         user.custname = URI.decode(user.custname)
         if user.sex.include?("M")
-          user.sex = "남자"
+          user.sex = "남"
         else
-          user.sex = "여자"
+          user.sex = "여"
         end
 
         user.is_agree_privacy = "X"
         if user.is_agree_privacy.include?("T")
           user.is_agree_privacy = "O"
         end
-        user.is_agree_thirdparty = "X"
-        if user.is_agree_thirdparty.include?("T")
-          user.is_agree_thirdparty = "O"
+        user.is_agree_thirdparty_info = "X"
+        if user.is_agree_thirdparty_info.include?("T")
+          user.is_agree_thirdparty_info = "O"
         end
         user.is_agree_marketing = "X"
         if user.is_agree_marketing.include?("T")
