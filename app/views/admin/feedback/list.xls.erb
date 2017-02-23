@@ -1,6 +1,7 @@
 이름, 설문시기, 진단 날짜, 성별, 나이, 베이스 , 앰플1, 앰플2, 설문1, 설문2, 설문3, 설문4, 기타의견
 <% @after_interviews_excel.each do |after_interview| %>
 <% custinfo = Custinfo.where(custserial: after_interview.custserial).first %>
+<% tabletinterview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first %>
 <% if after_interview.order == 0 %>
   <% order = "당일 설문" %>
 <% elsif after_interview.order == 1 %>
