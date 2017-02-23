@@ -41,6 +41,10 @@ class FctabletinterviewsController < ApplicationController
       tabletinterview.is_make_up = "F"
     end
 
+    user = Custinfo.where(custserial: tabletinterview.custserial).first
+    if !user.nil?
+      tabletinterview.ch_cd = user.ch_cd
+    end
     if tabletinterview.save
       render json: tabletinterview.to_api_hash, status: :ok
     else
@@ -52,6 +56,12 @@ class FctabletinterviewsController < ApplicationController
     Rails.logger.info params[:tablet_interview_id]
     existed_interview = Fctabletinterview.where(tablet_interview_id: params[:tablet_interview_id]).last
     if existed_interview.update(permitted_param)
+      user = Custinfo.where(custserial: existed_interview.custserial).first
+      if !user.nil?
+        existed_interview.ch_cd = user.ch_cd
+        existed_interview.save
+      end
+
       render json: existed_interview.to_api_hash, status: :ok
     else
       render json: "", status: 404
@@ -64,6 +74,12 @@ class FctabletinterviewsController < ApplicationController
     t = Time.now
     tabletinterview.uptdate = t.strftime("%Y-%m-%d-%H-%M")
     tabletinterview.is_agree_after = "T"
+
+    user = Custinfo.where(custserial: tabletinterview.custserial).first
+    if !user.nil?
+      tabletinterview.ch_cd = user.ch_cd
+    end
+
     if tabletinterview.save
       render json: tabletinterview.to_api_hash, status: :ok
     else
@@ -85,6 +101,12 @@ class FctabletinterviewsController < ApplicationController
     Rails.logger.info params[:tablet_interview_id]
     existed_interview = Fctabletinterview.where(tablet_interview_id: params[:tablet_interview_id]).last
     if existed_interview.update(permitted_param)
+      user = Custinfo.where(custserial: existed_interview.custserial).first
+      if !user.nil?
+        existed_interview.ch_cd = user.ch_cd
+        existed_interview.save
+      end
+      
       render json: existed_interview.to_api_hash, status: :ok
     else
       render json: "", status: 404
