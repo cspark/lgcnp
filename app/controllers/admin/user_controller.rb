@@ -17,24 +17,6 @@ class Admin::UserController < Admin::AdminApplicationController
     if params.has_key?(:isExcel) && params[:isExcel] == 'true'
       @users.each do |user|
         user.custname = URI.decode(user.custname)
-        if user.sex.include?("M")
-          user.sex = "남"
-        else
-          user.sex = "여"
-        end
-
-        user.is_agree_privacy = "X"
-        if user.is_agree_privacy == "T"
-          user.is_agree_privacy = "O"
-        end
-        user.is_agree_thirdparty_info = "X"
-        if user.is_agree_thirdparty_info == "T"
-          user.is_agree_thirdparty_info = "O"
-        end
-        user.is_agree_marketing = "X"
-        if user.is_agree_marketing == "T"
-          user.is_agree_marketing = "O"
-        end
       end
     end
 
