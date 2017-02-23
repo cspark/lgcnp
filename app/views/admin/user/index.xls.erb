@@ -1,9 +1,4 @@
 이름, 가입 날짜, 마지막 진단 날짜, 시리얼, 연락처, 성별, 생년월일, 개인정보 이용 동의, 제3자 정보 제공 동의, 마케팅 정보 동의, 측정횟수
 <% @users.each do |user| %>
-<% if user.sex == "M" %>
-  <% user.sex == "남자" %>
-<% else %>
-  <% user.sex == "여자" %>
-<% end %>
 <%= user.custname %>, <%= user.uptdate %>, <%= user.lastanaldate %>, <%= user.custserial %>, <%= user.phone %>, <%= user.sex %>, <%= user.birthyy %>-<%= user.birthmm %>-<%= user.birthdd %>, <%= user.is_agree_privacy %>, <%= user.is_agree_marketing %>, <%= user.is_agree_thirdparty_info %>, <%= user.measureno %>
 <% end %>
