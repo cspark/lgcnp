@@ -13,7 +13,7 @@ class Admin::UserController < Admin::AdminApplicationController
     else
       @search = ""
       @users = Custinfo.where(ch_cd: "CNP").where.not(lastanaldate: nil).order("lastanaldate desc").page(params[:page]).per(6)
-      @all_users = Custinfo.where(ch_cd: "CNP").where.not(lastanaldate: nil).order("lastanaldate desc").page(params[:page]).per(6)
+      @all_users = Custinfo.where(ch_cd: "CNP").where.not(lastanaldate: nil).order("lastanaldate desc")
     end
 
     if params.has_key?(:isExcel) && params[:isExcel] == 'true'
