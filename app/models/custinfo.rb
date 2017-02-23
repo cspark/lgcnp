@@ -1,3 +1,4 @@
+require 'uri'
 class Custinfo < ApplicationRecord
   self.table_name = "custinfo" if Rails.env.production? || Rails.env.staging?
   self.primary_key = :custserial if Rails.env.production? || Rails.env.staging?
@@ -50,8 +51,13 @@ class Custinfo < ApplicationRecord
     CSV.generate(options) do |csv|
       csv << column_names
       users.each do |user|
+        decode_utf8_b64(user.custname)
         csv << user.attributes.values_at(*column_names)
       end
     end
+  end
+
+  def decode_utf8_b64(string)
+    URI.unescape(CGI::escape(Base64.decode64(string)))
   end
 end
