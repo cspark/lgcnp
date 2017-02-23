@@ -1,8 +1,5 @@
-이름, 시리얼, 진단 날짜, 전화번호, 사후 피드백 서비스, 1차 설문여부 , 2차 설문여부, 3차 설문여부
+이름, 시리얼, 진단 날짜, 전화번호, 1차 설문여부 , 2차 설문여부, 3차 설문여부
 <% @after_interviews_excel.each do |tabletinterview| %>
-<% if tabletinterview.is_agree_after == "T" && !tabletinterview.base_lot.blank? %>
-  <% is_agree = "O" %>
-<% end %>
 <% f1 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 0).first %>
 <% if f1.a1.nil? %>
   <% is_feed_back_ok_1 = "X" %>
@@ -24,5 +21,5 @@
     <% is_feed_back_ok_3 = "O" %>
   <% end %>
 <% end %>
-<%= tabletinterview.custname %>, <%= tabletinterview.custserial.to_i %>, <%= tabletinterview.uptdate %>, <%= tabletinterview.phone %>, <%= is_agree %>, <%= is_feed_back_ok_1 %>, <%= is_feed_back_ok_2 %>-<%= is_feed_back_ok_3 %>
+<%= tabletinterview.custname %>, <%= tabletinterview.custserial.to_i %>, <%= tabletinterview.uptdate %>, <%= tabletinterview.phone %>, <%= is_feed_back_ok_1 %>, <%= is_feed_back_ok_2 %>-<%= is_feed_back_ok_3 %>
 <% end %>
