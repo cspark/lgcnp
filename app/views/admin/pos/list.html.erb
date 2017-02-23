@@ -9,8 +9,30 @@
     <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
 
     <script>
-      $(function () {
+    $(function () {
+      $(document).keyup(function (e) {
+          if ($("#search").is(":focus") && (e.keyCode == 13)) {
+              console.log(encodeURI($("#search").val()));
+              location.href = "/admin/fcpos_list?search=" + encodeURI(encodeURI($("#search").val()));
+          }
       });
+      if (encodeURI('<%= @search_name %>').length != 0) {
+        $("#search").val(decode_utf8('<%= @search_name %>'));
+      }
+    });
+
+    function decode_utf8(s) {
+      try{
+        return decodeURI(s);
+      }catch(err){
+        console.log(err);
+        return s;
+      }
+    }
+
+    function show_all(){
+      location.href = "/admin/fcpos_list";
+    }
 
     </script>
   </head>
@@ -18,16 +40,17 @@
   <body>
     <%= render "admin/header" %>
 
-    <h2> 구현중입니다. 테스트 중입니다 </h2>
+    <div style="background: #b1cbbb; padding: 8px;">
+      <input type="text" name="search" id="search" placeholder="이름으로 검색" style="width: 200px;"> <button class="btn btn-warning" id="show_all" onclick="show_all()">전체보기</button>
+    </div>
+    <div>
 
     <div>
+      <% @fcpos.each do |data| %>
+        <%= render partial: "admin/pos/item", locals: { data: data } %>
+      <% end %>
       <div>
-        <% @fcpos.each do |data| %>
-          <%= render partial: "admin/pos/item", locals: { data: data } %>
-        <% end %>
-        <div>
-          <%= paginate @fcpos %>
-        </div>
+        <%= paginate @fcpos %>
       </div>
     </div>
   </body>

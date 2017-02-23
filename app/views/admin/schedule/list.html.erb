@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+    $(function () {
+        $("#select_date").datepicker({
+                dateFormat: 'yy-mm-dd',
+                dayNamesMin: [
+                    '일',
+                    '월',
+                    '화',
+                    '수',
+                    '목',
+                    '금',
+                    '토'
+                ],
+                monthNamesShort: [
+                    '1월',
+                    '2월',
+                    '3월',
+                    '4월',
+                    '5월',
+                    '6월',
+                    '7월',
+                    '8월',
+                    '9월',
+                    '10월',
+                    '11월',
+                    '12월'
+                ],
+                currentText: '오늘 날짜',
+                changeMonth: true
+            });
+
+        $("#select_date").datepicker('setDate', '<%= @select_date %>');
+
+        $('#submit').click(function(){
+          load();
+        });
+      });
+
+      function load(isAll){
+        location.href = "/admin/fcschedule_list?select_date=" + $('#select_date').val();
+      }
+
+    </script>
+  </head>
+
+  <body>
+    <%= render "admin/header" %>
+
+    <div id="filter" style="background: #b1cbbb; padding: 8px;">
+      <div class="form-inline">
+        날짜 : <input class="form-control" type="text" id="select_date" style="width:100px;">
+        <button class="btn btn-warning" id="submit">조회</button>
+      </div>
+    </div>
+
+    <div>
+      <% @fcschedules.each do |data| %>
+        <%= render partial: "admin/schedule/item", locals: { data: data } %>
+      <% end %>
+      <div>
+        <%= paginate @fcschedules %>
+      </div>
+    </div>
+
+  </body>
+</html>

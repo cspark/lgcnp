@@ -245,4 +245,24 @@ class GenerateTestModel < ApplicationRecord
     end
   end
 
+  def self.generate_test_schedule
+    num = 2
+    (1..num).each do |i|
+       f = Fcschedule.new
+       f.ch_cd = "CNP"
+       f.shop_cd = "59100"
+       f.reserve_yyyy = "2017"
+       f.reserve_mmdd = "0221"
+       f.reserve_hhmm = "1500"
+       f.custname = "김수민"
+       f.phone = "01086919942"
+       f.reserve_yn = "Y"
+       f.memo = "민트기술"
+       f.uptdate = "2017-02-20"
+       f.purchase_yn = "Y"
+       f.save
+       i +=1;
+    end
+  end
+
 end

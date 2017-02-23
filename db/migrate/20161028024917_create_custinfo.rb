@@ -2,6 +2,7 @@ class CreateCustinfo < ActiveRecord::Migration[5.0]
   def change
     create_table :custinfos do |t|
       t.string :custserial, null: false
+      t.string :n_cust_id
       t.string :custname
       t.string :sex
       t.string :birthyy

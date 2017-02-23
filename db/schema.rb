@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170216113125) do
+ActiveRecord::Schema.define(version: 20170220105147) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20170216113125) do
 
   create_table "custinfos", force: :cascade do |t|
     t.string   "custserial",               null: false
+    t.string   "n_cust_id"
     t.string   "custname"
     t.string   "sex"
     t.string   "birthyy"
@@ -68,17 +69,17 @@ ActiveRecord::Schema.define(version: 20170216113125) do
     t.datetime "updated_at",      null: false
     t.integer  "n_index"
     t.string   "age"
-    t.float    "pore"
-    t.float    "wrinkle"
-    t.float    "spot_pl"
-    t.float    "spot_uv"
-    t.float    "elasticity"
-    t.float    "porphyrin_ratio"
+    t.integer  "pore"
+    t.integer  "wrinkle"
+    t.integer  "spot_pl"
+    t.integer  "spot_uv"
+    t.integer  "elasticity"
+    t.integer  "porphyrin_ratio"
     t.float    "e_sebum_t"
     t.float    "e_sebum_u"
-    t.float    "moisture"
-    t.integer  "e_porphyrin_t"
-    t.integer  "e_porphyrin_u"
+    t.integer  "moisture"
+    t.float    "e_porphyrin_t"
+    t.float    "e_porphyrin_u"
   end
 
   create_table "fcdata", force: :cascade do |t|
@@ -253,6 +254,22 @@ ActiveRecord::Schema.define(version: 20170216113125) do
     t.integer  "rt_les_y"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "fcschedules", force: :cascade do |t|
+    t.string   "ch_cd",        null: false
+    t.string   "shop_cd",      null: false
+    t.string   "reserve_yyyy", null: false
+    t.string   "reserve_mmdd", null: false
+    t.string   "reserve_hhmm", null: false
+    t.string   "custname"
+    t.string   "phone"
+    t.string   "reserve_yn"
+    t.string   "memo"
+    t.string   "uptdate"
+    t.string   "purchase_yn"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "fctabletinterviews", force: :cascade do |t|

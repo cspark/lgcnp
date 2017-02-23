@@ -21,11 +21,21 @@ Rails.application.routes.draw do
     get "fcavg_list" => "fcavgdata#list"
     get "data_list" => "data#list"
     get "fcpos_list" => "pos#list"
+    get "fcschedule_list" => "schedule#list"
     resources :admin_users do
     end
   end
 
-
+  namespace :api do
+    namespace :beau do
+      resources :user do
+        collection do
+          get 'lcare_user_list'
+          put 'measure_update'
+        end
+      end
+    end
+  end
 
   get "get_api_key" => "custinfos#get_api_key"
   get "find_user" => "custinfos#find_user"
