@@ -24,15 +24,15 @@ class Admin::UserController < Admin::AdminApplicationController
         end
 
         user.is_agree_privacy = "X"
-        if user.is_agree_privacy.include?("T")
+        if user.is_agree_privacy == "T"
           user.is_agree_privacy = "O"
         end
         user.is_agree_thirdparty_info = "X"
-        if user.is_agree_thirdparty_info.include?("T")
+        if user.is_agree_thirdparty_info == "T"
           user.is_agree_thirdparty_info = "O"
         end
         user.is_agree_marketing = "X"
-        if user.is_agree_marketing.include?("T")
+        if user.is_agree_marketing == "T"
           user.is_agree_marketing = "O"
         end
       end
