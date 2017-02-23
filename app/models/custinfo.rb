@@ -1,3 +1,4 @@
+require 'uri'
 class Custinfo < ApplicationRecord
   self.table_name = "custinfo" if Rails.env.production? || Rails.env.staging?
   self.primary_key = :custserial if Rails.env.production? || Rails.env.staging?
@@ -44,5 +45,14 @@ class Custinfo < ApplicationRecord
 
   def decode_name
     custname
+  end
+
+  def self.to_csv(options = {}, users)
+    CSV.generate(options) do |csv|
+      csv << column_names
+      users.each do |user|
+        csv << user.attributes.values_at(*column_names)
+      end
+    end
   end
 end

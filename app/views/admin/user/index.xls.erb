@@ -1,0 +1,21 @@
+이름, 가입 날짜, 마지막 진단 날짜, 시리얼, 연락처, 성별, 생년월일, 개인정보 이용 동의, 제3자 정보 제공 동의, 마케팅 정보 동의, 측정횟수
+<% @users.each do |user| %>
+<% if user.sex.include?("M") %>
+  <% user.sex = "남" %>
+<% else %>
+  <% user.sex = "여" %>
+<% end %>
+<% is_agree_privacy = "X" %>
+<% if user.is_agree_privacy.include?("T") %>
+  <% is_agree_privacy = "O" %>
+<% end %>
+<% is_agree_thirdparty = "X" %>
+<% if user.is_agree_thirdparty_info.include?("T") %>
+  <% is_agree_thirdparty = "O" %>
+<% end %>
+<% is_agree_marketing = "X" %>
+<% if user.is_agree_marketing.include?("T") %>
+  <% is_agree_marketing = "O" %>
+<% end %>
+<%= user.custname %>, <%= user.uptdate %>, <%= user.lastanaldate %>, <%= user.custserial.to_i %>, <%= user.phone %>, <%= user.sex %>, <%= user.birthyy %>-<%= user.birthmm %>-<%= user.birthdd %>, <%= is_agree_privacy %>, <%= is_agree_marketing %>, <%= is_agree_thirdparty %>, <%= user.measureno.to_i %>
+<% end %>
