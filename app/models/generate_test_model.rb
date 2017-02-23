@@ -265,4 +265,21 @@ class GenerateTestModel < ApplicationRecord
     end
   end
 
+  def self.generate_test_afterinterview
+    num = 2
+    (1..num).each do |i|
+       f = Fcafterinterview.new
+       f.custserial = "1"
+       f.tablet_interview_id = 1
+       f.after_interview_id = 1
+       f.a1 = 1
+       f.a2 = 2
+       f.a3 = 3
+       f.a4 = 4
+       f.a5 = 5
+
+       i +=1;
+    end
+  end
+
 end

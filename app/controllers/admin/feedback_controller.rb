@@ -211,6 +211,18 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     end
 
     @after_interviews = Kaminari.paginate_array(@after_interviews).page(params[:page]).per(5)
-    render 'list'
+
+    if params.has_key?(:isExcel) && params[:isExcel] == 'true'
+      @after_interviews.each do |tabletinterview|
+        user = Custinfo.find tabletinterview.custserial.to_i
+        tabletinterview.custname = URI.decode(user.custname)
+      end
+    end
+
+    respond_to do |format|
+      format.html
+      format.xls
+    end
+    # render 'list'
   end
 end

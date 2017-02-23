@@ -17,5 +17,5 @@
 <% if user.is_agree_marketing.include?("T") %>
   <% is_agree_marketing = "O" %>
 <% end %>
-<%= user.custname %>, <%= user.uptdate %>, <%= user.lastanaldate %>, <%= user.custserial.to_i %>, <%= user.phone %>, <%= user.sex %>, <%= user.birthyy %>-<%= user.birthmm %>-<%= user.birthdd %>, <%= is_agree_privacy %>, <%= is_agree_marketing %>, <%= is_agree_thirdparty %>, <%= user.measureno.to_i %>
+<%= user.custname %>, <%= user.uptdate %>, <%= user.lastanaldate %>, <%= user.custserial.to_i %>, <%= user.phone %>, <%= user.sex %>, <%= user.birthyy %>-<%= user.birthmm %>-<%= user.birthdd %>, <%= is_agree_privacy %>, <%= is_agree_thirdparty %>, <%= is_agree_marketing %>, <%= user.measureno.to_i %>
 <% end %>
