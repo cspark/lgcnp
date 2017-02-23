@@ -16,15 +16,25 @@ class Admin::UserController < Admin::AdminApplicationController
 
     if params.has_key?(:isExcel) && params[:isExcel] == 'true'
       @users.each do |user|
-        Rails.logger.info "!!!!"
-        Rails.logger.info user.custname
         user.custname = URI.decode(user.custname)
         if user.sex.include?("M")
           user.sex = "남자"
         else
           user.sex = "여자"
         end
-        Rails.logger.info user.custname
+
+        user.is_agree_privacy = "X"
+        if user.is_agree_privacy.include?("T")
+          user.is_agree_privacy = "O"
+        end
+        user.is_agree_thirdparty = "X"
+        if user.is_agree_thirdparty.include?("T")
+          user.is_agree_thirdparty = "O"
+        end
+        user.is_agree_marketing = "X"
+        if user.is_agree_marketing.include?("T")
+          user.is_agree_marketing = "O"
+        end
       end
     end
 
