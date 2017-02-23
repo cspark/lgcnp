@@ -35,7 +35,7 @@
       <p style="float:right; margin-right:20px;">
         Download:
         <!-- <%= link_to "CSV", admin_user_list_path(format: "csv") %> -->
-        <%= link_to "Excel", admin_user_list_path(format: "xls", :search => @search) %>
+        <%= link_to "Excel", admin_user_list_path(format: "xls", :search => @search, :isExcel => true) %>
       </p>
     </div>
     <div>

@@ -14,8 +14,10 @@ class Admin::UserController < Admin::AdminApplicationController
       @users = Custinfo.where(ch_cd: "CNP").where.not(lastanaldate: nil).order("lastanaldate desc").page(params[:page]).per(6)
     end
 
-    @users.each do |user|
-      user.custname = user.decode_utf8_b64(user.custname)
+    if params.has_key?(:isExcel) && params[:isExcel] == true
+      @users.each do |user|
+        user.custname = user.decode_utf8_b64(user.custname)
+      end
     end
 
     respond_to do |format|
