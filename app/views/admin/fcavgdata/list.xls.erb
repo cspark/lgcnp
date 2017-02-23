@@ -1,0 +1,16 @@
+등급, 모공, 주름, 색소침착 편광, 색소침착 UV광, 탄력, 포피린 비율, T존 피지, U존 피지, 수분, T존 포피린, U존 포피린
+<% @fcavgdatas_list.each do |data| %>
+<% title = data.age %>
+<% temp1 = title.split("_")[0] %>
+<% if title.split("_")[2].nil? %>
+  <% grade = title.split("_")[1] %>
+<% else %>
+  <% grade = title.split("_")[2] %>
+<% end %>
+<% if temp1.include?("Male") %>
+  <% title = "남자 "+grade %>
+<% else %>
+  <% title = "여자 "+grade %>
+<% end %>
+<%= title %>, <%= data.pore %>, <%= data.wrinkle %>, <%= data.spot_pl %>, <%= data.spot_uv %>, <%= data.elasticity %>, <%= data.porphyrin_ratio %>, <%= data.e_sebum_t %>, <%= data.e_sebum_u %>, <%= data.moisture %>, <%= data.e_porphyrin_t %>, <%= data.e_porphyrin_u %>
+<% end %>

@@ -1,0 +1,188 @@
+이름, 시리얼, 진단 날짜, 채널, 피부타입, 진단으로 나온 솔루션 1, 최종으로 선택된 솔루션 1, 진단으로 나온 솔루션 2, 최종으로 선택된 솔루션 2, 진단으로 나온 세럼, 최종으로 선택된 세럼, 진단으로 나온 앰플 1, 최종으로 선택된 앰플 1, 진단으로 나온 앰플 1, 최종으로 선택된 앰플 2, 진단으로 나온 화장품, 최종으로 선택된 화장품, A1, A2, A3, B1, B2, B3, B4, C1, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, 모공 점수, 트러블 점수,
+색소침착 점수, 주름 점수, 탄력 점수
+<% @tabletinterviews_excel.each do |tabletinterview| %>
+<% custinfo = Custinfo.where(custserial: tabletinterview.custserial).first %>
+<% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
+<% skin_type = "" %>
+<% if tabletinterview.skin_type.include?("skin_type_gunsung") %>
+  <% skin_type = "건성" %>
+<% elsif tabletinterview.skin_type.include?("skin_type_gun_boggab") %>
+  skin_type = "건복합성" %>
+<% elsif tabletinterview.skin_type.include?("skin_type_jisung") %>
+  <% skin_type = "지성" %>
+<% elsif tabletinterview.skin_type.include?("skin_type_jisung_boghab") %>
+  <% skin_type = "지복합성" %>
+<% elsif tabletinterview.skin_type.include?("skin_type_jungsung") %>
+  <% skin_type = "중성" %>
+<% end %>
+<% if tabletinterview.skin_type.include?("senstive")) %>
+  <% skin_type = skin_type + " (민감성)" %>
+<% end %>
+<% before_solution_1 = "" %>
+<% if tabletinterview.before_solution_1 == "elasticity solution") %>
+  <% before_solution_1 = "탄력 솔루션" %>
+<% elsif tabletinterview.before_solution_1 == "pigment solution") %>
+  <% before_solution_1 = "색소침착 솔루션" %>
+<% elsif tabletinterview.before_solution_1 == "pore solution") %>
+  <% before_solution_1 = "모공 솔루션" %>
+<% elsif tabletinterview.before_solution_1 == "trouble solution") %>
+  <% before_solution_1 = "트러블 솔루션" %>
+<% elsif tabletinterview.before_solution_1 == "wrinkle solution") %>
+  <% before_solution_1 = "주름 솔루션" %>
+<% else %>
+  <% before_solution_1 = tabletinterview.before_solution_1 %>
+<% end %>
+<% before_solution_2 = "" %>
+<% if tabletinterview.before_solution_2 == "elasticity solution") %>
+  <% before_solution_2 = "탄력 솔루션" %>
+<% elsif tabletinterview.before_solution_2 == "pigment solution") %>
+  <% before_solution_2 = "색소침착 솔루션" %>
+<% elsif tabletinterview.before_solution_2 == "pore solution") %>
+  <% before_solution_2 = "모공 솔루션" %>
+<% elsif tabletinterview.before_solution_2 == "trouble solution") %>
+  <% before_solution_2 = "트러블 솔루션" %>
+<% elsif tabletinterview.before_solution_2 == "wrinkle solution") %>
+  <% before_solution_2 = "주름 솔루션" %>
+<% else %>
+  <% before_solution_2 = tabletinterview.before_solution_2 %>
+<% end %>
+<% after_solution_1 = "" %>
+<% if tabletinterview.after_solution_1 == "elasticity solution") %>
+  <% after_solution_1 = "탄력 솔루션" %>
+<% elsif tabletinterview.after_solution_1 == "pigment solution") %>
+  <% after_solution_1 = "색소침착 솔루션" %>
+<% elsif tabletinterview.after_solution_1 == "pore solution") %>
+  <% after_solution_1 = "모공 솔루션" %>
+<% elsif tabletinterview.after_solution_1 == "trouble solution") %>
+  <% after_solution_1 = "트러블 솔루션" %>
+<% elsif tabletinterview.after_solution_1 == "wrinkle solution") %>
+  <% after_solution_1 = "주름 솔루션" %>
+<% else %>
+  <% after_solution_1 = tabletinterview.after_solution_1 %>
+<% end %>
+<% after_solution_2 = "" %>
+<% if tabletinterview.after_solution_2 == "elasticity solution") %>
+  <% after_solution_2 = "탄력 솔루션" %>
+<% elsif tabletinterview.after_solution_2 == "pigment solution") %>
+  <% after_solution_2 = "색소침착 솔루션" %>
+<% elsif tabletinterview.after_solution_2 == "pore solution") %>
+  <% after_solution_2 = "모공 솔루션" %>
+<% elsif tabletinterview.after_solution_2 == "trouble solution") %>
+  <% after_solution_2 = "트러블 솔루션" %>
+<% elsif tabletinterview.after_solution_2 == "wrinkle solution") %>
+  <% after_solution_2 = "주름 솔루션" %>
+<% else %>
+  <% after_solution_2 = tabletinterview.after_solution_2 %>
+<% end %>
+<% before_serum = "" %>
+<% if tabletinterview.before_serum.include?("deep humect") %>
+  <% before_serum = "딥 휴멕트 세럼" %>
+<% elsif tabletinterview.before_serum.include?("skin control") %>
+  <% before_serum = "스킨 컨트롤 세럼" %>
+<% elsif tabletinterview.before_serum.include?("rebalencing") %>
+  <% before_serum = "리밸런싱 세럼" %>
+<% else %>
+  <% before_serum = tabletinterview.before_serum %>
+<% end %>
+<% after_serum = "" %>
+<% if tabletinterview.after_serum.include?("deep humect") %>
+  <% after_serum = "딥 휴멕트 세럼" %>
+<% elsif tabletinterview.after_serum.include?("skin control") %>
+  <% after_serum = "스킨 컨트롤 세럼" %>
+<% elsif tabletinterview.after_serum.include?("rebalencing") %>
+  <% after_serum = "리밸런싱 세럼" %>
+<% else %>
+  <% after_serum = tabletinterview.after_serum %>
+<% end %>
+<% before_made_cosmetic = "" %>
+<% if tabletinterview.before_made_cosmetic.include?("deep humect") %>
+  <% before_made_cosmetic = "딥 휴멕트 세럼" %>
+<% elsif tabletinterview.before_made_cosmetic.include?("skin control") %>
+  <% before_made_cosmetic = "스킨 컨트롤 세럼" %>
+<% elsif tabletinterview.before_made_cosmetic.include?("rebalencing") %>
+  <% before_made_cosmetic = "리밸런싱 세럼" %>
+<% else %>
+  <% before_made_cosmetic = tabletinterview.before_made_cosmetic %>
+<% end %>
+<% after_made_cosmetic = "" %>
+<% if tabletinterview.after_made_cosmetic.include?("deep humect") %>
+  <% after_made_cosmetic = "딥 휴멕트 세럼" %>
+<% elsif tabletinterview.after_made_cosmetic.include?("skin control") %>
+  <% after_made_cosmetic = "스킨 컨트롤 세럼" %>
+<% elsif tabletinterview.after_made_cosmetic.include?("rebalencing") %>
+  <% after_made_cosmetic = "리밸런싱 세럼" %>
+<% else %>
+  <% after_made_cosmetic = tabletinterview.after_made_cosmetic %>
+<% end %>
+<% before_ample_1 = "" %>
+<% if tabletinterview.before_ample_1 == "pore clinic ampoule") %>
+  <% before_ample_1 = "포어클리닉 앰플" %>
+<% elsif tabletinterview.before_ample_1 == "carming ampoule") %>
+  <% before_ample_1 = "카밍 앰플" %>
+<% elsif tabletinterview.before_ample_1 == "luminus ampoule") %>
+  <% before_ample_1 = "루미너스 앰플" %>
+<% elsif tabletinterview.before_ample_1 == "regenerating ampoule") %>
+  <% before_ample_1 = "리제네레이팅 앰플" %>
+<% elsif tabletinterview.before_ample_1 == "perming ampoule") %>
+  <% before_ample_1 = "퍼밍 앰플" %>
+<% else %>
+  <% before_ample_1 = tabletinterview.before_ample_1 %>
+<% end %>
+<% after_ample_1 = "" %>
+<% if tabletinterview.after_ample_1 == "pore clinic ampoule") %>
+  <% after_ample_1 = "포어클리닉 앰플" %>
+<% elsif tabletinterview.after_ample_1 == "carming ampoule") %>
+  <% after_ample_1 = "카밍 앰플" %>
+<% elsif tabletinterview.after_ample_1 == "luminus ampoule") %>
+  <% after_ample_1 = "루미너스 앰플" %>
+<% elsif tabletinterview.after_ample_1 == "regenerating ampoule") %>
+  <% after_ample_1 = "리제네레이팅 앰플" %>
+<% elsif tabletinterview.after_ample_1 == "perming ampoule") %>
+  <% after_ample_1 = "퍼밍 앰플" %>
+<% else %>
+  <% after_ample_1 = tabletinterview.after_ample_1 %>
+<% end %>
+<% before_ample_2 = "" %>
+<% if tabletinterview.before_ample_2 == "pore clinic ampoule") %>
+  <% before_ample_2 = "포어클리닉 앰플" %>
+<% elsif tabletinterview.before_ample_2 == "carming ampoule") %>
+  <% before_ample_2 = "카밍 앰플" %>
+<% elsif tabletinterview.before_ample_2 == "luminus ampoule") %>
+  <% before_ample_2 = "루미너스 앰플" %>
+<% elsif tabletinterview.before_ample_2 == "regenerating ampoule") %>
+  <% before_ample_2 = "리제네레이팅 앰플" %>
+<% elsif tabletinterview.before_ample_2 == "perming ampoule") %>
+  <% before_ample_2 = "퍼밍 앰플" %>
+<% else %>
+  <% before_ample_2 = tabletinterview.before_ample_2 %>
+<% end %>
+<% after_ample_2 = "" %>
+<% if tabletinterview.after_ample_2 == "pore clinic ampoule") %>
+  <% after_ample_2 = "포어클리닉 앰플" %>
+<% elsif tabletinterview.after_ample_2 == "carming ampoule") %>
+  <% after_ample_2 = "카밍 앰플" %>
+<% elsif tabletinterview.after_ample_2 == "luminus ampoule") %>
+  <% after_ample_2 = "루미너스 앰플" %>
+<% elsif tabletinterview.after_ample_2 == "regenerating ampoule") %>
+  <% after_ample_2 = "리제네레이팅 앰플" %>
+<% elsif tabletinterview.after_ample_2 == "perming ampoule") %>
+  <% after_ample_2 = "퍼밍 앰플" %>
+<% else %>
+  <% after_ample_2 = tabletinterview.after_ample_2 %>
+<% end %>
+<% if !fcdata.nil? %>
+  <% fcdata = fcdata.to_api_hash %>
+  <% pr_graph = fcdata[:pr_graph]%>
+  <% sb_graph = fcdata[:sb_graph]%>
+  <% pp_graph = fcdata[:pp_graph]%>
+  <% wr_graph = fcdata[:wr_graph]%>
+  <% el_graph = fcdata[:el_graph]%>
+<% else %>
+  <% pr_graph = "" %>
+  <% sb_graph = "" %>
+  <% pp_graph = "" %>
+  <% wr_graph = "" %>
+  <% el_graph = "" %>
+<% end %>
+<%= URI.decode(custinfo.custname) %>, <%= tabletinterview.custserial.to_i %>, <%= tabletinterview.uptdate %>, <%= custinfo.ch_cd %>, <%= skin_type %>, <%= before_solution_1 %>, <%= after_solution_1 %>, <%= before_solution_2 %>, <%= after_solution_2 %>, <%= before_serum %>, <%= after_serum_ %>, <%= before_ample_1 %>, <%= after_ample_1 %>, <%= before_ample_2 %>, <%= after_ample_2 %>, <% before_made_cosmetic %>, <% after_made_cosmetic %>, <%= tabletinterview.a_1.to_i %>, <%= tabletinterview.a_2.to_i %>, <%= tabletinterview.a_3.to_i %>, <%= tabletinterview.b_1.to_i %>, <%= tabletinterview.b_2.to_i %>, <%= tabletinterview.b_3.to_i %>, <%= tabletinterview.b_4.to_i %>, <%= tabletinterview.c_1.to_i %>, <%= tabletinterview.d_1.to_i %>, <%= tabletinterview.d_2.to_i %>, <%= tabletinterview.d_3.to_i %>, <%= tabletinterview.d_4.to_i %>, <%= tabletinterview.d_5.to_i %>, <%= tabletinterview.d_5.to_i %>, <%= tabletinterview.d_6.to_i %>, <%= tabletinterview.d_7.to_i %>, <%= tabletinterview.d_8.to_i %>, <%= tabletinterview.d_9.to_i %>, <%= tabletinterview.d_10.to_i %>, <%= fcdata[:pr_graph].to_i %>, <%= fcdata[:sb_graph].to_i %>, <%= fcdata[:pp_graph].to_i %>, <%= fcdata[:wr_graph].to_i %>, <%= fcdata[:el_graph].to_i %>
+<% end %>

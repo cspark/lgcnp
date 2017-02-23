@@ -145,7 +145,7 @@
         진단으로 나온 화장품 : <font id="before_made_cosmetic_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font> / 최종으로 선택된 화장품 : <font id="after_made_cosmetic_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font>  <br>
         A1 : <%= tabletinterview.a_1.to_i %> / A2 : <%= tabletinterview.a_2.to_i %> / A3 : <%= tabletinterview.a_3.to_i %> <br>
         B1 : <%= tabletinterview.b_1.to_i %> / B2 : <%= tabletinterview.b_2.to_i %> / B3 : <%= tabletinterview.b_3.to_i %> / B4 : <%= tabletinterview.b_4.to_i %> <br>
-        C1 : <%= tabletinterview.c_1.to_i %> / D1 : <%= tabletinterview.d_2.to_i %> / D2 : <%= tabletinterview.d_2.to_i %> / D3 : <%= tabletinterview.d_3.to_i %>
+        C1 : <%= tabletinterview.c_1.to_i %> / D1 : <%= tabletinterview.d_1.to_i %> / D2 : <%= tabletinterview.d_2.to_i %> / D3 : <%= tabletinterview.d_3.to_i %>
         / D4 : <%= tabletinterview.d_4.to_i %> / D5 : <%= tabletinterview.d_5.to_i %> / D6 : <%= tabletinterview.d_6.to_i %> / D7 : <%= tabletinterview.d_7.to_i %> / D8 : <%= tabletinterview.d_8.to_i %> / D9 : <%= tabletinterview.d_9.to_i %> / D10 : <%= tabletinterview.d_10.to_i %> <br>
         <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
         <% if !fcdata.nil? %>

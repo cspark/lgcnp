@@ -10,5 +10,10 @@ class Admin::FcavgdataController < Admin::AdminApplicationController
     end
 
     @fcavgdatas_list = Fcavgdata.all.where("age LIKE ?", "%#{@select_option}%")
+
+    respond_to do |format|
+      format.html
+      format.xls
+    end
   end
 end
