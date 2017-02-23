@@ -26,7 +26,8 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
   def create_new_fcafterservice(relation)
     relation.each do |tabletinterview|
-      if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).count == 0
+      custinfo = Custinfo.where(custserial: tabletinterview.custserial).last
+      if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).count == 0 && custinfo.ch_cd == "CNP"
         after_interview = Fcafterinterview.new
         after_interview.custserial = tabletinterview.custserial
         after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
