@@ -1,16 +1,30 @@
 class GenerateTestModel < ApplicationRecord
-  def self.generate_test_fctabletinterview
-    f = Fctabletinterview.new
 
+  def methself.generate_test_custinfo
     c = Custinfo.new
-    c.custserial = 1
-    c.custname = "JJ"
-    c.birthyy = "1988"
-    c.birthmm = "05"
+    c.custserial = "4"
+    c.n_cust_id = "4"
+    c.custname = "정구현"
+    c.sex = "M"
+    c.birthyy = "1990"
+    c.birthmm = "04"
+    c.birthdd = "01"
+    c.age = "27"
+    c.phone = "0123456789"
+    c.lastanaldate = "2017-01-25-18-00"
+    c.measureno = "1"
+    c.uptdate = "2017/01/25"
+    c.is_agree_privacy = "T"
+    c.is_agree_after = "T"
+    c.is_agree_marketing = "T"
+    c.is_agree_thirdparty_info = "T"
     c.ch_cd = "CNP"
     c.save
-    f.custserial = Custinfo.first.custserial
+  end
 
+  def self.generate_test_fctabletinterview
+    f = Fctabletinterview.new
+    f.custserial = Custinfo.first.custserial
     f.tablet_interview_id = Fctabletinterview.all.count
     f.ch_cd = "CNP"
     f.skin_type = "skin_type_jisung_senstive"
@@ -269,14 +283,15 @@ class GenerateTestModel < ApplicationRecord
     num = 2
     (1..num).each do |i|
        f = Fcafterinterview.new
-       f.custserial = "1"
-       f.tablet_interview_id = 1
-       f.after_interview_id = 1
+       f.custserial = "2"
+       f.tablet_interview_id = 2
+       f.after_interview_id = 2
        f.a1 = 1
        f.a2 = 2
        f.a3 = 3
        f.a4 = 4
        f.a5 = 5
+       f.save
 
        i +=1;
     end
