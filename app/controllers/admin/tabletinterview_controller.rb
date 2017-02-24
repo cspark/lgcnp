@@ -39,7 +39,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @select_makeup = select_makeup
     @select_area = select_area
 
-    min_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy desc").first
+    min_age_custinfo = Custinfo.where(ch_cd: "CNP").where.not(birthyy: nil).order("birthyy desc").first
     @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
     @min_birthyy = min_age_custinfo.birthyy
     @min_birthmm = 1

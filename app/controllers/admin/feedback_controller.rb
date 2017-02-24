@@ -66,7 +66,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @end_date = Date.today
     @today = Date.today
 
-    min_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy desc").first
+    min_age_custinfo = Custinfo.where(ch_cd: "CNP").where.not(birthyy: nil).order("birthyy desc").first
     @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
     max_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy asc").first
     @max_age = Time.current.year - max_age_custinfo.birthyy.to_i

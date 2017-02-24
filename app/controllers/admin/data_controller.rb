@@ -51,7 +51,7 @@ class Admin::DataController < Admin::AdminApplicationController
     @select_skin_anxiety1 = select_skin_anxiety1
     @select_skin_anxiety2 = select_skin_anxiety2
 
-    min_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy desc").first
+    min_age_custinfo = Custinfo.where(ch_cd: "CNP").where.not(birthyy: nil).order("birthyy desc").first
     @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
     @min_birthyy = min_age_custinfo.birthyy
     @min_birthmm = 1
@@ -159,7 +159,7 @@ class Admin::DataController < Admin::AdminApplicationController
       Rails.logger.info Custinfo.all.count
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
     end
-    
+
     respond_to do |format|
       format.html
       format.xls
