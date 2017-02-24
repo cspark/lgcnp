@@ -10,9 +10,9 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @date_2weeks_ago = (@date - 2.weeks).strftime("%F")
     @date_3months_ago = (@date - 3.months).strftime("%F")
     if Rails.env.production? || Rails.env.staging?
-      @tablet_interviews_today = Fctabletinterview.where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
-      @tablet_interviews_2_weeks_ago = Fctabletinterview.where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
-      @tablet_interviews_3_months_ago = Fctabletinterview.where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
+      @tablet_interviews_today = Fctabletinterview.where(ch_cd: "CNP").where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
+      @tablet_interviews_2_weeks_ago = Fctabletinterview.where(ch_cd: "CNP").where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
+      @tablet_interviews_3_months_ago = Fctabletinterview.where(ch_cd: "CNP").where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
     else
       @tablet_interviews_today = Fctabletinterview.all
       @tablet_interviews_2_weeks_ago = Fctabletinterview.all
@@ -26,7 +26,8 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
   def create_new_fcafterservice(relation)
     relation.each do |tabletinterview|
-      if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).count == 0
+      custinfo = Custinfo.where(custserial: tabletinterview.custserial).last
+      if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).count == 0 && custinfo.ch_cd == "CNP"
         after_interview = Fcafterinterview.new
         after_interview.custserial = tabletinterview.custserial
         after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
