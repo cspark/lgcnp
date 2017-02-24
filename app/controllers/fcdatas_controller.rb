@@ -160,6 +160,8 @@ class FcdatasController < ApplicationController
     image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_PL_UVC_")
     image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_PL_UVC_")
 
+    image_download(serial: serial, measureno: measureno, number: nil, type: "_F_PW_SK_L_SIDE")
+
     image_download(serial: serial, measureno: measureno, number: nil, type: "_F_FM_WH_PWC_W")
     image_download(serial: serial, measureno: measureno, number: nil, type: "_F_FM_WH_E")
     image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Pore_Cust")
