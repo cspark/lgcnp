@@ -58,7 +58,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
   def show
     userId = params[:userId]
     @user = Custinfo.where(custserial: userId).first
-    @after_interview = Fcafterinterview.where(after_interview_id: params[:after_interview_id])
+    @after_interview = Fcafterinterview.where(after_interview_id: params[:after_interview_id]).first
   end
 
   def list
