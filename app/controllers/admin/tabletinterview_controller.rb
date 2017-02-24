@@ -122,8 +122,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
         end
       end
 
-      @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(3)
       @tabletinterviews_excel = @tabletinterviews
+      @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(3)
       respond_to do |format|
         format.html
         format.xls
