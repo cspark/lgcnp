@@ -214,7 +214,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     end
 
     @after_interviews = Kaminari.paginate_array(@after_interviews).page(params[:page]).per(5)
-    @after_interviews_excel = Kaminari.paginate_array(@after_interviews)
+    @after_interviews_excel = @after_interviews
 
     if params.has_key?(:isExcel) && params[:isExcel] == 'true'
       @after_interviews_excel.each do |tabletinterview|

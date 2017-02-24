@@ -149,7 +149,7 @@ class Admin::DataController < Admin::AdminApplicationController
       end
 
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
-      @fcdatas_excel = Kaminari.paginate_array(@fcdatas)
+      @fcdatas_excel = @fcdatas
     else
       @fcdatas = Fcdata.all
       Rails.logger.info "development???"
