@@ -60,6 +60,10 @@
       <div class="form-inline">
         날짜 : <input class="form-control" type="text" id="select_date" style="width:100px;">
         <button class="btn btn-warning" id="submit">조회</button>
+        <p style="float:right; margin-right:20px;">
+          Download:
+          <%= link_to "Excel", admin_fcschedule_list_path(format: "xls", :select_date => @select_date, :isExcel => true) %>
+        </p>
       </div>
     </div>
 

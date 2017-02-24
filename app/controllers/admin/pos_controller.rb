@@ -15,6 +15,7 @@ class Admin::PosController < Admin::AdminApplicationController
     else
       @fcpos = Fcpos.all.order("uptdate desc")
     end
+    
     @fcpos_excel = @fcpos
     @fcpos = Kaminari.paginate_array(@fcpos).page(params[:page]).per(3)
 

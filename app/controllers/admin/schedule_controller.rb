@@ -18,6 +18,12 @@ class Admin::ScheduleController < Admin::AdminApplicationController
     scoped = scoped.where("reserve_mmdd = ?", select_mmdd)
     @fcschedules = scoped.order("reserve_hhmm asc")
 
+    @fcschedules_excel = @fcschedules
     @fcschedules = Kaminari.paginate_array(@fcschedules).page(params[:page]).per(10)
+
+    respond_to do |format|
+      format.html
+      format.xls
+    end
   end
 end
