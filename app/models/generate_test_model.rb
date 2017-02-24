@@ -1,6 +1,6 @@
 class GenerateTestModel < ApplicationRecord
 
-  def methself.generate_test_custinfo
+  def self.generate_test_custinfo
     c = Custinfo.new
     c.custserial = "10"
     c.n_cust_id = "10"
@@ -283,9 +283,9 @@ class GenerateTestModel < ApplicationRecord
     num = 2
     (1..num).each do |i|
        f = Fcafterinterview.new
-       f.custserial = "2"
-       f.tablet_interview_id = 2
-       f.after_interview_id = 2
+       f.custserial = "9"
+       f.tablet_interview_id = 8
+       f.after_interview_id = 8
        f.a1 = 1
        f.a2 = 2
        f.a3 = 3
