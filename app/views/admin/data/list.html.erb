@@ -186,7 +186,7 @@
         url += "&select_sex=" + select_sex;
         url += "&start_age=" + document.getElementById("start_age").value;
         url += "&end_age=" + document.getElementById("end_age").value;
-        url += "&name=" + document.getElementById("name").value;
+        url += "&name=" + encodeURI(encodeURI($("#name")val()));
         url += "&custserial=" + document.getElementById("custserial").value;
         url += "&measureno=" + document.getElementById("measureno").value;
         url += "&start_birthyy=" + document.getElementById("start_birthyy").value;
