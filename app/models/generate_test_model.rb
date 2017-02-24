@@ -23,28 +23,44 @@ class GenerateTestModel < ApplicationRecord
   end
 
   def self.generate_test_fctabletinterview
-    f = Fctabletinterview.new
-    f.custserial = "1"
-    f.tablet_interview_id = Fctabletinterview.all.count
-    f.ch_cd = "CNP"
-    f.skin_type = "skin_type_jisung_senstive"
-    f.before_solution_1 = "pore solution"
-    f.after_solution_1 = "pore solution"
-    f.before_solution_2 = "pore solution"
-    f.after_solution_2 = "pore solution"
-    f.before_serum = "skin control"
-    f.after_serum = "skin control"
-    f.before_ample_1 = "pore clinic ampoule"
-    f.after_ample_1 = "pore clinic ampoule"
-    f.before_ample_2 = "pore clinic ampoule"
-    f.after_ample_2 = "pore clinic ampoule"
-
-    f.before_made_cosmetic = "skin control EX"
-    f.after_made_cosmetic = "skin control EX"
-    f.fcdata_id = 1
-    f.uptdate = "2017-02-19-15-20"
-    f.is_quick_mode = "F"
-    f.save
+    num = 10
+    (7..num).each do |i|
+      f = Fctabletinterview.new
+      f.custserial = i.to_s
+      f.a_1 = i
+      f.a_2 = i
+      f.a_3 = i
+      f.b_1 = i
+      f.b_2 = i
+      f.b_3 = i
+      f.b_4 = i
+      f.c_1 = i
+      f.d_1 = i
+      f.d_2 = i
+      f.d_3 = i
+      f.d_4 = i
+      f.d_5 = i
+      f.d_6 = i
+      f.d_7 = i
+      f.d_8 = i
+      f.d_9 = i
+      f.d_10 = i
+      f.skin_type = "skin_type_gunsung"
+      f.before_solution_1 = "elasticity solution"
+      f.after_solution_1 = "elasticity solution"
+      f.before_solution_2 = "wrinkle solution"
+      f.after_solution_2 = "wrinkle solution"
+      f.before_serum = "rebalencing"
+      f.after_serum = "rebalencing"
+      f.before_ample_1 = "regenerating ampoule"
+      f.after_ample_1 = "regenerating ampoule"
+      f.before_ample_2 = "regenerating ampoule"
+      f.after_ample_2 = "regenerating ampoule"
+      f.before_made_cosmetic = "skin control EX"
+      f.after_made_cosmetic = "skin control EX"
+      f.uptdate = "2017-02-10-15-20"
+      f.save
+    end
   end
 
   def self.generate_test_fcavgdata
@@ -283,9 +299,9 @@ class GenerateTestModel < ApplicationRecord
     num = 2
     (1..num).each do |i|
        f = Fcafterinterview.new
-       f.custserial = "9"
-       f.tablet_interview_id = 8
-       f.after_interview_id = 8
+       f.custserial = "10"
+       f.tablet_interview_id = 10
+       f.after_interview_id = 10
        f.a1 = 1
        f.a2 = 2
        f.a3 = 3
