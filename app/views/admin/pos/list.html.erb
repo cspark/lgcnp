@@ -16,8 +16,8 @@
               location.href = "/admin/fcpos_list?search=" + encodeURI(encodeURI($("#search").val()));
           }
       });
-      if (encodeURI('<%= @search_name %>').length != 0) {
-        $("#search").val(decode_utf8('<%= @search_name %>'));
+      if (encodeURI('<%= @search %>').length != 0) {
+        $("#search").val(decode_utf8('<%= @search %>'));
       }
     });
 
