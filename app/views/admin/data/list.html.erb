@@ -71,7 +71,7 @@
         $("#end_date").datepicker('setDate', '<%= @end_date %>');
 
         <% if !@name.nil? %>
-          document.getElementById("name").value = '<%= @name %>'
+          document.getElementById("name").value = decode_utf8('<%= @name %>')
         <% end %>
 
         <% if !@custserial.nil? %>
@@ -203,6 +203,15 @@
         url += "&select_skin_anxiety2=" + select_skin_anxiety2;
 
         location.href = url;
+      }
+
+      function decode_utf8(s) {
+        try{
+          return decodeURI(s);
+        }catch(err){
+          console.log(err);
+          return s;
+        }
       }
     </script>
   </head>
