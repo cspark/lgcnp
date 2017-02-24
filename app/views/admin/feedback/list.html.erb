@@ -141,6 +141,10 @@
         url += "&name=" + encodeURI(document.getElementById("name").value);
         location.href = url;
       }
+
+      function showDetail(userId){
+        window.open("/admin/feedbacks/detail?userId=" + userId, "/feedbacks/detail?userId=" + userId, "scrollbars=1,resizable=1,height=500,width=600");
+      }
     </script>
   </head>
 

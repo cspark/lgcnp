@@ -55,6 +55,11 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     end
   end
 
+  def show
+    userId = params[:userId]
+    @user = Custinfo.where(custserial: userId).first
+  end
+  
   def list
     @start_date = Date.today
     @end_date = Date.today
