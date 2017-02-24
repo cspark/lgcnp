@@ -159,6 +159,10 @@ class Admin::DataController < Admin::AdminApplicationController
       Rails.logger.info Custinfo.all.count
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
     end
-
+    
+    respond_to do |format|
+      format.html
+      format.xls
+    end
   end
 end
