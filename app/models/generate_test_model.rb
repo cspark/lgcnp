@@ -2,18 +2,18 @@ class GenerateTestModel < ApplicationRecord
 
   def methself.generate_test_custinfo
     c = Custinfo.new
-    c.custserial = "4"
-    c.n_cust_id = "4"
-    c.custname = "정구현"
+    c.custserial = "10"
+    c.n_cust_id = "10"
+    c.custname = "red"
     c.sex = "M"
-    c.birthyy = "1990"
-    c.birthmm = "04"
+    c.birthyy = "1986"
+    c.birthmm = "11"
     c.birthdd = "01"
-    c.age = "27"
+    c.age = "32"
     c.phone = "0123456789"
-    c.lastanaldate = "2017-01-25-18-00"
+    c.lastanaldate = "2017-02-24-18-00"
     c.measureno = "1"
-    c.uptdate = "2017/01/25"
+    c.uptdate = "2017/02/24"
     c.is_agree_privacy = "T"
     c.is_agree_after = "T"
     c.is_agree_marketing = "T"
@@ -24,7 +24,7 @@ class GenerateTestModel < ApplicationRecord
 
   def self.generate_test_fctabletinterview
     f = Fctabletinterview.new
-    f.custserial = Custinfo.first.custserial
+    f.custserial = "1"
     f.tablet_interview_id = Fctabletinterview.all.count
     f.ch_cd = "CNP"
     f.skin_type = "skin_type_jisung_senstive"
