@@ -28,16 +28,16 @@
 
   <body style="padding: 10px;">
     <h2>피드백 리스트 정보</h2>
-    <% tabletinterview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first %>
+    <% tabletinterview = Fctabletinterview.where(tablet_interview_id: @after_interview.tablet_interview_id).first %>
     <font size="5"><b><div id="name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>"></b></div></font>
 
     <div style="display:table; height:50px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
       <font size="4" onClick="showDetail(<%= @user.custserial.to_i %>)"><div id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
-      <% if after_interview.order == 0 %>
+      <% if @after_interview.order == 0 %>
         <b>당일 설문</b>
-      <% elsif after_interview.order == 1 %>
+      <% elsif @after_interview.order == 1 %>
         <b>2주 후 설문</b>
-      <% elsif after_interview.order == 2 %>
+      <% elsif @after_interview.order == 2 %>
         <b>3개월 후 설문</b>
       <% end %>
       <font size="2">
@@ -77,8 +77,8 @@
           <% after_ample_2 = "퍼밍 앰플" %>
         <% end %>
         <%= after_ample_2 %> <br>
-        설문 1 : <%= after_interview.a1.to_i %> / 설문 2 : <%= after_interview.a2.to_i %> / 설문 3 : <%= after_interview.a3.to_i %> / 설문 4 : <%= after_interview.a4.to_i %> <br>
-        기타의견 : <%= after_interview.a5 %>
+        설문 1 : <%= @after_interview.a1.to_i %> / 설문 2 : <%= @after_interview.a2.to_i %> / 설문 3 : <%= @after_interview.a3.to_i %> / 설문 4 : <%= @after_interview.a4.to_i %> <br>
+        기타의견 : <%= @after_interview.a5 %>
       </font>
     </div>
 

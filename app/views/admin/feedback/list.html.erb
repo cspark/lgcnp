@@ -142,8 +142,8 @@
         location.href = url;
       }
 
-      function showDetail(userId){
-        window.open("/admin/feedbacks/detail?userId=" + userId, "/feedbacks/detail?userId=" + userId, "scrollbars=1,resizable=1,height=500,width=600");
+      function showDetail(userId, after_interview_id){
+        window.open("/admin/feedbacks/detail?userId=" + userId +"&after_interview_id=" +after_interview_id , "/feedbacks/detail?userId=" + userId +"&after_interview_id=" +after_interview_id, "scrollbars=1,resizable=1,height=500,width=600");
       }
     </script>
   </head>

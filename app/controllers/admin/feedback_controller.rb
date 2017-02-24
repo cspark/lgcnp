@@ -58,8 +58,9 @@ class Admin::FeedbackController < Admin::AdminApplicationController
   def show
     userId = params[:userId]
     @user = Custinfo.where(custserial: userId).first
+    @after_interview = Fcafterinterview.where(after_interview_id: params[:after_interview_id])
   end
-  
+
   def list
     @start_date = Date.today
     @end_date = Date.today
