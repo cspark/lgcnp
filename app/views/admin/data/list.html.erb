@@ -67,7 +67,7 @@
                       changeMonth: true
                   });
 
-        $("#start_date").datepicker('setDate', '<%= @start_date %>');
+        $("#start_date").datepicker('setDate', '2017-01-25');
         $("#end_date").datepicker('setDate', '<%= @end_date %>');
 
         <% if !@name.nil? %>
@@ -215,6 +215,10 @@
         분석일 : <input class="form-control" type="text" id="start_date" style="width:100px;">
         <input class="form-control" type="text" id="end_date" style="width:100px;">
         <button id="date_init" class="btn btn-primary">ALL</button>
+        <p style="float:right; margin-right:20px;">
+          Download:
+          <%= link_to "Excel", admin_data_list_path(format: "xls", :start_date => @start_date, :end_date => @end_date, :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial, :measureno => @measureno, :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm, :select_channel => @select_channel, :select_mode => @select_mode, :select_makeup => @select_makeup, :select_area => @select_area, :select_skin_type_device => @select_skin_type_device, :select_skin_type_survey => @select_skin_type_survey, :select_senstive => @select_senstive, :select_skin_anxiety2 => @select_skin_anxiety2, :isExcel => true) %>
+        </p>
       </div>
 
       <div class="form-inline">

@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+    $ (function () {
+        try
+        {
+          $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append( decode_utf8('<%= @user.custname %>'));
+        }
+        catch(err)
+        {
+          $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append('<%= @user.custname %>');
+        }
+      });
+
+      function decode_utf8(s) {
+        return decodeURI(s);
+      }
+
+    </script>
+  </head>
+
+  <body style="padding: 10px;">
+    <h2>피드백 리스트 정보</h2>
+    <% tabletinterview = Fctabletinterview.where(tablet_interview_id: @after_interview.tablet_interview_id).first %>
+    <font size="5"><b><div id="name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>"></b></div></font>
+
+    <div style="display:table; height:50px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
+      <font size="4" onClick="showDetail(<%= @user.custserial.to_i %>)"><div id="name_<%= @user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
+      <% if @after_interview.order == 0 %>
+        <b>당일 설문</b>
+      <% elsif @after_interview.order == 1 %>
+        <b>2주 후 설문</b>
+      <% elsif @after_interview.order == 2 %>
+        <b>3개월 후 설문</b>
+      <% end %>
+      <font size="2">
+        진단 날짜 : <%= tabletinterview.uptdate %> / 성별 : <%= @user.sex %> / 나이 : <%= @user.age %>
+        <% after_serum = tabletinterview.after_serum %>
+        <% if tabletinterview.after_serum == "skin control" %>
+          <% after_serum = "스킨 컨트롤 세럼" %>
+        <% elsif tabletinterview.after_serum == "deep humect" %>
+          <% after_serum = "딥 휴멕트 세럼" %>
+        <% elsif tabletinterview.after_serum == "rebalencing" %>
+          <% after_serum = "리밸런싱 세럼" %>
+        <% end %>
+        베이스 : <%= after_serum %> / 앰플 1 :
+        <% after_ample_1 = tabletinterview.after_ample_1 %>
+        <% if tabletinterview.after_ample_1 == "pore clinic ampoule" %>
+          <% after_ample_1 = "포어 클리닉 앰플" %>
+        <% elsif tabletinterview.after_ample_1 == "carming ampoule" %>
+          <% after_ample_1 = "카밍 앰플" %>
+        <% elsif tabletinterview.after_ample_1 == "luminus ampoule" %>
+          <% after_ample_1 = "루미너스 앰플" %>
+        <% elsif tabletinterview.after_ample_1 == "regenerating ampoule" %>
+          <% after_ample_1 = "리제네리이팅 앰플" %>
+        <% elsif tabletinterview.after_ample_1 == "perming ampoule" %>
+          <% after_ample_1 = "퍼밍 앰플" %>
+        <% end %>
+        <%= after_ample_1 %> / 앰플 2 :
+        <% after_ample_2 = tabletinterview.after_ample_2 %>
+        <% if tabletinterview.after_ample_2 == "pore clinic ampoule" %>
+          <% after_ample_2 = "포어 클리닉 앰플" %>
+        <% elsif tabletinterview.after_ample_2 == "carming ampoule" %>
+          <% after_ample_2 = "카밍 앰플" %>
+        <% elsif tabletinterview.after_ample_2 == "luminus ampoule" %>
+          <% after_ample_2 = "루미너스 앰플" %>
+        <% elsif tabletinterview.after_ample_2 == "regenerating ampoule" %>
+          <% after_ample_2 = "리제네리이팅 앰플" %>
+        <% elsif tabletinterview.after_ample_2 == "perming ampoule" %>
+          <% after_ample_2 = "퍼밍 앰플" %>
+        <% end %>
+        <%= after_ample_2 %> <br>
+        설문 1 : <%= @after_interview.a1.to_i %> / 설문 2 : <%= @after_interview.a2.to_i %> / 설문 3 : <%= @after_interview.a3.to_i %> / 설문 4 : <%= @after_interview.a4.to_i %> <br>
+        기타의견 : <%= @after_interview.a5 %>
+      </font>
+    </div>
+
+  </body>
+</html>

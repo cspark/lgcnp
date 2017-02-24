@@ -55,12 +55,18 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     end
   end
 
+  def show
+    userId = params[:userId]
+    @user = Custinfo.where(custserial: userId).first
+    @after_interview = Fcafterinterview.where(after_interview_id: params[:after_interview_id]).first
+  end
+
   def list
     @start_date = Date.today
     @end_date = Date.today
     @today = Date.today
 
-    min_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy desc").first
+    min_age_custinfo = Custinfo.where(ch_cd: "CNP").where.not(birthyy: nil).order("birthyy desc").first
     @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
     max_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy asc").first
     @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
@@ -213,17 +219,8 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       @average_a4 = (@average_a4 / divider).to_f
     end
 
+    @after_interviews_excel = @after_interviews
     @after_interviews = Kaminari.paginate_array(@after_interviews).page(params[:page]).per(5)
-    @after_interviews_excel = Kaminari.paginate_array(@after_interviews)
-
-    if params.has_key?(:isExcel) && params[:isExcel] == 'true'
-      @after_interviews_excel.each do |tabletinterview|
-        user = Custinfo.find tabletinterview.custserial.to_i
-        tabletinterview.custname = URI.decode(user.custname)
-        Rails.logger.info "!!!"
-        Rails.logger.info tabletinterview.custname
-      end
-    end
 
     respond_to do |format|
       format.html

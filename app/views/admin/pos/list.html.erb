@@ -16,8 +16,8 @@
               location.href = "/admin/fcpos_list?search=" + encodeURI(encodeURI($("#search").val()));
           }
       });
-      if (encodeURI('<%= @search_name %>').length != 0) {
-        $("#search").val(decode_utf8('<%= @search_name %>'));
+      if (encodeURI('<%= @search %>').length != 0) {
+        $("#search").val(decode_utf8('<%= @search %>'));
       }
     });
 
@@ -42,9 +42,11 @@
 
     <div style="background: #b1cbbb; padding: 8px;">
       <input type="text" name="search" id="search" placeholder="이름으로 검색" style="width: 200px;"> <button class="btn btn-warning" id="show_all" onclick="show_all()">전체보기</button>
+      <p style="float:right; margin-right:20px;">
+        Download:
+        <%= link_to "Excel", admin_fcpos_list_path(format: "xls", :search => @search, :isExcel => true) %>
+      </p>
     </div>
-    <div>
-
     <div>
       <% @fcpos.each do |data| %>
         <%= render partial: "admin/pos/item", locals: { data: data } %>

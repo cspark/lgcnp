@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get "users/detail"  => "user#show"
     get "feedback"  => "feedback#index"
     get "feedback_list"  => "feedback#list"
+    get "feedbacks/detail"  => "feedback#show"
     get "tabletinterview" => "tabletinterview#index"
 
     get "after_interview" => "fcafterinterviews#show"

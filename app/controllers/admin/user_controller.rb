@@ -16,12 +16,6 @@ class Admin::UserController < Admin::AdminApplicationController
       @all_users = Custinfo.where(ch_cd: "CNP").where.not(lastanaldate: nil).order("lastanaldate desc")
     end
 
-    if params.has_key?(:isExcel) && params[:isExcel] == 'true'
-      @all_users.each do |user|
-        user.custname = URI.decode(user.custname)
-      end
-    end
-
     respond_to do |format|
       format.html
       # format.csv { send_data Custinfo.to_csv(@users) }

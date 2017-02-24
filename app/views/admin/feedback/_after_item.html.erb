@@ -15,7 +15,17 @@
           <% tabletinterview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first %>
           try
           {
-            $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(decode_utf8('<%= user.custname %>'));
+            var userName = decode_utf8('<%= user.custname %>')
+            tempUserName = ""
+            for(var i = 0; i < userName.length; i++){
+              if(i == 0)
+                tempUserName += userName.slice(0, 1)
+              else if(i == userName.length - 1)
+                tempUserName += userName.slice(userName.length - 1, userName.length)
+              else
+                tempUserName += "*"
+            }
+            $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(tempUserName);
           }
           catch(err)
           {
@@ -32,7 +42,7 @@
       <div style="display:table; height:50px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
         <% custinfo = Custinfo.where(custserial: after_interview.custserial).first %>
         <% tabletinterview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first %>
-        <font size="4"><div id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
+        <font size="4" onClick="showDetail(<%= custinfo.custserial.to_i %>, <%= after_interview.after_interview_id.to_i %>)"><div id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
         <% if after_interview.order == 0 %>
           <b>당일 설문</b>
         <% elsif after_interview.order == 1 %>
