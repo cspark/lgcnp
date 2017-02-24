@@ -149,6 +149,14 @@ class Admin::DataController < Admin::AdminApplicationController
       end
 
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
+      @fcdatas_excel = Kaminari.paginate_array(@fcdatas)
+
+      if params.has_key?(:isExcel) && params[:isExcel] == 'true'
+        @fcdatas_excel.each do |fcdata|
+          user = Custinfo.find fcdata.custserial.to_i
+          fcdata.custname = URI.decode(user.custname)
+        end
+      end
     else
       @fcdatas = Fcdata.all
       Rails.logger.info "development???"

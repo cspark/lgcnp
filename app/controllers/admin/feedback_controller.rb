@@ -219,8 +219,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       @after_interviews_excel.each do |tabletinterview|
         user = Custinfo.find tabletinterview.custserial.to_i
         tabletinterview.custname = URI.decode(user.custname)
-        Rails.logger.info "!!!"
-        Rails.logger.info tabletinterview.custname
       end
     end
 
