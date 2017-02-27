@@ -91,7 +91,7 @@
           <% end %>
 
           <% if !@name.nil? %>
-            document.getElementById("name").value = '<%= @name %>'
+            document.getElementById("name").value = decode_utf8('<%= @name %>')
           <% end %>
 
           <% if !@sex.nil? %>
