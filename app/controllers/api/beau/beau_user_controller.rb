@@ -8,12 +8,20 @@ class Api::Beau::BeauUserController < Api::ApplicationController
     # user = Custinfo.list(page: params[:page], per: params[:per], n_cust_id: params[:n_cust_id])
     # L-Care Serial 조건으로 Janus3 DB에 해당 L-Care 회원이 존재하는지 확인
     user = Custinfo.where(n_cust_id: params[:n_cust_id]).first
-    render json: user.to_api_hash
+    if !user.nil?
+      render json: user.to_api_hash, status: :ok
+    else
+      render json: "", status: 404
+    end
   end
 
   def show
     user = Custinfo.where(custserial: params[:custserial]).first
-    render json: user.to_api_hash
+    if !user.nil?
+      render json: user.to_api_hash, status: :ok
+    else
+      render json: "", status: 404
+    end
   end
 
   def create
@@ -28,10 +36,14 @@ class Api::Beau::BeauUserController < Api::ApplicationController
     end
       user.custserial = custserial.to_s
 
+    t = Time.now
+    yymmdd = t.to_s.split(" ")[0]
+    user.uptdate = yymmdd.split("-")[0] +"/"+ yymmdd.split("-")[1] +"/"+ yymmdd.split("-")[2]
+
     if user.save
-      render json: user.to_api_hash
+      render json: user.to_api_hash, status: :ok
     else
-      render_error(errors: user.errors.full_messages)
+      render json: "", status: 404
     end
   end
 
@@ -41,9 +53,9 @@ class Api::Beau::BeauUserController < Api::ApplicationController
     if !user.nil?
       user.phone = params[:phone]
       user.save
-      render json: user.to_api_hash
+      render json: user.to_api_hash, status: :ok
     else
-      render_error(errors: user.errors.full_messages)
+      render json: "", status: 404
     end
   end
 
@@ -54,9 +66,9 @@ class Api::Beau::BeauUserController < Api::ApplicationController
       user.increase_measureno
       user.update_lastanaldate
       user.save
-      render json: user.to_api_hash
+      render json: user.to_api_hash, status: :ok
     else
-      render_error(errors: user.errors.full_messages)
+      render json: "", status: 404
     end
   end
 
