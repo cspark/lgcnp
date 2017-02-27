@@ -138,7 +138,7 @@
         url += "&select_ample1=" + select_ample1;
         url += "&select_ample2=" + select_ample2;
         url += "&select_interview=" + select_interview;
-        url += "&name=" + encodeURI(document.getElementById("name").value);
+        url += "&name=" + encodeURI(encodeURI(document.getElementById("name").value));
         location.href = url;
       }
 
