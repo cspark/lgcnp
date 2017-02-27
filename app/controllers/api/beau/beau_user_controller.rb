@@ -1,4 +1,4 @@
-class Api::Beau::UserController < Api::ApplicationController
+class Api::Beau::BeauUserController < Api::ApplicationController
   def index
     user = Custinfo.list(page: params[:page], per: params[:per])
     render json: api_hash_for_list(user)
@@ -22,7 +22,7 @@ class Api::Beau::UserController < Api::ApplicationController
 
     user = Custinfo.new(permitted_params)
     if Custinfo.all.count > 0
-      custserial = Custinfo.all.order('custserial desc').first.custserial.to_i + 1
+      custserial = Custinfo.all.order('CAST(custserial AS INT) desc').first.custserial.to_i + 1
     else
       custserial = 1.to_s
     end
@@ -62,6 +62,6 @@ class Api::Beau::UserController < Api::ApplicationController
 
   private
   def permitted_params
-    params.permit(:custserial, :ch_cd, :n_cust_id, :custname, :sex, :age, :birthyy, :birthmm, :birthdd, :phone, :uptdate, :shop_cd, :is_agree_privacy, :is_agree_after, :is_agree_marketing, :is_agree_thirdparty_info)
+    params.permit(:custserial, :ch_cd, :n_cust_id, :custname, :sex, :age, :birthyy, :birthmm, :birthdd, :phone, :uptdate, :shop_cd, :is_agree_privacy, :is_agree_after, :is_agree_marketing, :is_agree_thirdparty_info, :address)
   end
 end

@@ -29,10 +29,15 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :beau do
-      resources :user do
+      resources :beau_user do
         collection do
           get 'lcare_user_list'
           put 'measure_update'
+        end
+      end
+
+      resources :beau_fcdata do
+        collection do
         end
       end
     end

@@ -28,7 +28,8 @@ class Custinfo < ApplicationRecord
       is_agree_privacy: is_agree_privacy,
       is_agree_thirdparty_info: is_agree_thirdparty_info,
       is_agree_marketing: is_agree_marketing,
-      is_agree_after: is_agree_after
+      is_agree_after: is_agree_after,
+      address: address
     }
   end
 
