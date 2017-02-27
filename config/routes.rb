@@ -40,6 +40,8 @@ Rails.application.routes.draw do
       end
       resources :beau_fcinterview do
       end
+      resources :beau_fcpos do
+      end
     end
   end
 
