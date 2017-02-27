@@ -772,7 +772,7 @@ class Fcdata < ApplicationRecord
 
   def self.list(custserial: nil, page: 1, per: 3)
     scoped = Fcdata.all
-    scoped = scoped.where(custserial: custserial) if custserial.present?
+    scoped = scoped.where("custserial: LIKE ?", "%#{custserial}%") if custserial.present?
     scoped.order('measureno DESC').page(page).per(per)
   end
 end
