@@ -9,7 +9,8 @@ class Api::Beau::BeauFcinterviewController < Api::ApplicationController
   end
 
   def create
-    # Data 분석이 완료 된 후 해당 고객 분석값 Insert
+    # Data 분석이 완료 된 후 해당 고객 설문값 Insert
+    measure_number = 1
     if Fcinterview.where(custserial: params[:custserial]).count > 0
       measure_number = Fcinterview.where(custserial: params[:custserial]).order("CAST(measureno AS INT) desc").first.measureno.to_i + 1
     end
