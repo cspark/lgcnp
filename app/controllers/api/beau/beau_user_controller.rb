@@ -54,7 +54,7 @@ class Api::Beau::BeauUserController < Api::ApplicationController
   def update
     # Janus3 고객DB에 존재하는 고객인 경우 L-Care 핸드폰번호만 Update
     # address 추가
-    user = Custinfo.where(custserial: params[:custserial]).first
+    user = Custinfo.where(custserial: params[:id]).first
     if !user.nil?
       if params[:phone].present?
         user.phone = params[:phone]
