@@ -769,4 +769,10 @@ class Fcdata < ApplicationRecord
   def test2
     #탄력 각도 ; EL_ANGLE_7 이 오른쪽 볼, 8이 왼쪽
   end
+
+  def self.list(custserial: nil, page: 1, per: 3)
+    scoped = Fcdata.all
+    scoped = scoped.where(custserial: custserial) if custserial.present?
+    scoped.order('measureno DESC').page(page).per(per)
+  end
 end

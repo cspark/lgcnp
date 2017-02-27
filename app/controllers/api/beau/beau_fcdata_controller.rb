@@ -1,67 +1,26 @@
 class Api::Beau::BeauFcdataController < Api::ApplicationController
-  def index
-    user = Custinfo.list(page: params[:page], per: params[:per])
-    render json: api_hash_for_list(user)
-  end
-
-  def lcare_user_list
-    # user = Custinfo.list(page: params[:page], per: params[:per], n_cust_id: params[:n_cust_id])
-    # L-Care Serial 조건으로 Janus3 DB에 해당 L-Care 회원이 존재하는지 확인
-    user = Custinfo.where(n_cust_id: params[:n_cust_id]).first
-    render json: user.to_api_hash
-  end
-
   def show
-    user = Custinfo.where(custserial: params[:custserial]).first
-    render json: user.to_api_hash
+    list = Fcdata.list(custserial: params[:id])
+    if list.count > 0
+      render json: api_hash_for_list(list), status: :ok
+    else
+      render json: "", status: 404
+    end
   end
 
   def create
-    # 고객정보를 insert 하기 위하여 Max(CUSTSERIAL) 값을 구하여 +1
-    # L-care 조회하여 받은 회원 정보로 janus3 회원정보 insert
+    # Data 분석이 완료 된 후 해당 고객 분석값 Insert
+    fcdata = Fcdata.new(permitted_params)
 
-    user = Custinfo.new(permitted_params)
-    if Custinfo.all.count > 0
-      custserial = Custinfo.all.order('custserial desc').first.custserial.to_i + 1
+    if fcdata.save
+      render json: fcdata.to_api_hash, status: :ok
     else
-      custserial = 1.to_s
-    end
-      user.custserial = custserial.to_s
-
-    if user.save
-      render json: user.to_api_hash
-    else
-      render_error(errors: user.errors.full_messages)
-    end
-  end
-
-  def update
-    # Janus3 고객DB에 존재하는 고객인 경우 L-Care 핸드폰번호만 Update
-    user = Custinfo.where(custserial: params[:custserial]).first
-    if !user.nil?
-      user.phone = params[:phone]
-      user.save
-      render json: user.to_api_hash
-    else
-      render_error(errors: user.errors.full_messages)
-    end
-  end
-
-  def measure_update
-    # Data 분석이 완료 된 후 CUSTINFO의 분석횟수 카운트 증가시키고, 최근 분석일 Update
-    user = Custinfo.where(custserial: params[:custserial]).first
-    if !user.nil?
-      user.increase_measureno
-      user.update_lastanaldate
-      user.save
-      render json: user.to_api_hash
-    else
-      render_error(errors: user.errors.full_messages)
+      render json: "", status: 404
     end
   end
 
   private
   def permitted_params
-    params.permit(:custserial, :ch_cd, :n_cust_id, :custname, :sex, :age, :birthyy, :birthmm, :birthdd, :phone, :uptdate, :shop_cd, :is_agree_privacy, :is_agree_after, :is_agree_marketing, :is_agree_thirdparty_info)
+    params.permit(:custserial, :ch_cd, :faceno, :measuredate, :measureno, :mo_1, :mo_7, :mo_8, :pr_1, :pr_2, :pr_7, :pr_8, :pr_avr, :wr_3, :wr_4, :wr_5, :wr_6, :wr_avr, :el_7, :el_8, :el_avr, :el_angle_7, :el_angle_8, :sb_1, :sb_2, :sb_7, :sb_8, :sb_avr, :pp_1, :pp_2, :pp_7, :pp_8, :pp_avr, :pp_ratio_1, :sp_pl_1, :sp_pl_2, :sp_pl_3, :sp_pl_4, :sp_pl_5, :sp_pl_6, :sp_pl_7, :sp_pl_8, :sp_pl_avr, :sp_uv_1, :sp_uv_2, :sp_uv_3, :sp_uv_4, :sp_uv_5, :sp_uv_6, :sp_uv_7, :sp_uv_8, :sp_uv_avr, :sk_c_1, :sk_c_2, :sk_c_4, :sk_c_6, :sk_c_7, :sk_c_8, :sk_c_avr, :sk_r_1, :sk_r_2, :sk_r_4, :sk_r_6, :sk_r_7, :sk_r_8, :sk_r_avr, :sk_g_1, :sk_g_2, :sk_g_4, :sk_g_6, :sk_g_7, :sk_g_8, :sk_g_avr, :sk_b_1, :sk_b_2, :sk_b_4, :sk_b_6, :sk_b_7, :sk_b_8, :sk_b_avr, :lab_l, :lab_a, :lab_b, :colortype, :suntype, :skintype, :score_r, :score_l, :e_sebum_t, :e_sebum_u, :e_porphyrin_t, :e_porphyrin_u, :skintype, :janus_status, :shop_cd, :worry_skin_1, :worry_skin_2)
   end
 end

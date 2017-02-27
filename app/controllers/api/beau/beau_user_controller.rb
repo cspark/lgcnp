@@ -1,7 +1,11 @@
 class Api::Beau::BeauUserController < Api::ApplicationController
   def index
     user = Custinfo.list(page: params[:page], per: params[:per])
-    render json: api_hash_for_list(user)
+    if user.count > 0
+      render json: api_hash_for_list(user), status: :ok
+    else
+      render json: "", status: 404
+    end
   end
 
   def lcare_user_list
@@ -16,7 +20,7 @@ class Api::Beau::BeauUserController < Api::ApplicationController
   end
 
   def show
-    user = Custinfo.where(custserial: params[:custserial]).first
+    user = Custinfo.where(custserial: params[:id]).first
     if !user.nil?
       render json: user.to_api_hash, status: :ok
     else
@@ -49,11 +53,20 @@ class Api::Beau::BeauUserController < Api::ApplicationController
 
   def update
     # Janus3 고객DB에 존재하는 고객인 경우 L-Care 핸드폰번호만 Update
+    # address 추가
     user = Custinfo.where(custserial: params[:custserial]).first
     if !user.nil?
-      user.phone = params[:phone]
-      user.save
-      render json: user.to_api_hash, status: :ok
+      if params[:phone].present?
+        user.phone = params[:phone]
+      end
+      if params[:address].present?
+        user.address = params[:address]
+      end
+      if user.save
+        render json: user.to_api_hash, status: :ok
+      else
+        render json: "", status: 404
+      end
     else
       render json: "", status: 404
     end
