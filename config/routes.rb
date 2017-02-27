@@ -42,6 +42,8 @@ Rails.application.routes.draw do
       end
       resources :beau_fcpos do
       end
+      resources :beau_fcavg do
+      end
     end
   end
 
