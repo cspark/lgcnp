@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227060313) do
+ActiveRecord::Schema.define(version: 20170227080119) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -190,7 +190,7 @@ ActiveRecord::Schema.define(version: 20170227060313) do
   end
 
   create_table "fcinterviews", force: :cascade do |t|
-    t.string   "custserial",  null: false
+    t.string   "custserial",   null: false
     t.string   "faceno"
     t.string   "measuredate"
     t.integer  "measureno"
@@ -203,8 +203,12 @@ ActiveRecord::Schema.define(version: 20170227060313) do
     t.string   "interview_6"
     t.string   "interview_7"
     t.string   "interview_8"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "ch_cd"
+    t.string   "interview_9"
+    t.string   "interview_10"
+    t.string   "shop_cd"
   end
 
   create_table "fcpos", force: :cascade do |t|

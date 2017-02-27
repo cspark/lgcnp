@@ -37,8 +37,8 @@ Rails.application.routes.draw do
       end
 
       resources :beau_fcdata do
-        collection do
-        end
+      end
+      resources :beau_fcinterview do
       end
     end
   end

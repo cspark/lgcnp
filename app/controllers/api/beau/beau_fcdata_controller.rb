@@ -10,12 +10,12 @@ class Api::Beau::BeauFcdataController < Api::ApplicationController
 
   def create
     # Data 분석이 완료 된 후 해당 고객 분석값 Insert
-    if Fcdata.where(custserial: params[:custserial]).count > 0
-      render json: "", status: 404
-      return
+    if Fcdata.where(custserial: params[:custserial], ch_cd: params[:ch_cd]).count > 0
+      measure_number = Fcdata.where(custserial: params[:custserial], ch_cd: params[:ch_cd]).order("CAST(measureno AS INT) desc").first.measureno.to_i + 1
     end
-    
+
     fcdata = Fcdata.new(permitted_params)
+    fcdata.measureno = measure_number
     t = Time.now
     fcdata.uptdate = t.to_s.split(" ")[0]
 

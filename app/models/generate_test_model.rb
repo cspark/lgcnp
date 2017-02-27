@@ -190,8 +190,8 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        user = Custinfo.new
-       user.custserial = i.to_s
-       user.custname = i.to_s+"이름"
+       user.custserial = 1.to_s
+       user.custname = "김수민"
        user.sex = "M"
        user.birthyy = "1985"
        user.birthmm = "11"
@@ -200,9 +200,9 @@ class GenerateTestModel < ApplicationRecord
        user.phone = "012-345-6789"
        user.address = "nonhyun"
        user.email = "test@test.com"
-       user.lastanaldate = "??"
-       user.measureno = i
-       user.uptdate = "2017-02-01"
+       user.lastanaldate = "2017-02-21"
+       user.measureno = 0
+       user.uptdate = "2017-02-21"
        user.is_agree_privacy = "Y"
        user.is_agree_after = "Y"
        user.is_agree_marketing = "Y"
@@ -299,16 +299,41 @@ class GenerateTestModel < ApplicationRecord
     num = 2
     (1..num).each do |i|
        f = Fcafterinterview.new
-       f.custserial = "10"
-       f.tablet_interview_id = 10
-       f.after_interview_id = 10
+       f.custserial = "1"
+       f.tablet_interview_id = 1
+       f.after_interview_id = 1
        f.a1 = 1
        f.a2 = 2
        f.a3 = 3
        f.a4 = 4
        f.a5 = 5
        f.save
+       i +=1;
+    end
+  end
 
+  def self.generate_test_interview
+    num = 2
+    (1..num).each do |i|
+       f = Fcinterview.new
+       f.custserial = "1"
+       f.ch_cd = "CNP"
+       f.faceno = "F"
+       f.measuredate = "2017-02-16-15-00-00"
+       f.measureno = 1
+       f.uptdate = "2017-02-16"
+       f.interview_1 = "1"
+       f.interview_2 = "2"
+       f.interview_3 = "1,2"
+       f.interview_4 = "4"
+       f.interview_5 = "5"
+       f.interview_6 = "1"
+       f.interview_7 = "2"
+       f.interview_8 = "3"
+       f.interview_9 = "4"
+       f.interview_10 = "5"
+       f.shop_cd = "5000"
+       f.save
        i +=1;
     end
   end
