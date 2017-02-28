@@ -3,13 +3,6 @@ class Custinfo < ApplicationRecord
   self.table_name = "custinfo" if Rails.env.production? || Rails.env.staging?
   self.primary_key = :custserial if Rails.env.production? || Rails.env.staging?
 
-
-  def self.list(n_cust_id: nil, page: 1, per: 3)
-    scoped = Custinfo.all
-    scoped = scoped.where(n_cust_id: n_cust_id) if n_cust_id.present?
-    scoped.order('updated_at DESC').page(page).per(per)
-  end
-
   def to_api_hash
     {
       serial: custserial,

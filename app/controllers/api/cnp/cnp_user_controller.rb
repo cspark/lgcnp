@@ -1,18 +1,8 @@
-class Api::Beau::BeauUserController < Api::ApplicationController
+class Api::Beau::CnpUserController < Api::ApplicationController
   def index
-    user = Custinfo.all.where(n_cust_id: n_cust_id).order('updated_at DESC')
+    user = Custinfo.list(page: params[:page], per: params[:per])
     if user.count > 0
       render json: api_hash_for_list(user), status: :ok
-    else
-      render json: "", status: 404
-    end
-  end
-
-  def lcare_user_list
-    # L-Care Serial 조건으로 Janus3 DB에 해당 L-Care 회원이 존재하는지 확인
-    user = Custinfo.where(n_cust_id: params[:n_cust_id]).first
-    if !user.nil?
-      render json: user.to_api_hash, status: :ok
     else
       render json: "", status: 404
     end
@@ -21,29 +11,6 @@ class Api::Beau::BeauUserController < Api::ApplicationController
   def show
     user = Custinfo.where(custserial: params[:id]).first
     if !user.nil?
-      render json: user.to_api_hash, status: :ok
-    else
-      render json: "", status: 404
-    end
-  end
-
-  def create
-    # 고객정보를 insert 하기 위하여 Max(CUSTSERIAL) 값을 구하여 +1
-    # L-care 조회하여 받은 회원 정보로 janus3 회원정보 insert
-
-    user = Custinfo.new(permitted_params)
-    if Custinfo.all.count > 0
-      custserial = Custinfo.all.order('CAST(custserial AS INT) desc').first.custserial.to_i + 1
-    else
-      custserial = 1.to_s
-    end
-      user.custserial = custserial.to_s
-
-    t = Time.now
-    yymmdd = t.to_s.split(" ")[0]
-    user.uptdate = yymmdd.split("-")[0] +"/"+ yymmdd.split("-")[1] +"/"+ yymmdd.split("-")[2]
-
-    if user.save
       render json: user.to_api_hash, status: :ok
     else
       render json: "", status: 404

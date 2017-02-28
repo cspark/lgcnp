@@ -53,6 +53,24 @@ Rails.application.routes.draw do
         end
       end
     end
+
+    namespace :cnp do
+      resources :cnp_user do
+        collection do
+          get 'lcare_user_list'
+          put 'measure_update'
+        end
+      end
+
+      resources :cnp_fcdata do
+      end
+      resources :cnp_fcinterview do
+      end
+      resources :cnp_fcpos do
+      end
+      resources :cnp_fcavgdata do
+      end
+    end
   end
 
   get "get_api_key" => "custinfos#get_api_key"
