@@ -6,6 +6,11 @@ class Api::Beau::BeauLcareUserController < Api::ApplicationController
     else
       lcare_user = LcareUser.list(cust_hnm: params[:cust_hnm], birth_year: params[:birth_year], birth_mmdd: params[:birth_mmdd], page: params[:page], per: params[:per])
     end
+
+    Rails.logger.info "lcare_integrated_user_list!!!!"
+    Rails.logger.info lcare_user.count
+    Rails.logger.info lcare_user.first
+    Rails.logger.info lcare_user.cust_hnm
     if lcare_user.count > 0
       render json: api_hash_for_list(lcare_user), status: :ok
     else
