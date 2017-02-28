@@ -50,6 +50,10 @@
         location.href = "/admin/fcschedule_list?select_date=" + $('#select_date').val();
       }
 
+      function showDetail(phone, reserve_hhmm){
+        window.open("/admin/fcschedule/detail?phone=" +phone+ "&reserve_hhmm=" +reserve_hhmm, "/users/detail?phone=" + phone+ "&reserve_hhmm=" +reserve_hhmm, "scrollbars=1,resizable=1,height=500,width=600");
+      }
+
     </script>
   </head>
 

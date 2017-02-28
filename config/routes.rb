@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get "data_list" => "data#list"
     get "fcpos_list" => "pos#list"
     get "fcschedule_list" => "schedule#list"
+    get "fcschedule/detail" => "schedule#show"
     resources :admin_users do
     end
   end
