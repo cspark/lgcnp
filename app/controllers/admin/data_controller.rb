@@ -162,6 +162,6 @@ class Admin::DataController < Admin::AdminApplicationController
   end
 
   def show
-    @fcdata = Fcdata.where(id: params[:id]).first
+    @fcdata = Fcdata.where(custserial: params[:userId]).where(measureno: params[:measureno]).first
   end
 end

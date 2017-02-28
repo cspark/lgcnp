@@ -26,6 +26,6 @@ class Admin::PosController < Admin::AdminApplicationController
   end
 
   def show
-    @fcpos = Fcpos.where(id: params[:id]).first
+    @fcpos = Fcpos.where(custserial: params[:userId], measureno: params[:measureno]).first
   end
 end
