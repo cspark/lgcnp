@@ -26,7 +26,7 @@ class LcareUser < ApplicationRecord
     scoped = LcareUser.all
     Rails.logger.info scoped.count
     scoped = scoped.where(cust_hnm: cust_hnm) if cust_hnm.present?
-    scoped = scoped.where(birth_year: birth_year) if birthyy.present?
+    scoped = scoped.where(birth_year: birth_year) if birth_year.present?
     scoped = scoped.where(birth_mmdd: birth_mmdd) if birth_mmdd.present?
     scoped = scoped.where(cell_phnno: cell_phnno) if cell_phnno.present?
     scoped.order('updated_at DESC').page(page).per(per)
