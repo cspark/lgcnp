@@ -1,13 +1,7 @@
 class Api::Beau::BeauFcposController < Api::ApplicationController
   def create
     # Data 분석이 완료 된 후 해당 고객 설문값 Insert
-    measure_number = 1
-    if Fcpos.where(custserial: params[:custserial]).count > 0
-      measure_number = Fcpos.where(custserial: params[:custserial]).order("CAST(measureno AS INT) desc").first.measureno.to_i + 1
-    end
-
     fcpos = Fcpos.new(permitted_params)
-    fcpos.measureno = measure_number
     t = Time.now
     fcpos.uptdate = t.to_s.split(" ")[0]
 
