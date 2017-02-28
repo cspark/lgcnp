@@ -184,6 +184,7 @@ class GenerateTestModel < ApplicationRecord
        f.skintype = 1
        f.score_r = 1
        f.score_l = 1
+       f.m_skintype = 1
        f.save
        i +=1;
     end
@@ -274,6 +275,7 @@ class GenerateTestModel < ApplicationRecord
        f.rt_res_y = i
        f.rt_les_x = i
        f.rt_les_y = i
+       f.shop_cd = i
        f.save
        i +=1;
     end

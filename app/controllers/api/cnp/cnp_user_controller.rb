@@ -1,6 +1,12 @@
-class Api::Beau::CnpUserController < Api::ApplicationController
+class Api::Cnp::CnpUserController < Api::ApplicationController
   def index
-    user = Custinfo.list(page: params[:page], per: params[:per])
+    # CNP Tablet 앱에서 가입한 고객정보를 조건으로 고객정보 조회 (* Next 조회 필요) *추가 ADDRESS 필드
+    if params.has_key?(:phone)
+      user = Custinfo.where(custname: params[:custname], birthyy: params[:birthyy], birthmm: params[:birthmm], birthdd: params[:birthdd], ch_cd: params[:ch_cd])
+    else
+      user = Custinfo.where(custname: params[:custname], birthyy: params[:birthyy], birthmm: params[:birthmm], birthdd: params[:birthdd], ch_cd: params[:ch_cd], phone: params[:phone])
+    end
+
     if user.count > 0
       render json: api_hash_for_list(user), status: :ok
     else
@@ -18,13 +24,9 @@ class Api::Beau::CnpUserController < Api::ApplicationController
   end
 
   def update
-    # Janus3 고객DB에 존재하는 고객인 경우 L-Care 핸드폰번호만 Update
-    # address 추가
+    # CNP Tablet 앱에서 가입한 고객정보에서 거주지역(Address) Update
     user = Custinfo.where(custserial: params[:id]).first
     if !user.nil?
-      if params[:phone].present?
-        user.phone = params[:phone]
-      end
       if params[:address].present?
         user.address = params[:address]
       end
