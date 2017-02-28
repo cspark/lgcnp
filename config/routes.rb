@@ -47,6 +47,8 @@ Rails.application.routes.draw do
       end
       resources :beau_fcavgdata do
       end
+      resources :beau_lcare_user do
+      end
     end
   end
 

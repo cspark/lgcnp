@@ -20,6 +20,15 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+lcare_production:
+    adapter: oracle_enhanced
+    username: ifuser
+    password: ifuser!123
+    host: 165.244.88.137
+    encoding: utf-8
+    port: 1528
+    database: "(DESCRIPTION=(FAILOVER=on)(LOAD_BALANCE=off)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=165.244.88.137)(PORT=1528))(ADDRESS=(PROTOCOL=TCP)(HOST=165.244.88.138)(PORT=1528)))(CONNECT_DATA=(FAILOVER_MODE=(TYPE=select)(METHOD=basic)(RETRIES=20)(DELAY=3))(SERVER=dedicated)(SERVICE_NAME=LGCIO)))"
+
 staging:
     adapter: oracle_enhanced
     username: janus
