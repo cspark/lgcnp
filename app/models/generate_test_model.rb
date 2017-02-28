@@ -275,7 +275,7 @@ class GenerateTestModel < ApplicationRecord
        f.rt_res_y = i
        f.rt_les_x = i
        f.rt_les_y = i
-       f.shop_cd = i
+       f.shop_cd = "1"
        f.save
        i +=1;
     end
