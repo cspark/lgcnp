@@ -48,6 +48,10 @@ Rails.application.routes.draw do
       resources :beau_fcavgdata do
       end
       resources :beau_lcare_user do
+        collection do
+          get 'lcare_integrated_user_list_at_least'
+          get 'lcare_integrated_user_list'
+        end
       end
     end
   end
