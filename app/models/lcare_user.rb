@@ -1,6 +1,6 @@
 class LcareUser < ApplicationRecord
   # self.abstract_class = true
-  establish_connection(:production)
+  establish_connection(:lcare)
   self.table_name = "if_tdc10" if Rails.env.production? || Rails.env.staging?
 
   def to_api_hash
