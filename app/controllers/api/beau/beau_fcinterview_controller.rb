@@ -10,6 +10,10 @@ class Api::Beau::BeauFcinterviewController < Api::ApplicationController
 
   def create
     # Data 분석이 완료 된 후 해당 고객 설문값 Insert
+    if !Fcinterview.where(custserial: params[:custserial], ch_cd: params[:ch_cd], measureno: params[:measureno]).first.nil?
+      render json: "", status: 404
+      return
+    end
     fcinterview = Fcinterview.new(permitted_params)
     t = Time.now
     fcinterview.uptdate = t.to_s.split(" ")[0]

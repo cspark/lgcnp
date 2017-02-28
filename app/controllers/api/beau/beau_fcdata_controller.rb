@@ -10,6 +10,10 @@ class Api::Beau::BeauFcdataController < Api::ApplicationController
 
   def create
     # Data 분석이 완료 된 후 해당 고객 분석값 Insert
+    if !Fcdata.where(custserial: params[:custserial], ch_cd: params[:ch_cd], measureno: params[:measureno]).first.nil?
+      render json: "", status: 404
+      return
+    end
     fcdata = Fcdata.new(permitted_params)
     t = Time.now
     fcdata.uptdate = t.to_s.split(" ")[0]
