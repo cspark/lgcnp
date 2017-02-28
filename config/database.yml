@@ -20,7 +20,7 @@ test:
   <<: *default
   database: db/test.sqlite3
 
-lcare_production:
+lcare:
     adapter: oracle_enhanced
     username: ifuser
     password: ifuser!123
