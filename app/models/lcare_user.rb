@@ -10,7 +10,7 @@ class LcareUser < ApplicationRecord
 
   def to_api_hash
     {
-      n_cust_id: n_cust_id,
+      n_cust_id: n_cust_id.to_i,
       cust_hnm: cust_hnm,
       sex_cd: sex_cd,
       birth_year: birth_year,
