@@ -1,6 +1,13 @@
 class LcareUser < ApplicationRecord
   # self.abstract_class = true
-  establish_connection(:lcare)
+  establish_connection(
+    :adapter  => 'oracle_enhanced',
+    :database => '(DESCRIPTION=(FAILOVER=on)(LOAD_BALANCE=off)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=165.244.88.137)(PORT=1528))(ADDRESS=(PROTOCOL=TCP)(HOST=165.244.88.138)(PORT=1528)))(CONNECT_DATA=(FAILOVER_MODE=(TYPE=select)(METHOD=basic)(RETRIES=20)(DELAY=3))(SERVER=dedicated)(SERVICE_NAME=LGCIO)))',
+    :host     => '165.244.88.137',
+    :username => 'ifuser',
+    :password => 'ifuser!123',
+    :port     => 1528
+  )
   self.table_name = "if_tdc10" if Rails.env.production? || Rails.env.staging?
 
   def to_api_hash
