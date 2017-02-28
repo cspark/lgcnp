@@ -24,11 +24,11 @@
               else
                 tempUserName += "*"
             }
-            $('#name_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno %>').append(tempUserName);
+            $('#name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno %>').append(tempUserName);
           }
           catch(err)
           {
-            $('#name_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno %>').append('<%= user.custname %>');
+            $('#name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno %>').append('<%= user.custname %>');
           }
 
           try
@@ -46,11 +46,11 @@
               else
                 tempPhone += "*"
             }
-            $('#phone_fcdata_<%= user.custserial.to_i %>_<%= fcdata.uptdate %>').append(tempPhone);
+            $('#phone_<%= user.custserial.to_i %>_<%= fcdata.uptdate %>').append(tempPhone);
           }
           catch(err)
           {
-            $('#phone_fcdata_<%= user.custserial.to_i %>_<%= fcdata.uptdate %>').append('<%= user.phone %>');
+            $('#phone_<%= user.custserial.to_i %>_<%= fcdata.uptdate %>').append('<%= user.phone %>');
           }
         });
 
@@ -67,6 +67,9 @@
     <body>
       <% custinfo = Custinfo.where(custserial: fcdata.custserial).first %>
       <div style="display:table; height:130px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
+        <% Rails.logger.info "!!!" %>
+        <% Rails.logger.info fcdata.custserial.to_i %>
+        <% Rails.logger.info fcdata.measureno %>
         <font size="4" onClick="showDetail(<%= fcdata.custserial.to_i %>, <%= fcdata.measureno %>)"><div id="name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno %>"></div></font>
         <font size="2">분석 횟수: <%= fcdata.measureno.to_i %> / 채널구분: <%= user.ch_cd %> / 전면,좌,우측면: <%= fcdata.faceno %></font><br>
         <font size="2">분석 일: <%= fcdata.measuredate %></font> / <font size="2">업데이트 일: <%= fcdata.uptdate %></font><br>
