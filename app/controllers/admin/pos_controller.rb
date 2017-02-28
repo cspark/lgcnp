@@ -24,4 +24,8 @@ class Admin::PosController < Admin::AdminApplicationController
       format.xls
     end
   end
+
+  def show
+    @fcpos = Fcpos.where(custserial: params[:userId], measureno: params[:measureno]).first
+  end
 end

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     get "fcavg_list" => "fcavgdata#list"
     get "data_list" => "data#list"
     get "fcpos_list" => "pos#list"
+    get "fcpos/detail" => "pos#show"
     get "fcschedule_list" => "schedule#list"
     get "fcschedule/detail" => "schedule#show"
     resources :admin_users do

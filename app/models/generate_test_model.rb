@@ -89,10 +89,11 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        f = Fcdata.new
-       f.custserial = i.to_s
-       f.faceno = i.to_s+"faceno"
-       f.measuredate = i.to_s+"measuredate"
-       f.measureno = i
+       f.custserial = 6.to_s
+       f.ch_cd = "BEAU"
+       f.faceno = "F"
+       f.measuredate = "2017-02-01-13-00-00"
+       f.measureno = 1
        f.uptdate = "2017-02-01"
        f.mo_1 = 1.0
        f.mo_7 = 1.0
@@ -190,13 +191,13 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        user = Custinfo.new
-       user.custserial = 1.to_s
-       user.custname = "김수민"
+       user.custserial = 5.to_s
+       user.custname = "망고"
        user.sex = "M"
-       user.birthyy = "1985"
-       user.birthmm = "11"
-       user.birthdd = "21"
-       user.age = "33"
+       user.birthyy = "2000"
+       user.birthmm = "07"
+       user.birthdd = "03"
+       user.age = "18"
        user.phone = "012-345-6789"
        user.address = "nonhyun"
        user.email = "test@test.com"
@@ -207,7 +208,7 @@ class GenerateTestModel < ApplicationRecord
        user.is_agree_after = "Y"
        user.is_agree_marketing = "Y"
        user.is_agree_thirdparty_info = "Y"
-       user.ch_cd = "CNP"
+       user.ch_cd = "BEAU"
        user.save
        i +=1;
     end
@@ -217,11 +218,12 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        f = Fcpos.new
-       f.custserial = i.to_s
-       f.faceno = i.to_s+"이름"
-       f.measuredate = "measuredate"
-       f.measureno = i
-       f.uptdate = "2017-02-01"
+       f.ch_cd = "CNP"
+       f.custserial = 1
+       f.faceno = "F"
+       f.measuredate = "2017-02-28-13-00-00"
+       f.measureno = 1
+       f.uptdate = "2017-02-28"
        f.fh_x = i
        f.fh_y = i
        f.fh_w = i
@@ -264,7 +266,7 @@ class GenerateTestModel < ApplicationRecord
        f.rt_le_b = i
        f.rt_lip_l = i
        f.rt_lip_t = i
-       f.rtrt_lip_r_re_r = i
+       f.rt_lip_r = i
        f.rt_lip_b = i
        f.rt_res_x = i
        f.rt_res_y = i
