@@ -152,11 +152,6 @@ class Admin::DataController < Admin::AdminApplicationController
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
     else
       @fcdatas = Fcdata.all
-      Rails.logger.info "development???"
-      Rails.logger.info @fcdatas.count
-
-      Rails.logger.info "development???"
-      Rails.logger.info Custinfo.all.count
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
     end
 
@@ -164,5 +159,9 @@ class Admin::DataController < Admin::AdminApplicationController
       format.html
       format.xls
     end
+  end
+
+  def show
+    @fcdata = Fcdata.where(id: params[:id]).first
   end
 end

@@ -25,6 +25,7 @@ class GenerateTestModel < ApplicationRecord
   def self.generate_test_fctabletinterview
     num = 10
     (7..num).each do |i|
+      i = 1
       f = Fctabletinterview.new
       f.custserial = i.to_s
       f.a_1 = i
@@ -58,7 +59,8 @@ class GenerateTestModel < ApplicationRecord
       f.after_ample_2 = "regenerating ampoule"
       f.before_made_cosmetic = "skin control EX"
       f.after_made_cosmetic = "skin control EX"
-      f.uptdate = "2017-02-10-15-20"
+      f.uptdate = "2017-02-28-15-20"
+      f.ch_cd = "CNP"
       f.save
     end
   end

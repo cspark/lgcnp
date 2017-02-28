@@ -45,7 +45,7 @@
     <body>
       <% custinfo = Custinfo.where(custserial: data.custserial).first %>
       <div style="display:table; height:130px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
-        <font size="4" onClick="showDetail(<%= data.custserial %>, <%= data.measureno %>)"><div id="name_<%= data.custserial.to_i %>_<%= data.ch_cd %>_<%= data.measureno %>"></div></font>
+        <font size="4" onClick="showDetail(<%= data.id %>)"><div id="name_<%= data.custserial.to_i %>_<%= data.ch_cd %>_<%= data.measureno %>"></div></font>
         <font size="2">채널구분: <%= user.ch_cd %> / 전면,좌,우측면: <%= data.faceno %> / 분석 일: <%= data.measuredate %> / 분석 횟수: <%= data.measureno.to_i %> / 업데이트 일: <%= data.uptdate %></font><br>
         <font size="2">이마 영역정보: <%= data.fh_x.to_i %> / <%= data.fh_y.to_i %> / <%= data.fh_w.to_i %> / <%= data.fh_h.to_i %></font><br>
         <font size="2">코 영역정보: <%= data.ns_x.to_i %> / <%= data.ns_y.to_i %> / <%= data.ns_w.to_i %> / <%= data.ns_h.to_i %></font><br>
