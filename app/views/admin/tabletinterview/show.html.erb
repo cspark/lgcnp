@@ -9,13 +9,14 @@
 
     <script>
     $ (function () {
+        <% user = Custinfo.where(custserial: @tabletinterview.custserial).first %>
         try
         {
-          $('#name_<%= @data.custserial.to_i %>').append( decode_utf8('<%= @user.custname %>'));
+          $('#name_<%= @tabletinterview.custserial.to_i %>').append( decode_utf8('<%= user.custname %>'));
         }
         catch(err)
         {
-          $('#name_<%= @data.custserial.to_i %>').append('<%= @user.custname %>');
+          $('#name_<%= @tabletinterview.custserial.to_i %>').append('<%= user.custname %>');
         }
       });
 
