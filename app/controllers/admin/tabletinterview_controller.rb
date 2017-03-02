@@ -139,4 +139,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end
   end
 
+  def show
+    @tabletinterview = Fctabletinterview.where(custserial: params[:userId]).where(ch_cd: params[:userId]).where(uptdate: params[:uptdate]).first
+  end
 end

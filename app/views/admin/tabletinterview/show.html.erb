@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+    $ (function () {
+        try
+        {
+          $('#name_<%= @data.custserial.to_i %>').append( decode_utf8('<%= @user.custname %>'));
+        }
+        catch(err)
+        {
+          $('#name_<%= @data.custserial.to_i %>').append('<%= @user.custname %>');
+        }
+      });
+
+      function decode_utf8(s) {
+        return decodeURI(s);
+      }
+
+    </script>
+  </head>
+
+  <body style="padding: 10px;">
+    <h2>태블릿 인터뷰 정보</h2>
+    <% user = Custinfo.where(custserial: @tabletinterview.custserial).first %>
+    <div style="display:table; height:50px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
+      <% custinfo = Custinfo.where(custserial: @tabletinterview.custserial).first %>
+      <font size="4"><div id="name_<%= @tabletinterview.custserial.to_i %>"></div></font>
+      <font size="2">시리얼: <%= @tabletinterview.custserial.to_i %>
+      진단 날짜: <%= @tabletinterview.uptdate %></td>
+      채널: <%= custinfo.ch_cd %></td>
+      피부타입: <div id="skin_type_<%= user.custserial.to_i %>_<%= @tabletinterview.updivate %>"></div>
+      진단으로 나온 솔루션 1: <div id="before_solution_1_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></div>
+      최종으로 선택된 솔루션 1: <div id="after_solution_1_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></div>
+      진단으로 나온 솔루션 2: <div id="before_solution_2_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></div>
+      최종으로 선택된 솔루션 2: <div id="after_solution_2_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></div>
+      진단으로 나온 세럼: <div id="before_serum_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></div>
+      최종으로 선택된 세럼: <div id="after_serum_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></div>
+      진단으로 나온 앰플 1: <div id="before_ampoule_1_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></div>
+      최종으로 선택된 앰플 1: <div id="after_ampoule_1_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></div>
+      진단으로 나온 앰플 2: <div id="before_ampoule_2_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></div>
+      최종으로 선택된 앰플 2: <div id="after_ampoule_2_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></div>
+      진단으로 나온 화장품: <div id="before_made_cosmetic_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></div>
+      최종으로 선택된 화장품: <div id="after_made_cosmetic_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></div>
+      A1: <div><%= @tabletinterview.a_1.to_i %></div>
+      A2: <div><%= @tabletinterview.a_2.to_i %></div>
+      A3: <div><%= @tabletinterview.a_3.to_i %></div>
+      B1: <div><%= @tabletinterview.b_1.to_i %></div>
+      B2: <div><%= @tabletinterview.b_2.to_i %></div>
+      B3: <div><%= @tabletinterview.b_3.to_i %></div>
+      B4: <div><%= @tabletinterview.b_4.to_i %></div>
+      C1: <div><%= @tabletinterview.c_1.to_i %></div>
+      D1: <div><%= @tabletinterview.d_1.to_i %></div>
+      D2: <div><%= @tabletinterview.d_2.to_i %></div>
+      D3: <div><%= @tabletinterview.d_3.to_i %></div>
+      D4: <div><%= @tabletinterview.d_4.to_i %></div>
+      D5: <div><%= @tabletinterview.d_5.to_i %></div>
+      D6: <div><%= @tabletinterview.d_6.to_i %></div>
+      D7: <div><%= @tabletinterview.d_7.to_i %></div>
+      D8: <div><%= @tabletinterview.d_8.to_i %></div>
+      D9: <div><%= @tabletinterview.d_9.to_i %></div>
+      <% fcdata = Fcdata.where(custserial: @tabletinterview.custserial).where(measureno: @tabletinterview.fcdata_id).first %>
+      <% if !fcdata.nil? %>
+        <% fcdata = fcdata.to_api_hash %>
+        [그래프] 모공 점수 : <%= fcdata[:pr_graph].to_i %> / 트러블 점수 : <%= fcdata[:sb_graph].to_i %> / 색소침착 점수 : <%= fcdata[:pp_graph].to_i %> / 주름 점수 : <%= fcdata[:wr_graph].to_i %> / 탄력 점수 : <%= fcdata[:el_graph].to_i %>
+      <% end %>
+    </div>
+
+  </body>
+</html>

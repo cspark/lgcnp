@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     get "feedback_list"  => "feedback#list"
     get "feedbacks/detail"  => "feedback#show"
     get "tabletinterview" => "tabletinterview#index"
+    get "tabletinterview/detail" => "tabletinterview#show"
 
     get "after_interview" => "fcafterinterviews#show"
     get "after_interview_1" => "fcafterinterviews#show_1"

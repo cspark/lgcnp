@@ -32,7 +32,7 @@
     <font size="5"><b><div id="name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>"></b></div></font>
 
     <div style="display:table; height:50px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
-      <font size="4" onClick="showDetail(<%= @user.custserial.to_i %>)"><div id="name_<%= @user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
+      <font size="4"><div id="name_<%= @user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
       <% if @after_interview.order == 0 %>
         <b>당일 설문</b>
       <% elsif @after_interview.order == 1 %>
