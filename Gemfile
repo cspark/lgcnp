@@ -37,7 +37,7 @@ gem 'iconv'
 gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 gem 'kaminari'
-# gem 'table_cloth'
+# gem 'table-for', git: 'https://github.com/hunterae/table-for'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
