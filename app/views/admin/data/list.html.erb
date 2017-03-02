@@ -375,15 +375,109 @@
       </div>
     </div>
 
-    <div>
-      <div>
+    <table data-toggle="table" style="width:3600px;">
+      <thead style="width: 100%;">
+        <tr>
+            <th>이름</th>
+            <th>분석 횟수</th>
+            <th>채널</th>
+            <th>전면,좌,우측면</th>
+            <th>분석 일</th>
+            <th>업데이트 일</th>
+            <th>수분 측정1</th>
+            <th>수분 측정7</th>
+            <th>수분 측정8</th>
+            <th>모공 측정1</th>
+            <th>모공 측정2</th>
+            <th>모공 측정7</th>
+            <th>모공 측정8</th>
+            <th>모공 측정avr</th>
+            <th>주름 측정3</th>
+            <th>주름 측정4</th>
+            <th>주름 측정6</th>
+            <th>주름 측정avr</th>
+            <th>탄력 측정7</th>
+            <th>탄력 측정8</th>
+            <th>탄력 측정avr</th>
+            <th>탄력 각도7</th>
+            <th>탄력 각도8</th>
+            <th>피지 측정1</th>
+            <th>피지 측정2</th>
+            <th>피지 측정7</th>
+            <th>피지 측정8</th>
+            <th>피지 측정avr</th>
+            <th>포피린 측정1</th>
+            <th>포피린 측정2</th>
+            <th>포피린 측정7</th>
+            <th>포피린 측정8</th>
+            <th>포피린 측정avr</th>
+            <th>포피린 비 측정1</th>
+            <th>포피린 비 측정2</th>
+            <th>포피린 비 측정7</th>
+            <th>포피린 비 측정8</th>
+            <th>포피린 비 측정avr</th>
+            <th>편광 색소침착 측정1</th>
+            <th>편광 색소침착 측정2</th>
+            <th>편광 색소침착 측정3</th>
+            <th>편광 색소침착 측정4</th>
+            <th>편광 색소침착 측정5</th>
+            <th>편광 색소침착 측정6</th>
+            <th>편광 색소침착 측정7</th>
+            <th>편광 색소침착 측정8</th>
+            <th>편광 색소침착 측정avr</th>
+            <th>UV광 색소침착 측정1</th>
+            <th>UV광 색소침착 측정2</th>
+            <th>UV광 색소침착 측정3</th>
+            <th>UV광 색소침착 측정4</th>
+            <th>UV광 색소침착 측정5</th>
+            <th>UV광 색소침착 측정6</th>
+            <th>UV광 색소침착 측정7</th>
+            <th>UV광 색소침착 측정8</th>
+            <th>UV광 색소침착 측정avr</th>
+            <th>피부톤 측정1</th>
+            <th>피부톤 측정2</th>
+            <th>피부톤 측정4</th>
+            <th>피부톤 측정6</th>
+            <th>피부톤 측정7</th>
+            <th>피부톤 측정8</th>
+            <th>피부톤 측정avr</th>
+            <th>피부톤 Red1</th>
+            <th>피부톤 Red2</th>
+            <th>피부톤 Red4</th>
+            <th>피부톤 Red6</th>
+            <th>피부톤 Red7</th>
+            <th>피부톤 Red8</th>
+            <th>피부톤 Red_avr</th>
+            <th>피부톤 Green1</th>
+            <th>피부톤 Green2</th>
+            <th>피부톤 Green4</th>
+            <th>피부톤 Green6</th>
+            <th>피부톤 Green7</th>
+            <th>피부톤 Green8</th>
+            <th>피부톤 Green_avr</th>
+            <th>피부톤 Blue1</th>
+            <th>피부톤 Blue2</th>
+            <th>피부톤 Blue4</th>
+            <th>피부톤 Blue6</th>
+            <th>피부톤 Blue7</th>
+            <th>피부톤 Blue8</th>
+            <th>피부톤 Blue_avr</th>
+            <th>피부톤 칼라 타입</th>
+            <th>선 민감도</th>
+            <th>동안각도 점수 우측</th>
+            <th>동안각도 점수 좌측</th>
+            <th>피부타입</th>
+        </tr>
+      </thead>
+      <tbody>
         <% @fcdatas.each do |fcdata| %>
           <%= render partial: "admin/data/item", locals: { fcdata: fcdata } %>
         <% end %>
-        <div>
-          <%= paginate @fcdatas %>
-        </div>
-      </div>
+      </tbody>
+    </table>
+
+    <div>
+      <%= paginate @fcdatas %>
     </div>
   </body>
 </html>
