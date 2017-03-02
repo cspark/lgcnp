@@ -123,14 +123,14 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       end
 
       @tabletinterviews_excel = @tabletinterviews
-      @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(10)
+      @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(5)
       respond_to do |format|
         format.html
         format.xls
       end
     else
       @tabletinterviews = Fctabletinterview.all
-      @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(10)
+      @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(5)
       @tabletinterviews_excel = Fctabletinterview.all
       respond_to do |format|
         format.html
@@ -140,6 +140,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
   end
 
   def show
-    @tabletinterview = Fctabletinterview.where(custserial: params[:userId]).where(ch_cd: params[:userId]).where(uptdate: params[:uptdate][0,10]).first
+    @tabletinterview = Fctabletinterview.where(custserial: params[:userId]).where(ch_cd: params[:ch_cd]).where(uptdate: params[:uptdate][0,10]).first
   end
 end
