@@ -29,9 +29,9 @@ class Api::Cnp::CnpFcdataController < Api::ApplicationController
     fcdata = Fcdata.where(custserial: params[:custserial], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
     if !fcdata.nil?
       if fcdata.delete
-        render json: "", status: :ok
+        render :text => "Delete Complete", status: 200
       else
-        render json: "", status: 404
+        render json: "Delete Fail", status: 404
       end
     end
   end
