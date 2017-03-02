@@ -146,9 +146,13 @@
           });
 
           $(document).on("click", ".table_tr", function (e) {
+            console.log("click!!!!");
             var userId = $(this).attr('id').split("/")[0]
             var ch_cd = $(this).attr('id').split("/")[1]
             var uptdate = $(this).attr('id').split("/")[2]
+            console.log(userId);
+            console.log(ch_cd);
+            console.log(uptdate);
             window.open("/admin/tabletinterview/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&uptdate" +uptdate, "/users/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&uptdate" +uptdate, "scrollbars=1,resizable=1,height=500,width=600");
           });
       });
