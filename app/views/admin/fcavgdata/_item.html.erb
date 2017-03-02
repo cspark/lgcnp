@@ -24,7 +24,7 @@
     </head>
     <body>
 
-      <div style="display:table; height:130px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
+      <tr class="table_tr">
         <% title = data.age %>
         <% temp1 = title.split("_")[0] %>
         <% if title.split("_")[2].nil? %>
@@ -37,12 +37,18 @@
         <% else %>
           <% title = "여자 "+grade %>
         <% end %>
-        <h4><%= title %></h4>
-        <font size="2">
-          모공 : <%= data.pore %> / 주름 : <%= data.wrinkle %> / 색소침착 편광 : <%= data.spot_pl %> / 색소침착 UV광  : <%= data.spot_uv %> / 탄력 : <%= data.elasticity %> / 포피린 비율 : <%= data.porphyrin_ratio %><br>
-          T존 피지 : <%= data.e_sebum_t %> / U존 피지 : <%= data.e_sebum_u %> / 수분 : <%= data.moisture %> / T존 포피린 : <%= data.e_porphyrin_t %> / U존 포피린 : <%= data.e_porphyrin_u %><br>
-        </font>
-      </div>
-
+        <td><%= title %></td>
+        <td><%= data.pore %></td>
+        <td><%= data.wrinkle %></td>
+        <td><%= data.spot_pl %></td>
+        <td><%= data.spot_uv %></td>
+        <td><%= data.elasticity %></td>
+        <td><%= data.porphyrin_ratio %></td>
+        <td><%= data.e_sebum_t %></td>
+        <td><%= data.e_sebum_u %></td>
+        <td><%= data.moisture %></td>
+        <td><%= data.e_porphyrin_t %></td>
+        <td><%= data.e_porphyrin_u %></td>
+      </tr>
     </body>
 </html>
