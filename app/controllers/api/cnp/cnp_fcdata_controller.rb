@@ -31,10 +31,10 @@ class Api::Cnp::CnpFcdataController < Api::ApplicationController
       if fcdata.delete
         render :text => "Delete Complete", status: 200
       else
-        render json: "Delete Fail", status: 404
+        render :text => "Delete Fail", status: 404
       end
     else
-      render json: "Delete Fail", status: 404
+      render :text => "Delete Fail", status: 404
     end
   end
 
