@@ -95,5 +95,23 @@
         <td><%= data.rt_res_y.to_i %></td>
         <td><%= data.rt_les_x.to_i %></td>
         <td><%= data.rt_les_y.to_i %></td>
+
+      <!-- <div style="display:table; height:130px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
+        <font size="4" onClick="showDetail(<%= data.custserial %>, <%= data.measureno %>)"><div id="name_fcpos_<%= data.custserial.to_i %>_<%= data.measureno.to_i %>"></div></font>
+        <font size="2">채널구분: <%= user.ch_cd %> / 전면,좌,우측면: <%= data.faceno %> / 분석 일: <%= data.measuredate %> / 분석 횟수: <%= data.measureno.to_i %> / 업데이트 일: <%= data.uptdate %></font><br>
+        <font size="2">이마 영역정보: <%= data.fh_x.to_i %> / <%= data.fh_y.to_i %> / <%= data.fh_w.to_i %> / <%= data.fh_h.to_i %></font><br>
+        <font size="2">코 영역정보: <%= data.ns_x.to_i %> / <%= data.ns_y.to_i %> / <%= data.ns_w.to_i %> / <%= data.ns_h.to_i %></font><br>
+        <font size="2">우측 눈가 영역정보: <%= data.res_x.to_i %> / <%= data.res_y.to_i %> / <%= data.res_w.to_i %> / <%= data.res_h.to_i %></font><br>
+        <font size="2">우측 눈밑 영역정보: <%= data.reu_x.to_i %> / <%= data.reu_y.to_i %> / <%= data.reu_w.to_i %> / <%= data.reu_h.to_i %></font><br>
+        <font size="2">좌측 눈가 영역정보: <%= data.les_x.to_i %> / <%= data.les_y.to_i %> / <%= data.les_w.to_i %> / <%= data.les_h.to_i %></font><br>
+        <font size="2">좌측 눈밑 영역정보: <%= data.leu_x.to_i %> / <%= data.leu_y.to_i %> / <%= data.leu_w.to_i %> / <%= data.leu_h.to_i %></font><br>
+        <font size="2">우측 볼 영역정보: <%= data.rs_x.to_i %> / <%= data.rs_y.to_i %> / <%= data.rs_w.to_i %> / <%= data.rs_h.to_i %></font><br>
+        <font size="2">좌측 볼 영역정보: <%= data.ls_x.to_i %> / <%= data.ls_y.to_i %> / <%= data.ls_w.to_i %> / <%= data.ls_h.to_i %></font><br>
+        <font size="2">우측눈 사각영역 정보: <%= data.rt_re_l.to_i %> / <%= data.rt_re_t.to_i %> / <%= data.rt_re_r.to_i %> / <%= data.rt_re_b.to_i %></font><br>
+        <font size="2">좌측눈 사각영역 정보: <%= data.rt_le_l.to_i %> / <%= data.rt_le_t.to_i %> / <%= data.rt_le_r.to_i %> / <%= data.rt_le_b.to_i %></font><br>
+        <font size="2">입 사각영역 정보: <%= data.rt_lip_l.to_i %> / <%= data.rt_lip_t.to_i %> / <%= data.rt_lip_r.to_i %> / <%= data.rt_lip_b.to_i %></font><br>
+        <font size="2">우측 얼굴 끝 라인 좌표: <%= data.rt_res_x.to_i %> / <%= data.rt_res_y.to_i %></font><br>
+        <font size="2">좌측 얼굴 끝 라인 좌표: <%= data.rt_les_x.to_i %> / <%= data.rt_les_y.to_i %></font><br>
+      </div> -->
     </body>
 </html>
