@@ -39,10 +39,14 @@
       }
     </script>
     <style>
+    .fixed-table-body {
+      max-height: 75%;
+    }
+
     .text-center {
         margin: 0 auto;
         text-align: center !important;
-      }
+    }
     </style>
   </head>
 
@@ -56,7 +60,6 @@
         <%= link_to "Excel", admin_user_list_path(format: "xls", :search => @search, :isExcel => true) %>
       </p>
     </div>
-    <div>
       <table data-toggle="table" style="width:1200px;">
         <thead style="width: 100%;">
           <tr>
@@ -83,6 +86,5 @@
       <div>
         <%= paginate @users %>
       </div>
-    </div>
   </body>
 </html>
