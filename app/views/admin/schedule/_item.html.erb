@@ -64,7 +64,6 @@
       </script>
     </head>
     <body>
-      <% custinfo = Custinfo.where(custserial: data.custserial).first %>
       <% mmdd = data.reserve_mmdd[0, 2] + "-" +data.reserve_mmdd[2, 4]%>
       <% hhmm = data.reserve_hhmm[0, 2] + ":" +data.reserve_hhmm[2, 4]%>
       <tr class="table_tr" id="<%= data.phone %>/<%= data.reserve_hhmm %>">
