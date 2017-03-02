@@ -66,7 +66,7 @@
     </head>
     <body>
       <% custinfo = Custinfo.where(custserial: fcdata.custserial).first %>
-      <tr class="table_tr" id="<%= custinfo.custserial.to_i %>/<%= tabletinterview.ch_cd %>/<%= tabletinterview.uptdate %>">
+      <tr class="table_tr" id="<%= fcdata.custserial.to_i %>/<%= fcdata.measureno %>">
         <td id="name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno.to_i %>"></td>
         <td><%= fcdata.measureno.to_i %></td>
         <td><%= user.ch_cd %></td>
