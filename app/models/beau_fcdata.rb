@@ -4,6 +4,7 @@ class BeauFcdata < ApplicationRecord
   def to_api_hash
     {
        custserial: custserial,
+       ch_cd: ch_cd,
        faceno: faceno,
        measuredate: measuredate,
        measureno: measureno.to_i,

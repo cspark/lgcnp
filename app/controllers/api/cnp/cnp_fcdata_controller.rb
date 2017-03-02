@@ -26,13 +26,15 @@ class Api::Cnp::CnpFcdataController < Api::ApplicationController
   end
 
   def destroy
-    fcdata = BeauFcdata.where(custserial: params[:custserial], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
+    fcdata = BeauFcdata.where(custserial: params[:id], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
     if !fcdata.nil?
       if fcdata.delete
         render :text => "Delete Complete", status: 200
       else
         render json: "Delete Fail", status: 404
       end
+    else
+      render json: "Delete Fail", status: 404
     end
   end
 
