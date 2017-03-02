@@ -3,7 +3,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
   before_action :is_admin
 
   def index
-    @start_date = Date.today
+    @start_date = Fctabletinterview.all.order('uptdate asc').first.uptdate[0,10]
     @end_date = Date.today
     @today = Date.today
 
