@@ -66,11 +66,10 @@
     </head>
     <body>
       <% custinfo = Custinfo.where(custserial: fcdata.custserial).first %>
-      <tr class="table_tr" id="<%= fcdata.custserial.to_i %>/<%= fcdata.measureno %>">
+      <tr class="table_tr text-center" id="<%= fcdata.custserial.to_i %>/<%= fcdata.measureno %>">
         <td id="name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno.to_i %>"></td>
         <td><%= fcdata.measureno.to_i %></td>
         <td><%= user.ch_cd %></td>
-        <td><%= fcdata.measureno.to_i %></td>
         <td><%= fcdata.faceno %></td>
         <td><%= fcdata.measuredate %></td>
         <td><%= fcdata.uptdate %></td>
@@ -86,6 +85,7 @@
         <td><%= fcdata.wr_4.to_i %></td>
         <td><%= fcdata.wr_6.to_i %></td>
         <td><%= fcdata.wr_avr.to_i %></td>
+        <td><%= fcdata.el_7.to_i %></td>
         <td><%= fcdata.el_8.to_i %></td>
         <td><%= fcdata.el_avr.to_i %></td>
         <td><%= fcdata.el_angle_7 %></td>
@@ -153,9 +153,9 @@
         <td><%= fcdata.sk_b_avr.to_i %></td>
         <td><%= fcdata.colortype.to_i %></td>
         <td><%= fcdata.suntype.to_i %></td>
-        <td><%= fcdata.score_r %></td>
-        <td><%= fcdata.score_l %></td>
-        <td><%= fcdata.skintype %></td>
+        <td><%= fcdata.score_r.to_i %></td>
+        <td><%= fcdata.score_l.to_i %></td>
+        <td><%= fcdata.skintype.to_i %></td>
       </tr>
     </body>
 </html>

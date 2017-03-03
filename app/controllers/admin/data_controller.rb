@@ -149,10 +149,10 @@ class Admin::DataController < Admin::AdminApplicationController
       end
 
       @fcdatas_excel = @fcdatas
-      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
+      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(10)
     else
       @fcdatas = Fcdata.all
-      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
+      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(10)
     end
 
     respond_to do |format|
