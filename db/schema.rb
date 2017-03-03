@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228112718) do
+ActiveRecord::Schema.define(version: 20170303021414) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -325,6 +325,17 @@ ActiveRecord::Schema.define(version: 20170228112718) do
     t.string   "before_made_cosmetic"
     t.string   "after_made_cosmetic"
     t.string   "ch_cd"
+    t.integer  "fcdata_id"
+    t.integer  "tablet_interview_id"
+    t.string   "is_quick_mode"
+    t.string   "base_lot"
+    t.string   "ampoule_1_lot"
+    t.string   "ampoule_2_lot"
+    t.string   "mixer_name"
+    t.string   "memo"
+    t.string   "is_agree_cant_refund"
+    t.string   "is_agree_after"
+    t.string   "shop_cd"
   end
 
   create_table "lcare_users", force: :cascade do |t|
