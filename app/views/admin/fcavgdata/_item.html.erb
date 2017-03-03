@@ -24,7 +24,7 @@
     </head>
     <body>
 
-      <tr class="table_tr">
+      <tr class="table_tr text-center">
         <% title = data.age %>
         <% temp1 = title.split("_")[0] %>
         <% if title.split("_")[2].nil? %>
@@ -38,15 +38,15 @@
           <% title = "여자 "+grade %>
         <% end %>
         <td><%= title %></td>
-        <td><%= data.pore %></td>
-        <td><%= data.wrinkle %></td>
-        <td><%= data.spot_pl %></td>
-        <td><%= data.spot_uv %></td>
-        <td><%= data.elasticity %></td>
-        <td><%= data.porphyrin_ratio %></td>
+        <td><%= data.pore.to_i %></td>
+        <td><%= data.wrinkle.to_i %></td>
+        <td><%= data.moisture.to_i %></td>
+        <td><%= data.spot_pl.to_i %></td>
+        <td><%= data.spot_uv.to_i %></td>
+        <td><%= data.elasticity.to_i %></td>
+        <td><%= data.porphyrin_ratio.to_i %></td>
         <td><%= data.e_sebum_t %></td>
         <td><%= data.e_sebum_u %></td>
-        <td><%= data.moisture %></td>
         <td><%= data.e_porphyrin_t %></td>
         <td><%= data.e_porphyrin_u %></td>
       </tr>

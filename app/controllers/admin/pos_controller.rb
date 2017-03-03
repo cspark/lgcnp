@@ -17,7 +17,7 @@ class Admin::PosController < Admin::AdminApplicationController
     end
 
     @fcpos_excel = @fcpos
-    @fcpos = Kaminari.paginate_array(@fcpos).page(params[:page]).per(3)
+    @fcpos = Kaminari.paginate_array(@fcpos).page(params[:page]).per(10)
 
     respond_to do |format|
       format.html
