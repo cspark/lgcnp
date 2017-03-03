@@ -4,7 +4,10 @@ class Admin::PosController < Admin::AdminApplicationController
 
   def list
     @search = ""
+    Rails.logger.info "list!!!"
     if params.has_key?(:search) && params[:search].length != 0
+      Rails.logger.info "search!!!"
+      Rails.logger.info params[:search]
       @search = params[:search]
       users = Custinfo.where(ch_cd: "CNP").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
       user_custserials = []
@@ -12,8 +15,11 @@ class Admin::PosController < Admin::AdminApplicationController
         user_custserials.push(user.custserial)
       end
       @fcpos = Fcpos.where(custserial: user_custserials)
+      Rails.logger.info @fcpos.count
     else
+      Rails.logger.info "search nil!!!"
       @fcpos = Fcpos.all.order("uptdate desc")
+      Rails.logger.info @fcpos.count
     end
 
     @fcpos_excel = @fcpos
@@ -23,7 +29,8 @@ class Admin::PosController < Admin::AdminApplicationController
       page = 1
     end
     @fcpos = Kaminari.paginate_array(@fcpos).page(page).per(10)
-
+    Rails.logger.info @fcpos.count
+    
     respond_to do |format|
       format.html
       format.xls

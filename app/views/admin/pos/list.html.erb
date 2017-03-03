@@ -150,6 +150,7 @@
       </thead>
       <tbody>
         <% @fcpos.each do |data| %>
+          <% Rails.logger.info "each do !!!"%>
           <%= render partial: "admin/pos/item", locals: { data: data } %>
         <% end %>
       </tbody>

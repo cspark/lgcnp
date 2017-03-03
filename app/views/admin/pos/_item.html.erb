@@ -43,6 +43,7 @@
       </script>
     </head>
     <body>
+      <% Rails.logger.info "_item !!!"%>
       <% custinfo = Custinfo.where(custserial: data.custserial).first %>
       <tr class="table_tr text-center" id="<%= data.custserial.to_i %>/<%= data.measureno %>">
         <td id="name_fcpos_<%= data.custserial.to_i %>_<%= data.measureno.to_i %>"></td>
