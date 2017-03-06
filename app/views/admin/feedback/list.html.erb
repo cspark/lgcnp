@@ -154,6 +154,15 @@
       function showDetail(userId, after_interview_id){
         window.open("/admin/feedbacks/detail?userId=" + userId +"&after_interview_id=" +after_interview_id , "/feedbacks/detail?userId=" + userId +"&after_interview_id=" +after_interview_id, "scrollbars=1,resizable=1,height=500,width=600");
       }
+
+      function decode_utf8(s) {
+        try{
+          return decodeURI(s);
+        }catch(err){
+          console.log(err);
+          return s;
+        }
+      }
     </script>
     <style>
     .fixed-table-body {
