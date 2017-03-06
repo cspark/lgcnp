@@ -1,4 +1,4 @@
-# require 'rmagick'
+require 'rmagick'
 class BeauFcdata < ApplicationRecord
   self.table_name = "fcdata"
 
