@@ -117,7 +117,7 @@ class Admin::ImageController < Admin::AdminApplicationController
 
       @fcdata = BeauFcdata.where(custserial: serial, ch_cd: ch_cd, measureno: measureno).first
       @path = ""
-      sub_folder_name = (((serial.to_i / 100) * 100) + 100).to_s << "-p"
+      sub_folder_name = (((serial.to_i / 100) * 100) + 100).to_s << "-P"
       @path << sub_folder_name.to_s
       @path << "/"
       @path << serial.to_s
