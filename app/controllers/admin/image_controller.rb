@@ -10,11 +10,11 @@ class Admin::ImageController < Admin::AdminApplicationController
       @users.each do |user|
         user_ids << user.custserial
       end
-      @fcdatas = BeauFcdata.where(custserial: user_ids)
+      @fcdatas = AdminFcdata.where(custserial: user_ids)
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
     else
       @search = ""
-      @fcdatas = BeauFcdata.all
+      @fcdatas = AdminFcdata.all
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
     end
 
@@ -30,7 +30,7 @@ class Admin::ImageController < Admin::AdminApplicationController
     ch_cd = params[:ch_cd]
 
     if Rails.env.production? || Rails.env.staging?
-      @fcdata = BeauFcdata.where(custserial: serial, ch_cd: ch_cd, measureno: measureno).first
+      @fcdata = AdminFcdata.where(custserial: serial, ch_cd: ch_cd, measureno: measureno).first
       @path = ""
       sub_folder_name = (((serial.to_i / 100) * 100) + 100).to_s << "-P"
       @path << sub_folder_name.to_s
@@ -48,74 +48,80 @@ class Admin::ImageController < Admin::AdminApplicationController
       image_download(serial: serial, measureno: measureno, number: "2", type: "_Sym_L_")
       image_download(serial: serial, measureno: measureno, number: "3", type: "_Sym_L_")
       image_download(serial: serial, measureno: measureno, number: "4", type: "_Sym_L_")
-      BeauFcdata.image_combine(relation: @fcdata, path: @path, type: "Sym_L_")
 
       image_download(serial: serial, measureno: measureno, number: "1", type: "_Sym_R_")
       image_download(serial: serial, measureno: measureno, number: "2", type: "_Sym_R_")
       image_download(serial: serial, measureno: measureno, number: "3", type: "_Sym_R_")
       image_download(serial: serial, measureno: measureno, number: "4", type: "_Sym_R_")
-      BeauFcdata.image_combine(relation: @fcdata, path: @path, type: "Sym_R_")
 
       image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UV_")
       image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UV_")
       image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UV_")
       image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UV_")
-      BeauFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UV_")
 
       image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_WH_PWC_")
       image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_WH_PWC_")
       image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_WH_PWC_")
       image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_WH_PWC_")
-      BeauFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_WH_PWC_")
+
       image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_WH_")
       image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_WH_")
       image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_WH_")
       image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_WH_")
-      BeauFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_WH_")
 
       image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UVGR_SBC_")
       image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UVGR_SBC_")
       image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UVGR_SBC_")
       image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UVGR_SBC_")
-      BeauFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UVGR_SBC_")
+
       image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UV_GR_")
       image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UV_GR_")
       image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UV_GR_")
       image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UV_GR_")
-      BeauFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UV_GR_")
 
       image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_PL_PLC_")
       image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_PL_PLC_")
       image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_PL_PLC_")
       image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_PL_PLC_")
-      BeauFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_PLC_")
+
       image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UVGR_UVC_")
       image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UVGR_UVC_")
       image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UVGR_UVC_")
       image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UVGR_UVC_")
-      BeauFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UVGR_UVC_")
+
       image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_PL_")
       image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_PL_")
       image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_PL_")
       image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_PL_")
-      BeauFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_")
+
       image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_PL_UVC_")
       image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_PL_UVC_")
       image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_PL_UVC_")
       image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_PL_UVC_")
-      BeauFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_UVC_")
 
       image_download(serial: serial, measureno: measureno, number: nil, type: "_F_FM_WH_PWC_W")
       image_download(serial: serial, measureno: measureno, number: nil, type: "_F_FM_WH_E")
       image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Pore_Cust")
       image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Spot_Cust")
       image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Wr_Cust")
+
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "Sym_L_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "Sym_R_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UV_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_WH_PWC_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_WH_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UVGR_SBC_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UV_GR_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_PLC_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UVGR_UVC_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_UVC_")
     else
       serial = "2"
       measureno = 2
       ch_cd = "CNP"
 
-      @fcdata = BeauFcdata.where(custserial: serial, ch_cd: ch_cd, measureno: measureno).first
+      @fcdata = AdminFcdata.where(custserial: serial, ch_cd: ch_cd, measureno: measureno).first
       @path = ""
       sub_folder_name = (((serial.to_i / 100) * 100) + 100).to_s << "-P"
       @path << sub_folder_name.to_s

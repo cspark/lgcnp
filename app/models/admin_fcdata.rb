@@ -1,5 +1,5 @@
 require 'rmagick'
-class BeauFcdata < ApplicationRecord
+class AdminFcdata < ApplicationRecord
   self.table_name = "fcdata"
 
   def to_api_hash
@@ -108,7 +108,7 @@ class BeauFcdata < ApplicationRecord
   end
 
   def self.list(custserial: nil)
-    scoped = BeauFcdata.all
+    scoped = AdminFcdata.all
     scoped = scoped.where(custserial: custserial) if custserial.present?
     scoped.order('measureno DESC')
   end
@@ -124,7 +124,6 @@ class BeauFcdata < ApplicationRecord
       }
       image_list.push(new_image.append(false))
     }
-
     image_list.append(true).write("public/"+relation.ch_cd+"/"+path+"Sym_L_merge.jpg")
   end
 end

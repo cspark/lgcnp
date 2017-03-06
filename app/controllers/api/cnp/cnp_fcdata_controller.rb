@@ -1,6 +1,6 @@
 class Api::Cnp::CnpFcdataController < Api::ApplicationController
   def show
-    list = BeauFcdata.list(custserial: params[:id])
+    list = AdminFcdata.list(custserial: params[:id])
     if list.count > 0
       render json: api_hash_for_list(list), status: :ok
     else
@@ -10,11 +10,11 @@ class Api::Cnp::CnpFcdataController < Api::ApplicationController
 
   def create
     # Data 분석이 완료 된 후 해당 고객 분석값 Insert
-    if !BeauFcdata.where(custserial: params[:custserial], ch_cd: params[:ch_cd], measureno: params[:measureno]).first.nil?
+    if !AdminFcdata.where(custserial: params[:custserial], ch_cd: params[:ch_cd], measureno: params[:measureno]).first.nil?
       render json: "", status: 404
       return
     end
-    fcdata = BeauFcdata.new(permitted_params)
+    fcdata = AdminFcdata.new(permitted_params)
     t = Time.now
     fcdata.uptdate = t.to_s.split(" ")[0]
 
@@ -26,7 +26,7 @@ class Api::Cnp::CnpFcdataController < Api::ApplicationController
   end
 
   def destroy
-    fcdata = BeauFcdata.where(custserial: params[:id], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
+    fcdata = AdminFcdata.where(custserial: params[:id], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
     if !fcdata.nil?
       if fcdata.delete
         render :text => "Delete Complete", status: 200
