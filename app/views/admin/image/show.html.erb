@@ -1,0 +1,392 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+    $ (function () {
+        <% user = Custinfo.where(custserial: @fcdata.custserial).first %>
+        try
+        {
+          $('#name_<%= @fcdata.custserial.to_i %>').append( decode_utf8('<%= user.custname %>'));
+        }
+        catch(err)
+        {
+          $('#name_<%= @fcdata.custserial.to_i %>').append('<%= user.custname %>');
+        }
+      });
+
+      function decode_utf8(s) {
+        return decodeURI(s);
+      }
+
+    </script>
+  </head>
+
+  <body style="padding: 10px;">
+    <h2>고객 이미지 정보</h2>
+
+    <font size="5"><div id="name_<%= @fcdata.custserial.to_i %>"></div></font>
+    <font size="5">분석 일 : <%= @fcdata.measuredate %></div></font><br>
+    <font size="5">채널 : <%= @fcdata.ch_cd %></div></font><br>
+    <font size="5">매장 : <%= @fcdata.shop_cd %></div></font><br><br>
+    <div>
+      <center>
+        <font size="4">
+          <div style="border: 1px solid darkgrey; width:100%; height:700px;">
+            <div style="width:100%; height:30px;">
+              <b><font size="6">동안각도L</font></b>
+            </div>
+            <div style="width:100%; height:40px;">
+              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>Sym_L_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>Sym_L_1.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>Sym_L_2.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>Sym_L_3.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 아래<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>Sym_L_4.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 아래<font>
+            </div>
+          </div>
+
+          <div style="border: 1px solid darkgrey; width:100%; height:700px;">
+            <div style="width:100%; height:30px;">
+              <b><font size="6">동안각도R</font></b>
+            </div>
+            <div style="width:100%; height:40px;">
+              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>Sym_R_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>Sym_R_1.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>Sym_R_2.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>Sym_R_3.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 아래<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>Sym_R_4.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 아래<font>
+            </div>
+          </div>
+
+          <div style="border: 1px solid darkgrey; width:100%; height:700px;">
+            <div style="width:100%; height:30px;">
+              <b><font size="6">클렌징 상태</font></b>
+            </div>
+            <div style="width:100%; height:40px;">
+              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_1.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_2.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_3.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 아래<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_4.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 아래<font>
+            </div>
+          </div>
+
+          <div style="border: 1px solid darkgrey; width:100%; height:700px;">
+            <div style="width:100%; height:30px;">
+              <b><font size="6">클렌징 상태 GR</font></b>
+            </div>
+            <div style="width:100%; height:40px;">
+              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_GR_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_GR_1.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_GR_2.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_GR_3.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 아래<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_GR_4.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 아래<font>
+            </div>
+          </div>
+
+          <div style="border: 1px solid darkgrey; width:100%; height:700px;">
+            <div style="width:100%; height:30px;">
+              <b><font size="6">클렌징 상태 GR_SBC</font></b>
+            </div>
+            <div style="width:100%; height:40px;">
+              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UVGR_SBC_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UVGR_SBC_1.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UVGR_SBC_2.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UVGR_SBC_3.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 아래<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UVGR_SBC_4.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 아래<font>
+            </div>
+          </div>
+
+          <div style="border: 1px solid darkgrey; width:100%; height:700px;">
+            <div style="width:100%; height:30px;">
+              <b><font size="6">모공</font></b>
+            </div>
+            <div style="width:100%; height:40px;">
+              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_1.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_2.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_3.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 아래<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_4.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 아래<font>
+            </div>
+          </div>
+
+          <div style="border: 1px solid darkgrey; width:100%; height:700px;">
+            <div style="width:100%; height:30px;">
+              <b><font size="6">모공 pwc</font></b>
+            </div>
+            <div style="width:100%; height:40px;">
+              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_PWC_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_PWC_1.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_PWC_2.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_PWC_3.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 아래<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_PWC_4.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 아래<font>
+            </div>
+          </div>
+
+          <div style="border: 1px solid darkgrey; width:100%; height:700px;">
+            <div style="width:100%; height:30px;">
+              <b><font size="6">트러블</font></b>
+            </div>
+            <div style="width:100%; height:40px;">
+              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_GR_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_GR_1.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_GR_2.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_GR_3.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 아래<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_GR_4.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 아래<font>
+            </div>
+          </div>
+
+          <div style="border: 1px solid darkgrey; width:100%; height:700px;">
+            <div style="width:100%; height:30px;">
+              <b><font size="6">트러블SBC</font></b>
+            </div>
+            <div style="width:100%; height:40px;">
+              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UVGR_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UVGR_SBC_1.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UVGR_SBC_2.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UVGR_SBC_3.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 아래<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UVGR_SBC_4.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 아래<font>
+            </div>
+          </div>
+
+          <div style="border: 1px solid darkgrey; width:100%; height:700px;">
+            <div style="width:100%; height:30px;">
+              <b><font size="6">색소침착</font></b>
+            </div>
+            <div style="width:100%; height:40px;">
+              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_1.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_2.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_3.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 아래<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_4.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 아래<font>
+            </div>
+          </div>
+
+          <div style="border: 1px solid darkgrey; width:100%; height:700px;">
+            <div style="width:100%; height:30px;">
+              <b><font size="6">색소침착 편광</font></b>
+            </div>
+            <div style="width:100%; height:40px;">
+              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_PLC_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_PLC_1.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_PLC_2.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_PLC_3.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 아래<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_PLC_4.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 아래<font>
+            </div>
+          </div>
+
+          <div style="border: 1px solid darkgrey; width:100%; height:700px;">
+            <div style="width:100%; height:30px;">
+              <b><font size="6">색소침착 편광+자외선</font></b>
+            </div>
+            <div style="width:100%; height:40px;">
+              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UVGR_UVC_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UVGR_UVC_1.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UVGR_UVC_2.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UVGR_UVC_3.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 아래<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UVGR_UVC_4.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 아래<font>
+            </div>
+          </div>
+
+          <div style="border: 1px solid darkgrey; width:100%; height:700px;">
+            <div style="width:100%; height:30px;">
+              <b><font size="6">색소침착 자외선</font></b>
+            </div>
+            <div style="width:100%; height:40px;">
+              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_UVC_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_UVC_1.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_UVC_2.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 위<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_UVC_3.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>오른쪽 아래<font>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_UVC_4.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <font>왼쪽 아래<font>
+            </div>
+          </div>
+
+          <div style="width:100%; height:700px;">
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_PWC_W.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <b><font size="6">주름</font></b>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_E.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <b><font size="6">탄력</font></b>
+            </div>
+            <div style="float:left; width:33%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>Sp_Pore_Cust.jpg" style="float: right; margin-right:10px; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <b><font size="6">모공 이미지</font></b>
+            </div>
+            <div style="float:left; width:33%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>Sp_Spot_Cust.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <b><font size="6">색소침착</font></b>
+            </div>
+            <div style="float:left; width:33%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>Sp_Wr_Cust.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+              <b><font size="6">주름</font></b>
+            </div>
+          </div>
+
+        </font>
+      </center>
+    </div>
+  </body>
+</html>

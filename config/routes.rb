@@ -27,6 +27,8 @@ Rails.application.routes.draw do
     get "fcpos/detail" => "pos#show"
     get "fcschedule_list" => "schedule#list"
     get "fcschedule/detail" => "schedule#show"
+    get "image_list" => "image#index"
+    get "image/detail" => "image#show"
     resources :admin_users do
     end
   end

@@ -25,9 +25,9 @@ class GenerateTestModel < ApplicationRecord
   def self.generate_test_fctabletinterview
     num = 10
     (7..num).each do |i|
-      i = 1
+      i = 2
       f = Fctabletinterview.new
-      f.custserial = i.to_s
+      f.custserial = "134"
       f.a_1 = i
       f.a_2 = i
       f.a_3 = i
@@ -49,8 +49,8 @@ class GenerateTestModel < ApplicationRecord
       f.skin_type = "skin_type_gunsung"
       f.before_solution_1 = "elasticity solution"
       f.after_solution_1 = "elasticity solution"
-      f.before_solution_2 = "wrinkle solution"
-      f.after_solution_2 = "wrinkle solution"
+      f.before_solution_2 = "elasticity solution"
+      f.after_solution_2 = "elasticity solution"
       f.before_serum = "rebalencing"
       f.after_serum = "rebalencing"
       f.before_ample_1 = "regenerating ampoule"
@@ -59,8 +59,13 @@ class GenerateTestModel < ApplicationRecord
       f.after_ample_2 = "regenerating ampoule"
       f.before_made_cosmetic = "skin control EX"
       f.after_made_cosmetic = "skin control EX"
-      f.uptdate = "2017-02-28-15-20"
+      f.uptdate = "2017-03-03-12-10"
       f.ch_cd = "CNP"
+      f.fcdata_id = "1"
+      f.tablet_interview_id = 26
+      f.is_quick_mode = "F"
+      f.is_agree_cant_refund = "T"
+      f.is_agree_after = "T"
       f.save
     end
   end

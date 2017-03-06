@@ -1,3 +1,4 @@
+require 'rmagick'
 class BeauFcdata < ApplicationRecord
   self.table_name = "fcdata"
 
@@ -110,5 +111,20 @@ class BeauFcdata < ApplicationRecord
     scoped = BeauFcdata.all
     scoped = scoped.where(custserial: custserial) if custserial.present?
     scoped.order('measureno DESC')
+  end
+
+  def self.image_combine(relation: nil, path: nil, type: nil)
+    image_list = Magick::ImageList.new
+    i = 1
+    1.upto(2) {|x|
+      new_image = Magick::ImageList.new
+      1.upto(2) {|y|
+        new_image.push(Magick::Image.read("public/"+relation.ch_cd+"/"+path+type+i.to_s+".jpg").first)
+        i += 1
+      }
+      image_list.push(new_image.append(false))
+    }
+
+    image_list.append(true).write("public/"+relation.ch_cd+"/"+path+"Sym_L_merge.jpg")
   end
 end

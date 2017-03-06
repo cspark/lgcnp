@@ -1,0 +1,378 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+    <script>
+      $(function () {
+          $("#start_date").datepicker({
+                  dateFormat: 'yy-mm-dd',
+                  dayNamesMin: [
+                      '일',
+                      '월',
+                      '화',
+                      '수',
+                      '목',
+                      '금',
+                      '토'
+                  ],
+                  monthNamesShort: [
+                      '1월',
+                      '2월',
+                      '3월',
+                      '4월',
+                      '5월',
+                      '6월',
+                      '7월',
+                      '8월',
+                      '9월',
+                      '10월',
+                      '11월',
+                      '12월'
+                  ],
+                  currentText: '오늘 날짜',
+                  changeMonth: true
+              });
+          $("#end_date").datepicker({
+                      dateFormat: 'yy-mm-dd',
+                      dayNamesMin: [
+                          '일',
+                          '월',
+                          '화',
+                          '수',
+                          '목',
+                          '금',
+                          '토'
+                      ],
+                      monthNamesShort: [
+                          '1월',
+                          '2월',
+                          '3월',
+                          '4월',
+                          '5월',
+                          '6월',
+                          '7월',
+                          '8월',
+                          '9월',
+                          '10월',
+                          '11월',
+                          '12월'
+                      ],
+                      currentText: '오늘 날짜',
+                      changeMonth: true
+                  });
+
+        $("#start_date").datepicker('setDate', '2017-01-25');
+        $("#end_date").datepicker('setDate', '<%= @end_date %>');
+
+        <% if !@name.nil? %>
+          document.getElementById("name").value = decode_utf8('<%= @name %>')
+        <% end %>
+
+        <% if !@custserial.nil? %>
+          document.getElementById("custserial").value = '<%= @custserial %>'
+        <% end %>
+
+        <% if !@measureno.nil? %>
+          document.getElementById("measureno").value = '<%= @measureno %>'
+        <% end %>
+
+        <% if !@select_sex.nil? %>
+          $('select[id="select_sex"]').val('<%= @select_sex %>');
+        <% end %>
+
+        <% if !@start_age.nil? %>
+          document.getElementById("start_age").value = '<%= @start_age %>'
+        <% end %>
+        <% if !@end_age.nil? %>
+          document.getElementById("end_age").value = '<%= @end_age %>'
+        <% end %>
+
+        <% if !@start_birthyy.nil? %>
+          document.getElementById("start_birthyy").value = '<%= @start_birthyy %>'
+        <% end %>
+        <% if !@end_birthyy.nil? %>
+          document.getElementById("end_birthyy").value = '<%= @end_birthyy %>'
+        <% end %>
+
+        <% if !@start_birthmm.nil? %>
+          document.getElementById("start_birthmm").value = '<%= @start_birthmm %>'
+        <% end %>
+        <% if !@end_birthmm.nil? %>
+          document.getElementById("end_birthmm").value = '<%= @end_birthmm %>'
+        <% end %>
+
+        <% if !@select_channel.nil? %>
+          $('select[id="select_channel"]').val('<%= @select_channel %>');
+        <% end %>
+
+        <% if !@select_mode.nil? %>
+          $('select[id="select_mode"]').val('<%= @select_mode %>');
+        <% end %>
+
+        <% if !@select_makeup.nil? %>
+          $('select[id="select_makeup"]').val('<%= @select_makeup %>');
+        <% end %>
+
+        <% if !@select_area.nil? %>
+          $('select[id="select_area"]').val('<%= @select_area %>');
+        <% end %>
+
+        <% if !@select_skin_type_device.nil? %>
+          $('select[id="select_skin_type_device"]').val('<%= @select_skin_type_device %>');
+        <% end %>
+
+        <% if !@select_skin_type_survey.nil? %>
+          $('select[id="select_skin_type_survey"]').val('<%= @select_skin_type_survey %>');
+        <% end %>
+
+        <% if !@select_senstive.nil? %>
+          $('select[id="select_senstive"]').val('<%= @select_senstive %>');
+        <% end %>
+
+        <% if !@select_skin_anxiety1.nil? %>
+          $('select[id="select_skin_anxiety1"]').val('<%= @select_skin_anxiety1 %>');
+        <% end %>
+
+        <% if !@select_skin_anxiety2.nil? %>
+          $('select[id="select_skin_anxiety2"]').val('<%= @select_skin_anxiety2 %>');
+        <% end %>
+
+        $("#date_init").click(function(){
+          $("#start_date").datepicker('setDate', '2017-01-25');
+          $("#end_date").datepicker('setDate', '<%= @today %>');
+        });
+
+        $("#age_init").click(function(){
+          document.getElementById("start_age").value = '<%= @min_age %>';
+          document.getElementById("end_age").value = '<%= @max_age %>';
+        });
+
+        $("#birthyy_init").click(function(){
+          document.getElementById("start_birthyy").value = '<%= @max_birthyy %>';
+          document.getElementById("end_birthyy").value = '<%= @min_birthyy %>';
+        });
+
+        $("#birthmm_init").click(function(){
+          document.getElementById("start_birthmm").value = '<%= @min_birthmm %>';
+          document.getElementById("end_birthmm").value = '<%= @max_birthmm %>';
+        });
+
+        $('#submit').click(function(){
+          load();
+        });
+
+        $(document).on("click", ".table_tr", function (e) {
+          console.log($(this).attr('id'));
+          var userId = $(this).attr('id').split("/")[0]
+          var ch_cd = $(this).attr('id').split("/")[1]
+          var measureno = $(this).attr('id').split("/")[2]
+          window.open("/admin/image/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno, "/admin/data/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno, "scrollbars=1,resizable=1,height=800,width=900");
+        });
+      });
+
+      function load(){
+        var select_sex = document.getElementById("select_sex").options[document.getElementById("select_sex").selectedIndex].value;
+        var select_channel = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
+        var select_mode = document.getElementById("select_mode").options[document.getElementById("select_mode").selectedIndex].value;
+        var select_makeup = document.getElementById("select_makeup").options[document.getElementById("select_makeup").selectedIndex].value;
+        var select_area = document.getElementById("select_area").options[document.getElementById("select_area").selectedIndex].value;
+        var select_skin_type_device = document.getElementById("select_skin_type_device").options[document.getElementById("select_skin_type_device").selectedIndex].value;
+        var select_skin_type_survey = document.getElementById("select_skin_type_survey").options[document.getElementById("select_skin_type_survey").selectedIndex].value;
+        var select_senstive = document.getElementById("select_senstive").options[document.getElementById("select_senstive").selectedIndex].value;
+        var select_skin_anxiety1 = document.getElementById("select_skin_anxiety1").options[document.getElementById("select_skin_anxiety1").selectedIndex].value;
+        var select_skin_anxiety2 = document.getElementById("select_skin_anxiety2").options[document.getElementById("select_skin_anxiety2").selectedIndex].value;
+
+        url = ""
+        url += "/admin/data_list?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
+        url += "&select_sex=" + select_sex;
+        url += "&start_age=" + document.getElementById("start_age").value;
+        url += "&end_age=" + document.getElementById("end_age").value;
+        url += "&name=" + encodeURI(encodeURI(document.getElementById("name").value));
+        url += "&custserial=" + document.getElementById("custserial").value;
+        url += "&measureno=" + document.getElementById("measureno").value;
+        url += "&start_birthyy=" + document.getElementById("start_birthyy").value;
+        url += "&end_birthyy=" + document.getElementById("end_birthyy").value;
+        url += "&start_birthmm=" + document.getElementById("start_birthmm").value;
+        url += "&end_birthmm=" + document.getElementById("end_birthmm").value;
+        url += "&select_channel=" + select_channel;
+        url += "&select_mode=" + select_mode;
+        url += "&select_makeup=" + select_makeup;
+        url += "&select_area=" + select_area;
+        url += "&select_skin_type_device=" + select_skin_type_device;
+        url += "&select_skin_type_survey=" + select_skin_type_survey;
+        url += "&select_senstive=" + select_senstive;
+        url += "&select_skin_anxiety2=" + select_skin_anxiety2;
+
+        location.href = url;
+      }
+
+      function decode_utf8(s) {
+        try{
+          return decodeURI(s);
+        }catch(err){
+          console.log(err);
+          return s;
+        }
+      }
+
+      function showDetail(userId, ch_cd, measureno){
+        window.open("/admin/image/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno, "/admin/data/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno, "scrollbars=1,resizable=1,height=500,width=900");
+      }
+
+    </script>
+    <style>
+    .fixed-table-body {
+      max-height: 65%;
+    }
+
+    .text-center {
+        margin: 0 auto;
+        text-align: center !important;
+    }
+
+    th {
+      font-size: 15px;
+    }
+
+    td {
+      font-size: 15px;
+    }
+
+    .width70 {
+      min-width:70px
+    }
+    .width100 {
+      min-width:100px
+    }
+    .width170 {
+      min-width:170px
+    }
+    </style>
+  </head>
+
+  <body>
+    <%= render "admin/header" %>
+
+    <div style="background: #b1cbbb; padding: 8px;">
+      <input type="text" name="search" id="search" placeholder="이름으로 검색" style="width: 200px;"> <button class="btn btn-warning" id="show_all" onclick="show_all()">전체보기</button>
+      <p style="float:right; margin-right:20px;">
+        Download:
+        <%= link_to "Excel", admin_image_list_path(format: "xls", :search => @search, :isExcel => true) %>
+      </p>
+    </div>
+
+    <table data-toggle="table" style="width:3600px;">
+      <thead style="width: 100%;">
+        <tr>
+            <th class="width70 text-center">이름</th>
+            <th>분석 횟수</th>
+            <th>채널</th>
+            <th>전면,좌,우측면</th>
+            <th class="width170 text-center">분석 일</th>
+            <th class="width100 text-center">업데이트 일</th>
+            <th>수분 측정1</th>
+            <th>수분 측정7</th>
+            <th>수분 측정8</th>
+            <th>모공 측정1</th>
+            <th>모공 측정2</th>
+            <th>모공 측정7</th>
+            <th>모공 측정8</th>
+            <th>모공 측정avr</th>
+            <th>주름 측정3</th>
+            <th>주름 측정4</th>
+            <th>주름 측정6</th>
+            <th>주름 측정avr</th>
+            <th>탄력 측정7</th>
+            <th>탄력 측정8</th>
+            <th>탄력 측정avr</th>
+            <th>탄력 각도7</th>
+            <th>탄력 각도8</th>
+            <th>피지 측정1</th>
+            <th>피지 측정2</th>
+            <th>피지 측정7</th>
+            <th>피지 측정8</th>
+            <th>피지 측정avr</th>
+            <th>포피린 측정1</th>
+            <th>포피린 측정2</th>
+            <th>포피린 측정7</th>
+            <th>포피린 측정8</th>
+            <th>포피린 측정avr</th>
+            <th>포피린 비 측정1</th>
+            <th>포피린 비 측정2</th>
+            <th>포피린 비 측정7</th>
+            <th>포피린 비 측정8</th>
+            <th>포피린 비 측정avr</th>
+            <th>편광 색소침착 측정1</th>
+            <th>편광 색소침착 측정2</th>
+            <th>편광 색소침착 측정3</th>
+            <th>편광 색소침착 측정4</th>
+            <th>편광 색소침착 측정5</th>
+            <th>편광 색소침착 측정6</th>
+            <th>편광 색소침착 측정7</th>
+            <th>편광 색소침착 측정8</th>
+            <th>편광 색소침착 측정avr</th>
+            <th>UV광 색소침착 측정1</th>
+            <th>UV광 색소침착 측정2</th>
+            <th>UV광 색소침착 측정3</th>
+            <th>UV광 색소침착 측정4</th>
+            <th>UV광 색소침착 측정5</th>
+            <th>UV광 색소침착 측정6</th>
+            <th>UV광 색소침착 측정7</th>
+            <th>UV광 색소침착 측정8</th>
+            <th>UV광 색소침착 측정avr</th>
+            <th>피부톤 측정1</th>
+            <th>피부톤 측정2</th>
+            <th>피부톤 측정4</th>
+            <th>피부톤 측정6</th>
+            <th>피부톤 측정7</th>
+            <th>피부톤 측정8</th>
+            <th>피부톤 측정avr</th>
+            <th>피부톤 Red1</th>
+            <th>피부톤 Red2</th>
+            <th>피부톤 Red4</th>
+            <th>피부톤 Red6</th>
+            <th>피부톤 Red7</th>
+            <th>피부톤 Red8</th>
+            <th>피부톤 Red_avr</th>
+            <th>피부톤 Green1</th>
+            <th>피부톤 Green2</th>
+            <th>피부톤 Green4</th>
+            <th>피부톤 Green6</th>
+            <th>피부톤 Green7</th>
+            <th>피부톤 Green8</th>
+            <th>피부톤 Green_avr</th>
+            <th>피부톤 Blue1</th>
+            <th>피부톤 Blue2</th>
+            <th>피부톤 Blue4</th>
+            <th>피부톤 Blue6</th>
+            <th>피부톤 Blue7</th>
+            <th>피부톤 Blue8</th>
+            <th>피부톤 Blue_avr</th>
+            <th>피부톤 칼라 타입</th>
+            <th>선 민감도</th>
+            <th>동안각도 점수 우측</th>
+            <th>동안각도 점수 좌측</th>
+            <th>피부타입</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @fcdatas.each do |fcdata| %>
+          <%= render partial: "admin/image/item", locals: { fcdata: fcdata } %>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div>
+      <%= paginate @fcdatas %>
+    </div>
+  </body>
+</html>
