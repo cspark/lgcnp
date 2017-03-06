@@ -128,5 +128,6 @@ class AdminFcdata < ApplicationRecord
       image_list.push(new_image.append(false))
     }
     image_list.append(true).write("public/"+relation.ch_cd+"/"+path+type+i.to_s+".jpg")
+    Rails.logger.info "end!!!!!!!!"
   end
 end
