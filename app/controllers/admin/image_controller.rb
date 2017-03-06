@@ -5,17 +5,17 @@ class Admin::ImageController < Admin::AdminApplicationController
   def index
     if params.has_key?(:search) && params[:search].length != 0
       @search = params[:search]
-      @users = Custinfo.where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc").page(params[:page]).per(20)
+      @users = Custinfo.where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc").page(params[:page]).per(5)
       user_ids = []
       @users.each do |user|
         user_ids << user.custserial
       end
       @fcdatas = BeauFcdata.where(custserial: user_ids)
-      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(10)
+      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
     else
       @search = ""
       @fcdatas = BeauFcdata.all
-      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(10)
+      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
     end
 
     respond_to do |format|
@@ -37,7 +37,7 @@ class Admin::ImageController < Admin::AdminApplicationController
       @path << "/"
       @path << serial.to_s
       @path << "-"
-      @path << measureno.to_s
+      @path << measureno.to_i.to_s
       @path << "/"
       @path << serial.to_s
       @path << "-"
