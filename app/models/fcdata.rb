@@ -159,6 +159,21 @@ class Fcdata < ApplicationRecord
     }
   end
 
+  def to_api_hash_for_admin
+    {
+       custserial: custserial,
+       faceno: faceno,
+       measuredate: measuredate,
+       measureno: measureno.to_i,
+       uptdate: uptdate,
+       pr_graph: get_graph_data(type: "pore"),
+       wr_graph: get_graph_data(type: "wr"),
+       el_graph: get_graph_data(type: "el"),
+       sb_graph: get_graph_data(type: "sb"),
+       pp_graph: get_graph_data(type: "pp"),
+    }
+  end
+
   #TZone 이마 수분 측정 평균값 : Moisture 본인값 : MO_1
   #UZone 양볼 수분 측정 평균값 : Moisture 본인값 : MO_7 / 8 의 평균
 
