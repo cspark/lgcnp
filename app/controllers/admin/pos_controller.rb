@@ -22,7 +22,7 @@ class Admin::PosController < Admin::AdminApplicationController
     else
       page = 1
     end
-    @fcpos = Kaminari.paginate_array(@fcpos).page(page).per(15)
+    @fcpos = Kaminari.paginate_array(@fcpos).page(page).per(5)
 
     respond_to do |format|
       format.html
