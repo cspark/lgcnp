@@ -104,6 +104,18 @@ class Admin::ImageController < Admin::AdminApplicationController
       image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Pore_Cust")
       image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Spot_Cust")
       image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Wr_Cust")
+
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "Sym_L_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "Sym_R_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UV_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_WH_PWC_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_WH_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UVGR_SBC_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UV_GR_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_PLC_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UVGR_UVC_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_UVC_")
     else
       serial = "2"
       measureno = 2
@@ -123,18 +135,6 @@ class Admin::ImageController < Admin::AdminApplicationController
       @path << measureno.to_i.to_s
       @path << "_"
     end
-
-    AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "Sym_L_")
-    AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "Sym_R_")
-    AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UV_")
-    AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_WH_PWC_")
-    AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_WH_")
-    AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UVGR_SBC_")
-    AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UV_GR_")
-    AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_PLC_")
-    AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UVGR_UVC_")
-    AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_")
-    AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_UVC_")
   end
 
   def image_download(serial: nil, measureno: nil, number: nil, type: nil)

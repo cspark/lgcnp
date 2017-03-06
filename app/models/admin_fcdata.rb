@@ -127,6 +127,6 @@ class AdminFcdata < ApplicationRecord
       }
       image_list.push(new_image.append(false))
     }
-    image_list.append(true).write("public/"+relation.ch_cd+"/"+path+"Sym_L_merge.jpg")
+    image_list.append(true).write("public/"+relation.ch_cd+"/"+path+type+i.to_s+".jpg")
   end
 end
