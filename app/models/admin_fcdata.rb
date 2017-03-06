@@ -114,6 +114,9 @@ class AdminFcdata < ApplicationRecord
   end
 
   def self.image_combine(relation: nil, path: nil, type: nil)
+    Rails.logger.info "image_combine!!!"
+    Rails.logger.info path
+    Rails.logger.info type
     image_list = Magick::ImageList.new
     i = 1
     1.upto(2) {|x|
