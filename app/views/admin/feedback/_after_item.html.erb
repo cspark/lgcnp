@@ -25,11 +25,11 @@
               else
                 tempUserName += "*"
             }
-            $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>_<%= after_interview.order %>').append(tempUserName);
+            $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>_<%= after_interview.order.to_i %>').append(tempUserName);
           }
           catch(err)
           {
-            $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>_<%= after_interview.order %>').append('<%= user.custname %>');
+            $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>_<%= after_interview.order.to_i %>').append('<%= user.custname %>');
           }
         });
 
@@ -43,7 +43,7 @@
       <% tabletinterview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first %>
 
       <tr class="table_tr" id="<%= custinfo.custserial.to_i %>/<%= after_interview.after_interview_id.to_i %>">
-        <td id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>_<%= after_interview.order %>"></td>
+        <td id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>_<%= after_interview.order.to_i %>"></td>
         <% if after_interview.order == 0 %>
           <td>당일 설문</td>
         <% elsif after_interview.order == 1 %>
