@@ -21,7 +21,7 @@ class LcareUser < ApplicationRecord
   end
 
   def self.list(cust_hnm: nil, birth_year: nil, birth_mmdd: nil, cell_phnno: nil, page: 1, per: 3)
-    scoped = LcareUser.all
+    scoped = LcareUser.where(u_cust_yn: "Y")
     scoped = scoped.where(cust_hnm: cust_hnm) if cust_hnm.present?
     scoped = scoped.where(birth_year: birth_year) if birth_year.present?
     scoped = scoped.where(birth_mmdd: birth_mmdd) if birth_mmdd.present?

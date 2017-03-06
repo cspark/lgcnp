@@ -37,7 +37,7 @@ gem 'iconv'
 gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 gem 'kaminari'
-gem 'rmagick', '~> 2.16.0'
+# gem 'rmagick', '~> 2.16.0'
 # gem 'table_cloth'
 
 group :development, :test do
