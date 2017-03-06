@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
     <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
     <script>
       $(function () {
             $("#start_date").datepicker({
@@ -66,7 +69,7 @@
                         changeMonth: true
                     });
 
-          $("#start_date").datepicker('setDate', '2017-01-25');
+          $("#start_date").datepicker('setDate', '<%= @start_date %>');
           $("#end_date").datepicker('setDate', '<%= @end_date %>');
 
           <% if !@name.nil? %>
@@ -119,7 +122,7 @@
           <% end %>
 
           $("#date_init").click(function(){
-            $("#start_date").datepicker('setDate', '2017-01-25');
+            $("#start_date").datepicker('setDate', '<%= @start_date %>');
             $("#end_date").datepicker('setDate', '<%= @today %>');
           });
 
@@ -140,6 +143,17 @@
 
           $('#submit').click(function(){
             load();
+          });
+
+          $(document).on("click", ".table_tr", function (e) {
+            console.log("click!!!!");
+            var userId = $(this).attr('id').split("/")[0]
+            var ch_cd = $(this).attr('id').split("/")[1]
+            var uptdate = $(this).attr('id').split("/")[2]
+            console.log(userId);
+            console.log(ch_cd);
+            console.log(uptdate);
+            window.open("/admin/tabletinterview/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&uptdate=" +uptdate, "/users/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&uptdate=" +uptdate, "scrollbars=1,resizable=1,height=500,width=600");
           });
       });
 
@@ -169,6 +183,16 @@
         location.href = url;
       }
     </script>
+    <style>
+    .fixed-table-body {
+      max-height: 50%;
+    }
+
+    .text-center {
+        margin: 0 auto;
+        text-align: center !important;
+    }
+    </style>
   </head>
 
   <body>
@@ -253,16 +277,59 @@
       </div>
     </div>
 
-    <div>
-      <div>
+    <table data-toggle="table" style="width:3600px;">
+      <thead style="width: 100%;">
+        <tr>
+            <th>이름</th>
+            <th>시리얼</th>
+            <th>진단 날짜</th>
+            <th>채널</th>
+            <th>피부타입</th>
+            <th>진단으로 나온 솔루션 1</th>
+            <th>최종으로 선택된 솔루션 1</th>
+            <th>진단으로 나온 솔루션 2</th>
+            <th>최종으로 선택된 솔루션 2</th>
+            <th>진단으로 나온 세럼</th>
+            <th>최종으로 선택된 세럼</th>
+            <th>진단으로 나온 앰플 1</th>
+            <th>최종으로 선택된 앰플 1</th>
+            <th>진단으로 나온 앰플 2</th>
+            <th>최종으로 선택된 앰플 2</th>
+            <th>진단으로 나온 화장품</th>
+            <th>최종으로 선택된 화장품</th>
+            <th>A1</th>
+            <th>A2</th>
+            <th>A3</th>
+            <th>B1</th>
+            <th>B2</th>
+            <th>B3</th>
+            <th>B4</th>
+            <th>C1</th>
+            <th>D1</th>
+            <th>D2</th>
+            <th>D3</th>
+            <th>D4</th>
+            <th>D5</th>
+            <th>D6</th>
+            <th>D7</th>
+            <th>D8</th>
+            <th>D9</th>
+            <th>모공 점수</th>
+            <th>트러블 점수</th>
+            <th>색소침착 점수</th>
+            <th>주름 점수</th>
+            <th>탄력 점수</th>
+        </tr>
+      </thead>
+      <tbody>
         <% @tabletinterviews.each do |tabletinterview| %>
           <%= render partial: "admin/tabletinterview/item", locals: { tabletinterview: tabletinterview } %>
         <% end %>
-        <div>
-          <%= paginate @tabletinterviews %>
-        </div>
-      </div>
-    </div>
+      </tbody>
+    </table>
 
+    <div>
+      <%= paginate @tabletinterviews %>
+    </div>
   </body>
 </html>

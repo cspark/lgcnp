@@ -149,20 +149,19 @@ class Admin::DataController < Admin::AdminApplicationController
       end
 
       @fcdatas_excel = @fcdatas
-      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
+      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(10)
     else
       @fcdatas = Fcdata.all
-      Rails.logger.info "development???"
-      Rails.logger.info @fcdatas.count
-
-      Rails.logger.info "development???"
-      Rails.logger.info Custinfo.all.count
-      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
+      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(10)
     end
 
     respond_to do |format|
       format.html
       format.xls
     end
+  end
+
+  def show
+    @fcdata = Fcdata.where(custserial: params[:userId]).where(measureno: params[:measureno]).first
   end
 end

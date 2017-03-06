@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
     <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
     <script>
     $(function () {
         $("#select_date").datepicker({
@@ -44,13 +46,51 @@
         $('#submit').click(function(){
           load();
         });
+
+        $(document).on("click", ".table_tr", function (e) {
+          var phone = $(this).attr('id').split("/")[0]
+          var reserve_hhmm = $(this).attr('id').split("/")[1]
+          window.open("/admin/fcschedule/detail?phone=" +phone+ "&reserve_hhmm=" +reserve_hhmm, "/admin/fcschedule/detail?phone=" + phone+ "&reserve_hhmm=" +reserve_hhmm, "scrollbars=1,resizable=1,height=500,width=600");
+        });
       });
 
       function load(isAll){
         location.href = "/admin/fcschedule_list?select_date=" + $('#select_date').val();
       }
 
+      function showDetail(phone, reserve_hhmm){
+        window.open("/admin/fcschedule/detail?phone=" +phone+ "&reserve_hhmm=" +reserve_hhmm, "/admin/fcschedule/detail?phone=" + phone+ "&reserve_hhmm=" +reserve_hhmm, "scrollbars=1,resizable=1,height=500,width=600");
+      }
+
     </script>
+    <style>
+    .fixed-table-body {
+      max-height: 75%;
+    }
+
+    .text-center {
+        margin: 0 auto;
+        text-align: center !important;
+    }
+
+    th {
+      font-size: 15px;
+    }
+
+    td {
+      font-size: 15px;
+    }
+
+    .width70 {
+      min-width:70px
+    }
+    .width100 {
+      min-width:100px
+    }
+    .width170 {
+      min-width:170px
+    }
+    </style>
   </head>
 
   <body>
@@ -67,14 +107,31 @@
       </div>
     </div>
 
+    <table data-toggle="table" style="width:1180px;">
+      <thead style="width: 100%;">
+        <tr>
+            <th class="text-center">이름</th>
+            <th class="text-center">채널</th>
+            <th class="text-center">매장</th>
+            <th class="text-center">예약 시간</th>
+            <th class="text-center">연락처</th>
+            <th class="text-center">상담예약 여부</th>
+            <th class="text-center">메모</th>
+            <th class="text-center">등록날짜</th>
+            <th class="text-center">구매 여부</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @fcschedules.each do |data| %>
+          <%= render partial: "admin/schedule/item", locals: { data: data } %>
+        <% end %>
+      </tbody>
+    </table>
+
     <div>
-      <% @fcschedules.each do |data| %>
-        <%= render partial: "admin/schedule/item", locals: { data: data } %>
-      <% end %>
-      <div>
-        <%= paginate @fcschedules %>
-      </div>
+      <%= paginate @fcschedules %>
     </div>
+
 
   </body>
 </html>

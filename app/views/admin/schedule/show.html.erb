@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+    $ (function () {
+        try
+        {
+          $('#name_<%= @fcschedule.reserve_hhmm %>_<%= @fcschedule.uptdate %>').append( decode_utf8('<%= @fcschedule.custname %>'));
+        }
+        catch(err)
+        {
+          $('#name_<%= @fcschedule.reserve_hhmm %>_<%= @fcschedule.uptdate %>').append('<%= @fcschedule.custname %>');
+        }
+      });
+
+      function decode_utf8(s) {
+        return decodeURI(s);
+      }
+
+    </script>
+  </head>
+
+  <body style="padding: 10px;">
+    <h2>고객정보</h2>
+
+    <font size="5"><b><div id="name_<%= @fcschedule.reserve_hhmm %>_<%= @fcschedule.uptdate %>"></b></div></font>
+
+    <div><font size="4">
+      <% mmdd = @fcschedule.reserve_mmdd[0, 2] + "-" +@fcschedule.reserve_mmdd[2, 4]%>
+      <% hhmm = @fcschedule.reserve_hhmm[0, 2] + ":" +@fcschedule.reserve_hhmm[2, 4]%>
+      <b>채널구분</b> <%= @fcschedule.ch_cd %><br>
+      <b>매장구분</b> <%= @fcschedule.shop_cd %><br>
+      <b>예약시간</b> <%= @fcschedule.reserve_yyyy %>-<%= mmdd %> , <%= hhmm %><br>
+      <b>전화번호</b> <%= @fcschedule.phone %><br>
+      <b>상담여부</b> <%= @fcschedule.reserve_yn %><br>
+      <b>메모</b> <%= @fcschedule.memo %><br>
+      <b>등록날짜</b> <%= @fcschedule.uptdate %><br>
+      <b>구매여부</b> <%= @fcschedule.purchase_yn %>
+    </font>
+  </body>
+</html>

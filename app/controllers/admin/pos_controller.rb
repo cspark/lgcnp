@@ -17,11 +17,20 @@ class Admin::PosController < Admin::AdminApplicationController
     end
 
     @fcpos_excel = @fcpos
-    @fcpos = Kaminari.paginate_array(@fcpos).page(params[:page]).per(3)
+    if params.has_key?(:page)
+      page = params[:page]
+    else
+      page = 1
+    end
+    @fcpos = Kaminari.paginate_array(@fcpos).page(page).per(15)
 
     respond_to do |format|
       format.html
       format.xls
     end
+  end
+
+  def show
+    @fcpos = Fcpos.where(custserial: params[:userId], measureno: params[:measureno]).first
   end
 end

@@ -155,6 +155,7 @@ class Fcdata < ApplicationRecord
        dry_u_graph_min: 0,
        dry_u_graph_max: 100,
        dry_u_graph_avr: get_vertical_graph_avr(type: "moisture"),
+       m_skintype: m_skintype
     }
   end
 
@@ -768,5 +769,11 @@ class Fcdata < ApplicationRecord
 
   def test2
     #탄력 각도 ; EL_ANGLE_7 이 오른쪽 볼, 8이 왼쪽
+  end
+
+  def self.list(custserial: nil)
+    scoped = Fcdata.all
+    scoped = scoped.where(custserial: custserial) if custserial.present?
+    scoped.order('measureno DESC')
   end
 end

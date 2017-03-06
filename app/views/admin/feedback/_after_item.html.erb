@@ -39,7 +39,64 @@
       </script>
     </head>
     <body>
-      <div style="display:table; height:50px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
+      <% custinfo = Custinfo.where(custserial: after_interview.custserial).first %>
+      <% tabletinterview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first %>
+
+      <tr class="table_tr" id="<%= custinfo.custserial.to_i %>/<%= after_interview.after_interview_id.to_i %>">
+        <td id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
+        <% if after_interview.order == 0 %>
+          <td>당일 설문</td>
+        <% elsif after_interview.order == 1 %>
+          <td>2주 후 설문</td>
+        <% elsif after_interview.order == 2 %>
+          <td>3개월 후 설문</td>
+        <% end %>
+        <td><%= tabletinterview.uptdate %></td>
+        <td><%= custinfo.sex %></td>
+        <td><%= custinfo.age %></td>
+        <% after_serum = tabletinterview.after_serum %>
+        <% if tabletinterview.after_serum == "skin control" %>
+          <% after_serum = "스킨 컨트롤 세럼" %>
+        <% elsif tabletinterview.after_serum == "deep humect" %>
+          <% after_serum = "딥 휴멕트 세럼" %>
+        <% elsif tabletinterview.after_serum == "rebalencing" %>
+          <% after_serum = "리밸런싱 세럼" %>
+        <% end %>
+        <td><%= after_serum %></td>
+        <% after_ample_1 = tabletinterview.after_ample_1 %>
+        <% if tabletinterview.after_ample_1 == "pore clinic ampoule" %>
+          <% after_ample_1 = "포어 클리닉 앰플" %>
+        <% elsif tabletinterview.after_ample_1 == "carming ampoule" %>
+          <% after_ample_1 = "카밍 앰플" %>
+        <% elsif tabletinterview.after_ample_1 == "luminus ampoule" %>
+          <% after_ample_1 = "루미너스 앰플" %>
+        <% elsif tabletinterview.after_ample_1 == "regenerating ampoule" %>
+          <% after_ample_1 = "리제네리이팅 앰플" %>
+        <% elsif tabletinterview.after_ample_1 == "perming ampoule" %>
+          <% after_ample_1 = "퍼밍 앰플" %>
+        <% end %>
+        <td><%= after_ample_1 %></td>
+        <% after_ample_2 = tabletinterview.after_ample_2 %>
+        <% if tabletinterview.after_ample_2 == "pore clinic ampoule" %>
+          <% after_ample_2 = "포어 클리닉 앰플" %>
+        <% elsif tabletinterview.after_ample_2 == "carming ampoule" %>
+          <% after_ample_2 = "카밍 앰플" %>
+        <% elsif tabletinterview.after_ample_2 == "luminus ampoule" %>
+          <% after_ample_2 = "루미너스 앰플" %>
+        <% elsif tabletinterview.after_ample_2 == "regenerating ampoule" %>
+          <% after_ample_2 = "리제네리이팅 앰플" %>
+        <% elsif tabletinterview.after_ample_2 == "perming ampoule" %>
+          <% after_ample_2 = "퍼밍 앰플" %>
+        <% end %>
+        <td><%= after_ample_2 %></td>
+        <td><%= after_interview.a1.to_i %></td>
+        <td><%= after_interview.a2.to_i %></td>
+        <td><%= after_interview.a3.to_i %></td>
+        <td><%= after_interview.a4.to_i %></td>
+        <td><%= after_interview.a5 %></td>
+      </tr>
+
+      <!-- <div style="display:table; height:50px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
         <% custinfo = Custinfo.where(custserial: after_interview.custserial).first %>
         <% tabletinterview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first %>
         <font size="4" onClick="showDetail(<%= custinfo.custserial.to_i %>, <%= after_interview.after_interview_id.to_i %>)"><div id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
@@ -90,6 +147,6 @@
           설문 1 : <%= after_interview.a1.to_i %> / 설문 2 : <%= after_interview.a2.to_i %> / 설문 3 : <%= after_interview.a3.to_i %> / 설문 4 : <%= after_interview.a4.to_i %> <br>
           기타의견 : <%= after_interview.a5 %>
         </font>
-      </div>
+      </div> -->
     </body>
 </html>

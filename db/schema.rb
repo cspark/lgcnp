@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220105147) do
+ActiveRecord::Schema.define(version: 20170303021414) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 20170220105147) do
   end
 
   create_table "fcdata", force: :cascade do |t|
-    t.string   "custserial",               null: false
+    t.string   "custserial",                null: false
     t.string   "faceno"
     t.string   "measuredate"
     t.integer  "measureno"
@@ -175,13 +175,23 @@ ActiveRecord::Schema.define(version: 20170220105147) do
     t.integer  "skintype"
     t.integer  "score_r"
     t.integer  "score_l"
-    t.integer  "yanus_status", default: 1
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "yanus_status",  default: 1
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "ch_cd"
+    t.float    "e_sebum_t"
+    t.float    "e_sebum_u"
+    t.float    "e_porphyrin_t"
+    t.float    "e_porphyrin_u"
+    t.integer  "janus_status"
+    t.string   "shop_cd"
+    t.string   "worry_skin_1"
+    t.string   "worry_skin_2"
+    t.integer  "m_skintype"
   end
 
   create_table "fcinterviews", force: :cascade do |t|
-    t.string   "custserial",  null: false
+    t.string   "custserial",   null: false
     t.string   "faceno"
     t.string   "measuredate"
     t.integer  "measureno"
@@ -194,8 +204,12 @@ ActiveRecord::Schema.define(version: 20170220105147) do
     t.string   "interview_6"
     t.string   "interview_7"
     t.string   "interview_8"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "ch_cd"
+    t.string   "interview_9"
+    t.string   "interview_10"
+    t.string   "shop_cd"
   end
 
   create_table "fcpos", force: :cascade do |t|
@@ -254,6 +268,8 @@ ActiveRecord::Schema.define(version: 20170220105147) do
     t.integer  "rt_les_y"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "ch_cd"
+    t.string   "shop_cd"
   end
 
   create_table "fcschedules", force: :cascade do |t|
@@ -308,6 +324,30 @@ ActiveRecord::Schema.define(version: 20170220105147) do
     t.string   "uptdate"
     t.string   "before_made_cosmetic"
     t.string   "after_made_cosmetic"
+    t.string   "ch_cd"
+    t.integer  "fcdata_id"
+    t.integer  "tablet_interview_id"
+    t.string   "is_quick_mode"
+    t.string   "base_lot"
+    t.string   "ampoule_1_lot"
+    t.string   "ampoule_2_lot"
+    t.string   "mixer_name"
+    t.string   "memo"
+    t.string   "is_agree_cant_refund"
+    t.string   "is_agree_after"
+    t.string   "shop_cd"
+  end
+
+  create_table "lcare_users", force: :cascade do |t|
+    t.string   "n_cust_id",  null: false
+    t.string   "cust_hnm"
+    t.string   "sex_cd"
+    t.integer  "birth_year"
+    t.string   "birth_mmdd"
+    t.string   "cell_phnno"
+    t.string   "u_cust_yn"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
     <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
     <script>
       $(function () {
 
@@ -91,7 +94,7 @@
           <% end %>
 
           <% if !@name.nil? %>
-            document.getElementById("name").value = '<%= @name %>'
+            document.getElementById("name").value = decode_utf8('<%= @name %>')
           <% end %>
 
           <% if !@sex.nil? %>
@@ -114,12 +117,18 @@
             $('select[id="select_interview"]').val('<%= @select_interview %>');
           <% end %>
 
-
-
           $('#submit').click(function(){
             load();
           });
 
+          $(document).on("click", ".table_tr", function (e) {
+            console.log($(this).attr('id'));
+            var userId = $(this).attr('id').split("/")[0]
+            var after_interview_id = $(this).attr('id').split("/")[1]
+            console.log(userId);
+            console.log(after_interview_id);
+            window.open("/admin/feedbacks/detail?userId=" + userId +"&after_interview_id=" +after_interview_id , "/feedbacks/detail?userId=" + userId +"&after_interview_id=" +after_interview_id, "scrollbars=1,resizable=1,height=500,width=600");
+          });
       });
 
       function load(){
@@ -138,7 +147,7 @@
         url += "&select_ample1=" + select_ample1;
         url += "&select_ample2=" + select_ample2;
         url += "&select_interview=" + select_interview;
-        url += "&name=" + encodeURI(document.getElementById("name").value);
+        url += "&name=" + encodeURI(encodeURI(document.getElementById("name").value));
         location.href = url;
       }
 
@@ -146,6 +155,16 @@
         window.open("/admin/feedbacks/detail?userId=" + userId +"&after_interview_id=" +after_interview_id , "/feedbacks/detail?userId=" + userId +"&after_interview_id=" +after_interview_id, "scrollbars=1,resizable=1,height=500,width=600");
       }
     </script>
+    <style>
+    .fixed-table-body {
+      max-height: 65%;
+    }
+
+    .text-center {
+        margin: 0 auto;
+        text-align: center !important;
+    }
+    </style>
   </head>
 
   <body>
@@ -226,9 +245,32 @@
         <div id="avr" style="background: #eea29a; padding: 8px;">
           총 인원 수 : <%= @count %> / 설문 1의 평균 점수 : <%= @average_a1 %> / 설문 2의 평균 점수 : <%= @average_a2 %> / 설문 3의 평균 점수 : <%= @average_a3 %> / 설문 4의 평균 점수 : <%= @average_a4 %><br>
         </div>
-        <% @after_interviews.each do |after_interview| %>
-          <%= render partial: "admin/feedback/after_item", locals: { after_interview: after_interview } %>
-        <% end %>
+
+        <table data-toggle="table" style="width:1180px;">
+          <thead style="width: 100%;">
+            <tr>
+                <th>이름</th>
+                <th>설문 날짜</th>
+                <th>진단 날짜</th>
+                <th>성별</th>
+                <th>나이</th>
+                <th>베이스</th>
+                <th>앰플 1</th>
+                <th>앰플 2</th>
+                <th>설문 1</th>
+                <th>설문 2</th>
+                <th>설문 3</th>
+                <th>설문 4</th>
+                <th>기타의견</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @after_interviews.each do |after_interview| %>
+            <%= render partial: "admin/feedback/after_item", locals: { after_interview: after_interview } %>
+            <% end %>
+          </tbody>
+        </table>
+
         <div>
           <%= paginate @after_interviews %>
         </div>

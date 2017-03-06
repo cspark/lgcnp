@@ -3,13 +3,6 @@ class Custinfo < ApplicationRecord
   self.table_name = "custinfo" if Rails.env.production? || Rails.env.staging?
   self.primary_key = :custserial if Rails.env.production? || Rails.env.staging?
 
-
-  def self.list(n_cust_id: nil, page: 1, per: 3)
-    scoped = Custinfo.all
-    scoped = scoped.where(n_cust_id: n_cust_id) if n_cust_id.present?
-    scoped.order('updated_at DESC').page(page).per(per)
-  end
-
   def to_api_hash
     {
       serial: custserial,
@@ -28,7 +21,8 @@ class Custinfo < ApplicationRecord
       is_agree_privacy: is_agree_privacy,
       is_agree_thirdparty_info: is_agree_thirdparty_info,
       is_agree_marketing: is_agree_marketing,
-      is_agree_after: is_agree_after
+      is_agree_after: is_agree_after,
+      address: address
     }
   end
 
@@ -37,8 +31,9 @@ class Custinfo < ApplicationRecord
   end
 
   def update_lastanaldate
-    yymmdd = Time.now.to_s.split(" ")[0]
-    temp_date = Time.now.to_s.split(" ")[1]
+    change_time_now = Time.now + 10.minute - 18.seconds
+    yymmdd = change_time_now.to_s.split(" ")[0]
+    temp_date = change_time_now.to_s.split(" ")[1]
     hhmmss = temp_date.split(":")[0] + "-" +temp_date.split(":")[1]+ "-" +temp_date.split(":")[2]
     self.lastanaldate = yymmdd+ "-" +hhmmss
   end

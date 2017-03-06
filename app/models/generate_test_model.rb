@@ -25,8 +25,9 @@ class GenerateTestModel < ApplicationRecord
   def self.generate_test_fctabletinterview
     num = 10
     (7..num).each do |i|
+      i = 2
       f = Fctabletinterview.new
-      f.custserial = i.to_s
+      f.custserial = "134"
       f.a_1 = i
       f.a_2 = i
       f.a_3 = i
@@ -48,8 +49,8 @@ class GenerateTestModel < ApplicationRecord
       f.skin_type = "skin_type_gunsung"
       f.before_solution_1 = "elasticity solution"
       f.after_solution_1 = "elasticity solution"
-      f.before_solution_2 = "wrinkle solution"
-      f.after_solution_2 = "wrinkle solution"
+      f.before_solution_2 = "elasticity solution"
+      f.after_solution_2 = "elasticity solution"
       f.before_serum = "rebalencing"
       f.after_serum = "rebalencing"
       f.before_ample_1 = "regenerating ampoule"
@@ -58,41 +59,47 @@ class GenerateTestModel < ApplicationRecord
       f.after_ample_2 = "regenerating ampoule"
       f.before_made_cosmetic = "skin control EX"
       f.after_made_cosmetic = "skin control EX"
-      f.uptdate = "2017-02-10-15-20"
+      f.uptdate = "2017-03-03-12-10"
+      f.ch_cd = "CNP"
+      f.fcdata_id = "1"
+      f.tablet_interview_id = 26
+      f.is_quick_mode = "F"
+      f.is_agree_cant_refund = "T"
+      f.is_agree_after = "T"
       f.save
     end
   end
 
   def self.generate_test_fcavgdata
-    num = 58
-    (1..num).each do |i|
-       f = Fcavgdata.new
-       f.n_index = i
-       f.age = 0
-       f.pore = 1.0
-       f.wrinkle = 1.0
-       f.spot_pl = 1.0
-       f.spot_uv = 1.0
-       f.elasticity = 1.0
-       f.porphyrin_ratio = 1.0
-       f.e_sebum_t = 1.0
-       f.e_sebum_u = 1.0
-       f.moisture = 1.0
-       f.e_porphyrin_t = 1.0
-       f.e_porphyrin_u = 1.0
-       f.save
-       i +=1;
-    end
+     i = 79
+
+     f = Fcavgdata.new
+     f.n_index = i
+     f.age = "Male_Age36-40_Grade1"
+     f.pore = i-60
+     f.wrinkle = i-60
+     f.moisture = i-60
+     f.spot_pl = i-60
+     f.spot_uv = i-60
+     f.elasticity = i-60
+     f.porphyrin_ratio = i-60
+     f.e_sebum_t = i-60
+     f.e_sebum_u = i-60
+     f.e_porphyrin_t = i-60
+     f.e_porphyrin_u = i-60
+     f.save
+     i +=1;
   end
 
   def self.generate_test_data
     num = 10
     (1..num).each do |i|
        f = Fcdata.new
-       f.custserial = i.to_s
-       f.faceno = i.to_s+"faceno"
-       f.measuredate = i.to_s+"measuredate"
-       f.measureno = i
+       f.custserial = 6.to_s
+       f.ch_cd = "BEAU"
+       f.faceno = "F"
+       f.measuredate = "2017-02-01-13-00-00"
+       f.measureno = 1
        f.uptdate = "2017-02-01"
        f.mo_1 = 1.0
        f.mo_7 = 1.0
@@ -181,6 +188,7 @@ class GenerateTestModel < ApplicationRecord
        f.skintype = 1
        f.score_r = 1
        f.score_l = 1
+       f.m_skintype = 1
        f.save
        i +=1;
     end
@@ -190,24 +198,24 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        user = Custinfo.new
-       user.custserial = i.to_s
-       user.custname = i.to_s+"이름"
+       user.custserial = 5.to_s
+       user.custname = "망고"
        user.sex = "M"
-       user.birthyy = "1985"
-       user.birthmm = "11"
-       user.birthdd = "21"
-       user.age = "33"
+       user.birthyy = "2000"
+       user.birthmm = "07"
+       user.birthdd = "03"
+       user.age = "18"
        user.phone = "012-345-6789"
        user.address = "nonhyun"
        user.email = "test@test.com"
-       user.lastanaldate = "??"
-       user.measureno = i
-       user.uptdate = "2017-02-01"
+       user.lastanaldate = "2017-02-21"
+       user.measureno = 0
+       user.uptdate = "2017-02-21"
        user.is_agree_privacy = "Y"
        user.is_agree_after = "Y"
        user.is_agree_marketing = "Y"
        user.is_agree_thirdparty_info = "Y"
-       user.ch_cd = "CNP"
+       user.ch_cd = "BEAU"
        user.save
        i +=1;
     end
@@ -217,11 +225,12 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        f = Fcpos.new
-       f.custserial = i.to_s
-       f.faceno = i.to_s+"이름"
-       f.measuredate = "measuredate"
-       f.measureno = i
-       f.uptdate = "2017-02-01"
+       f.ch_cd = "CNP"
+       f.custserial = 1
+       f.faceno = "F"
+       f.measuredate = "2017-02-28-13-00-00"
+       f.measureno = 1
+       f.uptdate = "2017-02-28"
        f.fh_x = i
        f.fh_y = i
        f.fh_w = i
@@ -264,12 +273,13 @@ class GenerateTestModel < ApplicationRecord
        f.rt_le_b = i
        f.rt_lip_l = i
        f.rt_lip_t = i
-       f.rtrt_lip_r_re_r = i
+       f.rt_lip_r = i
        f.rt_lip_b = i
        f.rt_res_x = i
        f.rt_res_y = i
        f.rt_les_x = i
        f.rt_les_y = i
+       f.shop_cd = "1"
        f.save
        i +=1;
     end
@@ -299,16 +309,41 @@ class GenerateTestModel < ApplicationRecord
     num = 2
     (1..num).each do |i|
        f = Fcafterinterview.new
-       f.custserial = "10"
-       f.tablet_interview_id = 10
-       f.after_interview_id = 10
+       f.custserial = "1"
+       f.tablet_interview_id = 1
+       f.after_interview_id = 1
        f.a1 = 1
        f.a2 = 2
        f.a3 = 3
        f.a4 = 4
        f.a5 = 5
        f.save
+       i +=1;
+    end
+  end
 
+  def self.generate_test_interview
+    num = 2
+    (1..num).each do |i|
+       f = Fcinterview.new
+       f.custserial = "1"
+       f.ch_cd = "CNP"
+       f.faceno = "F"
+       f.measuredate = "2017-02-16-15-00-00"
+       f.measureno = 1
+       f.uptdate = "2017-02-16"
+       f.interview_1 = "1"
+       f.interview_2 = "2"
+       f.interview_3 = "1,2"
+       f.interview_4 = "4"
+       f.interview_5 = "5"
+       f.interview_6 = "1"
+       f.interview_7 = "2"
+       f.interview_8 = "3"
+       f.interview_9 = "4"
+       f.interview_10 = "5"
+       f.shop_cd = "5000"
+       f.save
        i +=1;
     end
   end

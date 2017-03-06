@@ -26,4 +26,8 @@ class Admin::ScheduleController < Admin::AdminApplicationController
       format.xls
     end
   end
+
+  def show
+    @fcschedule = Fcschedule.where("phone LIKE ?", "%#{params[:phone]}%").where("reserve_hhmm LIKE ?","%#{params[:reserve_hhmm]}%").first
+  end
 end

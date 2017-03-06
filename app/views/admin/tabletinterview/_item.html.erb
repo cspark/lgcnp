@@ -12,7 +12,25 @@
       <script>
         $(function () {
           <% user = Custinfo.where(custserial: tabletinterview.custserial).first %>
-          $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(decode_utf8('<%= user.custname %>'));
+          try
+          {
+            var userName = decode_utf8('<%= user.custname %>')
+            tempUserName = ""
+            for(var i = 0; i < userName.length; i++){
+              if(i == 0)
+                tempUserName += userName.slice(0, 1)
+              else if(i == userName.length - 1)
+                tempUserName += userName.slice(userName.length - 1, userName.length)
+              else
+                tempUserName += "*"
+            }
+            $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').append(tempUserName);
+          }
+          catch(err)
+          {
+            $('#name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append('<%= user.custname %>');
+          }
+
           //피부타입 한글로 변경
           $('#skin_type_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').html(translate_skin_type('<%= tabletinterview.skin_type %>'));
 
@@ -38,6 +56,10 @@
           $('#after_made_cosmetic_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>').html(translate_serum('<%= tabletinterview.after_made_cosmetic %>') + "Ex");
 
         });
+
+        function decode_utf8(s) {
+          return decodeURI(s);
+        }
 
         function translate_skin_type(value){
             var skin_type = ""
@@ -132,7 +154,54 @@
       </script>
     </head>
     <body>
-      <div style="display:table; height:150px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
+      <% custinfo = Custinfo.where(custserial: tabletinterview.custserial).first %>
+      <tr class="table_tr" id="<%= custinfo.custserial.to_i %>/<%= tabletinterview.ch_cd %>/<%= tabletinterview.uptdate %>">
+        <td id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
+        <td><%= tabletinterview.custserial.to_i %></td>
+        <td><%= tabletinterview.uptdate %></td>
+        <td><%= custinfo.ch_cd %></td>
+        <td id="skin_type_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
+        <td id="before_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
+        <td id="after_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
+        <td id="before_solution_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
+        <td id="after_solution_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
+        <td id="before_serum_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
+        <td id="after_serum_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
+        <td id="before_ampoule_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
+        <td id="after_ampoule_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
+        <td id="before_ampoule_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
+        <td id="after_ampoule_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
+        <td id="before_made_cosmetic_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
+        <td id="after_made_cosmetic_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
+        <td><%= tabletinterview.a_1.to_i %></td>
+        <td><%= tabletinterview.a_2.to_i %></td>
+        <td><%= tabletinterview.a_3.to_i %></td>
+        <td><%= tabletinterview.b_1.to_i %></td>
+        <td><%= tabletinterview.b_2.to_i %></td>
+        <td><%= tabletinterview.b_3.to_i %></td>
+        <td><%= tabletinterview.b_4.to_i %></td>
+        <td><%= tabletinterview.c_1.to_i %></td>
+        <td><%= tabletinterview.d_1.to_i %></td>
+        <td><%= tabletinterview.d_2.to_i %></td>
+        <td><%= tabletinterview.d_3.to_i %></td>
+        <td><%= tabletinterview.d_4.to_i %></td>
+        <td><%= tabletinterview.d_5.to_i %></td>
+        <td><%= tabletinterview.d_6.to_i %></td>
+        <td><%= tabletinterview.d_7.to_i %></td>
+        <td><%= tabletinterview.d_8.to_i %></td>
+        <td><%= tabletinterview.d_9.to_i %></td>
+        <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
+        <% if !fcdata.nil? %>
+          <% fcdata = fcdata.to_api_hash %>
+          <td><%= fcdata[:pr_graph].to_i %></td>
+          <td><%= fcdata[:sb_graph].to_i %></td>
+          <td><%= fcdata[:pp_graph].to_i %></td>
+          <td><%= fcdata[:wr_graph].to_i %></td>
+          <td><%= fcdata[:el_graph].to_i %></td>
+        <% end %>
+      </tr>
+
+      <!-- <div style="display:table; height:150px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
         <% custinfo = Custinfo.where(custserial: tabletinterview.custserial).first %>
         <font size="4"><div id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
         시리얼 : <%= tabletinterview.custserial.to_i %> / 진단 날짜 : <%= tabletinterview.uptdate %> / 채널 : <%= custinfo.ch_cd %><br>
@@ -152,6 +221,6 @@
           <% fcdata = fcdata.to_api_hash %>
           [그래프] 모공 점수 : <%= fcdata[:pr_graph].to_i %> / 트러블 점수 : <%= fcdata[:sb_graph].to_i %> / 색소침착 점수 : <%= fcdata[:pp_graph].to_i %> / 주름 점수 : <%= fcdata[:wr_graph].to_i %> / 탄력 점수 : <%= fcdata[:el_graph].to_i %>
         <% end %>
-      </div>
+      </div> -->
     </body>
 </html>

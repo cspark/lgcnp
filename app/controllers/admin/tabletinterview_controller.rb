@@ -3,7 +3,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
   before_action :is_admin
 
   def index
-    @start_date = Date.today
+    @start_date = Fctabletinterview.all.order('uptdate asc').first.uptdate[0,10]
     @end_date = Date.today
     @today = Date.today
 
@@ -123,14 +123,14 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       end
 
       @tabletinterviews_excel = @tabletinterviews
-      @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(3)
+      @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(10)
       respond_to do |format|
         format.html
         format.xls
       end
     else
       @tabletinterviews = Fctabletinterview.all
-      @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(3)
+      @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(10)
       @tabletinterviews_excel = Fctabletinterview.all
       respond_to do |format|
         format.html
@@ -139,4 +139,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end
   end
 
+  def show
+    @tabletinterview = Fctabletinterview.where(custserial: params[:userId]).where(ch_cd: params[:ch_cd]).where(uptdate: params[:uptdate]).first
+  end
 end

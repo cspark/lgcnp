@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     get "feedback_list"  => "feedback#list"
     get "feedbacks/detail"  => "feedback#show"
     get "tabletinterview" => "tabletinterview#index"
+    get "tabletinterview/detail" => "tabletinterview#show"
 
     get "after_interview" => "fcafterinterviews#show"
     get "after_interview_1" => "fcafterinterviews#show_1"
@@ -21,19 +22,56 @@ Rails.application.routes.draw do
     delete "after_interview" => "fcafterinterviews#delete"
     get "fcavg_list" => "fcavgdata#list"
     get "data_list" => "data#list"
+    get "data/detail" => "data#show"
     get "fcpos_list" => "pos#list"
+    get "fcpos/detail" => "pos#show"
     get "fcschedule_list" => "schedule#list"
+    get "fcschedule/detail" => "schedule#show"
+    get "image_list" => "image#index"
+    get "image/detail" => "image#show"
     resources :admin_users do
     end
   end
 
   namespace :api do
     namespace :beau do
-      resources :user do
+      resources :beau_user do
         collection do
           get 'lcare_user_list'
           put 'measure_update'
         end
+      end
+
+      resources :beau_fcdata do
+      end
+      resources :beau_fcinterview do
+      end
+      resources :beau_fcpos do
+      end
+      resources :beau_fcavgdata do
+      end
+      resources :beau_lcare_user do
+        collection do
+          get 'lcare_integrated_user_list'
+        end
+      end
+    end
+
+    namespace :cnp do
+      resources :cnp_user do
+        collection do
+          get 'lcare_user_list'
+          put 'measure_update'
+        end
+      end
+
+      resources :cnp_fcdata do
+      end
+      resources :cnp_fcinterview do
+      end
+      resources :cnp_fcpos do
+      end
+      resources :cnp_fcavgdata do
       end
     end
   end

@@ -56,6 +56,7 @@ class Fcpos < ApplicationRecord
    	  rt_res_y: rt_res_y,
     	rt_les_x: rt_les_x,
     	rt_les_y: rt_les_y,
+      shop_cd: shop_cd
     }
   end
 end

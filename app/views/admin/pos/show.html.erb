@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+    $ (function () {
+        <% user = Custinfo.find @fcpos.custserial.to_i %>
+        try
+        {
+          $('#name_<%= @fcpos.custserial %>_<%= @fcpos.ch_cd %>_<%= @fcpos.measureno.to_i %>').append( decode_utf8('<%= user.custname %>'));
+        }
+        catch(err)
+        {
+          $('#name_<%= @fcpos.custserial %>_<%= @fcpos.ch_cd %>_<%= @fcpos.measureno.to_i %>').append('<%= user.custname %>');
+        }
+      });
+
+      function decode_utf8(s) {
+        return decodeURI(s);
+      }
+
+    </script>
+  </head>
+
+  <body style="padding: 10px;">
+    <h2>고객정보</h2>
+
+    <font size="5"><b><div id="name_<%= @fcpos.custserial %>_<%= @fcpos.ch_cd %>_<%= @fcpos.measureno.to_i %>"></b></div></font>
+    <div><font size="4">
+      <b>채널구분</b> <%= @fcpos.ch_cd %><br>
+      <b>전면,좌,우측면</b> <%= @fcpos.faceno %><br>
+      <b>분석 일</b> <%= @fcpos.measuredate %><br>
+      <b>분석 횟수</b> <%= @fcpos.measureno.to_i %><br>
+      <b>업데이트 일</b> <%= @fcpos.uptdate %><br>
+      <b>이마 영역정보</b> <%= @fcpos.fh_x.to_i %> / <%= @fcpos.fh_y.to_i %> / <%= @fcpos.fh_w.to_i %> / <%= @fcpos.fh_h.to_i %><br>
+      <b>코 영역정보</b> <%= @fcpos.ns_x.to_i %> / <%= @fcpos.ns_y.to_i %> / <%= @fcpos.ns_w.to_i %> / <%= @fcpos.ns_h.to_i %><br>
+      <b>우측 눈가 영역정보</b> <%= @fcpos.res_x.to_i %> / <%= @fcpos.res_y.to_i %> / <%= @fcpos.res_w.to_i %> / <%= @fcpos.res_h.to_i %><br>
+      <b>우측 눈밑 영역정보</b> <%= @fcpos.reu_x.to_i %> / <%= @fcpos.reu_y.to_i %> / <%= @fcpos.reu_w.to_i %> / <%= @fcpos.reu_h.to_i %><br>
+      <b>좌측 눈가 영역정보</b> <%= @fcpos.les_x.to_i %> / <%= @fcpos.les_y.to_i %> / <%= @fcpos.les_w.to_i %> / <%= @fcpos.les_h.to_i %><br>
+      <b>좌측 눈밑 영역정보</b> <%= @fcpos.leu_x.to_i %> / <%= @fcpos.leu_y.to_i %> / <%= @fcpos.leu_w.to_i %> / <%= @fcpos.leu_h.to_i %><br>
+      <b>우측 볼 영역정보</b> <%= @fcpos.rs_x.to_i %> / <%= @fcpos.rs_y.to_i %> / <%= @fcpos.rs_w.to_i %> / <%= @fcpos.rs_h.to_i %><br>
+      <b>좌측 볼 영역정보</b> <%= @fcpos.ls_x.to_i %> / <%= @fcpos.ls_y.to_i %> / <%= @fcpos.ls_w.to_i %> / <%= @fcpos.ls_h.to_i %><br>
+      <b>우측눈 사각영역 영역정보</b> <%= @fcpos.rt_re_l.to_i %> / <%= @fcpos.rt_re_t.to_i %> / <%= @fcpos.rt_re_r.to_i %> / <%= @fcpos.rt_re_b.to_i %><br>
+      <b>좌측눈 사각영역 영역정보</b> <%= @fcpos.rt_le_l.to_i %> / <%= @fcpos.rt_le_t.to_i %> / <%= @fcpos.rt_le_r.to_i %> / <%= @fcpos.rt_le_b.to_i %><br>
+      <b>입 사각영역 영역정보</b> <%= @fcpos.rt_lip_l.to_i %> / <%= @fcpos.rt_lip_t.to_i %> / <%= @fcpos.rt_lip_r.to_i %> / <%= @fcpos.rt_lip_b.to_i %><br>
+      <b>우측 얼굴 끝 라인 좌표</b> <%= @fcpos.rt_res_x.to_i %> / <%= @fcpos.rt_res_y.to_i %><br>
+      <b>좌측 얼굴 끝 라인 좌표</b> <%= @fcpos.rt_les_x.to_i %> / <%= @fcpos.rt_les_y.to_i %>
+    </font>
+  </body>
+</html>

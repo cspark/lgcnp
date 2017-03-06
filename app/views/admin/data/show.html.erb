@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+    $ (function () {
+        <% user = Custinfo.where(custserial: @fcdata.custserial).first %>
+        try
+        {
+          $('#name_<%= @fcdata.custserial.to_i %>').append( decode_utf8('<%= user.custname %>'));
+        }
+        catch(err)
+        {
+          $('#name_<%= @fcdata.custserial.to_i %>').append('<%= user.custname %>');
+        }
+      });
+
+      function decode_utf8(s) {
+        return decodeURI(s);
+      }
+
+    </script>
+  </head>
+
+  <body style="padding: 10px;">
+    <h2>고객정보</h2>
+
+    <font size="5"><b><div id="name_<%= @fcdata.custserial.to_i %>"></b></div></font>
+    <div><font size="4">
+      <b>분석횟수</b> <%= @fcdata.measureno %><br>
+      <b>채널</b> <%= @fcdata.ch_cd %><br>
+      <b>전면,좌,우측면</b> <%= @fcdata.faceno %><br>
+      <b>분석 일</b> <%= @fcdata.measuredate %><br>
+      <b>업데이트 일</b> <%= @fcdata.uptdate %><br>
+      <b>수분 측정 Data</b> <%= @fcdata.mo_1 %> / <%= @fcdata.mo_7 %> / <%= @fcdata.mo_8 %><br>
+      <b>모공 측정 Data</b> <%= @fcdata.pr_1.to_i %> / <%= @fcdata.pr_2.to_i %> / <%= @fcdata.pr_7.to_i %> / <%= @fcdata.pr_8.to_i %> / <%= @fcdata.pr_avr.to_i %><br>
+      <b>주름 측정 Data</b> <%= @fcdata.wr_3.to_i %> / <%= @fcdata.wr_4.to_i %> / <%= @fcdata.wr_6.to_i %> / <%= @fcdata.wr_avr.to_i %><br>
+      <b>탄력 측정 Data</b> <%= @fcdata.el_7.to_i %> / <%= @fcdata.el_8.to_i %> / <%= @fcdata.el_avr.to_i %><br>
+      <b>탄력 각도 Data</b> <%= @fcdata.el_angle_7 %> / <%= @fcdata.el_angle_8 %><br>
+      <b>피지 측정 Data</b> <%= @fcdata.sb_1.to_i %> / <%= @fcdata.sb_2.to_i %> / <%= @fcdata.sb_7.to_i %> / <%= @fcdata.sb_8.to_i %> / <%= @fcdata.sb_avr.to_i %><br>
+      <b>포피린 측정 Data</b> <%= @fcdata.pp_1.to_i %> / <%= @fcdata.pp_2.to_i %> / <%= @fcdata.pp_7.to_i %> / <%= @fcdata.pp_8.to_i %> / <%= @fcdata.pp_avr.to_i %><br>
+      <b>포피린 비 측정 Data</b> <%= @fcdata.pp_ratio_1.to_i %> / <%= @fcdata.pp_ratio_2.to_i %> / <%= @fcdata.pp_ratio_7.to_i %> / <%= @fcdata.pp_ratio_8.to_i %> / <%= @fcdata.pp_ratio_avr.to_i %><br>
+      <b>편광 색소침착 측정 Data</b> <%= @fcdata.sp_pl_1.to_i %> / <%= @fcdata.sp_pl_2.to_i %> / <%= @fcdata.sp_pl_3.to_i %> / <%= @fcdata.sp_pl_4.to_i %> / <%= @fcdata.sp_pl_5.to_i %> / <%= @fcdata.sp_pl_6.to_i %> / <%= @fcdata.sp_pl_7.to_i %> / <%= @fcdata.sp_pl_8.to_i %> / <%= @fcdata.sp_pl_avr.to_i %><br>
+      <b>UV광 색소침착 측정 Data</b> <%= @fcdata.sp_uv_1.to_i %> / <%= @fcdata.sp_uv_2.to_i %> / <%= @fcdata.sp_uv_3.to_i %> / <%= @fcdata.sp_uv_4.to_i %> / <%= @fcdata.sp_uv_5.to_i %> / <%= @fcdata.sp_uv_6.to_i %> / <%= @fcdata.sp_uv_7.to_i %> / <%= @fcdata.sp_uv_8.to_i %> / <%= @fcdata.sp_uv_avr.to_i %><br>
+      <b>피부톤 측정 Data</b> <%= @fcdata.sk_c_1.to_i %> / <%= @fcdata.sk_c_2.to_i %> / <%= @fcdata.sk_c_4.to_i %> / <%= @fcdata.sk_c_6.to_i %> / <%= @fcdata.sk_c_7.to_i %> / <%= @fcdata.sk_c_8.to_i %> / <%= @fcdata.sk_c_avr.to_i %><br>
+      <b>피부톤 Red Data</b> <%= @fcdata.sk_r_1.to_i %> / <%= @fcdata.sk_r_2.to_i %> / <%= @fcdata.sk_r_4.to_i %> / <%= @fcdata.sk_r_6.to_i %> / <%= @fcdata.sk_r_7.to_i %> / <%= @fcdata.sk_r_8.to_i %> / <%= @fcdata.sk_r_avr.to_i %><br>
+      <b>피부톤 Green Data</b> <%= @fcdata.sk_g_1.to_i %> / <%= @fcdata.sk_g_2.to_i %> / <%= @fcdata.sk_g_4.to_i %> / <%= @fcdata.sk_g_6.to_i %> / <%= @fcdata.sk_g_7.to_i %> / <%= @fcdata.sk_g_8.to_i %> / <%= @fcdata.sk_g_avr.to_i %><br>
+      <b>피부톤 Blue Data</b> <%= @fcdata.sk_b_1.to_i %> / <%= @fcdata.sk_b_2.to_i %> / <%= @fcdata.sk_b_4.to_i %> / <%= @fcdata.sk_b_6.to_i %> / <%= @fcdata.sk_b_7.to_i %> / <%= @fcdata.sk_b_8.to_i %> / <%= @fcdata.sk_b_avr.to_i %><br>
+      <b>피부톤 칼라 타입</b> <%= @fcdata.colortype.to_i %><br>
+      <b>선 민감도</b> <%= @fcdatasuntype.to_i %><br>
+      <b>동안각도 점수 우측</b> <%= @fcdata.score_r %><br>
+      <b>동안각도 점수 좌측</b> <%= @fcdata.score_l %><br>
+      <b>피부타입</b> <%= @fcdata.skintype %>
+    </font>
+  </body>
+</html>

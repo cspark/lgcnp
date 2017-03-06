@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
     <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
     <script>
       $(function () {
         document.getElementById("select_age").addEventListener("change", function() {
@@ -21,6 +24,16 @@
       });
 
     </script>
+    <style>
+    .fixed-table-body {
+      max-height: 75%;
+    }
+
+    .text-center {
+        margin: 0 auto;
+        text-align: center !important;
+    }
+    </style>
   </head>
 
   <body>
@@ -48,8 +61,28 @@
       <%= link_to "Excel", admin_fcavg_list_path(format: "xls", :select => @select_option, :isExcel => true) %>
     </p>
 
-    <% @fcavgdatas_list.each do |fcavgdata| %>
-      <%= render partial: "admin/fcavgdata/item", locals: { data: fcavgdata } %>
-    <% end %>
+    <table data-toggle="table" style="width:1180px;">
+      <thead style="width: 100%;">
+        <tr>
+            <th class="text-center">등급</th>
+            <th class="text-center">모공</th>
+            <th class="text-center">주름</th>
+            <th class="text-center">수분</th>
+            <th class="text-center">색소침착 편광</th>
+            <th class="text-center">색소침착 UV광</th>
+            <th class="text-center">탄력</th>
+            <th class="text-center">포피린 비율</th>
+            <th class="text-center">T존 피지</th>
+            <th class="text-center">U존 피지</th>
+            <th class="text-center">T존 포피린</th>
+            <th class="text-center">U존 포피린</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @fcavgdatas_list.each do |fcavgdata| %>
+          <%= render partial: "admin/fcavgdata/item", locals: { data: fcavgdata } %>
+        <% end %>
+      </tbody>
+    </table>
   </body>
 </html>
