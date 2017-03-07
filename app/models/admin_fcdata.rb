@@ -1,4 +1,5 @@
 require 'rmagick'
+
 class AdminFcdata < ApplicationRecord
   self.table_name = "fcdata"
 
@@ -115,18 +116,19 @@ class AdminFcdata < ApplicationRecord
 
   def self.image_combine(relation: nil, path: nil, type: nil)
     Rails.logger.info "image_combine!!!"
-    Rails.logger.info path
-    Rails.logger.info type
-    image_list = Magick::ImageList.new
-    i = 1
-    1.upto(2) {|x|
-      new_image = Magick::ImageList.new
-      1.upto(2) {|y|
-        new_image.push(Magick::Image.read("public/"+relation.ch_cd+"/"+path+type+i.to_s+".jpg").first)
-        i += 1
+    Rails.logger.info File.exist?("public/"+relation.ch_cd+"/"+path+type+"merge.jpg")
+    if !File.exist?("public/"+relation.ch_cd+"/"+path+type+"merge.jpg")
+      image_list = Magick::ImageList.new
+      i = 1
+      1.upto(2) {|x|
+        new_image = Magick::ImageList.new
+        1.upto(2) {|y|
+          new_image.push(Magick::Image.read("public/"+relation.ch_cd+"/"+path+type+i.to_s+".jpg").first)
+          i += 1
+        }
+        image_list.push(new_image.append(false))
       }
-      image_list.push(new_image.append(false))
-    }
-    image_list.append(true).write("public/"+relation.ch_cd+"/"+path+type+"merge.jpg")
+      image_list.append(true).write("public/"+relation.ch_cd+"/"+path+type+"merge.jpg")
+    end
   end
 end

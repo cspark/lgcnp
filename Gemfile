@@ -38,6 +38,8 @@ gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resour
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 gem 'kaminari'
 gem 'rmagick', '~> 2.16.0'
+gem 'rubyzip', '>= 1.0.0' # will load new rubyzip version
+gem 'zip-zip' # will load compatibility for old rubyzip API.
 # gem 'table_cloth'
 
 group :development, :test do
