@@ -74,6 +74,11 @@ Rails.application.routes.draw do
       resources :cnp_fcavgdata do
       end
     end
+
+    namespace :schedule do
+      resources :fcshop do
+      end
+    end
   end
 
   get "get_api_key" => "custinfos#get_api_key"
