@@ -73,7 +73,7 @@
           $("#end_date").datepicker('setDate', '<%= @end_date %>');
 
           <% if !@name.nil? %>
-            document.getElementById("name").value = '<%= @name %>'
+            document.getElementById("name").value = decode_utf8('<%= @name %>')
           <% end %>
 
           <% if !@custserial.nil? %>
@@ -157,6 +157,15 @@
           });
       });
 
+      function decode_utf8(s) {
+        try{
+          return decodeURI(s);
+        }catch(err){
+          console.log(err);
+          return s;
+        }
+      }
+
       function load(){
         var select_sex = document.getElementById("select_sex").options[document.getElementById("select_sex").selectedIndex].value;
         var select_channel = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
@@ -169,7 +178,7 @@
         url += "&select_sex=" + select_sex;
         url += "&start_age=" + document.getElementById("start_age").value;
         url += "&end_age=" + document.getElementById("end_age").value;
-        url += "&name=" + document.getElementById("name").value;
+        url += "&name=" + encodeURI(encodeURI(document.getElementById("name").value));
         url += "&custserial=" + document.getElementById("custserial").value;
         url += "&start_birthyy=" + document.getElementById("start_birthyy").value;
         url += "&end_birthyy=" + document.getElementById("end_birthyy").value;

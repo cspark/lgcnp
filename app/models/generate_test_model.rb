@@ -2,18 +2,18 @@ class GenerateTestModel < ApplicationRecord
 
   def self.generate_test_custinfo
     c = Custinfo.new
-    c.custserial = "10"
-    c.n_cust_id = "10"
-    c.custname = "red"
+    c.custserial = "11"
+    c.n_cust_id = "11"
+    c.custname = "망고"
     c.sex = "M"
-    c.birthyy = "1986"
-    c.birthmm = "11"
-    c.birthdd = "01"
-    c.age = "32"
+    c.birthyy = "2000"
+    c.birthmm = "07"
+    c.birthdd = "03"
+    c.age = "18"
     c.phone = "0123456789"
-    c.lastanaldate = "2017-02-24-18-00"
+    c.lastanaldate = "2017-01-15-18-00"
     c.measureno = "1"
-    c.uptdate = "2017/02/24"
+    c.uptdate = "2017/01/15"
     c.is_agree_privacy = "T"
     c.is_agree_after = "T"
     c.is_agree_marketing = "T"
@@ -25,6 +25,8 @@ class GenerateTestModel < ApplicationRecord
   def self.generate_test_fctabletinterview
     i = 1
     Fctabletinterview.all.each do |f|
+      i = 1
+      f = Fctabletinterview.new
       f.custserial = i.to_s
       f.a_1 = i
       f.a_2 = i
