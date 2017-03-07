@@ -142,6 +142,9 @@ class Admin::ImageController < Admin::AdminApplicationController
         AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UVGR_UVC_")
         AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_")
         AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_UVC_")
+
+        zip_path = @path.split("/")[0] +"/"+ @path.split("/")[1]
+        generate_tgz(relation: @fcdata, path: @path)
       rescue
       end
     else
@@ -174,8 +177,8 @@ class Admin::ImageController < Admin::AdminApplicationController
       AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UVGR_UVC_")
       AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_")
       AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_UVC_")
-      zip_path = @path.split("/")[0] +"/"+ @path.split("/")[1]
 
+      zip_path = @path.split("/")[0] +"/"+ @path.split("/")[1]
       generate_tgz(relation: @fcdata, path: @path)
     end
   end
