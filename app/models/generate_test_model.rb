@@ -23,11 +23,9 @@ class GenerateTestModel < ApplicationRecord
   end
 
   def self.generate_test_fctabletinterview
-    num = 10
-    (7..num).each do |i|
-      i = 2
-      f = Fctabletinterview.new
-      f.custserial = "134"
+    i = 1
+    Fctabletinterview.all.each do |f|
+      f.custserial = i.to_s
       f.a_1 = i
       f.a_2 = i
       f.a_3 = i
@@ -61,12 +59,13 @@ class GenerateTestModel < ApplicationRecord
       f.after_made_cosmetic = "skin control EX"
       f.uptdate = "2017-03-03-12-10"
       f.ch_cd = "CNP"
-      f.fcdata_id = "1"
-      f.tablet_interview_id = 26
-      f.is_quick_mode = "F"
+      f.fcdata_id = i.to_s
+      f.tablet_interview_id = i
+      f.is_quick_mode = "T"
       f.is_agree_cant_refund = "T"
       f.is_agree_after = "T"
       f.save
+      i += 1
     end
   end
 
@@ -306,20 +305,22 @@ class GenerateTestModel < ApplicationRecord
   end
 
   def self.generate_test_afterinterview
-    num = 2
-    (1..num).each do |i|
-       f = Fcafterinterview.new
-       f.custserial = "1"
-       f.tablet_interview_id = 1
-       f.after_interview_id = 1
-       f.a1 = 1
-       f.a2 = 2
-       f.a3 = 3
-       f.a4 = 4
-       f.a5 = 5
-       f.save
-       i +=1;
-    end
+    i = 1
+    f = Fcafterinterview.new
+    f.custserial = i.to_s
+    f.tablet_interview_id = i
+    f.after_interview_id = i
+    f.a1 = 1
+    f.a2 = 2
+    f.a3 = 3
+    f.a4 = 4
+    f.a5 = 5
+    f.order = i
+    f.a1_1 = "파워 블로거"
+    f.tablet_interview_update = "2017-02-27-17-00"
+    f.uptdate = "2017-02-27"
+    f.save
+    i +=1;
   end
 
   def self.generate_test_interview

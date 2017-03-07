@@ -5,8 +5,12 @@ class Admin::PosController < Admin::AdminApplicationController
   def list
     @search = ""
     if params.has_key?(:search) && params[:search].length != 0
-      @search = params[:search]
-      users = Custinfo.where(ch_cd: "CNP").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
+      if Rails.env.production? || Rails.env.staging?
+        @search = params[:search]
+      else
+        @search = URI.decode(params[:search]) if !params[:search].blank?
+      end
+      users = Custinfo.where(ch_cd: "CNP").where("custname LIKE ?", "%#{@search}%").order("lastanaldate desc")
       user_custserials = []
       users.each do |user|
         user_custserials.push(user.custserial)

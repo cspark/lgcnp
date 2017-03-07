@@ -47,6 +47,10 @@
       window.open("/admin/fcpos/detail?userId=" +userId+ "&measureno=" +measureno, "/admin/fcpos/detail?userId=" +userId+ "&measureno=" +measureno, "scrollbars=1,resizable=1,height=600,width=600");
     }
 
+    $('#submit').click(function(){
+      location.href = "/admin/fcpos_list?search=" + encodeURI(encodeURI($("#search").val()));
+    });
+
     </script>
     <style>
     .fixed-table-body {
@@ -82,7 +86,9 @@
     <%= render "admin/header" %>
 
     <div style="background: #b1cbbb; padding: 8px;">
-      <input type="text" name="search" id="search" placeholder="이름으로 검색" style="width: 200px;"> <button class="btn btn-warning" id="show_all" onclick="show_all()">전체보기</button>
+      <input type="text" name="search" id="search" placeholder="이름으로 검색" style="width: 200px;">
+      <button class="btn btn-warning" id="submit">조회</button>
+      <button class="btn btn-warning" id="show_all" onclick="show_all()">전체보기</button>
       <p style="float:right; margin-right:20px;">
         Download:
         <%= link_to "Excel", admin_fcpos_list_path(format: "xls", :search => @search, :isExcel => true) %>

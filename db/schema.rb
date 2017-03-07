@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303021414) do
+ActiveRecord::Schema.define(version: 20170307072856) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20170303021414) do
   end
 
   create_table "fcafterinterviews", force: :cascade do |t|
-    t.string  "custserial",          null: false
+    t.string  "custserial",              null: false
     t.integer "tablet_interview_id"
     t.integer "after_interview_id"
     t.integer "a1"
@@ -62,6 +62,10 @@ ActiveRecord::Schema.define(version: 20170303021414) do
     t.integer "a3"
     t.integer "a4"
     t.text    "a5"
+    t.integer "order"
+    t.text    "a1_1"
+    t.string  "tablet_interview_update"
+    t.string  "uptdate"
   end
 
   create_table "fcavgdata", force: :cascade do |t|

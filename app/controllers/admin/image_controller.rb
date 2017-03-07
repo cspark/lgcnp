@@ -3,18 +3,77 @@ class Admin::ImageController < Admin::AdminApplicationController
   before_action :is_admin
 
   def index
-    if params.has_key?(:search) && params[:search].length != 0
-      @search = params[:search]
-      @users = Custinfo.where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc").page(params[:page]).per(5)
-      user_ids = []
-      @users.each do |user|
-        user_ids << user.custserial
+    @start_date = "2017-01-01"
+    @end_date = Date.today
+    @today = Date.today
+
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+    name = params[:name]
+    measureno = params[:measureno]
+    select_channel = params[:select_channel]
+    shop_cd = params[:shop_cd]
+
+    @start_date = start_date if !start_date.blank?
+    @end_date = end_date  if !end_date.blank?
+    @name = name
+    @measureno = measureno
+    @select_channel = select_channel if select_channel != "all"
+    @shop_cd = shop_cd
+    @name = name if !name.blank?
+
+    @fcdatas = []
+    if Rails.env.production? || Rails.env.staging?
+      scoped = Fcdata.all
+      temp_end_date = @end_date.to_date + 1.day
+      scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
+      scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
+      scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank?
+      scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
+      scoped = scoped.order("uptdate desc")
+
+      scoped.each do |fcdata|
+        custinfo = Custinfo.where(custserial: fcdata.custserial).first
+        is_contain = true
+
+        if !@name.blank?
+          if !custinfo.custname.include? @name
+            is_contain = false
+          end
+        end
+
+        if is_contain == true
+          @fcdatas << fcdata
+        end
       end
-      @fcdatas = AdminFcdata.where(custserial: user_ids)
+
+      @fcdatas_excel = @fcdatas
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
     else
-      @search = ""
-      @fcdatas = AdminFcdata.all
+      scoped = Fcdata.all
+      scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
+      scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank?
+      scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
+      scoped = scoped.order("uptdate desc")
+
+      @name = URI.decode(@name) if !@name.blank?
+
+      scoped.each do |fcdata|
+        custinfo = Custinfo.where(custserial: fcdata.custserial).first
+        is_contain = true
+
+        if !@name.blank?
+          if !custinfo.custname.include? @name
+            is_contain = false
+          end
+        end
+
+        if is_contain == true
+          @fcdatas << fcdata
+        end
+      end
+
+      @fcdatas_excel = @fcdatas
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
     end
 
@@ -184,7 +243,6 @@ class Admin::ImageController < Admin::AdminApplicationController
   end
 
   def generate_tgz(relation: nil, path: nil)
-    Rails.logger.info "generate_tgz!!!"
     zip_path = path.split("/")[0] +"/"+ path.split("/")[1]
     file_path = path.split("/")[2]
 
