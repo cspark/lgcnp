@@ -16,10 +16,10 @@ class Admin::ImageController < Admin::AdminApplicationController
 
     @start_date = start_date if !start_date.blank?
     @end_date = end_date  if !end_date.blank?
-    @name = name
-    @measureno = measureno
+    @name = name if !name.blank?
+    @measureno = measureno if !measureno.blank?
     @select_channel = select_channel if select_channel != "all"
-    @shop_cd = shop_cd
+    @shop_cd = shop_cd if !shop_cd.blank?
     @name = name if !name.blank?
 
     @fcdatas = []
