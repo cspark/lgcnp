@@ -38,8 +38,8 @@ gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resour
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 gem 'kaminari'
 gem 'rmagick', '~> 2.16.0'
-# gem 'rubyzip', '>= 1.0.0'
-# gem 'zip-zip'
+gem 'rubyzip', '>= 1.0.0'
+gem 'zip-zip'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
