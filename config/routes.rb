@@ -74,9 +74,9 @@ Rails.application.routes.draw do
     end
 
     namespace :schedule do
-      resources :fcshop do
+      resources :schedule_fcshop do
       end
-      resources :fcschedule do
+      resources :schedule_fcschedule do
         collection do
           get 'month_list'
           get 'today_list'
