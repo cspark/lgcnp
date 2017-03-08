@@ -9,11 +9,6 @@ class Api::Schedule::FcscheduleController < Api::ApplicationController
 
   def create
     # 예약 스케줄 정보 추가
-    if !Fcschedule.where(shop_cd: params[:shop_cd]).first.nil?
-      render :text => "Shop exist!!!", status: 404
-      return
-    end
-    fcschedule = Fcschedule.new(permitted_params)
     t = Time.now
     fcschedule.uptdate = t.to_s.split(" ")[0]
 
