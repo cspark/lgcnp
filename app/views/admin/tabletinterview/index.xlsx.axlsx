@@ -5,19 +5,22 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
         custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
         fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first
         skin_type = ""
-        if !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("skin_type_gunsung")
-          skin_type = "건성"
-        elsif !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("skin_type_gun_boggab")
-          skin_type = "건복합성"
-        elsif !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("skin_type_jisung")
-          skin_type = "지성"
-        elsif !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("skin_type_jisung_boghab")
-          skin_type = "지복합성"
-        elsif !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("skin_type_jungsung")
-          skin_type = "중성"
-        end
-        if !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("senstive")
-          skin_type = skin_type + " (민감성)"
+        begin
+          if !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("skin_type_gunsung")
+            skin_type = "건성"
+          elsif !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("skin_type_gun_boggab")
+            skin_type = "건복합성"
+          elsif !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("skin_type_jisung")
+            skin_type = "지성"
+          elsif !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("skin_type_jisung_boghab")
+            skin_type = "지복합성"
+          elsif !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("skin_type_jungsung")
+            skin_type = "중성"
+          end
+          if !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("senstive")
+            skin_type = skin_type + " (민감성)"
+          end
+        rescue
         end
         before_solution_1 = ""
         if tabletinterview.before_solution_1 == "elasticity solution"
