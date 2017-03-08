@@ -2,9 +2,9 @@ class Api::Schedule::FcscheduleController < Api::ApplicationController
   def index
     # Calendar 에서 월 선택 시 해당 월에 예약이 존재하는지 확인 RESERVE_MMDD 오름차순으로 정렬
     # 년월일, 채널코드, 매장코드 조건 (* Next 조회 필요)
-    list = Fcschedule.list(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd], reserve_hhmm: params[:reserve_hhmm])
-    if list.count > 0
-      render json: api_hash_for_list(list), status: :ok
+    fcschedule = Fcschedule.where(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd], reserve_hhmm: params[:reserve_hhmm]).first
+    if !fcschedule.nil?
+      render json: fcschedule.to_api_hash, status: :ok
     else
       render json: "", status: 404
     end
@@ -12,20 +12,9 @@ class Api::Schedule::FcscheduleController < Api::ApplicationController
 
   def month_list
     # 예약 스케줄 정보 추가/수정 시 해당 년월일로 조회하여 예약 스케줄 정보가 존재하는지 확인
-    list = Fcschedule.list(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy])
+    list = Fcschedule.month_list(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mm: params[:reserve_mmdd][0,2])
     if list.count > 0
-      fcschedule_list = []
-      if params.has_key?(:reserve_mm)
-        list.each do |fcschedule|
-          if fcschedule.reserve_mmdd[0,2] == params[:reserve_mm]
-            fcschedule_list.push(fcschedule)
-          end
-        end
-      else
-        fcschedule_list = list
-      end
-
-      render json: api_hash_for_list(fcschedule_list), status: :ok
+      render json: api_hash_for_list(list), status: :ok
     else
       render json: "", status: 404
     end

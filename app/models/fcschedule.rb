@@ -17,6 +17,15 @@ class Fcschedule < ApplicationRecord
     }
   end
 
+  def self.month_list(ch_cd: nil, shop_cd: nil, reserve_yyyy: nil, reserve_mm: nil)
+    scoped = Fcschedule.all
+    scoped = scoped.where(ch_cd: ch_cd) if ch_cd.present?
+    scoped = scoped.where(shop_cd: shop_cd) if shop_cd.present?
+    scoped = scoped.where(reserve_yyyy: reserve_yyyy) if reserve_yyyy.present?
+    scoped = scoped.where("reserve_mmdd LIKE ?", "#{reserve_mm}%") if reserve_mm.present?
+    scoped.order('reserve_mmdd ASC')
+  end
+
   def self.list(ch_cd: nil, shop_cd: nil, reserve_yyyy: nil, reserve_mmdd: nil, reserve_hhmm: nil)
     scoped = Fcschedule.all
     scoped = scoped.where(ch_cd: ch_cd) if ch_cd.present?

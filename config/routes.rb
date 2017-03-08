@@ -41,7 +41,6 @@ Rails.application.routes.draw do
           put 'measure_update'
         end
       end
-
       resources :beau_fcdata do
       end
       resources :beau_fcinterview do
@@ -64,7 +63,6 @@ Rails.application.routes.draw do
           put 'measure_update'
         end
       end
-
       resources :cnp_fcdata do
       end
       resources :cnp_fcinterview do
@@ -86,6 +84,15 @@ Rails.application.routes.draw do
         end
       end
     end
+
+    namespace :admin do
+      resources :admin_lcare_user do
+        collection do
+          get 'lcare_integrated_user_list'
+        end
+      end
+    end
+
   end
 
   get "get_api_key" => "custinfos#get_api_key"
