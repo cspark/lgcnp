@@ -7,4 +7,8 @@ ActiveSupport::TimeZone.all.each do |timezone|
   every :day, :at => Time.zone.parse('8:55 pm').utc do
     rake "image:remove_image[#{timezone.name}]"
   end
+
+  every :day, :at => Time.zone.parse('1:10 pm').utc do
+    rake "image:remove_image[#{timezone.name}]"
+  end
 end

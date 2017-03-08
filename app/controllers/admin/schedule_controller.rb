@@ -28,6 +28,6 @@ class Admin::ScheduleController < Admin::AdminApplicationController
   end
 
   def show
-    @fcschedule = Fcschedule.where("phone LIKE ?", "%#{params[:phone]}%").where("reserve_mmdd LIKE ?","%#{params[:reserve_mmdd]}%").where("reserve_hhmm LIKE ?","%#{params[:reserve_hhmm]}%").first
+    @fcschedule = Fcschedule.list(phone: params[:phone], reserve_mmdd: params[:reserve_mmdd], reserve_hhmm: params[:reserve_hhmm]).first
   end
 end
