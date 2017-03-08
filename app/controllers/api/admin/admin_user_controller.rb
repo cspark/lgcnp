@@ -41,10 +41,88 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     user_list = Custinfo.where(custserial: params[:id])
     Rails.logger.info "destroy"
     Rails.logger.info user_list
-    if user_list.count > 0
-      render json: api_hash_for_list(user_list), status: :ok
+
+    measureno = user_list.order("measureno desc").first.measureno
+    # if user_list.count > 0
+    #   render json: api_hash_for_list(user_list), status: :ok
+    # else
+    #   render json: "", status: 404
+    # end
+  end
+
+  def image_remove(serial: nil, measureno: nil)
+    #이미지 삭제하기
+    Rails.logger.info serial
+    user = Custinfo.where(custserial: serial).first
+    sub_folder_name = (((user.custserial.to_i / 100) * 100) + 100).to_s
+    # sub_folder_name = "100"
+    sub_folder_name << "-P"
+    Rails.logger.info sub_folder_name
+
+    ftp_path = ""
+    if !user.ch_cd.nil?
+      ftp_path = "ftp://165.244.88.27/"
+      ftp_path << user.ch_cd.to_s
+      ftp_path << "/"
     else
-      render json: "", status: 404
+      ftp_path = "ftp://165.244.88.27/CNP/"
+    end
+
+    (1..measureno).each do |num|
+      ftp_path << sub_folder_name.to_s
+
+      ftp_path << "/"
+      ftp_path << user.custserial.to_i.to_s
+      ftp_path << "-"
+      ftp_path << num.to_i.to_s
+
+      Rails.logger.info ftp_path
+      system("echo FILE Delete")
+      file_delete_command = "wget --user janus --password pielgahn2012#1 "
+      file_delete_command << ftp_path
+      file_delete_command << " -N -P "
+
+      rm_rf_command = "rm -rf "
+      # make_dir_command << "public/CNP/"
+      if !user.ch_cd.nil?
+        rm_rf_command << "public/"
+        rm_rf_command << user.ch_cd.to_s
+        rm_rf_command << "/"
+      else
+        rm_rf_command << "public/CNP/"
+      end
+
+      Rails.logger.info rm_rf_command
+      system(rm_rf_command)
+
+      rm_rf_command << sub_folder_name
+      Rails.logger.info rm_rf_command
+      system(rm_rf_command)
+
+      rm_rf_command << "/"
+      rm_rf_command << user.custserial.to_i.to_s
+      rm_rf_command << "-"
+      rm_rf_command << measureno.to_i.to_s
+      Rails.logger.info rm_rf_command
+      system(rm_rf_command)
+
+
+      if !user.ch_cd.nil?
+        file_delete_command << "public/"
+        file_delete_command << user.ch_cd.to_s
+        file_delete_command << "/"
+      else
+        file_delete_command << "public/CNP/"
+      end
+
+      file_delete_command << sub_folder_name
+      file_delete_command << "/"
+      file_delete_command << user.custserial.to_i.to_s
+      file_delete_command << "-"
+      file_delete_command << measureno.to_i.to_s
+      Rails.logger.info "final"
+      Rails.logger.info file_delete_command
+      system(file_delete_command)
     end
   end
 
