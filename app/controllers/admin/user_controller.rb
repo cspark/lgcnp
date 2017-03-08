@@ -19,8 +19,9 @@ class Admin::UserController < Admin::AdminApplicationController
     respond_to do |format|
       format.html
       # format.csv { send_data Custinfo.to_csv(@users) }
-      format.xls
+      format.xlsx
     end
+
   end
 
   def show

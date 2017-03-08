@@ -188,7 +188,7 @@
         <button id="date_init" class="btn btn-primary">ALL</button>
         <p style="float:right; margin-right:20px;">
           Download:
-          <%= link_to "Excel", admin_feedback_list_path(format: "xls", :start_date => @start_date, :end_date => @end_date, :sex => @sex, :start_age => @start_age, :end_age => @end_age, :select_base => @select_base, :select_ample1 => @select_ample1, :select_ample2 => @select_ample2, :select_interview => @select_interview, :name => @name, :isExcel => true) %>
+          <%= link_to "Excel", admin_feedback_list_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date, :sex => @sex, :start_age => @start_age, :end_age => @end_age, :select_base => @select_base, :select_ample1 => @select_ample1, :select_ample2 => @select_ample2, :select_interview => @select_interview, :name => @name, :isExcel => true) %>
         </p>
       </div>
 

@@ -30,7 +30,7 @@ class Admin::PosController < Admin::AdminApplicationController
 
     respond_to do |format|
       format.html
-      format.xls
+      format.xlsx
     end
   end
 

@@ -126,7 +126,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(5)
       respond_to do |format|
         format.html
-        format.xls
+        format.xlsx
       end
     else
       @tabletinterviews = Fctabletinterview.all
@@ -134,7 +134,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       @tabletinterviews_excel = Fctabletinterview.all
       respond_to do |format|
         format.html
-        format.xls
+        format.xlsx
       end
     end
   end

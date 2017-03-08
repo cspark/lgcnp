@@ -152,12 +152,13 @@ class Admin::DataController < Admin::AdminApplicationController
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
     else
       @fcdatas = Fcdata.all
+      @fcdatas_excel = @fcdatas
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
     end
 
     respond_to do |format|
       format.html
-      format.xls
+      format.xlsx
     end
   end
 

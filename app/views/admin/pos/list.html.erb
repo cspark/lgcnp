@@ -91,7 +91,7 @@
       <button class="btn btn-warning" id="show_all" onclick="show_all()">전체보기</button>
       <p style="float:right; margin-right:20px;">
         Download:
-        <%= link_to "Excel", admin_fcpos_list_path(format: "xls", :search => @search, :isExcel => true) %>
+        <%= link_to "Excel", admin_fcpos_list_path(format: "xlsx", :search => @search, :isExcel => true) %>
       </p>
     </div>
 

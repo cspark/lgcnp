@@ -1,0 +1,9 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Fcdata") do |sheet|
+    sheet.add_row ["이름","분석 일","채널","매장","분석 횟수"]
+    @fcdatas_excel.each do |fcdata|
+        custinfo = Custinfo.where(custserial: fcdata.custserial).first
+
+        sheet.add_row [URI.decode(custinfo.custname), fcdata.measuredate, fcdata.ch_cd, fcdata.shop_cd, fcdata.measureno.to_i]
+    end
+end
