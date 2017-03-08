@@ -79,6 +79,11 @@ Rails.application.routes.draw do
       resources :fcshop do
       end
       resources :fcschedule do
+        collection do
+          get 'month_list'
+          get 'today_list'
+          put 'update_reservation'
+        end
       end
     end
   end

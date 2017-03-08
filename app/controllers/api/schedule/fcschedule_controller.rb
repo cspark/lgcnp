@@ -1,14 +1,49 @@
 class Api::Schedule::FcscheduleController < Api::ApplicationController
   def index
-    # Calendar 에서 월 선택 시 해당 월에 예약이 존재하는지 확 RESERVE_MMDD 오름차순으로 정렬
+    # Calendar 에서 월 선택 시 해당 월에 예약이 존재하는지 확인 RESERVE_MMDD 오름차순으로 정렬
     # 년월일, 채널코드, 매장코드 조건 (* Next 조회 필요)
+    list = Fcschedule.list(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd], reserve_hhmm: params[:reserve_hhmm])
+    if list.count > 0
+      render json: api_hash_for_list(list), status: :ok
+    else
+      render json: "", status: 404
+    end
+  end
 
-    list = Fcschedule.all.order("shop_cd asc")
-    render json: api_hash_for_list(list), status: :ok
+  def month_list
+    # 예약 스케줄 정보 추가/수정 시 해당 년월일로 조회하여 예약 스케줄 정보가 존재하는지 확인
+    list = Fcschedule.list(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy])
+    if list.count > 0
+      fcschedule_list = []
+      if params.has_key?(:reserve_mm)
+        list.each do |fcschedule|
+          if fcschedule.reserve_mmdd[0,2] == params[:reserve_mm]
+            fcschedule_list.push(fcschedule)
+          end
+        end
+      else
+        fcschedule_list = list
+      end
+
+      render json: api_hash_for_list(fcschedule_list), status: :ok
+    else
+      render json: "", status: 404
+    end
+  end
+
+  def today_list
+    # 예약 스케줄 관리 프로그램 실행 시 팝업되는 '금일 예약자 리스트'에 추가될 오늘 날짜에 대한 예약스케줄 정보 확인 (* Next 조회 필요)
+    list = Fcschedule.list(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd]).order('reserve_hhmm ASC')
+    if list.count > 0
+      render json: api_hash_for_list(list), status: :ok
+    else
+      render json: "", status: 404
+    end
   end
 
   def create
     # 예약 스케줄 정보 추가
+    fcschedule = Fcschedule.new(permitted_params)
     t = Time.now
     fcschedule.uptdate = t.to_s.split(" ")[0]
 
@@ -19,8 +54,40 @@ class Api::Schedule::FcscheduleController < Api::ApplicationController
     end
   end
 
+  def update_reservation
+    fcschedule = Fcschedule.where(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd], reserve_hhmm: params[:reserve_hhmm]).first
+    if !fcschedule.nil?
+      if params[:phone].present?
+        fcschedule.phone = params[:phone]
+      end
+      if params[:custname].present?
+        fcschedule.custname = params[:custname]
+      end
+      if params[:memo].present?
+        fcschedule.memo = params[:memo]
+      end
+      if params[:reserve_yn].present?
+        fcschedule.reserve_yn = params[:reserve_yn]
+      end
+      if params[:purchase_yn].present?
+        fcschedule.purchase_yn = params[:purchase_yn]
+      end
+
+      t = Time.now
+      fcschedule.uptdate = t.to_s.split(" ")[0]
+
+      if fcschedule.save
+        render json: fcschedule.to_api_hash, status: :ok
+      else
+        render json: "", status: 404
+      end
+    else
+      render json: "", status: 404
+    end
+  end
+
   private
   def permitted_params
-    params.permit(:ch_cd, :shop_cd, :reserve_yyyy, :reserve_mmdd, :reserve_hhmm, :custname, :phone, :reserve_yn, :memo, :uptdate, :purchase_yn)
+    params.permit(:ch_cd, :shop_cd, :reserve_yyyy, :reserve_mmdd, :reserve_mm, :reserve_hhmm, :custname, :phone, :reserve_yn, :memo, :uptdate, :purchase_yn, :custname)
   end
 end

@@ -131,13 +131,4 @@ class AdminFcdata < ApplicationRecord
       image_list.append(true).write("public/"+relation.ch_cd+"/"+path+type+"merge.jpg")
     end
   end
-
-  def self.remove_image
-    Rails.logger.info "remove_image!!!!"
-    system("mkdir public/TEST")
-    # system("rm -rf public/CNP")
-    # system("rm -rf public/BEAU")
-    # system("rm -rf public/CLAB")
-  end
-
 end
