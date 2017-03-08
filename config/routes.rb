@@ -91,6 +91,12 @@ Rails.application.routes.draw do
           get 'lcare_integrated_user_list'
         end
       end
+      resources :admin_user do
+      end
+      resources :admin_fcdata do
+      end
+      resources :admin_fcshop do
+      end
     end
 
   end
