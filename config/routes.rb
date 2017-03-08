@@ -78,6 +78,8 @@ Rails.application.routes.draw do
     namespace :schedule do
       resources :fcshop do
       end
+      resources :fcschedule do
+      end
     end
   end
 
