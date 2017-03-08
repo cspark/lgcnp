@@ -38,7 +38,14 @@ class Api::Admin::AdminUserController < Api::ApplicationController
   end
 
   def destroy
-    list = Custinfo.where(custserial: params[:id])
+    user_list = Custinfo.where(custserial: params[:id])
+    Rails.logger.info "destroy"
+    Rails.logger.info user_list
+    if user_list.count > 0
+      render json: api_hash_for_list(user_list), status: :ok
+    else
+      render json: "", status: 404
+    end
   end
 
   private
