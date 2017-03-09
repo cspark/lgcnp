@@ -8,5 +8,4 @@ every :day, :at => '4:00 am' do
   system("rm -rf public/LABO")
   system("rm -rf public/MART")
   system("rm -rf public/TMR")
-  # rake "image:remove_image"
 end
