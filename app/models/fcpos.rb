@@ -4,7 +4,7 @@ class Fcpos < ApplicationRecord
   def to_api_hash
     {
       custserial: custserial,
-      faceno: faceno,ㅇㄷ
+      faceno: faceno,
       measuredate: measuredate,
       measureno: measureno,
       uptdate: uptdate,
