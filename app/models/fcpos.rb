@@ -1,5 +1,6 @@
 class Fcpos < ApplicationRecord
   self.table_name = "fcpos" if Rails.env.production? || Rails.env.staging?
+  self.primary_keys = :custserial,:ch_cd,:measureno if Rails.env.production? || Rails.env.staging?
 
   def to_api_hash
     {
