@@ -60,7 +60,8 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     ftp_path = ""
     if !user.ch_cd.nil?
       ftp_path = "'ftp://165.244.88.27/'"
-      ftp_path << user.ch_cd.to_s
+      # ftp_path << user.ch_cd.to_s
+      ftp_path << "CLAB"
       ftp_path << "/"
     else
       ftp_path = "'ftp://165.244.88.27/CNP/'"
