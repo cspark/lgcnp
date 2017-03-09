@@ -27,7 +27,7 @@ class GenerateTestModel < ApplicationRecord
     Fctabletinterview.all.each do |f|
       i = 1
       f = Fctabletinterview.new
-      f.custserial = 7.to_s
+      f.custserial = 839.to_s
       f.a_1 = i
       f.a_2 = i
       f.a_3 = i
@@ -62,7 +62,7 @@ class GenerateTestModel < ApplicationRecord
       f.uptdate = "2017-02-02-12-10"
       f.ch_cd = "CNP"
       f.fcdata_id = i.to_s
-      f.tablet_interview_id = i
+      f.tablet_interview_id = 840
       f.is_quick_mode = "T"
       f.is_agree_cant_refund = "T"
       f.is_agree_after = "T"
@@ -96,12 +96,12 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        f = Fcdata.new
-       f.custserial = 7.to_s
+       f.custserial = 839.to_s
        f.ch_cd = "CNP"
-       f.faceno = "F"
-       f.measuredate = "2017-02-01-13-00-00"
+       f.faceno = "M"
+       f.measuredate = "2017-02-02-13-00-00"
        f.measureno = 2
-       f.uptdate = "2017-02-01"
+       f.uptdate = "2017-02-02"
        f.mo_1 = 1.0
        f.mo_7 = 1.0
        f.mo_8 = 1.0
@@ -199,18 +199,18 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        user = Custinfo.new
-       user.custserial = 7.to_s
-       user.custname = "test"
+       user.custserial = 839.to_s
+       user.cust  name = "test"
        user.sex = "M"
-       user.birthyy = "2000"
-       user.birthmm = "07"
-       user.birthdd = "03"
-       user.age = "18"
+       user.birthyy = "1985"
+       user.birthmm = "11"
+       user.birthdd = "21"
+       user.age = "33"
        user.phone = "012-345-6789"
        user.address = "nonhyun"
        user.email = "test@test.com"
        user.lastanaldate = "2017-02-21"
-       user.measureno = 1
+       user.measureno = 2
        user.uptdate = "2017-02-21"
        user.is_agree_privacy = "Y"
        user.is_agree_after = "Y"
