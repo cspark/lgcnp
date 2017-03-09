@@ -59,11 +59,11 @@ class Api::Admin::AdminUserController < Api::ApplicationController
 
     ftp_path = ""
     if !user.ch_cd.nil?
-      ftp_path = "ftp://165.244.88.27/"
+      ftp_path = "'ftp://165.244.88.27/'"
       ftp_path << user.ch_cd.to_s
       ftp_path << "/"
     else
-      ftp_path = "ftp://165.244.88.27/CNP/"
+      ftp_path = "'ftp://165.244.88.27/CNP/'"
     end
 
     (1..measureno).each do |num|
@@ -77,13 +77,13 @@ class Api::Admin::AdminUserController < Api::ApplicationController
 
       Rails.logger.info ftp_path
       system("echo FILE Delete")
-      file_delete_command = "curl "
+      file_delete_command = "curl -p --insecure "
       file_delete_command << ftp_path
       file_delete_command << " -X 'DELE "
       file_delete_command << delete_folder
       file_delete_command << "' --user janus:pielgahn2012#1"
 
-      final = "curl ftp://165.244.88.27/CLAB/900-P/ -X 'DELE 839-1' --user janus:pielgahn2012#1"
+      # final = "curl -p --insecure 'ftp://165.244.88.27/CLAB/900-P/839-1/839-1_F_FM_WH_2.jpg' -u 'janus:pielgahn2012#1' -Q '-DELE /CLAB/900-P/839-1/839-1_F_FM_WH_2.jpg' --ftp-create-dirs"
       Rails.logger.info file_delete_command
       system(file_delete_command)
 

@@ -90,6 +90,8 @@ class Admin::ImageController < Admin::AdminApplicationController
 
     if Rails.env.production? || Rails.env.staging?
       @fcdata = AdminFcdata.where(custserial: serial, ch_cd: ch_cd, measureno: measureno).first
+      serial = "71"
+      measureno = "1"
       @path = ""
       sub_folder_name = (((serial.to_i / 100) * 100) + 100).to_s << "-P"
       @path << sub_folder_name.to_s
@@ -264,8 +266,10 @@ class Admin::ImageController < Admin::AdminApplicationController
   def image_download(serial: nil, measureno: nil, number: nil, type: nil)
     #이미지 가져오기
     Rails.logger.info serial
+    serial = "71"
+    measureno = "1"
     user = Custinfo.where(custserial: serial).first
-    sub_folder_name = (((user.custserial.to_i / 100) * 100) + 100).to_s
+    sub_folder_name = (((serial.to_i / 100) * 100) + 100).to_s
     # sub_folder_name = "100"
     sub_folder_name << "-P"
     Rails.logger.info sub_folder_name
@@ -273,7 +277,7 @@ class Admin::ImageController < Admin::AdminApplicationController
     ftp_path = ""
     if !user.ch_cd.nil?
       ftp_path = "ftp://165.244.88.27/"
-      ftp_path << user.ch_cd.to_s
+      ftp_path << "CLAB"
       ftp_path << "/"
     else
       ftp_path = "ftp://165.244.88.27/CNP/"
@@ -282,11 +286,11 @@ class Admin::ImageController < Admin::AdminApplicationController
     ftp_path << sub_folder_name.to_s
 
     ftp_path << "/"
-    ftp_path << user.custserial.to_i.to_s
+    ftp_path << serial.to_s
     ftp_path << "-"
     ftp_path << measureno.to_i.to_s
     ftp_path << "/"
-    ftp_path << user.custserial.to_i.to_s
+    ftp_path << serial.to_s
     ftp_path << "-"
     ftp_path << measureno.to_i.to_s
     ftp_path << type
@@ -317,7 +321,7 @@ class Admin::ImageController < Admin::AdminApplicationController
     system(make_dir_command)
 
     make_dir_command << "/"
-    make_dir_command << user.custserial.to_i.to_s
+    make_dir_command << serial.to_s
     make_dir_command << "-"
     make_dir_command << measureno.to_i.to_s
     Rails.logger.info make_dir_command
@@ -334,7 +338,7 @@ class Admin::ImageController < Admin::AdminApplicationController
 
     file_get_command << sub_folder_name
     file_get_command << "/"
-    file_get_command << user.custserial.to_i.to_s
+    file_get_command << serial.to_s
     file_get_command << "-"
     file_get_command << measureno.to_i.to_s
     Rails.logger.info "final"
