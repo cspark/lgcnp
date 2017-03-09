@@ -1,6 +1,6 @@
 class Fcdata < ApplicationRecord
   self.table_name = "fcdata" if Rails.env.production? || Rails.env.staging?
-  # self.primary_keys = :custserial,:ch_cd,measureno: if Rails.env.production? || Rails.env.staging?
+  self.primary_keys = :custserial,:ch_cd,measureno: if Rails.env.production? || Rails.env.staging?
 
   # TZone 1 이마 2 코
   # UZone 7 오른쪽 볼 8 왼쪽 볼
