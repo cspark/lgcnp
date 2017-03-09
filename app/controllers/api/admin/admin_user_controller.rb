@@ -97,14 +97,14 @@ class Api::Admin::AdminUserController < Api::ApplicationController
         image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_F_PW_SK_L_SIDE")
       end
     end
-
+    # serial = "839"
     Fctabletinterview.where(custserial: serial).destroy_all
     Fcdata.where(custserial: serial).destroy_all
     Fcpos.where(custserial: serial).destroy_all
     Fcinterview.where(custserial: serial).destroy_all
     Fcafterinterview.where(custserial: serial).destroy_all
     user_list.destroy_all
-    
+
     if user_list == 0
       render :text => "Delete Success!!!", status: 200
     else
