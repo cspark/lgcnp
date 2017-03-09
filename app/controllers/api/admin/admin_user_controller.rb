@@ -51,9 +51,10 @@ class Api::Admin::AdminUserController < Api::ApplicationController
   def image_remove(serial: nil, measureno: nil)
     #이미지 삭제하기
     Rails.logger.info serial
-    serial = "71"
+    serial = "839"
+    measureno = "1"
     user = Custinfo.where(custserial: serial).first
-    sub_folder_name = (((user.custserial.to_i / 100) * 100) + 100).to_s
+    sub_folder_name = (((serial.to_i / 100) * 100) + 100).to_s
     sub_folder_name << "-P"
     Rails.logger.info sub_folder_name
 
@@ -71,7 +72,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       ftp_path << sub_folder_name.to_s
 
       ftp_path << "/"
-      ftp_path << user.custserial.to_i.to_s
+      ftp_path << serial.to_i.to_s
       ftp_path << "-"
       ftp_path << num.to_i.to_s
 
@@ -79,13 +80,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       system("echo FILE Delete")
       file_delete_command = "wget --user janus --password pielgahn2012#1 --method=DELETE "
       file_delete_command << ftp_path
-      file_delete_command << " -N -P "
 
-      file_delete_command << sub_folder_name
-      file_delete_command << "/"
-      file_delete_command << user.custserial.to_i.to_s
-      file_delete_command << "-"
-      file_delete_command << num.to_i.to_s
       Rails.logger.info "final"
       Rails.logger.info file_delete_command
       system(file_delete_command)
