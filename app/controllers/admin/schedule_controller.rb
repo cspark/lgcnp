@@ -28,6 +28,6 @@ class Admin::ScheduleController < Admin::AdminApplicationController
   end
 
   def show
-    @fcschedule = Fcschedule.list(phone: params[:phone], ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd], reserve_hhmm: params[:reserve_hhmm]).first
+    @fcschedule = Fcschedule.list(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd], reserve_hhmm: params[:reserve_hhmm]).first
   end
 end
