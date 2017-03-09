@@ -38,12 +38,12 @@ class Api::Admin::AdminUserController < Api::ApplicationController
   end
 
   def destroy
-    user = Custinfo.where(custserial: params[:id]).first
+    user_list = Custinfo.where(custserial: params[:id])
     Rails.logger.info "destroy"
     Rails.logger.info user_list
 
     measureno = user_list.order("measureno desc").first.measureno
-    image_remove(serial: user.custserial, measureno: measureno)
+    image_remove(serial: params[:id], measureno: measureno)
 
     render json: user.to_api_hash, status: :ok
   end
@@ -51,6 +51,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
   def image_remove(serial: nil, measureno: nil)
     #이미지 삭제하기
     Rails.logger.info serial
+    serial = "71"
     user = Custinfo.where(custserial: serial).first
     sub_folder_name = (((user.custserial.to_i / 100) * 100) + 100).to_s
     sub_folder_name << "-P"
@@ -66,6 +67,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     end
 
     (1..measureno).each do |num|
+      num = 1
       ftp_path << sub_folder_name.to_s
 
       ftp_path << "/"
@@ -75,7 +77,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
 
       Rails.logger.info ftp_path
       system("echo FILE Delete")
-      file_delete_command = "wget --user janus --password pielgahn2012#1 --method=DELETE"
+      file_delete_command = "wget --user janus --password pielgahn2012#1 --method=DELETE "
       file_delete_command << ftp_path
       file_delete_command << " -N -P "
 
@@ -83,7 +85,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       file_delete_command << "/"
       file_delete_command << user.custserial.to_i.to_s
       file_delete_command << "-"
-      file_delete_command << measureno.to_i.to_s
+      file_delete_command << num.to_i.to_s
       Rails.logger.info "final"
       Rails.logger.info file_delete_command
       system(file_delete_command)
@@ -104,7 +106,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       rm_rf_command << "/"
       rm_rf_command << user.custserial.to_i.to_s
       rm_rf_command << "-"
-      rm_rf_command << measureno.to_i.to_s
+      rm_rf_command << num.to_i.to_s
       Rails.logger.info rm_rf_command
       system(rm_rf_command)
     end

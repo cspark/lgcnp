@@ -49,9 +49,10 @@
 
         $(document).on("click", ".table_tr", function (e) {
           var phone = $(this).attr('id').split("/")[0]
-          var reserve_mmdd = $(this).attr('id').split("/")[1]
-          var reserve_hhmm = $(this).attr('id').split("/")[2]
-          window.open("/admin/fcschedule/detail?phone=" +phone+ "&reserve_mmdd=" +reserve_mmdd+ "&reserve_hhmm=" +reserve_hhmm, "/admin/fcschedule/detail?phone=" + phone+ "&reserve_mmdd=" +reserve_mmdd+ "&reserve_hhmm=" +reserve_hhmm, "scrollbars=1,resizable=1,height=500,width=600");
+          var reserve_yyyy = $(this).attr('id').split("/")[1]
+          var reserve_mmdd = $(this).attr('id').split("/")[2]
+          var reserve_hhmm = $(this).attr('id').split("/")[3]
+          window.open("/admin/fcschedule/detail?phone=" +phone+ "&reserve_yyyy=" +reserve_yyyy+ "&reserve_mmdd=" +reserve_mmdd+ "&reserve_hhmm=" +reserve_hhmm, "/admin/fcschedule/detail?phone=" + phone+ "&reserve_yyyy=" +reserve_yyyy+ "&reserve_mmdd=" +reserve_mmdd+ "&reserve_hhmm=" +reserve_hhmm, "scrollbars=1,resizable=1,height=500,width=600");
         });
       });
 
