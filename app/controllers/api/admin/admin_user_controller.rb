@@ -38,12 +38,15 @@ class Api::Admin::AdminUserController < Api::ApplicationController
   end
 
   def destroy
+    Rails.logger.info "destroy!!!"
     serial = params[:id]
     user_list = Custinfo.where(custserial: serial)
-    Rails.logger.info "destroy"
+    measureno = 0
+    if !user_list.order("measureno desc").first.nil?
+      measureno = user_list.order("measureno desc").first.measureno.to_i
+    end
 
-    if Rails.env.production? || Rails.env.staging?
-      measureno = user_list.order("measureno desc").first.measureno
+    if user_list.count > 0 && !measureno.nil? && Rails.env.production? || Rails.env.staging?
       (1..measureno.to_i).each do |num|
         image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_Sym_L_")
         image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_Sym_L_")
@@ -98,11 +101,13 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       end
     end
     # serial = "839"
-    Fctabletinterview.where(custserial: serial).delete_all
-    Fcafterinterview.where(custserial: serial).delete_all
-    Fcdata.where(custserial: serial).delete_all
-    Fcpos.where(custserial: serial).delete_all
-    Fcinterview.where(custserial: serial).delete_all
+    if user_list.count > 0
+      Fctabletinterview.where(custserial: serial).delete_all
+      Fcafterinterview.where(custserial: serial).delete_all
+      Fcdata.where(custserial: serial).delete_all
+      Fcpos.where(custserial: serial).delete_all
+      Fcinterview.where(custserial: serial).delete_all
+    end
 
     user_list.delete_all
 
