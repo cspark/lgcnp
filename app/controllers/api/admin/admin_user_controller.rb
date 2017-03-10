@@ -99,10 +99,10 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     end
     # serial = "839"
     Fctabletinterview.where(custserial: serial).destroy_all
+    Fcafterinterview.where(custserial: serial).destroy_all
+    Fcinterview.where(custserial: serial).destroy_all
     Fcdata.where(custserial: serial).destroy_all
     Fcpos.where(custserial: serial).destroy_all
-    Fcinterview.where(custserial: serial).destroy_all
-    Fcafterinterview.where(custserial: serial).destroy_all
     user_list.destroy_all
 
     if user_list == 0
