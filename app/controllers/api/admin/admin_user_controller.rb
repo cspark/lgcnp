@@ -98,6 +98,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
         image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_Sp_Spot_Cust")
         image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_Sp_Wr_Cust")
         image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_F_PW_SK_L_SIDE")
+        image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_END")
       end
     end
     # serial = "839"
@@ -136,7 +137,10 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       ftp_path = "'ftp://165.244.88.27/CNP/'"
     end
 
+    ftp_path_delete_folder = ""
+
     ftp_path << sub_folder_name.to_s
+    ftp_path_delete_folder << ftp_path
     ftp_path << "/"
     ftp_path << serial.to_s
     ftp_path << "-"
@@ -159,30 +163,38 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     file_delete_command << delete_file
     file_delete_command << "' --ftp-create-dirs"
 
-
-    file_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CLAB/900-P/839-1/' -u 'janus:pielgahn2012#1' -Q '-DELE 839-1_F_FM_WH_4.jpg' --ftp-create-dirs"
+    # file_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CLAB/900-P/839-1/' -u 'janus:pielgahn2012#1' -Q '-DELE 839-1_F_FM_WH_4.jpg' --ftp-create-dirs"
+    # folder_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CLAB/900-P/' -u 'janus:pielgahn2012#1' -Q '-RMD 839-1' --ftp-create-dirs"
     Rails.logger.info file_delete_command
     system(file_delete_command)
+    if type == "_END"
+      folder_delete_command = "curl -p --insecure "
+      folder_delete_command << ftp_path_delete_folder + "/'"
+      folder_delete_command << " -u 'janus:pielgahn2012#1' -Q '-RMD "
+      folder_delete_command << serial.to_i.to_s+ "-" +measureno.to_i.to_s
+      folder_delete_command << "' --ftp-create-dirs"
 
-    rm_rf_command = "rm -rf "
-    if !user.ch_cd.nil?
-      rm_rf_command << "public/"
-      rm_rf_command << user.ch_cd.to_s
+      system(folder_delete_command)
+
+      rm_rf_command = "rm -rf "
+      if !user.ch_cd.nil?
+        rm_rf_command << "public/"
+        rm_rf_command << user.ch_cd.to_s
+        rm_rf_command << "/"
+      else
+        rm_rf_command << "public/CNP/"
+      end
+
+      Rails.logger.info rm_rf_command
+
+      rm_rf_command << sub_folder_name
       rm_rf_command << "/"
-    else
-      rm_rf_command << "public/CNP/"
+      rm_rf_command << serial.to_s
+      rm_rf_command << "-"
+      rm_rf_command << measureno.to_i.to_s
+      Rails.logger.info rm_rf_command
+      system(rm_rf_command)
     end
-
-    Rails.logger.info rm_rf_command
-
-    rm_rf_command << sub_folder_name
-
-    rm_rf_command << "/"
-    rm_rf_command << serial.to_s
-    rm_rf_command << "-"
-    rm_rf_command << measureno.to_i.to_s
-    Rails.logger.info rm_rf_command
-    system(rm_rf_command)
   end
 
   private
