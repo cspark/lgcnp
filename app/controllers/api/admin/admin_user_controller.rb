@@ -160,7 +160,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     file_delete_command << "' --ftp-create-dirs"
 
 
-    # final = "curl -p --insecure 'ftp://165.244.88.27/CLAB/900-P/839-1/' -u 'janus:pielgahn2012#1' -Q '-DELE 839-1_F_FM_WH_4.jpg' --ftp-create-dirs"
+    file_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CLAB/900-P/839-1/' -u 'janus:pielgahn2012#1' -Q '-DELE 839-1_F_FM_WH_4.jpg' --ftp-create-dirs"
     Rails.logger.info file_delete_command
     system(file_delete_command)
 
