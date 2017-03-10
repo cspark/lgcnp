@@ -98,12 +98,13 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       end
     end
     # serial = "839"
-    Fctabletinterview.where(custserial: serial).destroy_all
-    Fcafterinterview.where(custserial: serial).destroy_all
-    Fcinterview.where(custserial: serial).destroy_all
-    Fcdata.where(custserial: serial).destroy_all
-    Fcpos.where(custserial: serial).destroy_all
-    user_list.destroy_all
+    Fctabletinterview.where(custserial: serial).delete_all
+    Fcafterinterview.where(custserial: serial).delete_all
+    Fcdata.where(custserial: serial).delete_all
+    Fcpos.where(custserial: serial).delete_all
+    Fcinterview.where(custserial: serial).delete_all
+
+    user_list.delete_all
 
     if user_list == 0
       render :text => "Delete Success!!!", status: 200
