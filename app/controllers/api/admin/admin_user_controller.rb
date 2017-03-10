@@ -107,11 +107,10 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       Fcdata.where(custserial: serial).delete_all
       Fcpos.where(custserial: serial).delete_all
       Fcinterview.where(custserial: serial).delete_all
+      user_list.delete_all
     end
 
-    user_list.delete_all
-
-    if user_list == 0
+    if user_list.count == 0
       render :text => "Delete Success!!!", status: 200
     else
       render :text => "Delete Fail!!!", status: 404
