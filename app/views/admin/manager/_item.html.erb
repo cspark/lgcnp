@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script>
+        $(function () {
+
+        });
+
+        function decode_utf8(s) {
+          return decodeURI(s);
+        }
+      </script>
+    </head>
+    <body>
+      <tr class="table_tr" id="<%= user.email %>">
+        <td class="text-center"><%= user.email %></td>
+        <td class="text-center"><%= user.ch_cd %></td>
+        <td class="text-center"><%= user.shop_cd %></td>
+        <% role = "X" %>
+        <% if user.role == "admin" %>
+        <% role = "O" %>
+        <% end %>
+        <td class="text-center"><%= role %></td>
+      </tr>
+    </body>
+</html>

@@ -352,4 +352,13 @@ class GenerateTestModel < ApplicationRecord
     end
   end
 
+  def self.generate_test_adminuser
+     f = AdminUser.new
+     f.email = "5001@naver.com"
+     f.ch_cd = "CLAB"
+     f.shop_cd = "5001"
+     f.save
+    end
+  end
+
 end

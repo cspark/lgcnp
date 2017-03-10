@@ -29,6 +29,9 @@ Rails.application.routes.draw do
     get "fcschedule/detail" => "schedule#show"
     get "image_list" => "image#index"
     get "image/detail" => "image#show"
+
+    get "manager_list" => "manager#index"
+    get "manager/login_history" => "manager#login_history"
     resources :admin_users do
     end
   end

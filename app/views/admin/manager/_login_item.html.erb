@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script>
+        $(function () {
+
+        });
+
+        function decode_utf8(s) {
+          return decodeURI(s);
+        }
+      </script>
+    </head>
+    <body>
+      <tr class="table_tr" id="<%= data.email %>">
+        <td class="text-center"><%= data.email %></td>
+        <td class="text-center"><%= data.created_at.localtime.to_s.split("+")[0] %></td>
+        <td class="text-center"><%= data.ip %></td>
+      </tr>
+    </body>
+</html>

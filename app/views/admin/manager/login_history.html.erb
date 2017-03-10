@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+    <script>
+    $ (function () {
+
+    });
+
+    </script>
+
+    <style>
+    .fixed-table-body {
+      max-height: 350px;
+    }
+
+    .text-center {
+        margin: 0 auto;
+        text-align: center !important;
+    }
+    </style>
+  </head>
+
+  <body style="padding: 10px;">
+    <h2>로그인 기록</h2>
+
+    <table data-toggle="table" style="width:570px;">
+      <thead style="width: 100%;">
+        <tr>
+          <th class="text-center">관리자 이메일</th>
+          <th class="text-center">로그인 시간</th>
+          <th class="text-center">로그인 IP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @history.each do |data| %>
+        <%= render partial: "admin/manager/login_item", locals: { data: data } %>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div>
+      <%= paginate @history %>
+    </div>
+  </body>
+</html>

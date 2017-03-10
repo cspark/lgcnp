@@ -1,0 +1,119 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+    <script>
+      <% email = "" %>
+      $(function () {
+        $(document).keyup(function (e) {
+            if ($("#email").is(":focus") && (e.keyCode == 13) || ($("#shop_cd").is(":focus") && (e.keyCode == 13))) {
+                load();
+            }
+        });
+
+        <% if !@email.nil? %>
+          document.getElementById("email").value = '<%= @email %>'
+        <% end %>
+
+        <% if !@ch_cd.nil? %>
+          $('select[id="ch_cd"]').val('<%= @ch_cd %>');
+        <% end %>
+
+        <% if !@shop_cd.nil? %>
+          document.getElementById("shop_cd").value = '<%= @shop_cd %>'
+        <% end %>
+
+        $(document).on("click", ".table_tr", function (e) {
+          var email = $(this).attr('id')
+          // window.open("/admin/manager/detail?email=" + email, "/users/manager?email=" + email, "scrollbars=1,resizable=1,height=500,width=600");
+        });
+
+        $('#submit').click(function(){
+          load();
+        });
+
+        $('#add_manager').click(function(){
+          window.open("/admin/manager/add_manager", "/admin/manager/add_manager", "scrollbars=1,resizable=1,height=500,width=600");
+        });
+
+        $('#login_history').click(function(){
+          window.open("/admin/manager/login_history", "/admin/manager/login_history", "scrollbars=1,resizable=1,height=500,width=600");
+        });
+      });
+
+      function load(){
+        var ch_cd = document.getElementById("ch_cd").options[document.getElementById("ch_cd").selectedIndex].value;
+        url = ""
+        url += "/admin/manager_list?email=" + $('#email').val() + "&ch_cd=" + ch_cd + "&shop_cd=" +$('#shop_cd').val();
+        location.href = url;
+      }
+
+      function showDetail(userId){
+        window.open("/admin/manager/detail?userId=" + userId, "/admin/admin_users/detail?userId=" + userId, "scrollbars=1,resizable=1,height=500,width=600");
+      }
+
+    </script>
+    <style>
+    .fixed-table-body {
+      max-height: 350px;
+    }
+
+    .text-center {
+        margin: 0 auto;
+        text-align: center !important;
+    }
+    </style>
+  </head>
+
+  <body>
+    <%= render "admin/header" %>
+    <div style="background: #b1cbbb; padding: 8px;">
+      <div class="form-inline">
+        <input type="text" name="email" id="email" placeholder="이메일 검색" style="width: 200px;">
+        채널 :
+        <select class="form-control" id="ch_cd">
+          <option value="all">All</option>
+          <option value="cnp">CNP</option>
+          <option value="mart">마트</option>
+          <option value="nc">NC</option>
+          <option value="beau">보떼</option>
+          <option value="clab">CLAB</option>
+        </select>
+        매장 :
+        <input type="text" name="shop_cd" id="shop_cd" placeholder="매장코드 검색" style="width: 200px;">
+        <button class="btn btn-warning" id="submit">조회</button>
+
+        <button style="float:right" class="btn btn-custom-3" id="login_history">로그인 기록 보기</button>
+        <button style="float:right" class="btn btn-custom-2" id="add_manager">새로운 관리자 추가</button>
+    </div>
+    </div>
+
+      <table data-toggle="table" style="width:1160px;">
+        <thead style="width: 100%;">
+          <tr>
+            <th class="text-center">이메일</th>
+            <th class="text-center">채널</th>
+            <th class="text-center">매장</th>
+            <th class="text-center">전체 관리자 여부</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+          <%= render partial: "admin/manager/item", locals: { user: user } %>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div>
+        <%= paginate @users %>
+      </div>
+  </body>
+</html>
