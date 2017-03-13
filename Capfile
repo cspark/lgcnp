@@ -2,6 +2,7 @@
 require "capistrano/setup"
 
 # Include default deployment tasks
+require "capistrano/scm/git"
 require "capistrano/deploy"
 
 # Include tasks from other gems included in your Gemfile
