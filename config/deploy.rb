@@ -58,14 +58,13 @@ set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+namespace :whenever do
+  task :start, :roles => :app do
+    run "cd #{release_path} && bundle exec whenever --update-crontab"
+  end
+end
 
 namespace :deploy do
-  namespace :whenever do
-    task :start, :roles => :app do
-      run "cd #{release_path} && bundle exec whenever --update-crontab"
-    end
-  end
-
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
