@@ -25,10 +25,10 @@ set :port, 10022
 # set :linked_files, %w{config/database.yml config/secrets.yml}
 # set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/uploads')
 
-require 'whenever/capistrano'
+set :whenever_environment, defer { stage }
+set :whenever_identifier, defer { "#{application}-#{stage}" }
 
-set :whenever_environment, defer { staging, production }
-set :whenever_command, 'bundle exec whenever'
+require 'whenever/capistrano'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
