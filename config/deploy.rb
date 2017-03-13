@@ -26,6 +26,7 @@ set :port, 10022
 # set :linked_files, %w{config/database.yml config/secrets.yml}
 # set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/uploads')
 
+set :whenever_roles,        ->{ :web }
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default branch is :master
@@ -79,7 +80,7 @@ namespace :deploy do
     end
   end
 
-  after :restart, :clear_cache do
+  after :clear_cache, :update_crontab do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       run "cd #{release_path} && whenever --update-crontab"
     end
