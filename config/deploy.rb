@@ -26,14 +26,7 @@ set :port, 10022
 # set :linked_files, %w{config/database.yml config/secrets.yml}
 # set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/uploads')
 
-set :whenever_roles,        ->{ :db }
-set :whenever_options,      ->{ {:roles => fetch(:whenever_roles)} }
-set :whenever_command,      ->{  }
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
-set :whenever_environment,  ->{ fetch :rails_env, "production" }
-set :whenever_variables,    ->{ "environment=#{fetch :whenever_environment}" }
-set :whenever_update_flags, ->{ "--update-crontab #{fetch :whenever_identifier} --set #{fetch :whenever_variables}" }
-set :whenever_clear_flags,  ->{ "--clear-crontab #{fetch :whenever_identifier}" }
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
