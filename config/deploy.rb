@@ -27,7 +27,6 @@ set :port, 10022
 
 
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
-require 'whenever/capistrano'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -86,11 +85,5 @@ namespace :deploy do
   desc "No ActiveRecord override"
   task :migrate do
   end
-
-  # desc "Update the crontab file"
-  # task :update_crontab, :roles => :app, :except => { :no_release => true } do
-  #   run "cd #{release_path} && bundle exec whenever --update-crontab #{application}"
-  # end
-  # after 'deploy:update_code', 'deploy:update_crontab'
 
 end
