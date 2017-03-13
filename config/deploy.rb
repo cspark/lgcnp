@@ -79,9 +79,9 @@ namespace :deploy do
     end
   end
 
-  after :restart, :update_crontab do
+  after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
-      run "cd #{release_path} && whenever --update-crontab #{application}"
+      run "cd #{release_path} && whenever --update-crontab"
     end
   end
 
