@@ -89,5 +89,4 @@ namespace :deploy do
   desc "No ActiveRecord override"
   task :migrate do
   end
-  after "deploy:update", "whenever:start"
 end
