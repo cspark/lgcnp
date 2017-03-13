@@ -88,5 +88,3 @@ namespace :deploy do
     run "cd #{release_path} && bundle exec whenever --update-crontab #{application}"
   end
 end
-
-after 'deploy:update_code', 'deploy:update_crontab'
