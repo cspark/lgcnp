@@ -27,7 +27,7 @@ set :port, 10022
 
 require 'whenever/capistrano'
 
-set :whenever_environment, defer { stage }
+set :whenever_environment, defer { staging, production }
 set :whenever_command, 'bundle exec whenever'
 
 # Default branch is :master
