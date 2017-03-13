@@ -58,7 +58,7 @@ set :port, 10022
 # set :keep_releases, 5
 
 namespace :deploy do
-  task :update_crontab, :roles => :app do
+  task :update_crontab do
     run "cd #{release_path} && bundle exec whenever --update-crontab"
   end
 
