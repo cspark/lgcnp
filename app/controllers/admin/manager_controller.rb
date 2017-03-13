@@ -17,7 +17,7 @@ class Admin::ManagerController < Admin::AdminApplicationController
     scoped = scoped.where("ch_cd LIKE?", "%#{@ch_cd}%") if !@ch_cd.blank?
 
     @users = scoped.order("shop_cd asc")
-    @users = Kaminari.paginate_array(@users).page(params[:page]).per(5)
+    @users = Kaminari.paginate_array(@users).page(params[:page]).per(6)
 
     respond_to do |format|
       format.html
@@ -26,7 +26,39 @@ class Admin::ManagerController < Admin::AdminApplicationController
   end
 
   def add_manager
-    @user = AdminUser.where(email: params[:email]).first
+  end
+
+  def create
+    admin_user = AdminUser.new(permitted_params)
+
+    if admin_user.save
+      render json: {}, status: :ok
+    else
+      render json: {}, status: :bad_request
+    end
+  end
+
+  def duplication
+    admin_user = AdminUser.find_by(email: params[:email])
+    if admin_user.present?
+      render json: {}, status: :bad_request
+    else
+      render json: {}, status: :ok
+    end
+  end
+
+  def edit_manager
+    @admin_user = AdminUser.where(email: params[:email]).first
+  end
+
+  def update
+    admin_user = AdminUser.where(email: params[:email]).first
+
+    if admin_user.update(permitted_params)
+      render json: {}, status: :ok
+    else
+      render json: {}, status: :bad_request
+    end
   end
 
   def login_history
@@ -34,4 +66,18 @@ class Admin::ManagerController < Admin::AdminApplicationController
     @history = Kaminari.paginate_array(@history).page(params[:page]).per(5)
   end
 
+  def delete
+    admin_user = AdminUser.where(email: params[:email]).first
+    Rails.logger.info admin_user
+    if admin_user.delete
+      render json: {}, status: :ok
+    else
+      render json: {}, status: :bad_request
+    end
+  end
+
+  private
+  def permitted_params
+    params.permit(:email, :password, :ch_cd, :shop_cd)
+  end
 end

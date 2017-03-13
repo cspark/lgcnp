@@ -31,8 +31,18 @@ Rails.application.routes.draw do
     get "image/detail" => "image#show"
 
     get "manager_list" => "manager#index"
-    get "manager/login_history" => "manager#login_history"
+
     resources :admin_users do
+    end
+    resources :manager do
+      collection do
+        get 'add_manager'
+        get 'edit_manager'
+        get 'login_history'
+        post 'duplication'
+        post 'update'
+        post 'delete'
+      end
     end
   end
 

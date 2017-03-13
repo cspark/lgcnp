@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+    <script>
+    $ (function () {
+      if ("<%= @admin_user %>" != null) {
+        $("#email").val('<%= @admin_user.email %>');
+        $("#ch_cd").val('<%= @admin_user.ch_cd %>');
+        $("#shop_cd").val('<%= @admin_user.shop_cd %>');
+      }
+
+      $('#submit').click(function(){
+        if ($("#email").val() == "" || $("#password").val() == "" || $("#ch_cd").val() == "" || $("#shop_cd").val() == ""){
+          alert("공란을 채워주세요!")
+          return
+        }
+
+        var formData = new FormData($(this)[0]);
+        formData.append("email", $("#email").val());
+        formData.append("password", $("#password").val());
+        formData.append("ch_cd", $("#ch_cd").val());
+        formData.append("shop_cd", $("#shop_cd").val());
+
+        $.ajax({
+            url: "/admin/manager/update",
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+              alert("관리자 정보를 수정하였습니다.");
+              window.opener.location.reload();
+              location.reload();
+            },
+            error: function (response){
+              alert("실패");
+            }
+        });
+      });
+    });
+
+    </script>
+
+    <style>
+    .fixed-table-body {
+      max-height: 350px;
+    }
+
+    .text-center {
+        margin: 0 auto;
+        text-align: center !important;
+    }
+    </style>
+  </head>
+
+  <body style="padding: 10px;">
+    <h2>매장 관리자 수정</h2>
+    <div id="filter" style="background: #b1cbbb; padding: 8px;">
+      <div class="form-inline">
+        <div style="display: block;">
+          <font style="float:left;">Email</font><br>
+          <input class="form-control" type="text" id="email" style="float:left; width:200px;" readonly="">
+        <div><br><br>
+
+        <font>Password</font>
+        <input class="form-control" type="password" id="password" style="width:200px;">
+
+        채널코드
+        <input class="form-control" type="text" id="ch_cd" style="width:200px;">
+
+        매장코드
+        <input class="form-control" type="text" id="shop_cd" style="width:200px;"><br>
+        <center>
+          <button class="btn btn-warning" id="submit">수정</button>
+        </center>
+      </div>
+    </div>
+
+  </body>
+</html>

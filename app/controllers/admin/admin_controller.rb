@@ -16,6 +16,7 @@ class Admin::AdminController < Admin::AdminApplicationController
   def login
     if params[:email] == "mint" && params[:password] == "mint"
       session[:admin_user] = "user"
+      request.remote_ip
       return
     end
 
@@ -23,6 +24,10 @@ class Admin::AdminController < Admin::AdminApplicationController
 
     if user.present? && user.valid_password?(params[:password])
       session[:admin_user] = user
+      history = LoginHistory.new
+      history.email = params[:email]
+      history.ip = request.remote_ip
+      history.save
       Rails.logger.info "Login success"
     else
 

@@ -21,6 +21,12 @@
         <% role = "O" %>
         <% end %>
         <td class="text-center"><%= role %></td>
+        <td class="text-center">
+          <% if user.role != "admin"%>
+            <button id="<%= user.email %>" class="btn btn-warning delete-admin">삭제</button>
+            <button id="<%= user.email %>" class="btn btn-warning edit-admin">수정</button>
+          <% end %>
+        </td>
       </tr>
     </body>
 </html>
