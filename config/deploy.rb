@@ -26,6 +26,7 @@ set :port, 10022
 # set :linked_files, %w{config/database.yml config/secrets.yml}
 # set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/uploads')
 
+set :whenever_roles,        ->{ :app }
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default branch is :master
@@ -57,6 +58,12 @@ set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+namespace :whenever do
+  task :start, :roles => :app do
+    run "cd #{release_path} && bundle exec whenever --update-crontab"
+  end
+end
 
 namespace :deploy do
   desc "Update the crontab file"
