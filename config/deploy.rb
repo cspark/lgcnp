@@ -26,7 +26,14 @@ set :port, 10022
 # set :linked_files, %w{config/database.yml config/secrets.yml}
 # set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/uploads')
 
-set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
+set :whenever_roles,        ->{ :db }
+set :whenever_options,      ->{ {:roles => fetch(:whenever_roles)} }
+set :whenever_command,      ->{  }
+set :whenever_identifier,   ->{ fetch :application }
+set :whenever_environment,  ->{ fetch :rails_env, "production" }
+set :whenever_variables,    ->{ "environment=#{fetch :whenever_environment}" }
+set :whenever_update_flags, ->{ "--update-crontab #{fetch :whenever_identifier} --set #{fetch :whenever_variables}" }
+set :whenever_clear_flags,  ->{ "--clear-crontab #{fetch :whenever_identifier}" }
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -57,12 +64,6 @@ set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
-
-namespace :whenever do
-  task :start, :roles => :app do
-    run "cd #{release_path} && bundle exec whenever --update-crontab"
-  end
-end
 
 namespace :deploy do
   desc "Update the crontab file"
