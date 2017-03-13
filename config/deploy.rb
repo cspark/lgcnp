@@ -59,6 +59,11 @@ set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 # set :keep_releases, 5
 
 namespace :deploy do
+  desc "Update the crontab file"
+  task :update_crontab, :roles => :app, :except => { :no_release => true } do
+    run "cd #{release_path} && bundle exec whenever --update-crontab #{application}"
+  end
+  
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
