@@ -58,10 +58,6 @@ set :port, 10022
 # set :keep_releases, 5
 
 namespace :deploy do
-  task :update_crontab do
-    run "cd #{release_path} && bundle exec whenever --update-crontab"
-  end
-
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
@@ -71,7 +67,6 @@ namespace :deploy do
     end
   end
 
-  after :deploy, :update_crontab
   after :publishing, :restart
 
   after :restart, :clear_cache do
