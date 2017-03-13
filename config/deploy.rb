@@ -26,7 +26,6 @@ set :port, 10022
 # set :linked_files, %w{config/database.yml config/secrets.yml}
 # set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/uploads')
 
-set :whenever_roles,        ->{ :app }
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default branch is :master
@@ -83,10 +82,10 @@ namespace :deploy do
   task :migrate do
   end
 
-  desc "Update the crontab file"
-  task :update_crontab, :roles => :app, :except => { :no_release => true } do
-    run "cd #{release_path} && bundle exec whenever --update-crontab #{application}"
-  end
-  after 'deploy:update_code', 'deploy:update_crontab'
+  # desc "Update the crontab file"
+  # task :update_crontab, :roles => :app, :except => { :no_release => true } do
+  #   run "cd #{release_path} && bundle exec whenever --update-crontab #{application}"
+  # end
+  # after 'deploy:update_code', 'deploy:update_crontab'
 
 end
