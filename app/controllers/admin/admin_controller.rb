@@ -26,6 +26,7 @@ class Admin::AdminController < Admin::AdminApplicationController
       history = LoginHistory.new
       history.email = params[:email]
       history.ip = request.remote_ip
+      history.created_at = Time.now
       history.save
       Rails.logger.info "Login success"
     else
