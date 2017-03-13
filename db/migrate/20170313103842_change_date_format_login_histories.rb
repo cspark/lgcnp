@@ -1,6 +1,11 @@
 class ChangeDateFormatLoginHistories < ActiveRecord::Migration[5.0]
-  change_table :login_histories do |t|
-    t.change :created_at, :datetime
-    t.change :updated_at, :datetime
+  def up
+    change_column :login_histories, :created_at, :datetime, :default => Time.now
+    change_column :login_histories, :updated_at, :date, :default => Time.now
+  end
+
+  def down
+    change_column :login_histories, :created_at, :date
+    change_column :login_histories, :updated_at, :date
   end
 end
