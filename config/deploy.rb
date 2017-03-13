@@ -56,8 +56,20 @@ set :port, 10022
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+namespace :load do
+  task :defaults do
+    set :whenever_roles,        ->{ :db }
+    set :whenever_command,      ->{ [:bundle, :exec, :whenever] }
+    set :whenever_command_environment_variables, ->{ { rails_env: fetch(:whenever_environment) } }
+    set :whenever_identifier,   ->{ fetch :application }
+    set :whenever_environment,  ->{ fetch :rails_env, fetch(:stage, "production") }
+    set :whenever_variables,    ->{ "environment=#{fetch :whenever_environment}" }
+    set :whenever_update_flags, ->{ "--update-crontab #{fetch :whenever_identifier} --set #{fetch :whenever_variables}" }
+    set :whenever_clear_flags,  ->{ "--clear-crontab #{fetch :whenever_identifier}" }
+  end
+end
 
-namespace :whenever do
+namespace :deploy do
   def setup_whenever_task(*args, &block)
     args = Array(fetch(:whenever_command)) + args
 
@@ -84,24 +96,9 @@ namespace :whenever do
     setup_whenever_task(fetch(:whenever_clear_flags))
   end
 
-  after "deploy:updated",  "whenever:update_crontab"
-  after "deploy:reverted", "whenever:update_crontab"
-end
+  after "deploy:updated",  "deploy:update_crontab"
+  after "deploy:reverted", "deploy:update_crontab"
 
-namespace :load do
-  task :defaults do
-    set :whenever_roles,        ->{ :db }
-    set :whenever_command,      ->{ [:bundle, :exec, :whenever] }
-    set :whenever_command_environment_variables, ->{ { rails_env: fetch(:whenever_environment) } }
-    set :whenever_identifier,   ->{ fetch :application }
-    set :whenever_environment,  ->{ fetch :rails_env, fetch(:stage, "production") }
-    set :whenever_variables,    ->{ "environment=#{fetch :whenever_environment}" }
-    set :whenever_update_flags, ->{ "--update-crontab #{fetch :whenever_identifier} --set #{fetch :whenever_variables}" }
-    set :whenever_clear_flags,  ->{ "--clear-crontab #{fetch :whenever_identifier}" }
-  end
-end
-
-namespace :deploy do
   before :restart, :update_crontab do
     # run "cd #{release_path} && bundle exec whenever --update-crontab"
   end
@@ -129,5 +126,4 @@ namespace :deploy do
   desc "No ActiveRecord override"
   task :migrate do
   end
-
 end
