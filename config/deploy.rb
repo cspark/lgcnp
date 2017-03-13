@@ -1,6 +1,6 @@
 # config valid only for current version of Capistrano
 require 'whenever/capistrano'
-lock '3.7.2'
+lock '3.8.0'
 
 set :application, 'lgcare'
 set :repo_url, 'https://github.com/ShakeJ/LGCNP.git'
