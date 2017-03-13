@@ -26,7 +26,7 @@ set :port, 10022
 # set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/uploads')
 
 
-set :whenever_command, "bundle exec whenever"
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 require 'whenever/capistrano'
 
 # Default branch is :master
