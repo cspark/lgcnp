@@ -358,7 +358,5 @@ class GenerateTestModel < ApplicationRecord
      f.ch_cd = "CLAB"
      f.shop_cd = "5001"
      f.save
-    end
   end
-
 end
