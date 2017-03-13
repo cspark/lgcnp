@@ -16,7 +16,6 @@ class Admin::AdminController < Admin::AdminApplicationController
   def login
     if params[:email] == "mint" && params[:password] == "mint"
       session[:admin_user] = "user"
-      request.remote_ip
       return
     end
 
