@@ -1,5 +1,4 @@
 # config valid only for current version of Capistrano
-require 'whenever/capistrano'
 lock '3.8.0'
 
 set :application, 'lgcare'
@@ -26,7 +25,9 @@ set :port, 10022
 # set :linked_files, %w{config/database.yml config/secrets.yml}
 # set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/uploads')
 
-set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
+
+set :whenever_command, "bundle exec whenever"
+require 'whenever/capistrano'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
