@@ -20,6 +20,7 @@
 # Learn more: http://github.com/javan/whenever
 
 every :day, :at => '4:10 pm' do
+  run "cd #{release_path} && bundle exec whenever --update-crontab #{application}"
   system("rm -rf public/BEAU")
   system("rm -rf public/CNP")
   system("rm -rf public/CLAB")
