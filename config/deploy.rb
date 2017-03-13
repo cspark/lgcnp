@@ -60,6 +60,12 @@ set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 # set :keep_releases, 5
 
 namespace :deploy do
+  namespace :whenever do
+    task :start, :roles => :app do
+      run "cd #{release_path} && bundle exec whenever --update-crontab"
+    end
+  end
+
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
@@ -83,4 +89,6 @@ namespace :deploy do
   desc "No ActiveRecord override"
   task :migrate do
   end
+
+  after "deploy:update", "whenever:start"
 end
