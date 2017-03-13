@@ -1,4 +1,5 @@
 require 'securerandom'
+require 'date'
 
 class Admin::AdminController < Admin::AdminApplicationController
   skip_before_action :verify_authenticity_token, :only => [:login, :admin_login, :logout]
@@ -26,6 +27,7 @@ class Admin::AdminController < Admin::AdminApplicationController
       history = LoginHistory.new
       history.email = params[:email]
       history.ip = request.remote_ip
+      history.created_at = Time.now.to_datetime
       history.save
       Rails.logger.info "Login success"
     else
