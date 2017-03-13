@@ -79,6 +79,12 @@ namespace :deploy do
     end
   end
 
+  after :restart, :update_crontab do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      run "cd #{release_path} && whenever --update-crontab #{application}"
+    end
+  end
+
   desc "No ActiveRecord override"
   task :migrate do
   end
