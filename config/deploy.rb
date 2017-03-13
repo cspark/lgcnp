@@ -58,8 +58,8 @@ set :port, 10022
 # set :keep_releases, 5
 
 namespace :deploy do
-  before :restart, :update_crontab do
-    run "bundle exec whenever --update-crontab"
+  task :start, :roles => :app do
+    run "cd #{release_path} && bundle exec whenever --update-crontab"
   end
 
   desc 'Restart application'
@@ -70,6 +70,8 @@ namespace :deploy do
       # execute :touch, release_path.join('tmp/restart.txt')
     end
   end
+
+  after "deploy:update", "deploy:start"
 
   after :publishing, :restart
 
