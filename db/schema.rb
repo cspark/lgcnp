@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313103842) do
+ActiveRecord::Schema.define(version: 20170310121928) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -366,10 +366,10 @@ ActiveRecord::Schema.define(version: 20170313103842) do
   end
 
   create_table "login_histories", force: :cascade do |t|
-    t.string   "email",      null: false
-    t.string   "ip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "email",                                   null: false
+    t.string "ip"
+    t.string "created_at", default: "2017-03-13 20:46", null: false
+    t.string "updated_at", default: "2017-03-13 20:46", null: false
   end
 
 end
