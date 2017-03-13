@@ -59,12 +59,6 @@ set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 namespace :deploy do
-  desc "Update the crontab file"
-  task :update_crontab, :roles => :app, :except => { :no_release => true } do
-    run "cd #{release_path} && bundle exec whenever --update-crontab #{application}"
-  end
-  after 'deploy:update_code', 'deploy:update_crontab'
-
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
@@ -88,5 +82,11 @@ namespace :deploy do
   desc "No ActiveRecord override"
   task :migrate do
   end
+
+  desc "Update the crontab file"
+  task :update_crontab, :roles => :app, :except => { :no_release => true } do
+    run "cd #{release_path} && bundle exec whenever --update-crontab #{application}"
+  end
+  after 'deploy:update_code', 'deploy:update_crontab'
 
 end
