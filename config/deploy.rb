@@ -25,13 +25,6 @@ set :port, 10022
 # set :linked_files, %w{config/database.yml config/secrets.yml}
 # set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/uploads')
 
-set :whenever_command,      ->{  }
-set :whenever_identifier,   ->{ fetch :application }
-set :whenever_environment,  ->{ fetch :rails_env, "staging" }
-set :whenever_variables,    ->{ "environment=#{fetch :whenever_environment}" }
-set :whenever_update_flags, ->{ "--update-crontab #{fetch :whenever_identifier} --set #{fetch :whenever_variables}" }
-set :whenever_clear_flags,  ->{ "--clear-crontab #{fetch :whenever_identifier}" }
-
 # set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default branch is :master
@@ -64,9 +57,16 @@ set :whenever_clear_flags,  ->{ "--clear-crontab #{fetch :whenever_identifier}" 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 namespace :deploy do
-  # before :restart, :update_crontab do
-  #   run "cd #{release_path} && bundle exec whenever --update-crontab"
-  # end
+  before :restart, :update_crontab do
+    # run "cd #{release_path} && bundle exec whenever --update-crontab"
+    set :whenever_command,      ->{ [:bundle, :exec, :whenever] }
+    set :whenever_command_environment_variables, ->{ { rails_env: fetch(:whenever_environment) } }
+    set :whenever_identifier,   ->{ fetch :application }
+    set :whenever_environment,  ->{ fetch :rails_env, fetch(:stage, "production") }
+    set :whenever_variables,    ->{ "environment=#{fetch :whenever_environment}" }
+    set :whenever_update_flags, ->{ "--update-crontab #{fetch :whenever_identifier} --set #{fetch :whenever_variables}" }
+    set :whenever_clear_flags,  ->{ "--clear-crontab #{fetch :whenever_identifier}" }
+  end
 
   desc 'Restart application'
   task :restart do
