@@ -168,10 +168,13 @@ class Admin::FeedbackController < Admin::AdminApplicationController
         measureno_array << measureno.to_i
       end
 
+      Rails.logger.info custserial_array
+      Rails.logger.info measureno_array
+
       tablet_interviews = Fctabletinterview.where(custserial: custserial_array).where(fcdata_id: measureno_array)
       array = tablet_interviews.pluck(:tablet_interview_id)
-
       temp_after_interviews = Fcafterinterview.where.not(a1: nil).where(tablet_interview_id: array)
+      Rails.logger.info temp_after_interviews.count
       if select_interview != "all"
         if select_interview == "today"
           temp_after_interviews = temp_after_interviews.where(order: 0)
@@ -229,11 +232,16 @@ class Admin::FeedbackController < Admin::AdminApplicationController
             is_contain = false
           end
         end
+
+        Rails.logger.info is_contain
         if is_contain == true
           @after_interviews << after_interview
         end
       end
     end
+
+    Rails.logger.info "!!!!!"
+    Rails.logger.info @after_interviews.count
     @after_interviews.each do |interview|
       @average_a1 = @average_a1 + interview.a1.to_i
       @average_a2 = @average_a2 + interview.a2.to_i
