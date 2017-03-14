@@ -93,7 +93,7 @@
           <li id="fcdata_list"><a href="#">야누스 측정 데이터</a></li>
           <li id="fcpos_list"><a href="#">야누스 분석 영역 정보</a></li>
           <li id="fcschedule_list"><a href="#">예약 스케줄</a></li>
-          <li id="image_list"><a href="#">고객 이미지</a></li>
+          <!-- <li id="image_list"><a href="#">고객 이미지</a></li> -->
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
             <li id="manager_list"><a href="#">매장 관리자</a></li>
           <% end %>
