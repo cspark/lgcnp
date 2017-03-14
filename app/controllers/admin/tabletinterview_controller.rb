@@ -50,8 +50,9 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     @tabletinterviews = []
     if Rails.env.production? || Rails.env.staging?
+      is_contain = true
       scoped = Fctabletinterview.all
-      temp_end_date = @end_date.to_date + 1.day
+      temp_end_date = @end_date.to_date+1.day
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
       scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank? && @select_channel.downcase != "all"
