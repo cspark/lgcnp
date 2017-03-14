@@ -20,8 +20,8 @@ class Admin::UserController < Admin::AdminApplicationController
 
     if params.has_key?(:search) && params[:search].length != 0
       @search = params[:search]
-      @users = Custinfo.where(custserial: custserial_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc").page(params[:page]).per(7)
-      @all_users = Custinfo.where(custserial: custserial_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
+      @users = Custinfo.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc").page(params[:page]).per(7)
+      @all_users = Custinfo.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
     else
       @search = ""
       @users = Custinfo.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc").page(params[:page]).per(7)
