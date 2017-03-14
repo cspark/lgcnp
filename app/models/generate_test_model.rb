@@ -25,9 +25,9 @@ class GenerateTestModel < ApplicationRecord
   def self.generate_test_fctabletinterview
     i = 1
     Fctabletinterview.all.each do |f|
-      i = 6
+      i = 2
       f = Fctabletinterview.new
-      f.custserial = i.to_s
+      f.custserial = 2.to_s
       f.a_1 = i
       f.a_2 = i
       f.a_3 = i
@@ -61,7 +61,7 @@ class GenerateTestModel < ApplicationRecord
       f.after_made_cosmetic = "skin control EX"
       f.uptdate = "2017-03-15-12-00"
       f.ch_cd = "CNP"
-      f.fcdata_id = i.to_s
+      f.fcdata_id = 2.to_s
       f.tablet_interview_id = i
       f.is_quick_mode = "T"
       f.is_agree_cant_refund = "T"
@@ -96,12 +96,12 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        f = Fcdata.new
-       f.custserial = 839.to_s
+       f.custserial = 6.to_s
        f.ch_cd = "CNP"
-       f.faceno = "M"
-       f.measuredate = "2017-02-02-13-00-00"
-       f.measureno = 2
-       f.uptdate = "2017-02-02"
+       f.faceno = "F"
+       f.measuredate = "2017-03-14-13-00-00"
+       f.measureno = 1
+       f.uptdate = "2017-03-14"
        f.mo_1 = 1.0
        f.mo_7 = 1.0
        f.mo_8 = 1.0
@@ -190,6 +190,7 @@ class GenerateTestModel < ApplicationRecord
        f.score_r = 1
        f.score_l = 1
        f.m_skintype = 1
+       f.shop_cd = "1001"
        f.save
        i +=1;
     end
@@ -199,8 +200,8 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        user = Custinfo.new
-       user.custserial = 6.to_s
-       user.custname = "jungchanghwan"
+       user.custserial = 2.to_s
+       user.custname = "kimheejung"
        user.sex = "M"
        user.birthyy = "1998"
        user.birthmm = "07"
@@ -210,7 +211,7 @@ class GenerateTestModel < ApplicationRecord
        user.address = "nonhyun"
        user.email = "test@test.com"
        user.lastanaldate = "2017-03-14"
-       user.measureno = 1
+       user.measureno = 2
        user.uptdate = "2017-03-14"
        user.is_agree_privacy = "Y"
        user.is_agree_after = "Y"
