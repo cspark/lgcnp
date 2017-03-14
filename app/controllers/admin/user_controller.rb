@@ -8,12 +8,22 @@ class Admin::UserController < Admin::AdminApplicationController
   def index
     if params.has_key?(:search) && params[:search].length != 0
       @search = params[:search]
-      @users = Custinfo.where(ch_cd: "CNP").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc").page(params[:page]).per(7)
-      @all_users = Custinfo.where(ch_cd: "CNP").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
+      if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin")
+        ch_cd = ""
+      else
+        ch_cd = session[:admin_user]['ch_cd']
+      end
+      @users = Custinfo.where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc").page(params[:page]).per(7)
+      @all_users = Custinfo.where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
     else
       @search = ""
-      @users = Custinfo.where(ch_cd: "CNP").where.not(lastanaldate: nil).order("lastanaldate desc").page(params[:page]).per(7)
-      @all_users = Custinfo.where(ch_cd: "CNP").where.not(lastanaldate: nil).order("lastanaldate desc")
+      if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin")
+        ch_cd = ""
+      else
+        ch_cd = session[:admin_user]['ch_cd']
+      end
+      @users = Custinfo.where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc").page(params[:page]).per(7)
+      @all_users = Custinfo.where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc")
     end
 
     respond_to do |format|

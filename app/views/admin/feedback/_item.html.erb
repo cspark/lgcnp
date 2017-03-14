@@ -3,7 +3,7 @@
     <head>
       <script>
         $(function () {
-          <% user = Custinfo.find tabletinterview.custserial.to_i %>
+          <% user = Custinfo.where(custserial: tabletinterview.custserial.to_i).first %>
           try
           {
             var userName = decode_utf8('<%= user.custname %>')
@@ -53,7 +53,7 @@
     </head>
     <body>
       <div style="display:table; height:50px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
-        <% custinfo = Custinfo.find tabletinterview.custserial.to_i %>
+        <% custinfo = Custinfo.where(custserial: tabletinterview.custserial.to_i).first %>
         <font size="4"><div id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
         <font size="2">
           시리얼 : <%= tabletinterview.custserial.to_i %> / 진단 날짜 : <%= tabletinterview.uptdate %> / 전화번호 : <div id="phone_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div> <br>
@@ -65,17 +65,21 @@
           <br>
           <!-- 1차설문 조건에 상관없이 보임 -->
           <% f1 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 0).first %>
-          <% if f1.a1.nil? %>
+          <% if f1.present? && f1.a1.nil? %>
             <% is_feed_back_ok_1 = "X" %>
           <% else %>
             <% is_feed_back_ok_1 = "O" %>
           <% end %>
-          <a onClick="show_after_interview_1(<%= f1.after_interview_id %>, <%= f1.tablet_interview_id %>, <%= f1.custserial %>)">1차 설문 여부 : <%= is_feed_back_ok_1 %></a> /
+          <% if f1.present? %>
+            <a onClick="show_after_interview_1(<%= f1.after_interview_id %>, <%= f1.tablet_interview_id %>, <%= f1.custserial %>)">1차 설문 여부 : <%= is_feed_back_ok_1 %></a> /
+          <% else %>
+            <a onClick="show_after_interview_1()">1차 설문 여부 : <%= is_feed_back_ok_1 %></a> /
+          <% end %>
 
           <% f2 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 1).first %>
 
-          <% if (tabletinterview.is_agree_after == "T" && !tabletinterview.base_lot.blank?) || !f2.a1.nil? %>
-            <% if f2.a1.nil? %>
+          <% if (!f2.nil? && tabletinterview.is_agree_after == "T" && !tabletinterview.base_lot.blank?) || (!f2.nil? && !f2.a1.nil?) %>
+            <% if f2.present? && f2.a1.nil? %>
               <% is_feed_back_ok_2 = "X" %>
             <% else %>
               <% is_feed_back_ok_2 = "O" %>

@@ -9,14 +9,19 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @date_today = (@date).strftime("%F")
     @date_2weeks_ago = (@date - 2.weeks).strftime("%F")
     @date_3months_ago = (@date - 3.months).strftime("%F")
-    if Rails.env.production? || Rails.env.staging?
-      @tablet_interviews_today = Fctabletinterview.where(ch_cd: "CNP").where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
-      @tablet_interviews_2_weeks_ago = Fctabletinterview.where(ch_cd: "CNP").where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
-      @tablet_interviews_3_months_ago = Fctabletinterview.where(ch_cd: "CNP").where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
+    if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin")
+      ch_cd = ""
     else
-      @tablet_interviews_today = Fctabletinterview.all
-      @tablet_interviews_2_weeks_ago = Fctabletinterview.all
-      @tablet_interviews_3_months_ago = Fctabletinterview.all
+      ch_cd = session[:admin_user]['ch_cd']
+    end
+    if Rails.env.production? || Rails.env.staging?
+      @tablet_interviews_today = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where("ch_cd LIKE ? or ch_cd LIKE ?", "CNP","CLAB").where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
+      @tablet_interviews_2_weeks_ago = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where("ch_cd LIKE ? or ch_cd LIKE ?", "CNP","CLAB").where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
+      @tablet_interviews_3_months_ago = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where("ch_cd LIKE ? or ch_cd LIKE ?", "CNP","CLAB").where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
+    else
+      @tablet_interviews_today = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where("ch_cd LIKE ? or ch_cd LIKE ?", "CNP","CLAB")
+      @tablet_interviews_2_weeks_ago = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where("ch_cd LIKE ? or ch_cd LIKE ?", "CNP","CLAB")
+      @tablet_interviews_3_months_ago = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where("ch_cd LIKE ? or ch_cd LIKE ?", "CNP","CLAB")
     end
 
     create_new_fcafterservice(@tablet_interviews_today)
@@ -27,7 +32,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
   def create_new_fcafterservice(relation)
     relation.each do |tabletinterview|
       custinfo = Custinfo.where(custserial: tabletinterview.custserial).last
-      if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).count == 0 && custinfo.ch_cd == "CNP"
+      if Fcafterinterview.where(custserial: tabletinterview.custserial).where(tablet_interview_id: tabletinterview.tablet_interview_id).count == 0 && (custinfo.ch_cd == "CNP" || custinfo.ch_cd == "CLAB")
         after_interview = Fcafterinterview.new
         after_interview.custserial = tabletinterview.custserial
         after_interview.tablet_interview_id = tabletinterview.tablet_interview_id
@@ -62,14 +67,19 @@ class Admin::FeedbackController < Admin::AdminApplicationController
   end
 
   def list
+    if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin")
+      ch_cd = ""
+    else
+      ch_cd = session[:admin_user]['ch_cd']
+    end
     @start_date = Date.today
     @end_date = Date.today
     @today = Date.today
 
-    min_age_custinfo = Custinfo.where(ch_cd: "CNP").where.not(birthyy: nil).order("birthyy desc").first
-    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
-    max_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy asc").first
-    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
+    min_age_custinfo = Custinfo.where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(birthyy: nil).order("birthyy desc").first
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
+    max_age_custinfo = Custinfo.where("ch_cd LIKE ?", "%#{ch_cd}%").order("birthyy asc").first
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
 
     begin
       @start_date = Fctabletinterview.all.minimum(:uptdate).to_date
@@ -128,7 +138,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
 
     @after_interviews = []
-    if Rails.env.production? || Rails.env.staging?
+    if ch_cd == "" || ch_cd == "CNP" || ch_cd == "CLAB"
       temp_after_interviews = Fcafterinterview.where.not(a1: nil)
       if select_interview != "all"
         if select_interview == "today"
@@ -149,7 +159,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
           end
         end
 
-        if custinfo.ch_cd.nil? || custinfo.ch_cd != "CNP"
+        if custinfo.ch_cd.nil?
           is_contain = false
         end
 
@@ -159,14 +169,13 @@ class Admin::FeedbackController < Admin::AdminApplicationController
           end
         end
 
-        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
+        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i + 1
         if temp_age < start_age.to_i || temp_age > end_age.to_i
           is_contain = false
         end
 
-
         tablet_interview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first
-        if !(tablet_interview.uptdate.to_date >= @start_date && tablet_interview.uptdate.to_date <= @end_date)
+        if !(tablet_interview.uptdate.to_date >= @start_date && tablet_interview.uptdate.to_date <= @end_date.to_date)
           is_contain = false
         end
 
@@ -175,25 +184,21 @@ class Admin::FeedbackController < Admin::AdminApplicationController
             is_contain = false
           end
         end
-
         if select_ample1 != "all"
           if tablet_interview.after_ample_1 != select_ample1
             is_contain = false
           end
         end
-
         if select_ample2 != "all"
           if tablet_interview.after_ample_2 != select_ample2
             is_contain = false
           end
         end
-
         if is_contain == true
           @after_interviews << after_interview
         end
       end
     end
-
     @after_interviews.each do |interview|
       @average_a1 = @average_a1 + interview.a1.to_i
       @average_a2 = @average_a2 + interview.a2.to_i
@@ -226,6 +231,5 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       format.html
       format.xlsx
     end
-    # render 'list'
   end
 end

@@ -30,6 +30,7 @@ class Admin::ManagerController < Admin::AdminApplicationController
 
   def create
     admin_user = AdminUser.new(permitted_params)
+    admin_user.ch_cd = params[:ch_cd].upcase
 
     if admin_user.save
       render json: {}, status: :ok
@@ -53,8 +54,10 @@ class Admin::ManagerController < Admin::AdminApplicationController
 
   def update
     admin_user = AdminUser.where(email: params[:email]).first
+    admin_user.update(permitted_params)
+    admin_user.ch_cd = params[:ch_cd].upcase
 
-    if admin_user.update(permitted_params)
+    if admin_user.save
       render json: {}, status: :ok
     else
       render json: {}, status: :bad_request

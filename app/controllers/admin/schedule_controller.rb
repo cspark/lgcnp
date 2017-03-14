@@ -10,12 +10,18 @@ class Admin::ScheduleController < Admin::AdminApplicationController
       @select_date = Date.today
     end
 
+    if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin")
+      ch_cd = ""
+    else
+      ch_cd = session[:admin_user]['ch_cd']
+    end
+
     select_year = @select_date.to_s.split("-")[0]
     select_mmdd = @select_date.to_s.split("-")[1]+@select_date.to_s.split("-")[2]
 
     scoped = Fcschedule.all
-    scoped = scoped.where("reserve_yyyy = ?", select_year)
-    scoped = scoped.where("reserve_mmdd = ?", select_mmdd)
+    scoped = scoped.where("ch_cd LIKE ?", "%#{ch_cd}%").where("reserve_yyyy = ?", select_year)
+    scoped = scoped.where("ch_cd LIKE ?", "%#{ch_cd}%").where("reserve_mmdd = ?", select_mmdd)
     @fcschedules = scoped.order("reserve_hhmm asc")
 
     @fcschedules_excel = @fcschedules

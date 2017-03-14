@@ -25,9 +25,9 @@ class GenerateTestModel < ApplicationRecord
   def self.generate_test_fctabletinterview
     i = 1
     Fctabletinterview.all.each do |f|
-      i = 1
+      i = 6
       f = Fctabletinterview.new
-      f.custserial = 839.to_s
+      f.custserial = i.to_s
       f.a_1 = i
       f.a_2 = i
       f.a_3 = i
@@ -59,10 +59,10 @@ class GenerateTestModel < ApplicationRecord
       f.after_ample_2 = "regenerating ampoule"
       f.before_made_cosmetic = "skin control EX"
       f.after_made_cosmetic = "skin control EX"
-      f.uptdate = "2017-02-02-12-10"
+      f.uptdate = "2017-03-15-12-00"
       f.ch_cd = "CNP"
       f.fcdata_id = i.to_s
-      f.tablet_interview_id = 840
+      f.tablet_interview_id = i
       f.is_quick_mode = "T"
       f.is_agree_cant_refund = "T"
       f.is_agree_after = "T"
@@ -199,19 +199,19 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        user = Custinfo.new
-       user.custserial = 839.to_s
-       user.cust  name = "test"
+       user.custserial = 6.to_s
+       user.custname = "jungchanghwan"
        user.sex = "M"
-       user.birthyy = "1985"
-       user.birthmm = "11"
-       user.birthdd = "21"
-       user.age = "33"
+       user.birthyy = "1998"
+       user.birthmm = "07"
+       user.birthdd = "03"
+       user.age = "20"
        user.phone = "012-345-6789"
        user.address = "nonhyun"
        user.email = "test@test.com"
-       user.lastanaldate = "2017-02-21"
-       user.measureno = 2
-       user.uptdate = "2017-02-21"
+       user.lastanaldate = "2017-03-14"
+       user.measureno = 1
+       user.uptdate = "2017-03-14"
        user.is_agree_privacy = "Y"
        user.is_agree_after = "Y"
        user.is_agree_marketing = "Y"
@@ -291,16 +291,16 @@ class GenerateTestModel < ApplicationRecord
     num = 2
     (1..num).each do |i|
        f = Fcschedule.new
-       f.ch_cd = "CNP"
-       f.shop_cd = "59100"
+       f.ch_cd = "MART"
+       f.shop_cd = "1004"
        f.reserve_yyyy = "2017"
-       f.reserve_mmdd = "0221"
+       f.reserve_mmdd = "0314"
        f.reserve_hhmm = "1500"
-       f.custname = "김수민"
-       f.phone = "01086919942"
+       f.custname = "changhwan"
+       f.phone = "0123456789"
        f.reserve_yn = "Y"
-       f.memo = "민트기술"
-       f.uptdate = "2017-02-20"
+       f.memo = "MART"
+       f.uptdate = "2017-03-14"
        f.purchase_yn = "Y"
        f.save
        i +=1;
@@ -308,11 +308,11 @@ class GenerateTestModel < ApplicationRecord
   end
 
   def self.generate_test_afterinterview
-    i = 7
+    i = 6
     f = Fcafterinterview.new
     f.custserial = i.to_s
-    f.tablet_interview_id = i+1
-    f.after_interview_id = i+1
+    f.tablet_interview_id = i
+    f.after_interview_id = i
     f.a1 = 1
     f.a2 = 2
     f.a3 = 3
@@ -320,8 +320,8 @@ class GenerateTestModel < ApplicationRecord
     f.a5 = 5
     f.order = 0
     f.a1_1 = "파워 블로거"
-    f.tablet_interview_update = "2017-02-02-17-00"
-    f.uptdate = "2017-02-02"
+    f.tablet_interview_update = "2017-03-15-13-00"
+    f.uptdate = "2017-03-15-13-00"
     f.save
     i +=1;
   end

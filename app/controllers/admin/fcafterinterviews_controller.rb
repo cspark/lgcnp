@@ -26,13 +26,7 @@ class Admin::FcafterinterviewsController < Admin::AdminApplicationController
     after_interview_id = params[:after_interview_id]
     order = params[:order]
 
-    Rails.logger.info "!! Update "
-    Rails.logger.info custserial
-    Rails.logger.info tablet_interview_id
-    Rails.logger.info after_interview_id
     after_interview = Fcafterinterview.where(custserial: custserial).where(tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).where(order: order).first
-
-    Rails.logger.info Fcafterinterview.where(custserial: custserial).where(tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).where(order: order).count
 
     after_interview.a1 = params[:a1]
     after_interview.a2 = params[:a2]
@@ -53,7 +47,7 @@ class Admin::FcafterinterviewsController < Admin::AdminApplicationController
     time_string = time_string.concat(t.strftime("%S"))
 
     after_interview.uptdate = time_string
-    
+
     if params.has_key?(:a4)
       after_interview.a4 = params[:a4]
     end
