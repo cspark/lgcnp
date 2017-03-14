@@ -17,7 +17,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       shop_cd = session[:admin_user]['shop_cd']
     end
 
-    Rails.logger.info "index!!!!"
     fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
     temp_serial_array = fcdata_list.pluck(:custserial).uniq
     temp_measureno_array = fcdata_list.pluck(:measureno).uniq
@@ -30,20 +29,16 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       measureno_array << measureno.to_i
     end
 
-    Rails.logger.info custserial_array
-    Rails.logger.info measureno_array
-
     if Rails.env.production? || Rails.env.staging?
-      @tablet_interviews_today = Fctabletinterview.where(custserial: custserial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
-      @tablet_interviews_2_weeks_ago = Fctabletinterview.where(custserial: custserial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
-      @tablet_interviews_3_months_ago = Fctabletinterview.where(custserial: custserial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
+      @tablet_interviews_today = Fctabletinterview.where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
+      @tablet_interviews_2_weeks_ago = Fctabletinterview.where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
+      @tablet_interviews_3_months_ago = Fctabletinterview.where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
     else
       @tablet_interviews_today = Fctabletinterview.where(custserial: custserial_array).where(fcdata_id: measureno_array)
       @tablet_interviews_2_weeks_ago = Fctabletinterview.where(custserial: custserial_array).where(fcdata_id: measureno_array)
       @tablet_interviews_3_months_ago = Fctabletinterview.where(custserial: custserial_array).where(fcdata_id: measureno_array)
     end
 
-    Rails.logger.info @tablet_interviews_today
     create_new_fcafterservice(@tablet_interviews_today)
     create_new_fcafterservice(@tablet_interviews_2_weeks_ago)
     create_new_fcafterservice(@tablet_interviews_3_months_ago)
