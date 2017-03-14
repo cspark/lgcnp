@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script type="text/javascript" src="../../js/jquery.js"></script>
+      <script type="text/javascript" src="../../js/bootstrap.js"></script>
+      <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+      <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    </head>
+    <script>
+    $(function () {
+      $('#filter_submit').click(function(){
+        var select_filter = []
+        $('input:checkbox[name="ckeck_box"]').each(function() {
+            if(this.checked){//checked 처리된 항목의 값
+              select_filter.push(this.value)
+            }
+         });
+         $.cookie("select_filter", [])
+         $.cookie("select_filter", select_filter);
+         console.log($.cookie("select_filter"));
+      });
+
+      $("input:checkbox[id='mo_check']").prop("checked", true);
+      $("input:checkbox[id='pr_check']").prop("checked", true);
+      $("input:checkbox[id='wr_check']").prop("checked", true);
+      $("input:checkbox[id='el_check']").prop("checked", true);
+      $("input:checkbox[id='sb_check']").prop("checked", true);
+      $("input:checkbox[id='pp_check']").prop("checked", true);
+      $("input:checkbox[id='pp_ratio_check']").prop("checked", true);
+
+      $(document).on("click", "#mo_check", function (e) {
+        if (!$("input:checkbox[id='mo_check']").is(":checked")){
+          $("#mo_check_detail").show();
+        } else {
+          $("input:checkbox[class='mo_check']").prop("checked", false);
+          $("#mo_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#pr_check", function (e) {
+        if (!$("input:checkbox[id='pr_check']").is(":checked")){
+          $("#pr_check_detail").show();
+        } else {
+          $("input:checkbox[class='pr_check']").prop("checked", false);
+          $("#pr_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#wr_check", function (e) {
+        if (!$("input:checkbox[id='wr_check']").is(":checked")){
+          $("#wr_check_detail").show();
+        } else {
+          $("#wr_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#el_check", function (e) {
+        if (!$("input:checkbox[id='el_check']").is(":checked")){
+          $("#el_check_detail").show();
+        } else {
+          $("#el_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#sb_check", function (e) {
+        if (!$("input:checkbox[id='sb_check']").is(":checked")){
+          $("#sb_check_detail").show();
+        } else {
+          $("#sb_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#pp_check", function (e) {
+        if (!$("input:checkbox[id='pp_check']").is(":checked")){
+          $("#pp_check_detail").show();
+        } else {
+          $("#pp_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#pp_ratio_check", function (e) {
+        if (!$("input:checkbox[id='pp_ratio_check']").is(":checked")){
+          $("#pp_ratio_check_detail").show();
+        } else {
+          $("#pp_ratio_check_detail").hide();
+        }
+      });
+    });
+    </script>
+
+    <body>
+      <div id="filter" style="background: #b1cbbb; padding: 8px; height:600px;">
+        <div class="form-inline">
+
+
+          <div style="display: block; float:left;">
+            <font style="float:left;"><b>수분 측정 Data ALL</b></font>
+            <input type="checkbox" name="ckeck_box" value="mo_all" id="mo_check" style="float:left; margin-left:5px;">
+            <div id="mo_check_detail" style="display:none; float:left; margin-left:20px;">
+              mo_1<input type="checkbox" name="ckeck_box" class="mo_check" value="mo_1" id="mo_1">
+              mo_2<input type="checkbox" name="ckeck_box" class="mo_check" value="mo_2" id="mo_2">
+              mo_3<input type="checkbox" name="ckeck_box" class="mo_check" value="mo_3" id="mo_3">
+            </div>
+          </div><br>
+          <hr style="margin-top: 10px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>모공 측정 Data ALL</b></font>
+            <input type="checkbox" name="ckeck_box" value="pr_all" id="pr_check" style="float:left; margin-left:5px;">
+            <div id="pr_check_detail" style="display:none; float:left; margin-left:20px;">
+              pr_1<input type="checkbox" name="ckeck_box" class="pr_check" value="pr_1" id="pr_1">
+              pr_2<input type="checkbox" name="ckeck_box" class="pr_check" value="pr_2" id="pr_2">
+              pr_7<input type="checkbox" name="ckeck_box" class="pr_check" value="pr_7" id="pr_7">
+              pr_8<input type="checkbox" name="ckeck_box" class="pr_check" value="pr_8" id="pr_8">
+              pr_avr<input type="checkbox" name="ckeck_box" class="pr_check" value="pr_avr" id="pr_avr">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>주름 측정 Data ALL</b></font>
+            <input type="checkbox" id="wr_check" style="float:left; margin-left:5px;">
+            <div id="wr_check_detail" style="display:none; float:left; margin-left:20px;">
+              wr_3<input type="checkbox" id="wr_3">
+              wr_4<input type="checkbox" id="wr_4">
+              wr_5<input type="checkbox" id="wr_5">
+              wr_6<input type="checkbox" id="wr_6">
+              wr_avr<input type="checkbox" id="wr_avr">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>탄력 측정 Data ALL</b></font>
+            <input type="checkbox" id="el_check" style="float:left; margin-left:5px;">
+            <div id="el_check_detail" style="display:none; float:left; margin-left:20px;">
+              el_7<input type="checkbox" id="el_7">
+              el_8<input type="checkbox" id="el_8">
+              el_avr<input type="checkbox" id="el_avr">
+              el_angle_7<input type="checkbox" id="el_angle_7">
+              el_angle_8<input type="checkbox" id="el_angle_8">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>피지 측정 Data ALL</b></font>
+            <input type="checkbox" id="sb_check" style="float:left; margin-left:5px;">
+            <div id="sb_check_detail" style="display:none; float:left; margin-left:20px;">
+              sb_1<input type="checkbox" id="sb_1">
+              sb_2<input type="checkbox" id="sb_2">
+              sb_7<input type="checkbox" id="sb_7">
+              sb_8<input type="checkbox" id="sb_8">
+              sb_avr<input type="checkbox" id="sb_avr">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>포피린 측정 Data ALL</b></font>
+            <input type="checkbox" id="pp_check" style="float:left; margin-left:5px;">
+            <div id="pp_check_detail" style="display:none; float:left; margin-left:20px;">
+              pp_1<input type="checkbox" id="pp_1">
+              pp_2<input type="checkbox" id="pp_2">
+              pp_7<input type="checkbox" id="pp_7">
+              pp_8<input type="checkbox" id="pp_8">
+              pp_avr<input type="checkbox" id="pp_avr">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>포피린 비 측정 Data ALL</b></font>
+            <input type="checkbox" id="pp_ratio_check" style="float:left; margin-left:5px;">
+            <div id="pp_ratio_check_detail" style="display:none; float:left; margin-left:20px;">
+              pp_ratio_1<input type="checkbox" id="pp_ratio_1">
+              pp_ratio_2<input type="checkbox" id="pp_ratio_2">
+              pp_ratio_7<input type="checkbox" id="pp_ratio_7">
+              pp_ratio_8<input type="checkbox" id="pp_ratio_8">
+              pp_ratio_avr<input type="checkbox" id="pp_ratio_avr">
+            </div>
+          </div><br>
+
+        </div><br>
+        <center>
+          <button class="btn btn-warning" id="filter_submit">필터적용</button>
+        </center>
+      </div>
+    </body>
+</html>

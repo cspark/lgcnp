@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get "fcavg_list" => "fcavgdata#list"
     get "data_list" => "data#list"
     get "data/detail" => "data#show"
+    get "data/filter_check" => "data#filter_check"
     get "fcpos_list" => "pos#list"
     get "fcpos/detail" => "pos#show"
     get "fcschedule_list" => "schedule#list"
