@@ -157,8 +157,17 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     if ch_cd == "" || ch_cd == "CNP" || ch_cd == "CLAB"
       fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
-      custserial_array = fcdata_list.pluck(:custserial).uniq
-      measureno_array = fcdata_list.pluck(:measureno).uniq
+      temp_serial_array = fcdata_list.pluck(:custserial).uniq
+      temp_measureno_array = fcdata_list.pluck(:measureno).uniq
+      custserial_array = []
+      measureno_array = []
+      temp_serial_array.each do |serial|
+        custserial_array << serial.to_i
+      end
+      temp_measureno_array.each do |measureno|
+        measureno_array << measureno.to_i
+      end
+
       tablet_interviews = Fctabletinterview.where(custserial: custserial_array).where(fcdata_id: measureno_array)
       array = tablet_interviews.pluck(:tablet_interview_id)
 
