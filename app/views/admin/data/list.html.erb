@@ -8,41 +8,13 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
     <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
-
-    <style>
-    .fixed-table-body {
-      max-height: 280px;
-    }
-
-    .text-center {
-        margin: 0 auto;
-        text-align: center !important;
-    }
-
-    th {
-      font-size: 15px;
-    }
-
-    td {
-      font-size: 15px;
-    }
-
-    .width70 {
-      min-width:70px
-    }
-    .width100 {
-      min-width:100px
-    }
-    .width170 {
-      min-width:170px
-    }
-    </style>
   </head>
+
     <script>
+      var filterStr = "";
       $(function () {
           $("#start_date").datepicker({
                   dateFormat: 'yy-mm-dd',
@@ -197,11 +169,6 @@
           document.getElementById("end_birthmm").value = '<%= @max_birthmm %>';
         });
 
-        $('#submit').click(function(){
-          console.log($.cookie("select_filter"));
-          // load();
-        });
-
         $(document).on("click", ".table_tr", function (e) {
           var userId = $(this).attr('id').split("/")[0]
           var measureno = $(this).attr('id').split("/")[1]
@@ -211,10 +178,19 @@
         $("input:checkbox[id='all_check']").prop("checked", true);
         $(document).on("click", "#all_check", function (e) {
           if (!$("input:checkbox[id='all_check']").is(":checked")){
-            window.open("/admin/data/filter_check", "/admin/data/filter_check", "scrollbars=1,resizable=1,height=500,width=1000");
+            window.open("/admin/data/filter_check", "/admin/data/filter_check", "scrollbars=1,resizable=1,height=600,width=900");
+          } else {
+            filterStr = ""
           }
         });
+
+        $('#submit').click(function(){
+          load();
+        });
       });
+      function selectFilter(select_filter){
+        filterStr = select_filter
+      }
 
       function load(){
         var select_sex = document.getElementById("select_sex").options[document.getElementById("select_sex").selectedIndex].value;
@@ -248,6 +224,7 @@
         url += "&select_skin_type_survey=" + select_skin_type_survey;
         url += "&select_senstive=" + select_senstive;
         url += "&select_skin_anxiety2=" + select_skin_anxiety2;
+        url += "&select_filter=" +filterStr
 
         location.href = url;
       }
@@ -264,12 +241,39 @@
       function showDetail(userId, measureno){
         window.open("/admin/data/detail?userId=" +userId+ "&measureno=" +measureno, "/admin/data/detail?userId=" +userId+ "&measureno=" +measureno, "scrollbars=1,resizable=1,height=500,width=600");
       }
-
     </script>
+
+    <style>
+    .fixed-table-body {
+      max-height: 280px;
+    }
+
+    .text-center {
+        margin: 0 auto;
+        text-align: center !important;
+    }
+
+    th {
+      font-size: 15px;
+    }
+
+    td {
+      font-size: 15px;
+    }
+
+    .width70 {
+      min-width:70px
+    }
+    .width100 {
+      min-width:100px
+    }
+    .width170 {
+      min-width:170px
+    }
+    </style>
 
   <body>
     <%= render "admin/header" %>
-
     <div id="filter" style="background: #b1cbbb; padding: 8px;">
       <div class="form-inline">
         분석일 : <input class="form-control" type="text" id="start_date" style="width:100px;">
@@ -277,7 +281,7 @@
         <button id="date_init" class="btn btn-primary">ALL</button>
         <p style="float:right; margin-right:20px;">
           Download:
-          <%= link_to "Excel", admin_data_list_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date, :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial, :measureno => @measureno, :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm, :select_channel => @select_channel, :select_mode => @select_mode, :select_makeup => @select_makeup, :select_area => @select_area, :select_skin_type_device => @select_skin_type_device, :select_skin_type_survey => @select_skin_type_survey, :select_senstive => @select_senstive, :select_skin_anxiety2 => @select_skin_anxiety2, :isExcel => true) %>
+          <%= link_to "Excel", admin_data_list_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date, :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial, :measureno => @measureno, :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm, :select_channel => @select_channel, :select_mode => @select_mode, :select_makeup => @select_makeup, :select_area => @select_area, :select_skin_type_device => @select_skin_type_device, :select_skin_type_survey => @select_skin_type_survey, :select_senstive => @select_senstive, :select_skin_anxiety2 => @select_skin_anxiety2, :select_filter => @params_filter, :isExcel => true) %>
         </p>
       </div>
 
@@ -405,7 +409,7 @@
 
     <div id="filter" style="background: #b1cbbb; padding: 8px;">
       <div class="form-inline">
-       필터링 전체 선택: <input type="checkbox" aria-label="..." id="all_check">
+       필터링 전체 선택: <input type="checkbox" id="all_check">
       </div>
     </div>
 
@@ -413,94 +417,101 @@
       <thead style="width: 100%;">
         <tr>
             <th class="width70 text-center">이름</th>
-            <th>분석 횟수</th>
-            <th>채널</th>
-            <th>전면,좌,우측면</th>
+            <th class="text-center">분석 횟수</th>
+            <th class="text-center">채널</th>
+            <th class="text-center">전면,좌,우측면</th>
             <th class="width170 text-center">분석 일</th>
             <th class="width100 text-center">업데이트 일</th>
-            <th>수분 측정1</th>
-            <th>수분 측정7</th>
-            <th>수분 측정8</th>
-            <th>모공 측정1</th>
-            <th>모공 측정2</th>
-            <th>모공 측정7</th>
-            <th>모공 측정8</th>
-            <th>모공 측정avr</th>
-            <th>주름 측정3</th>
-            <th>주름 측정4</th>
-            <th>주름 측정6</th>
-            <th>주름 측정avr</th>
-            <th>탄력 측정7</th>
-            <th>탄력 측정8</th>
-            <th>탄력 측정avr</th>
-            <th>탄력 각도7</th>
-            <th>탄력 각도8</th>
-            <th>피지 측정1</th>
-            <th>피지 측정2</th>
-            <th>피지 측정7</th>
-            <th>피지 측정8</th>
-            <th>피지 측정avr</th>
-            <th>포피린 측정1</th>
-            <th>포피린 측정2</th>
-            <th>포피린 측정7</th>
-            <th>포피린 측정8</th>
-            <th>포피린 측정avr</th>
-            <th>포피린 비 측정1</th>
-            <th>포피린 비 측정2</th>
-            <th>포피린 비 측정7</th>
-            <th>포피린 비 측정8</th>
-            <th>포피린 비 측정avr</th>
-            <th>편광 색소침착 측정1</th>
-            <th>편광 색소침착 측정2</th>
-            <th>편광 색소침착 측정3</th>
-            <th>편광 색소침착 측정4</th>
-            <th>편광 색소침착 측정5</th>
-            <th>편광 색소침착 측정6</th>
-            <th>편광 색소침착 측정7</th>
-            <th>편광 색소침착 측정8</th>
-            <th>편광 색소침착 측정avr</th>
-            <th>UV광 색소침착 측정1</th>
-            <th>UV광 색소침착 측정2</th>
-            <th>UV광 색소침착 측정3</th>
-            <th>UV광 색소침착 측정4</th>
-            <th>UV광 색소침착 측정5</th>
-            <th>UV광 색소침착 측정6</th>
-            <th>UV광 색소침착 측정7</th>
-            <th>UV광 색소침착 측정8</th>
-            <th>UV광 색소침착 측정avr</th>
-            <th>피부톤 측정1</th>
-            <th>피부톤 측정2</th>
-            <th>피부톤 측정4</th>
-            <th>피부톤 측정6</th>
-            <th>피부톤 측정7</th>
-            <th>피부톤 측정8</th>
-            <th>피부톤 측정avr</th>
-            <th>피부톤 Red1</th>
-            <th>피부톤 Red2</th>
-            <th>피부톤 Red4</th>
-            <th>피부톤 Red6</th>
-            <th>피부톤 Red7</th>
-            <th>피부톤 Red8</th>
-            <th>피부톤 Red_avr</th>
-            <th>피부톤 Green1</th>
-            <th>피부톤 Green2</th>
-            <th>피부톤 Green4</th>
-            <th>피부톤 Green6</th>
-            <th>피부톤 Green7</th>
-            <th>피부톤 Green8</th>
-            <th>피부톤 Green_avr</th>
-            <th>피부톤 Blue1</th>
-            <th>피부톤 Blue2</th>
-            <th>피부톤 Blue4</th>
-            <th>피부톤 Blue6</th>
-            <th>피부톤 Blue7</th>
-            <th>피부톤 Blue8</th>
-            <th>피부톤 Blue_avr</th>
-            <th>피부톤 칼라 타입</th>
-            <th>선 민감도</th>
-            <th>동안각도 점수 우측</th>
-            <th>동안각도 점수 좌측</th>
-            <th>피부타입</th>
+            <% if @select_filter != [] %>
+              <% @select_filter.each do |filter| %>
+                <th class="text-center"><%= filter %></th>
+              <% end %>
+            <% else %>
+              <th>수분 측정1</th>
+              <th>수분 측정7</th>
+              <th>수분 측정8</th>
+              <th>모공 측정1</th>
+              <th>모공 측정2</th>
+              <th>모공 측정7</th>
+              <th>모공 측정8</th>
+              <th>모공 측정avr</th>
+              <th>주름 측정3</th>
+              <th>주름 측정4</th>
+              <th>주름 측정6</th>
+              <th>주름 측정avr</th>
+              <th>탄력 측정7</th>
+              <th>탄력 측정8</th>
+              <th>탄력 측정avr</th>
+              <th>탄력 각도7</th>
+              <th>탄력 각도8</th>
+              <th>피지 측정1</th>
+              <th>피지 측정2</th>
+              <th>피지 측정7</th>
+              <th>피지 측정8</th>
+              <th>피지 측정avr</th>
+              <th>포피린 측정1</th>
+              <th>포피린 측정2</th>
+              <th>포피린 측정7</th>
+              <th>포피린 측정8</th>
+              <th>포피린 측정avr</th>
+              <th>포피린 비 측정1</th>
+              <th>포피린 비 측정2</th>
+              <th>포피린 비 측정7</th>
+              <th>포피린 비 측정8</th>
+              <th>포피린 비 측정avr</th>
+              <th>편광 색소침착 측정1</th>
+              <th>편광 색소침착 측정2</th>
+              <th>편광 색소침착 측정3</th>
+              <th>편광 색소침착 측정4</th>
+              <th>편광 색소침착 측정5</th>
+              <th>편광 색소침착 측정6</th>
+              <th>편광 색소침착 측정7</th>
+              <th>편광 색소침착 측정8</th>
+              <th>편광 색소침착 측정avr</th>
+              <th>UV광 색소침착 측정1</th>
+              <th>UV광 색소침착 측정2</th>
+              <th>UV광 색소침착 측정3</th>
+              <th>UV광 색소침착 측정4</th>
+              <th>UV광 색소침착 측정5</th>
+              <th>UV광 색소침착 측정6</th>
+              <th>UV광 색소침착 측정7</th>
+              <th>UV광 색소침착 측정8</th>
+              <th>UV광 색소침착 측정avr</th>
+              <th>피부톤 측정1</th>
+              <th>피부톤 측정2</th>
+              <th>피부톤 측정4</th>
+              <th>피부톤 측정6</th>
+              <th>피부톤 측정7</th>
+              <th>피부톤 측정8</th>
+              <th>피부톤 측정avr</th>
+              <th>피부톤 Red1</th>
+              <th>피부톤 Red2</th>
+              <th>피부톤 Red4</th>
+              <th>피부톤 Red6</th>
+              <th>피부톤 Red7</th>
+              <th>피부톤 Red8</th>
+              <th>피부톤 Red_avr</th>
+              <th>피부톤 Green1</th>
+              <th>피부톤 Green2</th>
+              <th>피부톤 Green4</th>
+              <th>피부톤 Green6</th>
+              <th>피부톤 Green7</th>
+              <th>피부톤 Green8</th>
+              <th>피부톤 Green_avr</th>
+              <th>피부톤 Blue1</th>
+              <th>피부톤 Blue2</th>
+              <th>피부톤 Blue4</th>
+              <th>피부톤 Blue6</th>
+              <th>피부톤 Blue7</th>
+              <th>피부톤 Blue8</th>
+              <th>피부톤 Blue_avr</th>
+              <th>피부톤 칼라 타입</th>
+              <th>선 민감도</th>
+              <th>동안각도 점수 우측</th>
+              <th>동안각도 점수 좌측</th>
+              <th>피부타입</th>
+            <% end %>
+
         </tr>
       </thead>
       <tbody>

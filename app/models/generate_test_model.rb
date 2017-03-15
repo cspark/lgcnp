@@ -27,7 +27,7 @@ class GenerateTestModel < ApplicationRecord
     Fctabletinterview.all.each do |f|
       i = 2
       f = Fctabletinterview.new
-      f.custserial = 2.to_s
+      f.custserial = 153.to_s
       f.a_1 = i
       f.a_2 = i
       f.a_3 = i
@@ -59,10 +59,10 @@ class GenerateTestModel < ApplicationRecord
       f.after_ample_2 = "regenerating ampoule"
       f.before_made_cosmetic = "skin control EX"
       f.after_made_cosmetic = "skin control EX"
-      f.uptdate = "2017-03-15-12-00"
+      f.uptdate = "2017-03-14-12-00"
       f.ch_cd = "CNP"
-      f.fcdata_id = 2.to_s
-      f.tablet_interview_id = i
+      f.fcdata_id = 1.to_s
+      f.tablet_interview_id = 153
       f.is_quick_mode = "T"
       f.is_agree_cant_refund = "T"
       f.is_agree_after = "T"
@@ -96,7 +96,7 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        f = Fcdata.new
-       f.custserial = 6.to_s
+       f.custserial = 153.to_s
        f.ch_cd = "CNP"
        f.faceno = "F"
        f.measuredate = "2017-03-14-13-00-00"
@@ -200,21 +200,21 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        user = Custinfo.new
-       user.custserial = 2.to_s
-       user.custname = "kimheejung"
+       user.custserial = 153.to_s
+       user.custname = "kimsoomin"
        user.sex = "M"
-       user.birthyy = "1998"
-       user.birthmm = "07"
-       user.birthdd = "03"
-       user.age = "20"
+       user.birthyy = "1985"
+       user.birthmm = "11"
+       user.birthdd = "21"
+       user.age = "33"
        user.phone = "012-345-6789"
        user.address = "nonhyun"
        user.email = "test@test.com"
        user.lastanaldate = "2017-03-14"
-       user.measureno = 2
+       user.measureno = 1
        user.uptdate = "2017-03-14"
        user.is_agree_privacy = "Y"
-       user.is_agree_after = "Y"
+       user.is_agree_after = "T"
        user.is_agree_marketing = "Y"
        user.is_agree_thirdparty_info = "Y"
        user.ch_cd = "CNP"
@@ -292,15 +292,15 @@ class GenerateTestModel < ApplicationRecord
     num = 2
     (1..num).each do |i|
        f = Fcschedule.new
-       f.ch_cd = "MART"
-       f.shop_cd = "1004"
+       f.ch_cd = "CNP"
+       f.shop_cd = "1001"
        f.reserve_yyyy = "2017"
-       f.reserve_mmdd = "0314"
+       f.reserve_mmdd = "0315"
        f.reserve_hhmm = "1500"
-       f.custname = "changhwan"
+       f.custname = "kimsoomin"
        f.phone = "0123456789"
        f.reserve_yn = "Y"
-       f.memo = "MART"
+       f.memo = "CNP"
        f.uptdate = "2017-03-14"
        f.purchase_yn = "Y"
        f.save
