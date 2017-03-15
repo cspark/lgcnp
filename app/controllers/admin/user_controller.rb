@@ -37,7 +37,25 @@ class Admin::UserController < Admin::AdminApplicationController
   end
 
   def show
-    userId = params[:userId]
-    @user = Custinfo.where(custserial: userId).first
+    @user = Custinfo.where(custserial: params[:userId], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
+  end
+
+  def edit
+    @user = Custinfo.where(custserial: params[:userId], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
+  end
+
+  def update
+    user = Custinfo.where(custserial: params[:id], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
+    user.update(permitted_params)
+    if user.save
+      render json: {}, status: :ok
+    else
+      render json: {}, status: :bad_request
+    end
+  end
+
+  private
+  def permitted_params
+    params.permit(:custserial, :userId, :ch_cd, :measureno, :phone, :birthyy, :birthmm, :birthdd, :email, :is_agree_privacy, :is_agree_thirdparty_info, :is_agree_marketing, :is_agree_after)
   end
 end

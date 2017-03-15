@@ -23,8 +23,10 @@
         });
 
         $(document).on("click", ".table_tr", function (e) {
-          var userId = $(this).attr('id')
-          window.open("/admin/users/detail?userId=" + userId, "/users/detail?userId=" + userId, "scrollbars=1,resizable=1,height=500,width=600");
+          var userId = $(this).attr('id').split("/")[0]
+          var ch_cd = $(this).attr('id').split("/")[1]
+          var measureno = $(this).attr('id').split("/")[2]
+          window.open("/admin/users/detail?userId=" + userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno, "/users/detail?userId=" + userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno, "scrollbars=1,resizable=1,height=500,width=500");
         });
       });
 

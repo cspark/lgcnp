@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
     get "user_list"  => "user#index"
     get "users/detail"  => "user#show"
+    get "users/edit"  => "user#edit"
     get "feedback"  => "feedback#index"
     get "feedback_list"  => "feedback#list"
     get "feedbacks/detail"  => "feedback#show"
@@ -32,6 +33,9 @@ Rails.application.routes.draw do
     get "image/detail" => "image#show"
 
     get "manager_list" => "manager#index"
+
+    resources :user do
+    end
 
     resources :admin_users do
     end

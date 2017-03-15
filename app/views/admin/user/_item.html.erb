@@ -51,7 +51,7 @@
       </script>
     </head>
     <body>
-      <tr class="table_tr" id="<%= user.custserial.to_i %>">
+      <tr class="table_tr" id="<%= user.custserial %>/<%= user.ch_cd %>/<%= user.measureno %>">
         <td id="name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></td>
         <td><%= user.uptdate %></td>
         <td><%= user.lastanaldate %></td>

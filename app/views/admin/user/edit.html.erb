@@ -1,0 +1,198 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+    $ (function () {
+        window.resizeTo(500, 700);
+        try
+        {
+          $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append( decode_utf8('<%= @user.custname %>'));
+        }
+        catch(err)
+        {
+          $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append('<%= @user.custname %>');
+        }
+
+        var toDay = new Date();
+  			var year  = toDay.getFullYear();
+  			var month = (toDay.getMonth()+1);
+  			var day   = toDay.getDate();
+  			var str = "";
+        var birthYear = '<%= @user.birthyy %>'
+        var birthMonth = '<%= @user.birthmm %>'
+        var birthDay = '<%= @user.birthdd %>'
+
+			// 년도 설정
+  			for (var i=year; i>=1950; i--) {
+  				if (parseInt(birthYear) == i) {
+  					str += "<option value='" + i + "' selected='selected'>" + i + "</option>";
+  				} else {
+  					str += "<option value='" + i + "' >" + i + "</option>";
+  				}
+  			}
+  			$("#birthyy").html(str);
+
+  			// 월, 일 설정
+  			for (var i=1; i<=31; i++) {
+  				  var val = "";
+    				if (i < 10) {
+    					val = "0" + new String(i);
+    				} else {
+    					val = new String(i);
+    				}
+
+    				if (parseInt(birthDay) == i) {
+    					$("<option value='" + val + "' selected>" + val + "</option>").appendTo("#birthdd");
+    				} else {
+    					$("<option value='" + val + "'>" + val + "</option>").appendTo("#birthdd");
+    				}
+
+    				if (i < 13) {
+    					if (parseInt(birthMonth) == i) {
+    						$("<option value='" + val + "' selected>" + val + "</option>").appendTo("#birthmm");
+    					} else {
+    						$("<option value='" + val + "'>" + val + "</option>").appendTo("#birthmm");
+    					}
+    				}
+  			  }
+
+          $("#phone").keyup(function (event) {
+              if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+                  var inputVal = $(this).val();
+                  $(this).val(inputVal.replace(/[^0-9]/gi, ''));
+              }
+          });
+
+          <% if @user.is_agree_privacy== "T" %>
+            $('input:radio[name=is_agree_privacy]:input[value=T]').attr("checked", true);
+          <% end %>
+          <% if @user.is_agree_thirdparty_info== "T" %>
+            $('input:radio[name=is_agree_thirdparty_info]:input[value=T]').attr("checked", true);
+          <% end %>
+          <% if @user.is_agree_marketing== "T" %>
+            $('input:radio[name=is_agree_marketing]:input[value=T]').attr("checked", true);
+          <% end %>
+          <% if @user.is_agree_after== "T" %>
+            $('input:radio[name=is_agree_after]:input[value=T]').attr("checked", true);
+          <% end %>
+
+          $(document).on("click", ".edit-user", function (e) {
+            var is_agree_privacy = $(':radio[name="is_agree_privacy"]:checked').val();
+            var is_agree_thirdparty_info = $(':radio[name="is_agree_thirdparty_info"]:checked').val();
+            var is_agree_marketing = $(':radio[name="is_agree_marketing"]:checked').val();
+            var is_agree_after = $(':radio[name="is_agree_after"]:checked').val();
+
+            var userId = $(this).attr('id').split("/")[0]
+            var ch_cd = $(this).attr('id').split("/")[1]
+            var measureno = $(this).attr('id').split("/")[2]
+
+            var formData = new FormData($(this)[0]);
+            formData.append("ch_cd", ch_cd);
+            formData.append("measureno", measureno);
+            formData.append("phone", $("#phone").val());
+            formData.append("birthyy", $("#birthyy").val());
+            formData.append("birthmm", $("#birthmm").val());
+            formData.append("birthdd", $("#birthdd").val());
+            formData.append("email", $("#email").val());
+            formData.append("is_agree_privacy", is_agree_privacy);
+            formData.append("is_agree_thirdparty_info", is_agree_thirdparty_info);
+            formData.append("is_agree_marketing", is_agree_marketing);
+            formData.append("is_agree_after", is_agree_after);
+
+              $.ajax({
+                  url: "/admin/user/"+userId,
+                  type: 'PUT',
+                  data: formData,
+                  async: false,
+                  cache: true,
+                  contentType: false,
+                  processData: false,
+                  success: function (response) {
+                      alert("정상적으로 수정되었습니다.");
+                      console.log(response);
+                      location.href = "/admin/users/detail?userId=" + userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno;
+                  },
+                  error: function (response) {
+                      console.log(response);
+                  }
+              });
+          });
+
+      });
+
+      function decode_utf8(s) {
+        return decodeURI(s);
+      }
+
+    </script>
+  </head>
+
+  <body style="padding: 10px;">
+    <h2>고객정보</h2>
+
+    <font size="5"><b><div id="name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>"></b></div></font>
+
+    <div style="width:100%; height:400px;">
+      <font size="4">
+      (가입날짜 : <%= @user.uptdate %>  마지막 진단 날짜 : <%= @user.lastanaldate %>)<br>
+      <b>시리얼</b> <%= @user.custserial.to_i %> <br>
+      <b>성별</b> <%= @user.sex %> <br>
+      <b>측정 횟수</b> <%= Fctabletinterview.where(custserial: @user.custserial).count %> <br>
+
+      <b style="float:left; margin-right:20px; margin-top:10px;">전화번호</b>
+      <input class="form-control" type="text" id="phone" style="width:200px; margin-top:5px;" value="<%= @user.phone %>"><br>
+      <b style="float:left; margin-right:20px; margin-top:10px;">생년월일</b>
+      <div style="margin-top:5px;">
+        <select class="form-control" id="birthyy" style="width:70px; float:left;">
+        </select><p style="float:left; font-size:8px; margin-top:10px; margin-left:5px;">년</p>
+        <select class="form-control" id="birthmm" style="width:50px; float:left; margin-left:5px;">
+        </select><p style="float:left; font-size:8px; margin-top:10px; margin-left:5px;">월</p>
+        <select class="form-control" id="birthdd" style="width:50px; float:left; margin-left:5px;">
+        </select><p style="float:left; font-size:8px; margin-top:10px; margin-left:5px;">일</p>
+      </div>
+      <br><br>
+      <b style="float:left; margin-right:35px;">이메일</b>
+      <input class="form-control" type="text" id="email" style="width:200px;" value="<%= @user.email %>"><br>
+
+      <div style="width:200px; height:30px; float:left;">
+        <b>개인정보 이용동의</b>
+      </div>
+      <div style="width:200px; height:30px; float:left;">
+        <input style="margin-left:20px;" type="radio" name="is_agree_privacy" value="T"> 예
+  			<input style="margin-left:20px;" type="radio" name="is_agree_privacy" value="F" checked="checked"> 아니오 <br>
+      </div><br>
+      <div style="width:200px; height:30px; float:left;">
+        <b>제 3자 정보 제공 동의</b>
+      </div>
+      <div style="width:200px; height:30px; float:left;">
+        <input style="margin-left:20px;" type="radio" name="is_agree_thirdparty_info" value="T"> 예
+  			<input style="margin-left:20px;" type="radio" name="is_agree_thirdparty_info" value="F" checked="checked"> 아니오 <br>
+      </div>
+      <div style="width:200px; height:30px; float:left;">
+        <b>마케팅 정보 동의</b>
+      </div>
+      <div style="width:200px; height:30px; float:left;">
+        <input style="margin-left:20px;" type="radio" name="is_agree_marketing" value="T"> 예
+        <input style="margin-left:20px;" type="radio" name="is_agree_marketing" value="F" checked="checked"> 아니오 <br>
+      </div>
+      <div style="width:200px; height:30px; float:left;">
+        <b>사후 피드백 서비스</b>
+      </div>
+      <div style="width:200px; height:30px; float:left;">
+        <input style="margin-left:20px;" type="radio" name="is_agree_after" value="T"> 예
+  			<input style="margin-left:20px;" type="radio" name="is_agree_after" value="F" checked="checked"> 아니오 <br>
+      </div>
+      </font>
+    </div><br>
+    <center>
+      <button id="<%= @user.custserial %>/<%= @user.ch_cd %>/<%= @user.measureno %>" class="btn btn-warning edit-user">수정</button>
+    </center>
+
+  </body>
+</html>
