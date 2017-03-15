@@ -124,7 +124,6 @@ Rails.application.routes.draw do
   get "update_after_service" => "custinfos#update_after_service"
   get "update_agreement" => "custinfos#update_agreement"
 
-
   resources :custinfos do
   end
 
@@ -152,4 +151,8 @@ Rails.application.routes.draw do
 
   #Related Admin
   get 'calculate' => 'fctabletinterviews#calculate'
+
+  resources :images do
+  end
+  post "image_upload" => "images#image_upload"
 end
