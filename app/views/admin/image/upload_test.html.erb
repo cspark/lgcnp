@@ -2,20 +2,12 @@
   <head>
     <script type="text/javascript" src="../js/jquery.js"></script>
     <script type="text/javascript" src="../js/bootstrap.js"></script>
-
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
     <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
-
     <script>
-      $(function () {
-
-      });
-
       function onChange(){
         var formData = new FormData($(this)[0]);
         for (var i = 0; i < document.getElementById('file').files.length; i++) {
@@ -36,6 +28,7 @@
               processData: false,
               success: function (response) {
                 console.log(response);
+                location.reload();
               },
               error: function (response) {
                 console.log(response);
@@ -44,12 +37,11 @@
         }
       }
 
-
-
     </script>
   </head>
 
   <body>
+    <%= render "admin/header" %>
     <form id="data" enctype="multipart/form-data">
         <div class="container-fluid">
             <input id="file" onchange="onChange()" type="file" class="filestyle" name="file" multiple>

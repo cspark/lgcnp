@@ -63,7 +63,9 @@ class ImagesController < Api::ApplicationController
     # 1. 디렉토리 만들기
     # 2. 파일 복사
     # Success!!!!!
-    image_copy_ftp(custserial: custserial, ch_cd: ch_cd, measureno: measureno, number: number, type: type)
+    if Rails.env.production? || Rails.env.staging?
+      image_copy_ftp(custserial: custserial, ch_cd: ch_cd, measureno: measureno, number: number, type: type)
+    end
     render :text => "Success!!!", status: 200
   end
 
