@@ -11,7 +11,7 @@
       function onChange(){
         var formData = new FormData($(this)[0]);
         for (var i = 0; i < document.getElementById('file').files.length; i++) {
-          formData.append('image', document.getElementById('file').files[i]);
+          formData.append('upload_image', document.getElementById('file').files[i]);
           formData.append('custserial', "839");
           formData.append('ch_cd', "CNP");
           formData.append('measureno', "1");

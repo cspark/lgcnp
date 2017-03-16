@@ -56,7 +56,7 @@ class ImagesController < Api::ApplicationController
 
     ImageUploader.temp_save(file_name: file_name, file_extension: file_extension, image_ch_cd: ch_cd, sub_folder_name: sub_folder_name, private_folder_name: private_folder_name, )
     uploader = ImageUploader.new
-    uploader.store!(params[:image])
+    uploader.store!(params[:upload_image])
 
     # =======================================================
     # WAS 업로드 마친 이미지 -> FTP 서버로 복사
@@ -168,6 +168,6 @@ class ImagesController < Api::ApplicationController
 
   private
   def permitted_params
-    params.permit(:custserial, :ch_cd, :measureno, :number, :type, :image)
+    params.permit(:custserial, :ch_cd, :measureno, :number, :type, :upload_image)
   end
 end
