@@ -43,6 +43,7 @@ gem 'zip-zip'
 gem 'axlsx', '~> 2.0'
 gem "axlsx_rails"
 gem 'whenever', :require => false
+gem 'carrierwave'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
