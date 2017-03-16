@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     get "fcschedule/detail" => "schedule#show"
     get "image_list" => "image#index"
     get "image/detail" => "image#show"
+    get "image_test" => "image#upload_test"
 
     get "manager_list" => "manager#index"
 

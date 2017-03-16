@@ -341,4 +341,7 @@ class Admin::ImageController < Admin::AdminApplicationController
     Rails.logger.info file_get_command
     system(file_get_command)
   end
+
+  def upload_test
+  end
 end

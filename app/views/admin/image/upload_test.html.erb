@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+    <script>
+      $(function () {
+
+      });
+
+      function onChange(){
+        var formData = new FormData($(this)[0]);
+        for (var i = 0; i < document.getElementById('file').files.length; i++) {
+          formData.append('image', document.getElementById('file').files[i]);
+          formData.append('custserial', "839");
+          formData.append('ch_cd', "CNP");
+          formData.append('measureno', "1");
+          formData.append('number', "1");
+          formData.append('type', "Sym_L");
+
+          $.ajax({
+              url: "/images",
+              type: 'POST',
+              data: formData,
+              async: false,
+              cache: true,
+              contentType: false,
+              processData: false,
+              success: function (response) {
+                console.log(response);
+              },
+              error: function (response) {
+                console.log(response);
+              }
+          });
+        }
+      }
+
+
+
+    </script>
+  </head>
+
+  <body>
+    <form id="data" enctype="multipart/form-data">
+        <div class="container-fluid">
+            <input id="file" onchange="onChange()" type="file" class="filestyle" name="file" multiple>
+        </div>
+    </form>
+  </body>
+</html>
