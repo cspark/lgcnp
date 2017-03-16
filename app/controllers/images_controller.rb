@@ -66,7 +66,7 @@ class ImagesController < Api::ApplicationController
     if Rails.env.production? || Rails.env.staging?
       image_copy_ftp(custserial: custserial, ch_cd: ch_cd, measureno: measureno, number: number, type: type)
     end
-    render :text => "Success!!!", status: 200
+    render :body => "Success!!!", status: 200
   end
 
   def image_copy_ftp(custserial: nil, ch_cd: nil, measureno: nil, number: nil, type: nil)
