@@ -26,9 +26,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'mini_magick'
 gem 'rmagick', '~> 2.16.0'
 gem 'carrierwave'
+gem 'mini_magick'
 gem "fog"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
