@@ -1,4 +1,4 @@
-class Api::ImagesController < Api::ApplicationController
+class ImagesController < Api::ApplicationController
   def create
     # 폴더 만들기
     custserial = params[:custserial]
@@ -160,6 +160,10 @@ class Api::ImagesController < Api::ApplicationController
     file_copy_command << "' --ftp-create-dirs"
     # system(file_copy_command)
     # "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/public/CNP/900-P/839-1/839-1_Sym_L_1.jpg' --ftp-create-dirs"
+  end
+
+  def route_test
+    Rails.logger.info "route_test!!!!!!!!"
   end
 
   private
