@@ -168,6 +168,6 @@ class ImagesController < Api::ApplicationController
 
   private
   def permitted_params
-    params.permit(:custserial, :ch_cd, :measureno, :number, :type, :image_upload_was)
+    params.permit(:custserial, :ch_cd, :measureno, :number, :type, :image)
   end
 end
