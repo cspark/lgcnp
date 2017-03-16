@@ -57,6 +57,7 @@ class ImagesController < Api::ApplicationController
     uploader = ImageUploader.new
     uploader.temp_save(file_name: file_name, file_extension: file_extension, image_ch_cd: ch_cd, sub_folder_name: sub_folder_name, private_folder_name: private_folder_name)
     uploader.store!(params[:image])
+    # uploader.retrieve_from_store!('')
 
     # =======================================================
     # WAS 업로드 마친 이미지 -> FTP 서버로 복사
