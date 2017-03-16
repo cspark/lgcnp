@@ -26,7 +26,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'carrierwave'
+gem 'mini_magick'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'activerecord-oracle_enhanced-adapter', '= 1.7.7'
@@ -43,8 +44,6 @@ gem 'zip-zip'
 gem 'axlsx', '~> 2.0'
 gem "axlsx_rails"
 gem 'whenever', :require => false
-gem 'carrierwave'
-gem 'mini_magick'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
