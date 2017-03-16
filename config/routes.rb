@@ -161,6 +161,6 @@ Rails.application.routes.draw do
   #Related Admin
   get 'calculate' => 'fctabletinterviews#calculate'
 
-  resources :images_upload do
+  resources :images do
   end
 end
