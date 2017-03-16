@@ -19,14 +19,29 @@
           $('#name_<%= @tabletinterview.custserial.to_i %>').append('<%= user.custname %>');
         }
 
-        try
-        {
-          $('#skin_type_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').append('<%= @tabletinterview.skin_type %>');
-        }
-        catch(err)
-        {
-          $('#skin_type_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').append('<%= @tabletinterview.skin_type %>');
-        }
+        //피부타입 한글로 변경
+        $('#skin_type_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').html(translate_skin_type('<%= @tabletinterview.skin_type %>'));
+
+        //솔루션 한글로 변경
+        $('#before_solution_1_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').html(translate_solution('<%= @tabletinterview.before_solution_1 %>'));
+        $('#after_solution_1_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').html(translate_solution('<%= @tabletinterview.after_solution_1 %>'));
+
+        $('#before_solution_2_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').html(translate_solution('<%= @tabletinterview.before_solution_2 %>'));
+        $('#after_solution_2_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').html(translate_solution('<%= @tabletinterview.after_solution_2 %>'));
+
+        //세럼 한글 변경
+        $('#before_serum_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').html(translate_serum('<%= @tabletinterview.before_serum %>'));
+        $('#after_serum_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').html(translate_serum('<%= @tabletinterview.after_serum %>'));
+
+        //앰플 한글 변경
+        $('#before_ampoule_1_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').html(translate_ampoule('<%= @tabletinterview.before_ample_1 %>'));
+        $('#after_ampoule_1_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').html(translate_ampoule('<%= @tabletinterview.after_ample_1 %>'));
+        $('#before_ampoule_2_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').html(translate_ampoule('<%= @tabletinterview.before_ample_2 %>'));
+        $('#after_ampoule_2_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').html(translate_ampoule('<%= @tabletinterview.after_ample_2 %>'));
+
+        //제품 한글 변경
+        $('#before_made_cosmetic_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').html(translate_serum('<%= @tabletinterview.before_made_cosmetic %>') + "Ex");
+        $('#after_made_cosmetic_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').html(translate_serum('<%= @tabletinterview.after_made_cosmetic %>') + "Ex");
 
         if ('<%= @tabletinterview.memo %>' != null) {
           $('#memo').append('<%= @tabletinterview.memo %>');
@@ -59,12 +74,93 @@
                   console.log(response);
               }
           });
-
         });
       });
 
       function decode_utf8(s) {
         return decodeURI(s);
+      }
+
+      function translate_skin_type(value){
+          var skin_type = ""
+          console.log(value);
+          try{
+            if(value.includes("skin_type_gunsung"))
+              skin_type = "건성";
+            else if(value.includes("skin_type_gun_boggab"))
+              skin_type = "건복합성";
+            else if(value.includes("skin_type_jisung"))
+              skin_type = "지성";
+            else if(value.includes("skin_type_jisung_boghab"))
+              skin_type = "지복합성";
+            else if(value.includes("skin_type_jungsung"))
+              skin_type = "중성";
+
+            if(value.includes("senstive"))
+              skin_type = skin_type + " (민감성)";
+          }catch(err){
+            console.log(err);
+            return value;
+          }
+
+          console.log(skin_type);
+          return skin_type;
+      }
+
+      function translate_solution(value){
+          try{
+            if(value == "elasticity solution")
+              return "탄력 솔루션";
+            else if(value == "pigment solution")
+              return "색소침착 솔루션";
+            else if(value == "pore solution")
+              return "모공 솔루션";
+            else if(value == "trouble solution")
+              return "트러블 솔루션";
+            else if(value == "wrinkle solution")
+              return "주름 솔루션";
+            else
+              return value;
+          }catch(err){
+            console.log(err);
+            return value;
+          }
+      }
+
+      function translate_serum(value){
+          try{
+            if(value.includes("deep humect"))
+              return "딥 휴멕트 세럼";
+            else if(value.includes("skin control"))
+              return "스킨 컨트롤 세럼";
+            else if(value.includes("rebalencing"))
+              return "리밸런싱 세럼";
+            else
+              return value;
+          }catch(err){
+            console.log(err);
+            return value;
+          }
+      }
+
+      function translate_ampoule(value){
+          try{
+            if(value == "pore clinic ampoule")
+              return "포어클리닉 앰플";
+            else if(value == "carming ampoule")
+              return "카밍 앰플";
+            else if(value == "luminus ampoule")
+              return "루미너스 앰플";
+            else if(value == "regenerating ampoule")
+              return "리제네레이팅 앰플";
+            else if(value == "perming ampoule")
+              return "퍼밍 앰플";
+            else
+              return value;
+          }catch(err){
+            console.log(err);
+            return value;
+          }
       }
 
     </script>
@@ -73,7 +169,7 @@
   <body style="padding: 10px;">
     <div style="display:inline;">
       <h2 style="float:left; width:45%;">태블릿 인터뷰 정보</h2>
-    </div><br><br>
+    </div><br>
 
     <% user = Custinfo.where(custserial: @tabletinterview.custserial).first %>
     <div style="display:table; height:50px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
@@ -81,18 +177,18 @@
       <font size="4"><div id="name_<%= @tabletinterview.custserial.to_i %>"></div></font>
       <font size="2">시리얼: <%= @tabletinterview.custserial.to_i %> / 진단 날짜: <%= @tabletinterview.uptdate %> / 채널: <%= custinfo.ch_cd %><br>
       <font style="float:left;">피부타입: </font><div style="float:left;" id="skin_type_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></div><br>
-      진단으로 나온 솔루션 1: <font id="before_solution_1_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></font>
-      최종으로 선택된 솔루션 1: <font id="after_solution_1_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></font>
-      진단으로 나온 솔루션 2: <font id="before_solution_2_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></font>
-      최종으로 선택된 솔루션 2: <font id="after_solution_2_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></font>
-      진단으로 나온 세럼: <font id="before_serum_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></font>
-      최종으로 선택된 세럼: <font id="after_serum_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></font>
-      진단으로 나온 앰플 1: <font id="before_ampoule_1_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></font>
-      최종으로 선택된 앰플 1: <font id="after_ampoule_1_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></font>
-      진단으로 나온 앰플 2: <font id="before_ampoule_2_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></font>
-      최종으로 선택된 앰플 2: <font id="after_ampoule_2_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></font>
-      진단으로 나온 화장품: <font id="before_made_cosmetic_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></font>
-      최종으로 선택된 화장품: <font id="after_made_cosmetic_<%= user.custserial.to_i %>_<%= @tabletinterview.uptdate %>"></font>
+      진단으로 나온 솔루션 1: <font id="before_solution_1_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
+      최종으로 선택된 솔루션 1: <font id="after_solution_1_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
+      진단으로 나온 솔루션 2: <font id="before_solution_2_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
+      최종으로 선택된 솔루션 2: <font id="after_solution_2_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
+      진단으로 나온 세럼: <font id="before_serum_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
+      최종으로 선택된 세럼: <font id="after_serum_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
+      진단으로 나온 앰플 1: <font id="before_ampoule_1_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
+      최종으로 선택된 앰플 1: <font id="after_ampoule_1_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
+      진단으로 나온 앰플 2: <font id="before_ampoule_2_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
+      최종으로 선택된 앰플 2: <font id="after_ampoule_2_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
+      진단으로 나온 화장품: <font id="before_made_cosmetic_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
+      최종으로 선택된 화장품: <font id="after_made_cosmetic_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
       <font size="2"> A1: <%= @tabletinterview.a_1.to_i %> / A2: <%= @tabletinterview.a_2.to_i %> / A3: <%= @tabletinterview.a_3.to_i %><br>
       B1: <%= @tabletinterview.b_1.to_i %> / B2: <%= @tabletinterview.b_2.to_i %> / B3: <%= @tabletinterview.b_3.to_i %> / B4: <%= @tabletinterview.b_4.to_i %><br>
       C1: <%= @tabletinterview.c_1.to_i %>
@@ -102,8 +198,7 @@
       <textarea type="textarea" name="memo" class="ckeditor" id="memo" style="width:83%;" placeholder="메모를 적어주세요"></textarea>
     </div><br>
     <center>
-      <button id="<%= @tabletinterview.custserial %>/<%= @tabletinterview.ch_cd %>/<%= @tabletinterview.fcdata_id %>" class="btn btn-warning update-tablet">수정</button>
+      <button id="<%= @tabletinterview.custserial %>/<%= @tabletinterview.ch_cd %>/<%= @tabletinterview.fcdata_id %>" class="btn btn-warning update-tablet">저장</button>
     </center>
-
   </body>
 </html>
