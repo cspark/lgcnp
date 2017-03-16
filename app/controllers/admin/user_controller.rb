@@ -54,6 +54,29 @@ class Admin::UserController < Admin::AdminApplicationController
     end
   end
 
+  def destroy
+    user = Custinfo.where(custserial: params[:id], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
+
+    fcdata = Fcdata.where(custserial: params[:id], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
+    fcdata.delete if !fcdata.nil?
+    fctabletinterview = Fctabletinterview.where(custserial: params[:id], ch_cd: params[:ch_cd], fcdata_id: params[:measureno]).first
+    if !fctabletinterview.nil?
+      fcafterinterview = Fcafterinterview.where(custserial: params[:id], tablet_interview_id: fctabletinterview.tablet_interview_id).first
+      fcafterinterview.delete if !fcafterinterview.nil?
+      fctabletinterview.delete
+    end
+    fcpos = Fcpos.where(custserial: params[:id], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
+    fcpos.delete if !fcpos.nil?
+    fcinterview = Fcinterview.where(custserial: params[:id], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
+    fcinterview.delete if !fcinterview.nil?
+
+    if user.delete
+      render json: {}, status: 200
+    else
+      render json: {}, status: 404
+    end
+  end
+
   private
   def permitted_params
     params.permit(:custserial, :userId, :ch_cd, :measureno, :phone, :birthyy, :birthmm, :birthdd, :email, :is_agree_privacy, :is_agree_thirdparty_info, :is_agree_marketing, :is_agree_after)

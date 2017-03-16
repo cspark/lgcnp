@@ -82,6 +82,40 @@
             $('input:radio[name=is_agree_after]:input[value=T]').attr("checked", true);
           <% end %>
 
+          $(document).on("click", ".is_agree_privacy", function (e) {
+              var is_agree_privacy = $(':radio[name="is_agree_privacy"]:checked').val();
+
+              if (is_agree_privacy == "F") {
+                var r = confirm("해당 건을 철회하면 고객의 모든 정보가 삭제됩니다. \n삭제하시겠습니까?");
+                if (r){
+                  var formData = new FormData($(this)[0]);
+                  formData.append("ch_cd", '<%= @user.ch_cd%>');
+                  formData.append("measureno", '<%= @user.measureno%>');
+
+                  $.ajax({
+                      url: "/admin/user/"+'<%= @user.custserial%>',
+                      type: 'DELETE',
+                      data: formData,
+                      async: false,
+                      cache: true,
+                      contentType: false,
+                      processData: false,
+                      success: function (response) {
+                          alert("정상적으로 삭제되었습니다.");
+                          opener.location.reload();
+                          window.close();
+                      },
+                      error: function (response) {
+                          console.log(response);
+                      }
+                  });
+                } else {
+                  console.log("!!!!");
+                  $("input:radio[id='is_agree_privacy_t']").prop("checked", true);
+                }
+              }
+          });
+
           $(document).on("click", ".edit-user", function (e) {
             var is_agree_privacy = $(':radio[name="is_agree_privacy"]:checked').val();
             var is_agree_thirdparty_info = $(':radio[name="is_agree_thirdparty_info"]:checked').val();
@@ -115,7 +149,7 @@
                   processData: false,
                   success: function (response) {
                       alert("정상적으로 수정되었습니다.");
-                      console.log(response);
+                      opener.location.reload();
                       location.href = "/admin/users/detail?userId=" + userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno;
                   },
                   error: function (response) {
@@ -123,7 +157,6 @@
                   }
               });
           });
-
       });
 
       function decode_utf8(s) {
@@ -164,8 +197,8 @@
         <b>개인정보 이용동의</b>
       </div>
       <div style="width:200px; height:30px; float:left;">
-        <input style="margin-left:20px;" type="radio" name="is_agree_privacy" value="T"> 예
-  			<input style="margin-left:20px;" type="radio" name="is_agree_privacy" value="F" checked="checked"> 아니오 <br>
+        <input style="margin-left:20px;" type="radio" name="is_agree_privacy" class="is_agree_privacy" id="is_agree_privacy_t" value="T"> 예
+  			<input style="margin-left:20px;" type="radio" name="is_agree_privacy" class="is_agree_privacy" id="is_agree_privacy_f" value="F" checked="checked"> 아니오 <br>
       </div><br>
       <div style="width:200px; height:30px; float:left;">
         <b>제 3자 정보 제공 동의</b>

@@ -96,7 +96,7 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        f = Fcdata.new
-       f.custserial = 839.to_s
+       f.custserial = 44.to_s
        f.ch_cd = "CNP"
        f.faceno = "F"
        f.measuredate = "2017-03-14-13-00-00"
@@ -200,23 +200,23 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        user = Custinfo.new
-       user.custserial = 839.to_s
-       user.custname = "kimsoomin"
+       user.custserial = 44.to_s
+       user.custname = "Delete"
        user.sex = "M"
        user.birthyy = "1985"
        user.birthmm = "11"
        user.birthdd = "21"
        user.age = "33"
-       user.phone = "012-345-6789"
+       user.phone = "0123456789"
        user.address = "nonhyun"
        user.email = "test@test.com"
        user.lastanaldate = "2017-03-14"
        user.measureno = 1
        user.uptdate = "2017-03-14"
-       user.is_agree_privacy = "Y"
+       user.is_agree_privacy = "T"
        user.is_agree_after = "T"
-       user.is_agree_marketing = "Y"
-       user.is_agree_thirdparty_info = "Y"
+       user.is_agree_marketing = "T"
+       user.is_agree_thirdparty_info = "T"
        user.ch_cd = "CNP"
        user.save
        i +=1;
