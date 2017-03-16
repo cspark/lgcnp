@@ -299,7 +299,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
-  activerecord-oracle_enhanced-adapter (= 1.7.7)
+  activerecord-oracle_enhanced-adapter (~> 1.7.0)
   axlsx (~> 2.0)
   axlsx_rails
   bootstrap-datepicker-rails
@@ -323,7 +323,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 5.0.0, >= 5.0.0.1)
   rmagick (~> 2.16.0)
-  ruby-oci8 (= 2.2.2)
+  ruby-oci8 (~> 2.2.2)
   rubyzip (>= 1.0.0)
   sass-rails (~> 5.0)
   spring

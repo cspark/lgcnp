@@ -1,3 +1,363 @@
 class GenerateTestModel < ApplicationRecord
 
+  def self.generate_test_custinfo
+    c = Custinfo.new
+    c.custserial = "11"
+    c.n_cust_id = "11"
+    c.custname = "망고"
+    c.sex = "M"
+    c.birthyy = "2000"
+    c.birthmm = "07"
+    c.birthdd = "03"
+    c.age = "18"
+    c.phone = "0123456789"
+    c.lastanaldate = "2017-01-15-18-00"
+    c.measureno = "1"
+    c.uptdate = "2017/01/15"
+    c.is_agree_privacy = "T"
+    c.is_agree_after = "T"
+    c.is_agree_marketing = "T"
+    c.is_agree_thirdparty_info = "T"
+    c.ch_cd = "CNP"
+    c.save
+  end
+
+  def self.generate_test_fctabletinterview
+    i = 1
+    Fctabletinterview.all.each do |f|
+      i = 1
+      f = Fctabletinterview.new
+      f.custserial = 839.to_s
+      f.a_1 = i
+      f.a_2 = i
+      f.a_3 = i
+      f.b_1 = i
+      f.b_2 = i
+      f.b_3 = i
+      f.b_4 = i
+      f.c_1 = i
+      f.d_1 = i
+      f.d_2 = i
+      f.d_3 = i
+      f.d_4 = i
+      f.d_5 = i
+      f.d_6 = i
+      f.d_7 = i
+      f.d_8 = i
+      f.d_9 = i
+      f.d_10 = i
+      f.skin_type = "skin_type_gunsung"
+      f.before_solution_1 = "elasticity solution"
+      f.after_solution_1 = "elasticity solution"
+      f.before_solution_2 = "elasticity solution"
+      f.after_solution_2 = "elasticity solution"
+      f.before_serum = "rebalencing"
+      f.after_serum = "rebalencing"
+      f.before_ample_1 = "regenerating ampoule"
+      f.after_ample_1 = "regenerating ampoule"
+      f.before_ample_2 = "regenerating ampoule"
+      f.after_ample_2 = "regenerating ampoule"
+      f.before_made_cosmetic = "skin control EX"
+      f.after_made_cosmetic = "skin control EX"
+      f.uptdate = "2017-03-14-12-00"
+      f.ch_cd = "CNP"
+      f.fcdata_id = 1.to_s
+      f.tablet_interview_id = 839
+      f.is_quick_mode = "T"
+      f.is_agree_cant_refund = "T"
+      f.is_agree_after = "T"
+      f.save
+      i += 1
+    end
+  end
+
+  def self.generate_test_fcavgdata
+     i = 79
+
+     f = Fcavgdata.new
+     f.n_index = i
+     f.age = "Male_Age36-40_Grade1"
+     f.pore = i-60
+     f.wrinkle = i-60
+     f.moisture = i-60
+     f.spot_pl = i-60
+     f.spot_uv = i-60
+     f.elasticity = i-60
+     f.porphyrin_ratio = i-60
+     f.e_sebum_t = i-60
+     f.e_sebum_u = i-60
+     f.e_porphyrin_t = i-60
+     f.e_porphyrin_u = i-60
+     f.save
+     i +=1;
+  end
+
+  def self.generate_test_data
+    num = 10
+    (1..num).each do |i|
+       f = Fcdata.new
+       f.custserial = 44.to_s
+       f.ch_cd = "CNP"
+       f.faceno = "F"
+       f.measuredate = "2017-03-14-13-00-00"
+       f.measureno = 1
+       f.uptdate = "2017-03-14"
+       f.mo_1 = 1.0
+       f.mo_7 = 1.0
+       f.mo_8 = 1.0
+       f.pr_1 = 1
+       f.pr_2 = 2
+       f.pr_7 = 7
+       f.pr_8 = 8
+       f.pr_avr = 1
+       f.wr_3 = 3
+       f.wr_4 = 4
+       f.wr_5 = 5
+       f.wr_6 = 6
+       f.wr_avr = 1
+       f.el_7 = 7
+       f.el_8 = 8
+       f.el_avr = 1
+       f.el_angle_7 = 1.0
+       f.el_angle_8 = 1.0
+       f.sb_1 = 1
+       f.sb_2 = 2
+       f.sb_7 = 7
+       f.sb_8 = 8
+       f.sb_avr = 1
+       f.pp_1 = 1
+       f.pp_2 = 2
+       f.pp_7 = 7
+       f.pp_8 = 8
+       f.pp_avr = 1
+       f.pp_ratio_1 = 1
+       f.pp_ratio_2 = 2
+       f.pp_ratio_7 = 7
+       f.pp_ratio_8 = 8
+       f.pp_ratio_avr = 1
+       f.sp_pl_1 = 1
+       f.sp_pl_2 = 2
+       f.sp_pl_3 = 3
+       f.sp_pl_4 = 4
+       f.sp_pl_5 = 5
+       f.sp_pl_6 = 6
+       f.sp_pl_7 = 7
+       f.sp_pl_8 = 8
+       f.sp_pl_avr = 1
+       f.sp_uv_1 = 1
+       f.sp_uv_2 = 2
+       f.sp_uv_3 = 3
+       f.sp_uv_4 = 4
+       f.sp_uv_5 = 5
+       f.sp_uv_6 = 6
+       f.sp_uv_7 = 7
+       f.sp_uv_8 = 8
+       f.sp_uv_avr = 1
+       f.sk_c_1 = 1
+       f.sk_c_2 = 2
+       f.sk_c_4 = 4
+       f.sk_c_6 = 6
+       f.sk_c_7 = 7
+       f.sk_c_8 = 8
+       f.sk_c_avr = 1
+       f.sk_r_1 = 1
+       f.sk_r_2 = 2
+       f.sk_r_4 = 4
+       f.sk_r_6 = 6
+       f.sk_r_7 = 7
+       f.sk_r_8 = 8
+       f.sk_r_avr = 1
+       f.sk_g_1 = 1
+       f.sk_g_2 = 2
+       f.sk_g_4 = 4
+       f.sk_g_6 = 6
+       f.sk_g_7 = 7
+       f.sk_g_8 = 8
+       f.sk_g_avr = 1
+       f.sk_b_1 = 1
+       f.sk_b_2 = 2
+       f.sk_b_4 = 4
+       f.sk_b_6 = 6
+       f.sk_b_7 = 7
+       f.sk_b_8 = 8
+       f.sk_b_avr = 1
+       f.lab_l = 1.0
+       f.lab_a = 1.0
+       f.lab_b = 1.0
+       f.colortype = 1
+       f.suntype = 1
+       f.skintype = 1
+       f.score_r = 1
+       f.score_l = 1
+       f.m_skintype = 1
+       f.shop_cd = "1001"
+       f.save
+       i +=1;
+    end
+  end
+
+  def self.generate_test_custinfo
+    num = 10
+    (1..num).each do |i|
+       user = Custinfo.new
+       user.custserial = 44.to_s
+       user.custname = "Delete"
+       user.sex = "M"
+       user.birthyy = "1985"
+       user.birthmm = "11"
+       user.birthdd = "21"
+       user.age = "33"
+       user.phone = "0123456789"
+       user.address = "nonhyun"
+       user.email = "test@test.com"
+       user.lastanaldate = "2017-03-14"
+       user.measureno = 1
+       user.uptdate = "2017-03-14"
+       user.is_agree_privacy = "T"
+       user.is_agree_after = "T"
+       user.is_agree_marketing = "T"
+       user.is_agree_thirdparty_info = "T"
+       user.ch_cd = "CNP"
+       user.save
+       i +=1;
+    end
+  end
+
+  def self.generate_test_fcpos
+    num = 10
+    (1..num).each do |i|
+       i = 1
+       f = Fcpos.new
+       f.ch_cd = "CNP"
+       f.custserial = 7.to_s
+       f.faceno = "F"
+       f.measuredate = "2017-02-02-13-00-00"
+       f.measureno = 1
+       f.uptdate = "2017-02-02"
+       f.fh_x = i
+       f.fh_y = i
+       f.fh_w = i
+       f.fh_h = i
+       f.ns_x = i
+       f.ns_y = i
+       f.ns_w = i
+       f.ns_h = i
+       f.res_x = i
+       f.res_y = i
+       f.res_w = i
+       f.res_h = i
+       f.reu_x = i
+       f.reu_y = i
+       f.reu_w = i
+       f.reu_h = i
+       f.les_x = i
+       f.les_y = i
+       f.les_w = i
+       f.les_h = i
+       f.leu_x = i
+       f.leu_y = i
+       f.leu_w = i
+       f.leu_h = i
+       f.rs_x = i
+       f.rs_y = i
+       f.rs_w = i
+       f.rs_h = i
+       f.ls_x = i
+       f.ls_y = i
+       f.ls_w = i
+       f.ls_h = i
+       f.rt_re_l = i
+       f.rt_re_t = i
+       f.rt_re_r = i
+       f.rt_re_b = i
+       f.rt_le_l = i
+       f.rt_le_t = i
+       f.rt_le_r = i
+       f.rt_le_b = i
+       f.rt_lip_l = i
+       f.rt_lip_t = i
+       f.rt_lip_r = i
+       f.rt_lip_b = i
+       f.rt_res_x = i
+       f.rt_res_y = i
+       f.rt_les_x = i
+       f.rt_les_y = i
+       f.shop_cd = "1004"
+       f.save
+       i +=1;
+    end
+  end
+
+  def self.generate_test_schedule
+    num = 2
+    (1..num).each do |i|
+       f = Fcschedule.new
+       f.ch_cd = "CNP"
+       f.shop_cd = "1001"
+       f.reserve_yyyy = "2017"
+       f.reserve_mmdd = "0315"
+       f.reserve_hhmm = "1500"
+       f.custname = "kimsoomin"
+       f.phone = "0123456789"
+       f.reserve_yn = "T"
+       f.memo = "CNP"
+       f.uptdate = "2017-03-14"
+       f.purchase_yn = "T"
+       f.save
+       i +=1;
+    end
+  end
+
+  def self.generate_test_afterinterview
+    i = 6
+    f = Fcafterinterview.new
+    f.custserial = i.to_s
+    f.tablet_interview_id = i
+    f.after_interview_id = i
+    f.a1 = 1
+    f.a2 = 2
+    f.a3 = 3
+    f.a4 = 4
+    f.a5 = 5
+    f.order = 0
+    f.a1_1 = "파워 블로거"
+    f.tablet_interview_update = "2017-03-15-13-00"
+    f.uptdate = "2017-03-15-13-00"
+    f.save
+    i +=1;
+  end
+
+  def self.generate_test_interview
+    num = 2
+    (1..num).each do |i|
+       f = Fcinterview.new
+       f.custserial = "7"
+       f.ch_cd = "CNP"
+       f.faceno = "F"
+       f.measuredate = "2017-02-02-15-00-00"
+       f.measureno = 2
+       f.uptdate = "2017-02-02"
+       f.interview_1 = "1"
+       f.interview_2 = "2"
+       f.interview_3 = "1,2"
+       f.interview_4 = "4"
+       f.interview_5 = "5"
+       f.interview_6 = "1"
+       f.interview_7 = "2"
+       f.interview_8 = "3"
+       f.interview_9 = "4"
+       f.interview_10 = "5"
+       f.shop_cd = "1004"
+       f.save
+       i +=1;
+    end
+  end
+
+  def self.generate_test_adminuser
+     f = AdminUser.new
+     f.email = "5001@naver.com"
+     f.ch_cd = "CLAB"
+     f.shop_cd = "5001"
+     f.save
+  end
 end
