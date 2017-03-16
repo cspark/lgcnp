@@ -1,4 +1,4 @@
-class ImagesController < ApplicationController
+class ImagesController < Api::ApplicationController
   def create
     # 폴더 만들기
     custserial = params[:custserial]
@@ -64,6 +64,7 @@ class ImagesController < ApplicationController
     # 2. 파일 복사
     # Success!!!!!
     image_copy_ftp(custserial: custserial, ch_cd: ch_cd, measureno: measureno, number: number, type: type)
+    render :text => "Success!!!", status: 200
   end
 
   def image_copy_ftp(custserial: nil, ch_cd: nil, measureno: nil, number: nil, type: nil)
