@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'mini_magick'
 gem 'rmagick', '~> 2.16.0'
 gem 'carrierwave'
+gem "fog"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'activerecord-oracle_enhanced-adapter', '= 1.7.7'

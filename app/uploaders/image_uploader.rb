@@ -1,9 +1,9 @@
 class ImageUploader < CarrierWave::Uploader::Base
 
-  include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  # include CarrierWave::RMagick
+  include CarrierWave::MiniMagick
 
-  storage :file
+  storage :fog
 
   def store_dir
     "#{@@image_ch_cd}/#{@@sub_folder_name}/#{@@private_folder_name}"
