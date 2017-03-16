@@ -19,11 +19,11 @@
           formData.append('type', "Sym_L");
 
           $.ajax({
-              url: "/images/upload",
+              url: "/images",
               type: 'POST',
               data: formData,
               async: false,
-              cache: true,
+              cache: false,
               contentType: false,
               processData: false,
               success: function (response) {

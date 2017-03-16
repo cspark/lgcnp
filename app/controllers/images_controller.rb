@@ -1,5 +1,5 @@
 class ImagesController < Api::ApplicationController
-  def upload
+  def create
     # 폴더 만들기
     custserial = params[:custserial]
     ch_cd = params[:ch_cd]
