@@ -162,5 +162,5 @@ Rails.application.routes.draw do
 
   resources :images do
   end
-  post "image_upload" => "images#image_upload"
+  post "image_upload" => "images#create"
 end

@@ -85,7 +85,7 @@
             formData.append('type', "Sym_L");
 
             $.ajax({
-                url: "/images",
+                url: "/image_upload",
                 type: 'POST',
                 data: formData,
                 async: false,
@@ -96,8 +96,7 @@
                   console.log(response);
                 },
                 error: function (response) {
-                    alert(errorFileUpload());
-                    console.log(response);
+                  console.log(response);
                 }
             });
           }
