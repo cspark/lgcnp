@@ -155,7 +155,7 @@
     </head>
     <body>
       <% custinfo = Custinfo.where(custserial: tabletinterview.custserial).first %>
-      <tr class="table_tr" id="<%= custinfo.custserial.to_i %>/<%= tabletinterview.ch_cd %>/<%= tabletinterview.uptdate %>">
+      <tr class="table_tr" id="<%= custinfo.custserial.to_i %>/<%= tabletinterview.ch_cd %>/<%= tabletinterview.fcdata_id %>">
         <td id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
         <td><%= tabletinterview.custserial.to_i %></td>
         <td><%= tabletinterview.uptdate %></td>
@@ -202,26 +202,5 @@
         <% end %>
       </tr>
 
-      <!-- <div style="display:table; height:150px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
-        <% custinfo = Custinfo.where(custserial: tabletinterview.custserial).first %>
-        <font size="4"><div id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
-        시리얼 : <%= tabletinterview.custserial.to_i %> / 진단 날짜 : <%= tabletinterview.uptdate %> / 채널 : <%= custinfo.ch_cd %><br>
-        피부타입 : <font id="skin_type_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font> <br>
-        진단으로 나온 솔루션 1 : <font id="before_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font> / 최종으로 선택된 솔루션 1 : <font id="after_solution_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font>  <br>
-        진단으로 나온 솔루션 2 : <font id="before_solution_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font> / 최종으로 선택된 솔루션 2 : <font id="after_solution_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font>  <br>
-        진단으로 나온 세럼 : <font id="before_serum_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font> / 최종으로 선택된 세럼 : <font id="after_serum_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font>  <br>
-        진단으로 나온 앰플 1 : <font id="before_ampoule_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font> / 최종으로 선택된 앰플 1 : <font id="after_ampoule_1_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font>  <br>
-        진단으로 나온 앰플 2 : <font id="before_ampoule_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font> / 최종으로 선택된 앰플 2 : <font id="after_ampoule_2_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font>  <br>
-        진단으로 나온 화장품 : <font id="before_made_cosmetic_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font> / 최종으로 선택된 화장품 : <font id="after_made_cosmetic_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></font>  <br>
-        A1 : <%= tabletinterview.a_1.to_i %> / A2 : <%= tabletinterview.a_2.to_i %> / A3 : <%= tabletinterview.a_3.to_i %> <br>
-        B1 : <%= tabletinterview.b_1.to_i %> / B2 : <%= tabletinterview.b_2.to_i %> / B3 : <%= tabletinterview.b_3.to_i %> / B4 : <%= tabletinterview.b_4.to_i %> <br>
-        C1 : <%= tabletinterview.c_1.to_i %> / D1 : <%= tabletinterview.d_1.to_i %> / D2 : <%= tabletinterview.d_2.to_i %> / D3 : <%= tabletinterview.d_3.to_i %>
-        / D4 : <%= tabletinterview.d_4.to_i %> / D5 : <%= tabletinterview.d_5.to_i %> / D6 : <%= tabletinterview.d_6.to_i %> / D7 : <%= tabletinterview.d_7.to_i %> / D8 : <%= tabletinterview.d_8.to_i %> / D9 : <%= tabletinterview.d_9.to_i %> / D10 : <%= tabletinterview.d_10.to_i %> <br>
-        <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
-        <% if !fcdata.nil? %>
-          <% fcdata = fcdata.to_api_hash %>
-          [그래프] 모공 점수 : <%= fcdata[:pr_graph].to_i %> / 트러블 점수 : <%= fcdata[:sb_graph].to_i %> / 색소침착 점수 : <%= fcdata[:pp_graph].to_i %> / 주름 점수 : <%= fcdata[:wr_graph].to_i %> / 탄력 점수 : <%= fcdata[:el_graph].to_i %>
-        <% end %>
-      </div> -->
     </body>
 </html>

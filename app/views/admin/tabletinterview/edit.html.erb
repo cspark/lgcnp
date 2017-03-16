@@ -28,11 +28,38 @@
           $('#skin_type_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').append('<%= @tabletinterview.skin_type %>');
         }
 
-        $(document).on("click", ".edit-tablet", function (e) {
+        if ('<%= @tabletinterview.memo %>' != null) {
+          $('#memo').append('<%= @tabletinterview.memo %>');
+        }
+        $(document).on("click", ".update-tablet", function (e) {
           var userId = $(this).attr('id').split("/")[0]
           var ch_cd = $(this).attr('id').split("/")[1]
           var fcdata_id = $(this).attr('id').split("/")[2]
-          location.href = "/admin/tabletinterview/edit?userId=" +userId+ "&ch_cd=" +ch_cd+ "&fcdata_id=" +fcdata_id;
+
+          var memo = $('#memo').val();
+          var formData = new FormData($(this)[0]);
+          formData.append("memo", memo);
+          formData.append("ch_cd", ch_cd);
+          formData.append("fcdata_id", fcdata_id);
+
+          $.ajax({
+              url: "/admin/tabletinterview/"+userId,
+              type: 'PUT',
+              data: formData,
+              async: false,
+              cache: true,
+              contentType: false,
+              processData: false,
+              success: function (response) {
+                  alert("정상적으로 수정되었습니다.");
+                  opener.location.reload();
+                  location.href = "/admin/tabletinterview/detail?userId=" + userId+ "&ch_cd=" +ch_cd+ "&fcdata_id=" +fcdata_id;
+              },
+              error: function (response) {
+                  console.log(response);
+              }
+          });
+
         });
       });
 
@@ -46,10 +73,7 @@
   <body style="padding: 10px;">
     <div style="display:inline;">
       <h2 style="float:left; width:45%;">태블릿 인터뷰 정보</h2>
-      <div style="float:right; width:45%; margin-top:30px;">
-        <button id="<%= @tabletinterview.custserial %>/<%= @tabletinterview.ch_cd %>/<%= @tabletinterview.fcdata_id %>" style="float:right; margin-right:50px;" class="btn btn-warning edit-tablet">수정</button>
-      </div>
-    </div><br>
+    </div><br><br>
 
     <% user = Custinfo.where(custserial: @tabletinterview.custserial).first %>
     <div style="display:table; height:50px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
@@ -74,12 +98,12 @@
       C1: <%= @tabletinterview.c_1.to_i %>
       D1: <%= @tabletinterview.d_1.to_i %> / D2: <%= @tabletinterview.d_2.to_i %> / D3: <%= @tabletinterview.d_3.to_i %> / D4: <%= @tabletinterview.d_4.to_i %> / D5: <%= @tabletinterview.d_5.to_i %><br>
       D6: <%= @tabletinterview.d_6.to_i %> / D7: <%= @tabletinterview.d_7.to_i %> / D8: <%= @tabletinterview.d_8.to_i %> / D9: <%= @tabletinterview.d_9.to_i %><br>
-      <% fcdata = Fcdata.where(custserial: @tabletinterview.custserial).where(measureno: @tabletinterview.fcdata_id).first %>
-      <% if !fcdata.nil? %>
-        <% fcdata = fcdata.to_api_hash %>
-        [그래프] 모공 점수 : <%= fcdata[:pr_graph].to_i %> / 트러블 점수 : <%= fcdata[:sb_graph].to_i %> / 색소침착 점수 : <%= fcdata[:pp_graph].to_i %> / 주름 점수 : <%= fcdata[:wr_graph].to_i %> / 탄력 점수 : <%= fcdata[:el_graph].to_i %>
-      <% end %>
-    </div>
+      <font size="2">메모: </font><br>
+      <textarea type="textarea" name="memo" class="ckeditor" id="memo" style="width:83%;" placeholder="메모를 적어주세요"></textarea>
+    </div><br>
+    <center>
+      <button id="<%= @tabletinterview.custserial %>/<%= @tabletinterview.ch_cd %>/<%= @tabletinterview.fcdata_id %>" class="btn btn-warning update-tablet">수정</button>
+    </center>
 
   </body>
 </html>

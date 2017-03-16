@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     get "feedbacks/detail"  => "feedback#show"
     get "tabletinterview" => "tabletinterview#index"
     get "tabletinterview/detail" => "tabletinterview#show"
+    get "tabletinterview/edit" => "tabletinterview#edit"
 
     get "after_interview" => "fcafterinterviews#show"
     get "after_interview_1" => "fcafterinterviews#show_1"
@@ -35,6 +36,9 @@ Rails.application.routes.draw do
     get "manager_list" => "manager#index"
 
     resources :user do
+    end
+
+    resources :tabletinterview do
     end
 
     resources :admin_users do

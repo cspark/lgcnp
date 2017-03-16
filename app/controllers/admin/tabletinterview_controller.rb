@@ -141,6 +141,25 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
   end
 
   def show
-    @tabletinterview = Fctabletinterview.where(custserial: params[:userId]).where(ch_cd: params[:ch_cd]).where(uptdate: params[:uptdate]).first
+    @tabletinterview = Fctabletinterview.where(custserial: params[:userId]).where(ch_cd: params[:ch_cd]).where(fcdata_id: params[:fcdata_id]).first
+  end
+
+  def edit
+    @tabletinterview = Fctabletinterview.where(custserial: params[:userId]).where(ch_cd: params[:ch_cd]).where(fcdata_id: params[:fcdata_id]).first
+  end
+
+  def update
+    fctabletinterview = Fctabletinterview.where(custserial: params[:id], ch_cd: params[:ch_cd], fcdata_id: params[:fcdata_id]).first
+    fctabletinterview.update(permitted_params)
+    if fctabletinterview.save
+      render json: {}, status: :ok
+    else
+      render json: {}, status: :bad_request
+    end
+  end
+
+  private
+  def permitted_params
+    params.permit(:memo)
   end
 end
