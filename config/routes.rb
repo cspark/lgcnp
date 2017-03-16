@@ -161,8 +161,5 @@ Rails.application.routes.draw do
   get 'calculate' => 'fctabletinterviews#calculate'
 
   resources :images do
-    collection do
-      post "image_upload" => "images#create"
-    end
   end
 end
