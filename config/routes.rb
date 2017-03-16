@@ -57,6 +57,9 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
+    resources :images do
+    end
+    
     namespace :beau do
       resources :beau_user do
         collection do
@@ -160,7 +163,4 @@ Rails.application.routes.draw do
 
   #Related Admin
   get 'calculate' => 'fctabletinterviews#calculate'
-
-  resources :images do
-  end
 end
