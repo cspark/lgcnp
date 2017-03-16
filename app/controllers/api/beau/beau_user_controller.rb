@@ -4,7 +4,7 @@ class Api::Beau::BeauUserController < Api::ApplicationController
     if user.count > 0
       render json: api_hash_for_list(user), status: :ok
     else
-      render json: "", status: 404
+      render :text => "Custinfo is not exist!!!", status: 204
     end
   end
 
@@ -14,7 +14,7 @@ class Api::Beau::BeauUserController < Api::ApplicationController
     if !user.nil?
       render json: user.to_api_hash, status: :ok
     else
-      render json: "", status: 404
+      render :text => "Custinfo is not exist!!!", status: 204
     end
   end
 
@@ -23,7 +23,7 @@ class Api::Beau::BeauUserController < Api::ApplicationController
     if !user.nil?
       render json: user.to_api_hash, status: :ok
     else
-      render json: "", status: 404
+      render :text => "Custinfo is not exist!!!", status: 204
     end
   end
 
@@ -46,7 +46,7 @@ class Api::Beau::BeauUserController < Api::ApplicationController
     if user.save
       render json: user.to_api_hash, status: :ok
     else
-      render json: "", status: 404
+      render :text => "Fail!!!", status: 404
     end
   end
 
@@ -64,10 +64,10 @@ class Api::Beau::BeauUserController < Api::ApplicationController
       if user.save
         render json: user.to_api_hash, status: :ok
       else
-        render json: "", status: 404
+        render :text => "Fail!!!", status: 404
       end
     else
-      render json: "", status: 404
+      render json: "Custinfo is not exist!!!", status: 204
     end
   end
 
@@ -77,10 +77,13 @@ class Api::Beau::BeauUserController < Api::ApplicationController
     if !user.nil?
       user.increase_measureno
       user.update_lastanaldate
-      user.save
-      render json: user.to_api_hash, status: :ok
+      if user.save
+        render json: user.to_api_hash, status: :ok
+      else
+        render :text => "Fail!!!", status: 404
+      end
     else
-      render json: "", status: 404
+      render json: "Custinfo is not exist!!!", status: 404
     end
   end
 

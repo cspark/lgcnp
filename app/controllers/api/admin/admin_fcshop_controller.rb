@@ -7,7 +7,7 @@ class Api::Admin::AdminFcshopController < Api::ApplicationController
 
   def create
     if !Fcshop.where(shop_cd: params[:shop_cd]).first.nil?
-      render :text => "Shop cd exist!!!", status: 404
+      render :text => "Shop cd exist!!!", status: 204
       return
     end
 

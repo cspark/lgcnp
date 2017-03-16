@@ -5,11 +5,11 @@ class ImageUploader < CarrierWave::Uploader::Base
   storage :file
 
   def store_dir
-    "#{model.ch_cd}/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "#{model.ch_cd}/#{model.sub_folder_name}/#{model.private_folder_name}"
   end
 
    def filename
-     "#{original_filename}.#{file.extension}" if original_filename.present?
+     "#{file_name}.#{file.extension}"
    end
 
    process :fix_exif_rotation

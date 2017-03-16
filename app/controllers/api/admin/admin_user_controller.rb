@@ -5,7 +5,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     if !user.nil?
       render :json => user.to_api_hash, status: :ok
     else
-      render json: "", status: 404
+      render json: "", status: 204
     end
   end
 

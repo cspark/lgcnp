@@ -4,14 +4,14 @@ class Api::Cnp::CnpFcdataController < Api::ApplicationController
     if list.count > 0
       render json: api_hash_for_list(list), status: :ok
     else
-      render json: "", status: 404
+      render :text => "Fcdata is not exist!!!", status: 204
     end
   end
 
   def create
     # Data 분석이 완료 된 후 해당 고객 분석값 Insert
     if !AdminFcdata.where(custserial: params[:custserial], ch_cd: params[:ch_cd], measureno: params[:measureno]).first.nil?
-      render json: "", status: 404
+      render :text => "Fcdata already exist!!!", status: 204
       return
     end
     fcdata = AdminFcdata.new(permitted_params)
@@ -21,7 +21,7 @@ class Api::Cnp::CnpFcdataController < Api::ApplicationController
     if fcdata.save
       render json: fcdata.to_api_hash, status: :ok
     else
-      render json: "", status: 404
+      render :text => "Fail!!!", status: 404
     end
   end
 
@@ -34,7 +34,7 @@ class Api::Cnp::CnpFcdataController < Api::ApplicationController
         render :text => "Delete Fail", status: 404
       end
     else
-      render :text => "Delete Fail", status: 404
+      render :text => "Fcdata is not exist!!!", status: 204
     end
   end
 

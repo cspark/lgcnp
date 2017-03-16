@@ -2,7 +2,7 @@ class Api::Beau::BeauFcposController < Api::ApplicationController
   def create
     # Data 분석이 완료 된 후 해당 고객 설문값 Insert
     if !Fcpos.where(custserial: params[:custserial], ch_cd: params[:ch_cd], measureno: params[:measureno]).first.nil?
-      render json: "", status: 404
+      render :text => "Fcpos already exist!!!", status: 204
       return
     end
     fcpos = Fcpos.new(permitted_params)
@@ -12,7 +12,7 @@ class Api::Beau::BeauFcposController < Api::ApplicationController
     if fcpos.save
       render json: fcpos.to_api_hash, status: :ok
     else
-      render json: "", status: 404
+      render :text => "Fail!!!", status: 404
     end
   end
 
