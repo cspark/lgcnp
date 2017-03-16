@@ -12,7 +12,7 @@ class ImageUploader < CarrierWave::Uploader::Base
      "#{@@file_name}.#{@@file_extension}"
    end
 
-   def self.temp_save(file_name: nil, file_extension: nil, image_ch_cd: nil, sub_folder_name: nil, private_folder_name: nil)
+   def temp_save(file_name: nil, file_extension: nil, image_ch_cd: nil, sub_folder_name: nil, private_folder_name: nil)
      @@file_name = file_name
      @@file_extension = file_extension
      @@image_ch_cd = image_ch_cd
