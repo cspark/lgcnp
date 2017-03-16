@@ -27,7 +27,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'mini_magick'
-gem "rmagick", '~> 2.16.0'
+gem 'rmagick', '~> 2.16.0'
 gem 'carrierwave'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -39,7 +39,6 @@ gem 'iconv'
 gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 gem 'kaminari'
-gem 'rmagick', '~> 2.16.0'
 gem 'rubyzip', '>= 1.0.0'
 gem 'zip-zip'
 gem 'axlsx', '~> 2.0'
