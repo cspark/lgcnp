@@ -12,7 +12,7 @@ set :rbenv_ruby, '2.3.1'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 # set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all # default value
-set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/CNP')
+set :linked_dirs, %w{log public/CNP}
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 # set :deploy_to, '/var/www/my_app'
@@ -77,9 +77,4 @@ namespace :deploy do
       # end
     end
   end
-
-  desc "No ActiveRecord override"
-  task :migrate do
-  end
-
 end
