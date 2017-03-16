@@ -299,10 +299,10 @@ class GenerateTestModel < ApplicationRecord
        f.reserve_hhmm = "1500"
        f.custname = "kimsoomin"
        f.phone = "0123456789"
-       f.reserve_yn = "Y"
+       f.reserve_yn = "T"
        f.memo = "CNP"
        f.uptdate = "2017-03-14"
-       f.purchase_yn = "Y"
+       f.purchase_yn = "T"
        f.save
        i +=1;
     end

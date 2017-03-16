@@ -103,6 +103,11 @@
           <% end %>
         <% end %>
 
+        <% fctabletinterview = Fctabletinterview.where(custserial: @after_interview.custserial).where(tablet_interview_id: @after_interview.tablet_interview_id).first %>
+        <% if fctabletinterview.is_agree_after== "T" %>
+          $('input:radio[name=is_agree_after]:input[value=T]').attr("checked", true);
+        <% end %>
+
         $('#delete').click(function(){
           var r = confirm("정말 삭제하시겠습니까?")
           if(r){
@@ -177,6 +182,8 @@
             else if ($('#a4_4').is(":checked"))
               a4 = 4
 
+            var is_agree_after = $(':radio[name="is_agree_after"]:checked').val();
+
             if(a1 != -1 && a2 != -1 && a3 != -1 && a4 != -1){
               var formData = new FormData($(this)[0]);
               formData.append("custserial", '<%= @after_interview.custserial.to_i %>');
@@ -188,6 +195,7 @@
               formData.append("a3", a3);
               formData.append("a4", a4);
               formData.append("a5", $('#a5').val());
+              formData.append("is_agree_after", is_agree_after);
 
               $.ajax({
                   url: "/admin/update_after_interview",
@@ -299,7 +307,11 @@
         <input type="checkbox" name="group4[]" id="a4_3"/> 차별성 없음
         <input type="checkbox" name="group4[]" id="a4_4"/> 잘 모르겠음
         <br><br>
-        5. 기타의견<br>구입하신 세럼을 사용하면서 좋았던 점이나 개선해야 할 사항에 대하여 의견을 주시면 감사하겠습니다.<br>
+        5. 3개월 후 피드백 설문에 동의하시나요?
+        <input style="margin-left:20px;" type="radio" name="is_agree_after" value="T"> 예
+        <input style="margin-left:20px;" type="radio" name="is_agree_after" value="F" checked="checked"> 아니오
+        <br><br>
+        6. 기타의견<br>구입하신 세럼을 사용하면서 좋았던 점이나 개선해야 할 사항에 대하여 의견을 주시면 감사하겠습니다.<br>
         <textarea type="text" rows="5" style="width: 500px;" id="a5" onfocus="this.value = this.value;"></textarea>
         <br>
         <button class="btn btn-primary" id="submit" type="submit" value="Submit">입력</button>

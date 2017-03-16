@@ -27,6 +27,15 @@ class Admin::FcafterinterviewsController < Admin::AdminApplicationController
     order = params[:order]
 
     after_interview = Fcafterinterview.where(custserial: custserial).where(tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).where(order: order).first
+    if params[:is_agree_after].present?
+      fctabletinterview = Fctabletinterview.where(custserial: custserial, tablet_interview_id: tablet_interview_id).first
+      fctabletinterview.is_agree_after = params[:is_agree_after]
+      fctabletinterview.save
+
+      custinfo = Custinfo.where(custserial: custserial).where(ch_cd: fctabletinterview.ch_cd).where(measureno: fctabletinterview.fcdata_id).first
+      custinfo.is_agree_after = params[:is_agree_after]
+      custinfo.save
+    end
 
     after_interview.a1 = params[:a1]
     after_interview.a2 = params[:a2]
