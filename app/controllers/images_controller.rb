@@ -1,4 +1,4 @@
-class ImagesController < Api::ApplicationController
+class ImagesController < ActionController::Base
   def create
     # 폴더 만들기
     custserial = params[:custserial]
