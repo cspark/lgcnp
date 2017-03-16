@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   # devise_for :admin_users, ActiveAdmin::Devise.config
   # ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :images do
+  end
+
   namespace :admin do
     get "/"  => "admin#index"
     get "admin_login"  => "admin#admin_login"
@@ -160,7 +163,4 @@ Rails.application.routes.draw do
 
   #Related Admin
   get 'calculate' => 'fctabletinterviews#calculate'
-
-  resources :images do
-  end
 end
