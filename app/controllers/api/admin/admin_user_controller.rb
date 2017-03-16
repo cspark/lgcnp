@@ -5,7 +5,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     if !user.nil?
       render :json => user.to_api_hash, status: :ok
     else
-      render json: "", status: 204
+      render :text => "Custinfo is not exist!!!", status: 204
     end
   end
 
@@ -30,91 +30,96 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       if user.save
         render json: user.to_api_hash, status: :ok
       else
-        render json: "", status: 404
+        render :text => "Fail!!!", status: 404
       end
     else
-      render json: "", status: 404
+      render :text => "Custinfo is not exist!!!", status: 204
     end
   end
 
   def destroy
     Rails.logger.info "destroy!!!"
     serial = params[:id]
-    user_list = Custinfo.where(custserial: serial)
+
     measureno = 0
-    if !user_list.order("measureno desc").first.nil?
-      measureno = user_list.order("measureno desc").first.measureno.to_i
-    end
-
-    if user_list.count > 0 && !measureno.nil? && Rails.env.production? || Rails.env.staging?
-      (1..measureno.to_i).each do |num|
-        image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_Sym_L_")
-        image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_Sym_L_")
-        image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_Sym_L_")
-        image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_Sym_L_")
-        image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_Sym_R_")
-        image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_Sym_R_")
-        image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_Sym_R_")
-        image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_Sym_R_")
-        image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_UV_")
-        image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_UV_")
-        image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_UV_")
-        image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_UV_")
-        image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_WH_PWC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_WH_PWC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_WH_PWC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_WH_PWC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_WH_")
-        image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_WH_")
-        image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_WH_")
-        image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_WH_")
-        image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_UVGR_SBC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_UVGR_SBC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_UVGR_SBC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_UVGR_SBC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_UV_GR_")
-        image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_UV_GR_")
-        image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_UV_GR_")
-        image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_UV_GR_")
-        image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_PL_PLC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_PL_PLC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_PL_PLC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_PL_PLC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_UVGR_UVC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_UVGR_UVC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_UVGR_UVC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_UVGR_UVC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_PL_")
-        image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_PL_")
-        image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_PL_")
-        image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_PL_")
-        image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_PL_UVC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_PL_UVC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_PL_UVC_")
-        image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_PL_UVC_")
-        image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_F_FM_WH_PWC_W")
-        image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_F_FM_WH_E")
-        image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_Sp_Pore_Cust")
-        image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_Sp_Spot_Cust")
-        image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_Sp_Wr_Cust")
-        image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_F_PW_SK_L_SIDE")
-        image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_END")
-      end
-    end
-    # serial = "839"
+    user_list = Custinfo.where(custserial: serial)
     if user_list.count > 0
-      Fctabletinterview.where(custserial: serial).delete_all
-      Fcafterinterview.where(custserial: serial).delete_all
-      Fcdata.where(custserial: serial).delete_all
-      Fcpos.where(custserial: serial).delete_all
-      Fcinterview.where(custserial: serial).delete_all
-      user_list.delete_all
-    end
+      if !user_list.order("measureno desc").first.nil?
+        measureno = user_list.order("measureno desc").first.measureno.to_i
+      end
 
-    if user_list.count == 0
-      render :text => "Delete Success!!!", status: 200
+      if user_list.count > 0 && !measureno.nil? && Rails.env.production? || Rails.env.staging?
+        (1..measureno.to_i).each do |num|
+          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_Sym_L_")
+          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_Sym_L_")
+          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_Sym_L_")
+          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_Sym_L_")
+          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_Sym_R_")
+          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_Sym_R_")
+          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_Sym_R_")
+          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_Sym_R_")
+          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_UV_")
+          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_UV_")
+          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_UV_")
+          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_UV_")
+          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_WH_PWC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_WH_PWC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_WH_PWC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_WH_PWC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_WH_")
+          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_WH_")
+          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_WH_")
+          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_WH_")
+          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_UVGR_SBC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_UVGR_SBC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_UVGR_SBC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_UVGR_SBC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_UV_GR_")
+          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_UV_GR_")
+          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_UV_GR_")
+          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_UV_GR_")
+          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_PL_PLC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_PL_PLC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_PL_PLC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_PL_PLC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_UVGR_UVC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_UVGR_UVC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_UVGR_UVC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_UVGR_UVC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_PL_")
+          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_PL_")
+          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_PL_")
+          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_PL_")
+          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_PL_UVC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_PL_UVC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_PL_UVC_")
+          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_PL_UVC_")
+          image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_F_FM_WH_PWC_W")
+          image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_F_FM_WH_E")
+          image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_Sp_Pore_Cust")
+          image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_Sp_Spot_Cust")
+          image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_Sp_Wr_Cust")
+          image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_F_PW_SK_L_SIDE")
+          image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_END")
+        end
+      end
+      # serial = "839"
+      if user_list.count > 0
+        Fctabletinterview.where(custserial: serial).delete_all
+        Fcafterinterview.where(custserial: serial).delete_all
+        Fcdata.where(custserial: serial).delete_all
+        Fcpos.where(custserial: serial).delete_all
+        Fcinterview.where(custserial: serial).delete_all
+        user_list.delete_all
+      end
+
+      if user_list.count == 0
+        render :text => "Delete Success!!!", status: 200
+      else
+        render :text => "Delete Fail!!!", status: 404
+      end
     else
-      render :text => "Delete Fail!!!", status: 404
+      render :text => "Custinfo is not exist!!!", status: 204
     end
   end
 

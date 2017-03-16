@@ -4,7 +4,7 @@ class Api::Admin::AdminFcdataController < Api::ApplicationController
     if list.count > 0
       render json: api_hash_for_list(list), status: :ok
     else
-      render json: "", status: 204
+      render :text => "Fcdata is not exist!!!", status: 204
     end
   end
 

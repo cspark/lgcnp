@@ -7,7 +7,7 @@ class Api::Admin::AdminFcshopController < Api::ApplicationController
 
   def create
     if !Fcshop.where(shop_cd: params[:shop_cd]).first.nil?
-      render :text => "Shop cd exist!!!", status: 204
+      render :text => "Shop already exist!!!", status: 204
       return
     end
 
@@ -15,7 +15,7 @@ class Api::Admin::AdminFcshopController < Api::ApplicationController
     if fcshop.save
       render json: fcshop.to_api_hash, status: :ok
     else
-      render json: "", status: 404
+      render :text => "Fail!!!", status: 404
     end
   end
 

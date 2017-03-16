@@ -5,7 +5,7 @@ class Api::Admin::AdminLcareUserController < Api::ApplicationController
     if lcare_user.count > 0
       render json: api_hash_for_list(lcare_user), status: :ok
     else
-      render json: "", status: 204
+      render :text => "LcareUser is not exist!!!", status: 204
     end
   end
 
