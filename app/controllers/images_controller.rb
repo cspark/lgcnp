@@ -54,7 +54,7 @@ class ImagesController < Api::ApplicationController
     file_name << number
     file_extension = "jpg"
 
-    ImageUploader.temp_save(file_name: file_name, file_extension: file_extension, image_ch_cd: ch_cd, sub_folder_name: sub_folder_name, private_folder_name: private_folder_name, )
+    ImageUploader.temp_save(file_name: file_name, file_extension: file_extension, image_ch_cd: ch_cd, sub_folder_name: sub_folder_name, private_folder_name: private_folder_name)
     uploader = ImageUploader.new
     uploader.store!(params[:image])
 
