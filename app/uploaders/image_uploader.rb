@@ -5,24 +5,18 @@ class ImageUploader < CarrierWave::Uploader::Base
   storage :file
 
   def store_dir
-    "#{model.ch_cd}/#{model.sub_folder_name}/#{model.private_folder_name}"
+    "#{@@image_ch_cd}/#{@@sub_folder_name}/#{@@private_folder_name}"
   end
 
    def filename
-     "#{file_name}.#{file.extension}"
+     "#{@@file_name}.#{@@file_extension}"
    end
 
-   process :fix_exif_rotation
-
-   def fix_exif_rotation
-     manipulate! do |img|
-       img.tap(&:auto_orient)
-     end
-   end
-
-   protected
-   def secure_token
-     var = :"@#{mounted_as}_secure_token"
-     model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
+   def self.temp_save(file_name: nil, file_extension: nil, image_ch_cd: nil, sub_folder_name: nil, private_folder_name: nil)
+     @@file_name = file_name
+     @@file_extension = file_extension
+     @@image_ch_cd = image_ch_cd
+     @@sub_folder_name = sub_folder_name
+     @@private_folder_name = private_folder_name
    end
 end
