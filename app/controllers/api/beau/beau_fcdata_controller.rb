@@ -4,14 +4,14 @@ class Api::Beau::BeauFcdataController < Api::ApplicationController
     if list.count > 0
       render json: api_hash_for_list(list), status: :ok
     else
-      render :body => "AdminFcdata is not exist!!!", status: 204
+      render :text => "AdminFcdata is not exist!!!", status: 204
     end
   end
 
   def create
     # Data 분석이 완료 된 후 해당 고객 분석값 Insert
     if !AdminFcdata.where(custserial: params[:custserial], ch_cd: params[:ch_cd], measureno: params[:measureno]).first.nil?
-      render :body => "Data exist!!!", status: 204
+      render :text => "Data exist!!!", status: 204
       return
     end
     fcdata = AdminFcdata.new(permitted_params)
@@ -21,7 +21,7 @@ class Api::Beau::BeauFcdataController < Api::ApplicationController
     if fcdata.save
       render json: fcdata.to_api_hash, status: :ok
     else
-      render :body => "Fail!!!", status: 404
+      render :text => "Fail!!!", status: 404
     end
   end
 

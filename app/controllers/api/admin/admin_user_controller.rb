@@ -5,7 +5,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     if !user.nil?
       render :json => user.to_api_hash, status: :ok
     else
-      render :body => "Custinfo is not exist!!!", status: 204
+      render :text => "Custinfo is not exist!!!", status: 204
     end
   end
 
@@ -30,10 +30,10 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       if user.save
         render json: user.to_api_hash, status: :ok
       else
-        render :body => "Fail!!!", status: 404
+        render :text => "Fail!!!", status: 404
       end
     else
-      render :body => "Custinfo is not exist!!!", status: 204
+      render :text => "Custinfo is not exist!!!", status: 204
     end
   end
 

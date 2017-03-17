@@ -10,7 +10,7 @@ class Api::Beau::BeauLcareUserController < Api::ApplicationController
     if lcare_user.count > 0
       render json: api_hash_for_list(lcare_user), status: :ok
     else
-      render :body => "Lcare user is not exist!!!", status: 204
+      render :text => "Lcare user is not exist!!!", status: 204
     end
   end
 

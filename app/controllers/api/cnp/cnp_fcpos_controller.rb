@@ -2,7 +2,7 @@ class Api::Cnp::CnpFcposController < Api::ApplicationController
   def create
     # Data 분석이 완료 된 후 해당 고객 설문값 Insert
     if !Fcpos.where(custserial: params[:custserial], ch_cd: params[:ch_cd], measureno: params[:measureno]).first.nil?
-      render :body => "Fcpos already exist!!!", status: 204
+      render :text => "Fcpos already exist!!!", status: 204
       return
     end
     fcpos = Fcpos.new(permitted_params)
@@ -12,7 +12,7 @@ class Api::Cnp::CnpFcposController < Api::ApplicationController
     if fcpos.save
       render json: fcpos.to_api_hash, status: :ok
     else
-      render :body => "Fail!!!", status: 404
+      render :text => "Fail!!!", status: 404
     end
   end
 
@@ -20,12 +20,12 @@ class Api::Cnp::CnpFcposController < Api::ApplicationController
     fcpos = Fcpos.where(custserial: params[:id], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
     if !fcpos.nil?
       if fcpos.delete
-        render :body => "Delete Complete", status: 200
+        render :text => "Delete Complete", status: 200
       else
-        render :body => "Delete Fail", status: 404
+        render :text => "Delete Fail", status: 404
       end
     else
-      render :body => "Fcpos is not exist!!!", status: 204
+      render :text => "Fcpos is not exist!!!", status: 204
     end
   end
 
