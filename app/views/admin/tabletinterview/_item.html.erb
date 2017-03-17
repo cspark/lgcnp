@@ -155,10 +155,6 @@
     </head>
     <body>
       <% custinfo = Custinfo.where(custserial: tabletinterview.custserial).first %>
-      <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
-      <% if !fcdata.nil? %>
-        <% fcdata = fcdata.to_api_hash_for_admin %>
-      <% end %>  
       <tr class="table_tr" id="<%= custinfo.custserial.to_i %>/<%= tabletinterview.ch_cd %>/<%= tabletinterview.fcdata_id %>">
         <td id="name_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
         <td><%= tabletinterview.custserial.to_i %></td>
@@ -166,6 +162,10 @@
         <td><%= custinfo.ch_cd %></td>
         <% if @select_filter != [] %>
           <% @select_filter.each do |filter| %>
+            <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
+            <% if !fcdata.nil? %>
+              <% fcdata = fcdata.to_api_hash_for_admin %>
+            <% end %>  
             <% if filter.include?("skin_type") %>
               <td id="skin_type_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
             <% elsif filter.include?("before_solution_1") %>
