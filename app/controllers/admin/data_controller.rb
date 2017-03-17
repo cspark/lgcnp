@@ -92,6 +92,21 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped = scoped.where(faceno: @select_area.to_i) if !@select_area.blank? && @select_area.downcase != "all"
       scoped = scoped.where("skintype LIKE ?", "%#{@select_skin_type_device}%") if !@select_skin_type_device.blank? && @select_skin_type_device != "all"
 
+      if @select_filter == []
+        @excel_name = ["이름","분석 횟수","채널구분","전면/좌/우측면","분석 일","업데이트 일","수분 측정1","수분 측정2","수분 측정3","모공 측정1","모공 측정2","모공 측정7","모공 측정8","모공 측정avr","주름 측정3", "주름 측정4", "주름 측정6", "주름 측정avr",
+        "탄력 측정7", "탄력 측정8", "탄력 측정avr", "탄력 각도7", "탄력 각도8", "피지 측정1", "피지 측정2", "피지 측정7", "피지 측정8", "피지 측정avr", "포피린 측정1", "포피린 측정2", "포피린 측정7", "포피린 측정8", "포피린 측정avr",
+        "포피린 비 측정1", "포피린 비 측정2", "포피린 비 측정7", "포피린 비 측정8", "포피린 비 측정avr", "편광 색소침착 측정1", "편광 색소침착 측정2", "편광 색소침착 측정3", "편광 색소침착 측정4", "편광 색소침착 측정5", "편광 색소침착 측정6", "편광 색소침착 측정7", "편광 색소침착 측정8", "편광 색소침착 측정avr",
+        "UV광 색소침착 측정1", "UV광 색소침착 측정2", "UV광 색소침착 측정3","UV광 색소침착 측정4","UV광 색소침착 측정5","UV광 색소침착 측정6","UV광 색소침착 측정7","UV광 색소침착 측정8","UV광 색소침착 측정avr","피부톤 측정1","피부톤 측정2","피부톤 측정4","피부톤 측정6","피부톤 측정7","피부톤 측정8","피부톤 측정avr",
+        "피부톤 Red 측정1","피부톤 Red 측정2","피부톤 Red 측정4","피부톤 Red 측정6","피부톤 Red 측정7","피부톤 Red 측정8","피부톤 Red 측정avr","피부톤 Green 측정1","피부톤 Green 측정2","피부톤 Green 측정4","피부톤 Green 측정6","피부톤 Green 측정7","피부톤 Green 측정8","피부톤 Green 측정avr",
+        "피부톤 Blue 측정1","피부톤 Blue 측정2","피부톤 Blue 측정4","피부톤 Blue 측정6","피부톤 Blue 측정7","피부톤 Blue 측정8","피부톤 Blue 측정avr","피부톤 칼라 타입","선 민감도","동안각도 점수 우측","동안각도 점수 좌측","피부타입"]
+      else
+        scoped = scoped.select("custserial,faceno,measuredate,measureno,uptdate," +@params_filter)
+        @excel_name = ["이름","분석 횟수","채널구분","전면/좌/우측면","분석 일","업데이트 일"]
+        @select_filter.each do |filter|
+          @excel_name << filter
+        end
+      end
+
       # scoped = scoped.where(skintype: @select_skin_type_survey) if !@select_skin_type_survey.blank? && @select_skin_type_survey != "all"
 
       scoped = scoped.order("uptdate desc")
@@ -157,25 +172,6 @@ class Admin::DataController < Admin::AdminApplicationController
         end
       end
 
-      if @select_filter == []
-        @excel_name = ["이름","분석 횟수","채널구분","전면/좌/우측면","분석 일","업데이트 일","수분 측정1","수분 측정2","수분 측정3","모공 측정1","모공 측정2","모공 측정7","모공 측정8","모공 측정avr","주름 측정3", "주름 측정4", "주름 측정6", "주름 측정avr",
-        "탄력 측정7", "탄력 측정8", "탄력 측정avr", "탄력 각도7", "탄력 각도8", "피지 측정1", "피지 측정2", "피지 측정7", "피지 측정8", "피지 측정avr", "포피린 측정1", "포피린 측정2", "포피린 측정7", "포피린 측정8", "포피린 측정avr",
-        "포피린 비 측정1", "포피린 비 측정2", "포피린 비 측정7", "포피린 비 측정8", "포피린 비 측정avr", "편광 색소침착 측정1", "편광 색소침착 측정2", "편광 색소침착 측정3", "편광 색소침착 측정4", "편광 색소침착 측정5", "편광 색소침착 측정6", "편광 색소침착 측정7", "편광 색소침착 측정8", "편광 색소침착 측정avr",
-        "UV광 색소침착 측정1", "UV광 색소침착 측정2", "UV광 색소침착 측정3","UV광 색소침착 측정4","UV광 색소침착 측정5","UV광 색소침착 측정6","UV광 색소침착 측정7","UV광 색소침착 측정8","UV광 색소침착 측정avr","피부톤 측정1","피부톤 측정2","피부톤 측정4","피부톤 측정6","피부톤 측정7","피부톤 측정8","피부톤 측정avr",
-        "피부톤 Red 측정1","피부톤 Red 측정2","피부톤 Red 측정4","피부톤 Red 측정6","피부톤 Red 측정7","피부톤 Red 측정8","피부톤 Red 측정avr","피부톤 Green 측정1","피부톤 Green 측정2","피부톤 Green 측정4","피부톤 Green 측정6","피부톤 Green 측정7","피부톤 Green 측정8","피부톤 Green 측정avr",
-        "피부톤 Blue 측정1","피부톤 Blue 측정2","피부톤 Blue 측정4","피부톤 Blue 측정6","피부톤 Blue 측정7","피부톤 Blue 측정8","피부톤 Blue 측정avr","피부톤 칼라 타입","선 민감도","동안각도 점수 우측","동안각도 점수 좌측","피부타입"]
-      else
-        Rails.logger.info "!!!"
-        Rails.logger.info @params_filter
-        Rails.logger.info @fcdatas
-        Rails.logger.info @fcdatas.count
-        Rails.logger.info "custserial,faceno,measuredate,measureno,uptdate," +@params_filter
-        @fcdatas = @fcdatas.select("custserial,faceno,measuredate,measureno,uptdate," +@params_filter)
-        @excel_name = ["이름","분석 횟수","채널구분","전면/좌/우측면","분석 일","업데이트 일"]
-        @select_filter.each do |filter|
-          @excel_name << filter
-        end
-      end
       @fcdatas_excel = @fcdatas
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
     else
