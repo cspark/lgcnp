@@ -212,6 +212,10 @@
         margin: 0 auto;
         text-align: center !important;
     }
+
+    .width170 {
+      min-width:170px
+    }
     </style>
   </head>
 
@@ -308,7 +312,7 @@
         <tr>
             <th>이름</th>
             <th>시리얼</th>
-            <th style="width:170px;">진단 날짜</th>
+            <th class="width170 text-center">진단 날짜</th>
             <th>채널</th>
             <% if @select_filter != [] %>
               <% @select_filter.each do |filter| %>

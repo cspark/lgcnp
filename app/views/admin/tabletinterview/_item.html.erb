@@ -193,17 +193,17 @@
             <% elsif filter.include?("after_made_cosmetic") %>
               <td id="after_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
             <% elsif !fcdata.nil? && filter.include?("pr_graph") %>
-              <td><%= fcdata[:pr_graph].to_i %></td>
+              <td class="text-center"><%= fcdata[:pr_graph].to_i %></td>
             <% elsif !fcdata.nil? && filter.include?("sb_graph") %>
-              <td><%= fcdata[:sb_graph].to_i %></td>
+              <td class="text-center"><%= fcdata[:sb_graph].to_i %></td>
             <% elsif !fcdata.nil? && filter.include?("pp_graph") %>
-              <td><%= fcdata[:pp_graph].to_i %></td>
+              <td class="text-center"><%= fcdata[:pp_graph].to_i %></td>
             <% elsif !fcdata.nil? && filter.include?("wr_graph") %>
-              <td><%= fcdata[:wr_graph].to_i %></td>
+              <td class="text-center"><%= fcdata[:wr_graph].to_i %></td>
             <% elsif !fcdata.nil? && filter.include?("el_graph") %>
-              <td><%= fcdata[:el_graph].to_i %></td>
+              <td class="text-center"><%= fcdata[:el_graph].to_i %></td>
             <% else %>
-              <td><%= tabletinterview[filter] %></td>
+              <td class="text-center"><%= tabletinterview[filter] %></td>
             <% end %>
           <% end %>
         <% else %>
@@ -241,11 +241,11 @@
           <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
           <% if !fcdata.nil? %>
             <% fcdata = fcdata.to_api_hash_for_admin %>
-            <td><%= fcdata[:pr_graph].to_i %></td>
-            <td><%= fcdata[:sb_graph].to_i %></td>
-            <td><%= fcdata[:pp_graph].to_i %></td>
-            <td><%= fcdata[:wr_graph].to_i %></td>
-            <td><%= fcdata[:el_graph].to_i %></td>
+            <td class="text-center"><%= fcdata[:pr_graph].to_i %></td>
+            <td class="text-center"><%= fcdata[:sb_graph].to_i %></td>
+            <td class="text-center"><%= fcdata[:pp_graph].to_i %></td>
+            <td class="text-center"><%= fcdata[:wr_graph].to_i %></td>
+            <td class="text-center"><%= fcdata[:el_graph].to_i %></td>
           <% end %>
         <% end %>
       </tr>
