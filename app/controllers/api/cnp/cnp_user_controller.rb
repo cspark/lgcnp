@@ -12,7 +12,7 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
     if user.count > 0
       render json: api_hash_for_list(user), status: :ok
     else
-      render :text => "Custinfo is not exist!!!", status: 204
+      render :body => "Custinfo is not exist!!!", status: 204
     end
   end
 
@@ -21,7 +21,7 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
     if !user.nil?
       render json: user.to_api_hash, status: :ok
     else
-      render :text => "Custinfo is not exist!!!", status: 404
+      render :body => "Custinfo is not exist!!!", status: 404
     end
   end
 
@@ -35,10 +35,10 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
       if user.save
         render json: user.to_api_hash, status: :ok
       else
-        render :text => "Fail!!!", status: 404
+        render :body => "Fail!!!", status: 404
       end
     else
-      render :text => "Custinfo is not exist!!!", status: 404
+      render :body => "Custinfo is not exist!!!", status: 404
     end
   end
 
@@ -51,10 +51,10 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
       if user.save
         render json: user.to_api_hash, status: :ok
       else
-        render :text => "Fail!!!", status: 404
+        render :body => "Fail!!!", status: 404
       end
     else
-      render :text => "Custinfo is not exist!!!", status: 404
+      render :body => "Custinfo is not exist!!!", status: 404
     end
   end
 

@@ -6,7 +6,7 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
     if !fcschedule.nil?
       render json: fcschedule.to_api_hash, status: :ok
     else
-      render :text => "Fcschedule is not exist!!!", status: 404
+      render :body => "Fcschedule is not exist!!!", status: 404
     end
   end
 
@@ -16,7 +16,7 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
     if list.count > 0
       render json: api_hash_for_list(list), status: :ok
     else
-      render :text => "Fcschedule is not exist!!!", status: 404
+      render :body => "Fcschedule is not exist!!!", status: 404
     end
   end
 
@@ -26,7 +26,7 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
     if list.count > 0
       render json: api_hash_for_list(list), status: :ok
     else
-      render :text => "Fcschedule is not exist!!!", status: 404
+      render :body => "Fcschedule is not exist!!!", status: 404
     end
   end
 
@@ -39,7 +39,7 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
     if fcschedule.save
       render json: fcschedule.to_api_hash, status: :ok
     else
-      render :text => "Fail!!!", status: 404
+      render :body => "Fail!!!", status: 404
     end
   end
 
@@ -68,10 +68,10 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
       if fcschedule.save
         render json: fcschedule.to_api_hash, status: :ok
       else
-        render :text => "Fail!!!", status: 404
+        render :body => "Fail!!!", status: 404
       end
     else
-      render :text => "Fcschedule is not exist!!!", status: 204
+      render :body => "Fcschedule is not exist!!!", status: 204
     end
   end
 

@@ -4,14 +4,14 @@ class Api::Beau::BeauFcinterviewController < Api::ApplicationController
     if !interview.nil?
       render json: interview.to_api_hash, status: :ok
     else
-      render :text => "Fcinterview is not exist!!!", status: 204
+      render :body => "Fcinterview is not exist!!!", status: 204
     end
   end
 
   def create
     # Data 분석이 완료 된 후 해당 고객 설문값 Insert
     if !Fcinterview.where(custserial: params[:custserial], ch_cd: params[:ch_cd], measureno: params[:measureno]).first.nil?
-      render :text => "Fcinterview exist!!!", status: 204
+      render :body => "Fcinterview exist!!!", status: 204
       return
     end
     fcinterview = Fcinterview.new(permitted_params)
@@ -21,7 +21,7 @@ class Api::Beau::BeauFcinterviewController < Api::ApplicationController
     if fcinterview.save
       render json: fcinterview.to_api_hash, status: :ok
     else
-      render :text => "Fail!!!", status: 404
+      render :body => "Fail!!!", status: 404
     end
   end
 
