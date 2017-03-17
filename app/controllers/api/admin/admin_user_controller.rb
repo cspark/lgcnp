@@ -43,6 +43,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
 
     measureno = 0
     user_list = Custinfo.where(custserial: serial)
+    Rails.logger.info user_list.count
     if user_list.count > 0
       if !user_list.order("measureno desc").first.nil?
         measureno = user_list.order("measureno desc").first.measureno.to_i
@@ -114,12 +115,12 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       end
 
       if user_list.count == 0
-        render :body => "Delete Success!!!", status: 200
+        render :text => "Delete Success!!!", status: 200
       else
-        render :body => "Delete Fail!!!", status: 404
+        render :text => "Delete Fail!!!", status: 404
       end
     else
-      render :body => "Custinfo is not exist!!!", status: 204
+      render :text => "Custinfo is not exist!!!", status: 204
     end
   end
 
@@ -168,7 +169,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     file_delete_command << delete_file
     file_delete_command << "' --ftp-create-dirs"
 
-    # file_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CLAB/900-P/839-1/' -u 'janus:pielgahn2012#1' -Q '-DELE 839-1_F_FM_WH_4.jpg' --ftp-create-dirs"
+    # file_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CLAB/900-P/839-1/' -u 'janus:pielgahn2012#1' -Q '-DELE 839-1_Sym_L_1.jpg' --ftp-create-dirs"
     # folder_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CLAB/900-P/' -u 'janus:pielgahn2012#1' -Q '-RMD 839-1' --ftp-create-dirs"
     Rails.logger.info file_delete_command
     system(file_delete_command)

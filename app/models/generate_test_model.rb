@@ -200,8 +200,8 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        user = Custinfo.new
-       user.custserial = 44.to_s
-       user.custname = "Delete"
+       user.custserial = 839.to_s
+       user.custname = "kimsoomin"
        user.sex = "M"
        user.birthyy = "1985"
        user.birthmm = "11"
