@@ -6,7 +6,7 @@ wb.add_worksheet(name: "Pos") do |sheet|
         temp = [URI.decode(custinfo.custname), custinfo.ch_cd, data.faceno, data.measuredate, data.measureno.to_i, data.uptdate]
         if @select_filter != []
           @select_filter.each do |filter|
-            temp << fcdata[filter].to_s
+            temp << data[filter].to_s
           end
           sheet.add_row temp
         else

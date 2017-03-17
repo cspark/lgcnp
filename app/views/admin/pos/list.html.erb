@@ -33,10 +33,16 @@
       $("input:checkbox[id='all_check']").prop("checked", true);
       $(document).on("click", "#all_check", function (e) {
         if (!$("input:checkbox[id='all_check']").is(":checked")){
-          window.open("/admin/fcpos/filter_check", "/admin/fcpos/filter_check", "scrollbars=1,resizable=1,height=650,width=900");
+          window.open("/admin/fcpos/filter_check", "/admin/fcpos/filter_check", "scrollbars=1,resizable=1,height=650,width=500");
         } else {
           filterStr = ""
         }
+      });
+
+      $('#submit').click(function(){
+        url = "/admin/fcpos_list?search=" + encodeURI(encodeURI($("#search").val()));
+        url += "&select_filter=" +filterStr
+        location.href = url;
       });
     });
 
@@ -56,12 +62,6 @@
     function showDetail(userId, measureno){
       window.open("/admin/fcpos/detail?userId=" +userId+ "&measureno=" +measureno, "/admin/fcpos/detail?userId=" +userId+ "&measureno=" +measureno, "scrollbars=1,resizable=1,height=600,width=600");
     }
-
-    $('#submit').click(function(){
-      url = "/admin/fcpos_list?search=" + encodeURI(encodeURI($("#search").val()));
-      url += "&select_filter=" +filterStr
-      location.href = url;
-    });
 
     function selectPosFilter(select_filter){
       filterStr = select_filter
@@ -123,54 +123,60 @@
             <th class="width170 text-center">분석 일</th>
             <th>분석 횟수</th>
             <th class="width100 text-center">업데이트 일</th>
-            <th>이마 영역정보x</th>
-            <th>이마 영역정보y</th>
-            <th>이마 영역정보w</th>
-            <th>이마 영역정보h</th>
-            <th>코 영역정보x</th>
-            <th>코 영역정보y</th>
-            <th>코 영역정보w</th>
-            <th>코 영역정보h</th>
-            <th>우측 눈가 영역정보x</th>
-            <th>우측 눈가 영역정보y</th>
-            <th>우측 눈가 영역정보w</th>
-            <th>우측 눈가 영역정보h</th>
-            <th>우측 눈밑 영역정보x</th>
-            <th>우측 눈밑 영역정보y</th>
-            <th>우측 눈밑 영역정보w</th>
-            <th>우측 눈밑 영역정보h</th>
-            <th>좌측 눈가 영역정보x</th>
-            <th>좌측 눈가 영역정보y</th>
-            <th>좌측 눈가 영역정보w</th>
-            <th>좌측 눈가 영역정보h</th>
-            <th>좌측 눈밑 영역정보x</th>
-            <th>좌측 눈밑 영역정보y</th>
-            <th>좌측 눈밑 영역정보w</th>
-            <th>좌측 눈밑 영역정보h</th>
-            <th>우측 볼 영역정보x</th>
-            <th>우측 볼 영역정보y</th>
-            <th>우측 볼 영역정보w</th>
-            <th>우측 볼 영역정보h</th>
-            <th>좌측 볼 영역정보x</th>
-            <th>좌측 볼 영역정보y</th>
-            <th>좌측 볼 영역정보w</th>
-            <th>좌측 볼 영역정보h</th>
-            <th>우측눈 사각영역 정보l</th>
-            <th>우측눈 사각영역 정보t</th>
-            <th>우측눈 사각영역 정보r</th>
-            <th>우측눈 사각영역 정보b</th>
-            <th>좌측눈 사각영역 정보l</th>
-            <th>좌측눈 사각영역 정보t</th>
-            <th>좌측눈 사각영역 정보r</th>
-            <th>좌측눈 사각영역 정보b</th>
-            <th>입 사각영역 정보l</th>
-            <th>입 사각영역 정보t</th>
-            <th>입 사각영역 정보r</th>
-            <th>입 사각영역 정보b</th>
-            <th>우측 얼굴 끝 라인 좌표x</th>
-            <th>우측 얼굴 끝 라인 좌표y</th>
-            <th>좌측 얼굴 끝 라인 좌표x</th>
-            <th>좌측 얼굴 끝 라인 좌표y</th>
+            <% if @select_filter != [] %>
+              <% @select_filter.each do |filter| %>
+                <th class="text-center"><%= filter %></th>
+              <% end %>
+            <% else %>
+              <th>이마 영역정보x</th>
+              <th>이마 영역정보y</th>
+              <th>이마 영역정보w</th>
+              <th>이마 영역정보h</th>
+              <th>코 영역정보x</th>
+              <th>코 영역정보y</th>
+              <th>코 영역정보w</th>
+              <th>코 영역정보h</th>
+              <th>우측 눈가 영역정보x</th>
+              <th>우측 눈가 영역정보y</th>
+              <th>우측 눈가 영역정보w</th>
+              <th>우측 눈가 영역정보h</th>
+              <th>우측 눈밑 영역정보x</th>
+              <th>우측 눈밑 영역정보y</th>
+              <th>우측 눈밑 영역정보w</th>
+              <th>우측 눈밑 영역정보h</th>
+              <th>좌측 눈가 영역정보x</th>
+              <th>좌측 눈가 영역정보y</th>
+              <th>좌측 눈가 영역정보w</th>
+              <th>좌측 눈가 영역정보h</th>
+              <th>좌측 눈밑 영역정보x</th>
+              <th>좌측 눈밑 영역정보y</th>
+              <th>좌측 눈밑 영역정보w</th>
+              <th>좌측 눈밑 영역정보h</th>
+              <th>우측 볼 영역정보x</th>
+              <th>우측 볼 영역정보y</th>
+              <th>우측 볼 영역정보w</th>
+              <th>우측 볼 영역정보h</th>
+              <th>좌측 볼 영역정보x</th>
+              <th>좌측 볼 영역정보y</th>
+              <th>좌측 볼 영역정보w</th>
+              <th>좌측 볼 영역정보h</th>
+              <th>우측눈 사각영역 정보l</th>
+              <th>우측눈 사각영역 정보t</th>
+              <th>우측눈 사각영역 정보r</th>
+              <th>우측눈 사각영역 정보b</th>
+              <th>좌측눈 사각영역 정보l</th>
+              <th>좌측눈 사각영역 정보t</th>
+              <th>좌측눈 사각영역 정보r</th>
+              <th>좌측눈 사각영역 정보b</th>
+              <th>입 사각영역 정보l</th>
+              <th>입 사각영역 정보t</th>
+              <th>입 사각영역 정보r</th>
+              <th>입 사각영역 정보b</th>
+              <th>우측 얼굴 끝 라인 좌표x</th>
+              <th>우측 얼굴 끝 라인 좌표y</th>
+              <th>좌측 얼굴 끝 라인 좌표x</th>
+              <th>좌측 얼굴 끝 라인 좌표y</th>
+            <% end %>
         </tr>
       </thead>
       <tbody>
