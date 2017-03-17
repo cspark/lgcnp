@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script type="text/javascript" src="../../js/jquery.js"></script>
+      <script type="text/javascript" src="../../js/bootstrap.js"></script>
+      <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+      <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    </head>
+    <script>
+    $(function () {
+      $('#filter_submit').click(function(){
+        var select_filter = []
+        $('input:checkbox[name="check_box"]').each(function() {
+            if(this.checked){//checked 처리된 항목의 값
+              if(this.value.indexOf("_all") <= 0){
+                select_filter.push(this.value)
+              }
+            }
+         });
+         opener.selectPosFilter(select_filter);
+         self.close();
+      });
+
+      $("input:checkbox[name='check_box']").prop("checked", true);
+      $("input:checkbox[id='all_check']").prop("checked", true);
+
+      $(document).on("click", "#fh_check", function (e) {
+        if (!$("input:checkbox[id='fh_check']").is(":checked")){
+          $("input:checkbox[class='fh_check']").prop("checked", false);
+          $("#fh_check_detail").show();
+        } else {
+          $("input:checkbox[class='fh_check']").prop("checked", true);
+          $("#fh_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#ns_check", function (e) {
+        if (!$("input:checkbox[id='ns_check']").is(":checked")){
+          $("input:checkbox[class='ns_check']").prop("checked", false);
+          $("#ns_check_detail").show();
+        } else {
+          $("input:checkbox[class='ns_check']").prop("checked", true);
+          $("#ns_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#res_check", function (e) {
+        if (!$("input:checkbox[id='res_check']").is(":checked")){
+          $("input:checkbox[class='res_check']").prop("checked", false);
+          $("#res_check_detail").show();
+        } else {
+          $("input:checkbox[class='res_check']").prop("checked", true);
+          $("#res_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#reu_check", function (e) {
+        if (!$("input:checkbox[id='reu_check']").is(":checked")){
+          $("input:checkbox[class='reu_check']").prop("checked", false);
+          $("#reu_check_detail").show();
+        } else {
+          $("input:checkbox[class='reu_check']").prop("checked", true);
+          $("#reu_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#les_check", function (e) {
+        if (!$("input:checkbox[id='les_check']").is(":checked")){
+          $("input:checkbox[class='les_check']").prop("checked", false);
+          $("#les_check_detail").show();
+        } else {
+          $("input:checkbox[class='les_check']").prop("checked", true);
+          $("#les_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#leu_check", function (e) {
+        if (!$("input:checkbox[id='leu_check']").is(":checked")){
+          $("input:checkbox[class='leu_check']").prop("checked", false);
+          $("#leu_check_detail").show();
+        } else {
+          $("input:checkbox[class='leu_check']").prop("checked", true);
+          $("#leu_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#rs_check", function (e) {
+        if (!$("input:checkbox[id='rs_check']").is(":checked")){
+          $("input:checkbox[class='rs_check']").prop("checked", false);
+          $("#rs_check_detail").show();
+        } else {
+          $("input:checkbox[class='rs_check']").prop("checked", true);
+          $("#rs_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#ls_check", function (e) {
+        if (!$("input:checkbox[id='ls_check']").is(":checked")){
+          $("input:checkbox[class='ls_check']").prop("checked", false);
+          $("#ls_check_detail").show();
+        } else {
+          $("input:checkbox[class='ls_check']").prop("checked", true);
+          $("#ls_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#rt_re_check", function (e) {
+        if (!$("input:checkbox[id='rt_re_check']").is(":checked")){
+          $("input:checkbox[class='rt_re_check']").prop("checked", false);
+          $("#rt_re_check_detail").show();
+        } else {
+          $("input:checkbox[class='rt_re_check']").prop("checked", true);
+          $("#rt_re_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#rt_le_check", function (e) {
+        if (!$("input:checkbox[id='rt_le_check']").is(":checked")){
+          $("input:checkbox[class='rt_le_check']").prop("checked", false);
+          $("#rt_le_check_detail").show();
+        } else {
+          $("input:checkbox[class='rt_le_check']").prop("checked", true);
+          $("#rt_le_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#rt_lip_check", function (e) {
+        if (!$("input:checkbox[id='rt_lip_check']").is(":checked")){
+          $("input:checkbox[class='rt_lip_check']").prop("checked", false);
+          $("#rt_lip_check_detail").show();
+        } else {
+          $("input:checkbox[class='rt_lip_check']").prop("checked", true);
+          $("#rt_lip_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#rt_res_check", function (e) {
+        if (!$("input:checkbox[id='rt_res_check']").is(":checked")){
+          $("input:checkbox[class='rt_res_check']").prop("checked", false);
+          $("#rt_res_check_detail").show();
+        } else {
+          $("input:checkbox[class='rt_res_check']").prop("checked", true);
+          $("#rt_res_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#rt_les_check", function (e) {
+        if (!$("input:checkbox[id='rt_les_check']").is(":checked")){
+          $("input:checkbox[class='rt_les_check']").prop("checked", false);
+          $("#rt_les_check_detail").show();
+        } else {
+          $("input:checkbox[class='rt_les_check']").prop("checked", true);
+          $("#rt_les_check_detail").hide();
+        }
+      });
+
+      $(document).on("click", "#all_check", function (e) {
+        if (!$("input:checkbox[id='all_check']").is(":checked")){
+          $("input:checkbox[name='check_box']").prop("checked", false);
+        } else {
+          $("input:checkbox[name='check_box']").prop("checked", true);
+        }
+      });
+
+    });
+    </script>
+
+    <body>
+      <div id="filter" style="background: #b1cbbb; padding: 8px; height:650px;">
+        <div class="form-inline">
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>전체 Data ALL</b></font>
+            <input type="checkbox" value="all_check" id="all_check" style="float:left; margin-left:5px;">
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>이마영역 정보 ALL</b></font>
+            <input type="checkbox" name="check_box" value="fh_all" id="fh_check" style="float:left; margin-left:5px;">
+            <div id="fh_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>fh_x </font><input type="checkbox" name="check_box" class="fh_check" value="fh_x" id="fh_x">
+              <font style="margin-left:5px;">fh_y </font><input type="checkbox" name="check_box" class="fh_check" value="fh_y" id="fh_y">
+              <font style="margin-left:5px;">fh_w </font><input type="checkbox" name="check_box" class="fh_check" value="fh_w" id="fh_w">
+              <font style="margin-left:5px;">fh_h </font><input type="checkbox" name="check_box" class="fh_check" value="fh_h" id="fh_h">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>코 영역정보 ALL</b></font>
+            <input type="checkbox" name="check_box" value="ns_all" id="ns_check" style="float:left; margin-left:5px;">
+            <div id="ns_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>ns_x </font><input type="checkbox" name="check_box" class="ns_check" value="ns_x" id="ns_x">
+              <font style="margin-left:5px;">ns_y </font><input type="checkbox" name="check_box" class="ns_check" value="ns_y" id="ns_y">
+              <font style="margin-left:5px;">ns_w </font><input type="checkbox" name="check_box" class="ns_check" value="ns_w" id="ns_w">
+              <font style="margin-left:5px;">ns_h </font><input type="checkbox" name="check_box" class="ns_check" value="ns_h" id="ns_h">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>우측 눈가 영역정보 ALL</b></font>
+            <input type="checkbox" name="check_box" value="res_all" id="res_check" style="float:left; margin-left:5px;">
+            <div id="res_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>res_x </font><input type="checkbox" type="checkbox" name="check_box" class="res_check" value="res_x" id="res_x">
+              <font style="margin-left:5px;">res_y </font><input type="checkbox" name="check_box" class="res_check" value="res_y" id="res_y">
+              <font style="margin-left:5px;">res_w </font><input type="checkbox" name="check_box" class="res_check" value="res_w" id="res_w">
+              <font style="margin-left:5px;">res_h </font><input type="checkbox" name="check_box" class="res_check" value="res_h" id="res_h">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>우측 눈밑 영역정보 ALL</b></font>
+            <input type="checkbox" name="check_box" value="reu_all" id="reu_check" style="float:left; margin-left:5px;">
+            <div id="reu_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>reu_x </font><input type="checkbox" name="check_box" class="reu_check" value="reu_x" id="reu_x">
+              <font style="margin-left:5px;">reu_y  </font><input type="checkbox" name="check_box" class="reu_check" value="reu_y" id="reu_y">
+              <font style="margin-left:5px;">reu_w  </font><input type="checkbox" name="check_box" class="reu_check" value="reu_w" id="reu_w">
+              <font style="margin-left:5px;">reu_h  </font><input type="checkbox" name="check_box" class="reu_check" value="reu_h" id="reu_h">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>좌측 눈가 영역정보 ALL</b></font>
+            <input type="checkbox" name="check_box" value="les_all" id="les_check" style="float:left; margin-left:5px;">
+            <div id="les_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>les_x </font><input type="checkbox" name="check_box" class="les_check" value="les_x" id="les_x">
+              <font style="margin-left:5px;">les_y </font><input type="checkbox" name="check_box" class="les_check" value="les_y" id="les_y">
+              <font style="margin-left:5px;">les_w </font><input type="checkbox" name="check_box" class="les_check" value="les_w" id="les_w">
+              <font style="margin-left:5px;">les_h </font><input type="checkbox" name="check_box" class="les_check" value="les_h" id="les_h">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>좌측 눈밑 영역정보 ALL</b></font>
+            <input type="checkbox" name="check_box" value="leu_all" id="leu_check" style="float:left; margin-left:5px;">
+            <div id="leu_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>leu_x </font><input type="checkbox" name="check_box" class="leu_check" value="leu_x" id="leu_x">
+              <font style="margin-left:5px;">leu_y </font><input type="checkbox" name="check_box" class="leu_check" value="leu_y" id="leu_y">
+              <font style="margin-left:5px;">leu_w </font><input type="checkbox" name="check_box" class="leu_check" value="leu_w" id="leu_w">
+              <font style="margin-left:5px;">leu_h </font><input type="checkbox" name="check_box" class="leu_check" value="leu_h" id="leu_h">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>우측 볼 영역정보 ALL</b></font>
+            <input type="checkbox" name="check_box" value="rs_all" id="rs_check" style="float:left; margin-left:5px;">
+            <div id="rs_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>rs_x </font><input type="checkbox" name="check_box" class="rs_check" value="rs_x" id="rs_x">
+              <font style="margin-left:5px;">rs_y </font><input type="checkbox" name="check_box" class="rs_check" value="rs_y" id="rs_y">
+              <font style="margin-left:5px;">rs_w </font><input type="checkbox" name="check_box" class="rs_check" value="rs_w" id="rs_w">
+              <font style="margin-left:5px;">rs_h </font><input type="checkbox" name="check_box" class="rs_check" value="rs_h" id="rs_h">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>좌측 볼 영역정보</b></font>
+            <input type="checkbox" name="check_box" value="ls_all" id="ls_check" style="float:left; margin-left:5px;">
+            <div id="ls_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>ls_x </font><input type="checkbox" name="check_box" class="ls_check" value="ls_x" id="ls_x">
+              <font style="margin-left:5px;">ls_y </font><input type="checkbox" name="check_box" class="ls_check" value="ls_y" id="ls_y">
+              <font style="margin-left:5px;">ls_w </font><input type="checkbox" name="check_box" class="ls_check" value="ls_w" id="ls_w">
+              <font style="margin-left:5px;">ls_h </font><input type="checkbox" name="check_box" class="ls_check" value="ls_h" id="ls_h">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>우측 눈 사각 영역정보 ALL</b></font>
+            <input type="checkbox" name="check_box" value="rt_re_all" id="rt_re_check" style="float:left; margin-left:5px;">
+            <div id="rt_re_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>rt_re_l </font><input type="checkbox" name="check_box" class="rt_re_check" value="rt_re_l" id="rt_re_l">
+              <font style="margin-left:5px;">rt_re_t </font><input type="checkbox" name="check_box" class="rt_re_check" value="rt_re_t" id="rt_re_t">
+              <font style="margin-left:5px;">rt_re_r </font><input type="checkbox" name="check_box" class="rt_re_check" value="rt_re_r" id="rt_re_r">
+              <font style="margin-left:5px;">rt_re_b </font><input type="checkbox" name="check_box" class="rt_re_check" value="rt_re_b" id="rt_re_b">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>좌측 눈 사각 영역정보 ALL</b></font>
+            <input type="checkbox" name="check_box" value="rt_le_all" id="rt_le_check" style="float:left; margin-left:5px;">
+            <div id="rt_le_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>rt_le_l </font><input type="checkbox" name="check_box" class="rt_le_check" value="rt_le_l" id="rt_le_l">
+              <font style="margin-left:5px;">rt_le_t </font><input type="checkbox" name="check_box" class="rt_le_check" value="rt_le_t" id="rt_le_t">
+              <font style="margin-left:5px;">rt_le_r </font><input type="checkbox" name="check_box" class="rt_le_check" value="rt_le_r" id="rt_le_r">
+              <font style="margin-left:5px;">rt_le_b </font><input type="checkbox" name="check_box" class="rt_le_check" value="rt_le_b" id="rt_le_b">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>입 사각영역 ALL</b></font>
+            <input type="checkbox" name="check_box" value="rt_lip_all" id="rt_lip_check" style="float:left; margin-left:5px;">
+            <div id="rt_lip_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>rt_lip_l </font><input type="checkbox" name="check_box" class="rt_lip_check" value="rt_lip_l" id="rt_lip_l">
+              <font style="margin-left:5px;">rt_lip_t </font><input type="checkbox" name="check_box" class="rt_lip_check" value="rt_lip_t" id="rt_lip_t">
+              <font style="margin-left:5px;">rt_lip_r </font><input type="checkbox" name="check_box" class="rt_lip_check" value="rt_lip_r" id="rt_lip_r">
+              <font style="margin-left:5px;">rt_lip_b </font><input type="checkbox" name="check_box" class="rt_lip_check" value="rt_lip_b" id="rt_lip_b">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>우측 얼굴 끝 라인 좌표 ALL</b></font>
+            <input type="checkbox" name="check_box" value="rt_res_all" id="rt_res_check" style="float:left; margin-left:5px;">
+            <div id="rt_res_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>rt_res_x </font><input type="checkbox" name="check_box" class="rt_res_check" value="rt_res_x" id="rt_res_x">
+              <font style="margin-left:5px;">rt_res_y </font><input type="checkbox" name="check_box" class="rt_res_check" value="rt_res_y" id="rt_res_y">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>좌측 얼굴 끝 라인 좌표 ALL</b></font>
+            <input type="checkbox" name="check_box" value="rt_les_all" id="rt_les_check" style="float:left; margin-left:5px;">
+            <div id="rt_les_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>rt_les_x </font><input type="checkbox" name="check_box" class="rt_les_check" value="rt_les_x" id="rt_les_x">
+              <font style="margin-left:5px;">rt_les_y </font><input type="checkbox" name="check_box" class="rt_les_check" value="rt_les_y" id="rt_les_y">
+            </div>
+          </div><br>
+        </div><br>
+        <center>
+          <button class="btn btn-warning" id="filter_submit">필터적용</button>
+        </center>
+      </div>
+    </body>
+</html>

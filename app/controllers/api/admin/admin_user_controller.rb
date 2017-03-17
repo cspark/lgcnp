@@ -129,8 +129,8 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     Rails.logger.info serial
     # serial = "839"
     # measureno = "1"
-    # measureno = "1"
-    # measureno = "1"
+    # number = "1"
+    # type = "_Sym_L_"
     user = Custinfo.where(custserial: serial, measureno: measureno).first
     sub_folder_name = (((serial.to_i / 100) * 100) + 100).to_s
     sub_folder_name << "-P"

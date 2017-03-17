@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     get "data/filter_check" => "data#filter_check"
     get "fcpos_list" => "pos#list"
     get "fcpos/detail" => "pos#show"
+    get "fcpos/filter_check" => "pos#filter_check"
     get "fcschedule_list" => "schedule#list"
     get "fcschedule/detail" => "schedule#show"
     get "image_list" => "image#index"

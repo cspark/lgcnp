@@ -13,7 +13,6 @@ class ImagesController < Api::ApplicationController
     # number = "1"
     # type = "Sym_L"
 
-    user = Custinfo.where(custserial: custserial).first
     sub_folder_name = (((custserial.to_i / 100) * 100) + 100).to_s
     sub_folder_name << "-P"
 
@@ -77,7 +76,6 @@ class ImagesController < Api::ApplicationController
     number = number
     type = type
 
-    user = Custinfo.where(custserial: custserial, ch_cd: ch_cd, measureno: measureno).first
     sub_folder_name = (((custserial.to_i / 100) * 100) + 100).to_s
     sub_folder_name << "-P"
 

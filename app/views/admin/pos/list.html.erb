@@ -12,6 +12,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
 
     <script>
+    var filterStr = "";
     $(function () {
       $(document).keyup(function (e) {
           if ($("#search").is(":focus") && (e.keyCode == 13)) {
@@ -27,6 +28,15 @@
         var userId = $(this).attr('id').split("/")[0]
         var measureno = $(this).attr('id').split("/")[1]
         window.open("/admin/fcpos/detail?userId=" +userId+ "&measureno=" +measureno, "/admin/fcpos/detail?userId=" +userId+ "&measureno=" +measureno, "scrollbars=1,resizable=1,height=600,width=600");
+      });
+
+      $("input:checkbox[id='all_check']").prop("checked", true);
+      $(document).on("click", "#all_check", function (e) {
+        if (!$("input:checkbox[id='all_check']").is(":checked")){
+          window.open("/admin/fcpos/filter_check", "/admin/fcpos/filter_check", "scrollbars=1,resizable=1,height=650,width=900");
+        } else {
+          filterStr = ""
+        }
       });
     });
 
@@ -48,8 +58,14 @@
     }
 
     $('#submit').click(function(){
-      location.href = "/admin/fcpos_list?search=" + encodeURI(encodeURI($("#search").val()));
+      url = "/admin/fcpos_list?search=" + encodeURI(encodeURI($("#search").val()));
+      url += "&select_filter=" +filterStr
+      location.href = url;
     });
+
+    function selectPosFilter(select_filter){
+      filterStr = select_filter
+    }
 
     </script>
     <style>
@@ -91,11 +107,14 @@
       <button class="btn btn-warning" id="show_all" onclick="show_all()">전체보기</button>
       <p style="float:right; margin-right:20px;">
         Download:
-        <%= link_to "Excel", admin_fcpos_list_path(format: "xlsx", :search => @search, :isExcel => true) %>
+        <%= link_to "Excel", admin_fcpos_list_path(format: "xlsx", :search => @search, :select_filter => @params_filter, :isExcel => true) %>
       </p>
+      <div class="form-inline">
+       필터링 전체 선택: <input type="checkbox" id="all_check">
+      </div>
     </div>
 
-    <table data-toggle="table" style="width:4800px;">
+    <table data-toggle="table">
       <thead style="width: 100%;">
         <tr>
             <th class="width70 text-center">이름</th>
