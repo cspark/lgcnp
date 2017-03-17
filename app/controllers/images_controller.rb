@@ -70,6 +70,7 @@ class ImagesController < Api::ApplicationController
   end
 
   def image_copy_ftp(custserial: nil, ch_cd: nil, measureno: nil, number: nil, type: nil)
+    Rails.logger.info "image_copy_ftp!!!"
     custserial = custserial
     ch_cd = ch_cd
     measureno = measureno
@@ -109,6 +110,8 @@ class ImagesController < Api::ApplicationController
     folder_create_command << "' -u 'janus:pielgahn2012#1' -Q '-MKD "
     folder_create_command << make_dir_command
     folder_create_command << "' --ftp-create-dirs"
+
+    Rails.logger.info folder_create_command
     system(folder_create_command)
 
     # Curl -p - --insecure"ftp://165.244.88.27/CNP/" --user"janus:pielgahn2012#1" -Q "-MKD /CNP/test"--ftp-create-dirs
@@ -129,6 +132,7 @@ class ImagesController < Api::ApplicationController
     folder_create_command << "' -u 'janus:pielgahn2012#1' -Q '-MKD "
     folder_create_command << make_dir_command
     folder_create_command << "' --ftp-create-dirs"
+    Rails.logger.info folder_create_command
     system(folder_create_command)
 
     # "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/' -u 'janus:pielgahn2012#1' -Q '-MKD /CNP/900-P/839-1' --ftp-create-dirs"
@@ -158,6 +162,7 @@ class ImagesController < Api::ApplicationController
     file_copy_command << "' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/public"
     file_copy_command << file_path
     file_copy_command << "' --ftp-create-dirs"
+    Rails.logger.info file_copy_command
     system(file_copy_command)
     # "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/public/CNP/900-P/839-1/839-1_Sym_L_1.jpg' --ftp-create-dirs"
   end
