@@ -12,11 +12,11 @@
         <% user = Custinfo.where(custserial: @fcpos.custserial, ch_cd: @fcpos.ch_cd, measureno: @fcpos.measureno).first  %>
         try
         {
-          $('#name_<%= @fcpos.custserial %>_<%= @fcpos.ch_cd %>_<%= @fcpos.measureno.to_i %>').append( decode_utf8('<%= user.custname %>'));
+          $('#name_<%= @fcpos.custserial.to_i %>_<%= @fcpos.ch_cd %>_<%= @fcpos.measureno.to_i %>').append( decode_utf8('<%= user.custname %>'));
         }
         catch(err)
         {
-          $('#name_<%= @fcpos.custserial %>_<%= @fcpos.ch_cd %>_<%= @fcpos.measureno.to_i %>').append('<%= user.custname %>');
+          $('#name_<%= @fcpos.custserial.to_i %>_<%= @fcpos.ch_cd %>_<%= @fcpos.measureno.to_i %>').append('<%= user.custname %>');
         }
       });
 
@@ -32,7 +32,7 @@
   <body style="padding: 10px;">
     <h2>고객정보</h2>
 
-    <font size="5"><b><div id="name_<%= @fcpos.custserial %>_<%= @fcpos.ch_cd %>_<%= @fcpos.measureno.to_i %>"></div></b></font>
+    <font size="5"><b><div id="name_<%= @fcpos.custserial.to_i %>_<%= @fcpos.ch_cd %>_<%= @fcpos.measureno.to_i %>"></div></b></font>
     <div><font size="4">
       <b>채널구분</b> <%= @fcpos.ch_cd %><br>
       <b>전면,좌,우측면</b> <%= @fcpos.faceno %><br>
