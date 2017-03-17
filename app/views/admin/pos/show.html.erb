@@ -21,6 +21,8 @@
       });
 
       function decode_utf8(s) {
+        console.log(s);
+        console.log(decodeURI(s));
         return decodeURI(s);
       }
 
@@ -30,7 +32,7 @@
   <body style="padding: 10px;">
     <h2>고객정보</h2>
 
-    <font size="5"><b><div id="name_<%= @fcpos.custserial %>_<%= @fcpos.ch_cd %>_<%= @fcpos.measureno.to_i %>"></b></div></font>
+    <font size="5"><b><div id="name_<%= @fcpos.custserial %>_<%= @fcpos.ch_cd %>_<%= @fcpos.measureno.to_i %>"></div></b></font>
     <div><font size="4">
       <b>채널구분</b> <%= @fcpos.ch_cd %><br>
       <b>전면,좌,우측면</b> <%= @fcpos.faceno %><br>
