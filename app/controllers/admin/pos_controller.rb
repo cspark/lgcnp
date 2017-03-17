@@ -36,7 +36,7 @@ class Admin::PosController < Admin::AdminApplicationController
       "우측눈 사각영역 정보l","우측눈 사각영역 정보t","우측눈 사각영역 정보r","우측눈 사각영역 정보b","좌측눈 사각영역 정보l","좌측눈 사각영역 정보t","좌측눈 사각영역 정보r","좌측눈 사각영역 정보b","입 사각영역 정보l","입 사각영역 정보t","입 사각영역 정보r","입 사각영역 정보b",
       "우측 얼굴 끝 라인 좌표x","우측 얼굴 끝 라인 좌표y","좌측 얼굴 끝 라인 좌표x","좌측 얼굴 끝 라인 좌표y"]
     else
-      @fcdatas = @fcpos.select("custserial,ch_cd,faceno,measuredate,measureno,uptdate," +@params_filter)
+      # @fcpos = @fcpos.select("custserial,ch_cd,faceno,measuredate,measureno,uptdate," +@params_filter)
       @excel_name = ["이름","채널구분","전면/좌/우측면","분석 일","분석 횟수","업데이트 일"]
       @select_filter.each do |filter|
         @excel_name << filter

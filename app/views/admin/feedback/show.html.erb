@@ -41,7 +41,7 @@
         <b>3개월 후 설문</b>
       <% end %>
       <font size="2">
-        진단 날짜 : <%= tabletinterview.uptdate %> / 성별 : <%= @user.sex %> / 나이 : <%= @user.age %>
+        진단 날짜 : <%= tabletinterview.uptdate %> / 성별 : <%= @user.sex %> / 나이 : <%= @user.age %><br>
         <% after_serum = tabletinterview.after_serum %>
         <% if tabletinterview.after_serum == "skin control" %>
           <% after_serum = "스킨 컨트롤 세럼" %>
@@ -50,7 +50,8 @@
         <% elsif tabletinterview.after_serum == "rebalencing" %>
           <% after_serum = "리밸런싱 세럼" %>
         <% end %>
-        베이스 : <%= after_serum %> / 앰플 1 :
+        베이스 : <%= after_serum %><br> 
+        앰플 1 :
         <% after_ample_1 = tabletinterview.after_ample_1 %>
         <% if tabletinterview.after_ample_1 == "pore clinic ampoule" %>
           <% after_ample_1 = "포어 클리닉 앰플" %>

@@ -11,6 +11,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
 
     <script>
+      var filterStr = "";
       $(function () {
             $("#start_date").datepicker({
                     dateFormat: 'yy-mm-dd',
@@ -152,7 +153,19 @@
             var fcdata_id = $(this).attr('id').split("/")[2]
             window.open("/admin/tabletinterview/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&fcdata_id=" +fcdata_id, "/users/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&fcdata_id=" +fcdata_id, "scrollbars=1,resizable=1,height=600,width=600");
           });
+
+          $("input:checkbox[id='all_check']").prop("checked", true);
+          $(document).on("click", "#all_check", function (e) {
+          if (!$("input:checkbox[id='all_check']").is(":checked")){
+            window.open("/admin/tabletinterview/filter_check", "/admin/tabletinterview/filter_check", "scrollbars=1,resizable=1,height=650,width=530");
+          } else {
+            filterStr = ""
+          }
+        });
       });
+      function selectFilter(select_filter){
+        filterStr = select_filter
+      }
 
       function decode_utf8(s) {
         try{
@@ -185,6 +198,7 @@
         url += "&select_mode=" + select_mode;
         url += "&select_makeup=" + select_makeup;
         url += "&select_area=" + select_area;
+        url += "&select_filter=" +filterStr
 
         location.href = url;
       }
@@ -211,7 +225,7 @@
         <button id="date_init" class="btn btn-primary">ALL</button>
         <p style="float:right; margin-right:20px;">
           Download:
-          <%= link_to "Excel", admin_tabletinterview_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date, :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial, :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm, :select_channel => @select_channel, :select_mode => @select_mode, :select_makeup => @select_makeup, :select_area => @select_area, :isExcel => true) %>
+          <%= link_to "Excel", admin_tabletinterview_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date, :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial, :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm, :select_channel => @select_channel, :select_mode => @select_mode, :select_makeup => @select_makeup, :select_area => @select_area, :select_filter => @params_filter, :isExcel => true) %>
         </p>
       </div>
 
@@ -283,6 +297,12 @@
       </div>
     </div>
 
+    <div id="filter" style="background: #b1cbbb; padding: 8px;">
+      <div class="form-inline">
+       필터링 전체 선택: <input type="checkbox" id="all_check">
+      </div>
+    </div>
+
     <table data-toggle="table" style="width:3600px;">
       <thead style="width: 100%;">
         <tr>
@@ -290,42 +310,86 @@
             <th>시리얼</th>
             <th>진단 날짜</th>
             <th>채널</th>
-            <th>피부타입</th>
-            <th>진단으로 나온 솔루션 1</th>
-            <th>최종으로 선택된 솔루션 1</th>
-            <th>진단으로 나온 솔루션 2</th>
-            <th>최종으로 선택된 솔루션 2</th>
-            <th>진단으로 나온 세럼</th>
-            <th>최종으로 선택된 세럼</th>
-            <th>진단으로 나온 앰플 1</th>
-            <th>최종으로 선택된 앰플 1</th>
-            <th>진단으로 나온 앰플 2</th>
-            <th>최종으로 선택된 앰플 2</th>
-            <th>진단으로 나온 화장품</th>
-            <th>최종으로 선택된 화장품</th>
-            <th>A1</th>
-            <th>A2</th>
-            <th>A3</th>
-            <th>B1</th>
-            <th>B2</th>
-            <th>B3</th>
-            <th>B4</th>
-            <th>C1</th>
-            <th>D1</th>
-            <th>D2</th>
-            <th>D3</th>
-            <th>D4</th>
-            <th>D5</th>
-            <th>D6</th>
-            <th>D7</th>
-            <th>D8</th>
-            <th>D9</th>
-            <th>D10</th>
-            <th>모공 점수</th>
-            <th>트러블 점수</th>
-            <th>색소침착 점수</th>
-            <th>주름 점수</th>
-            <th>탄력 점수</th>
+            <% if @select_filter != [] %>
+              <% @select_filter.each do |filter| %>
+                <% if filter.include?("skin_type") %>
+                  <th>피부타입</th>
+                <% elsif filter.include?("before_solution_1") %>
+                  <th>진단으로 나온 솔루션 1</th>
+                <% elsif filter.include?("after_solution_1") %>
+                  <th>최종으로 선택된 솔루션 1</th>
+                <% elsif filter.include?("before_solution_2") %>
+                  <th>진단으로 나온 솔루션 2</th>  
+                <% elsif filter.include?("after_solution_2") %>
+                  <th>최종으로 선택된 솔루션 2</th>
+                <% elsif filter.include?("before_serum") %>
+                  <th>진단으로 나온 세럼</th>
+                <% elsif filter.include?("after_serum") %>
+                  <th>최종으로 선택된 세럼</th>
+                <% elsif filter.include?("before_ampoule_1") %>
+                  <th>진단으로 나온 앰플 1</th>
+                <% elsif filter.include?("after_ampoule_1") %>
+                  <th>최종으로 선택된 앰플 1</th>
+                <% elsif filter.include?("before_ampoule_2") %>
+                  <th>진단으로 나온 앰플 2</th>
+                <% elsif filter.include?("after_ampoule_2") %>
+                  <th>최종으로 선택된 앰플 2</th>
+                <% elsif filter.include?("before_made_cosmetic") %>
+                  <th>진단으로 나온 화장품</th>
+                <% elsif filter.include?("after_made_cosmetic") %>
+                  <th>최종으로 선택된 화장품</th>
+                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+                  <th>모공 점수</th>
+                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+                  <th>트러블 점수</th>
+                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+                  <th>색소침착 점수</th>
+                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+                  <th>주름 점수</th>
+                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+                  <th>탄력 점수</th>
+                <% else %>
+                  <th class="text-center"><%= filter %></th>
+                <% end %>
+              <% end %>
+            <% else %>
+              <th>피부타입</th>
+              <th>진단으로 나온 솔루션 1</th>
+              <th>진단으로 나온 솔루션 2</th>
+              <th>최종으로 선택된 솔루션 1</th>
+              <th>최종으로 선택된 솔루션 2</th>
+              <th>진단으로 나온 세럼</th>
+              <th>최종으로 선택된 세럼</th>
+              <th>진단으로 나온 앰플 1</th>
+              <th>최종으로 선택된 앰플 1</th>
+              <th>진단으로 나온 앰플 2</th>
+              <th>최종으로 선택된 앰플 2</th>
+              <th>진단으로 나온 화장품</th>
+              <th>최종으로 선택된 화장품</th>
+              <th>A1</th>
+              <th>A2</th>
+              <th>A3</th>
+              <th>B1</th>
+              <th>B2</th>
+              <th>B3</th>
+              <th>B4</th>
+              <th>C1</th>
+              <th>D1</th>
+              <th>D2</th>
+              <th>D3</th>
+              <th>D4</th>
+              <th>D5</th>
+              <th>D6</th>
+              <th>D7</th>
+              <th>D8</th>
+              <th>D9</th>
+              <th>D10</th>
+              <th>모공 점수</th>
+              <th>트러블 점수</th>
+              <th>색소침착 점수</th>
+              <th>주름 점수</th>
+              <th>탄력 점수</th>
+            <% end %>
         </tr>
       </thead>
       <tbody>

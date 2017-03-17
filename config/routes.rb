@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     get "tabletinterview" => "tabletinterview#index"
     get "tabletinterview/detail" => "tabletinterview#show"
     get "tabletinterview/edit" => "tabletinterview#edit"
+    get "tabletinterview/filter_check" => "tabletinterview#filter_check"
 
     get "after_interview" => "fcafterinterviews#show"
     get "after_interview_1" => "fcafterinterviews#show_1"
