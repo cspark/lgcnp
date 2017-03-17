@@ -167,6 +167,9 @@ class Admin::DataController < Admin::AdminApplicationController
       else
         Rails.logger.info "!!!"
         Rails.logger.info @params_filter
+        Rails.logger.info @fcdatas
+        Rails.logger.info @fcdatas.count
+        Rails.logger.info "custserial,faceno,measuredate,measureno,uptdate," +@params_filter
         @fcdatas = @fcdatas.select("custserial,faceno,measuredate,measureno,uptdate," +@params_filter)
         @excel_name = ["이름","분석 횟수","채널구분","전면/좌/우측면","분석 일","업데이트 일"]
         @select_filter.each do |filter|
