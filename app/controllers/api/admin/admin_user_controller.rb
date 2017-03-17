@@ -129,6 +129,8 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     Rails.logger.info serial
     # serial = "839"
     # measureno = "1"
+    # measureno = "1"
+    # measureno = "1"
     user = Custinfo.where(custserial: serial, measureno: measureno).first
     sub_folder_name = (((serial.to_i / 100) * 100) + 100).to_s
     sub_folder_name << "-P"
@@ -169,8 +171,8 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     file_delete_command << delete_file
     file_delete_command << "' --ftp-create-dirs"
 
-    # file_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CLAB/900-P/839-1/' -u 'janus:pielgahn2012#1' -Q '-DELE 839-1_Sym_L_1.jpg' --ftp-create-dirs"
-    # folder_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CLAB/900-P/' -u 'janus:pielgahn2012#1' -Q '-RMD 839-1' --ftp-create-dirs"
+    # file_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' -Q '-DELE 839-1_Sym_L_1.jpg' --ftp-create-dirs"
+    # folder_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1' -u 'janus:pielgahn2012#1' -Q '-RMD 839-1' --ftp-create-dirs"
     Rails.logger.info file_delete_command
     system(file_delete_command)
     if type == "_END"
@@ -179,7 +181,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       folder_delete_command << " -u 'janus:pielgahn2012#1' -Q '-RMD "
       folder_delete_command << serial.to_i.to_s+ "-" +measureno.to_i.to_s
       folder_delete_command << "' --ftp-create-dirs"
-
+      Rails.logger.info folder_delete_command
       system(folder_delete_command)
 
       rm_rf_command = "rm -rf "
