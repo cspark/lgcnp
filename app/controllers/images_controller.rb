@@ -158,7 +158,7 @@ class ImagesController < Api::ApplicationController
     file_copy_command << "' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/public"
     file_copy_command << file_path
     file_copy_command << "' --ftp-create-dirs"
-    # system(file_copy_command)
+    system(file_copy_command)
     # "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/public/CNP/900-P/839-1/839-1_Sym_L_1.jpg' --ftp-create-dirs"
   end
 end
