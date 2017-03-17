@@ -12,11 +12,11 @@
         <% user = Custinfo.where(custserial: @fcdata.custserial).first %>
         try
         {
-          $('#name_<%= @fcdata.custserial.to_i %>').append( decode_utf8('<%= user.custname %>'));
+          $('#name_<%= @fcdata.custserial.to_i %>_<%= @fcdata.ch_cd %>_<%= @fcdata.measureno %>').append( decode_utf8('<%= user.custname %>'));
         }
         catch(err)
         {
-          $('#name_<%= @fcdata.custserial.to_i %>').append('<%= user.custname %>');
+          $('#name_<%= @fcdata.custserial.to_i %>_<%= @fcdata.ch_cd %>_<%= @fcdata.measureno %>').append('<%= user.custname %>');
         }
       });
 
@@ -30,7 +30,7 @@
   <body style="padding: 10px;">
     <h2>고객정보</h2>
 
-    <font size="5"><b><div id="name_<%= @fcdata.custserial.to_i %>"></b></div></font>
+    <font size="5"><b><div id="name_<%= @fcdata.custserial.to_i %>_<%= @fcdata.ch_cd %>_<%= @fcdata.measureno %>"></b></div></font>
     <div><font size="4">
       <b>분석횟수</b> <%= @fcdata.measureno %><br>
       <b>채널</b> <%= @fcdata.ch_cd %><br>

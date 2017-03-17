@@ -11,7 +11,7 @@
 
       <script>
         $(function () {
-          <% user = Custinfo.find fcdata.custserial.to_i %>
+          <% user = Custinfo.where(custserial: fcdata.custserial).first %>
           try
           {
             var userName = decode_utf8('<%= user.custname %>')
