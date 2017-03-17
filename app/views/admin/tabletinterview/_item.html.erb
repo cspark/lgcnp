@@ -192,15 +192,15 @@
               <td id="before_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
             <% elsif filter.include?("after_made_cosmetic") %>
               <td id="after_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
-            <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+            <% elsif !fcdata.nil? && filter.include?("pore_score") %>
               <td><%= fcdata[:pr_graph].to_i %></td>
-            <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+            <% elsif !fcdata.nil? && filter.include?("pore_score") %>
               <td><%= fcdata[:sb_graph].to_i %></td>
-            <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+            <% elsif !fcdata.nil? && filter.include?("pore_score") %>
               <td><%= fcdata[:pp_graph].to_i %></td>
-            <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+            <% elsif !fcdata.nil? && filter.include?("pore_score") %>
               <td><%= fcdata[:wr_graph].to_i %></td>
-            <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+            <% elsif !fcdata.nil? && filter.include?("pore_score") %>
               <td><%= fcdata[:el_graph].to_i %></td>
             <% else %>
               <td><%= tabletinterview[filter] %></td>
