@@ -308,7 +308,7 @@
         <tr>
             <th>이름</th>
             <th>시리얼</th>
-            <th>진단 날짜</th>
+            <th style="width:170px;">진단 날짜</th>
             <th>채널</th>
             <% if @select_filter != [] %>
               <% @select_filter.each do |filter| %>
@@ -326,13 +326,13 @@
                   <th>진단으로 나온 세럼</th>
                 <% elsif filter.include?("after_serum") %>
                   <th>최종으로 선택된 세럼</th>
-                <% elsif filter.include?("before_ampoule_1") %>
+                <% elsif filter.include?("before_ample_1") %>
                   <th>진단으로 나온 앰플 1</th>
-                <% elsif filter.include?("after_ampoule_1") %>
+                <% elsif filter.include?("after_ample_2") %>
                   <th>최종으로 선택된 앰플 1</th>
-                <% elsif filter.include?("before_ampoule_2") %>
+                <% elsif filter.include?("before_ample_2") %>
                   <th>진단으로 나온 앰플 2</th>
-                <% elsif filter.include?("after_ampoule_2") %>
+                <% elsif filter.include?("after_ample_2") %>
                   <th>최종으로 선택된 앰플 2</th>
                 <% elsif filter.include?("before_made_cosmetic") %>
                   <th>진단으로 나온 화장품</th>
