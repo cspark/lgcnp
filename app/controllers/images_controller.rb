@@ -26,16 +26,16 @@ class ImagesController < Api::ApplicationController
       make_dir_command << "public/CNP/"
     end
 
-    # system(make_dir_command)
+    system(make_dir_command)
 
     make_dir_command << sub_folder_name
-    # system(make_dir_command)
+    system(make_dir_command)
 
     make_dir_command << "/"
     make_dir_command << custserial
     make_dir_command << "-"
     make_dir_command << measureno.to_i.to_s
-    # system(make_dir_command)
+    system(make_dir_command)
     # 업로드 하기 전 WAS 폴더 만들기
     # Success!!!!
 
@@ -57,7 +57,6 @@ class ImagesController < Api::ApplicationController
     uploader = ImageUploader.new
     uploader.temp_save(file_name: file_name, file_extension: file_extension, image_ch_cd: ch_cd, sub_folder_name: sub_folder_name, private_folder_name: private_folder_name)
     uploader.store!(params[:image])
-    # uploader.retrieve_from_store!('')
 
     # =======================================================
     # WAS 업로드 마친 이미지 -> FTP 서버로 복사
