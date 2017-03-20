@@ -64,19 +64,31 @@
         <% end %>
         <td class="text-center"><%= translate_sex %></td>
         <td><%= user.birthyy %>-<%= user.birthmm %>-<%= user.birthdd %></td>
-        <% is_agree_privacy = "X" %>
-        <% if user.is_agree_privacy == "T" %>
-          <% is_agree_privacy = "O" %>
+        <% is_agree_privacy = "-" %>
+        <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX"%>
+          <% if user.is_agree_privacy == "T" %>
+            <% is_agree_privacy = "O" %>
+          <% else %>
+            <% is_agree_privacy = "X" %>
+          <% end %>
         <% end %>
         <td class="text-center"><%= is_agree_privacy %></td>
-        <% is_agree_thirdparty = "X" %>
-        <% if user.is_agree_thirdparty_info == "T" %>
-          <% is_agree_thirdparty = "O" %>
+        <% is_agree_thirdparty = "-" %>
+        <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX"%>
+          <% if user.is_agree_thirdparty_info == "T" %>
+            <% is_agree_thirdparty = "O" %>
+          <% else %>
+            <% is_agree_thirdparty = "X" %>
+          <% end %>
         <% end %>
         <td class="text-center"><%= is_agree_thirdparty %></td>
-        <% is_agree_marketing = "X" %>
-        <% if user.is_agree_marketing == "T" %>
-          <% is_agree_marketing = "O" %>
+        <% is_agree_marketing = "-" %>
+        <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX"%>
+          <% if user.is_agree_marketing == "T" %>
+            <% is_agree_marketing = "O" %>
+          <% else %>
+            <% is_agree_marketing = "X" %>
+          <% end %>
         <% end %>
         <td class="text-center"><%= is_agree_marketing %></td>
         <td class="text-center"><%= Fctabletinterview.where(custserial: user.custserial).count %></td>
