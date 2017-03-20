@@ -1,0 +1,2 @@
+class Fctabletinterviewrx < ApplicationRecord
+end
