@@ -14,6 +14,8 @@
     var isIdValidate = false;
     $ (function () {
       $('#submit').click(function(){
+        var shop_cd = document.getElementById("select_shop").options[document.getElementById("select_shop").selectedIndex].value;
+        var ch_cd = document.getElementById("select_shop").options[document.getElementById("select_shop").selectedIndex].id;
         if ($("#email").val() == "" || $("#password").val() == "" || $("#ch_cd").val() == "" || $("#shop_cd").val() == ""){
           alert("공란을 채워주세요!")
           return
@@ -28,8 +30,8 @@
         var formData = new FormData($(this)[0]);
         formData.append("email", $("#email").val());
         formData.append("password", $("#password").val());
-        formData.append("ch_cd", $("#ch_cd").val());
-        formData.append("shop_cd", $("#shop_cd").val());
+        formData.append("ch_cd", ch_cd);
+        formData.append("shop_cd", shop_cd);
 
         $.ajax({
             url: "/admin/manager",
@@ -104,13 +106,20 @@
         <font>Password</font>
         <input class="form-control" type="password" id="password" style="width:200px;">
 
-        채널코드<br>
-        <input class="form-control" type="text" id="ch_cd" style="width:200px; float:left;">
-        <p style="margin-top: 10px;"> ex) CNP, BEAU, MART...</p>
-
-        매장코드<br>
-        <input class="form-control" type="text" id="shop_cd" style="width:200px; float:left;">
-        <p style="margin-top: 10px;"> ex) 59100, 304639...</p>
+        매장 이름 :
+        <select class="form-control" id="select_shop" style="width:200px;">
+          <option id="LABO" value="1001">LG연구소</option>
+          <option id="LABO" value="1002">젠스토리</option>
+          <option id="LABO" value="1003">LG에스타워 보떼</option>
+          <option id="CLAB" value="1004">LG에스타워 CNP</option>
+          <option id="TMR" value="304639">NC 인천 올리브점</option>
+          <option id="BEAU" value="505415">수지 상현점</option>
+          <option id="BEAU" value="504130">파주 금촌점</option>
+          <option id="MART" value="505488">홈플러스 월드컵점</option>
+          <option id="TMR" value="304401">NC 안산 상록수점</option>
+          <option id="CNP" value="59100">르메디바이씨앤피 이대점</option>
+          <option id="TMR" value="304369">NC 신촌점</option>
+        </select><br>
         <center>
           <button class="btn btn-warning" id="submit">저장</button>
         </center>
