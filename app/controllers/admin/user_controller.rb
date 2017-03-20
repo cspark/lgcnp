@@ -14,6 +14,9 @@ class Admin::UserController < Admin::AdminApplicationController
       shop_cd = session[:admin_user]['shop_cd']
     end
 
+    ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
+    @ch_cd = ch_cd
+
     fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
     custserial_array = fcdata_list.pluck(:custserial).uniq
     measureno_array = fcdata_list.pluck(:measureno).uniq

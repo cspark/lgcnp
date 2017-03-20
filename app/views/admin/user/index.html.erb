@@ -15,10 +15,22 @@
     <script>
       <% search = "" %>
       $(function () {
+        <% if !@search.nil? %>
+          document.getElementById("search").value = decode_utf8('<%= @search %>')
+        <% end %>
+
+        <% if @ch_cd != "" %>
+          console.log('<%= @ch_cd %>');
+          $("#select_channel").val('<%= @ch_cd %>');
+        <% end %>
+
         $(document).keyup(function (e) {
             if ($("#search").is(":focus") && (e.keyCode == 13)) {
                 console.log(encodeURI($("#search").val()));
-                location.href = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
+                var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
+                url = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
+                url += "&select_channel=" +ch_cd
+                location.href = url;
             }
         });
 
@@ -27,6 +39,13 @@
           var ch_cd = $(this).attr('id').split("/")[1]
           var measureno = $(this).attr('id').split("/")[2]
           window.open("/admin/users/detail?userId=" + userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno, "/users/detail?userId=" + userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno, "scrollbars=1,resizable=1,height=500,width=500");
+        });
+
+        $('#submit').click(function(){
+          var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
+          url = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
+          url += "&select_channel=" +ch_cd
+          location.href = url;
         });
       });
 
@@ -57,7 +76,21 @@
   <body>
     <%= render "admin/header" %>
     <div style="background: #b1cbbb; padding: 8px;">
-      <input type="text" name="search" id="search" placeholder="이름으로 검색" style="width: 200px;"> <button class="btn btn-warning" id="show_all" onclick="show_all()">전체보기</button>
+      <input type="text" name="search" id="search" placeholder="이름으로 검색" style="float:left; width: 200px;">
+      <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
+      <p style="float:left; margin-left: 20px; margin-top: 5px;">채널 :</p>
+        <select class="form-control" id="select_channel" style="float:left; margin-left: 5px; width:200px;">
+          <option value="ALL">ALL</option>
+          <option value="CNP">CNP</option>
+          <option value="MART">마트</option>
+          <option value="NC">NC</option>
+          <option value="BEAU">보떼</option>
+          <option value="LABO">LABO</option>
+          <option value="CLAB">CLAB</option>
+          <option value="CNPRX">CNPRX</option>
+        </select>
+      <% end %>
+      <button style="margin-left: 10px;" class="btn btn-warning" id="submit">조회</button>
       <p style="float:right; margin-right:20px;">
         Download:
         <!-- <%= link_to "CSV", admin_user_list_path(format: "csv") %> -->
@@ -68,6 +101,7 @@
         <thead style="width: 100%;">
           <tr>
               <th>이름</th>
+              <th>채</th>
               <th>가입날짜</th>
               <th>마지막 진단 날짜</th>
               <th>시리얼</th>
