@@ -84,6 +84,10 @@ class Admin::FcafterinterviewsController < Admin::AdminApplicationController
     after_interview.a4 = nil
     after_interview.a5 = nil
 
+    fctabletinterview = Fctabletinterview.where(custserial: custserial).where(tablet_interview_id: tablet_interview_id).first
+    fctabletinterview.is_agree_after = "F"
+    fctabletinterview.save
+
     after_interview.save
   end
 end
