@@ -2,7 +2,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   def self.calculate_push_is_agree
     custinfos = Custinfo.all
     custinfos.each do |custinfo|
-      interviews = Fctabletinterviewrxes.where(custserial: custinfo.custserial).all
+      interviews = Fctabletinterviewrx.where(custserial: custinfo.custserial).all
       interviews.each do |interview|
         interview.is_agree_after = custinfo.is_agree_after
         interview.save
@@ -11,13 +11,13 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   end
 
   def index
-    tabletinterview = Fctabletinterviewrxes.all
+    tabletinterview = Fctabletinterviewrx.all
     render json: api_hash_for_list(tabletinterview, page: 1), status: :ok
   end
 
   def find_interviews
     serial = par
-    tabletinterviews = Fctabletinterviewrxes.where(custserial: serial).where(is_quick_mode: "F")
+    tabletinterviews = Fctabletinterviewrx.where(custserial: serial).where(is_quick_mode: "F")
     Rails.logger.info tabletinterviews.count
     if tabletinterviews.count.to_i > 0
       render json: api_hash_for_list(tabletinterviews), status: :ok
@@ -27,8 +27,8 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   end
 
   def fctabletinterviews_quickmode
-    tabletinterview = Fctabletinterviewrxes.new(permitted_param)
-    tabletinterview.tablet_interview_id = Fctabletinterviewrxes.all.count
+    tabletinterview = Fctabletinterviewrx.new(permitted_param)
+    tabletinterview.tablet_interview_id = Fctabletinterviewrx.all.count
     t = Time.now
     tabletinterview.uptdate = t.strftime("%Y-%m-%d-%H-%M")
     tabletinterview.is_quick_mode = "T"
@@ -51,7 +51,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
 
   def fctabletinterviews_update_lots
     Rails.logger.info params[:tablet_interview_id]
-    existed_interview = Fctabletinterviewrxes.where(tablet_interview_id: params[:tablet_interview_id]).last
+    existed_interview = Fctabletinterviewrx.where(tablet_interview_id: params[:tablet_interview_id]).last
     if existed_interview.update(permitted_param)
       user = Custinfo.where(custserial: existed_interview.custserial).first
       if !user.nil?
@@ -66,8 +66,8 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   end
 
   def create
-    tabletinterview = Fctabletinterviewrxes.new(permitted_param)
-    tabletinterview.tablet_interview_id = Fctabletinterviewrxes.all.count
+    tabletinterview = Fctabletinterviewrx.new(permitted_param)
+    tabletinterview.tablet_interview_id = Fctabletinterviewrx.all.count
     t = Time.now
     tabletinterview.uptdate = t.strftime("%Y-%m-%d-%H-%M")
     tabletinterview.is_agree_after = "T"
@@ -85,7 +85,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   end
 
   def update_interviews_just_refund
-    existed_interview = Fctabletinterviewrxes.where(tablet_interview_id: params[:tablet_interview_id]).last
+    existed_interview = Fctabletinterviewrx.where(tablet_interview_id: params[:tablet_interview_id]).last
     existed_interview.is_agree_cant_refund = params[:is_agree_cant_refund]
     if existed_interview.save
       render json: existed_interview.to_api_hash, status: :ok
@@ -96,7 +96,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
 
   def update_interviews
     Rails.logger.info params[:tablet_interview_id]
-    existed_interview = Fctabletinterviewrxes.where(tablet_interview_id: params[:tablet_interview_id]).last
+    existed_interview = Fctabletinterviewrx.where(tablet_interview_id: params[:tablet_interview_id]).last
     if existed_interview.update(permitted_param)
       user = Custinfo.where(custserial: existed_interview.custserial).first
       if !user.nil?
@@ -128,7 +128,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   end
 
   def calculate
-    Fctabletinterviewrxes.all.each do |fctabletinterview|
+    Fctabletinterviewrx.all.each do |fctabletinterview|
       # if fctabletinterview.skin_type == nil || fctabletinterview.skin_type == "null"
         calculate_value = 0
         calculate_value = calculate_value + get_answer(value: fctabletinterview.d_1)
