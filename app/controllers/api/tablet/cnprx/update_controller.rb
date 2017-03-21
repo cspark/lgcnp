@@ -1,4 +1,4 @@
-class Api::Tablet::Cnprx::UpdateController < Api::ApplicationController
+class Api::Tablet::Cnprx::UpdateController < ApplicationController
   def is_update
     version_code = params[:version_code]
 
