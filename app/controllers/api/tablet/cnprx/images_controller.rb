@@ -1,4 +1,4 @@
-class Api::Tablet::Cnprx::ImagesController < Api::ApplicationController
+class Api::Tablet::Cnprx::ImagesController < ApplicationController
   def create
     # 폴더 만들기
     custserial = params[:custserial]

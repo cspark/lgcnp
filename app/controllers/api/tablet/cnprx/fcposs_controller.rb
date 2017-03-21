@@ -1,6 +1,4 @@
 class Api::Tablet::Cnprx::FcpossController < Api::ApplicationController
-  skip_before_filter :verify_authenticity_token, :only => :create
-
   def index
     fcpos = Fcpos.all
     render json: api_hash_for_list(fcpos), status: :ok
