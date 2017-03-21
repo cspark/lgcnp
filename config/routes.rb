@@ -162,8 +162,8 @@ Rails.application.routes.draw do
 	    get "find_interviews" => "fctabletinterviewrxes#find_interviews"
 	    post "update_interviews" => "fctabletinterviewrxes#update_interviews"
 	    post "update_interviews_just_refund" => "fctabletinterviewrxes#update_interviews_just_refund"
-	    post "fctabletinterviews_quickmode" => "fctabletinterviewrxes#fctabletinterviews_quickmode"
-	    post "fctabletinterviews_update_lots" => "fctabletinterviewrxes#fctabletinterviews_update_lots"
+	    post "fctabletinterviewrxes_quickmode" => "fctabletinterviewrxes#fctabletinterviews_quickmode"
+	    post "fctabletinterviewrxes_update_lots" => "fctabletinterviewrxes#fctabletinterviews_update_lots"
 	    get "is_update" => "update#is_update"
 
 	    #Related Admin
