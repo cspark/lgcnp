@@ -1,5 +1,5 @@
 class Api::Tablet::Cnprx::FcpossController < ApplicationController
-  skip_before_filter :verify_authenticity_token, :only => :create
+  # skip_before_filter :verify_authenticity_token, :only => :create
 
   def index
     fcpos = Fcpos.all
