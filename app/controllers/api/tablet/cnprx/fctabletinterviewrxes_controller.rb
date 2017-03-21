@@ -70,7 +70,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
     tabletinterview.tablet_interview_id = Fctabletinterviewrx.all.count
     t = Time.now
     tabletinterview.uptdate = t.strftime("%Y-%m-%d-%H-%M")
-    tabletinterview.is_agree_after = "T"
+    # tabletinterview.is_agree_after = "T"
 
     user = Custinfo.where(custserial: tabletinterview.custserial).first
     if !user.nil?
