@@ -1,4 +1,4 @@
-class Api::Tablet::Cnprx::FcinterviewsController < Api::ApplicationController
+class Api::Tablet::Cnprx::FcinterviewsController < ApplicationController
   skip_before_filter :verify_authenticity_token,  :only => :create
 
   def index

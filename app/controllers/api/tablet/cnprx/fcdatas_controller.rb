@@ -1,4 +1,4 @@
-class Api::Tablet::Cnprx::FcdatasController < Api::ApplicationController
+class Api::Tablet::Cnprx::FcdatasController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :create
   skip_before_action :verify_authenticity_token
 
