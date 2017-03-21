@@ -12,7 +12,7 @@ class Api::Beau::BeauUserController < Api::ApplicationController
     # L-Care Serial 조건으로 Janus3 DB에 해당 L-Care 회원이 존재하는지 확인
     user = Custinfo.where(n_cust_id: params[:n_cust_id]).first
     if !user.nil?
-      render json: user.to_api_hash, status: :ok
+      render json: user.to_api_hash_for_yanus, status: :ok
     else
       render :text => "Custinfo is not exist!!!", status: 204
     end
@@ -21,7 +21,7 @@ class Api::Beau::BeauUserController < Api::ApplicationController
   def show
     user = Custinfo.where(custserial: params[:id]).first
     if !user.nil?
-      render json: user.to_api_hash, status: :ok
+      render json: user.to_api_hash_for_yanus, status: :ok
     else
       render :text => "Custinfo is not exist!!!", status: 204
     end
@@ -44,7 +44,7 @@ class Api::Beau::BeauUserController < Api::ApplicationController
     user.uptdate = yymmdd.split("-")[0] +"/"+ yymmdd.split("-")[1] +"/"+ yymmdd.split("-")[2]
 
     if user.save
-      render json: user.to_api_hash, status: :ok
+      render json: user.to_api_hash_for_yanus, status: :ok
     else
       render :text => "Fail!!!", status: 404
     end
@@ -62,7 +62,7 @@ class Api::Beau::BeauUserController < Api::ApplicationController
         user.address = params[:address]
       end
       if user.save
-        render json: user.to_api_hash, status: :ok
+        render json: user.to_api_hash_for_yanus, status: :ok
       else
         render :text => "Fail!!!", status: 404
       end
@@ -78,7 +78,7 @@ class Api::Beau::BeauUserController < Api::ApplicationController
       user.increase_measureno
       user.update_lastanaldate
       if user.save
-        render json: user.to_api_hash, status: :ok
+        render json: user.to_api_hash_for_yanus, status: :ok
       else
         render :text => "Fail!!!", status: 404
       end

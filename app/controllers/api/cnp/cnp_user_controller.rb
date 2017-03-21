@@ -19,7 +19,7 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
   def show
     user = Custinfo.where(custserial: params[:id]).first
     if !user.nil?
-      render json: user.to_api_hash, status: :ok
+      render json: user.to_api_hash_for_yanus, status: :ok
     else
       render :text => "Custinfo is not exist!!!", status: 404
     end
@@ -33,7 +33,7 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
         user.address = params[:address]
       end
       if user.save
-        render json: user.to_api_hash, status: :ok
+        render json: user.to_api_hash_for_yanus, status: :ok
       else
         render :text => "Fail!!!", status: 404
       end
@@ -49,7 +49,7 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
       user.increase_measureno
       user.update_lastanaldate
       if user.save
-        render json: user.to_api_hash, status: :ok
+        render json: user.to_api_hash_for_yanus, status: :ok
       else
         render :text => "Fail!!!", status: 404
       end

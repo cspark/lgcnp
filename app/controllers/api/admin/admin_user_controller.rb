@@ -3,7 +3,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     # 고객정보를 조건으로 CUSTSERIAL 값 조회 (고객정보 삭제 시 , Janus 분석 data 조회 시 CUSTINFO update 시)
     user = Custinfo.where(custname: params[:custname], sex: params[:sex], birthyy: params[:birthyy], birthmm: params[:birthmm], birthdd: params[:birthdd], phone: params[:phone]).first
     if !user.nil?
-      render :json => user.to_api_hash, status: :ok
+      render :json => user.to_api_hash_for_yanus, status: :ok
     else
       render :text => "Custinfo is not exist!!!", status: 204
     end
@@ -28,7 +28,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       end
 
       if user.save
-        render json: user.to_api_hash, status: :ok
+        render json: user.to_api_hash_for_yanus, status: :ok
       else
         render :text => "Fail!!!", status: 404
       end

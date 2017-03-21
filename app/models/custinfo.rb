@@ -26,6 +26,29 @@ class Custinfo < ApplicationRecord
     }
   end
 
+  def to_api_hash_for_yanus
+    {
+      custserial: custserial,
+      ch_cd: ch_cd,
+      n_cust_id: n_cust_id,
+      measureno: measureno,
+      custname: custname,
+      sex: sex,
+      age: age,
+      birthyy: birthyy,
+      birthmm: birthmm,
+      birthdd: birthdd,
+      phone: phone,
+      update: uptdate,
+      lastanaldate: lastanaldate,
+      is_agree_privacy: is_agree_privacy,
+      is_agree_thirdparty_info: is_agree_thirdparty_info,
+      is_agree_marketing: is_agree_marketing,
+      is_agree_after: is_agree_after,
+      address: address
+    }
+  end
+
   def increase_measureno
     self.measureno = (self.measureno.to_i + 1).to_s
   end

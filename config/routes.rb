@@ -159,9 +159,9 @@ Rails.application.routes.draw do
 	    end
       get "find_lcare_user" => "fctabletinterviewrxes#find_lcare_user"
       get "find_n_cust_id" => "fctabletinterviewrxes#find_n_cust_id"
-	    get "find_interviews" => "fctabletinterviewrxes#find_interviews"
-	    post "update_interviews" => "fctabletinterviewrxes#update_interviews"
-	    post "update_interviews_just_refund" => "fctabletinterviewrxes#update_interviews_just_refund"
+	    get "find_interviewrxes" => "fctabletinterviewrxes#find_interviews"
+	    post "update_interviewrxes" => "fctabletinterviewrxes#update_interviews"
+	    post "update_interviewrxes_just_refund" => "fctabletinterviewrxes#update_interviews_just_refund"
 	    post "fctabletinterviewrxes_quickmode" => "fctabletinterviewrxes#fctabletinterviews_quickmode"
 	    post "fctabletinterviewrxes_update_lots" => "fctabletinterviewrxes#fctabletinterviews_update_lots"
 	    get "is_update" => "update#is_update"
