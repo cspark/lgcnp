@@ -4,7 +4,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
     custinfos.each do |custinfo|
       interviews = Fctabletinterviewrx.where(custserial: custinfo.custserial).all
       interviews.each do |interview|
-        interview.is_agree_after = custinfo.is_agree_after
+        # interview.is_agree_after = custinfo.is_agree_after
         interview.save
       end
     end

@@ -38,7 +38,6 @@ class Fctabletinterviewrx < ApplicationRecord
       after_ample_2: after_ample_2,
       uptdate: uptdate,
       is_agree_cant_refund: is_agree_cant_refund,
-      is_agree_after: is_agree_after,
       mmode: mmode,
       brefore_production: brefore_production,
       after_production: after_production,
