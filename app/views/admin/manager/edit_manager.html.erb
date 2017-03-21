@@ -12,25 +12,32 @@
 
     <script>
     $ (function () {
-      if ("<%= @admin_user %>" != null) {
+      if ( '<%= @admin_user.role %>' != 'admin' && "<%= @admin_user %>" != null) {
         $("#email").val('<%= @admin_user.email %>');
         $("#select_shop").val('<%= @admin_user.shop_cd %>');
       }
 
+      if ("<%= @admin_user %>" != null){
+        $("#email").val('<%= @admin_user.email %>');
+      }
+
       $('#submit').click(function(){
-        var shop_cd = document.getElementById("select_shop").options[document.getElementById("select_shop").selectedIndex].value;
-        var ch_cd = document.getElementById("select_shop").options[document.getElementById("select_shop").selectedIndex].id;
-        
+        var formData = new FormData($(this)[0]);
+
         if ($("#email").val() == "" || $("#password").val() == "" || $("#ch_cd").val() == "" || $("#shop_cd").val() == ""){
           alert("공란을 채워주세요!")
           return
         }
 
-        var formData = new FormData($(this)[0]);
+        if ( '<%= @admin_user.role %>' != 'admin' ){
+          var shop_cd = document.getElementById("select_shop").options[document.getElementById("select_shop").selectedIndex].value;
+          var ch_cd = document.getElementById("select_shop").options[document.getElementById("select_shop").selectedIndex].id;
+          formData.append("ch_cd", ch_cd);
+          formData.append("shop_cd", shop_cd);
+        }
+
         formData.append("email", $("#email").val());
         formData.append("password", $("#password").val());
-        formData.append("ch_cd", ch_cd);
-        formData.append("shop_cd", shop_cd);
 
         $.ajax({
             url: "/admin/manager/update",
@@ -78,6 +85,7 @@
         <font>Password</font>
         <input class="form-control" type="password" id="password" style="width:200px;">
 
+        <% if @admin_user.role != "admin" %>
         매장 이름 :
         <select class="form-control" id="select_shop" style="width:200px;">
           <option id="LABO" value="1001">LG연구소</option>
@@ -92,6 +100,7 @@
           <option id="CNP" value="59100">르메디바이씨앤피 이대점</option>
           <option id="TMR" value="304369">NC 신촌점</option>
         </select><br>
+        <% end %>
         <center>
           <button class="btn btn-warning" id="submit">수정</button>
         </center>

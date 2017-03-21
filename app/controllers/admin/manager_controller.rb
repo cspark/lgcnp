@@ -55,7 +55,9 @@ class Admin::ManagerController < Admin::AdminApplicationController
   def update
     admin_user = AdminUser.where(email: params[:email]).first
     admin_user.update(permitted_params)
-    admin_user.ch_cd = params[:ch_cd].upcase
+    if params.has_key?(:ch_cd)
+      admin_user.ch_cd = params[:ch_cd].upcase
+    end
 
     if admin_user.save
       render json: {}, status: :ok
