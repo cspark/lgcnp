@@ -200,6 +200,15 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
     end
   end
 
+  def find_n_cust_id
+    user = Custinfo.where(n_cust_id: params[:n_cust_id]).first
+    if !user.nil?
+      render json: user.to_api_hash, status: :ok
+    else
+      render json: "", status: 404
+    end
+  end
+
   def permitted_param
     permitted = params.permit(:custserial, :tablet_interview_id, :a_1,:a_2,:a_3,:b_1,:b_2,:b_3,:b_4,:b_5,:b_6,:c_1,:d_1,:d_2,:d_3,:d_4,:d_5,:d_6,:d_7,:d_8,:d_9,:d_10,:d_11,
     :skin_type,:before_solution_1,:after_solution_1,:before_solution_2,:after_solution_2,

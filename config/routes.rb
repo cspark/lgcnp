@@ -158,6 +158,7 @@ Rails.application.routes.draw do
 	    resources :fctabletinterviewrxes do
 	    end
       get "find_lcare_user" => "fctabletinterviewrxes#find_lcare_user"
+      get "find_n_cust_id" => "fctabletinterviewrxes#find_n_cust_id"
 	    get "find_interviews" => "fctabletinterviewrxes#find_interviews"
 	    post "update_interviews" => "fctabletinterviewrxes#update_interviews"
 	    post "update_interviews_just_refund" => "fctabletinterviewrxes#update_interviews_just_refund"
