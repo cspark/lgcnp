@@ -16,7 +16,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   end
 
   def find_interviews
-    serial = par
+    serial = params[:custserial].to_s
     tabletinterviews = Fctabletinterviewrx.where(custserial: serial)
     Rails.logger.info tabletinterviews.count
     if tabletinterviews.count.to_i > 0
