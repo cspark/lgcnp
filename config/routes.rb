@@ -162,6 +162,7 @@ Rails.application.routes.draw do
 	    post "update_interviews_just_refund" => "fctabletinterviews#update_interviews_just_refund"
 	    post "fctabletinterviews_quickmode" => "fctabletinterviews#fctabletinterviews_quickmode"
 	    post "fctabletinterviews_update_lots" => "fctabletinterviews#fctabletinterviews_update_lots"
+      get "find_lcare_user" => "fctabletinterviews#find_lcare_user"
 	    get "is_update" => "update#is_update"
 
 	    #Related Admin
