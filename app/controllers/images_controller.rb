@@ -14,7 +14,10 @@ class ImagesController < ApplicationController
     # type = "Sym_L"
 
     sub_folder_name = (((custserial.to_i / 100) * 100) + 100).to_s
-    sub_folder_name << "-P"
+    if type.include?("F_PL") || type.include?("F_UV") || type.include?("F_WH")
+    else
+      sub_folder_name << "-P"
+    end
 
     make_dir_command = "mkdir "
     if !ch_cd.nil?
@@ -77,7 +80,10 @@ class ImagesController < ApplicationController
     type = type
 
     sub_folder_name = (((custserial.to_i / 100) * 100) + 100).to_s
-    sub_folder_name << "-P"
+    if type.include?("F_PL") || type.include?("F_UV") || type.include?("F_WH")
+    else
+      sub_folder_name << "-P"
+    end
 
     ftp_path = ""
     if !ch_cd.nil?
