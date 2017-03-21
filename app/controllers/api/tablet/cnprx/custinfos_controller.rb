@@ -1,6 +1,6 @@
 require 'securerandom'
 
-class Api::Tablet::Cnprx::CustinfosController < ApplicationController
+class Api::Tablet::Cnprx::CustinfosController < Api::ApplicationController
   skip_before_action :verify_authenticity_token, :only => [:create, :get_api_key]
   skip_before_action :authenticate, :only => [:get_api_key]
 
