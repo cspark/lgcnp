@@ -104,7 +104,9 @@ class AdminFcdata < ApplicationRecord
        e_porphyrin_u: e_porphyrin_u,
        m_skintype: m_skintype,
        janus_status: janus_status,
-       shop_cd: shop_cd
+       shop_cd: shop_cd,
+       worry_skin_1: worry_skin_1,
+       worry_skin_2: worry_skin_2
     }
   end
 
