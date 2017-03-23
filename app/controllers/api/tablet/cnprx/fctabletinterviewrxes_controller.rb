@@ -211,8 +211,8 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
 
   def permitted_param
     permitted = params.permit(:custserial, :tablet_interview_id, :a_1,:a_2,:a_3,:b_1,:b_2,:b_3,:b_4,:b_5,:b_6,:c_1,:d_1,:d_2,:d_3,:d_4,:d_5,:d_6,:d_7,:d_8,:d_9,:d_10,:d_11,
-    :skin_type,:before_solution_1,:after_solution_1,:before_solution_2,:after_solution_2,
+    :skin_type,:before_solution_1,:after_solution_1,:before_solution_2,:after_solution_2, :before_production, :after_production,
     :before_ample_1,:after_ample_1,:before_ample_2,:after_ample_2,:uptdate,:is_agree_after,:mmode,:brefore_production,:after_production,:bb_base,
-    :before_cushion_1,:after_cushion_1,:before_cushion_2,:after_cushion_2,:fcdata_id,:is_agree_cant_refund,:turnover_value,:corneous_value,:stress_value)
+    :before_cushion_1,:after_cushion_1,:before_cushion_2,:after_cushion_2,:fcdata_id,:is_agree_cant_refund,:turnover_value,:corneous_value,:stress_value,:bb_base_before,:bb_base_after)
   end
 end

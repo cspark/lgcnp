@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170322050328) do
+ActiveRecord::Schema.define(version: 20170323053654) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -342,7 +342,7 @@ ActiveRecord::Schema.define(version: 20170322050328) do
     t.string   "is_agree_cant_refund"
     t.string   "is_agree_after"
     t.string   "mmode"
-    t.string   "brefore_production"
+    t.string   "before_production"
     t.string   "after_production"
     t.string   "bb_base"
     t.string   "before_cushion_1"
