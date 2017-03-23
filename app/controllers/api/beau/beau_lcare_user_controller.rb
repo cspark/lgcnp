@@ -9,7 +9,7 @@ class Api::Beau::BeauLcareUserController < Api::ApplicationController
 
     if lcare_user.count > 0
       # response.headers["Transfer-Encoding"] = "Closed"
-      set_header(lcare_user)
+      set_header(lcare_user: lcare_user)
       render json: api_hash_for_list(lcare_user), status: :ok
     else
       render :text => "Lcare user is not exist!!!", status: 204
