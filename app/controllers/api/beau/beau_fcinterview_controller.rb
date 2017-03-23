@@ -2,6 +2,7 @@ class Api::Beau::BeauFcinterviewController < Api::ApplicationController
   def show
     interview = Fcinterview.where(custserial: params[:id], measureno: params[:measureno]).first
     if !interview.nil?
+      response.set_header("Content-length", ActiveSupport::JSON.encode(interview.to_api_hash).size)
       render json: interview.to_api_hash, status: :ok
     else
       render :text => "Fcinterview is not exist!!!", status: 204
@@ -19,6 +20,7 @@ class Api::Beau::BeauFcinterviewController < Api::ApplicationController
     fcinterview.uptdate = t.to_s.split(" ")[0]
 
     if fcinterview.save
+      response.set_header("Content-length", ActiveSupport::JSON.encode(fcinterview.to_api_hash).size)
       render json: fcinterview.to_api_hash, status: :ok
     else
       render :text => "Fail!!!", status: 404

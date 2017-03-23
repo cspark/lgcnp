@@ -1,7 +1,8 @@
 class Api::Beau::BeauUserController < Api::ApplicationController
   def index
-    user = Custinfo.all.where(n_cust_id: n_cust_id).order('updated_at DESC')
+    user = Custinfo.all.where(n_cust_id: params[:n_cust_id]).order('updated_at DESC')
     if user.count > 0
+      response.set_header("Content-length", ActiveSupport::JSON.encode(api_hash_for_list(user)).size)
       render json: api_hash_for_list(user), status: :ok
     else
       render :text => "Custinfo is not exist!!!", status: 204
@@ -12,6 +13,7 @@ class Api::Beau::BeauUserController < Api::ApplicationController
     # L-Care Serial 조건으로 Janus3 DB에 해당 L-Care 회원이 존재하는지 확인
     user = Custinfo.where(n_cust_id: params[:n_cust_id]).first
     if !user.nil?
+      response.set_header("Content-length", ActiveSupport::JSON.encode(user.to_api_hash_for_yanus).size)
       render json: user.to_api_hash_for_yanus, status: :ok
     else
       render :text => "Custinfo is not exist!!!", status: 204
@@ -21,6 +23,7 @@ class Api::Beau::BeauUserController < Api::ApplicationController
   def show
     user = Custinfo.where(custserial: params[:id]).first
     if !user.nil?
+      response.set_header("Content-length", ActiveSupport::JSON.encode(user.to_api_hash_for_yanus).size)
       render json: user.to_api_hash_for_yanus, status: :ok
     else
       render :text => "Custinfo is not exist!!!", status: 204
@@ -44,6 +47,7 @@ class Api::Beau::BeauUserController < Api::ApplicationController
     user.uptdate = yymmdd.split("-")[0] +"/"+ yymmdd.split("-")[1] +"/"+ yymmdd.split("-")[2]
 
     if user.save
+      response.set_header("Content-length", ActiveSupport::JSON.encode(user.to_api_hash_for_yanus).size)
       render json: user.to_api_hash_for_yanus, status: :ok
     else
       render :text => "Fail!!!", status: 404
@@ -62,6 +66,7 @@ class Api::Beau::BeauUserController < Api::ApplicationController
         user.address = params[:address]
       end
       if user.save
+        response.set_header("Content-length", ActiveSupport::JSON.encode(user.to_api_hash_for_yanus).size)
         render json: user.to_api_hash_for_yanus, status: :ok
       else
         render :text => "Fail!!!", status: 404
@@ -78,6 +83,7 @@ class Api::Beau::BeauUserController < Api::ApplicationController
       user.increase_measureno
       user.update_lastanaldate
       if user.save
+        response.set_header("Content-length", ActiveSupport::JSON.encode(user.to_api_hash_for_yanus).size)
         render json: user.to_api_hash_for_yanus, status: :ok
       else
         render :text => "Fail!!!", status: 404
