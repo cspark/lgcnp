@@ -8,10 +8,8 @@ class Api::Beau::BeauLcareUserController < Api::ApplicationController
     end
 
     if lcare_user.count > 0
-      Rails.logger.info lcare_user.to_s
-      Rails.logger.info api_hash_for_list(lcare_user).to_s
-      response.headers["Transfer-Encoding"] = "Closed"
-      response.set_header("Content-length", ActiveSupport::JSON.encode(api_hash_for_list(lcare_user)).size)
+      # response.headers["Transfer-Encoding"] = "Closed"
+      set_header(lcare_user)
       render json: api_hash_for_list(lcare_user), status: :ok
     else
       render :text => "Lcare user is not exist!!!", status: 204
@@ -21,5 +19,9 @@ class Api::Beau::BeauLcareUserController < Api::ApplicationController
   private
   def permitted_params
     params.permit(:cust_hnm, :birth_year, :birth_mmdd, :cell_phnno)
+  end
+
+  def set_header(lcare_user: nil)
+    response.set_header("Content-length", ActiveSupport::JSON.encode(api_hash_for_list(lcare_user)).size)
   end
 end
