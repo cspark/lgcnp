@@ -10,7 +10,7 @@ class Api::Beau::BeauLcareUserController < Api::ApplicationController
     if lcare_user.count > 0
       Rails.logger.info lcare_user.to_s
       Rails.logger.info api_hash_for_list(lcare_user).to_s
-      response.header.Del("Transfer-Encoding")
+      response.Del("Transfer-Encoding")
       response.set_header("Content-length", ActiveSupport::JSON.encode(api_hash_for_list(lcare_user)).size)
       render json: api_hash_for_list(lcare_user), status: :ok
     else
