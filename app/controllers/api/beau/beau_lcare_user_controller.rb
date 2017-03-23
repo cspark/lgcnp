@@ -1,6 +1,4 @@
 class Api::Beau::BeauLcareUserController < Api::ApplicationController
-  after_action :set_length_header
-
   def lcare_integrated_user_list
     # L-Care 통합회원 조회 이름, 생년월일, 핸드폰번호, 통합회원여부 조건으로 고객정보 조회 (* Next 조회 필요)
     if params.has_key?(:cell_phnno)
@@ -10,8 +8,8 @@ class Api::Beau::BeauLcareUserController < Api::ApplicationController
     end
 
     if lcare_user.count > 0
-      # response.headers["Transfer-Encoding"] = "Closed"
-      @@size = ActiveSupport::JSON.encode(api_hash_for_list(lcare_user)).size
+      response.headers["Transfer-Encoding"] = "Closed"
+      response.set_header("Content-length", ActiveSupport::JSON.encode(api_hash_for_list(lcare_user)).size)
       render json: api_hash_for_list(lcare_user), status: :ok
     else
       render json: "", status: 204
@@ -21,9 +19,5 @@ class Api::Beau::BeauLcareUserController < Api::ApplicationController
   private
   def permitted_params
     params.permit(:cust_hnm, :birth_year, :birth_mmdd, :cell_phnno)
-  end
-
-  def set_length_header
-    response.set_header("Content-length", @@size)
   end
 end
