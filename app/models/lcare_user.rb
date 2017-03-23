@@ -15,8 +15,7 @@ class LcareUser < ApplicationRecord
       sex_cd: sex_cd,
       birth_year: birth_year,
       birth_mmdd: birth_mmdd,
-      cell_phnno: cell_phnno,
-      u_cust_yn: u_cust_yn
+      cell_phnno: cell_phnno
     }
   end
 
