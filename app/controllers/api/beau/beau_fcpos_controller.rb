@@ -10,7 +10,6 @@ class Api::Beau::BeauFcposController < Api::ApplicationController
     fcpos.uptdate = t.to_s.split(" ")[0]
 
     if fcpos.save
-      response.set_header("Content-length", ActiveSupport::JSON.encode(fcpos.to_api_hash).size)
       render json: fcpos.to_api_hash, status: :ok
     else
       render :text => "Fail!!!", status: 404

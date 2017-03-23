@@ -2,7 +2,6 @@ class Api::Cnp::CnpFcdataController < Api::ApplicationController
   def show
     list = AdminFcdata.list(custserial: params[:id])
     if list.count > 0
-      response.set_header("Content-length", ActiveSupport::JSON.encode(api_hash_for_list(list)).size)
       render json: api_hash_for_list(list), status: :ok
     else
       render :text => "Fcdata is not exist!!!", status: 204
@@ -20,7 +19,6 @@ class Api::Cnp::CnpFcdataController < Api::ApplicationController
     fcdata.uptdate = t.to_s.split(" ")[0]
 
     if fcdata.save
-      response.set_header("Content-length", ActiveSupport::JSON.encode(fcdata.to_api_hash).size)
       render json: fcdata.to_api_hash, status: :ok
     else
       render :text => "Fail!!!", status: 404

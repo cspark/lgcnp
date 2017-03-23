@@ -2,7 +2,6 @@ class Api::Admin::AdminFcdataController < Api::ApplicationController
   def index
     list = AdminFcdata.list(custserial: params[:custserial])
     if list.count > 0
-      response.set_header("Content-length", ActiveSupport::JSON.encode(api_hash_for_list(list)).size)
       render json: api_hash_for_list(list), status: :ok
     else
       render :text => "Fcdata is not exist!!!", status: 204

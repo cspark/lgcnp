@@ -22,8 +22,4 @@ class Api::ApplicationController < ActionController::Base
       end
     end
   end
-
-  def set_header(size)
-    response.set_header("Content-length", size)
-  end
 end

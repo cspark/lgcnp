@@ -10,7 +10,6 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
     end
 
     if user.count > 0
-      response.set_header("Content-length", ActiveSupport::JSON.encode(api_hash_for_user_list(user)).size)
       render json: api_hash_for_user_list(user), status: :ok
     else
       render :text => "Custinfo is not exist!!!", status: 204
@@ -20,7 +19,6 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
   def show
     user = Custinfo.where(custserial: params[:id]).first
     if !user.nil?
-      response.set_header("Content-length", ActiveSupport::JSON.encode(user.to_api_hash_for_yanus).size)
       render json: user.to_api_hash_for_yanus, status: :ok
     else
       render :text => "Custinfo is not exist!!!", status: 404
@@ -35,7 +33,6 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
         user.address = params[:address]
       end
       if user.save
-        response.set_header("Content-length", ActiveSupport::JSON.encode(user.to_api_hash_for_yanus).size)
         render json: user.to_api_hash_for_yanus, status: :ok
       else
         render :text => "Fail!!!", status: 404
@@ -52,7 +49,6 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
       user.increase_measureno
       user.update_lastanaldate
       if user.save
-        response.set_header("Content-length", ActiveSupport::JSON.encode(user.to_api_hash_for_yanus).size)
         render json: user.to_api_hash_for_yanus, status: :ok
       else
         render :text => "Fail!!!", status: 404

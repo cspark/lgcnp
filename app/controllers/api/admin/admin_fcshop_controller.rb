@@ -2,7 +2,6 @@ class Api::Admin::AdminFcshopController < Api::ApplicationController
   def index
     # 매장 테이블 전체 조회 (* Next 조회 필요)
     list = Fcshop.all.order("shop_cd asc")
-    response.set_header("Content-length", ActiveSupport::JSON.encode(api_hash_for_list(list)).size)
     render json: api_hash_for_list(list), status: :ok
   end
 
@@ -14,7 +13,6 @@ class Api::Admin::AdminFcshopController < Api::ApplicationController
 
     fcshop = Fcshop.new(permitted_params)
     if fcshop.save
-      response.set_header("Content-length", ActiveSupport::JSON.encode(fcshop.to_api_hash).size)
       render json: fcshop.to_api_hash, status: :ok
     else
       render :text => "Fail!!!", status: 404
