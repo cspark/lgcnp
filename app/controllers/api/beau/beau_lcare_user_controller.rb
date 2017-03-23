@@ -7,9 +7,9 @@ class Api::Beau::BeauLcareUserController < Api::ApplicationController
       lcare_user = LcareUser.list(cust_hnm: params[:cust_hnm], birth_year: params[:birth_year], birth_mmdd: params[:birth_mmdd])
     end
 
-    response.headers['Content-Length'] = ActiveSupport::JSON.encode(api_hash_for_list(lcare_user)).size.to_s
-    
     if lcare_user.count > 0
+      # ActiveSupport::JSON.encode(api_hash_for_list(lcare_user)).size
+      response.headers['Content-Length'] = 200
       render json: api_hash_for_list(lcare_user), status: :ok
     else
       render :text => "Lcare user is not exist!!!", status: 204
