@@ -75,8 +75,10 @@ class Admin::DataController < Admin::AdminApplicationController
         @select_skin_type_device = 2
       elsif @select_skin_type_device == "jisung"
         @select_skin_type_device = 3
-      else
+      elsif @select_skin_type_device == "t_zone_boghab"
         @select_skin_type_device = 4
+      elsif @select_skin_type_device == "t_zone_boghab"
+        @select_skin_type_device = 5
       end
     end
 
@@ -90,8 +92,10 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped = scoped.where(faceno: @select_area.to_i) if !@select_area.blank? && @select_area.downcase != "all"
       if !@select_skin_type_device.blank? && @select_skin_type_device != "all" && @select_skin_type_device < 4
         scoped = scoped.where("skintype LIKE ?", "%#{@select_skin_type_device}%")
-      elsif !@select_skin_type_device.blank? && @select_skin_type_device != "all" && @select_skin_type_device >= 4
-        scoped = scoped.where("skintype >= ?", 4)
+      elsif !@select_skin_type_device.blank? && @select_skin_type_device != "all" && @select_skin_type_device == 4
+        scoped = scoped.where("skintype LIKE ? OR skintype LIKE ? OR skintype LIKE ?", 4, 6, 8)
+      elsif !@select_skin_type_device.blank? && @select_skin_type_device != "all" && @select_skin_type_device == 5
+        scoped = scoped.where("skintype LIKE ? OR skintype LIKE ? OR skintype LIKE ?", 5, 7, 9)
       end
 
       if @select_filter == []

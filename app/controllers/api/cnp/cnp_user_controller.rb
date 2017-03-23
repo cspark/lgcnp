@@ -10,8 +10,8 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
     end
 
     if user.count > 0
-      response.set_header("Content-length", ActiveSupport::JSON.encode(api_hash_for_list(user)).size)
-      render json: api_hash_for_list(user), status: :ok
+      response.set_header("Content-length", ActiveSupport::JSON.encode(api_hash_for_user_list(user)).size)
+      render json: api_hash_for_user_list(user), status: :ok
     else
       render :text => "Custinfo is not exist!!!", status: 204
     end

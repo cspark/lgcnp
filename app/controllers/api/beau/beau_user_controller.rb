@@ -2,8 +2,8 @@ class Api::Beau::BeauUserController < Api::ApplicationController
   def index
     user = Custinfo.all.where(n_cust_id: params[:n_cust_id]).order('updated_at DESC')
     if user.count > 0
-      response.set_header("Content-length", ActiveSupport::JSON.encode(api_hash_for_list(user)).size)
-      render json: api_hash_for_list(user), status: :ok
+      response.set_header("Content-length", ActiveSupport::JSON.encode(api_hash_for_user_list(user)).size)
+      render json: api_hash_for_user_list(user), status: :ok
     else
       render :text => "Custinfo is not exist!!!", status: 204
     end
