@@ -70,14 +70,12 @@ class Admin::DataController < Admin::AdminApplicationController
 
     if !@select_skin_type_device.blank? && @select_skin_type_device != "all"
       if @select_skin_type_device == "gunsung"
-        @select_skin_type_device = 0
-      elsif @select_skin_type_device == "jungsung"
         @select_skin_type_device = 1
-      elsif @select_skin_type_device == "jisung"
+      elsif @select_skin_type_device == "jungsung"
         @select_skin_type_device = 2
-      elsif @select_skin_type_device == "t_zone_boghab"
+      elsif @select_skin_type_device == "jisung"
         @select_skin_type_device = 3
-      elsif @select_skin_type_device == "u_zone_boghab"
+      else
         @select_skin_type_device = 4
       end
     end
@@ -90,7 +88,11 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
       scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
       scoped = scoped.where(faceno: @select_area.to_i) if !@select_area.blank? && @select_area.downcase != "all"
-      scoped = scoped.where("skintype LIKE ?", "%#{@select_skin_type_device}%") if !@select_skin_type_device.blank? && @select_skin_type_device != "all"
+      if !@select_skin_type_device.blank? && @select_skin_type_device != "all" && @select_skin_type_device < 4
+        scoped = scoped.where("skintype LIKE ?", "%#{@select_skin_type_device}%")
+      elsif !@select_skin_type_device.blank? && @select_skin_type_device != "all" && @select_skin_type_device >= 4
+        scoped = scoped.where("skintype >= ?", 4)
+      end
 
       if @select_filter == []
         @excel_name = ["이름","분석 횟수","채널구분","전면/좌/우측면","분석 일","업데이트 일","수분 측정1","수분 측정2","수분 측정3","모공 측정1","모공 측정2","모공 측정7","모공 측정8","모공 측정avr","주름 측정3", "주름 측정4", "주름 측정6", "주름 측정avr",
