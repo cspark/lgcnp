@@ -8,7 +8,7 @@ class Api::Beau::BeauLcareUserController < Api::ApplicationController
     end
 
     if !lcare_user.nil?
-      Rails.logger.info lcare_user
+      Rails.logger.info lcare_user.to_api_hash
       Rails.logger.info ActiveSupport::JSON.encode(lcare_user.to_api_hash).size
       response.set_header("Content-length", ActiveSupport::JSON.encode(lcare_user.to_api_hash).size)
       render json: lcare_user.to_api_hash, status: :ok
