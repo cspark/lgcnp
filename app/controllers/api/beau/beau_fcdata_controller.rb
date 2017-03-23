@@ -2,7 +2,7 @@ class Api::Beau::BeauFcdataController < Api::ApplicationController
   def show
     list = AdminFcdata.list(custserial: params[:id])
     if list.count > 0
-      response.set_header("Content-length", ActiveSupport::JSON.encode(api_hash_for_list(list)).size)
+      # response.set_header("Content-length", ActiveSupport::JSON.encode(api_hash_for_list(list)).size)
       render json: api_hash_for_list(list), status: :ok
     else
       render :text => "AdminFcdata is not exist!!!", status: 204
