@@ -12,7 +12,7 @@ class Api::Beau::BeauLcareUserController < Api::ApplicationController
 
       response_json = ActiveSupport::JSON.encode(api_hash_for_list(lcare_users))
       Rails.logger.info response_json
-      response.set_header("Content-length", response_json.to_s.length)
+      response.set_header("Content-length", response_json.to_s.length + 10)
       Rails.logger.info response_json.to_s.length
       Rails.logger.info response_json
       render text: response_json, status: :ok
