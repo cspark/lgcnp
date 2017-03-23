@@ -49,7 +49,9 @@ class Fctabletinterviewrx < ApplicationRecord
       fcdata_id: fcdata_id,
       turnover_value: turnover_value,
       corneous_value: corneous_value,
-      stress_value: stress_value
+      stress_value: stress_value,
+      bb_base_before: bb_base_before,
+      bb_base_after: bb_base_after
     }
   end
 end
