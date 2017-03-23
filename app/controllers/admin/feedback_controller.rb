@@ -12,12 +12,13 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin")
       ch_cd = ""
       shop_cd = ""
+      fcdata_list = Fcdata.all
     else
       ch_cd = session[:admin_user]['ch_cd']
       shop_cd = session[:admin_user]['shop_cd']
+      fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
     end
 
-    fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
     temp_serial_array = fcdata_list.pluck(:custserial).uniq
     temp_measureno_array = fcdata_list.pluck(:measureno).uniq
     custserial_array = []
@@ -30,13 +31,13 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     end
 
     if Rails.env.production? || Rails.env.staging?
-      @tablet_interviews_today = Fctabletinterview.where(custserial: custserial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
-      @tablet_interviews_2_weeks_ago = Fctabletinterview.where(custserial: custserial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
-      @tablet_interviews_3_months_ago = Fctabletinterview.where(custserial: custserial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
+      @tablet_interviews_today = Fctabletinterview.where(ch_cd: "CNP").where(custserial: custserial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
+      @tablet_interviews_2_weeks_ago = Fctabletinterview.where(ch_cd: "CNP").where(custserial: custserial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
+      @tablet_interviews_3_months_ago = Fctabletinterview.where(ch_cd: "CNP").where(custserial: custserial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
     else
-      @tablet_interviews_today = Fctabletinterview.where(custserial: custserial_array).where(fcdata_id: measureno_array)
-      @tablet_interviews_2_weeks_ago = Fctabletinterview.where(custserial: custserial_array).where(fcdata_id: measureno_array)
-      @tablet_interviews_3_months_ago = Fctabletinterview.where(custserial: custserial_array).where(fcdata_id: measureno_array)
+      @tablet_interviews_today = Fctabletinterview.where(ch_cd: "CNP").where(custserial: custserial_array).where(fcdata_id: measureno_array)
+      @tablet_interviews_2_weeks_ago = Fctabletinterview.where(ch_cd: "CNP").where(custserial: custserial_array).where(fcdata_id: measureno_array)
+      @tablet_interviews_3_months_ago = Fctabletinterview.where(ch_cd: "CNP").where(custserial: custserial_array).where(fcdata_id: measureno_array)
     end
 
     create_new_fcafterservice(@tablet_interviews_today)
@@ -156,19 +157,15 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @after_interviews = []
 
     if ch_cd == "" || ch_cd == "CNP" || ch_cd == "CLAB"
-      fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
+      if ch_cd == ""
+        fcdata_list = Fcdata.all
+      else
+        fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
+      end
       temp_serial_array = fcdata_list.pluck(:custserial).uniq
       temp_measureno_array = fcdata_list.pluck(:measureno).uniq
-      custserial_array = []
-      measureno_array = []
-      temp_serial_array.each do |serial|
-        custserial_array << serial.to_i
-      end
-      temp_measureno_array.each do |measureno|
-        measureno_array << measureno.to_i
-      end
 
-      tablet_interviews = Fctabletinterview.where(custserial: custserial_array).where(fcdata_id: measureno_array)
+      tablet_interviews = Fctabletinterview.where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array)
       array = tablet_interviews.pluck(:tablet_interview_id)
       temp_after_interviews = Fcafterinterview.where.not(a1: nil).where(tablet_interview_id: array)
       if select_interview != "all"
