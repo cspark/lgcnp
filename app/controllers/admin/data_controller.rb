@@ -90,7 +90,7 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
       scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
-      scoped = scoped.where(faceno: @select_area.to_i) if !@select_area.blank? && @select_area.downcase != "all"
+      scoped = scoped.where(faceno: @select_area) if !@select_area.blank? && @select_area.downcase != "all"
       scoped = scoped.where(worry_skin_1: @select_skin_anxiety1.to_i) if !@select_skin_anxiety1.blank? && @select_skin_anxiety1.downcase != "all"
       scoped = scoped.where(worry_skin_2: @select_skin_anxiety2.to_i) if !@select_skin_anxiety2.blank? && @select_skin_anxiety2.downcase != "all"
       if !@select_skin_type_device_final.blank? && @select_skin_type_device_final != "all" && @select_skin_type_device_final < 4
