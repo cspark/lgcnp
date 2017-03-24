@@ -83,6 +83,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     @fcdatas = []
+    @fcdatas_final = []
     if Rails.env.production? || Rails.env.staging?
       scoped = Fcdata.all
       temp_end_date = @end_date.to_date + 1.day
@@ -90,6 +91,8 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
       scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
       scoped = scoped.where(faceno: @select_area.to_i) if !@select_area.blank? && @select_area.downcase != "all"
+      scoped = scoped.where(worry_skin_1: @select_skin_anxiety1.to_i) if !@select_skin_anxiety1.blank? && @select_skin_anxiety1.downcase != "all"
+      scoped = scoped.where(worry_skin_2: @select_skin_anxiety2.to_i) if !@select_skin_anxiety2.blank? && @select_skin_anxiety2.downcase != "all"
       if !@select_skin_type_device.blank? && @select_skin_type_device != "all" && @select_skin_type_device < 4
         scoped = scoped.where("skintype LIKE ?", "%#{@select_skin_type_device}%")
       elsif !@select_skin_type_device.blank? && @select_skin_type_device != "all" && @select_skin_type_device == 4
@@ -120,21 +123,6 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped.each do |fcdata|
         custinfo = Custinfo.where(custserial: fcdata.custserial).first
         is_contain = true
-
-        # 필드 추가
-        # if !@select_mode.blank?
-        #   if @select_mode.downcase != "all"
-        #     if @select_mode == "quick"
-        #       scoped = scoped.where(is_quick_mode: "T")
-        #     end
-        #   end
-        # end
-
-        # if !@select_makeup.blank?
-        #   if @select_makeup.downcase != "all"
-        #     scoped = scoped.where(is_make_up: @select_makeup)
-        #   end
-        # end
 
         if !@name.blank?
           if !custinfo.custname.include? @name
@@ -178,8 +166,45 @@ class Admin::DataController < Admin::AdminApplicationController
         end
       end
 
-      @fcdatas_excel = @fcdatas
-      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
+      @fcdatas.each do |fcdata|
+        fctabletinterview = Fctabletinterview.where(custserial: fcdata.custserial).where(fcdata_id: fcdata.measureno).first
+        is_contain = true
+
+        if @select_skin_type_survey != "all"
+          if !fctabletinterview.skin_type.include?(@select_skin_type_survey)
+            is_contain = false
+          end
+        end
+
+        if @select_senstive != "all" && @select_senstive == "yes"
+          if !fctabletinterview.skin_type.include?("senstive")
+            is_contain = false
+          end
+        elsif @select_senstive != "all" && @select_senstive == "no"
+          if fctabletinterview.skin_type.include?("senstive")
+            is_contain = false
+          end
+        end
+
+        if !@select_makeup.blank? && @select_makeup != "all"
+          if fctabletinterview.a_1 != @select_makeup.to_i
+            is_contain = false
+          end
+        end
+
+        if !@select_mode.blank? && @select_mode != "all"
+          if fctabletinterview.is_quick_mode != @select_mode
+            is_contain = false
+          end
+        end
+
+        if is_contain == true
+          @fcdatas_final << fcdata
+        end
+      end
+
+      @fcdatas_excel = @fcdatas_final
+      @fcdatas = Kaminari.paginate_array(@fcdatas_final).page(params[:page]).per(5)
     else
       if @select_filter == []
         @fcdatas = Fcdata.all
