@@ -70,15 +70,15 @@ class Admin::DataController < Admin::AdminApplicationController
 
     if !@select_skin_type_device.blank? && @select_skin_type_device != "all"
       if @select_skin_type_device == "gunsung"
-        @select_skin_type_device = 1
+        @select_skin_type_device_final = 1
       elsif @select_skin_type_device == "jungsung"
-        @select_skin_type_device = 2
+        @select_skin_type_device_final = 2
       elsif @select_skin_type_device == "jisung"
-        @select_skin_type_device = 3
+        @select_skin_type_device_final = 3
       elsif @select_skin_type_device == "t_zone_boghab"
-        @select_skin_type_device = 4
+        @select_skin_type_device_final = 4
       elsif @select_skin_type_device == "t_zone_boghab"
-        @select_skin_type_device = 5
+        @select_skin_type_device_final = 5
       end
     end
 
@@ -93,11 +93,11 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped = scoped.where(faceno: @select_area.to_i) if !@select_area.blank? && @select_area.downcase != "all"
       scoped = scoped.where(worry_skin_1: @select_skin_anxiety1.to_i) if !@select_skin_anxiety1.blank? && @select_skin_anxiety1.downcase != "all"
       scoped = scoped.where(worry_skin_2: @select_skin_anxiety2.to_i) if !@select_skin_anxiety2.blank? && @select_skin_anxiety2.downcase != "all"
-      if !@select_skin_type_device.blank? && @select_skin_type_device != "all" && @select_skin_type_device < 4
-        scoped = scoped.where("skintype LIKE ?", "%#{@select_skin_type_device}%")
-      elsif !@select_skin_type_device.blank? && @select_skin_type_device != "all" && @select_skin_type_device == 4
+      if !@select_skin_type_device_final.blank? && @select_skin_type_device_final != "all" && @select_skin_type_device_final < 4
+        scoped = scoped.where("skintype LIKE ?", "%#{@select_skin_type_device_final}%")
+      elsif !@select_skin_type_device_final.blank? && @select_skin_type_device_final != "all" && @select_skin_type_device_final == 4
         scoped = scoped.where("skintype LIKE ? OR skintype LIKE ? OR skintype LIKE ?", 4, 6, 8)
-      elsif !@select_skin_type_device.blank? && @select_skin_type_device != "all" && @select_skin_type_device == 5
+      elsif !@select_skin_type_device_final.blank? && @select_skin_type_device_final != "all" && @select_skin_type_device_final == 5
         scoped = scoped.where("skintype LIKE ? OR skintype LIKE ? OR skintype LIKE ?", 5, 7, 9)
       end
 
@@ -167,6 +167,8 @@ class Admin::DataController < Admin::AdminApplicationController
       end
 
       @fcdatas.each do |fcdata|
+        Rails.logger.info "@fcdatas each do !!!"
+        Rails.logger.info fcdata.custserial
         fctabletinterview = Fctabletinterview.where(custserial: fcdata.custserial).where(fcdata_id: fcdata.measureno).first
         is_contain = true
 
