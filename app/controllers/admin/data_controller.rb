@@ -167,11 +167,7 @@ class Admin::DataController < Admin::AdminApplicationController
       end
 
       @fcdatas.each do |fcdata|
-        Rails.logger.info "fcdata each do !!!!!!"
-        Rails.logger.info fcdata.custserial.to_i
-        Rails.logger.info fcdata.measureno.to_i
         fctabletinterview = Fctabletinterview.where.not(skin_type: nil).where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno.to_i).first
-        Rails.logger.info fctabletinterview
         is_contain = true
 
         if !fctabletinterview.nil?
@@ -206,10 +202,10 @@ class Admin::DataController < Admin::AdminApplicationController
               is_contain = false
             end
           end
+        end
 
-          if is_contain == true
-            @fcdatas_final << fcdata
-          end
+        if is_contain == true
+          @fcdatas_final << fcdata
         end
       end
 
