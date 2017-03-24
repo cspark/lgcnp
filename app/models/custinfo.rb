@@ -56,8 +56,8 @@ class Custinfo < ApplicationRecord
   def update_lastanaldate
     change_time_now = Time.now + 10.minute - 18.seconds
     yymmdd = change_time_now.to_s.split(" ")[0]
-    temp_date = change_time_now.to_s.split(" ")[1]
-    hhmmss = temp_date.split(":")[0] + "-" +temp_date.split(":")[1]+ "-" +temp_date.split(":")[2]
+    temp_date = change_time_now.strftime("%H:%M:%S").to_s
+    hhmmss = temp_date.split(":")[0]+"-"+temp_date.split(":")[1]+"-"+temp_date.split(":")[2]
     self.lastanaldate = yymmdd+ "-" +hhmmss
   end
 
