@@ -167,22 +167,22 @@ class Admin::DataController < Admin::AdminApplicationController
       end
 
       @fcdatas.each do |fcdata|
-        Rails.logger.info "@fcdatas each do !!!"
+        Rails.logger.info "fcdata each do !!!"
         Rails.logger.info fcdata.custserial
-        fctabletinterview = Fctabletinterview.where(custserial: fcdata.custserial).where(fcdata_id: fcdata.measureno).first
+        fctabletinterview = Fctabletinterview.where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno).first
         is_contain = true
 
-        if @select_skin_type_survey != "all"
+        if !fctabletinterview.skin_type.nil? && @select_skin_type_survey != "all"
           if !fctabletinterview.skin_type.include?(@select_skin_type_survey)
             is_contain = false
           end
         end
 
-        if @select_senstive != "all" && @select_senstive == "yes"
+        if !fctabletinterview.skin_type.nil? && @select_senstive != "all" && @select_senstive == "yes"
           if !fctabletinterview.skin_type.include?("senstive")
             is_contain = false
           end
-        elsif @select_senstive != "all" && @select_senstive == "no"
+        elsif !fctabletinterview.skin_type.nil? && @select_senstive != "all" && @select_senstive == "no"
           if fctabletinterview.skin_type.include?("senstive")
             is_contain = false
           end
