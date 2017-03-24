@@ -171,8 +171,6 @@ class Admin::DataController < Admin::AdminApplicationController
         Rails.logger.info fcdata.custserial
         fctabletinterview = Fctabletinterview.where.not(skin_type: nil).where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno).first
         is_contain = true
-        Rails.logger.info fctabletinterview.skin_type.nil?
-        Rails.logger.info fctabletinterview.skin_type
 
         if !fctabletinterview.nil?
           if !fctabletinterview.skin_type.nil?
