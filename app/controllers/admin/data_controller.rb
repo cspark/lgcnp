@@ -174,40 +174,42 @@ class Admin::DataController < Admin::AdminApplicationController
         Rails.logger.info fctabletinterview.skin_type.nil?
         Rails.logger.info fctabletinterview.skin_type
 
-        if !fctabletinterview.skin_type.nil?
-          if @select_skin_type_survey != "all"
-            if !fctabletinterview.skin_type.include?(@select_skin_type_survey)
+        if !fctabletinterview.nil?
+          if !fctabletinterview.skin_type.nil?
+            if @select_skin_type_survey != "all"
+              if !fctabletinterview.skin_type.include?(@select_skin_type_survey)
+                is_contain = false
+              end
+            end
+          end
+
+          if !fctabletinterview.skin_type.nil?
+            if @select_senstive != "all" && @select_senstive == "yes"
+              if !fctabletinterview.skin_type.include?("senstive")
+                is_contain = false
+              end
+            elsif !fctabletinterview.skin_type.nil? && @select_senstive != "all" && @select_senstive == "no"
+              if fctabletinterview.skin_type.include?("senstive")
+                is_contain = false
+              end
+            end
+          end
+
+          if !@select_makeup.blank? && @select_makeup != "all"
+            if fctabletinterview.a_1 != @select_makeup.to_i
               is_contain = false
             end
           end
-        end
 
-        if !fctabletinterview.skin_type.nil?
-          if @select_senstive != "all" && @select_senstive == "yes"
-            if !fctabletinterview.skin_type.include?("senstive")
-              is_contain = false
-            end
-          elsif !fctabletinterview.skin_type.nil? && @select_senstive != "all" && @select_senstive == "no"
-            if fctabletinterview.skin_type.include?("senstive")
+          if !@select_mode.blank? && @select_mode != "all"
+            if fctabletinterview.is_quick_mode != @select_mode
               is_contain = false
             end
           end
-        end
 
-        if !@select_makeup.blank? && @select_makeup != "all"
-          if fctabletinterview.a_1 != @select_makeup.to_i
-            is_contain = false
+          if is_contain == true
+            @fcdatas_final << fcdata
           end
-        end
-
-        if !@select_mode.blank? && @select_mode != "all"
-          if fctabletinterview.is_quick_mode != @select_mode
-            is_contain = false
-          end
-        end
-
-        if is_contain == true
-          @fcdatas_final << fcdata
         end
       end
 
