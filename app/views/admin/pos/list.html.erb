@@ -14,10 +14,17 @@
     <script>
     var filterStr = "";
     $(function () {
+      <% if !@ch_cd.nil? %>
+        $('select[id="select_channel"]').val('<%= @ch_cd %>');
+      <% end %>
+
       $(document).keyup(function (e) {
           if ($("#search").is(":focus") && (e.keyCode == 13)) {
               console.log(encodeURI($("#search").val()));
-              location.href = "/admin/fcpos_list?search=" + encodeURI(encodeURI($("#search").val()));
+              var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
+              var url = "/admin/fcpos_list?search=" + encodeURI(encodeURI($("#search").val()));
+              url += "&select_channel=" +ch_cd
+              location.href = url
           }
       });
       if (encodeURI('<%= @search %>').length != 0) {
@@ -40,8 +47,10 @@
       });
 
       $('#submit').click(function(){
+        var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
         url = "/admin/fcpos_list?search=" + encodeURI(encodeURI($("#search").val()));
-        url += "&select_filter=" +filterStr
+        url += "&select_filter=" +filterStr;
+        url += "&select_channel=" +ch_cd
         location.href = url;
       });
     });
@@ -102,14 +111,27 @@
     <%= render "admin/header" %>
 
     <div style="background: #b1cbbb; padding: 8px;">
-      <input type="text" name="search" id="search" placeholder="이름으로 검색" style="width: 200px;">
+      <input type="text" name="search" id="search" placeholder="이름으로 검색" style="float:left; width: 200px;">
+      <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
+      <p style="float:left; margin-left: 20px; margin-top: 5px;">채널 :</p>
+        <select class="form-control" id="select_channel" style="float:left; margin-left: 5px; width:200px;">
+          <option value="ALL">ALL</option>
+          <option value="CNP">CNP</option>
+          <option value="MART">마트</option>
+          <option value="NC">NC</option>
+          <option value="BEAU">보떼</option>
+          <option value="LABO">LABO</option>
+          <option value="CLAB">CLAB</option>
+          <option value="CNPRX">CNPRX</option>
+        </select>
+      <% end %>
       <button class="btn btn-warning" id="submit">조회</button>
       <button class="btn btn-warning" id="show_all" onclick="show_all()">전체보기</button>
       <p style="float:right; margin-right:20px;">
         Download:
         <%= link_to "Excel", admin_fcpos_list_path(format: "xlsx", :search => @search, :select_filter => @params_filter, :isExcel => true) %>
-      </p>
-      <div class="form-inline">
+      </p><br>
+      <div class="form-inline" style="border: 1px solid #b1cbbb;">
        필터링 전체 선택: <input type="checkbox" id="all_check">
       </div>
     </div>

@@ -13,20 +13,23 @@ class Admin::PosController < Admin::AdminApplicationController
       end
     end
 
+    @ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
+
     if params.has_key?(:search) && params[:search].length != 0
       if Rails.env.production? || Rails.env.staging?
         @search = params[:search]
       else
         @search = URI.decode(params[:search]) if !params[:search].blank?
       end
-      users = Custinfo.where(ch_cd: "CNP").where("custname LIKE ?", "%#{@search}%").order("lastanaldate desc")
+
+      users = Custinfo.where("custname LIKE ?", "%#{@search}%").order("lastanaldate desc")
       user_custserials = []
       users.each do |user|
         user_custserials.push(user.custserial)
       end
-      @fcpos = Fcpos.where(custserial: user_custserials)
+      @fcpos = Fcpos.where("ch_cd LIKE ?", "%#{@ch_cd}%").where(custserial: user_custserials)
     else
-      @fcpos = Fcpos.all.order("uptdate desc")
+      @fcpos = Fcpos.where("ch_cd LIKE ?", "%#{@ch_cd}%").order("uptdate desc")
     end
 
     if @select_filter == []

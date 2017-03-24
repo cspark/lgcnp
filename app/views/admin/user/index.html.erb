@@ -15,13 +15,12 @@
     <script>
       <% search = "" %>
       $(function () {
-        <% if !@search.nil? %>
-          document.getElementById("search").value = decode_utf8('<%= @search %>')
+        <% if @ch_cd != ""%>
+          $('select[id="select_channel"]').val('<%= @ch_cd %>');
         <% end %>
 
-        <% if @ch_cd != "" %>
-          console.log('<%= @ch_cd %>');
-          $("#select_channel").val('<%= @ch_cd %>');
+        <% if !@search.nil? %>
+          document.getElementById("search").value = decode_utf8('<%= @search %>')
         <% end %>
 
         $(document).keyup(function (e) {
