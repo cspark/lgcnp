@@ -165,6 +165,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       Rails.logger.info "!!!!!"
       temp_serial_array = fcdata_list.pluck(:custserial).uniq
       temp_measureno_array = fcdata_list.pluck(:measureno).uniq
+      temp_measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
       tablet_interviews = Fctabletinterview.where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array)
       Rails.logger.info tablet_interviews.count
