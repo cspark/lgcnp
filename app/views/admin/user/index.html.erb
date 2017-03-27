@@ -19,6 +19,10 @@
           $('select[id="select_channel"]').val('<%= @ch_cd %>');
         <% end %>
 
+        <% if @shop_cd != ""%>
+          $('select[id="select_shop"]').val('<%= @shop_cd %>');
+        <% end %>
+
         <% if !@search.nil? %>
           document.getElementById("search").value = decode_utf8('<%= @search %>')
         <% end %>
@@ -41,12 +45,16 @@
         });
 
         $('#submit').click(function(){
-          if (document.getElementById("select_channel") != null ) {
+          if (document.getElementById("select_channel") != null) {
             var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
+            var shop_cd = document.getElementById("select_shop").options[document.getElementById("select_shop").selectedIndex].value;
+
             url = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
             url += "&select_channel=" +ch_cd
+            url += "&select_shop=" +shop_cd
           } else {
             url = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
+            url += "&select_shop=" +shop_cd
           }
           location.href = url;
         });
@@ -73,6 +81,21 @@
         margin: 0 auto;
         text-align: center !important;
     }
+
+    .width-150 {
+      width: 150px;
+    }
+
+    .th-inner {
+      width: 150px;
+      margin: 0 auto;
+      text-align: center !important;
+    }
+
+    td {
+      margin: 0 auto;
+      text-align: center !important;
+    }
     </style>
   </head>
 
@@ -82,22 +105,40 @@
       <input type="text" name="search" id="search" placeholder="이름으로 검색" style="float:left; width: 200px;">
       <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
       <p style="float:left; margin-left: 20px; margin-top: 5px;">채널 :</p>
-        <select class="form-control" id="select_channel" style="float:left; margin-left: 5px; width:200px;">
-          <option value="ALL">ALL</option>
-          <option value="CNP">CNP</option>
-          <option value="MART">마트</option>
-          <option value="NC">NC</option>
-          <option value="BEAU">보떼</option>
-          <option value="LABO">LABO</option>
-          <option value="CLAB">CLAB</option>
-        </select>
+      <select class="form-control" id="select_channel" style="float:left; margin-left: 5px; width:200px;">
+        <option value="ALL">ALL</option>
+        <option value="CNP">CNP</option>
+        <option value="MART">마트</option>
+        <option value="NC">NC</option>
+        <option value="BEAU">보떼</option>
+        <option value="LABO">LABO</option>
+        <option value="CLAB">CLAB</option>
+      </select>
       <% end %>
+      <p style="float:left; margin-left: 20px; margin-top: 5px;">매장 이름 : </p>
+      <select class="form-control" id="select_shop" style="float:left; width:200px;">
+      <option id="LABO" value="ALL">ALL</option>
+        <option id="LABO" value="1001">LG연구소</option>
+        <option id="LABO" value="1002">젠스토리</option>
+        <option id="LABO" value="1003">LG에스타워 보떼</option>
+        <option id="CLAB" value="1004">LG에스타워 CNP</option>
+        <option id="TMR" value="304639">NC 인천 올리브점</option>
+        <option id="BEAU" value="505415">수지 상현점</option>
+        <option id="BEAU" value="504130">파주 금촌점</option>
+        <option id="MART" value="505488">홈플러스 월드컵점</option>
+        <option id="TMR" value="304401">NC 안산 상록수점</option>
+        <option id="CNP" value="59100">르메디바이씨앤피 이대점</option>
+        <option id="TMR" value="304369">NC 신촌점</option>
+      </select>
       <button style="margin-left: 10px;" class="btn btn-warning" id="submit">조회</button>
       <p style="float:right; margin-right:20px;">
         Download:
         <!-- <%= link_to "CSV", admin_user_list_path(format: "csv") %> -->
         <%= link_to "Excel", admin_user_list_path(format: "xlsx", :search => @search, :isExcel => true) %>
       </p>
+    </div>
+    <div id="avr" style="background: #eea29a; padding: 8px;">
+      총 인원 수 : <%= @count %> 명<br>
     </div>
       <table data-toggle="table" style="width:1200px;">
         <thead style="width: 100%;">
@@ -117,8 +158,11 @@
           </tr>
         </thead>
         <tbody>
-          <% @users.each do |user| %>
-          <%= render partial: "admin/user/item", locals: { user: user } %>
+          <% if !@is_admin_init %>
+            <% Rails.logger.info "if!!!!" %>
+            <% @users.each do |user| %>
+            <%= render partial: "admin/user/item", locals: { user: user } %>
+            <% end %>
           <% end %>
         </tbody>
       </table>

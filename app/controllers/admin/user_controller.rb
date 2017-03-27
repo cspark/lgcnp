@@ -6,6 +6,8 @@ class Admin::UserController < Admin::AdminApplicationController
   before_action :is_admin
 
   def index
+    @is_admin_init = false
+    @count = 0
     if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin")
       ch_cd = ""
       shop_cd = ""
@@ -14,8 +16,14 @@ class Admin::UserController < Admin::AdminApplicationController
       shop_cd = session[:admin_user]['shop_cd']
     end
 
+    if session[:admin_user]['role'] == "admin" || session[:admin_user] == "user" && (!params.has_key?(:search) && !params.has_key?(:select_channel) && !params.has_key?(:select_shop))
+      @is_admin_init = true
+    end
+
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
+    shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
     @ch_cd = ch_cd
+    @shop_cd = shop_cd
 
     fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
     custserial_array = fcdata_list.pluck(:custserial).uniq
@@ -23,20 +31,21 @@ class Admin::UserController < Admin::AdminApplicationController
 
     if params.has_key?(:search) && params[:search].length != 0
       @search = params[:search]
-      @users = Custinfo.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc").page(params[:page]).per(7)
+      @users = Custinfo.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc").page(params[:page]).per(5)
       @all_users = Custinfo.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
     else
       @search = ""
-      @users = Custinfo.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc").page(params[:page]).per(7)
+      @users = Custinfo.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc").page(params[:page]).per(5)
       @all_users = Custinfo.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc")
     end
 
+
+    @count = @all_users.count
     respond_to do |format|
       format.html
       # format.csv { send_data Custinfo.to_csv(@users) }
       format.xlsx
     end
-
   end
 
   def show
