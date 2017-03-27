@@ -82,8 +82,6 @@ Rails.application.routes.draw do
           get 'lcare_integrated_user_list'
         end
       end
-      resources :beau_fcmodecnt do
-      end
     end
 
     namespace :cnp do
