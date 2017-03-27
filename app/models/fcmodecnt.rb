@@ -1,5 +1,6 @@
 class Fcmodecnt < ApplicationRecord
   self.table_name = "fcmodecnt" if Rails.env.production? || Rails.env.staging?
+  self.primary_key = :modecnt_serial if Rails.env.production? || Rails.env.staging?
 
   def to_api_hash
     {
