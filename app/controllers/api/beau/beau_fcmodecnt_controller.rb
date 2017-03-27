@@ -2,7 +2,11 @@ class Api::Beau::BeauFcmodecntController < Api::ApplicationController
   def index
     list = Fcmodecnt.list(shop_cd: params[:shop_cd], ch_cd: params[:ch_cd], mode_name: params[:mode_name], analdate: params[:analdate])
     if !list.nil?
-      render :json => list.count, status: 200
+      if list.count > 0
+        render :json => { count: list.count }, status: 200
+      else
+        render :text => "Fcmodecnt not exist!!!",, status: 204
+      end
     else
       render :text => "Fail!!!", status: 404
     end
