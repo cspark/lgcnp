@@ -5,7 +5,7 @@ class Api::Beau::BeauFcmodecntController < Api::ApplicationController
       if list.count > 0
         render :json => { count: list.count }, status: 200
       else
-        render :text => "Fcmodecnt not exist!!!",, status: 204
+        render :text => "Fcmodecnt not exist!!!", status: 204
       end
     else
       render :text => "Fail!!!", status: 404
