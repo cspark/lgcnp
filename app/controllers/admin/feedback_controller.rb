@@ -162,12 +162,15 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       else
         fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
       end
+      Rails.logger.info "!!!!!"
       temp_serial_array = fcdata_list.pluck(:custserial).uniq
       temp_measureno_array = fcdata_list.pluck(:measureno).uniq
 
       tablet_interviews = Fctabletinterview.where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array)
+      Rails.logger.info tablet_interviews.count
       array = tablet_interviews.pluck(:tablet_interview_id)
       temp_after_interviews = Fcafterinterview.where.not(a1: nil).where(tablet_interview_id: array)
+      Rails.logger.info temp_after_interviews.count
       if select_interview != "all"
         if select_interview == "today"
           temp_after_interviews = temp_after_interviews.where(order: 0)
@@ -178,6 +181,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
         end
       end
 
+      Rails.logger.info temp_after_interviews.count
       temp_after_interviews.each do |after_interview|
         is_contain = true
 
