@@ -250,6 +250,7 @@ GEM
       connection_pool (~> 2.2, >= 2.2.0)
       rack-protection (>= 1.5.0)
       redis (~> 3.2, >= 3.2.1)
+    slack-notifier (2.1.0)
     spring (2.0.1)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -326,6 +327,7 @@ DEPENDENCIES
   ruby-oci8 (= 2.2.2)
   rubyzip (>= 1.0.0)
   sass-rails (~> 5.0)
+  slack-notifier
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
