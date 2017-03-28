@@ -1,4 +1,4 @@
-every :day, :at => Time.zone.parse('11:30 am').utc do
+every :day, :at => Time.zone.parse('11:35 am').utc do
   system("rm -rf public/BEAU")
   system("rm -rf public/CNP")
   system("rm -rf public/CLAB")
@@ -7,7 +7,7 @@ every :day, :at => Time.zone.parse('11:30 am').utc do
   system("rm -rf public/TMR")
 end
 
-every :day, :at => Time.zone.parse('11:31 am').utc do
+every :day, :at => Time.zone.parse('11:36 am').utc do
   system("mkdir public/BEAU")
   system("mkdir public/CNP")
   system("mkdir public/CLAB")
