@@ -4,7 +4,7 @@ require 'active_support/time'
 ActiveSupport::TimeZone.all.each do |timezone|
   Time.zone = timezone.name
 
-  every :day, :at => Time.zone.parse('00:10 pm').utc do
+  every :day, :at => Time.zone.parse('00:30 pm').utc do
     system("rm -rf public/BEAU")
     system("rm -rf public/CNP")
     system("rm -rf public/CLAB")
@@ -13,7 +13,7 @@ ActiveSupport::TimeZone.all.each do |timezone|
     system("rm -rf public/TMR")
   end
 
-  every :day, :at => Time.zone.parse('00:11 pm').utc do
+  every :day, :at => Time.zone.parse('00:31 pm').utc do
     system("mkdir public/BEAU")
     system("mkdir public/CNP")
     system("mkdir public/CLAB")
