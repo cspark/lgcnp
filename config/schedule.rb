@@ -3,10 +3,12 @@ require 'active_support/time'
 
 ActiveSupport::TimeZone.all.each do |timezone|
   Time.zone = timezone.name
-  every :day, :at => Time.zone.parse('12:00 pm').utc do
+  # Rails.logger.info Time.zone
+  # Rails.logger.info Time.zone.parse('02:00 am').utc
+  every :day, :at => Time.zone.parse('02:00 am').utc do
     rake "image:remove_image"
   end
-  every :day, :at => Time.zone.parse('12:20 pm').utc do
+  every :day, :at => Time.zone.parse('02:10 pm').utc do
     rake "image:remove_image"
   end
   # every :day, :at => Time.zone.parse('01:00 pm').utc do
