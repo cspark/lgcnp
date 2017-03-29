@@ -18,11 +18,9 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end_birthyy = params[:end_birthyy]
     start_birthmm = params[:start_birthmm]
     end_birthmm = params[:end_birthmm]
-    select_channel = params[:select_channel]
     select_mode = params[:select_mode]
     select_makeup = params[:select_makeup]
     select_area = params[:select_area]
-    select_shop = params[:select_shop]
     @params_filter = params[:select_filter]
 
     @select_sex = select_sex
@@ -36,11 +34,15 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @end_birthyy = end_birthyy
     @start_birthmm = start_birthmm
     @end_birthmm = end_birthmm
-    @select_channel = select_channel
     @select_mode = select_mode
     @select_makeup = select_makeup
     @select_area = select_area
-    @select_shop = select_shop
+    ch_cd = ""
+    shop_cd = ""
+    ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
+    shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
+    @ch_cd = ch_cd
+    @shop_cd = shop_cd
 
     @select_filter = []
     if !@params_filter.blank?
@@ -152,6 +154,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
         end
       end
 
+      @count = @tabletinterviews.count
       @tabletinterviews_excel = @tabletinterviews
       @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(5)
 

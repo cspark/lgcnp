@@ -92,7 +92,7 @@
           <li id="input_feedback"><a href="#">피드백 입력</a></li>
           <li id="feedback_list"><a href="#">피드백 리스트</a></li>
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
-            <li id="tabletinterview"><a href="#">태블릿 인터뷰</a></li>
+            <li id="tabletinterview"><a href="#">CNP 인터뷰</a></li>
             <li id="fcavg_list"><a href="#">연령별 성별 평균</a></li>
             <li id="fcdata_list"><a href="#">야누스 측정 데이터</a></li>
             <li id="fcpos_list"><a href="#">야누스 분석 영역 정보</a></li>
