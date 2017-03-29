@@ -9,7 +9,7 @@ class AdminFcdata < ApplicationRecord
        ch_cd: ch_cd,
        faceno: faceno,
        measuredate: measuredate,
-       measureno: measureno.to_i,
+       measureno: measureno.to_s,
        uptdate: uptdate,
        mo_1: mo_1,
        mo_7: mo_7,
