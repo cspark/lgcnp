@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
     <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
     <script>
       $(function () {
         $("#datepicker").datepicker({
@@ -53,32 +55,110 @@
       }
 
     </script>
+    <style>
+    .fixed-table-body {
+      max-height: 170px;
+    }
+
+    .text-center {
+        margin: 0 auto;
+        text-align: center !important;
+    }
+
+    .width-150 {
+      width: 150px;
+    }
+
+    .th-inner {
+      width: 160px;
+      margin: 0 auto;
+      text-align: center !important;
+    }
+
+    td {
+      margin: 0 auto;
+      text-align: center !important;
+    }
+
+    width200 {
+      width: 200px;
+      margin: 0 auto;
+      text-align: center !important;
+    }
+    </style>
   </head>
 
   <body>
     <%= render "admin/header" %>
     <input type="text" id="datepicker" style="width:100%; margin-top:10px;">
-
     <div>
-      <h4 style="background: #b1cbbb; padding: 8px;">당일 (<%= @date_today %>)</h4>
+      <h4 style="background: #b1cbbb; padding: 8px;">당일 (<%= @date_today %>) <p style="float:right;">총 인원 수 : <%= @tablet_interviews_today.count %> 명</p></h4>
       <div>
-        <% @tablet_interviews_today.each do |tabletinterview| %>
-          <%= render partial: "admin/feedback/item", locals: { tabletinterview: tabletinterview } %>
-        <% end %>
+          <table data-toggle="table" style="width:1200px;">
+            <thead style="width: 100%;">
+              <tr>
+                  <th>이름</th>
+                  <th>시리얼</th>
+                  <th class="width200">진단 날짜</th>
+                  <th>전화번호</th>
+                  <th>사후 피드백 서비스</th>
+                  <th>1차 설문 여부</th>
+                  <th>2차 설문 여부</th>
+                  <th>3차 설문 여부</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @tablet_interviews_today.each do |tabletinterview| %>
+                <%= render partial: "admin/feedback/item", locals: { tabletinterview: tabletinterview } %>
+              <% end %>
+            </tbody>
+          </table>
       </div>
 
-      <h4 style="background: #b1cbbb; padding: 8px;">2주 후 (<%= @date_2weeks_ago %>)</h4>
+      <h4 style="background: #b1cbbb; padding: 8px;">2주 후 (<%= @date_2weeks_ago %>) <p style="float:right;">총 인원 수 : <%= @tablet_interviews_2_weeks_ago.count %> 명</p></h4>
       <div>
-        <% @tablet_interviews_2_weeks_ago.each do |tabletinterview| %>
-          <%= render partial: "admin/feedback/item", locals: { tabletinterview: tabletinterview } %>
-        <% end %>
+        <table data-toggle="table" style="width:1200px;">
+          <thead style="width: 100%;">
+            <tr>
+                <th>이름</th>
+                <th>시리얼</th>
+                <th class="width200">진단 날짜</th>
+                <th>전화번호</th>
+                <th>사후 피드백 서비스</th>
+                <th>1차 설문 여부</th>
+                <th>2차 설문 여부</th>
+                <th>3차 설문 여부</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @tablet_interviews_2_weeks_ago.each do |tabletinterview| %>
+              <%= render partial: "admin/feedback/item", locals: { tabletinterview: tabletinterview } %>
+            <% end %>
+          </tbody>
+        </table>
       </div>
 
-      <h4 style="background: #b1cbbb; padding: 8px;">3개월 후 (<%= @date_3months_ago %>)</h4>
+      <h4 style="background: #b1cbbb; padding: 8px;">3개월 후 (<%= @date_3months_ago %>) <p style="float:right;">총 인원 수 : <%= @tablet_interviews_3_months_ago.count %> 명</p></h4>
       <div>
-        <% @tablet_interviews_3_months_ago.each do |tabletinterview| %>
-          <%= render partial: "admin/feedback/item", locals: { tabletinterview: tabletinterview } %>
-        <% end %>
+        <table data-toggle="table" style="width:1200px;">
+          <thead style="width: 100%;">
+            <tr>
+                <th>이름</th>
+                <th>시리얼</th>
+                <th class="width200">진단 날짜</th>
+                <th>전화번호</th>
+                <th>사후 피드백 서비스</th>
+                <th>1차 설문 여부</th>
+                <th>2차 설문 여부</th>
+                <th>3차 설문 여부</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @tablet_interviews_3_months_ago.each do |tabletinterview| %>
+              <%= render partial: "admin/feedback/item", locals: { tabletinterview: tabletinterview } %>
+            <% end %>
+          </tbody>
+        </table>
       </div>
     </div>
   </body>

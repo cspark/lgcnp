@@ -52,17 +52,17 @@
       </script>
     </head>
     <body>
-      <div style="display:table; height:50px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
+      <tr class="table_tr" id="<%= user.custserial %>/<%= user.ch_cd %>/<%= user.measureno %>">
         <% custinfo = Custinfo.where(custserial: tabletinterview.custserial.to_i).first %>
-        <font size="4"><div id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
-        <font size="2">
-          시리얼 : <%= tabletinterview.custserial.to_i %> / 진단 날짜 : <%= tabletinterview.uptdate %> / 전화번호 : <div id="phone_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div> <br>
+        <td id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
+        <td><%= tabletinterview.custserial.to_i %></td>
+        <td><%= tabletinterview.uptdate %></td>
+        <td id="phone_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
           <% is_agree = "X" %>
           <% if tabletinterview.is_agree_after == "T" && !tabletinterview.base_lot.blank? %>
             <% is_agree = "O" %>
           <% end %>
-          사후 피드백 서비스 : <%= is_agree %>
-          <br>
+        <td><%= is_agree %></td>
           <!-- 1차설문 조건에 상관없이 보임 -->
           <% f1 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 0).first %>
           <% if f1.present? && f1.a1.nil? %>
@@ -71,22 +71,25 @@
             <% is_feed_back_ok_1 = "O" %>
           <% end %>
           <% if f1.present? %>
-            <a onClick="show_after_interview_1(<%= f1.after_interview_id %>, <%= f1.tablet_interview_id %>, <%= f1.custserial %>)">1차 설문 여부 : <%= is_feed_back_ok_1 %></a> /
+            <td><a onClick="show_after_interview_1(<%= f1.after_interview_id %>, <%= f1.tablet_interview_id %>, <%= f1.custserial %>)"><%= is_feed_back_ok_1 %></a></td>
           <% else %>
-            <a onClick="show_after_interview_1()">1차 설문 여부 : <%= is_feed_back_ok_1 %></a> /
+            <td><a onClick="show_after_interview_1()"><%= is_feed_back_ok_1 %></a></td>
           <% end %>
 
           <% f2 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 1).first %>
 
-          <% if (!f2.nil? && !tabletinterview.base_lot.blank?) || (!f2.nil? && !f2.a1.nil?) %>
+          <td>
+          <% if tabletinterview.is_agree_after == "T" && (!f2.nil? && !tabletinterview.base_lot.blank?) || (!f2.nil? && !f2.a1.nil?) %>
             <% if f2.present? && f2.a1.nil? %>
               <% is_feed_back_ok_2 = "X" %>
             <% else %>
               <% is_feed_back_ok_2 = "O" %>
             <% end %>
-            <a onClick="show_after_interview(<%= f2.after_interview_id %>, <%= f2.tablet_interview_id %>, <%= f2.custserial %>)">2차 설문 여부 : <%= is_feed_back_ok_2 %></a> /
+            <a onClick="show_after_interview(<%= f2.after_interview_id %>, <%= f2.tablet_interview_id %>, <%= f2.custserial %>)"><%= is_feed_back_ok_2 %></a>
           <% end %>
+          </td>
 
+          <td>
           <% if tabletinterview.is_agree_after == "T" && !tabletinterview.base_lot.blank? %>
             <% f3 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 2).first %>
             <% if f3.a1.nil? %>
@@ -94,9 +97,9 @@
             <% else %>
               <% is_feed_back_ok_3 = "O" %>
             <% end %>
-            <a onClick="show_after_interview(<%= f3.after_interview_id %>, <%= f3.tablet_interview_id %>, <%= f3.custserial %>)">3차 설문 여부 : <%= is_feed_back_ok_3 %></a>
+            <a onClick="show_after_interview(<%= f3.after_interview_id %>, <%= f3.tablet_interview_id %>, <%= f3.custserial %>)"><%= is_feed_back_ok_3 %></a>
           <% end %>
-        </font>
+          </td>
       </div>
     </body>
 </html>
