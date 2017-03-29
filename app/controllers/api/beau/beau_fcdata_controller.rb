@@ -1,6 +1,6 @@
 class Api::Beau::BeauFcdataController < Api::ApplicationController
   def show
-    list = AdminFcdata.list(custserial: params[:id])
+    list = AdminFcdata.list(custserial: params[:id], measureno: params[:measureno])
     if list.count > 0
       render json: api_hash_for_list(list), status: :ok
     else
