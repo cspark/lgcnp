@@ -78,7 +78,7 @@
 
           <% f2 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 1).first %>
 
-          <% if (!f2.nil? && !tabletinterview.base_lot.blank?) || (!f2.nil? && !f2.a1.nil?) %>
+          <% if (!f2.nil? && tabletinterview.is_agree_after == "T" && !tabletinterview.base_lot.blank?) || (!f2.nil? && !f2.a1.nil?) %>
             <% if f2.present? && f2.a1.nil? %>
               <% is_feed_back_ok_2 = "X" %>
             <% else %>
