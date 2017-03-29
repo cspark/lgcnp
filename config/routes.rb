@@ -167,7 +167,7 @@ Rails.application.routes.draw do
 	    post "fctabletinterviewrxes_quickmode" => "fctabletinterviewrxes#fctabletinterviews_quickmode"
 	    post "fctabletinterviewrxes_update_lots" => "fctabletinterviewrxes#fctabletinterviews_update_lots"
 	    get "is_update" => "update#is_update"
-      get "interview_count_increase" => "fctabletinterviewrxes#interview_count_increase"
+      put "interview_count_increase" => "fctabletinterviewrxes#interview_count_increase"
 
 	    #Related Admin
 	    get 'calculate' => 'fctabletinterviewrxes#calculate'
