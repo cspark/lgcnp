@@ -12,11 +12,11 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
     <script>
       $(function () {
-        <% if @ch_cd != ""%>
+        <% if @ch_cd != "" %>
           $('select[id="select_channel"]').val('<%= @ch_cd %>');
         <% end %>
 
-        <% if @shop_cd != ""%>
+        <% if @shop_cd != "" %>
           $('select[id="select_shop"]').val('<%= @shop_cd %>');
         <% end %>
 

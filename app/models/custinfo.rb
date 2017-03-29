@@ -31,7 +31,7 @@ class Custinfo < ApplicationRecord
       custserial: custserial,
       ch_cd: ch_cd,
       n_cust_id: n_cust_id,
-      measureno: measureno,
+      measureno: measureno.to_s,
       custname: custname,
       sex: sex,
       age: age,

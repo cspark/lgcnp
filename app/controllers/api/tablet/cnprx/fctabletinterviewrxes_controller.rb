@@ -209,6 +209,24 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
     end
   end
 
+  def interview_count_increase
+    if !FctabletinterviewrxSummary.order("interview_mode_count desc").first.nil?
+      max_count = FctabletinterviewrxSummary.order("interview_mode_count desc").first.interview_mode_count
+      summary = FctabletinterviewrxSummary.new
+      summary.interview_mode_count = max_count + 1
+    else
+      summary = FctabletinterviewrxSummary.new
+      summary.interview_mode_count = 1
+    end
+
+    if summary.save
+      render json: summary.to_api_hash, status: :ok
+    else
+      render json: "", status: 404
+    end
+
+  end
+
   def permitted_param
     permitted = params.permit(:custserial, :tablet_interview_id, :a_1,:a_2,:a_3,:b_1,:b_2,:b_3,:b_4,:b_5,:b_6,:c_1,:d_1,:d_2,:d_3,:d_4,:d_5,:d_6,:d_7,:d_8,:d_9,:d_10,:d_11,
     :skin_type,:before_solution_1,:after_solution_1,:before_solution_2,:after_solution_2, :before_production, :after_production,
