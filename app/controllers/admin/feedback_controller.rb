@@ -27,6 +27,8 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     Rails.logger.info serial_array.count
     if Rails.env.production? || Rails.env.staging?
       @tablet_interviews_today = Fctabletinterview.where(ch_cd: "CNP").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
+      @tablet_interviews_today2 = Fctabletinterview.where(ch_cd: "CNP").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
+      @tablet_interviews_today = @tablet_interviews_today + @tablet_interviews_today2
       @tablet_interviews_2_weeks_ago = Fctabletinterview.where(ch_cd: "CNP").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
       @tablet_interviews_3_months_ago = Fctabletinterview.where(ch_cd: "CNP").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
     else
