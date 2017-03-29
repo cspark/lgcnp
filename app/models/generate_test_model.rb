@@ -27,7 +27,7 @@ class GenerateTestModel < ApplicationRecord
     Fctabletinterview.all.each do |f|
       i = 1
       f = Fctabletinterview.new
-      f.custserial = 839.to_s
+      f.custserial = 153.to_s
       f.a_1 = i
       f.a_2 = i
       f.a_3 = i
@@ -62,7 +62,7 @@ class GenerateTestModel < ApplicationRecord
       f.uptdate = "2017-03-14-12-00"
       f.ch_cd = "CNP"
       f.fcdata_id = 1.to_s
-      f.tablet_interview_id = 839
+      f.tablet_interview_id = 28
       f.is_quick_mode = "T"
       f.is_agree_cant_refund = "T"
       f.is_agree_after = "T"

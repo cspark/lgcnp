@@ -36,14 +36,14 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     Rails.logger.info serial_array.count
     if Rails.env.production? || Rails.env.staging?
-      @tablet_interviews_today = Fctabletinterview.where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
-      @tablet_interviews_today2 = Fctabletinterview.where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
+      @tablet_interviews_today = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
+      @tablet_interviews_today2 = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
       @tablet_interviews_today = @tablet_interviews_today + @tablet_interviews_today2
-      @tablet_interviews_2_weeks_ago = Fctabletinterview.where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
-      @tablet_interviews_2_weeks_ago2 = Fctabletinterview.where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
+      @tablet_interviews_2_weeks_ago = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
+      @tablet_interviews_2_weeks_ago2 = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
       @tablet_interviews_2_weeks_ago = @tablet_interviews_2_weeks_ago + @tablet_interviews_2_weeks_ago2
-      @tablet_interviews_3_months_ago = Fctabletinterview.where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
-      @tablet_interviews_3_months_ago2 = Fctabletinterview.where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
+      @tablet_interviews_3_months_ago = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
+      @tablet_interviews_3_months_ago2 = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
       @tablet_interviews_3_months_ago = @tablet_interviews_3_months_ago + @tablet_interviews_3_months_ago2
     else
       @tablet_interviews_today = Fctabletinterview.where(custserial: serial_array).where(fcdata_id: measureno_array)
@@ -101,6 +101,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       ch_cd = session[:admin_user]['ch_cd']
       shop_cd = session[:admin_user]['shop_cd']
     end
+
     @start_date = Date.today
     @end_date = Date.today
     @today = Date.today
@@ -167,88 +168,92 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     @after_interviews = []
 
-    if ch_cd == "" || ch_cd == "CNP" || ch_cd == "CLAB"
-      if ch_cd == ""
-        fcdata_list = Fcdata.all
-      else
-        fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
-      end
+    ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
+    shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
+    @ch_cd = ch_cd
+    @shop_cd = shop_cd
 
-      temp_serial_array = fcdata_list.where("custserial < ? ", 1001).pluck(:custserial).uniq
-      temp_serial_array2 = fcdata_list.where("custserial > ? AND custserial < ? ", 1001, 2001).pluck(:custserial).uniq
-      temp_measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
+    if ch_cd == ""
+      fcdata_list = Fcdata.all
+    else
+      fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
+    end
 
-      tablet_interviews = Fctabletinterview.where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array)
-      tablet_interviews2 = Fctabletinterview.where(custserial: temp_serial_array2).where(fcdata_id: temp_measureno_array)
-      tablet_interviews = tablet_interviews + tablet_interviews2
-      Rails.logger.info tablet_interviews.count
-      array = tablet_interviews.pluck(:tablet_interview_id)
-      temp_after_interviews = Fcafterinterview.where.not(a1: nil).where(tablet_interview_id: array)
-      Rails.logger.info temp_after_interviews.count
-      if select_interview != "all"
-        if select_interview == "today"
-          temp_after_interviews = temp_after_interviews.where(order: 0)
-        elsif select_interview == "2weeks_ago"
-          temp_after_interviews = temp_after_interviews.where(order: 1)
-        elsif select_interview == "3months_ago"
-          temp_after_interviews = temp_after_interviews.where(order: 2)
-        end
-      end
+    temp_serial_array = fcdata_list.where("custserial < ? ", 1001).pluck(:custserial).uniq
+    temp_serial_array2 = fcdata_list.where("custserial > ? AND custserial < ? ", 1001, 2001).pluck(:custserial).uniq
+    temp_measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
-      Rails.logger.info temp_after_interviews.count
-      temp_after_interviews.each do |after_interview|
-        is_contain = true
-
-        Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first
-
-        custinfo = Custinfo.where(custserial: after_interview.custserial).first
-        if !name.nil?
-          if !custinfo.custname.include? name
-             is_contain = false
-          end
-        end
-
-        if custinfo.ch_cd.nil?
-          is_contain = false
-        end
-
-        if select_sex != "all"
-          if custinfo.sex != select_sex
-            is_contain = false
-          end
-        end
-
-        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i + 1
-        if temp_age < start_age.to_i || temp_age > end_age.to_i
-          is_contain = false
-        end
-
-        tablet_interview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first
-        if !(tablet_interview.uptdate.to_date >= @start_date && tablet_interview.uptdate.to_date <= @end_date.to_date)
-          is_contain = false
-        end
-
-        if select_base != "all"
-          if tablet_interview.after_serum != select_base
-            is_contain = false
-          end
-        end
-        if select_ample1 != "all"
-          if tablet_interview.after_ample_1 != select_ample1
-            is_contain = false
-          end
-        end
-        if select_ample2 != "all"
-          if tablet_interview.after_ample_2 != select_ample2
-            is_contain = false
-          end
-        end
-
-        if is_contain == true
-          @after_interviews << after_interview
-        end
+    tablet_interviews = Fctabletinterview.where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array)
+    tablet_interviews2 = Fctabletinterview.where(custserial: temp_serial_array2).where(fcdata_id: temp_measureno_array)
+    tablet_interviews = tablet_interviews + tablet_interviews2
+    Rails.logger.info tablet_interviews.count
+    array = tablet_interviews.pluck(:tablet_interview_id)
+    temp_after_interviews = Fcafterinterview.where.not(a1: nil).where(tablet_interview_id: array)
+    Rails.logger.info temp_after_interviews.count
+    if select_interview != "all"
+      if select_interview == "today"
+        temp_after_interviews = temp_after_interviews.where(order: 0)
+      elsif select_interview == "2weeks_ago"
+        temp_after_interviews = temp_after_interviews.where(order: 1)
+      elsif select_interview == "3months_ago"
+        temp_after_interviews = temp_after_interviews.where(order: 2)
       end
     end
+
+    Rails.logger.info temp_after_interviews.count
+    temp_after_interviews.each do |after_interview|
+      is_contain = true
+
+      Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first
+
+      custinfo = Custinfo.where(custserial: after_interview.custserial).first
+      if !name.nil?
+        if !custinfo.custname.include? name
+           is_contain = false
+        end
+      end
+
+      if custinfo.ch_cd.nil?
+        is_contain = false
+      end
+
+      if select_sex != "all"
+        if custinfo.sex != select_sex
+          is_contain = false
+        end
+      end
+
+      temp_age = Time.current.year.to_i - custinfo.birthyy.to_i + 1
+      if temp_age < start_age.to_i || temp_age > end_age.to_i
+        is_contain = false
+      end
+
+      tablet_interview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first
+      if !(tablet_interview.uptdate.to_date >= @start_date && tablet_interview.uptdate.to_date <= @end_date.to_date)
+        is_contain = false
+      end
+
+      if select_base != "all"
+        if tablet_interview.after_serum != select_base
+          is_contain = false
+        end
+      end
+      if select_ample1 != "all"
+        if tablet_interview.after_ample_1 != select_ample1
+          is_contain = false
+        end
+      end
+      if select_ample2 != "all"
+        if tablet_interview.after_ample_2 != select_ample2
+          is_contain = false
+        end
+      end
+
+      if is_contain == true
+        @after_interviews << after_interview
+      end
+    end
+
 
     @after_interviews.each do |interview|
       @average_a1 = @average_a1 + interview.a1.to_i
