@@ -1,5 +1,5 @@
 class FctabletinterviewrxSummary < ApplicationRecord
-  elf.table_name = "fctabletinterviewrxsummary" if Rails.env.production? || Rails.env.staging?
+  self.table_name = "fctabletinterviewrxsummary" if Rails.env.production? || Rails.env.staging?
 
   def to_api_hash
     {
