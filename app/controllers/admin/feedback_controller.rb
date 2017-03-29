@@ -172,11 +172,13 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
     @ch_cd = ch_cd
     @shop_cd = shop_cd
+    custserial = ""
+    custserial = params[:custserial] if !params[:custserial].blank?
 
     if ch_cd == ""
-      fcdata_list = Fcdata.all
+      fcdata_list = Fcdata.where("custserial LIKE ?", "%#{custserial}%")
     else
-      fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
+      fcdata_list = Fcdata.where("custserial LIKE ?", "%#{custserial}%").where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
     end
 
     temp_serial_array = fcdata_list.where("custserial < ? ", 1001).pluck(:custserial).uniq

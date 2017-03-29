@@ -161,6 +161,7 @@
         url += "&name=" + encodeURI(encodeURI(document.getElementById("name").value));
         url += "&select_channel=" +ch_cd
         url += "&select_shop=" +shop_cd
+        url += "&custserial=" +document.getElementById("custserial").value
         location.href = url;
       }
 
@@ -227,6 +228,9 @@
       <div class="form-inline">
         이름 :
         <input class="form-control" type="text" id="name" style="width:100px;">
+
+        시리얼 :
+        <input class="form-control" type="text" id="custserial" style="width:100px;">
 
         유형 :
         <select class="form-control" id="select_interview">
