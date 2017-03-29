@@ -69,13 +69,15 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       serial_array2 = fcdata_list.where("custserial > ? AND custserial < ? ", 1000, 2001).pluck(:custserial).uniq
       measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
-      scoped = Fctabletinterview.where(custserial: serial_array)
-      scoped2 = Fctabletinterview.where(custserial: serial_array2)
-      scoped = scoped + scoped2
+      Rails.logger.info serial_array
+      Rails.logger.info serial_array2
+      scoped = Fctabletinterview.where(custserial: serial_array).where(fcdata_id: measureno_array)
+      scoped = scoped.or(Fctabletinterview.where(custserial: serial_array2).where(fcdata_id: measureno_array))
       temp_end_date = @end_date.to_date+1.day
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
       scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank? && @ch_cd != "ALL"
+
 
       if @select_filter == []
         @excel_name = ["이름","시리얼","진단 날짜","채널","피부타입","진단으로 나온 솔루션 1","최종으로 선택된 솔루션 1","진단으로 나온 솔루션 2","최종으로 선택된 솔루션 2","진단으로 나온 세럼","최종으로 선택된 세럼",

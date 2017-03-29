@@ -38,13 +38,13 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     if Rails.env.production? || Rails.env.staging?
       @tablet_interviews_today = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
       @tablet_interviews_today2 = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
-      @tablet_interviews_today = @tablet_interviews_today + @tablet_interviews_today2
+      @tablet_interviews_today = @tablet_interviews_today.or(@tablet_interviews_today2)
       @tablet_interviews_2_weeks_ago = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
       @tablet_interviews_2_weeks_ago2 = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
-      @tablet_interviews_2_weeks_ago = @tablet_interviews_2_weeks_ago + @tablet_interviews_2_weeks_ago2
+      @tablet_interviews_2_weeks_ago = @tablet_interviews_2_weeks_ago.or(@tablet_interviews_2_weeks_ago2)
       @tablet_interviews_3_months_ago = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
       @tablet_interviews_3_months_ago2 = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
-      @tablet_interviews_3_months_ago = @tablet_interviews_3_months_ago + @tablet_interviews_3_months_ago2
+      @tablet_interviews_3_months_ago = @tablet_interviews_3_months_ago.or(@tablet_interviews_3_months_ago2)
     else
       @tablet_interviews_today = Fctabletinterview.where(custserial: serial_array).where(fcdata_id: measureno_array)
       @tablet_interviews_2_weeks_ago = Fctabletinterview.where(custserial: serial_array).where(fcdata_id: measureno_array)
