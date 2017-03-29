@@ -108,7 +108,6 @@
 
   <body>
     <%= render "admin/header" %>
-    <input type="text" id="datepicker" style="width:100%; margin-top:10px;">
     <div style="background: #b1cbbb; padding: 8px;">
       <input type="text" id="datepicker" style="float:left; width:200px; margin-top:5px;">
       <p style="float:left; margin-left: 20px; margin-top: 5px;">채널 :</p>
@@ -138,9 +137,8 @@
       </select>
       <button style="margin-left: 10px;" class="btn btn-warning" id="submit">조회</button>
     </div>
-
     <div>
-      <h4 style="background: #b1cbbb; padding: 8px;">당일 (<%= @date_today %>) <p style="float:right;">총 인원 수 : <%= @tablet_interviews_today.count %> 명</p></h4>
+      <h4 style="background: #b1cbbb; padding: 8px; margin-top:1px;">당일 (<%= @date_today %>) <p style="float:right;">총 인원 수 : <%= @tablet_interviews_today.count %> 명</p></h4>
       <div>
           <table data-toggle="table" style="width:1200px;">
             <thead style="width: 100%;">
