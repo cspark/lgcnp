@@ -12,6 +12,14 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
     <script>
       $(function () {
+        <% if @ch_cd != ""%>
+          $('select[id="select_channel"]').val('<%= @ch_cd %>');
+        <% end %>
+
+        <% if @shop_cd != ""%>
+          $('select[id="select_shop"]').val('<%= @shop_cd %>');
+        <% end %>
+
         $("#datepicker").datepicker({
                     dateFormat: 'yy-mm-dd',
                     dayNamesMin: [
@@ -41,8 +49,18 @@
                     changeMonth: true
                 });
           $("#datepicker").datepicker('setDate', '<%= @date %>');
-          $('#datepicker').change(function () {
-              location.href = "/admin/feedback?date=" + $('#datepicker').val()
+          // $('#datepicker').change(function () {
+          //     location.href = "/admin/feedback?date=" + $('#datepicker').val()
+          // });
+
+          $('#submit').click(function(){
+            var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
+            var shop_cd = document.getElementById("select_shop").options[document.getElementById("select_shop").selectedIndex].value;
+
+            url = "/admin/feedback?date=" + $('#datepicker').val();
+            url += "&select_channel=" +ch_cd
+            url += "&select_shop=" +shop_cd
+            location.href = url;
           });
       });
 
@@ -91,6 +109,36 @@
   <body>
     <%= render "admin/header" %>
     <input type="text" id="datepicker" style="width:100%; margin-top:10px;">
+    <div style="background: #b1cbbb; padding: 8px;">
+      <input type="text" id="datepicker" style="float:left; width:200px; margin-top:5px;">
+      <p style="float:left; margin-left: 20px; margin-top: 5px;">채널 :</p>
+      <select class="form-control" id="select_channel" style="float:left; margin-left: 5px; width:200px;">
+        <option value="ALL">ALL</option>
+        <option value="CNP">CNP</option>
+        <option value="MART">마트</option>
+        <option value="NC">NC</option>
+        <option value="BEAU">보떼</option>
+        <option value="LABO">LABO</option>
+        <option value="CLAB">CLAB</option>
+      </select>
+      <p style="float:left; margin-left: 20px; margin-top: 5px;">매장 이름 : </p>
+      <select class="form-control" id="select_shop" style="float:left; width:200px;">
+      <option id="LABO" value="ALL">ALL</option>
+        <option id="LABO" value="1001">LG연구소</option>
+        <option id="LABO" value="1002">젠스토리</option>
+        <option id="LABO" value="1003">LG에스타워 보떼</option>
+        <option id="CLAB" value="1004">LG에스타워 CNP</option>
+        <option id="TMR" value="304639">NC 인천 올리브점</option>
+        <option id="BEAU" value="505415">수지 상현점</option>
+        <option id="BEAU" value="504130">파주 금촌점</option>
+        <option id="MART" value="505488">홈플러스 월드컵점</option>
+        <option id="TMR" value="304401">NC 안산 상록수점</option>
+        <option id="CNP" value="59100">르메디바이씨앤피 이대점</option>
+        <option id="TMR" value="304369">NC 신촌점</option>
+      </select>
+      <button style="margin-left: 10px;" class="btn btn-warning" id="submit">조회</button>
+    </div>
+
     <div>
       <h4 style="background: #b1cbbb; padding: 8px;">당일 (<%= @date_today %>) <p style="float:right;">총 인원 수 : <%= @tablet_interviews_today.count %> 명</p></h4>
       <div>

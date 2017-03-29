@@ -9,6 +9,12 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @date_today = (@date).strftime("%F")
     @date_2weeks_ago = (@date - 2.weeks).strftime("%F")
     @date_3months_ago = (@date - 3.months).strftime("%F")
+
+    @is_admin_init = false
+    if session[:admin_user]['role'] == "admin" || session[:admin_user] == "user" && (!params.has_key?(:select_channel) && !params.has_key?(:select_shop))
+      @is_admin_init = true
+    end
+
     if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin")
       ch_cd = ""
       shop_cd = ""
@@ -18,6 +24,11 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       shop_cd = session[:admin_user]['shop_cd']
       fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
     end
+
+    ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
+    shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
+    @ch_cd = ch_cd
+    @shop_cd = shop_cd
 
     serial_array = fcdata_list.where("custserial < ? ", 1001).pluck(:custserial).uniq
     serial_array2 = fcdata_list.where("custserial > ? AND custserial < ? ", 1001, 2001).pluck(:custserial).uniq

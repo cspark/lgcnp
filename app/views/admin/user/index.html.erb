@@ -165,7 +165,6 @@
         </thead>
         <tbody>
           <% if !@is_admin_init %>
-            <% Rails.logger.info "if!!!!" %>
             <% @users.each do |user| %>
             <%= render partial: "admin/user/item", locals: { user: user } %>
             <% end %>
