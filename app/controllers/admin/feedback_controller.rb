@@ -21,7 +21,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     serial_array = fcdata_list.where("custserial < ? ", 1001).pluck(:custserial).uniq
     serial_array2 = fcdata_list.where("custserial > ? AND custserial < ? ", 1001, 2001).pluck(:custserial).uniq
-    serial_array = temp_serial_array + temp_serial_array2
+    serial_array = serial_array + serial_array2
     measureno_array = fcdata_list.pluck(:measureno).uniq
 
     Rails.logger.info serial_array.count
