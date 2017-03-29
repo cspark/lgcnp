@@ -22,6 +22,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     select_mode = params[:select_mode]
     select_makeup = params[:select_makeup]
     select_area = params[:select_area]
+    select_shop = params[:select_shop]
     @params_filter = params[:select_filter]
 
     @select_sex = select_sex
@@ -39,6 +40,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @select_mode = select_mode
     @select_makeup = select_makeup
     @select_area = select_area
+    @select_shop = select_shop
 
     @select_filter = []
     if !@params_filter.blank?
@@ -59,11 +61,19 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @tabletinterviews = []
     if Rails.env.production? || Rails.env.staging?
       is_contain = true
-      scoped = Fctabletinterview.all
+
+      fcdata_list = Fcdata.where("shop_cd LIKE ?", "%#{@select_shop}%")
+      serial_array = fcdata_list.where("custserial < ? ", 1001).pluck(:custserial).uniq
+      serial_array2 = fcdata_list.where("custserial > ? AND custserial < ? ", 1000, 2001).pluck(:custserial).uniq
+      measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
+
+      scoped = Fctabletinterview.where(custserial: serial_array)
+      scoped2 = Fctabletinterview.where(custserial: serial_array2)
+      scoped = scoped + scoped2
       temp_end_date = @end_date.to_date+1.day
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-      scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank? && @select_channel.downcase != "all"
+      scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank? && @select_channel != "ALL"
 
       if @select_filter == []
         @excel_name = ["이름","시리얼","진단 날짜","채널","피부타입","진단으로 나온 솔루션 1","최종으로 선택된 솔루션 1","진단으로 나온 솔루션 2","최종으로 선택된 솔루션 2","진단으로 나온 세럼","최종으로 선택된 세럼",

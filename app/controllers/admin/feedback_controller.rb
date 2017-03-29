@@ -18,20 +18,20 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin")
       ch_cd = ""
       shop_cd = ""
-      fcdata_list = Fcdata.all
+      # fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
     else
       ch_cd = session[:admin_user]['ch_cd']
       shop_cd = session[:admin_user]['shop_cd']
-      fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
     end
 
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
     shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
     @ch_cd = ch_cd
     @shop_cd = shop_cd
+    fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
 
     serial_array = fcdata_list.where("custserial < ? ", 1001).pluck(:custserial).uniq
-    serial_array2 = fcdata_list.where("custserial > ? AND custserial < ? ", 1001, 2001).pluck(:custserial).uniq
+    serial_array2 = fcdata_list.where("custserial > ? AND custserial < ? ", 1000, 2001).pluck(:custserial).uniq
     measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     Rails.logger.info serial_array.count
@@ -182,7 +182,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     end
 
     temp_serial_array = fcdata_list.where("custserial < ? ", 1001).pluck(:custserial).uniq
-    temp_serial_array2 = fcdata_list.where("custserial > ? AND custserial < ? ", 1001, 2001).pluck(:custserial).uniq
+    temp_serial_array2 = fcdata_list.where("custserial > ? AND custserial < ? ", 1000, 2001).pluck(:custserial).uniq
     temp_measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     tablet_interviews = Fctabletinterview.where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array)
@@ -282,6 +282,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       @average_a4 = (@average_a4 / divider).to_f
     end
 
+    @count = @after_interviews.count
     @after_interviews_excel = @after_interviews
     @after_interviews = Kaminari.paginate_array(@after_interviews).page(params[:page]).per(5)
 

@@ -182,6 +182,7 @@
         var select_mode = document.getElementById("select_mode").options[document.getElementById("select_mode").selectedIndex].value;
         var select_makeup = document.getElementById("select_makeup").options[document.getElementById("select_makeup").selectedIndex].value;
         var select_area = document.getElementById("select_area").options[document.getElementById("select_area").selectedIndex].value;
+        var shop_cd = document.getElementById("select_shop").options[document.getElementById("select_shop").selectedIndex].value;
 
         url = ""
         url += "/admin/tabletinterview?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
@@ -198,7 +199,8 @@
         url += "&select_mode=" + select_mode;
         url += "&select_makeup=" + select_makeup;
         url += "&select_area=" + select_area;
-        url += "&select_filter=" +filterStr
+        url += "&select_filter=" +filterStr;
+        url += "&select_shop=" +shop_cd;
 
         location.href = url;
       }
@@ -216,7 +218,7 @@
     .width170 {
       min-width:170px
     }
-    
+
     .min-width100 {
       min-width:100px;
     }
@@ -268,12 +270,9 @@
 
         채널 :
         <select class="form-control" id="select_channel">
-          <option value="all">All</option>
-          <option value="cnp">CNP</option>
-          <option value="mart">마트</option>
-          <option value="nc">NC</option>
-          <option value="beau">보떼</option>
-          <option value="cnprx">CNPRX</option>
+          <option value="ALL">All</option>
+          <option value="CNP">CNP</option>
+          <option value="CLAB">CLAB</option>
         </select>
       </div>
 
@@ -299,6 +298,22 @@
           <option value="face">전면</option>
           <option value="left">좌</option>
           <option value="right">우</option>
+        </select>
+
+        매장 이름 :
+        <select class="form-control" id="select_shop" style="margin-left: 5px;">
+        <option id="LABO" value="ALL">ALL</option>
+          <option id="LABO" value="1001">LG연구소</option>
+          <option id="LABO" value="1002">젠스토리</option>
+          <option id="LABO" value="1003">LG에스타워 보떼</option>
+          <option id="CLAB" value="1004">LG에스타워 CNP</option>
+          <option id="TMR" value="304639">NC 인천 올리브점</option>
+          <option id="BEAU" value="505415">수지 상현점</option>
+          <option id="BEAU" value="504130">파주 금촌점</option>
+          <option id="MART" value="505488">홈플러스 월드컵점</option>
+          <option id="TMR" value="304401">NC 안산 상록수점</option>
+          <option id="CNP" value="59100">르메디바이씨앤피 이대점</option>
+          <option id="TMR" value="304369">NC 신촌점</option>
         </select>
 
         <button class="btn btn-warning" id="submit">조회</button>
@@ -327,7 +342,7 @@
                 <% elsif filter.include?("after_solution_1") %>
                   <th>최종으로 선택된 솔루션 1</th>
                 <% elsif filter.include?("before_solution_2") %>
-                  <th>진단으로 나온 솔루션 2</th>  
+                  <th>진단으로 나온 솔루션 2</th>
                 <% elsif filter.include?("after_solution_2") %>
                   <th>최종으로 선택된 솔루션 2</th>
                 <% elsif filter.include?("before_serum") %>
