@@ -3,9 +3,7 @@ class FctabletinterviewrxSummary < ApplicationRecord
 
   def to_api_hash
     {
-      interview_mode_count: interview_mode_count,
-      created_at: created_at,
-      updated_at: updated_at
+      interview_mode_count: interview_mode_count
     }
   end
 end
