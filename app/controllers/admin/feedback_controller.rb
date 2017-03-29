@@ -158,10 +158,14 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       else
         fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
       end
-      temp_serial_array = fcdata_list.pluck(:custserial).uniq
+
+      temp_serial_array = fcdata_list.where("custserial < ? ", 1001).pluck(:custserial).uniq
+      temp_serial_array2 = fcdata_list.where("custserial > ? AND custserial < ? ", 1001, 2001).pluck(:custserial).uniq
       temp_measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
       tablet_interviews = Fctabletinterview.where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array)
+      tablet_interviews2 = Fctabletinterview.where(custserial: temp_serial_array2).where(fcdata_id: temp_measureno_array)
+      tablet_interviews = tablet_interviews + tablet_interviews2
       Rails.logger.info tablet_interviews.count
       array = tablet_interviews.pluck(:tablet_interview_id)
       temp_after_interviews = Fcafterinterview.where.not(a1: nil).where(tablet_interview_id: array)
