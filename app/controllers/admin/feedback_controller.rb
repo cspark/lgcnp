@@ -19,25 +19,19 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
     end
 
-    temp_serial_array = fcdata_list.pluck(:custserial).uniq
-    temp_measureno_array = fcdata_list.pluck(:measureno).uniq
-    custserial_array = []
-    measureno_array = []
-    temp_serial_array.each do |serial|
-      custserial_array << serial.to_i
-    end
-    temp_measureno_array.each do |measureno|
-      measureno_array << measureno.to_i
-    end
+    serial_array = fcdata_list.where("custserial < ? ", 1001).pluck(:custserial).uniq
+    serial_array2 = fcdata_list.where("custserial > ? AND custserial < ? ", 1001, 2001).pluck(:custserial).uniq
+    serial_array = temp_serial_array + temp_serial_array2
+    measureno_array = fcdata_list.pluck(:measureno).uniq
 
     if Rails.env.production? || Rails.env.staging?
-      @tablet_interviews_today = Fctabletinterview.where(ch_cd: "CNP").where(custserial: custserial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
-      @tablet_interviews_2_weeks_ago = Fctabletinterview.where(ch_cd: "CNP").where(custserial: custserial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
-      @tablet_interviews_3_months_ago = Fctabletinterview.where(ch_cd: "CNP").where(custserial: custserial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
+      @tablet_interviews_today = Fctabletinterview.where(ch_cd: "CNP").where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
+      @tablet_interviews_2_weeks_ago = Fctabletinterview.where(ch_cd: "CNP").where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
+      @tablet_interviews_3_months_ago = Fctabletinterview.where(ch_cd: "CNP").where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
     else
-      @tablet_interviews_today = Fctabletinterview.where(ch_cd: "CNP").where(custserial: custserial_array).where(fcdata_id: measureno_array)
-      @tablet_interviews_2_weeks_ago = Fctabletinterview.where(ch_cd: "CNP").where(custserial: custserial_array).where(fcdata_id: measureno_array)
-      @tablet_interviews_3_months_ago = Fctabletinterview.where(ch_cd: "CNP").where(custserial: custserial_array).where(fcdata_id: measureno_array)
+      @tablet_interviews_today = Fctabletinterview.where(ch_cd: "CNP").where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array)
+      @tablet_interviews_2_weeks_ago = Fctabletinterview.where(ch_cd: "CNP").where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array)
+      @tablet_interviews_3_months_ago = Fctabletinterview.where(ch_cd: "CNP").where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array)
     end
 
     create_new_fcafterservice(@tablet_interviews_today)

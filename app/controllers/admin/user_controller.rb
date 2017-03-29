@@ -26,7 +26,9 @@ class Admin::UserController < Admin::AdminApplicationController
     @shop_cd = shop_cd
 
     fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
-    custserial_array = fcdata_list.pluck(:custserial).uniq
+    custserial_array = fcdata_list.where("custserial < ? ", 1001).pluck(:custserial).uniq
+    custserial_array2 = fcdata_list.where("custserial > ? AND custserial < ? ", 1001, 2001).pluck(:custserial).uniq
+    custserial_array = custserial_array + custserial_array2
     measureno_array = fcdata_list.pluck(:measureno).uniq
 
     if params.has_key?(:search) && params[:search].length != 0
