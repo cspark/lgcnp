@@ -74,7 +74,7 @@
       function load(isAll){
         url = ""
         url += "/admin/fcschedule_list?select_date=" + $('#select_date').val();
-        url += "&search=" + encodeURI(encodeURI($("#search").val()));
+        url += "&search=" + $("#search").val();
 
         if (document.getElementById("select_channel") != null) {
           var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
