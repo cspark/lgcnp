@@ -12,6 +12,6 @@
 #   rake "image:remove_image"
 # end
 
-every :day, :at => '06:45 am' do
+every :day, :at => '07:50 am' do
   rake "image:remove_image"
 end
