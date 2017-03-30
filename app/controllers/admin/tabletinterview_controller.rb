@@ -51,11 +51,11 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       end
     end
 
-    min_age_custinfo = Custinfo.where(ch_cd: "CNP").where.not(birthyy: nil).order("birthyy desc").first
+    min_age_custinfo = Custinfo.where(ch_cd: ch_cd).where.not(birthyy: nil).order("birthyy desc").first
     @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
     @min_birthyy = min_age_custinfo.birthyy
     @min_birthmm = 1
-    max_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy asc").first
+    max_age_custinfo = Custinfo.where(ch_cd: ch_cd).order("birthyy asc").first
     @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
     @max_birthyy = max_age_custinfo.birthyy
     @max_birthmm = 12
@@ -64,7 +64,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     if Rails.env.production? || Rails.env.staging?
       is_contain = true
 
-      fcdata_list = Fcdata.where("shop_cd LIKE ?", "%#{@shop_cd}%")
+      fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{@shop_cd}%")
       serial_array = fcdata_list.where("custserial < ? ", 1001).pluck(:custserial).uniq
       serial_array2 = fcdata_list.where("custserial > ? AND custserial < ? ", 1000, 2001).pluck(:custserial).uniq
       measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq

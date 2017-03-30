@@ -176,7 +176,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     custserial = params[:custserial] if !params[:custserial].blank?
 
     if ch_cd == ""
-      fcdata_list = Fcdata.where("custserial LIKE ?", "%#{custserial}%")
+      fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("custserial LIKE ?", "%#{custserial}%")
     else
       fcdata_list = Fcdata.where("custserial LIKE ?", "%#{custserial}%").where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
     end
@@ -187,9 +187,9 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     tablet_interviews = Fctabletinterview.where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array)
     tablet_interviews2 = Fctabletinterview.where(custserial: temp_serial_array2).where(fcdata_id: temp_measureno_array)
-    tablet_interviews = tablet_interviews + tablet_interviews2
+    tablet_interviews = tablet_interviews.or(tablet_interviews2)
     Rails.logger.info tablet_interviews.count
-    array = tablet_interviews.pluck(:tablet_interview_id)
+    array = tablet_interviews.pluck(:tablet_interview_id).map(&:to_i).uniq
     temp_after_interviews = Fcafterinterview.where.not(a1: nil).where(tablet_interview_id: array)
     Rails.logger.info temp_after_interviews.count
     if select_interview != "all"
@@ -255,7 +255,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
         @after_interviews << after_interview
       end
     end
-
 
     @after_interviews.each do |interview|
       @average_a1 = @average_a1 + interview.a1.to_i
