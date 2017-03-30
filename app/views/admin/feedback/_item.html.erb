@@ -64,7 +64,7 @@
           <% end %>
         <td><%= is_agree %></td>
           <!-- 1차설문 조건에 상관없이 보임 -->
-          <% f1 = Fcafterinterview.where(tablet_interview_id: f.tablet_interview_id).where(custserial: f.custserial.to_i).where(order: 0).first %>
+          <% f1 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 0).first %>
           <% if f1.present? && f1.a1.nil? %>
             <% is_feed_back_ok_1 = "X" %>
           <% else %>
