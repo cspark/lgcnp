@@ -27,7 +27,7 @@ class GenerateTestModel < ApplicationRecord
     Fctabletinterview.all.each do |f|
       i = 1
       f = Fctabletinterview.new
-      f.custserial = 153.to_s
+      f.custserial = 3.to_s
       f.a_1 = i
       f.a_2 = i
       f.a_3 = i
@@ -51,21 +51,22 @@ class GenerateTestModel < ApplicationRecord
       f.after_solution_1 = "elasticity solution"
       f.before_solution_2 = "elasticity solution"
       f.after_solution_2 = "elasticity solution"
-      f.before_serum = "rebalencing"
-      f.after_serum = "rebalencing"
-      f.before_ample_1 = "regenerating ampoule"
-      f.after_ample_1 = "regenerating ampoule"
-      f.before_ample_2 = "regenerating ampoule"
-      f.after_ample_2 = "regenerating ampoule"
+      f.before_serum = "deep humect"
+      f.after_serum = "deep humect"
+      f.before_ample_1 = "perming ampoule"
+      f.after_ample_1 = "perming ampoule"
+      f.before_ample_2 = "perming ampoule"
+      f.after_ample_2 = "perming ampoule"
       f.before_made_cosmetic = "skin control EX"
       f.after_made_cosmetic = "skin control EX"
-      f.uptdate = "2017-03-14-12-00"
+      f.uptdate = "2017-03-01-12-00"
       f.ch_cd = "CNP"
       f.fcdata_id = 1.to_s
-      f.tablet_interview_id = 28
+      f.tablet_interview_id = 3
       f.is_quick_mode = "T"
       f.is_agree_cant_refund = "T"
       f.is_agree_after = "T"
+      f.base_lot = "1"
       f.save
       i += 1
     end
@@ -96,12 +97,12 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        f = Fcdata.new
-       f.custserial = 44.to_s
+       f.custserial = 3.to_s
        f.ch_cd = "CNP"
        f.faceno = "F"
-       f.measuredate = "2017-03-14-13-00-00"
+       f.measuredate = "2017-03-01-13-00-00"
        f.measureno = 1
-       f.uptdate = "2017-03-14"
+       f.uptdate = "2017-03-01"
        f.mo_1 = 1.0
        f.mo_7 = 1.0
        f.mo_8 = 1.0
@@ -190,7 +191,7 @@ class GenerateTestModel < ApplicationRecord
        f.score_r = 1
        f.score_l = 1
        f.m_skintype = 1
-       f.shop_cd = "1001"
+       f.shop_cd = "59100"
        f.save
        i +=1;
     end
@@ -200,24 +201,25 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        user = Custinfo.new
-       user.custserial = 839.to_s
-       user.custname = "kimsoomin"
-       user.sex = "M"
-       user.birthyy = "1985"
-       user.birthmm = "11"
-       user.birthdd = "21"
-       user.age = "33"
+       user.custserial = 3.to_s
+       user.custname = "mango"
+       user.sex = "F"
+       user.birthyy = "2000"
+       user.birthmm = "07"
+       user.birthdd = "03"
+       user.age = "18"
        user.phone = "0123456789"
        user.address = "nonhyun"
        user.email = "test@test.com"
-       user.lastanaldate = "2017-03-14"
+       user.lastanaldate = "2017-03-01"
        user.measureno = 1
-       user.uptdate = "2017-03-14"
+       user.uptdate = "2017-03-01"
        user.is_agree_privacy = "T"
        user.is_agree_after = "T"
        user.is_agree_marketing = "T"
        user.is_agree_thirdparty_info = "T"
        user.ch_cd = "CNP"
+       user.shop_cd = "59100"
        user.save
        i +=1;
     end
@@ -355,9 +357,9 @@ class GenerateTestModel < ApplicationRecord
 
   def self.generate_test_adminuser
      f = AdminUser.new
-     f.email = "5001@naver.com"
-     f.ch_cd = "CLAB"
-     f.shop_cd = "5001"
+     f.email = "505415"
+     f.ch_cd = "BEAU"
+     f.shop_cd = "505415"
      f.save
   end
 end

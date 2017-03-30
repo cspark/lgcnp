@@ -79,6 +79,50 @@
       });
 
     </script>
+    <style>
+    /* Dropdown Button */
+    .dropbtn {
+        border: none;
+        cursor: pointer;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 120px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #f1f1f1}
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+    </style>
   </head>
 
   <body style="padding:10px;">
@@ -89,10 +133,16 @@
         </div>
         <ul class="nav navbar-nav">
           <li><a href="#" id="custinfos">고객정보</a></li>
-          <li id="input_feedback"><a href="#">피드백 입력</a></li>
-          <li id="feedback_list"><a href="#">피드백 리스트</a></li>
+          <li id="input_feedback"><a href="#">CNP 피드백 입력</a></li>
+          <li id="feedback_list"><a href="#">CNP 피드백 리스트</a></li>
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
-            <li id="tabletinterview"><a href="#">CNP 인터뷰</a></li>
+            <li class="dropdown dropbtn"><a href="#">고객 인터뷰</a>
+              <div class="dropdown-content">
+                <a id="tabletinterview" href="#">CNP 인터뷰</a>
+                <a href="#">CNPR 인터뷰</a>
+                <a href="#">보떼 인터뷰</a>
+              </div>
+            </li>
             <li id="fcavg_list"><a href="#">연령별 성별 평균</a></li>
             <li id="fcdata_list"><a href="#">야누스 측정 데이터</a></li>
             <li id="fcpos_list"><a href="#">야누스 분석 영역 정보</a></li>

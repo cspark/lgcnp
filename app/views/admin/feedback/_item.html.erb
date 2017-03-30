@@ -54,9 +54,6 @@
     <body>
       <tr class="table_tr" id="<%= user.custserial %>/<%= user.ch_cd %>/<%= user.measureno %>">
         <% custinfo = Custinfo.where(custserial: tabletinterview.custserial.to_i).first %>
-        <% Rails.logger.info tabletinterview.custserial.to_i %>
-        <% Rails.logger.info tabletinterview.is_agree_after %>
-        <% Rails.logger.info tabletinterview.base_lot %>
         <td id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
         <td><%= tabletinterview.custserial.to_i %></td>
         <td><%= tabletinterview.uptdate %></td>

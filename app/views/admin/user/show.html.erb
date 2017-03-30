@@ -36,18 +36,25 @@
   <body style="padding: 10px;">
     <div style="display:inline;">
       <h2 style="float:left; width:45%;">고객정보</h2>
+      <% if @user.ch_cd == "CNP" || @user.ch_cd == "CLAB" %>
       <div style="float:right; width:45%; margin-top:30px;">
         <button id="<%= @user.custserial %>/<%= @user.ch_cd %>/<%= @user.measureno %>" style="float:right; margin-right:50px;" class="btn btn-warning edit-user">수정</button>
       </div>
+      <% end %>
     </div><br><br>
 
     <font size="5"><b><div style="margin-top:25px;" id="name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>"></div></b></font>
 
     <div><font size="4">
-      (가입날짜 : <%= @user.uptdate %>  마지막 진단 날짜 : <%= @user.lastanaldate %>)<br>
+      <b>가입날짜</b>  <%= @user.uptdate %> <br>
+      <b>마지막 진단 날짜</b> <%= @user.lastanaldate %> <br>
       <b>시리얼</b> <%= @user.custserial.to_i %> <br>
       <b>전화번호</b> <%= @user.phone %> <br>
-      <b>성별</b> <%= @user.sex %> <br>
+      <% sex = "남" %>
+      <% if @user.sex == "F" %>
+        <% sex = "여" %>
+      <% end %>
+      <b>성별</b> <%= sex %> <br>
       <b>생년월일</b> <%= @user.birthyy %>-<%= @user.birthmm %>-<%= @user.birthdd %><br><br>
       <% is_agree_privacy = "X" %>
       <% if @user.is_agree_privacy== "T" %>
@@ -69,7 +76,7 @@
        <% is_agree_after = "O" %>
       <% end %>
       <b>사후 피드백 서비스</b> <%= is_agree_after %> <br>
-      <b>측정 횟수</b> <%= Fctabletinterview.where(custserial: @user.custserial).count %>
+      <b>측정 횟수</b> <%= @user.measureno %>
     </font>
 
   </body>

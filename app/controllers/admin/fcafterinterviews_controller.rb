@@ -32,9 +32,11 @@ class Admin::FcafterinterviewsController < Admin::AdminApplicationController
       fctabletinterview.is_agree_after = params[:is_agree_after]
       fctabletinterview.save
 
-      custinfo = Custinfo.where(custserial: custserial).where(ch_cd: fctabletinterview.ch_cd).where(measureno: fctabletinterview.fcdata_id).first
-      custinfo.is_agree_after = params[:is_agree_after]
-      custinfo.save
+      custinfo = Custinfo.where(custserial: 153).where(ch_cd: fctabletinterview.ch_cd).where(measureno: fctabletinterview.fcdata_id).first
+      if !custinfo.nil?
+        custinfo.is_agree_after = params[:is_agree_after]
+        custinfo.save
+      end
     end
 
     after_interview.a1 = params[:a1]

@@ -165,7 +165,7 @@
             <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
             <% if !fcdata.nil? %>
               <% fcdata = fcdata.to_api_hash_for_admin %>
-            <% end %>  
+            <% end %>
             <% if filter.include?("skin_type") %>
               <td class="text-center" id="skin_type_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
             <% elsif filter.include?("before_solution_1") %>

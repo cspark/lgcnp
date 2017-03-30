@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329092551) do
+ActiveRecord::Schema.define(version: 20170330055404) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -321,9 +321,9 @@ ActiveRecord::Schema.define(version: 20170329092551) do
   end
 
   create_table "fctabletinterviewrxes", force: :cascade do |t|
-    t.string   "custserial",           null: false
-    t.string   "ch_cd",                null: false
-    t.integer  "tablet_interview_id",  null: false
+    t.string   "custserial",               null: false
+    t.string   "ch_cd",                    null: false
+    t.integer  "tablet_interview_id",      null: false
     t.integer  "a_1"
     t.integer  "a_2"
     t.integer  "a_3"
@@ -369,10 +369,13 @@ ActiveRecord::Schema.define(version: 20170329092551) do
     t.integer  "turnover_value"
     t.integer  "corneous_value"
     t.float    "stress_value"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.string   "bb_base_before"
     t.string   "bb_base_after"
+    t.text     "recommand_program_step_1"
+    t.text     "recommand_program_step_2"
+    t.text     "recommand_program_step_3"
   end
 
   create_table "fctabletinterviews", force: :cascade do |t|

@@ -1,5 +1,5 @@
-require 'active_support'
-require 'active_support/time'
+# require 'active_support'
+# require 'active_support/time'
 
 # ActiveSupport::TimeZone.all.each do |timezone|
 #   Time.zone = timezone.name
@@ -7,12 +7,11 @@ require 'active_support/time'
 #     rake "image:remove_image"
 #   end
 # end
+# 01:00 pm -> 새벽 4시
+# every :day, :at => '01:00 pm' do
+#   rake "image:remove_image"
+# end
 
-every :day, :at => '01:00 pm' do
-  system("rm -rf public/BEAU")
-  system("rm -rf public/CNP")
-  system("rm -rf public/CLAB")
-  system("rm -rf public/LABO")
-  system("rm -rf public/MART")
-  system("rm -rf public/TMR")
+every :day, :at => '06:45 am' do
+  rake "image:remove_image"
 end

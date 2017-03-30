@@ -51,11 +51,11 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       end
     end
 
-    min_age_custinfo = Custinfo.where(ch_cd: ch_cd).where.not(birthyy: nil).order("birthyy desc").first
+    min_age_custinfo = Custinfo.where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(birthyy: nil).order("birthyy desc").first
     @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
     @min_birthyy = min_age_custinfo.birthyy
     @min_birthmm = 1
-    max_age_custinfo = Custinfo.where(ch_cd: ch_cd).order("birthyy asc").first
+    max_age_custinfo = Custinfo.where("ch_cd LIKE ?", "%#{ch_cd}%").order("birthyy asc").first
     @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
     @max_birthyy = max_age_custinfo.birthyy
     @max_birthmm = 12
@@ -76,7 +76,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       temp_end_date = @end_date.to_date+1.day
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-      scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank? && @ch_cd != "ALL"
+      scoped = scoped.where("ch_cd LIKE ?", "%#{@ch_cd}%") if !@ch_cd.blank? && @ch_cd != "ALL"
 
 
       if @select_filter == []

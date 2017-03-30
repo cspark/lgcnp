@@ -52,7 +52,11 @@
           <td class="text-center">3개월 후 설문</td>
         <% end %>
         <td class="text-center"><%= tabletinterview.uptdate %></td>
-        <td class="text-center"><%= custinfo.sex %></td>
+        <% sex = "남" %>
+        <% if custinfo.sex == "F" %>
+          <% sex = "여" %>
+        <% end %>
+        <td class="text-center"><%= sex %></td>
         <td class="text-center"><%= custinfo.age %></td>
         <% after_serum = tabletinterview.after_serum %>
         <% if tabletinterview.after_serum == "skin control" %>

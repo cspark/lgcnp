@@ -30,8 +30,8 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @shop_cd = shop_cd
     fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
 
-    serial_array = fcdata_list.where("custserial < ? ", 1001).pluck(:custserial).uniq
-    serial_array2 = fcdata_list.where("custserial > ? AND custserial < ? ", 1000, 2001).pluck(:custserial).uniq
+    serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
+    serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
     measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     Rails.logger.info serial_array.count
@@ -181,8 +181,8 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       fcdata_list = Fcdata.where("custserial LIKE ?", "%#{custserial}%").where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
     end
 
-    temp_serial_array = fcdata_list.where("custserial < ? ", 1001).pluck(:custserial).uniq
-    temp_serial_array2 = fcdata_list.where("custserial > ? AND custserial < ? ", 1000, 2001).pluck(:custserial).uniq
+    temp_serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
+    temp_serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
     temp_measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     tablet_interviews = Fctabletinterview.where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array)
@@ -207,7 +207,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       is_contain = true
 
       Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first
-
       custinfo = Custinfo.where(custserial: after_interview.custserial).first
       if !name.nil?
         if !custinfo.custname.include? name
@@ -247,6 +246,16 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       end
       if select_ample2 != "all"
         if tablet_interview.after_ample_2 != select_ample2
+          is_contain = false
+        end
+      end
+
+      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "true"
+        if custinfo.is_agree_thirdparty_info == "F"
+          is_contain = false
+        end
+      elsif params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "false"
+        if custinfo.is_agree_thirdparty_info == "T"
           is_contain = false
         end
       end
