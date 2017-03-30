@@ -6,9 +6,5 @@ ActiveSupport::TimeZone.all.each do |timezone|
   every :day, :at => Time.zone.parse('01:00 pm').utc do
     rake "image:remove_image"
   end
-
-  every :day, :at => Time.zone.parse('08:35 pm').utc do
-    rake "image:remove_image"
-  end
 end
 # 01:00 pm -> 새벽 4시
