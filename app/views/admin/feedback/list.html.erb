@@ -137,11 +137,8 @@
           });
 
           $(document).on("click", ".table_tr", function (e) {
-            console.log($(this).attr('id'));
             var userId = $(this).attr('id').split("/")[0]
             var after_interview_id = $(this).attr('id').split("/")[1]
-            console.log(userId);
-            console.log(after_interview_id);
             window.open("/admin/feedbacks/detail?userId=" + userId +"&after_interview_id=" +after_interview_id , "/feedbacks/detail?userId=" + userId +"&after_interview_id=" +after_interview_id, "scrollbars=1,resizable=1,height=500,width=600");
           });
       });
@@ -152,7 +149,6 @@
         var select_ample2 = document.getElementById("select_ample_2").options[document.getElementById("select_ample_2").selectedIndex].value;
         var select_sex = document.getElementById("select_sex").options[document.getElementById("select_sex").selectedIndex].value;
         var select_interview = document.getElementById("select_interview").options[document.getElementById("select_interview").selectedIndex].value;
-        var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
 
         url = ""
         url += "/admin/feedback_list?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
@@ -164,10 +160,15 @@
         url += "&select_ample2=" + select_ample2;
         url += "&select_interview=" + select_interview;
         url += "&name=" + encodeURI(encodeURI(document.getElementById("name").value));
-        url += "&select_channel=" +ch_cd;
-        url += "&select_shop=" +$("#select_shop").val();
         url += "&custserial=" +document.getElementById("custserial").value;
         url += "&is_agree_thirdparty_info=" +document.getElementById('is_agree_thirdparty_info').checked;
+
+        if (document.getElementById("select_channel") != null) {
+          var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
+          url += "&select_channel=" +ch_cd;
+          url += "&select_shop=" +$("#select_shop").val();
+        }
+
         location.href = url;
       }
 
@@ -236,15 +237,17 @@
         <input class="form-control" type="text" id="start_date" style="width:100px; float:left;">
         <input class="form-control" type="text" id="end_date" style="width:100px; float:left;">
         <button id="date_init" class="btn btn-primary" style="float:left;">ALL</button>
-        <p style="float:left; margin-left: 20px; margin-top: 7px;">채널: </p>
-        <select class="form-control" id="select_channel" style="margin-left: 5px; float:left;">
-          <option value="ALL">ALL</option>
-          <option value="CNP">CNP</option>
-          <option value="CLAB">CLAB</option>
-        </select>
+        <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
+          <p style="float:left; margin-left: 20px; margin-top: 7px;">채널: </p>
+          <select class="form-control" id="select_channel" style="margin-left: 5px; float:left;">
+            <option value="ALL">ALL</option>
+            <option value="CNP">CNP</option>
+            <option value="CLAB">CLAB</option>
+          </select>
 
-        <p style="float:left; margin-left: 20px; margin-top: 7px;">매장 코드: </p>
-        <input type="text" name="select_shop" id="select_shop" placeholder="매장 코드로 검색" style="float:left; width: 200px; margin-top:4px;">
+          <p style="float:left; margin-left: 20px; margin-top: 7px;">매장 코드: </p>
+          <input type="text" name="select_shop" id="select_shop" placeholder="매장 코드로 검색" style="float:left; width: 200px; margin-top:4px;">
+        <% end %>
 
         <p style="float:right; margin-right:20px;">
           Download:

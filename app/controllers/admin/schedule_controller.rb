@@ -18,12 +18,21 @@ class Admin::ScheduleController < Admin::AdminApplicationController
       shop_cd = session[:admin_user]['shop_cd']
     end
 
+    search = ""
+    ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
+    shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
+    search = params[:search] if params.has_key?(:search) && params[:search].length != 0
+    @ch_cd = ch_cd
+    @shop_cd = shop_cd
+    @search = search
+
     select_year = @select_date.to_s.split("-")[0]
     select_mmdd = @select_date.to_s.split("-")[1]+@select_date.to_s.split("-")[2]
 
     scoped = Fcschedule.all
     scoped = scoped.where("shop_cd LIKE ?", "%#{shop_cd}%").where("ch_cd LIKE ?", "%#{ch_cd}%").where("reserve_yyyy = ?", select_year)
     scoped = scoped.where("reserve_mmdd = ?", select_mmdd)
+    scoped = scoped.where("custname LIKE ?", "%#{@search}%")
     @fcschedules = scoped.order("reserve_hhmm asc")
 
     @fcschedules_excel = @fcschedules

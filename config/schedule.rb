@@ -8,10 +8,11 @@
 #   end
 # end
 # 01:00 pm -> 새벽 4시
-# every :day, :at => '01:00 pm' do
-#   rake "image:remove_image"
-# end
 
-every :day, :at => '07:50 am' do
+every :day, :at => '08:30 am'.utc do
+  rake "image:remove_image"
+end
+
+every :day, :at => '01:00 pm'.utc do
   rake "image:remove_image"
 end

@@ -72,10 +72,18 @@
         <td><%= data.shop_cd %></td>
         <td><%= data.reserve_yyyy %>-<%= mmdd %> , <%= hhmm %></td>
         <td id="phone_<%= data.custname %>_<%= data.reserve_hhmm %>"></td>
-        <td><%= data.reserve_yn %></td>
+        <% reserve = "O" %>
+        <% if data.reserve_yn == "F" %>
+          <% reserve = "X" %>
+        <% end %>
+        <% purchase = "O" %>
+        <% if data.purchase_yn == "F" %>
+          <% purchase = "X" %>
+        <% end %>
+        <td><%= reserve %></td>
         <td><%= data.memo %></td>
         <td><%= data.uptdate %></td>
-        <td><%= data.purchase_yn %></td>
+        <td><%= purchase %></td>
       </tr>
     </body>
 </html>

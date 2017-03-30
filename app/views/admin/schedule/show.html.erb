@@ -38,10 +38,18 @@
       <b>매장구분</b> <%= @fcschedule.shop_cd %><br>
       <b>예약시간</b> <%= @fcschedule.reserve_yyyy %>-<%= mmdd %> , <%= hhmm %><br>
       <b>전화번호</b> <%= @fcschedule.phone %><br>
-      <b>상담여부</b> <%= @fcschedule.reserve_yn %><br>
+      <% reserve = "O" %>
+      <% if @fcschedule.reserve_yn == "F" %>
+        <% reserve = "X" %>
+      <% end %>
+      <% purchase = "O" %>
+      <% if @fcschedule.purchase_yn == "F" %>
+        <% purchase = "X" %>
+      <% end %>
+      <b>상담여부</b> <%= reserve %><br>
       <b>메모</b> <%= @fcschedule.memo %><br>
       <b>등록날짜</b> <%= @fcschedule.uptdate %><br>
-      <b>구매여부</b> <%= @fcschedule.purchase_yn %>
+      <b>구매여부</b> <%= purchase %>
     </font>
   </body>
 </html>

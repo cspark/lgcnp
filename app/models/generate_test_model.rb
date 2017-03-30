@@ -295,7 +295,7 @@ class GenerateTestModel < ApplicationRecord
     (1..num).each do |i|
        f = Fcschedule.new
        f.ch_cd = "CNP"
-       f.shop_cd = "1001"
+       f.shop_cd = "59100"
        f.reserve_yyyy = "2017"
        f.reserve_mmdd = "0315"
        f.reserve_hhmm = "1500"
