@@ -88,7 +88,7 @@
           <% end %>
           </td>
 
-          <% f3 = Fcafterinterview.where(tablet_interview_id: f.tablet_interview_id).where(custserial: f.custserial.to_i).where(order: 2).first %>
+          <% f3 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 2).first %>
           <td>
           <% if (!f3.nil? && !tabletinterview.base_lot.blank?) || (!f3.nil? && !f3.a1.nil?) %>
             <% if f3.a1.nil? %>
