@@ -197,7 +197,7 @@ class Api::Tablet::Cnprx::FcdatasController < Api::ApplicationController
       ftp_path << user.ch_cd.to_s
       ftp_path << "/"
     else
-      ftp_path = "ftp://165.244.88.27/CNP/"
+      ftp_path = "ftp://165.244.88.27/CNPR/"
     end
 
     ftp_path << sub_folder_name.to_s
@@ -227,7 +227,7 @@ class Api::Tablet::Cnprx::FcdatasController < Api::ApplicationController
       make_dir_command << user.ch_cd.to_s
       make_dir_command << "/"
     else
-      make_dir_command << "public/CNP/"
+      make_dir_command << "public/CNPR/"
     end
 
     Rails.logger.info make_dir_command
@@ -250,7 +250,7 @@ class Api::Tablet::Cnprx::FcdatasController < Api::ApplicationController
       file_get_command << user.ch_cd.to_s
       file_get_command << "/"
     else
-      file_get_command << "public/CNP/"
+      file_get_command << "public/CNPR/"
     end
 
     file_get_command << sub_folder_name

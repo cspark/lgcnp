@@ -19,7 +19,7 @@ class Api::Tablet::Cnprx::CustinfosController < Api::ApplicationController
     dd = params[:birthdd]
     phone = params[:phone]
 
-    ch_cd = "CNP"
+    ch_cd = "CNPR"
     if params.has_key?(:ch_cd)
       ch_cd = params[:ch_cd]
     end
@@ -37,7 +37,7 @@ class Api::Tablet::Cnprx::CustinfosController < Api::ApplicationController
     mm = params[:birthmm]
     dd = params[:birthdd]
 
-    ch_cd = "CNP"
+    ch_cd = "CNPR"
     if params.has_key?(:ch_cd)
       ch_cd = params[:ch_cd]
     end
@@ -54,7 +54,7 @@ class Api::Tablet::Cnprx::CustinfosController < Api::ApplicationController
       phone = params[:phone]
       serial = params[:serial]
 
-      ch_cd = "CNP"
+      ch_cd = "CNPR"
       if params.has_key?(:ch_cd)
         ch_cd = params[:ch_cd]
       end
@@ -72,7 +72,7 @@ class Api::Tablet::Cnprx::CustinfosController < Api::ApplicationController
       name = params[:name]
       serial = params[:serial]
 
-      ch_cd = "CNP"
+      ch_cd = "CNPR"
       if params.has_key?(:ch_cd)
         ch_cd = params[:ch_cd]
       end
@@ -91,7 +91,7 @@ class Api::Tablet::Cnprx::CustinfosController < Api::ApplicationController
       tablet_interview_id = params[:tabletInterviewId]
       serial = params[:serial]
 
-      ch_cd = "CNP"
+      ch_cd = "CNPR"
       if params.has_key?(:ch_cd)
         ch_cd = params[:ch_cd]
       end
@@ -116,7 +116,7 @@ class Api::Tablet::Cnprx::CustinfosController < Api::ApplicationController
       gene_barcode = params[:gene_barcode]
       serial = params[:serial]
 
-      ch_cd = "CNP"
+      ch_cd = "CNPR"
       if params.has_key?(:ch_cd)
         ch_cd = params[:ch_cd]
       end
@@ -142,7 +142,7 @@ class Api::Tablet::Cnprx::CustinfosController < Api::ApplicationController
       is_agree_thirdparty_info = params[:is_agree_thirdparty_info]
       serial = params[:serial]
 
-      ch_cd = "CNP"
+      ch_cd = "CNPR"
       if params.has_key?(:ch_cd)
         ch_cd = params[:ch_cd]
       end
@@ -178,7 +178,7 @@ class Api::Tablet::Cnprx::CustinfosController < Api::ApplicationController
     custinfo = Custinfo.new
     custinfo.custserial = Custinfo.all.order('custserial ASC').last.custserial + 1
 
-    ch_cd = "CNP"
+    ch_cd = "CNPR"
     if params.has_key?(:ch_cd)
       ch_cd = params[:ch_cd]
     end

@@ -22,7 +22,7 @@ class Api::Tablet::Cnprx::ImagesController < ApplicationController
       make_dir_command << ch_cd.to_s
       make_dir_command << "/"
     else
-      make_dir_command << "public/CNP/"
+      make_dir_command << "public/CNPR/"
     end
 
     system(make_dir_command)
@@ -85,7 +85,7 @@ class Api::Tablet::Cnprx::ImagesController < ApplicationController
       ftp_path << ch_cd.to_s
       ftp_path << "/"
     else
-      ftp_path = "'ftp://165.244.88.27/CNP/'"
+      ftp_path = "'ftp://165.244.88.27/CNPR/'"
     end
 
     make_dir_command = ""
@@ -94,7 +94,7 @@ class Api::Tablet::Cnprx::ImagesController < ApplicationController
       make_dir_command << ch_cd.to_s
       make_dir_command << "/"
     else
-      make_dir_command << "/CNP/"
+      make_dir_command << "/CNPR/"
     end
 
     Rails.logger.info make_dir_command
