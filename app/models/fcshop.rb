@@ -8,10 +8,4 @@ self.table_name = "fcshop" if Rails.env.production? || Rails.env.staging?
       ch_cd: ch_cd
     }
   end
-
-  def self.list(shop_cd: nil)
-    scoped = Fcshop.all
-    scoped = scoped.where(shop_cd: shop_cd) if shop_cd.present?
-    scoped.order('shop_cd asc')
-  end
 end
