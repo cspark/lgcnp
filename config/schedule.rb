@@ -9,6 +9,6 @@
 # end
 # 01:00 pm -> 새벽 4시
 
-every :day, :at => '11:55 pm' do
+every :day, :at => '00:10 am' do
   rake "image:remove_image"
 end
