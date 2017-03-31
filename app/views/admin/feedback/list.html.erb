@@ -236,11 +236,11 @@
         <p style="float:left; margin-top: 7px;">진단 날짜: </p>
         <input class="form-control" type="text" id="start_date" style="width:100px; float:left;">
         <input class="form-control" type="text" id="end_date" style="width:100px; float:left;">
-        <button id="date_init" class="btn btn-primary" style="float:left;">ALL</button>
+        <button id="date_init" class="btn btn-primary" style="float:left;">전체</button>
         <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
           <p style="float:left; margin-left: 20px; margin-top: 7px;">채널: </p>
           <select class="form-control" id="select_channel" style="margin-left: 5px; float:left;">
-            <option value="ALL">ALL</option>
+            <option value="ALL">전체</option>
             <option value="CNP">CNP</option>
             <option value="CLAB">CLAB</option>
           </select>
@@ -251,7 +251,7 @@
 
         <p style="float:right; margin-right:20px;">
           Download:
-          <%= link_to "Excel", admin_feedback_list_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date, :sex => @sex, :start_age => @start_age, :end_age => @end_age, :select_base => @select_base, :select_ample1 => @select_ample1, :select_ample2 => @select_ample2, :select_interview => @select_interview, :name => @name, :isExcel => true) %>
+          <%= link_to "Excel", admin_feedback_list_cnp_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date, :sex => @sex, :start_age => @start_age, :end_age => @end_age, :select_base => @select_base, :select_ample1 => @select_ample1, :select_ample2 => @select_ample2, :select_interview => @select_interview, :name => @name, :isExcel => true) %>
         </p>
       </div><br><br>
       <div class="form-inline">
@@ -263,7 +263,7 @@
 
         유형 :
         <select class="form-control" id="select_interview">
-          <option value="all">All</option>
+          <option value="all">전체</option>
           <option value="today">당일</option>
           <option value="2weeks_ago">2주 전</option>
           <option value="3months_ago">3개월 전</option>
@@ -271,7 +271,7 @@
 
         베이스제품 :
         <select class="form-control" id="select_base">
-          <option value="all">All</option>
+          <option value="all">전체</option>
           <option value="skin control">스킨 컨트롤 세럼</option>
           <option value="deep humect">딥 휴멕트 세럼</option>
           <option value="rebalencing">리밸런싱 세럼</option>
@@ -279,7 +279,7 @@
 
         앰플 1 :
         <select class="form-control" id="select_ample_1">
-          <option value="all">All</option>
+          <option value="all">전체</option>
           <option value="pore clinic ampoule">포어 클리닉 앰플</option>
           <option value="carming ampoule">카밍 앰플</option>
           <option value="luminus ampoule">루미너스 앰플</option>
@@ -289,7 +289,7 @@
 
         앰플 2 :
         <select class="form-control" id="select_ample_2">
-          <option value="all">All</option>
+          <option value="all">전체</option>
           <option value="pore clinic ampoule">포어 클리닉 앰플</option>
           <option value="carming ampoule">카밍 앰플</option>
           <option value="luminus ampoule">루미너스 앰플</option>
@@ -309,7 +309,7 @@
         나이 :
         <input class="form-control" type="text" id="start_age" style="width:100px;">
         <input class="form-control" type="text" id="end_age" style="width:100px;">
-        <button id="age_init" class="btn btn-primary">ALL</button>
+        <button id="age_init" class="btn btn-primary">전체</button>
 
          <font style="margin-left:10px;">제 3자 정보 제공 동의 고객: </font><input type="checkbox" name="is_agree_thirdparty_info" id="is_agree_thirdparty_info" checked="true">
         <button class="btn btn-warning" id="submit" style="margin-left:10px;">조회</button>

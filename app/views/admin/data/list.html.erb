@@ -278,7 +278,7 @@
       <div class="form-inline">
         분석일 : <input class="form-control" type="text" id="start_date" style="width:100px;">
         <input class="form-control" type="text" id="end_date" style="width:100px;">
-        <button id="date_init" class="btn btn-primary">ALL</button>
+        <button id="date_init" class="btn btn-primary">전체</button>
         <p style="float:right; margin-right:20px;">
           Download:
           <%= link_to "Excel", admin_data_list_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date, :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial, :measureno => @measureno, :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm, :select_channel => @select_channel, :select_mode => @select_mode, :select_makeup => @select_makeup, :select_area => @select_area, :select_skin_type_device => @select_skin_type_device, :select_skin_type_survey => @select_skin_type_survey, :select_senstive => @select_senstive, :select_skin_anxiety2 => @select_skin_anxiety2, :select_filter => @params_filter, :isExcel => true) %>
@@ -297,7 +297,7 @@
 
         성별 :
         <select class="form-control" id="select_sex">
-          <option value="all">All</option>
+          <option value="all">전체</option>
           <option value="F">F</option>
           <option value="M">M</option>
         </select>
@@ -305,21 +305,21 @@
         나이 :
         <input class="form-control" type="text" id="start_age" style="width:100px; margin-top:10px;">
         <input class="form-control" type="text" id="end_age" style="width:100px; margin-top:10px;">
-        <button id="age_init" class="btn btn-primary">ALL</button>
+        <button id="age_init" class="btn btn-primary">전체</button>
 
         연도 :
         <input class="form-control" type="text" id="start_birthyy" style="width:100px; margin-top:10px;">
         <input class="form-control" type="text" id="end_birthyy" style="width:100px; margin-top:10px;">
-        <button id="birthyy_init" class="btn btn-primary">ALL</button>
+        <button id="birthyy_init" class="btn btn-primary">전체</button>
 
         생월 :
         <input class="form-control" type="text" id="start_birthmm" style="width:100px; margin-top:10px;">
         <input class="form-control" type="text" id="end_birthmm" style="width:100px; margin-top:10px;">
-        <button id="birthmm_init" class="btn btn-primary">ALL</button>
+        <button id="birthmm_init" class="btn btn-primary">전체</button>
 
         채널 :
         <select class="form-control" id="select_channel">
-          <option value="all">All</option>
+          <option value="all">전체</option>
           <option value="CNP">CNP</option>
           <option value="MART">마트</option>
           <option value="NC">NC</option>
@@ -331,21 +331,21 @@
       <div class="form-inline">
         모드 :
         <select class="form-control" id="select_mode">
-          <option value="all">All</option>
+          <option value="all">전체</option>
           <option value="F">종합모드</option>
           <option value="T">간편모드</option>
         </select>
 
         메이크업 유무 :
         <select class="form-control" id="select_makeup">
-          <option value="all">All</option>
+          <option value="all">전체</option>
           <option value="1">유</option>
           <option value="2">무</option>
         </select>
 
         측정부위 :
         <select class="form-control" id="select_area">
-          <option value="all">All</option>
+          <option value="all">전체</option>
           <option value="F">전면</option>
           <option value="L">좌</option>
           <option value="R">우</option>
@@ -353,7 +353,7 @@
 
         피부타입(기기) :
         <select class="form-control" id="select_skin_type_device">
-          <option value="all">All</option>
+          <option value="all">전체</option>
           <option value="gunsung">건성</option>
           <option value="jungsung">중성</option>
           <option value="jisung">지성</option>
@@ -363,7 +363,7 @@
 
         피부타입(설문) :
         <select class="form-control" id="select_skin_type_survey">
-          <option value="all">All</option>
+          <option value="all">전체</option>
           <option value="skin_type_gun_boggab">건복합성</option>
           <option value="skin_type_jisung_boghab">지복합성</option>
           <option value="skin_type_boghab">복합성</option>
@@ -374,14 +374,14 @@
 
         민감성 :
         <select class="form-control" id="select_senstive">
-          <option value="all">All</option>
+          <option value="all">전체</option>
           <option value="yes">예</option>
           <option value="no">아니오</option>
         </select>
 
         피부고민1 :
         <select class="form-control" id="select_skin_anxiety1">
-          <option value="all">All</option>
+          <option value="all">전체</option>
           <option value="1">건조</option>
           <option value="2">피지</option>
           <option value="3">모공</option>
@@ -392,7 +392,7 @@
 
         피부고민2 :
         <select class="form-control" id="select_skin_anxiety2">
-          <option value="all">All</option>
+          <option value="all">전체</option>
           <option value="1">건조</option>
           <option value="2">피지</option>
           <option value="3">모공</option>

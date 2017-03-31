@@ -235,7 +235,7 @@
 
   <body>
     <%= render "admin/header" %>
-
+    <h1>CNPR</h1>
     <div id="filter" style="background: #b1cbbb; padding: 8px;">
       <div class="form-inline">
         <p style="float:left; margin-top: 7px;">분석일:&nbsp;</p>
@@ -255,7 +255,7 @@
 
         <p style="float:right; margin-right:20px;">
           Download:
-          <%= link_to "Excel", admin_cnp_interview_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date, :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial, :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm, :select_channel => @select_channel, :select_mode => @select_mode, :select_makeup => @select_makeup, :select_area => @select_area, :select_filter => @params_filter, :isExcel => true) %>
+          <%= link_to "Excel", admin_cnpr_interview_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date, :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial, :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm, :select_channel => @select_channel, :select_mode => @select_mode, :select_makeup => @select_makeup, :select_area => @select_area, :select_filter => @params_filter, :isExcel => true) %>
         </p>
       </div><br><br>
 
