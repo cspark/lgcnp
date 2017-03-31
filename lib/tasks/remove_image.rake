@@ -1,5 +1,5 @@
 namespace :image do
-  task :remove_image=> :environment do
+  task :remove_image=> :staging do
     system("rm -rf public/BEAU")
     system("rm -rf public/CNP")
     system("rm -rf public/CLAB")
