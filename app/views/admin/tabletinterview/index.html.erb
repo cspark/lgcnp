@@ -210,7 +210,11 @@
         url += "&select_filter=" +filterStr;
         url += "&select_shop=" +$("#select_shop").val();
 
-        location.href = url;
+        if (document.getElementById('is_agree_thirdparty_info').checked == false ) {
+          location.href = "/admin/feedback_list_cnp"
+        } else {
+          location.href = url;
+        }
       }
     </script>
     <style>
@@ -278,24 +282,23 @@
         모드 :
         <select class="form-control" id="select_mode">
           <option value="all">전체</option>
-          <option value="total">종합모드</option>
-          <option value="quick">간편모드</option>
-          <option value="survey">설문모드</option>
+          <option value="F">종합모드</option>
+          <option value="T">간편모드</option>
         </select>
 
         메이크업 유무 :
         <select class="form-control" id="select_makeup">
           <option value="all">전체</option>
-          <option value="T">유</option>
-          <option value="F">무</option>
+          <option value="1">유</option>
+          <option value="2">무</option>
         </select>
 
         측정부위 :
         <select class="form-control" id="select_area">
           <option value="all">전체</option>
-          <option value="face">전면</option>
-          <option value="left">좌</option>
-          <option value="right">우</option>
+          <option value="F">전면</option>
+          <option value="L">좌</option>
+          <option value="R">우</option>
         </select>
       </div>
 
