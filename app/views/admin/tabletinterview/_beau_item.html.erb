@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script type="text/javascript" src="../js/jquery.js"></script>
+      <script type="text/javascript" src="../js/bootstrap.js"></script>
+
+      <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+      <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+      <script>
+        $(function () {
+          <% user = Custinfo.where(custserial: interview.custserial).first %>
+          try
+          {
+            var userName = decode_utf8('<%= user.custname %>')
+            tempUserName = ""
+            for(var i = 0; i < userName.length; i++){
+              if(i == 0)
+                tempUserName += userName.slice(0, 1)
+              else if(i == userName.length - 1)
+                tempUserName += userName.slice(userName.length - 1, userName.length)
+              else
+                tempUserName += "*"
+            }
+            $('#name_<%= interview.custserial.to_i %>_<%= interview.ch_cd %>_<%= interview.measureno %>').append(tempUserName);
+          }
+          catch(err)
+          {
+            $('#name_<%= interview.custserial.to_i %>_<%= interview.ch_cd %>_<%= interview.measureno %>').append('<%= user.custname %>');
+          }
+        });
+
+        function decode_utf8(s) {
+          try{
+            return decodeURI(s);
+          }catch(err){
+            console.log(err);
+            return s;
+          }
+        }
+      </script>
+    </head>
+    <body>
+      <% custinfo = Custinfo.where(custserial: interview.custserial).first %>
+      <tr class="table_tr" id="<%= custinfo.custserial.to_i %>/<%= interview.ch_cd %>/<%= interview.measureno %>">
+        <td id="name_<%= interview.custserial.to_i %>_<%= interview.ch_cd %>_<%= interview.measureno %>"></td>
+        <td><%= interview.custserial.to_i %></td>
+        <td><%= interview.ch_cd %></td>
+        <td><%= interview.faceno %></td>
+        <td><%= interview.measuredate %></td>
+        <td><%= interview.measureno %></td>
+        <td><%= interview.uptdate %></td>
+        <td><%= interview.interview_1 %></td>
+        <td><%= interview.interview_2 %></td>
+        <td><%= interview.interview_3 %></td>
+        <td><%= interview.interview_4 %></td>
+        <td><%= interview.interview_5 %></td>
+        <td><%= interview.interview_6 %></td>
+        <td><%= interview.interview_7 %></td>
+        <td><%= interview.interview_8 %></td>
+      </tr>
+
+    </body>
+</html>

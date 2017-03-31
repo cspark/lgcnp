@@ -193,7 +193,7 @@
         var select_area = document.getElementById("select_area").options[document.getElementById("select_area").selectedIndex].value;
 
         url = ""
-        url += "/admin/tabletinterview?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
+        url += "/admin/beau_interview?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
         url += "&select_sex=" + select_sex;
         url += "&start_age=" + document.getElementById("start_age").value;
         url += "&end_age=" + document.getElementById("end_age").value;
@@ -210,7 +210,11 @@
         url += "&select_filter=" +filterStr;
         url += "&select_shop=" +$("#select_shop").val();
 
-        location.href = url;
+        if (document.getElementById('is_agree_thirdparty_info').checked == false) {
+          location.href = "/admin/beau_interview"
+        } else {
+          location.href = url;
+        }
       }
     </script>
     <style>
@@ -218,24 +222,26 @@
       max-height: 280px;
     }
 
-    .text-center {
-        margin: 0 auto;
-        text-align: center !important;
+    .width200 {
+      min-width:200px
     }
 
-    .width170 {
-      min-width:170px
-    }
-
-    .min-width100 {
+    th {
       min-width:100px;
+      margin: 0 auto;
+      text-align: center !important;
+    }
+
+    td {
+      margin: 0 auto;
+      text-align: center !important;
     }
     </style>
   </head>
 
   <body>
     <%= render "admin/header" %>
-    <h1>BEAU</h1>
+
     <div id="filter" style="background: #b1cbbb; padding: 8px;">
       <div class="form-inline">
         <p style="float:left; margin-top: 7px;">분석일:&nbsp;</p>
@@ -246,8 +252,10 @@
         <p style="float:left; margin-left: 20px; margin-top: 5px;">채널:&nbsp;</p>
         <select class="form-control" id="select_channel" style="float:left; margin-left: 5px; width:200px;">
           <option value="ALL">전체</option>
-          <option value="CNP">CNP</option>
-          <option value="CLAB">CLAB</option>
+          <option value="BEAU">BEAU</option>
+          <option value="NC">NC</option>
+          <option value="MART">MART</option>
+          <option value="LABO">LABO</option>
         </select>
 
         <p style="float:left; margin-left: 20px; margin-top: 7px;">매장 코드:&nbsp;</p>
@@ -279,7 +287,6 @@
         <select class="form-control" id="select_mode">
           <option value="all">전체</option>
           <option value="total">종합모드</option>
-          <option value="quick">간편모드</option>
           <option value="makeup">메이크업모드</option>
         </select>
 
@@ -293,9 +300,9 @@
         측정부위 :
         <select class="form-control" id="select_area">
           <option value="all">전체</option>
-          <option value="face">전면</option>
-          <option value="left">좌</option>
-          <option value="right">우</option>
+          <option value="F">전면</option>
+          <option value="L">좌</option>
+          <option value="R">우</option>
         </select>
       </div>
 
@@ -314,13 +321,8 @@
         <input class="form-control" type="text" id="start_birthmm" style="width:100px;">
         <input class="form-control" type="text" id="end_birthmm" style="width:100px;">
         <button id="birthmm_init" class="btn btn-primary">전체</button>
+        <font style="margin-left:10px;">제 3자 정보 제공 동의 고객: </font><input type="checkbox" name="is_agree_thirdparty_info" id="is_agree_thirdparty_info" checked="true">
         <button class="btn btn-warning" id="submit">조회</button>
-      </div>
-    </div>
-
-    <div id="filter" style="background: #b1cbbb; padding: 8px;">
-      <div class="form-inline">
-       필터링 전체 선택: <input type="checkbox" id="all_check">
       </div>
     </div>
 
@@ -331,101 +333,32 @@
     <table data-toggle="table">
       <thead style="width: 100%;">
         <tr>
-            <th class="min-width100">이름</th>
-            <th>시리얼</th>
-            <th class="width170 text-center">진단 날짜</th>
-            <th>채널</th>
-            <% if @select_filter != [] %>
-              <% @select_filter.each do |filter| %>
-                <% if filter.include?("skin_type") %>
-                  <th>피부타입</th>
-                <% elsif filter.include?("before_solution_1") %>
-                  <th>진단으로 나온 솔루션 1</th>
-                <% elsif filter.include?("after_solution_1") %>
-                  <th>최종으로 선택된 솔루션 1</th>
-                <% elsif filter.include?("before_solution_2") %>
-                  <th>진단으로 나온 솔루션 2</th>
-                <% elsif filter.include?("after_solution_2") %>
-                  <th>최종으로 선택된 솔루션 2</th>
-                <% elsif filter.include?("before_serum") %>
-                  <th>진단으로 나온 세럼</th>
-                <% elsif filter.include?("after_serum") %>
-                  <th>최종으로 선택된 세럼</th>
-                <% elsif filter.include?("before_ample_1") %>
-                  <th>진단으로 나온 앰플 1</th>
-                <% elsif filter.include?("after_ample_1") %>
-                  <th>최종으로 선택된 앰플 1</th>
-                <% elsif filter.include?("before_ample_2") %>
-                  <th>진단으로 나온 앰플 2</th>
-                <% elsif filter.include?("after_ample_2") %>
-                  <th>최종으로 선택된 앰플 2</th>
-                <% elsif filter.include?("before_made_cosmetic") %>
-                  <th>진단으로 나온 화장품</th>
-                <% elsif filter.include?("after_made_cosmetic") %>
-                  <th>최종으로 선택된 화장품</th>
-                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
-                  <th>모공 점수</th>
-                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
-                  <th>트러블 점수</th>
-                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
-                  <th>색소침착 점수</th>
-                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
-                  <th>주름 점수</th>
-                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
-                  <th>탄력 점수</th>
-                <% else %>
-                  <th class="text-center"><%= filter %></th>
-                <% end %>
-              <% end %>
-            <% else %>
-              <th>피부타입</th>
-              <th>진단으로 나온 솔루션 1</th>
-              <th>진단으로 나온 솔루션 2</th>
-              <th>최종으로 선택된 솔루션 1</th>
-              <th>최종으로 선택된 솔루션 2</th>
-              <th>진단으로 나온 세럼</th>
-              <th>최종으로 선택된 세럼</th>
-              <th>진단으로 나온 앰플 1</th>
-              <th>최종으로 선택된 앰플 1</th>
-              <th>진단으로 나온 앰플 2</th>
-              <th>최종으로 선택된 앰플 2</th>
-              <th>진단으로 나온 화장품</th>
-              <th>최종으로 선택된 화장품</th>
-              <th>A1</th>
-              <th>A2</th>
-              <th>A3</th>
-              <th>B1</th>
-              <th>B2</th>
-              <th>B3</th>
-              <th>B4</th>
-              <th>C1</th>
-              <th>D1</th>
-              <th>D2</th>
-              <th>D3</th>
-              <th>D4</th>
-              <th>D5</th>
-              <th>D6</th>
-              <th>D7</th>
-              <th>D8</th>
-              <th>D9</th>
-              <th>D10</th>
-              <th>모공 점수</th>
-              <th>트러블 점수</th>
-              <th>색소침착 점수</th>
-              <th>주름 점수</th>
-              <th>탄력 점수</th>
-            <% end %>
+          <th>이름</th>
+          <th>시리얼</th>
+          <th>채널</th>
+          <th>측정 부위</th>
+          <th class="width200">분석 일</th>
+          <th>분석 횟수</th>
+          <th class="width200">업데이트 일</th>
+          <th>설문문항1</th>
+          <th>설문문항2</th>
+          <th>설문문항3</th>
+          <th>설문문항4</th>
+          <th>설문문항5</th>
+          <th>설문문항6</th>
+          <th>설문문항7</th>
+          <th>설문문항8</th>
         </tr>
       </thead>
       <tbody>
-        <% @tabletinterviews.each do |tabletinterview| %>
-          <%= render partial: "admin/tabletinterview/item", locals: { tabletinterview: tabletinterview } %>
+        <% @beau_interviews.each do |interview| %>
+          <%= render partial: "admin/tabletinterview/beau_item", locals: { interview: interview } %>
         <% end %>
       </tbody>
     </table>
 
     <div>
-      <%= paginate @tabletinterviews %>
+      <%= paginate @beau_interviews %>
     </div>
   </body>
 </html>

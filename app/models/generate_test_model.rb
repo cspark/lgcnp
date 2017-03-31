@@ -333,12 +333,12 @@ class GenerateTestModel < ApplicationRecord
     num = 2
     (1..num).each do |i|
        f = Fcinterview.new
-       f.custserial = "7"
-       f.ch_cd = "CNP"
+       f.custserial = "2"
+       f.ch_cd = "BEAU"
        f.faceno = "F"
-       f.measuredate = "2017-02-02-15-00-00"
-       f.measureno = 2
-       f.uptdate = "2017-02-02"
+       f.measuredate = "2017-02-01-15-00-00"
+       f.measureno = 1
+       f.uptdate = "2017-02-01"
        f.interview_1 = "1"
        f.interview_2 = "2"
        f.interview_3 = "1,2"
@@ -349,7 +349,7 @@ class GenerateTestModel < ApplicationRecord
        f.interview_8 = "3"
        f.interview_9 = "4"
        f.interview_10 = "5"
-       f.shop_cd = "1004"
+       f.shop_cd = "505415"
        f.save
        i +=1;
     end
