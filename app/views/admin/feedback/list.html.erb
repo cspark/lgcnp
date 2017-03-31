@@ -151,7 +151,7 @@
         var select_interview = document.getElementById("select_interview").options[document.getElementById("select_interview").selectedIndex].value;
 
         url = ""
-        url += "/admin/feedback_list?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
+        url += "/admin/feedback_list_cnp?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
         url += "&sex=" + select_sex;
         url += "&start_age=" + document.getElementById("start_age").value;
         url += "&end_age=" + document.getElementById("end_age").value;
@@ -169,7 +169,11 @@
           url += "&select_shop=" +$("#select_shop").val();
         }
 
-        location.href = url;
+        if (document.getElementById('is_agree_thirdparty_info').checked == false) {
+          location.href = "/admin/feedback_list_cnp"
+        } else {
+          location.href = url;
+        }
       }
 
       function showDetail(userId, after_interview_id){

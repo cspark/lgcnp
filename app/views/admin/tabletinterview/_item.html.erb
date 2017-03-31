@@ -238,7 +238,15 @@
           <td><%= tabletinterview.d_8.to_i if tabletinterview.d_8.to_i != -1 %></td>
           <td><%= tabletinterview.d_9.to_i if tabletinterview.d_9.to_i != -1 %></td>
           <td><%= tabletinterview.d_10.to_i if tabletinterview.d_10.to_i != -1 %></td>
-          
+          <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
+          <% if !fcdata.nil? %>
+            <% fcdata = fcdata.to_api_hash_for_admin %>
+            <td class="text-center"><%= fcdata[:pr_graph].to_i %></td>
+            <td class="text-center"><%= fcdata[:sb_graph].to_i %></td>
+            <td class="text-center"><%= fcdata[:pp_graph].to_i %></td>
+            <td class="text-center"><%= fcdata[:wr_graph].to_i %></td>
+            <td class="text-center"><%= fcdata[:el_graph].to_i %></td>
+          <% end %>
         <% end %>
       </tr>
 
