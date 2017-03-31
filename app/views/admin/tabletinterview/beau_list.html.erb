@@ -23,6 +23,34 @@
           <% end %>
         <% end %>
 
+        <% if @ch_cd.include?("BEAU") %>
+          $("input:checkbox[value=BEAU]").prop("checked", true);
+        <% else %>
+          $("input:checkbox[value=BEAU]").prop("checked", false);
+        <% end %>
+
+        <% if @ch_cd.include?("NC") %>
+          $("input:checkbox[value=NC]").prop("checked", true);
+        <% else %>
+          $("input:checkbox[value=NC]").prop("checked", false);
+        <% end %>
+
+        <% if @ch_cd.include?("MART") %>
+          $("input:checkbox[value=MART]").prop("checked", true);
+        <% else %>
+          $("input:checkbox[value=MART]").prop("checked", false);
+        <% end %>
+
+        <% if @ch_cd.include?("LABO") %>
+          $("input:checkbox[value=LABO]").prop("checked", true);
+        <% else %>
+          $("input:checkbox[value=LABO]").prop("checked", false);
+        <% end %>
+
+        <% if @ch_cd == "" && @custserial.nil? %>
+          $("input:checkbox[name=check_box]").prop("checked", true);
+        <% end %>
+
             $("#start_date").datepicker({
                     dateFormat: 'yy-mm-dd',
                     dayNamesMin: [
@@ -187,10 +215,15 @@
 
       function load(){
         var select_sex = document.getElementById("select_sex").options[document.getElementById("select_sex").selectedIndex].value;
-        var select_channel = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
         var select_mode = document.getElementById("select_mode").options[document.getElementById("select_mode").selectedIndex].value;
         var select_makeup = document.getElementById("select_makeup").options[document.getElementById("select_makeup").selectedIndex].value;
         var select_area = document.getElementById("select_area").options[document.getElementById("select_area").selectedIndex].value;
+        var select_channel = []
+        $('input:checkbox[name="check_box"]').each(function() {
+            if(this.checked){
+              select_channel.push(this.value)
+            }
+        });
 
         url = ""
         url += "/admin/beau_interview?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
@@ -250,13 +283,14 @@
         <button id="date_init" class="btn btn-primary" style="float:left;">전체</button>
 
         <p style="float:left; margin-left: 20px; margin-top: 5px;">채널:&nbsp;</p>
-        <select class="form-control" id="select_channel" style="float:left; margin-left: 5px; width:200px;">
-          <option value="ALL">전체</option>
-          <option value="BEAU">BEAU</option>
-          <option value="NC">NC</option>
-          <option value="MART">MART</option>
-          <option value="LABO">LABO</option>
-        </select>
+        <p style="float:left; margin-left: 5px; margin-top: 5px;">BEAU&nbsp;</p>
+        <input type="checkbox" name="check_box" value="BEAU" id="BEAU" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">NC&nbsp;</p>
+        <input type="checkbox" name="check_box" value="NC" id="NC" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">MART&nbsp;</p>
+        <input type="checkbox" name="check_box" value="MART" id="MART" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">LABO&nbsp;</p>
+        <input type="checkbox" name="check_box" value="LABO" id="LABO" style="float:left; margin-top:9px;">
 
         <p style="float:left; margin-left: 20px; margin-top: 7px;">매장 코드:&nbsp;</p>
         <input class="form-control" type="text" name="select_shop" id="select_shop" style="float:left; width: 200px;">

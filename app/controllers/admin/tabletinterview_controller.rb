@@ -51,12 +51,17 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       end
     end
 
-    if !Custinfo.where("ch_cd LIKE ?", "%#{@ch_cd}%").where.not(birthyy: nil).order("birthyy desc").first.nil?
-      min_age_custinfo = Custinfo.where("ch_cd LIKE ?", "%#{@ch_cd}%").where.not(birthyy: nil).order("birthyy desc").first
+    @ch_array = []
+    ch_cd.split(",").each do |channel|
+      @ch_array.push(channel)
+    end
+
+    if !Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first.nil?
+      min_age_custinfo = Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first
       @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
       @min_birthyy = min_age_custinfo.birthyy
       @min_birthmm = 1
-      max_age_custinfo = Custinfo.where("ch_cd LIKE ?", "%#{@ch_cd}%").order("birthyy asc").first
+      max_age_custinfo = Custinfo.where(ch_cd: @ch_array).order("birthyy asc").first
       @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
       @max_birthyy = max_age_custinfo.birthyy
       @max_birthmm = 12
@@ -69,7 +74,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       @max_birthmm = 12
     end
 
-
     @tabletinterviews = []
     # if Rails.env.production? || Rails.env.staging?
     is_contain = true
@@ -80,7 +84,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       end
     end
 
-    fcdata_list = Fcdata.where("faceno LIKE ?", "%#{@select_area}%").where("ch_cd LIKE ?", "%#{@ch_cd}%").where("shop_cd LIKE ?", "%#{@shop_cd}%")
+    fcdata_list = Fcdata.where("faceno LIKE ?", "%#{@select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%")
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
     measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
@@ -92,7 +96,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-    scoped = scoped.where("ch_cd LIKE ?", "%#{@ch_cd}%") if !@ch_cd.blank? && @ch_cd != "ALL"
+    scoped = scoped.where(ch_cd: @ch_array) if !@ch_array.blank? && @ch_array != ""
 
 
     if @select_filter == []
@@ -245,12 +249,17 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       end
     end
 
-    if !Custinfo.where("ch_cd LIKE ?", "%#{@ch_cd}%").where.not(birthyy: nil).order("birthyy desc").first.nil?
-      min_age_custinfo = Custinfo.where("ch_cd LIKE ?", "%#{@ch_cd}%").where.not(birthyy: nil).order("birthyy desc").first
+    @ch_array = []
+    ch_cd.split(",").each do |channel|
+      @ch_array.push(channel)
+    end
+
+    if !Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first.nil?
+      min_age_custinfo = Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first
       @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
       @min_birthyy = min_age_custinfo.birthyy
       @min_birthmm = 1
-      max_age_custinfo = Custinfo.where("ch_cd LIKE ?", "%#{@ch_cd}%").order("birthyy asc").first
+      max_age_custinfo = Custinfo.where(ch_cd: @ch_array).order("birthyy asc").first
       @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
       @max_birthyy = max_age_custinfo.birthyy
       @max_birthmm = 12
@@ -268,7 +277,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     # if Rails.env.production? || Rails.env.staging?
     is_contain = true
 
-    fcdata_list = Fcdata.where("faceno LIKE ?", "%#{@select_area}%").where("ch_cd LIKE ?", "%#{@ch_cd}%").where("shop_cd LIKE ?", "%#{@shop_cd}%")
+    fcdata_list = Fcdata.where("faceno LIKE ?", "%#{@select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%")
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
     measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
@@ -280,7 +289,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-    scoped = scoped.where("ch_cd LIKE ?", "%#{@ch_cd}%") if !@ch_cd.blank? && @ch_cd != "ALL"
+    scoped = scoped.where(ch_cd: @ch_array) if !@ch_array.blank? && @ch_array != ""
 
 
     if @select_filter == []

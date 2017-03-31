@@ -23,6 +23,22 @@
           <% end %>
         <% end %>
 
+        <% if @ch_cd.include?("CNP") %>
+          $("input:checkbox[value=CNP]").prop("checked", true);
+        <% else %>
+          $("input:checkbox[value=CNP]").prop("checked", false);
+        <% end %>
+
+        <% if @ch_cd.include?("CLAB") %>
+          $("input:checkbox[value=CLAB]").prop("checked", true);
+        <% else %>
+          $("input:checkbox[value=CLAB]").prop("checked", false);
+        <% end %>
+
+        <% if @ch_cd == "" && @custserial.nil? %>
+          $("input:checkbox[name=check_box]").prop("checked", true);
+        <% end %>
+
             $("#start_date").datepicker({
                     dateFormat: 'yy-mm-dd',
                     dayNamesMin: [
@@ -187,10 +203,15 @@
 
       function load(){
         var select_sex = document.getElementById("select_sex").options[document.getElementById("select_sex").selectedIndex].value;
-        var select_channel = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
         var select_mode = document.getElementById("select_mode").options[document.getElementById("select_mode").selectedIndex].value;
         var select_makeup = document.getElementById("select_makeup").options[document.getElementById("select_makeup").selectedIndex].value;
         var select_area = document.getElementById("select_area").options[document.getElementById("select_area").selectedIndex].value;
+        var select_channel = []
+        $('input:checkbox[name="check_box"]').each(function() {
+            if(this.checked){
+              select_channel.push(this.value)
+            }
+        });
 
         url = ""
         url += "/admin/tabletinterview?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
@@ -215,6 +236,7 @@
         } else {
           location.href = url;
         }
+        console.log(select_filter);
       }
     </script>
     <style>
@@ -248,11 +270,10 @@
         <button id="date_init" class="btn btn-primary" style="float:left;">전체</button>
 
         <p style="float:left; margin-left: 20px; margin-top: 5px;">채널:&nbsp;</p>
-        <select class="form-control" id="select_channel" style="float:left; margin-left: 5px; width:200px;">
-          <option value="ALL">전체</option>
-          <option value="CNP">CNP</option>
-          <option value="CLAB">CLAB</option>
-        </select>
+        <p style="float:left; margin-left: 5px; margin-top: 5px;">CNP&nbsp;</p>
+        <input type="checkbox" name="check_box" value="CNP" id="CNP" style="float:left; margin-top:9px;"/>
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">CLAB&nbsp;</p>
+        <input type="checkbox" name="check_box" value="CLAB" id="CLAB" style="float:left; margin-top:9px;"/>
 
         <p style="float:left; margin-left: 20px; margin-top: 7px;">매장 코드:&nbsp;</p>
         <input class="form-control" type="text" name="select_shop" id="select_shop" style="float:left; width: 200px;">
