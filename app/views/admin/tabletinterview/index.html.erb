@@ -253,13 +253,13 @@
         </select>
 
         <p style="float:left; margin-left: 20px; margin-top: 7px;">매장 코드:&nbsp;</p>
-        <input type="text" name="select_shop" id="select_shop" placeholder="매장 코드로 검색" style="float:left; width: 200px; margin-top:4px;">
+        <input class="form-control" type="text" name="select_shop" id="select_shop" style="float:left; width: 200px;">
 
         <p style="float:right; margin-right:20px;">
           Download:
           <%= link_to "Excel", admin_tabletinterview_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date, :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial, :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm, :select_channel => @select_channel, :select_mode => @select_mode, :select_makeup => @select_makeup, :select_area => @select_area, :select_filter => @params_filter, :isExcel => true) %>
         </p>
-      </div><br>
+      </div><br><br>
 
       <div class="form-inline">
         이름 :
@@ -276,7 +276,7 @@
         </select>
       </div>
 
-      <div class="form-inline">
+      <div class="form-inline" style="margin-top:5px;">
         모드 :
         <select class="form-control" id="select_mode">
           <option value="all">All</option>
@@ -301,7 +301,7 @@
         </select>
       </div>
 
-      <div class="form-inline">
+      <div class="form-inline" style="margin-top:5px;">
         나이 :
         <input class="form-control" type="text" id="start_age" style="width:100px;">
         <input class="form-control" type="text" id="end_age" style="width:100px;">
