@@ -54,14 +54,14 @@
           $('#datepicker').change(function () {
             <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
             <% else %>
-              location.href = "/admin/feedback_list_cnp?date=" + $('#datepicker').val()
+              location.href = "/admin/input_cnp?date=" + $('#datepicker').val()
             <% end %>
           });
 
           $('#submit').click(function(){
             var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
 
-            url = "/admin/feedback_list_cnp?date=" + $('#datepicker').val();
+            url = "/admin/input_cnp?date=" + $('#datepicker').val();
             url += "&select_channel=" +ch_cd
             url += "&select_shop=" +$("#select_shop").val();
             location.href = url;
