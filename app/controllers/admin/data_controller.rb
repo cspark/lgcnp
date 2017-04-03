@@ -9,7 +9,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     Rails.logger.info "!!!!!!!!"
-    Rails.logger.info is_admin_init
+    Rails.logger.info @is_admin_init
 
     @start_date = Date.today
     @end_date = Date.today
