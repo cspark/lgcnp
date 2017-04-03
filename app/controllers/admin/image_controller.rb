@@ -204,7 +204,21 @@ class Admin::ImageController < Admin::AdminApplicationController
 
         zip_path = @path.split("/")[0] +"/"+ @path.split("/")[1]
         generate_tgz(relation: @fcdata, path: @path)
+        if params.has_key?(:is_api)
+          render json: "", status: :ok
+        else
+          respond_to do |format|
+            format.html
+          end
+        end
       rescue
+        if params.has_key?(:is_api)
+          render :text => "Fail!!!", status: 404
+        else
+          respond_to do |format|
+            format.html
+          end
+        end
       end
     else
       serial = "2"
@@ -239,16 +253,6 @@ class Admin::ImageController < Admin::AdminApplicationController
 
       zip_path = @path.split("/")[0] +"/"+ @path.split("/")[1]
       generate_tgz(relation: @fcdata, path: @path)
-    end
-
-    if params.has_key?(:is_api)
-      respond_to do |format|
-        format.json { render json: "", status: :ok }
-      end
-    else
-      respond_to do |format|
-        format.html
-      end
     end
   end
 
