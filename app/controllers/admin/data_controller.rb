@@ -118,7 +118,7 @@ class Admin::DataController < Admin::AdminApplicationController
 
       # scoped = scoped.where(skintype: @select_skin_type_survey) if !@select_skin_type_survey.blank? && @select_skin_type_survey != "all"
 
-      scoped = scoped.order("uptdate desc")
+      scoped = scoped.order("measuredate desc")
 
       scoped.each do |fcdata|
         custinfo = Custinfo.where(custserial: fcdata.custserial).first
