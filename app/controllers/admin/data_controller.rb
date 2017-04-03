@@ -106,11 +106,6 @@ class Admin::DataController < Admin::AdminApplicationController
       end
     end
 
-    @ch_array = []
-    ch_cd.split(",").each do |channel|
-      @ch_array.push(channel)
-    end
-
     @fcdatas = []
     @fcdatas_final = []
     if Rails.env.production? || Rails.env.staging?
@@ -181,12 +176,6 @@ class Admin::DataController < Admin::AdminApplicationController
 
         if !@start_birthmm.blank? && !@end_birthmm.blank?
           if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
-            is_contain = false
-          end
-        end
-
-        if @ch_cd != "all"
-          if custinfo.ch_cd != @ch_cd
             is_contain = false
           end
         end
@@ -446,12 +435,6 @@ class Admin::DataController < Admin::AdminApplicationController
 
         if !@start_birthmm.blank? && !@end_birthmm.blank?
           if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
-            is_contain = false
-          end
-        end
-
-        if @ch_cd != "all"
-          if custinfo.ch_cd != @ch_cd
             is_contain = false
           end
         end
