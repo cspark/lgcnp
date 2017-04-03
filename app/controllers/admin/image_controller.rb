@@ -1,6 +1,5 @@
-class Admin::ImageController < Admin::AdminApplicationController
+class Admin::ImageController < Admin::ApplicationController
   skip_before_action :verify_authenticity_token
-  # before_action :is_admin
 
   def index
     @start_date = "2017-01-01"

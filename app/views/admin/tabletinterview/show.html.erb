@@ -19,6 +19,16 @@
           $('#name_<%= @tabletinterview.custserial.to_i %>').append('<%= user.custname %>');
         }
 
+        // 메모 인코딩
+        try
+        {
+          $('#memo_<%= @tabletinterview.custserial.to_i %>').append( decode_utf8('<%= @tabletinterview.memo %>'));
+        }
+        catch(err)
+        {
+          $('#memo_<%= @tabletinterview.custserial.to_i %>').append('<%= @tabletinterview.memo %>');
+        }
+
         //피부타입 한글로 변경
         $('#skin_type_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').html(translate_skin_type('<%= @tabletinterview.skin_type %>'));
 
@@ -176,8 +186,7 @@
         <% fcdata = fcdata.to_api_hash %>
         [그래프] 모공 점수 : <%= fcdata[:pr_graph].to_i %> / 트러블 점수 : <%= fcdata[:sb_graph].to_i %> / 색소침착 점수 : <%= fcdata[:pp_graph].to_i %> / 주름 점수 : <%= fcdata[:wr_graph].to_i %> / 탄력 점수 : <%= fcdata[:el_graph].to_i %>
       <% end %>
-      <font size="2">메모: </font><br>
-      <%= @tabletinterview.memo %>
+      <font size="2">메모: <div id="memo_<%= @tabletinterview.custserial.to_i %>"></div></font><br>
     </div>
   </body>
 </html>
