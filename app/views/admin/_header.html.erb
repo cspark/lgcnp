@@ -51,8 +51,16 @@
           location.href = "/admin/fcavg_list"
         });
 
-        $("#fcdata_list").click(function(){
-          location.href = "/admin/data_list"
+        $("#fcdata_list_cnp").click(function(){
+          location.href = "/admin/data_list_cnp"
+        });
+
+        $("#fcdata_list_cnpr").click(function(){
+          location.href = "/admin/data_list_cnpr"
+        });
+
+        $("#fcdata_list_beau").click(function(){
+          location.href = "/admin/data_list_beau"
         });
 
         $("#fcpos_list").click(function(){
@@ -170,7 +178,13 @@
               </div>
             </li>
             <li id="fcavg_list"><a href="#">연령별 성별 평균</a></li>
-            <li id="fcdata_list"><a href="#">야누스 측정 데이터</a></li>
+            <li class="dropdown dropbtn"><a href="#">야누스 측정 데이터</a>
+              <div class="dropdown-content">
+                <a id="fcdata_list_cnp" href="#">CNP</a>
+                <a id="fcdata_list_cnpr" href="#">CNPR</a>
+                <a id="fcdata_list_beau" href="#">보떼</a>
+              </div>
+            </li>
             <li id="fcpos_list"><a href="#">야누스 분석 영역 정보</a></li>
             <li id="image_list"><a href="#">고객 이미지</a></li>
           <% end %>

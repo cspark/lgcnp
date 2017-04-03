@@ -1,4 +1,4 @@
-class Admin::ImageController < Admin::ApplicationController
+class Admin::ImageController < Admin::AdminApplicationController
   skip_before_action :verify_authenticity_token
 
   def index

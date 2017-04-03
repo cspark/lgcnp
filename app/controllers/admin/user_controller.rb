@@ -6,7 +6,6 @@ class Admin::UserController < Admin::AdminApplicationController
   before_action :is_admin
 
   def index
-    @is_admin_init = false
     @count = 0
     if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin")
       ch_cd = ""
@@ -16,6 +15,7 @@ class Admin::UserController < Admin::AdminApplicationController
       shop_cd = session[:admin_user]['shop_cd']
     end
 
+    @is_admin_init = false
     if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && !params.has_key?(:select_channel)
       @is_admin_init = true
     end

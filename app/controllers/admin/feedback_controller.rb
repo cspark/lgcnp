@@ -309,7 +309,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @date_3months_ago = (@date - 3.months).strftime("%F")
 
     @is_admin_init = false
-    if session[:admin_user]['role'] == "admin" || session[:admin_user] == "user" && (!params.has_key?(:select_channel) && !params.has_key?(:select_shop))
+    if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && !params.has_key?(:select_channel)
       @is_admin_init = true
     end
 
