@@ -174,6 +174,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @shop_cd = shop_cd
     custserial = ""
     custserial = params[:custserial] if !params[:custserial].blank?
+    @custserial = custserial
 
     if ch_cd == ""
       fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("custserial LIKE ?", "%#{custserial}%")

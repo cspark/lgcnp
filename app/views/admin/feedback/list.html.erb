@@ -17,6 +17,10 @@
           $('select[id="select_channel"]').val('<%= @ch_cd %>');
         <% end %>
 
+        <% if @custserial != "" %>
+          document.getElementById("custserial").value = '<%= @custserial %>'
+        <% end %>
+
         <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
           <% if !@shop_cd.nil? && @shop_cd != "" && %>
             document.getElementById("select_shop").value = '<%= @shop_cd %>'
@@ -254,7 +258,9 @@
 
         <p style="float:right; margin-right:20px;">
           Download:
-          <%= link_to "Excel", admin_feedback_list_cnp_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date, :sex => @sex, :start_age => @start_age, :end_age => @end_age, :select_base => @select_base, :select_ample1 => @select_ample1, :select_ample2 => @select_ample2, :select_interview => @select_interview, :name => @name, :isExcel => true) %>
+          <%= link_to "Excel", admin_feedback_list_cnp_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date, :sex => @sex, :start_age => @start_age, :end_age => @end_age,
+          :select_base => @select_base, :select_ample1 => @select_ample1, :select_ample2 => @select_ample2, :select_interview => @select_interview,
+          :name => @name, :custserial => @custserial, :isExcel => true, :select_channel => @ch_cd, :select_shop => @shop_cd,) %>
         </p>
       </div><br><br>
       <div class="form-inline">
