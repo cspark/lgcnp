@@ -84,7 +84,7 @@ class Admin::ImageController < Admin::AdminApplicationController
   end
 
   def show
-    serial = params[:userId]
+    serial = params[:custserial]
     measureno = params[:measureno]
     ch_cd = params[:ch_cd]
 
