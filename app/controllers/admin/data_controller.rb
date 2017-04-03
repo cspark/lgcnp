@@ -230,7 +230,7 @@ class Admin::DataController < Admin::AdminApplicationController
 
       @count = @fcdatas_final.count
       @fcdatas_excel = @fcdatas_final
-      @fcdatas_final = Kaminari.paginate_array(@fcdatas_final).page(params[:page]).per(3)
+      @fcdatas = Kaminari.paginate_array(@fcdatas_final).page(params[:page]).per(3)
     else
       if @select_filter == []
         @fcdatas = Fcdata.all
@@ -489,7 +489,7 @@ class Admin::DataController < Admin::AdminApplicationController
 
       @count = @fcdatas_final.count
       @fcdatas_excel = @fcdatas_final
-      @fcdatas_final = Kaminari.paginate_array(@fcdatas_final).page(params[:page]).per(3)
+      @fcdatas = Kaminari.paginate_array(@fcdatas_final).page(params[:page]).per(3)
     else
       if @select_filter == []
         @fcdatas = Fcdata.all
