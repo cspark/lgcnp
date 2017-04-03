@@ -4,9 +4,9 @@ class Admin::AdminApplicationController < ActionController::Base
 
   protected
 
-  def is_admin
-    if session[:admin_user] == nil
-      redirect_to '/admin/admin_login'
-    end
-  end
+  # def is_admin
+  #   if session[:admin_user] == nil
+  #     redirect_to '/admin/admin_login'
+  #   end
+  # end
 end
