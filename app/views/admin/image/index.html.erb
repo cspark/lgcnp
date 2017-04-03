@@ -102,7 +102,7 @@
           var userId = $(this).attr('id').split("/")[0]
           var ch_cd = $(this).attr('id').split("/")[1]
           var measureno = $(this).attr('id').split("/")[2]
-          window.open("/admin/image/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno, "/admin/data/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno, "scrollbars=1,resizable=1,height=800,width=900");
+          window.open("/admin/image/detail?custserial=" +userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno, "/admin/data/detail?custserial=" +userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno, "scrollbars=1,resizable=1,height=800,width=900");
         });
       });
 

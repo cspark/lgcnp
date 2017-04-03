@@ -13,6 +13,10 @@
     <script>
       var filterStr = "";
       $(function () {
+        <% if @custserial != "" %>
+          document.getElementById("custserial").value = '<%= @custserial %>'
+        <% end %>
+
         <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
           <% if !@shop_cd.nil? && @shop_cd != "" && %>
             document.getElementById("select_shop").value = '<%= @shop_cd %>'
@@ -191,13 +195,9 @@
             window.open("/admin/tabletinterview/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&fcdata_id=" +fcdata_id, "/users/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&fcdata_id=" +fcdata_id, "scrollbars=1,resizable=1,height=600,width=600");
           });
 
-          $("input:checkbox[id='all_check']").prop("checked", true);
-          $(document).on("click", "#all_check", function (e) {
-          if (!$("input:checkbox[id='all_check']").is(":checked")){
+          $('#filter-btn').click(function(){
             window.open("/admin/tabletinterview/filter_check", "/admin/tabletinterview/filter_check", "scrollbars=1,resizable=1,height=650,width=530");
-          } else {
-            filterStr = ""
-          }
+          });
         });
       });
       function selectFilter(select_filter){
