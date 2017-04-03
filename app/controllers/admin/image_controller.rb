@@ -205,9 +205,15 @@ class Admin::ImageController < Admin::AdminApplicationController
         zip_path = @path.split("/")[0] +"/"+ @path.split("/")[1]
         generate_tgz(relation: @fcdata, path: @path)
 
-        render json: "", status: :ok
+        respond_to do |format|
+          format.html # show.html.erb
+          format.json { render json: "", status: :ok }
+        end
       rescue
-        render :text => "Error", status: 404
+        respond_to do |format|
+          format.html # show.html.erb
+          format.json { render :text => "Error", status: 404 }
+        end
       end
     else
       serial = "2"
