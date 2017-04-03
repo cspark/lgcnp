@@ -228,8 +228,9 @@ class Admin::DataController < Admin::AdminApplicationController
         end
       end
 
+      @count = @fcdatas_final.count
       @fcdatas_excel = @fcdatas_final
-      @fcdatas = Kaminari.paginate_array(@fcdatas_final).page(params[:page]).per(3)
+      @fcdatas_final = Kaminari.paginate_array(@fcdatas_final).page(params[:page]).per(3)
     else
       if @select_filter == []
         @fcdatas = Fcdata.all
@@ -246,12 +247,11 @@ class Admin::DataController < Admin::AdminApplicationController
           @excel_name << filter
         end
       end
+      @count = @fcdatas
       @fcdatas_excel = @fcdatas
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
     end
 
-    Rails.logger.info @fcdatas_final.count
-    @count = @fcdatas_final.count
     respond_to do |format|
       format.html
       format.xlsx
@@ -487,8 +487,9 @@ class Admin::DataController < Admin::AdminApplicationController
         end
       end
 
+      @count = @fcdatas_final.count
       @fcdatas_excel = @fcdatas_final
-      @fcdatas = Kaminari.paginate_array(@fcdatas_final).page(params[:page]).per(3)
+      @fcdatas_final = Kaminari.paginate_array(@fcdatas_final).page(params[:page]).per(3)
     else
       if @select_filter == []
         @fcdatas = Fcdata.all
@@ -505,11 +506,11 @@ class Admin::DataController < Admin::AdminApplicationController
           @excel_name << filter
         end
       end
+      @count = @fcdatas.count
       @fcdatas_excel = @fcdatas
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
     end
 
-    @count = @fcdatas_final.count
     respond_to do |format|
       format.html
       format.xlsx
