@@ -16,7 +16,7 @@ class Admin::UserController < Admin::AdminApplicationController
       shop_cd = session[:admin_user]['shop_cd']
     end
 
-    if session[:admin_user]['role'] == "admin" || session[:admin_user] == "user" && (!params.has_key?(:search) && !params.has_key?(:select_channel) && !params.has_key?(:select_shop))
+    if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && !params.has_key?(:select_channel)
       @is_admin_init = true
     end
 
