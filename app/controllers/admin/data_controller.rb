@@ -3,6 +3,11 @@ class Admin::DataController < Admin::AdminApplicationController
   before_action :is_admin
 
   def list
+    @is_admin_init = false
+    if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && !params.has_key?(:select_channel)
+      @is_admin_init = true
+    end
+
     @start_date = Date.today
     @end_date = Date.today
     @today = Date.today
@@ -19,7 +24,6 @@ class Admin::DataController < Admin::AdminApplicationController
     end_birthyy = params[:end_birthyy]
     start_birthmm = params[:start_birthmm]
     end_birthmm = params[:end_birthmm]
-    select_channel = params[:select_channel]
     select_mode = params[:select_mode]
     select_makeup = params[:select_makeup]
     select_area = params[:select_area]
@@ -42,7 +46,6 @@ class Admin::DataController < Admin::AdminApplicationController
     @end_birthyy = end_birthyy
     @start_birthmm = start_birthmm
     @end_birthmm = end_birthmm
-    @select_channel = select_channel
     @select_mode = select_mode
     @select_makeup = select_makeup
     @select_area = select_area
@@ -59,14 +62,35 @@ class Admin::DataController < Admin::AdminApplicationController
       end
     end
 
-    min_age_custinfo = Custinfo.where(ch_cd: "CNP").where.not(birthyy: nil).order("birthyy desc").first
-    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
-    @min_birthyy = min_age_custinfo.birthyy
-    @min_birthmm = 1
-    max_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy asc").first
-    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
-    @max_birthyy = max_age_custinfo.birthyy
-    @max_birthmm = 12
+    ch_cd = ""
+    shop_cd = ""
+    ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
+    shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
+    @ch_cd = ch_cd
+    @shop_cd = shop_cd
+
+    @ch_array = []
+    ch_cd.split(",").each do |channel|
+      @ch_array.push(channel)
+    end
+
+    if !Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first.nil?
+      min_age_custinfo = Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first
+      @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
+      @min_birthyy = min_age_custinfo.birthyy
+      @min_birthmm = 1
+      max_age_custinfo = Custinfo.where(ch_cd: @ch_array).order("birthyy asc").first
+      @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
+      @max_birthyy = max_age_custinfo.birthyy
+      @max_birthmm = 12
+    else
+      @min_age = 14
+      @min_birthyy = 2005
+      @min_birthmm = 1
+      @max_age = 50
+      @max_birthyy = 1968
+      @max_birthmm = 12
+    end
 
     if !@select_skin_type_device.blank? && @select_skin_type_device != "all"
       if @select_skin_type_device == "gunsung"
@@ -82,10 +106,15 @@ class Admin::DataController < Admin::AdminApplicationController
       end
     end
 
+    @ch_array = []
+    ch_cd.split(",").each do |channel|
+      @ch_array.push(channel)
+    end
+
     @fcdatas = []
     @fcdatas_final = []
     if Rails.env.production? || Rails.env.staging?
-      scoped = Fcdata.all
+      scoped = Fcdata.where(ch_cd: @ch_array)
       temp_end_date = @end_date.to_date + 1.day
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
@@ -155,8 +184,8 @@ class Admin::DataController < Admin::AdminApplicationController
           end
         end
 
-        if @select_channel != "all"
-          if custinfo.ch_cd != @select_channel
+        if @ch_cd != "all"
+          if custinfo.ch_cd != @ch_cd
             is_contain = false
           end
         end
@@ -231,6 +260,7 @@ class Admin::DataController < Admin::AdminApplicationController
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
     end
 
+    @count = @fcdatas.count
     respond_to do |format|
       format.html
       format.xlsx
@@ -241,7 +271,12 @@ class Admin::DataController < Admin::AdminApplicationController
     @fcdata = Fcdata.where(custserial: params[:userId]).where(measureno: params[:measureno]).first
   end
 
-  def cnpr_list
+  def beau_list
+    @is_admin_init = false
+    if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && !params.has_key?(:select_channel)
+      @is_admin_init = true
+    end
+
     @start_date = Date.today
     @end_date = Date.today
     @today = Date.today
@@ -258,7 +293,6 @@ class Admin::DataController < Admin::AdminApplicationController
     end_birthyy = params[:end_birthyy]
     start_birthmm = params[:start_birthmm]
     end_birthmm = params[:end_birthmm]
-    select_channel = params[:select_channel]
     select_mode = params[:select_mode]
     select_makeup = params[:select_makeup]
     select_area = params[:select_area]
@@ -281,7 +315,6 @@ class Admin::DataController < Admin::AdminApplicationController
     @end_birthyy = end_birthyy
     @start_birthmm = start_birthmm
     @end_birthmm = end_birthmm
-    @select_channel = select_channel
     @select_mode = select_mode
     @select_makeup = select_makeup
     @select_area = select_area
@@ -298,14 +331,35 @@ class Admin::DataController < Admin::AdminApplicationController
       end
     end
 
-    min_age_custinfo = Custinfo.where(ch_cd: "CNP").where.not(birthyy: nil).order("birthyy desc").first
-    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
-    @min_birthyy = min_age_custinfo.birthyy
-    @min_birthmm = 1
-    max_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy asc").first
-    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
-    @max_birthyy = max_age_custinfo.birthyy
-    @max_birthmm = 12
+    ch_cd = ""
+    shop_cd = ""
+    ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
+    shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
+    @ch_cd = ch_cd
+    @shop_cd = shop_cd
+
+    @ch_array = []
+    ch_cd.split(",").each do |channel|
+      @ch_array.push(channel)
+    end
+
+    if !Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first.nil?
+      min_age_custinfo = Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first
+      @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
+      @min_birthyy = min_age_custinfo.birthyy
+      @min_birthmm = 1
+      max_age_custinfo = Custinfo.where(ch_cd: @ch_array).order("birthyy asc").first
+      @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
+      @max_birthyy = max_age_custinfo.birthyy
+      @max_birthmm = 12
+    else
+      @min_age = 14
+      @min_birthyy = 2005
+      @min_birthmm = 1
+      @max_age = 50
+      @max_birthyy = 1968
+      @max_birthmm = 12
+    end
 
     if !@select_skin_type_device.blank? && @select_skin_type_device != "all"
       if @select_skin_type_device == "gunsung"
@@ -324,7 +378,7 @@ class Admin::DataController < Admin::AdminApplicationController
     @fcdatas = []
     @fcdatas_final = []
     if Rails.env.production? || Rails.env.staging?
-      scoped = Fcdata.all
+      scoped = Fcdata.where(ch_cd: @ch_array)
       temp_end_date = @end_date.to_date + 1.day
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
@@ -394,8 +448,8 @@ class Admin::DataController < Admin::AdminApplicationController
           end
         end
 
-        if @select_channel != "all"
-          if custinfo.ch_cd != @select_channel
+        if @ch_cd != "all"
+          if custinfo.ch_cd != @ch_cd
             is_contain = false
           end
         end
@@ -474,8 +528,5 @@ class Admin::DataController < Admin::AdminApplicationController
       format.html
       format.xlsx
     end
-  end
-
-  def beau_list
   end
 end

@@ -119,6 +119,9 @@ class AdminFcdata < ApplicationRecord
 
   def self.image_combine(relation: nil, path: nil, type: nil)
     Rails.logger.info "image_combine!!!"
+    Rails.logger.info relation
+    Rails.logger.info path
+    Rails.logger.info type
     Rails.logger.info File.exist?("public/"+relation.ch_cd+"/"+path+type+"merge.jpg")
     if !File.exist?("public/"+relation.ch_cd+"/"+path+type+"merge.jpg")
       image_list = Magick::ImageList.new

@@ -186,7 +186,9 @@
         <% fcdata = fcdata.to_api_hash %>
         [그래프] 모공 점수 : <%= fcdata[:pr_graph].to_i %> / 트러블 점수 : <%= fcdata[:sb_graph].to_i %> / 색소침착 점수 : <%= fcdata[:pp_graph].to_i %> / 주름 점수 : <%= fcdata[:wr_graph].to_i %> / 탄력 점수 : <%= fcdata[:el_graph].to_i %>
       <% end %>
-      <font size="2">메모: <div id="memo_<%= @tabletinterview.custserial.to_i %>"></div></font><br>
+
+      <font size="2">메모: </font><br>
+      <div id="memo_<%= @tabletinterview.custserial.to_i %>"></div>
     </div>
   </body>
 </html>

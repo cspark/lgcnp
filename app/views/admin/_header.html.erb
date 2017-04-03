@@ -55,9 +55,9 @@
           location.href = "/admin/data_list_cnp"
         });
 
-        $("#fcdata_list_cnpr").click(function(){
-          location.href = "/admin/data_list_cnpr"
-        });
+        // $("#fcdata_list_cnpr").click(function(){
+        //   location.href = "/admin/data_list_cnpr"
+        // });
 
         $("#fcdata_list_beau").click(function(){
           location.href = "/admin/data_list_beau"
@@ -172,9 +172,9 @@
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
             <li class="dropdown dropbtn"><a href="#">고객 인터뷰</a>
               <div class="dropdown-content">
-                <a id="cnp_interview" href="#">CNP 인터뷰</a>
-                <a id="cnpr_interview" href="#">CNPR 인터뷰</a>
-                <a id="beau_interview" href="#">보떼 인터뷰</a>
+                <a id="cnp_interview" href="#">CNP</a>
+                <a id="cnpr_interview" href="#">CNPR</a>
+                <a id="beau_interview" href="#">보떼</a>
               </div>
             </li>
             <li id="fcavg_list"><a href="#">연령별 성별 평균</a></li>

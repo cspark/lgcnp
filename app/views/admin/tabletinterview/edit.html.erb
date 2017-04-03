@@ -19,6 +19,16 @@
           $('#name_<%= @tabletinterview.custserial.to_i %>').append('<%= user.custname %>');
         }
 
+        // 메모 인코딩
+        try
+        {
+          $('#memo_<%= @tabletinterview.custserial.to_i %>').append( decode_utf8('<%= @tabletinterview.memo %>'));
+        }
+        catch(err)
+        {
+          $('#memo_<%= @tabletinterview.custserial.to_i %>').append('<%= @tabletinterview.memo %>');
+        }
+
         //피부타입 한글로 변경
         $('#skin_type_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>').html(translate_skin_type('<%= @tabletinterview.skin_type %>'));
 
@@ -51,7 +61,8 @@
           var ch_cd = $(this).attr('id').split("/")[1]
           var fcdata_id = $(this).attr('id').split("/")[2]
 
-          var memo = $('#memo').val();
+          var memo = $('#memo_<%= @tabletinterview.custserial.to_i %>').val();
+          console.log(memo);
           var formData = new FormData($(this)[0]);
           formData.append("memo", memo);
           formData.append("ch_cd", ch_cd);
@@ -76,6 +87,11 @@
           });
         });
       });
+
+      function encode_utf8(s)
+      {
+         return unescape( encodeURIComponent( s ) );
+      }
 
       function decode_utf8(s) {
         return decodeURI(s);
@@ -195,7 +211,7 @@
       D1: <%= @tabletinterview.d_1.to_i %> / D2: <%= @tabletinterview.d_2.to_i %> / D3: <%= @tabletinterview.d_3.to_i %> / D4: <%= @tabletinterview.d_4.to_i %> / D5: <%= @tabletinterview.d_5.to_i %><br>
       D6: <%= @tabletinterview.d_6.to_i %> / D7: <%= @tabletinterview.d_7.to_i %> / D8: <%= @tabletinterview.d_8.to_i %> / D9: <%= @tabletinterview.d_9.to_i %><br>
       <font size="2">메모: </font><br>
-      <textarea type="textarea" name="memo" class="ckeditor" id="memo" style="width:83%;" placeholder="메모를 적어주세요"></textarea>
+        <textarea id="memo_<%= @tabletinterview.custserial.to_i %>" style="width:90%"></textarea>
     </div><br>
     <center>
       <button id="<%= @tabletinterview.custserial %>/<%= @tabletinterview.ch_cd %>/<%= @tabletinterview.fcdata_id %>" class="btn btn-warning update-tablet">저장</button>

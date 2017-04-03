@@ -40,7 +40,7 @@
         <font size="4">
           <div style="border: 1px solid darkgrey; width:100%; height:700px;">
             <div style="width:100%; height:30px;">
-              <b><font size="6">동안각도L</font></b>
+              <b><font size="6">동안각도 왼쪽</font></b>
             </div>
             <div style="width:100%; height:40px;">
               <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>Sym_L_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
@@ -61,7 +61,7 @@
 
           <div style="border: 1px solid darkgrey; width:100%; height:700px;">
             <div style="width:100%; height:30px;">
-              <b><font size="6">동안각도R</font></b>
+              <b><font size="6">동안각도 오른쪽</font></b>
             </div>
             <div style="width:100%; height:40px;">
               <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>Sym_R_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
@@ -124,7 +124,7 @@
 
           <div style="border: 1px solid darkgrey; width:100%; height:700px;">
             <div style="width:100%; height:30px;">
-              <b><font size="6">모공 pwc</font></b>
+              <b><font size="6">모공 추출 이미지</font></b>
             </div>
             <div style="width:100%; height:40px;">
               <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_PWC_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
@@ -166,7 +166,7 @@
 
           <div style="border: 1px solid darkgrey; width:100%; height:700px;">
             <div style="width:100%; height:30px;">
-              <b><font size="6">트러블 SBC</font></b>
+              <b><font size="6">트러블 추출 이미지</font></b>
             </div>
             <div style="width:100%; height:40px;">
               <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UVGR_SBC_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
@@ -208,7 +208,7 @@
 
           <div style="border: 1px solid darkgrey; width:100%; height:700px;">
             <div style="width:100%; height:30px;">
-              <b><font size="6">색소침착 편광</font></b>
+              <b><font size="6">색소침착 편광 추출 이미지</font></b>
             </div>
             <div style="width:100%; height:40px;">
               <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_PLC_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
@@ -229,7 +229,7 @@
 
           <div style="border: 1px solid darkgrey; width:100%; height:700px;">
             <div style="width:100%; height:30px;">
-              <b><font size="6">색소침착 편광+자외선</font></b>
+              <b><font size="6">색소침착 자외선 추출 이미지</font></b>
             </div>
             <div style="width:100%; height:40px;">
               <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UVGR_UVC_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
@@ -250,10 +250,10 @@
 
           <div style="border: 1px solid darkgrey; width:100%; height:700px;">
             <div style="width:100%; height:30px;">
-              <b><font size="6">색소침착 자외선</font></b>
+              <b><font size="6">색소침착 편광+자외선 추출 이미지</font></b>
             </div>
             <div style="width:100%; height:40px;">
-              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_UVC_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
+              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_UVC_merge.jpg' download><button class="btn btn-custom-2" style="float: right; margin-right:100px;display: inline; cursor: pointer;">다운로드</button></a>
             </div>
             <div style="float:left; width:50%;">
               <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_PL_UVC_1.jpg" style="float: right; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
@@ -271,24 +271,47 @@
 
           <div style="width:100%; height:700px;">
             <div style="float:left; width:100%;">
+              <center><b><font size="6">주름 추출 이미지</font></b></center>
+              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_PWC_W.jpg' download>
+                <button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button>
+              </a>
               <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_PWC_W.jpg" style="float:right; width:100%; margin-top: 10px; cursor: pointer;"></img>
-              <b><font size="6">주름</font></b>
             </div><br>
             <div style="float:left; width:100%;">
+              <b><font size="6">탄력 각도 추출 이미지</font></b>
+              <center>
+                <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_E.jpg' download>
+                  <button class="btn btn-custom-2" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button>
+                </a>
+              </center>
               <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_E.jpg" style="float: left; width:100%; margin-top: 10px; cursor: pointer;"></img>
-              <b><font size="6">탄력</font></b>
             </div>
             <div style="float:left; width:32%;">
+              <b><font size="6">모공 추출 이미지</font></b>
               <img src="/<%= @fcdata.ch_cd %>/<%= @path %>Sp_Pore_Cust.jpg" style="float: left; margin-top: 10px; cursor: pointer; "></img><br>
-              <b><font size="6">모공 이미지</font></b>
+              <center>
+                <a href='/<%= @fcdata.ch_cd %>/<%= @path %>Sp_Pore_Cust.jpg' download>
+                  <button class="btn btn-custom-2" style="display: inline; cursor: pointer;">다운로드</button>
+                </a>
+              </center>
             </div>
             <div style="float:left; width:32%; margin-left:10px;">
+              <b><font size="6">색소침착 추출 이미지</font></b>
               <img src="/<%= @fcdata.ch_cd %>/<%= @path %>Sp_Spot_Cust.jpg" style="float: left; margin-top: 10px; cursor: pointer;"></img><br>
-              <b><font size="6">색소침착</font></b>
+              <center>
+                <a href='/<%= @fcdata.ch_cd %>/<%= @path %>Sp_Spot_Cust.jpg' download>
+                  <button class="btn btn-custom-2" style="display: inline; cursor: pointer;">다운로드</button>
+                </a>
+              </center>
             </div>
             <div style="float:left; width:32%; margin-left:10px;">
+              <b><font size="6">주름 추출 이미지</font></b>
               <img src="/<%= @fcdata.ch_cd %>/<%= @path %>Sp_Wr_Cust.jpg" style="float: left; margin-top: 10px; cursor: pointer;"></img><br>
-              <b><font size="6">주름</font></b>
+              <center>
+                <a href='/<%= @fcdata.ch_cd %>/<%= @path %>Sp_Wr_Cust.jpg' download>
+                  <button class="btn btn-custom-2" style="display: inline; cursor: pointer;">다운로드</button>
+                </a>
+              </center>
             </div>
           </div>
 

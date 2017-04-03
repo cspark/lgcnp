@@ -192,7 +192,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
   def update
     fctabletinterview = Fctabletinterview.where(custserial: params[:id], ch_cd: params[:ch_cd], fcdata_id: params[:fcdata_id]).first
-    fctabletinterview.update(permitted_params)
+    fctabletinterview.memo = URI.encode(params[:memo])
+
     if fctabletinterview.save
       render json: {}, status: :ok
     else

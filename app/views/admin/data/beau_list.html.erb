@@ -16,16 +16,28 @@
     <script>
       var filterStr = "";
       $(function () {
-          <% if @ch_cd.include?("CNP") %>
-            $("input:checkbox[value=CNP]").prop("checked", true);
+          <% if @ch_cd.include?("BEAU") %>
+            $("input:checkbox[value=BEAU]").prop("checked", true);
           <% else %>
-            $("input:checkbox[value=CNP]").prop("checked", false);
+            $("input:checkbox[value=BEAU]").prop("checked", false);
           <% end %>
 
-          <% if @ch_cd.include?("CLAB") %>
-            $("input:checkbox[value=CLAB]").prop("checked", true);
+          <% if @ch_cd.include?("NC") %>
+            $("input:checkbox[value=NC]").prop("checked", true);
           <% else %>
-            $("input:checkbox[value=CLAB]").prop("checked", false);
+            $("input:checkbox[value=NC]").prop("checked", false);
+          <% end %>
+
+          <% if @ch_cd.include?("MART") %>
+            $("input:checkbox[value=MART]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=MART]").prop("checked", false);
+          <% end %>
+
+          <% if @ch_cd.include?("LABO") %>
+            $("input:checkbox[value=LABO]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=LABO]").prop("checked", false);
           <% end %>
 
           <% if @ch_cd == "" && @custserial.nil? %>
@@ -91,10 +103,6 @@
 
         $("#start_date").datepicker('setDate', '2017-01-25');
         $("#end_date").datepicker('setDate', '<%= @end_date %>');
-
-        <% if !@shop_cd.nil? && @shop_cd != "" && %>
-          document.getElementById("select_shop").value = '<%= @shop_cd %>'
-        <% end %>
 
         <% if !@name.nil? %>
           document.getElementById("name").value = decode_utf8('<%= @name %>')
@@ -222,7 +230,7 @@
         });
 
         url = ""
-        url += "/admin/data_list_cnp?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
+        url += "/admin/data_list_beau?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
         url += "&select_sex=" + select_sex;
         url += "&start_age=" + document.getElementById("start_age").value;
         url += "&end_age=" + document.getElementById("end_age").value;
@@ -243,8 +251,8 @@
         url += "&select_skin_anxiety2=" + select_skin_anxiety2;
         url += "&select_filter=" +filterStr
 
-        if (document.getElementById('is_agree_thirdparty_info').checked == false ) {
-          location.href = "/admin/data_list_cnp"
+        if (document.getElementById('is_agree_thirdparty_info').checked == false) {
+          location.href = "/admin/data_list_beau"
         } else {
           location.href = url;
         }
@@ -296,20 +304,25 @@
   <body>
     <%= render "admin/header" %>
     <div id="filter" style="background: #b1cbbb; padding: 8px;">
-      <div class="form-inline">
+        <div class="form-inline">
         <p style="float:left; margin-top: 7px;">분석일:&nbsp;</p>
         <input class="form-control" type="text" id="start_date" style="float:left; width:100px;">
         <input class="form-control" type="text" id="end_date" style="float:left; width:100px;">
         <button id="date_init" class="btn btn-primary" style="float:left;">전체</button>
 
         <p style="float:left; margin-left: 20px; margin-top: 5px;">채널:&nbsp;</p>
-        <p style="float:left; margin-left: 5px; margin-top: 5px;">CNP&nbsp;</p>
-        <input type="checkbox" name="check_box" value="CNP" id="CNP" style="float:left; margin-top:9px;"/>
-        <p style="float:left; margin-left: 10px; margin-top: 5px;">CLAB&nbsp;</p>
-        <input type="checkbox" name="check_box" value="CLAB" id="CLAB" style="float:left; margin-top:9px;"/>
+        <p style="float:left; margin-left: 5px; margin-top: 5px;">BEAU&nbsp;</p>
+        <input type="checkbox" name="check_box" value="BEAU" id="BEAU" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">NC&nbsp;</p>
+        <input type="checkbox" name="check_box" value="NC" id="NC" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">MART&nbsp;</p>
+        <input type="checkbox" name="check_box" value="MART" id="MART" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">LABO&nbsp;</p>
+        <input type="checkbox" name="check_box" value="LABO" id="LABO" style="float:left; margin-top:9px;">
 
         <p style="float:left; margin-left: 20px; margin-top: 7px;">매장 코드:&nbsp;</p>
         <input class="form-control" type="text" name="select_shop" id="select_shop" style="float:left; width: 200px;">
+
         <p style="float:right; margin-right:20px;">
           Download:
           <%= link_to "Excel", admin_data_list_cnp_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
