@@ -8,9 +8,6 @@ class Admin::DataController < Admin::AdminApplicationController
       @is_admin_init = true
     end
 
-    Rails.logger.info "!!!!!!!!"
-    Rails.logger.info @is_admin_init
-
     @start_date = Date.today
     @end_date = Date.today
     @today = Date.today
@@ -76,8 +73,6 @@ class Admin::DataController < Admin::AdminApplicationController
     ch_cd.split(",").each do |channel|
       @ch_array.push(channel)
     end
-
-    Rails.logger.info @ch_array
 
     if !Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first.nil?
       min_age_custinfo = Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first
@@ -266,8 +261,8 @@ class Admin::DataController < Admin::AdminApplicationController
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
     end
 
-    Rails.logger.info @fcdatas.count
-    @count = @fcdatas.count
+    Rails.logger.info @fcdatas_final.count
+    @count = @fcdatas_final.count
     respond_to do |format|
       format.html
       format.xlsx
@@ -531,6 +526,7 @@ class Admin::DataController < Admin::AdminApplicationController
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
     end
 
+    @count = @fcdatas_final.count
     respond_to do |format|
       format.html
       format.xlsx
