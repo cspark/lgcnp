@@ -1,6 +1,6 @@
 class Admin::ImageController < Admin::AdminApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :is_admin
+  # before_action :is_admin
 
   def index
     @start_date = "2017-01-01"
@@ -204,6 +204,8 @@ class Admin::ImageController < Admin::AdminApplicationController
 
         zip_path = @path.split("/")[0] +"/"+ @path.split("/")[1]
         generate_tgz(relation: @fcdata, path: @path)
+
+        Rails.logger.info params[:is_api]
         if params.has_key?(:is_api)
           render json: "", status: :ok
         else
