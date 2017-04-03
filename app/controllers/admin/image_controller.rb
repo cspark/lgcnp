@@ -241,9 +241,14 @@ class Admin::ImageController < Admin::AdminApplicationController
       generate_tgz(relation: @fcdata, path: @path)
     end
 
-    respond_to do |format|
-      format.html
-      format.json { render json: "", status: :ok }
+    if params.has_key?(:is_api)
+      respond_to do |format|
+        format.json { render json: "", status: :ok }
+      end
+    else
+      respond_to do |format|
+        format.html
+      end
     end
   end
 
