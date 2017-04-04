@@ -106,6 +106,45 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     else
       @excel_name = ["이름","시리얼","진단 날짜","채널"]
       @select_filter.each do |filter|
+        if filter.include?("skin_type")
+          filter = "피부타입"
+        elsif filter.include?("before_solution_1")
+          filter = "진단으로 나온 솔루션 1"
+        elsif filter.include?("after_solution_1")
+          filter = "최종으로 선택된 솔루션 1"
+        elsif filter.include?("before_solution_2")
+          filter = "진단으로 나온 솔루션 2"
+        elsif filter.include?("after_solution_2")
+          filter = "최종으로 선택된 솔루션 2"
+        elsif filter.include?("before_serum")
+          filter = "진단으로 나온 세럼"
+        elsif filter.include?("after_serum")
+          filter = "최종으로 선택된 세럼"
+        elsif filter.include?("before_ample_1")
+          filter = "진단으로 나온 앰플 1"
+        elsif filter.include?("after_ample_1")
+          filter = "최종으로 선택된 앰플 1"
+        elsif filter.include?("before_ample_2")
+          filter = "진단으로 나온 앰플 2"
+        elsif filter.include?("after_ample_2")
+          filter = "최종으로 선택된 앰플 2"
+        elsif filter.include?("before_made_cosmetic")
+          filter = "진단으로 나온 화장품"
+        elsif filter.include?("after_made_cosmetic")
+          filter = "최종으로 선택된 화장품"
+        elsif filter.include?("pr_graph")
+          filter = "모공 점수"
+        elsif filter.include?("sb_graph")
+          filter = "트러블 점수"
+        elsif filter.include?("pp_graph")
+          filter = "색소침착 점수"
+        elsif filter.include?("wr_graph")
+          filter = "주름 점수"
+        elsif filter.include?("el_graph")
+          filter = "탄력 점수"
+        else
+          filter = filter
+        end
         @excel_name << filter
       end
     end

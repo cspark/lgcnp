@@ -232,7 +232,45 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
         temp = [URI.decode(custinfo.custname), tabletinterview.custserial.to_i, tabletinterview.uptdate, custinfo.ch_cd]
         if @select_filter != []
           @select_filter.each do |filter|
-            temp << tabletinterview[filter].to_s
+            if filter.include?("skin_type")
+              temp << skin_type
+            elsif filter.include?("before_solution_1")
+              temp << before_solution_1
+            elsif filter.include?("after_solution_1")
+              temp << after_solution_1
+            elsif filter.include?("before_solution_2")
+              temp << before_solution_2
+            elsif filter.include?("after_solution_2")
+              temp << after_solution_2
+            elsif filter.include?("before_serum")
+              temp << before_serum
+            elsif filter.include?("after_serum")
+              temp << after_serum
+            elsif filter.include?("before_ample_1")
+              temp << before_ample_1
+            elsif filter.include?("after_ample_1")
+              temp << after_ample_1
+            elsif filter.include?("before_ample_2")
+              temp << before_ample_2
+            elsif filter.include?("after_ample_2")
+              temp << after_ample_2
+            elsif filter.include?("before_made_cosmetic")
+              temp << before_made_cosmetic
+            elsif filter.include?("after_made_cosmetic")
+              temp << after_made_cosmetic
+            elsif filter.include?("pr_graph")
+              temp << fcdata[:pr_graph].to_i
+            elsif filter.include?("sb_graph")
+              temp << fcdata[:sb_graph].to_i
+            elsif filter.include?("pp_graph")
+              temp << fcdata[:pp_graph].to_i
+            elsif filter.include?("wr_graph")
+              temp << fcdata[:wr_graph].to_i
+            elsif filter.include?("el_graph")
+              temp << fcdata[:el_graph].to_i
+            else
+              temp << tabletinterview[filter].to_s
+            end
           end
           sheet.add_row temp
         else
