@@ -37,13 +37,8 @@
         window.open("/admin/fcpos/detail?userId=" +userId+ "&measureno=" +measureno, "/admin/fcpos/detail?userId=" +userId+ "&measureno=" +measureno, "scrollbars=1,resizable=1,height=600,width=600");
       });
 
-      $("input:checkbox[id='all_check']").prop("checked", true);
-      $(document).on("click", "#all_check", function (e) {
-        if (!$("input:checkbox[id='all_check']").is(":checked")){
-          window.open("/admin/fcpos/filter_check", "/admin/fcpos/filter_check", "scrollbars=1,resizable=1,height=650,width=500");
-        } else {
-          filterStr = ""
-        }
+      $('#filter-btn').click(function(){
+        window.open("/admin/fcpos/filter_check", "/admin/fcpos/filter_check", "scrollbars=1,resizable=1,height=650,width=500");
       });
 
       $('#submit').click(function(){
@@ -130,8 +125,10 @@
         Download:
         <%= link_to "Excel", admin_fcpos_list_path(format: "xlsx", :search => @search, :select_filter => @params_filter, :isExcel => true) %>
       </p><br>
-      <div class="form-inline" style="border: 1px solid #b1cbbb;">
-       필터링 전체 선택: <input type="checkbox" id="all_check">
+      <div style="background: #b1cbbb; padding: 8px;">
+        <div class="form-inline">
+        <button id="filter-btn" class="btn btn-primary">필터링 선택</button>
+        </div>
       </div>
     </div>
 
