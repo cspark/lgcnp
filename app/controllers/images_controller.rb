@@ -4,7 +4,7 @@ class ImagesController < ApplicationController
     custserial = params[:custserial]
     ch_cd = params[:ch_cd]
     measureno = params[:measureno].to_i
-    number = params[:number].to_i
+    number = params[:number]
     type = params[:type]
 
     # custserial = "839"
@@ -52,7 +52,7 @@ class ImagesController < ApplicationController
     file_name << private_folder_name
     file_name << "_"
     file_name << type
-    if number != 0
+    if number.to_i != 0
       file_name << "_"
       file_name << number
     end
@@ -153,7 +153,7 @@ class ImagesController < ApplicationController
     file_path << measureno.to_i.to_s
     file_path << "_"
     file_path << type
-    if number != 0
+    if number.to_i != 0
       file_path << "_"
       file_path << number.to_s
     end
