@@ -391,15 +391,15 @@
                   <th>진단으로 나온 화장품</th>
                 <% elsif filter.include?("after_made_cosmetic") %>
                   <th>최종으로 선택된 화장품</th>
-                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+                <% elsif filter.include?("pr_graph")  %>
                   <th>모공 점수</th>
-                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+                <% elsif filter.include?("sb_graph")  %>
                   <th>트러블 점수</th>
-                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+                <% elsif filter.include?("pp_graph")  %>
                   <th>색소침착 점수</th>
-                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+                <% elsif filter.include?("wr_graph")  %>
                   <th>주름 점수</th>
-                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+                <% elsif filter.include?("el_graph")  %>
                   <th>탄력 점수</th>
                 <% else %>
                   <th class="text-center"><%= filter %></th>
