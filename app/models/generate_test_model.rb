@@ -192,6 +192,8 @@ class GenerateTestModel < ApplicationRecord
        f.score_l = 1
        f.m_skintype = 1
        f.shop_cd = "59100"
+       worry_skin_1 = 1
+       worry_skin_2 = 2
        f.save
        i +=1;
     end
