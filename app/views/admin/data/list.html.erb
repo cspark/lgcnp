@@ -101,84 +101,84 @@
           <% end %>
 
           // 피부고민1
-          <% if @select_skin_anxiety1.include?(1) %>
+          <% if @select_skin_anxiety1_array.include?(1) %>
             $("input:checkbox[id=select_skin_anxiety1_1]").prop("checked", true);
           <% else %>
             $("input:checkbox[id=select_skin_anxiety1_1]").prop("checked", false);
           <% end %>
 
-          <% if @select_skin_anxiety1.include?(2) %>
+          <% if @select_skin_anxiety1_array.include?(2) %>
             $("input:checkbox[id=select_skin_anxiety1_2]").prop("checked", true);
           <% else %>
             $("input:checkbox[id=select_skin_anxiety1_2]").prop("checked", false);
           <% end %>
 
-          <% if @select_skin_anxiety1.include?(3) %>
+          <% if @select_skin_anxiety1_array.include?(3) %>
             $("input:checkbox[id=select_skin_anxiety1_3]").prop("checked", true);
           <% else %>
             $("input:checkbox[id=select_skin_anxiety1_3]").prop("checked", false);
           <% end %>
 
-          <% if @select_skin_anxiety1.include?(4) %>
+          <% if @select_skin_anxiety1_array.include?(4) %>
             $("input:checkbox[id=select_skin_anxiety1_4]").prop("checked", true);
           <% else %>
             $("input:checkbox[id=select_skin_anxiety1_4]").prop("checked", false);
           <% end %>
 
-          <% if @select_skin_anxiety1.include?(5) %>
+          <% if @select_skin_anxiety1_array.include?(5) %>
             $("input:checkbox[id=select_skin_anxiety1_5]").prop("checked", true);
           <% else %>
             $("input:checkbox[id=select_skin_anxiety1_5]").prop("checked", false);
           <% end %>
 
-          <% if @select_skin_anxiety1.include?(6) %>
+          <% if @select_skin_anxiety1_array.include?(6) %>
             $("input:checkbox[id=select_skin_anxiety1_6]").prop("checked", true);
           <% else %>
             $("input:checkbox[id=select_skin_anxiety1_6]").prop("checked", false);
           <% end %>
 
-          <% if @select_skin_anxiety1 == [] && @custserial.nil? %>
+          <% if @select_skin_anxiety1_array == [] && @custserial.nil? %>
             $("input:checkbox[name=select_skin_anxiety1]").prop("checked", true);
           <% end %>
 
           // 피부고민2
-          <% if @select_skin_anxiety2.include?(1) %>
+          <% if @select_skin_anxiety2_array.include?(1) %>
             $("input:checkbox[id=select_skin_anxiety2_1]").prop("checked", true);
           <% else %>
             $("input:checkbox[id=select_skin_anxiety2_1]").prop("checked", false);
           <% end %>
 
-          <% if @select_skin_anxiety2.include?(2) %>
+          <% if @select_skin_anxiety2_array.include?(2) %>
             $("input:checkbox[id=select_skin_anxiety2_2]").prop("checked", true);
           <% else %>
             $("input:checkbox[id=select_skin_anxiety2_2]").prop("checked", false);
           <% end %>
 
-          <% if @select_skin_anxiety2.include?(3) %>
+          <% if @select_skin_anxiety2_array.include?(3) %>
             $("input:checkbox[id=select_skin_anxiety2_3]").prop("checked", true);
           <% else %>
             $("input:checkbox[id=select_skin_anxiety2_3]").prop("checked", false);
           <% end %>
 
-          <% if @select_skin_anxiety2.include?(4) %>
+          <% if @select_skin_anxiety2_array.include?(4) %>
             $("input:checkbox[id=select_skin_anxiety2_4]").prop("checked", true);
           <% else %>
             $("input:checkbox[id=select_skin_anxiety2_4]").prop("checked", false);
           <% end %>
 
-          <% if @select_skin_anxiety2.include?(5) %>
+          <% if @select_skin_anxiety2_array.include?(5) %>
             $("input:checkbox[id=select_skin_anxiety2_5]").prop("checked", true);
           <% else %>
             $("input:checkbox[id=select_skin_anxiety2_5]").prop("checked", false);
           <% end %>
 
-          <% if @select_skin_anxiety2.include?(6) %>
+          <% if @select_skin_anxiety2_array.include?(6) %>
             $("input:checkbox[id=select_skin_anxiety2_6]").prop("checked", true);
           <% else %>
             $("input:checkbox[id=select_skin_anxiety2_6]").prop("checked", false);
           <% end %>
 
-          <% if @select_skin_anxiety2 == [] && @custserial.nil? %>
+          <% if @select_skin_anxiety2_array == [] && @custserial.nil? %>
             $("input:checkbox[name=select_skin_anxiety2]").prop("checked", true);
           <% end %>
 
@@ -475,7 +475,7 @@
           :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
           :select_mode => @select_mode, :select_makeup => @select_makeup, :select_area => @select_area,
           :select_skin_type_device => @select_skin_type_device, :select_skin_type_survey => @select_skin_type_survey, :select_senstive => @select_senstive,
-          :select_skin_anxiety2 => @select_skin_anxiety2, :select_filter => @params_filter, :select_channel => @ch_cd, :select_shop => @shop_cd, :isExcel => true) %>
+          :select_skin_anxiety1 => @select_skin_anxiety1, :select_skin_anxiety2 => @select_skin_anxiety2, :select_filter => @params_filter, :select_channel => @ch_cd, :select_shop => @shop_cd, :isExcel => true) %>
         </p>
       </div><br><br>
 
@@ -623,7 +623,201 @@
             <th class="width100 text-center">업데이트 일</th>
             <% if @select_filter != [] %>
               <% @select_filter.each do |filter| %>
-                <th class="text-center"><%= filter %></th>
+                <% if filter.include?("mo_1") %>
+                  <th>수분 측정1</th>
+                <% elsif filter.include?("mo_7") %>
+                  <th>수분 측정7</th>
+                <% elsif filter.include?("mo_8") %>
+                  <th>수분 측정7</th>
+                <% elsif filter.include?("pr_1") %>
+                  <th>모공 측정1</th>
+                <% elsif filter.include?("pr_2") %>
+                  <th>모공 측정2</th>
+                <% elsif filter.include?("pr_7") %>
+                  <th>모공 측정7</th>
+                <% elsif filter.include?("pr_8") %>
+                  <th>모공 측정8</th>
+                <% elsif filter.include?("pr_avr") %>
+                  <th>모공 측정avr</th>
+                <% elsif filter.include?("wr_3") %>
+                  <th>주름 측정3</th>
+                <% elsif filter.include?("wr_4") %>
+                  <th>주름 측정4</th>
+                <% elsif filter.include?("wr_6") %>
+                  <th>주름 측정6</th>
+                <% elsif filter.include?("wr_avr") %>
+                  <th>수분 측정avr</th>
+                <% elsif filter.include?("el_7") %>
+                  <th>탄력 측정7</th>
+                <% elsif filter.include?("el_8") %>
+                  <th>탄력 측정8</th>
+                <% elsif filter.include?("el_avr") %>
+                  <th>탄력 측정avr</th>
+                <% elsif filter.include?("el_angle_7") %>
+                  <th>탄력 각도7</th>
+                <% elsif filter.include?("el_angle_8") %>
+                  <th>탄력 각도8</th>
+                <% elsif filter.include?("sb_1") %>
+                  <th>피지 측정1</th>
+                <% elsif filter.include?("sb_2") %>
+                  <th>피지 측정2</th>
+                <% elsif filter.include?("sb_7") %>
+                  <th>피지 측정7</th>
+                <% elsif filter.include?("sb_8") %>
+                  <th>피지 측정8</th>
+                <% elsif filter.include?("sb_avr") %>
+                  <th>피지 측정avr</th>
+                <% elsif filter.include?("pp_1") %>
+                  <th>포피린 측정1</th>
+                <% elsif filter.include?("pp_2") %>
+                  <th>포피린 측정2</th>
+                <% elsif filter.include?("pp_7") %>
+                  <th>포피린 측정7</th>
+                <% elsif filter.include?("pp_8") %>
+                  <th>포피린 측정8</th>
+                <% elsif filter.include?("pp_avr") %>
+                  <th>포피린 측정avr</th>
+                <% elsif filter.include?("pp_ratio_1") %>
+                  <th>포피린 비 측정1</th>
+                <% elsif filter.include?("pp_ratio_2") %>
+                  <th>포피린 비 측정2</th>
+                <% elsif filter.include?("pp_ratio_7") %>
+                  <th>포피린 비 측정7</th>
+                <% elsif filter.include?("pp_ratio_8") %>
+                  <th>포피린 비 측정8</th>
+                <% elsif filter.include?("pp_ratio_avr") %>
+                  <th>포피린 비 측정avr</th>
+                <% elsif filter.include?("sp_pl_1") %>
+                  <th>편광 색소침착 측정1</th>
+                <% elsif filter.include?("sp_pl_2") %>
+                  <th>편광 색소침착 측정2</th>
+                <% elsif filter.include?("sp_pl_3") %>
+                  <th>편광 색소침착 측정3</th>
+                <% elsif filter.include?("sp_pl_4") %>
+                  <th>편광 색소침착 측정4</th>
+                <% elsif filter.include?("sp_pl_5") %>
+                  <th>편광 색소침착 측정5</th>
+                <% elsif filter.include?("sp_pl_6") %>
+                  <th>편광 색소침착 측정6</th>
+                <% elsif filter.include?("sp_pl_7") %>
+                  <th>편광 색소침착 측정7</th>
+                <% elsif filter.include?("sp_pl_8") %>
+                  <th>편광 색소침착 측정8</th>
+                <% elsif filter.include?("sp_pl_avr") %>
+                  <th>편광 색소침착 측정avr</th>
+                <% elsif filter.include?("sp_uv_1") %>
+                  <th>UV광 색소침착 측정1</th>
+                <% elsif filter.include?("sp_uv_2") %>
+                  <th>UV광 색소침착 측정2</th>
+                <% elsif filter.include?("sp_uv_3") %>
+                  <th>UV광 색소침착 측정3</th>
+                <% elsif filter.include?("sp_uv_4") %>
+                  <th>UV광 색소침착 측정4</th>
+                <% elsif filter.include?("sp_uv_5") %>
+                  <th>UV광 색소침착 측정5</th>
+                <% elsif filter.include?("sp_uv_6") %>
+                  <th>UV광 색소침착 측정6</th>
+                <% elsif filter.include?("sp_uv_7") %>
+                  <th>UV광 색소침착 측정7</th>
+                <% elsif filter.include?("sp_uv_8") %>
+                  <th>UV광 색소침착 측정8</th>
+                <% elsif filter.include?("sp_uv_avr") %>
+                  <th>UV광 색소침착 측정avr</th>
+                <% elsif filter.include?("sk_c_1") %>
+                  <th>피부톤 측정1</th>
+                <% elsif filter.include?("sk_c_2") %>
+                  <th>피부톤 측정2</th>
+                <% elsif filter.include?("sk_c_3") %>
+                  <th>피부톤 측정3</th>
+                <% elsif filter.include?("sk_c_4") %>
+                  <th>피부톤 측정4</th>
+                <% elsif filter.include?("sk_c_5") %>
+                  <th>피부톤 측정5</th>
+                <% elsif filter.include?("sk_c_6") %>
+                  <th>피부톤 측정6</th>
+                <% elsif filter.include?("sk_c_7") %>
+                  <th>피부톤 측정7</th>
+                <% elsif filter.include?("sk_c_8") %>
+                  <th>피부톤 측정8</th>
+                <% elsif filter.include?("sk_c_avr") %>
+                  <th>피부톤 측정avr</th>
+                <% elsif filter.include?("sk_r_1") %>
+                  <th>피부톤 Red1</th>
+                <% elsif filter.include?("sk_r_2") %>
+                  <th>피부톤 Red2</th>
+                <% elsif filter.include?("sk_r_3") %>
+                  <th>피부톤 Red3</th>
+                <% elsif filter.include?("sk_r_4") %>
+                  <th>피부톤 Red4</th>
+                <% elsif filter.include?("sk_r_5") %>
+                  <th>피부톤 Red5</th>
+                <% elsif filter.include?("sk_r_6") %>
+                  <th>피부톤 Red6</th>
+                <% elsif filter.include?("sk_r_7") %>
+                  <th>피부톤 Red7</th>
+                <% elsif filter.include?("sk_r_8") %>
+                  <th>피부톤 Red8</th>
+                <% elsif filter.include?("sk_r_avr") %>
+                  <th>피부톤 Red_avr</th>
+                <% elsif filter.include?("sk_g_1") %>
+                  <th>피부톤 Green1</th>
+                <% elsif filter.include?("sk_g_2") %>
+                  <th>피부톤 Green2</th>
+                <% elsif filter.include?("sk_g_3") %>
+                  <th>피부톤 Green3</th>
+                <% elsif filter.include?("sk_g_4") %>
+                  <th>피부톤 Green4</th>
+                <% elsif filter.include?("sk_g_5") %>
+                  <th>피부톤 Green5</th>
+                <% elsif filter.include?("sk_g_6") %>
+                  <th>피부톤 Green6</th>
+                <% elsif filter.include?("sk_g_7") %>
+                  <th>피부톤 Green7</th>
+                <% elsif filter.include?("sk_g_8") %>
+                  <th>피부톤 Green8</th>
+                <% elsif filter.include?("sk_g_avr") %>
+                  <th>피부톤 Green_avr</th>
+                <% elsif filter.include?("sk_b_1") %>
+                  <th>피부톤 Blue1</th>
+                <% elsif filter.include?("sk_b_2") %>
+                  <th>피부톤 Blue2</th>
+                <% elsif filter.include?("sk_b_3") %>
+                  <th>피부톤 Blue3</th>
+                <% elsif filter.include?("sk_b_4") %>
+                  <th>피부톤 Blue4</th>
+                <% elsif filter.include?("sk_b_5") %>
+                  <th>피부톤 Blue5</th>
+                <% elsif filter.include?("sk_b_6") %>
+                  <th>피부톤 Blue6</th>
+                <% elsif filter.include?("sk_b_7") %>
+                  <th>피부톤 Blue7</th>
+                <% elsif filter.include?("sk_b_8") %>
+                  <th>피부톤 Blue8</th>
+                <% elsif filter.include?("sk_b_avr") %>
+                  <th>피부톤 Blue_avr</th>
+                <% elsif filter.include?("lab_l") %>
+                  <th>Lab L</th>
+                <% elsif filter.include?("lab_a") %>
+                  <th>Lab a</th>
+                <% elsif filter.include?("lab_b") %>
+                  <th>Lab b</th>
+                <% elsif filter.include?("e_sebum_t") %>
+                  <th>피부타입 기준 값 (T 존)</th>
+                <% elsif filter.include?("e_sebum_u") %>
+                  <th>피부타입 기준 값 (U 존)</th>
+                <% elsif filter.include?("colortype") %>
+                  <th>피부톤 칼라 타입</th>
+                <% elsif filter.include?("suntype") %>
+                  <th>선 민감도</th>
+                <% elsif filter.include?("score_r") %>
+                  <th>동안각도 점수 우측</th>
+                <% elsif filter.include?("score_l") %>
+                  <th>동안각도 점수 좌측</th>
+                <% elsif filter.include?("skintype") %>
+                  <th>피부타입</th>
+                <% else %>
+                  <th class="text-center"><%= filter %></th>
+                <% end %>
               <% end %>
             <% else %>
               <th>수분 측정1</th>
@@ -703,6 +897,11 @@
               <th>피부톤 Blue6</th>
               <th>피부톤 Blue7</th>
               <th>피부톤 Blue8</th>
+              <th>Lab L</th>
+              <th>Lab a</th>
+              <th>Lab b</th>
+              <th>피부타입 기준 값 (T 존)</th>
+              <th>피부타입 기준 값 (U 존)</th>
               <th>피부톤 Blue_avr</th>
               <th>피부톤 칼라 타입</th>
               <th>선 민감도</th>
@@ -710,7 +909,6 @@
               <th>동안각도 점수 좌측</th>
               <th>피부타입</th>
             <% end %>
-
         </tr>
       </thead>
       <tbody>
