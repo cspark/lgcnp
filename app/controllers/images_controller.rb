@@ -5,6 +5,7 @@ class ImagesController < ApplicationController
     ch_cd = params[:ch_cd]
     measureno = params[:measureno].to_i
     number = params[:number].to_i
+    type = params[:type]
 
     # custserial = "839"
     # ch_cd = "CNP"
