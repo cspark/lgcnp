@@ -4,8 +4,7 @@ class ImagesController < ApplicationController
     custserial = params[:custserial]
     ch_cd = params[:ch_cd]
     measureno = params[:measureno].to_i
-    number = params[:number]
-    type = params[:type]
+    number = params[:number].to_i
 
     # custserial = "839"
     # ch_cd = "CNP"
@@ -52,8 +51,10 @@ class ImagesController < ApplicationController
     file_name << private_folder_name
     file_name << "_"
     file_name << type
-    file_name << "_"
-    file_name << number
+    if number != 0
+      file_name << "_"
+      file_name << number
+    end
     file_extension = "jpg"
 
     uploader = ImageUploader.new
@@ -151,8 +152,10 @@ class ImagesController < ApplicationController
     file_path << measureno.to_i.to_s
     file_path << "_"
     file_path << type
-    file_path << "_"
-    file_path << number.to_s
+    if number != 0
+      file_path << "_"
+      file_path << number.to_s
+    end
     file_path << ".jpg"
 
     ftp_path << custserial.to_i.to_s
