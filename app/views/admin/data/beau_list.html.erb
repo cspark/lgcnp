@@ -22,10 +22,10 @@
             $("input:checkbox[value=BEAU]").prop("checked", false);
           <% end %>
 
-          <% if @ch_cd.include?("NC") %>
-            $("input:checkbox[value=NC]").prop("checked", true);
+          <% if @ch_cd.include?("TMR") %>
+            $("input:checkbox[value=TMR]").prop("checked", true);
           <% else %>
-            $("input:checkbox[value=NC]").prop("checked", false);
+            $("input:checkbox[value=TMR]").prop("checked", false);
           <% end %>
 
           <% if @ch_cd.include?("MART") %>
@@ -468,7 +468,7 @@
         <p style="float:left; margin-left: 5px; margin-top: 5px;">BEAU&nbsp;</p>
         <input type="checkbox" name="check_box" value="BEAU" id="BEAU" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">NC&nbsp;</p>
-        <input type="checkbox" name="check_box" value="NC" id="NC" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="check_box" value="TMR" id="TMR" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">MART&nbsp;</p>
         <input type="checkbox" name="check_box" value="MART" id="MART" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">LABO&nbsp;</p>
