@@ -143,18 +143,18 @@ class Admin::DataController < Admin::AdminApplicationController
       end
     end
 
-    if @select_skin_anxiety1_array.blank?
+    if @select_skin_anxiety1_array.blank? || @skin_type_survey_array.blank?
       serial_array = Fctabletinterview.where(before_solution_1: ["!!"]).pluck(:custserial).uniq
     else
-      serial_array = Fctabletinterview.where(before_solution_1: @select_skin_anxiety1_array).pluck(:custserial).uniq
+      serial_array = Fctabletinterview.where(before_solution_1: @select_skin_anxiety1_array).where(skin_type: @skin_type_survey_array).pluck(:custserial).uniq
     end
 
-    if @select_skin_anxiety2_array.blank?
+    if @select_skin_anxiety2_array.blank? || @skin_type_survey_array.blank?
       serial_array2 = Fctabletinterview.where(before_solution_2: ["!!"]).pluck(:custserial).uniq
     else
-      serial_array2 = Fctabletinterview.where(before_solution_2: @select_skin_anxiety2_array).pluck(:custserial).uniq
+      serial_array2 = Fctabletinterview.where(before_solution_2: @select_skin_anxiety2_array).where(skin_type: @skin_type_survey_array).pluck(:custserial).uniq
     end
-    serial_array = (serial_array + serial_array2).uniq
+    serial_array = serial_array & serial_array2
 
     @fcdatas = []
     @fcdatas_final = []
@@ -430,10 +430,6 @@ class Admin::DataController < Admin::AdminApplicationController
 
       if !fctabletinterview.nil?
         if !fctabletinterview.skin_type.nil?
-          if !@skin_type_survey_array.include?(fctabletinterview.skin_type)
-            is_contain = false
-          end
-
           if @select_senstive != "all" && @select_senstive == "yes"
             if !fctabletinterview.skin_type.include?("senstive")
               is_contain = false
@@ -1059,7 +1055,7 @@ class Admin::DataController < Admin::AdminApplicationController
     else
       serial_array2 = Fctabletinterview.where(before_solution_2: @select_skin_anxiety2_array).pluck(:custserial).uniq
     end
-    serial_array = (serial_array + serial_array2).uniq
+    serial_array = serial_array & serial_array2
 
     @fcdatas = []
     @fcdatas_final = []

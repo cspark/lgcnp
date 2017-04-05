@@ -12,6 +12,7 @@ class Admin::ImageController < Admin::AdminApplicationController
     measureno = params[:measureno]
     select_channel = params[:select_channel]
     shop_cd = params[:shop_cd]
+    custserial = params[:custserial]
 
     @start_date = start_date if !start_date.blank?
     @end_date = end_date  if !end_date.blank?
@@ -20,6 +21,7 @@ class Admin::ImageController < Admin::AdminApplicationController
     @select_channel = select_channel if select_channel != "all"
     @shop_cd = shop_cd if !shop_cd.blank?
     @name = name if !name.blank?
+    @custserial = custserial
 
     @fcdatas = []
     if Rails.env.production? || Rails.env.staging?
@@ -29,6 +31,7 @@ class Admin::ImageController < Admin::AdminApplicationController
       scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
       scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank?
       scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
+      scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
       scoped = scoped.order("uptdate desc")
 
       scoped.each do |fcdata|
@@ -53,6 +56,7 @@ class Admin::ImageController < Admin::AdminApplicationController
       scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
       scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank?
       scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
+      scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
       scoped = scoped.order("uptdate desc")
 
       @name = URI.decode(@name) if !@name.blank?

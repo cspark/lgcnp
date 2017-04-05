@@ -405,11 +405,7 @@
         url += "&select_skin_anxiety2=" + select_skin_anxiety2;
         url += "&select_filter=" +filterStr
 
-        if (document.getElementById('is_agree_thirdparty_info').checked == false) {
-          location.href = "/admin/data_list_beau"
-        } else {
-          location.href = url;
-        }
+        location.href = url;
       }
 
       function decode_utf8(s) {
@@ -599,7 +595,6 @@
         <input class="form-control" type="text" id="end_birthmm" style="width:100px;">
         <button id="birthmm_init" class="btn btn-primary">전체</button>
 
-        <font style="margin-left:10px;">제 3자 정보 제공 동의 고객: </font><input type="checkbox" name="is_agree_thirdparty_info" id="is_agree_thirdparty_info" checked="true">
         <button class="btn btn-warning" id="submit">조회</button>
       </div>
     </div>

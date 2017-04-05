@@ -89,6 +89,10 @@
           document.getElementById("measureno").value = '<%= @measureno %>'
         <% end %>
 
+        <% if !@custserial.nil? %>
+          document.getElementById("custserial").value = '<%= @custserial %>'
+        <% end %>
+
         $("#date_init").click(function(){
           $("#start_date").datepicker('setDate', '<%= @start_date %>');
           $("#end_date").datepicker('setDate', '<%= @today %>');
@@ -116,6 +120,7 @@
         url += "&select_channel=" + select_channel;
         url += "&shop_cd=" + shop_cd;
         url += "&measureno=" + document.getElementById("measureno").value;
+        url += "&custserial=" + document.getElementById("custserial").value;
 
         location.href = url;
       }
@@ -176,13 +181,18 @@
         이름 :
         <input class="form-control" type="text" id="name" style="width:100px;">
 
+        시리얼키 :
+        <input class="form-control" type="text" id="custserial" style="width:100px;">
+
         분석일 : <input class="form-control" type="text" id="start_date" style="width:100px;">
         <input class="form-control" type="text" id="end_date" style="width:100px;">
         <button id="date_init" class="btn btn-primary">전체</button>
 
         <p style="float:right; margin-right:20px;">
           Download:
-          <%= link_to "Excel", admin_image_list_path(format: "xlsx", :search => @search, :isExcel => true) %>
+          <%= link_to "Excel", admin_image_list_path(format: "xlsx", :search => @search,
+          :custserial => @custserial, :select_channel => @select_channel, :shop_cd => @shop_cd,
+          :measureno => @measureno, :isExcel => true) %>
         </p>
       </div>
 

@@ -161,7 +161,7 @@
             <div class="dropdown-content">
               <% if session[:admin_user] == "user" %>
                 <a id="input_feedback_cnp" href="#">CNP</a>
-                <a id="input_feedback_cnpr" href="#">CNPR</a>
+                <a id="input_feedback_cnpr" href="#">CNP RX</a>
               <% elsif session[:admin_user]['ch_cd'] == "CNP" %>
                 <a id="input_feedback_cnp" href="#">CNP</a>
               <% elsif session[:admin_user]['ch_cd'] == "CNPR" %>
@@ -173,7 +173,7 @@
             <div class="dropdown-content">
               <% if session[:admin_user] == "user" %>
                 <a id="feedback_list_cnp" href="#">CNP</a>
-                <a id="feedback_list_cnpr" href="#">CNPR</a>
+                <a id="feedback_list_cnpr" href="#">CNP RX</a>
               <% elsif session[:admin_user]['ch_cd'] == "CNP" %>
                 <a id="feedback_list_cnp" href="#">CNP</a>
               <% elsif session[:admin_user]['ch_cd'] == "CNPR" %>
@@ -185,14 +185,14 @@
               <div class="dropdown-content">
                 <% if session[:admin_user] == "user" %>
                   <a id="cnp_interview" href="#">CNP</a>
-                  <a id="cnpr_interview" href="#">CNPR</a>
                   <a id="beau_interview" href="#">보떼</a>
+                  <a id="cnpr_interview" href="#">CNP RX</a>
                 <% elsif session[:admin_user]['ch_cd'] == "CNP" %>
                   <a id="cnp_interview" href="#">CNP</a>
-                <% elsif session[:admin_user]['ch_cd'] == "CNPR" %>
-                  <a id="cnpr_interview" href="#">CNPR</a>
                 <% elsif session[:admin_user]['ch_cd'] == "BEAU" %>
                   <a id="beau_interview" href="#">보떼</a>
+                <% elsif session[:admin_user]['ch_cd'] == "CNPR" %>
+                  <a id="cnpr_interview" href="#">CNP RX</a>
                 <% end %>
               </div>
             </li>
@@ -201,8 +201,8 @@
             <li class="dropdown dropbtn"><a href="#">야누스 측정 데이터</a>
               <div class="dropdown-content">
                 <a id="fcdata_list_cnp" href="#">CNP</a>
-                <a id="fcdata_list_cnpr" href="#">CNPR</a>
                 <a id="fcdata_list_beau" href="#">보떼</a>
+                <a id="fcdata_list_cnpr" href="#">CNP RX</a>
               </div>
             </li>
             <li id="fcpos_list"><a href="#">야누스 분석 영역 정보</a></li>
