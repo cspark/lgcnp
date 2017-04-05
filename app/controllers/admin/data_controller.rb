@@ -168,7 +168,7 @@ class Admin::DataController < Admin::AdminApplicationController
     scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
     scoped = scoped.where(faceno: @select_area) if !@select_area.blank? && @select_area.downcase != "all"
     if @select_skin_type_device_final.blank?
-      scoped = scoped.where(skintype: ["!!"])
+      scoped = scoped.where(skintype: [100])
     else
       scoped = scoped.where(skintype: @select_skin_type_device_final)
     end
@@ -641,25 +641,25 @@ class Admin::DataController < Admin::AdminApplicationController
     scoped = scoped.where(m_skintype: [1,2,3]) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode == "T"
 
     if @select_skin_type_device_final.blank?
-      scoped = scoped.where(skintype: ["!!"])
+      scoped = scoped.where(skintype: [100])
     else
       scoped = scoped.where(skintype: @select_skin_type_device_final)
     end
 
     if @skin_type_survey_array.blank?
-      scoped = scoped.where(m_skintype: ["!!"])
+      scoped = scoped.where(m_skintype: [100])
     else
       scoped = scoped.where(m_skintype: @skin_type_survey_array)
     end
 
     if @select_skin_anxiety1_array.blank?
-      scoped = scoped.where(worry_skin_1: ["!!"])
+      scoped = scoped.where(worry_skin_1: [100])
     else
       scoped = scoped.where(worry_skin_1: @select_skin_anxiety1_array)
     end
 
     if @select_skin_anxiety2_array.blank?
-      scoped = scoped.where(worry_skin_2: ["!!"])
+      scoped = scoped.where(worry_skin_2: [100])
     else
       scoped = scoped.where(worry_skin_2: @select_skin_anxiety2_array)
     end
@@ -1087,19 +1087,19 @@ class Admin::DataController < Admin::AdminApplicationController
     scoped = scoped.where(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode == 0
 
     if @select_skin_type_device_final.blank?
-      scoped = scoped.where(skintype: ["!!"])
+      scoped = scoped.where(skintype: [100])
     else
       scoped = scoped.where(skintype: @select_skin_type_device_final)
     end
 
     if @select_skin_anxiety1_array.blank?
-      scoped = scoped.where(worry_skin_1: ["!!"])
+      scoped = scoped.where(worry_skin_1: [100])
     else
       scoped = scoped.where(worry_skin_1: @select_skin_anxiety1_array)
     end
 
     if @select_skin_anxiety2_array.blank?
-      scoped = scoped.where(worry_skin_2: ["!!"])
+      scoped = scoped.where(worry_skin_2: [100])
     else
       scoped = scoped.where(worry_skin_2: @select_skin_anxiety2_array)
     end
