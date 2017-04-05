@@ -317,10 +317,14 @@
               select_skin_anxiety2.push(this.value)
             }
         });
-
         var overlap = "T"
         if (!document.getElementById("overlap").checked) {
           overlap = "F"
+        }
+        if (document.getElementById("is_agree_thirdparty_info").checked) {
+          var is_agree_thirdparty_info = "T"
+        }else {
+          var is_agree_thirdparty_info = ""
         }
 
         url = ""
@@ -342,13 +346,10 @@
         url += "&select_skin_anxiety1=" + select_skin_anxiety1;
         url += "&select_skin_anxiety2=" + select_skin_anxiety2;
         url += "&overlap=" + overlap;
-        url += "&select_filter=" +filterStr
+        url += "&select_filter=" +filterStr;
+        url += "&is_agree_thirdparty_info=" +is_agree_thirdparty_info;
 
-        if (document.getElementById('is_agree_thirdparty_info').checked == false ) {
-          location.href = "/admin/data_list_cnpr"
-        } else {
-          location.href = url;
-        }
+        location.href = url;
       }
 
       function decode_utf8(s) {
@@ -418,7 +419,8 @@
           :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
           :select_area => @select_area,
           :select_skin_type_device => @select_skin_type_device, :select_senstive => @select_senstive,
-          :select_skin_anxiety1 => @select_skin_anxiety1, :select_skin_anxiety2 => @select_skin_anxiety2, :select_filter => @params_filter, :select_channel => @ch_cd, :select_shop => @shop_cd, :isExcel => true) %>
+          :select_skin_anxiety1 => @select_skin_anxiety1, :select_skin_anxiety2 => @select_skin_anxiety2, :select_filter => @params_filter,
+          :select_channel => @ch_cd, :select_shop => @shop_cd, :is_agree_thirdparty_info => @is_agree_thirdparty_info, :isExcel => true) %>
         </p>
       </div><br><br>
 

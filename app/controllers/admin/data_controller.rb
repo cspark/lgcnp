@@ -54,6 +54,7 @@ class Admin::DataController < Admin::AdminApplicationController
     @select_skin_anxiety2 = select_skin_anxiety2
     @select_skin_type_device = params[:select_skin_type_device]
     @select_skin_type_survey = params[:select_skin_type_survey]
+    @is_agree_thirdparty_info = params[:is_agree_thirdparty_info] if !params[:is_agree_thirdparty_info].blank?
 
     @select_filter = []
     if !@params_filter.blank?
@@ -387,6 +388,12 @@ class Admin::DataController < Admin::AdminApplicationController
     scoped.each do |fcdata|
       custinfo = Custinfo.where(custserial: fcdata.custserial).first
       is_contain = true
+
+      if !@is_agree_thirdparty_info.nil?
+        if !custinfo.is_agree_thirdparty_info.include?(@is_agree_thirdparty_info)
+          is_contain = false
+        end
+      end
 
       if !@name.blank?
         if !custinfo.custname.include? @name
@@ -970,6 +977,7 @@ class Admin::DataController < Admin::AdminApplicationController
     @select_skin_anxiety2 = select_skin_anxiety2
     @select_skin_type_device = params[:select_skin_type_device]
     @overlap = overlap if !overlap.blank?
+    @is_agree_thirdparty_info = params[:is_agree_thirdparty_info] if !params[:is_agree_thirdparty_info].blank?
 
     @select_filter = []
     if !@params_filter.blank?
@@ -1310,6 +1318,12 @@ class Admin::DataController < Admin::AdminApplicationController
     scoped.each do |fcdata|
       custinfo = Custinfo.where(custserial: fcdata.custserial).first
       is_contain = true
+
+      if !@is_agree_thirdparty_info.nil?
+        if !custinfo.is_agree_thirdparty_info.include?(@is_agree_thirdparty_info)
+          is_contain = false
+        end
+      end
 
       if !@name.blank?
         if !custinfo.custname.include? @name
