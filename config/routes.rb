@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get "cnpr_interview" => "tabletinterview#cnpr_list"
     get "beau_interview" => "tabletinterview#beau_list"
     get "tabletinterview/detail" => "tabletinterview#show"
+    get "tabletinterview/beau_detail" => "tabletinterview#beau_show"
     get "tabletinterview/edit" => "tabletinterview#edit"
     get "tabletinterview/filter_check" => "tabletinterview#filter_check"
 
@@ -38,7 +39,6 @@ Rails.application.routes.draw do
     get "data_list_cnpr" => "data#cnpr_list"
     get "data_list_beau" => "data#beau_list"
     get "data/detail" => "data#show"
-    get "data/beau_detail" => "data#beau_show"
     get "data/filter_check" => "data#filter_check"
     get "fcpos_list" => "pos#list"
     get "fcpos/detail" => "pos#show"
