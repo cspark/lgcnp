@@ -143,7 +143,105 @@
             <th class="width100 text-center">업데이트 일</th>
             <% if @select_filter != [] %>
               <% @select_filter.each do |filter| %>
-                <th class="text-center"><%= filter %></th>
+                <% if filter.include?("fh_x") %>
+                  <th>이마 영역정보x</th>
+                <% elsif filter.include?("fh_y") %>
+                  <th>이마 영역정보y</th>
+                <% elsif filter.include?("fh_w") %>
+                  <th>이마 영역정보w</th>
+                <% elsif filter.include?("fh_h") %>
+                  <th>이마 영역정보h</th>
+                <% elsif filter.include?("ns_x") %>
+                  <th>코 영역정보x</th>
+                <% elsif filter.include?("ns_y") %>
+                  <th>코 영역정보y</th>
+                <% elsif filter.include?("ns_w") %>
+                  <th>코 영역정보w</th>
+                <% elsif filter.include?("ns_h") %>
+                  <th>코 영역정보h</th>
+                <% elsif filter.include?("res_x") %>
+                  <th>우측 눈가 영역정보x</th>
+                <% elsif filter.include?("res_y") %>
+                  <th>우측 눈가 영역정보y</th>
+                <% elsif filter.include?("res_w") %>
+                  <th>우측 눈가 영역정보w</th>
+                <% elsif filter.include?("res_h") %>
+                  <th>우측 눈가 영역정보h</th>
+                <% elsif filter.include?("reu_x") %>
+                  <th>우측 눈밑 영역정보x</th>
+                <% elsif filter.include?("reu_y") %>
+                  <th>우측 눈밑 영역정보y</th>
+                <% elsif filter.include?("reu_w") %>
+                  <th>우측 눈밑 영역정보w</th>
+                <% elsif filter.include?("reu_h") %>
+                  <th>우측 눈밑 영역정보h</th>
+                <% elsif filter.include?("les_x") %>
+                  <th>좌측 눈가 영역정보x</th>
+                <% elsif filter.include?("les_y") %>
+                  <th>좌측 눈가 영역정보y</th>
+                <% elsif filter.include?("les_w") %>
+                  <th>좌측 눈가 영역정보w</th>
+                <% elsif filter.include?("les_h") %>
+                  <th>좌측 눈가 영역정보h</th>
+                <% elsif filter.include?("leu_x") %>
+                  <th>좌측 눈밑 영역정보x</th>
+                <% elsif filter.include?("leu_y") %>
+                  <th>좌측 눈밑 영역정보y</th>
+                <% elsif filter.include?("leu_w") %>
+                  <th>좌측 눈밑 영역정보w</th>
+                <% elsif filter.include?("leu_h") %>
+                  <th>좌측 눈밑 영역정보h</th>
+                <% elsif filter.include?("rs_x") %>
+                  <th>우측 볼 영역정보x</th>
+                <% elsif filter.include?("rs_y") %>
+                  <th>우측 볼 영역정보y</th>
+                <% elsif filter.include?("rs_w") %>
+                  <th>우측 볼 영역정보w</th>
+                <% elsif filter.include?("rs_h") %>
+                  <th>우측 볼 영역정보h</th>
+                <% elsif filter.include?("ls_x") %>
+                  <th>좌측 볼 영역정보x</th>
+                <% elsif filter.include?("ls_y") %>
+                  <th>좌측 볼 영역정보y</th>
+                <% elsif filter.include?("ls_w") %>
+                  <th>좌측 볼 영역정보w</th>
+                <% elsif filter.include?("ls_h") %>
+                  <th>좌측 볼 영역정보h</th>
+                <% elsif filter.include?("rt_re_l") %>
+                  <th>우측눈 사각영역 정보 Left</th>
+                <% elsif filter.include?("rt_re_t") %>
+                  <th>우측눈 사각영역 정보 top</th>
+                <% elsif filter.include?("rt_re_r") %>
+                  <th>우측눈 사각영역 정보 Right</th>
+                <% elsif filter.include?("rt_re_b") %>
+                  <th>우측눈 사각영역 정보 Bottom</th>
+                <% elsif filter.include?("rt_le_l") %>
+                  <th>좌측눈 사각영역 정보 Left</th>
+                <% elsif filter.include?("rt_le_l") %>
+                  <th>좌측눈 사각영역 정보 top</th>
+                <% elsif filter.include?("rt_le_t") %>
+                  <th>좌측눈 사각영역 정보 Right</th>
+                <% elsif filter.include?("rt_le_r") %>
+                  <th>좌측눈 사각영역 정보 Right</th>
+                <% elsif filter.include?("rt_lip_b") %>
+                  <th>입 사각영역 정보 Left</th>
+                <% elsif filter.include?("rt_lip_t") %>
+                  <th>입 사각영역 정보 top</th>
+                <% elsif filter.include?("rt_lip_r") %>
+                  <th>입 사각영역 정보 Right</th>
+                <% elsif filter.include?("rt_lip_b") %>
+                  <th>입 사각영역 정보 Bottom</th>
+                <% elsif filter.include?("rt_res_x") %>
+                  <th>우측 얼굴 끝 라인 좌표x</th>
+                <% elsif filter.include?("rt_res_y") %>
+                  <th>우측 얼굴 끝 라인 좌표y</th>
+                <% elsif filter.include?("rt_res_w") %>
+                  <th>우측 얼굴 끝 라인 좌표w</th>
+                <% elsif filter.include?("rt_res_h") %>
+                  <th>우측 얼굴 끝 라인 좌표h</th>
+                <% else %>
+                  <th class="text-center"><%= filter %></th>
+                <% end %>
               <% end %>
             <% else %>
               <th>이마 영역정보x</th>
