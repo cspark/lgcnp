@@ -55,9 +55,9 @@
           location.href = "/admin/data_list_cnp"
         });
 
-        // $("#fcdata_list_cnpr").click(function(){
-        //   location.href = "/admin/data_list_cnpr"
-        // });
+        $("#fcdata_list_cnpr").click(function(){
+          location.href = "/admin/data_list_cnpr"
+        });
 
         $("#fcdata_list_beau").click(function(){
           location.href = "/admin/data_list_beau"
@@ -159,24 +159,44 @@
           <li><a href="#" id="custinfos">고객정보</a></li>
           <li class="dropdown dropbtn"><a href="#">피드백 입력</a>
             <div class="dropdown-content">
-              <a id="input_feedback_cnp" href="#">CNP</a>
-              <a id="input_feedback_cnpr" href="#">CNPR</a>
+              <% if session[:admin_user] == "user" %>
+                <a id="input_feedback_cnp" href="#">CNP</a>
+                <a id="input_feedback_cnpr" href="#">CNPR</a>
+              <% elsif session[:admin_user]['ch_cd'] == "CNP" %>
+                <a id="input_feedback_cnp" href="#">CNP</a>
+              <% elsif session[:admin_user]['ch_cd'] == "CNPR" %>
+                <a id="input_feedback_cnpr" href="#">CNPR</a>
+              <% end %>
             </div>
           </li>
           <li class="dropdown dropbtn"><a href="#">피드백 리스트</a>
             <div class="dropdown-content">
-              <a id="feedback_list_cnp" href="#">CNP</a>
-              <a id="feedback_list_cnpr" href="#">CNPR</a>
+              <% if session[:admin_user] == "user" %>
+                <a id="feedback_list_cnp" href="#">CNP</a>
+                <a id="feedback_list_cnpr" href="#">CNPR</a>
+              <% elsif session[:admin_user]['ch_cd'] == "CNP" %>
+                <a id="feedback_list_cnp" href="#">CNP</a>
+              <% elsif session[:admin_user]['ch_cd'] == "CNPR" %>
+                <a id="feedback_list_cnpr" href="#">CNPR</a>
+              <% end %>
             </div>
           </li>
-          <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
             <li class="dropdown dropbtn"><a href="#">고객 인터뷰</a>
               <div class="dropdown-content">
-                <a id="cnp_interview" href="#">CNP</a>
-                <a id="cnpr_interview" href="#">CNPR</a>
-                <a id="beau_interview" href="#">보떼</a>
+                <% if session[:admin_user] == "user" %>
+                  <a id="cnp_interview" href="#">CNP</a>
+                  <a id="cnpr_interview" href="#">CNPR</a>
+                  <a id="beau_interview" href="#">보떼</a>
+                <% elsif session[:admin_user]['ch_cd'] == "CNP" %>
+                  <a id="cnp_interview" href="#">CNP</a>
+                <% elsif session[:admin_user]['ch_cd'] == "CNPR" %>
+                  <a id="cnpr_interview" href="#">CNPR</a>
+                <% elsif session[:admin_user]['ch_cd'] == "BEAU" %>
+                  <a id="beau_interview" href="#">보떼</a>
+                <% end %>
               </div>
             </li>
+            <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
             <li id="fcavg_list"><a href="#">연령별 성별 평균</a></li>
             <li class="dropdown dropbtn"><a href="#">야누스 측정 데이터</a>
               <div class="dropdown-content">

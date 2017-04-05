@@ -176,4 +176,101 @@ class ImagesController < ApplicationController
     # "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/public/CNP/900-P/839-1/839-1_Sym_L_1.jpg' --ftp-create-dirs"
     #  ls_command = "curl -l 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' --ftp-create-dirs"
   end
+
+  def type_image_download
+    serial="839"
+    measureno="1"
+    number="1"
+    ch_cd="CNP"
+    type="Sym_L"
+
+    # serial = params[:custserial]
+    # measureno = params[:measureno]
+    # number = params[:number]
+    # ch_cd = params[:ch_cd]
+    # type = params[:type]
+
+    #이미지 가져오기
+    Rails.logger.info serial
+    sub_folder_name = (((serial.to_i / 100) * 100) + 100).to_s
+    if type.include?("F_PL") || type.include?("F_UV") || type.include?("F_WH")
+    else
+      sub_folder_name << "-P"
+    end
+    Rails.logger.info sub_folder_name
+
+    ftp_path = ""
+    ftp_path = "ftp://165.244.88.27/"
+    ftp_path << ch_cd
+    ftp_path << "/"
+
+    ftp_path << sub_folder_name.to_s
+
+    ftp_path << "/"
+    ftp_path << serial.to_i.to_s
+    ftp_path << "-"
+    ftp_path << measureno.to_i.to_s
+    ftp_path << "/"
+    ftp_path << serial.to_i.to_s
+    ftp_path << "-"
+    ftp_path << measureno.to_i.to_s
+    ftp_path << "_"
+    ftp_path << type
+    if number.to_i != 0
+      ftp_path << "_"
+      ftp_path << number
+    end
+    ftp_path << ".jpg"
+    Rails.logger.info ftp_path
+
+    system("echo FILE Download")
+    file_get_command = "wget --user janus --password pielgahn2012#1 "
+    file_get_command << ftp_path
+    file_get_command << " -N -P "
+
+    make_dir_command = "mkdir "
+    make_dir_command << "public/"
+    make_dir_command << ch_cd
+    make_dir_command << "/"
+
+    Rails.logger.info make_dir_command
+    system(make_dir_command)
+
+    make_dir_command << sub_folder_name
+    Rails.logger.info make_dir_command
+    system(make_dir_command)
+
+    make_dir_command << "/"
+    make_dir_command << serial.to_i.to_s
+    make_dir_command << "-"
+    make_dir_command << measureno.to_i.to_s
+    Rails.logger.info make_dir_command
+    system(make_dir_command)
+
+    # file_get_command << "public/CNP/"
+    file_get_command << "public/"
+    file_get_command << ch_cd
+    file_get_command << "/"
+
+    file_get_command << sub_folder_name
+    file_get_command << "/"
+    file_get_command << serial.to_i.to_s
+    file_get_command << "-"
+    file_get_command << measureno.to_i.to_s
+    Rails.logger.info file_get_command
+    # wget --user janus --password pielgahn2012#1 ftp://165.244.88.27/CNP/100-P/41-1/41-1_F_PW_SK_L_SIDE.jpg -N -P public/CNP/100-P/41-1
+    system(file_get_command)
+
+    if number.to_i != 0
+      file_exist_command = "public/"+ch_cd+"/"+sub_folder_name+"/"+serial.to_s+"-"+measureno.to_s+"/"+serial.to_s+"-"+measureno.to_s+"_"+type+"_"+number+".jpg"
+    else
+      file_exist_command = "public/"+ch_cd+"/"+sub_folder_name+"/"+serial.to_s+"-"+measureno.to_s+"/"+serial.to_s+"-"+measureno.to_s+"_"+type+".jpg"
+    end
+
+    if File.exist?(file_exist_command)
+      render :text => "Success!!!", status: :ok
+    else
+      render :text => "Fail!!!", status: 404
+    end
+  end
 end
