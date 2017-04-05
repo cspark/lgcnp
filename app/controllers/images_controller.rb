@@ -178,17 +178,17 @@ class ImagesController < ApplicationController
   end
 
   def type_image_download
-    serial="839"
-    measureno="1"
-    number="1"
-    ch_cd="CNP"
-    type="Sym_L"
+    # serial="839"
+    # measureno="1"
+    # number="1"
+    # ch_cd="CNP"
+    # type="Sym_L"
 
-    # serial = params[:custserial]
-    # measureno = params[:measureno]
-    # number = params[:number]
-    # ch_cd = params[:ch_cd]
-    # type = params[:type]
+    serial = params[:custserial]
+    measureno = params[:measureno]
+    number = params[:number]
+    ch_cd = params[:ch_cd]
+    type = params[:type]
 
     #이미지 가져오기
     Rails.logger.info serial
