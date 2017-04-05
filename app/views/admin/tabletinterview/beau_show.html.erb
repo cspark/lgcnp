@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+    $ (function () {
+        <% user = Custinfo.where(custserial: @tabletinterview.custserial).first %>
+        try
+        {
+          $('#name_<%= @tabletinterview.custserial.to_i %>').append( decode_utf8('<%= user.custname %>'));
+        }
+        catch(err)
+        {
+          $('#name_<%= @tabletinterview.custserial.to_i %>').append('<%= user.custname %>');
+        }
+
+        // 메모 인코딩
+        try
+        {
+          $('#memo_<%= @tabletinterview.custserial.to_i %>').append( decode_utf8('<%= @tabletinterview.memo %>'));
+        }
+        catch(err)
+        {
+          $('#memo_<%= @tabletinterview.custserial.to_i %>').append('<%= @tabletinterview.memo %>');
+        }
+      });
+
+      function decode_utf8(s) {
+        return decodeURI(s);
+      }
+    </script>
+  </head>
+
+  <body style="padding: 10px;">
+    <div style="display:inline;">
+      <h2 style="float:left; width:45%;">태블릿 인터뷰 정보</h2>
+    </div><br>
+
+    <% user = Custinfo.where(custserial: @tabletinterview.custserial).first %>
+    <div style="display:table; height:50px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
+      <% custinfo = Custinfo.where(custserial: @tabletinterview.custserial).first %>
+      <font size="4"><div id="name_<%= @tabletinterview.custserial.to_i %>"></div></font>
+      <font size="2">시리얼: <%= @tabletinterview.custserial.to_i %><br>
+      채널: <%= custinfo.ch_cd %><br>
+      <% faceno = "F" %>
+      <% if @tabletinterview.faceno == "F" %>
+        <% faceno = "전면" %>
+      <% end %>
+      측정 부위: <%= faceno %><br>
+      업데이트 날짜: <%= @tabletinterview.uptdate %><br>
+      진단 날짜: <%= @tabletinterview.measuredate %><br>
+      인터뷰1: <%= @tabletinterview.interview_1 %><br>
+      인터뷰2: <%= @tabletinterview.interview_2 %><br>
+      인터뷰3: <%= @tabletinterview.interview_3 %><br>
+      인터뷰4: <%= @tabletinterview.interview_4 %><br>
+      인터뷰5: <%= @tabletinterview.interview_5 %><br>
+      인터뷰6: <%= @tabletinterview.interview_6 %><br>
+      인터뷰7: <%= @tabletinterview.interview_7 %><br>
+      인터뷰8: <%= @tabletinterview.interview_8 %><br>
+      인터뷰9: <%= @tabletinterview.interview_9 %><br>
+      인터뷰10: <%= @tabletinterview.interview_10 %><br>
+    </div>
+  </body>
+</html>

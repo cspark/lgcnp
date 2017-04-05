@@ -33,7 +33,7 @@
           $("input:checkbox[value=BEAU]").prop("checked", false);
         <% end %>
 
-        <% if @ch_cd.include?("NC") %>
+        <% if @ch_cd.include?("TMR") %>
           $("input:checkbox[value=TMR]").prop("checked", true);
         <% else %>
           $("input:checkbox[value=TMR]").prop("checked", false);
@@ -191,8 +191,8 @@
           $(document).on("click", ".table_tr", function (e) {
             var userId = $(this).attr('id').split("/")[0]
             var ch_cd = $(this).attr('id').split("/")[1]
-            var fcdata_id = $(this).attr('id').split("/")[2]
-            window.open("/admin/tabletinterview/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&fcdata_id=" +fcdata_id, "/users/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&fcdata_id=" +fcdata_id, "scrollbars=1,resizable=1,height=600,width=600");
+            var measureno = $(this).attr('id').split("/")[2]
+            window.open("/admin/tabletinterview/beau_detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno, "/users/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno, "scrollbars=1,resizable=1,height=600,width=600");
           });
 
           $('#filter-btn').click(function(){

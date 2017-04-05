@@ -24,11 +24,11 @@
               else
                 tempUserName += "*"
             }
-            $('#name_<%= interview.custserial.to_i %>_<%= interview.ch_cd %>_<%= interview.measureno %>').append(tempUserName);
+            $('#name_<%= interview.custserial.to_i %>_<%= interview.ch_cd %>_<%= interview.measureno.to_i %>').append(tempUserName);
           }
           catch(err)
           {
-            $('#name_<%= interview.custserial.to_i %>_<%= interview.ch_cd %>_<%= interview.measureno %>').append('<%= user.custname %>');
+            $('#name_<%= interview.custserial.to_i %>_<%= interview.ch_cd %>_<%= interview.measureno.to_i %>').append('<%= user.custname %>');
           }
         });
 
@@ -44,8 +44,8 @@
     </head>
     <body>
       <% custinfo = Custinfo.where(custserial: interview.custserial).first %>
-      <tr class="table_tr" id="<%= custinfo.custserial.to_i %>/<%= interview.ch_cd %>/<%= interview.measureno %>">
-        <td id="name_<%= interview.custserial.to_i %>_<%= interview.ch_cd %>_<%= interview.measureno %>"></td>
+      <tr class="table_tr" id="<%= custinfo.custserial.to_i %>/<%= interview.ch_cd %>/<%= interview.measureno.to_i %>">
+        <td id="name_<%= interview.custserial.to_i %>_<%= interview.ch_cd %>_<%= interview.measureno.to_i %>"></td>
         <td><%= interview.custserial.to_i %></td>
         <td><%= interview.ch_cd %></td>
         <td><%= interview.faceno %></td>
