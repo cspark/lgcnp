@@ -228,6 +228,9 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
   def beau_show
     @tabletinterview = Fcinterview.where(custserial: params[:userId]).where(ch_cd: params[:ch_cd]).where(measureno: params[:measureno]).first
+    Rails.logger.info "beau_show!!!"
+    Rails.logger.info @tabletinterview.custserial.to_i
+    Rails.logger.info @tabletinterview.measureno.to_i
   end
 
   def edit
