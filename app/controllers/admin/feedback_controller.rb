@@ -216,7 +216,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
           is_contain = false
         end
       end
-      
+
       if !name.nil?
         if !custinfo.custname.include? name
            is_contain = false
