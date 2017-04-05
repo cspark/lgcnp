@@ -136,6 +136,12 @@
             $("input:checkbox[name=select_skin_anxiety2]").prop("checked", true);
           <% end %>
 
+          <% if @overlap.nil? || @overlap == "T" %>
+            $("input:checkbox[name=overlap_check_box]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[name=overlap_check_box]").prop("checked", false);
+          <% end %>
+
           $("#start_date").datepicker({
                   dateFormat: 'yy-mm-dd',
                   dayNamesMin: [
@@ -237,10 +243,6 @@
           document.getElementById("end_birthmm").value = '<%= @end_birthmm %>'
         <% end %>
 
-        <% if !@select_makeup.nil? %>
-          $('select[id="select_makeup"]').val('<%= @select_makeup %>');
-        <% end %>
-
         <% if !@select_area.nil? %>
           $('select[id="select_area"]').val('<%= @select_area %>');
         <% end %>
@@ -289,7 +291,6 @@
 
       function load(){
         var select_sex = document.getElementById("select_sex").options[document.getElementById("select_sex").selectedIndex].value;
-        var select_makeup = document.getElementById("select_makeup").options[document.getElementById("select_makeup").selectedIndex].value;
         var select_area = document.getElementById("select_area").options[document.getElementById("select_area").selectedIndex].value;
         var select_senstive = document.getElementById("select_senstive").options[document.getElementById("select_senstive").selectedIndex].value;
         var select_channel = []
@@ -317,6 +318,11 @@
             }
         });
 
+        var overlap = "T"
+        if (!document.getElementById("overlap").checked) {
+          overlap = "F"
+        }
+
         url = ""
         url += "/admin/data_list_cnpr?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
         url += "&select_sex=" + select_sex;
@@ -330,12 +336,12 @@
         url += "&start_birthmm=" + document.getElementById("start_birthmm").value;
         url += "&end_birthmm=" + document.getElementById("end_birthmm").value;
         url += "&select_channel=" + select_channel;
-        url += "&select_makeup=" + select_makeup;
         url += "&select_area=" + select_area;
         url += "&select_skin_type_device=" + select_skin_type_device;
         url += "&select_senstive=" + select_senstive;
         url += "&select_skin_anxiety1=" + select_skin_anxiety1;
         url += "&select_skin_anxiety2=" + select_skin_anxiety2;
+        url += "&overlap=" + overlap;
         url += "&select_filter=" +filterStr
 
         if (document.getElementById('is_agree_thirdparty_info').checked == false ) {
@@ -410,7 +416,7 @@
           <%= link_to "Excel", admin_data_list_cnpr_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
           :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial, :measureno => @measureno,
           :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
-          :select_makeup => @select_makeup, :select_area => @select_area,
+          :select_area => @select_area,
           :select_skin_type_device => @select_skin_type_device, :select_senstive => @select_senstive,
           :select_skin_anxiety1 => @select_skin_anxiety1, :select_skin_anxiety2 => @select_skin_anxiety2, :select_filter => @params_filter, :select_channel => @ch_cd, :select_shop => @shop_cd, :isExcel => true) %>
         </p>
@@ -461,6 +467,9 @@
           <option value="yes">예</option>
           <option value="no">아니오</option>
         </select>
+
+        <p style="float:left; margin-left: 40px; margin-top: 5px;">중복샷:&nbsp;</p>
+        <input type="checkbox" name="overlap_check_box" value="overlap" id="overlap" style="float:left; margin-top:9px;">
       </div><br><br>
 
       <div class="form-inline">

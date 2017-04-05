@@ -947,6 +947,7 @@ class Admin::DataController < Admin::AdminApplicationController
     select_senstive = params[:select_senstive]
     select_skin_anxiety1 = params[:select_skin_anxiety1]
     select_skin_anxiety2 = params[:select_skin_anxiety2]
+    overlap = params[:overlap]
     @params_filter = params[:select_filter]
 
     @select_sex = select_sex
@@ -968,6 +969,7 @@ class Admin::DataController < Admin::AdminApplicationController
     @select_skin_anxiety1 = select_skin_anxiety1
     @select_skin_anxiety2 = select_skin_anxiety2
     @select_skin_type_device = params[:select_skin_type_device]
+    @overlap = overlap if !overlap.blank?
 
     @select_filter = []
     if !@params_filter.blank?
@@ -998,14 +1000,14 @@ class Admin::DataController < Admin::AdminApplicationController
     @select_skin_anxiety1_array = []
     if !select_skin_anxiety1.blank?
       select_skin_anxiety1.split(",").each do |anxiety|
-        @select_skin_anxiety1_array.push(anxiety.to_i)
+        @select_skin_anxiety1_array.push(anxiety)
       end
     end
 
     @select_skin_anxiety2_array = []
     if !select_skin_anxiety2.blank?
       select_skin_anxiety2.split(",").each do |anxiety|
-        @select_skin_anxiety2_array.push(anxiety.to_i)
+        @select_skin_anxiety2_array.push(anxiety)
       end
     end
 
@@ -1378,6 +1380,16 @@ class Admin::DataController < Admin::AdminApplicationController
           if fctabletinterview.a_1 != @select_makeup.to_i
             is_contain = false
           end
+        end
+      end
+
+      if !@overlap.blank? && @overlap == "T"
+        if fctabletinterview.before_solution_1 != fctabletinterview.before_solution_2
+          is_contain = false
+        end
+      elsif !@overlap.blank? && @overlap == "F"
+        if fctabletinterview.before_solution_1 == fctabletinterview.before_solution_2
+          is_contain = false
         end
       end
 
