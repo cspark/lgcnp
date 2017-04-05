@@ -37,6 +37,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @select_mode = select_mode
     @select_makeup = select_makeup
     @select_area = params[:select_area] if !params[:select_area].blank? && params[:select_area] != "all"
+    @is_agree_thirdparty_info = params[:is_agree_thirdparty_info] if !params[:is_agree_thirdparty_info].blank?
     ch_cd = ""
     shop_cd = ""
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
@@ -168,6 +169,12 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       Rails.logger.info custinfo.custname
       is_contain = true
 
+      if !@is_agree_thirdparty_info.nil?
+        if !custinfo.is_agree_thirdparty_info.include?(@is_agree_thirdparty_info)
+          is_contain = false
+        end
+      end
+
       if !@name.blank?
         if !custinfo.custname.include? @name
           Rails.logger.info "NAME FALSE"
@@ -275,6 +282,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @select_mode = select_mode
     @select_makeup = select_makeup
     @select_area = params[:select_area] if !params[:select_area].blank? && params[:select_area] != "all"
+    @is_agree_thirdparty_info = params[:is_agree_thirdparty_info] if !params[:is_agree_thirdparty_info].blank?
+
     ch_cd = ""
     shop_cd = ""
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
@@ -355,6 +364,12 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
       Rails.logger.info custinfo.custname
       is_contain = true
+
+      if !@is_agree_thirdparty_info.nil?
+        if !custinfo.is_agree_thirdparty_info.include?(@is_agree_thirdparty_info)
+          is_contain = false
+        end
+      end
 
       if !@select_mode.blank?
         if @select_mode.downcase != "all" && @select_mode.downcase != "total"
