@@ -616,7 +616,13 @@ class Admin::DataController < Admin::AdminApplicationController
 
     @fcdatas = []
     @fcdatas_final = []
+    serial_array = []
+    if !@select_senstive.blank? && @select_senstive != "all"
+      serial_array = Fcinterview.where(interview_2: @select_senstive).pluck(:custserial).uniq
+    end
+
     scoped = Fcdata.where(ch_cd: @ch_array)
+    scoped = scoped.where(custserial: serial_array) if @select_senstive != "all"
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)

@@ -475,7 +475,7 @@
 
         <p style="float:right; margin-right:20px;">
           Download:
-          <%= link_to "Excel", admin_data_list_cnp_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
+          <%= link_to "Excel", admin_data_list_beau_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
           :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial, :measureno => @measureno,
           :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
           :select_mode => @select_mode, :select_makeup => @select_makeup, :select_area => @select_area,
@@ -544,8 +544,8 @@
         <p style="float:left; margin-left: 40px; margin-top: 5px;">민감성:&nbsp;</p>
         <select class="form-control" id="select_senstive" style="float:left;">
           <option value="all">전체</option>
-          <option value="yes">예</option>
-          <option value="no">아니오</option>
+          <option value="1">예</option>
+          <option value="2">아니오</option>
         </select>
       </div><br><br>
 

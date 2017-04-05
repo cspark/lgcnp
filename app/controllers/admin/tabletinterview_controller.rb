@@ -79,12 +79,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     # if Rails.env.production? || Rails.env.staging?
     is_contain = true
 
-    if !@select_mode.blank?
-      if @select_mode.downcase != "all"
-        scoped = scoped.where(is_quick_mode: @select_mode)
-      end
-    end
-
     fcdata_list = Fcdata.where("faceno LIKE ?", "%#{@select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%")
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
@@ -98,7 +92,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(ch_cd: @ch_array) if !@ch_array.blank? && @ch_array != ""
-
+    scoped = scoped.where(is_quick_mode: @select_mode) if !@select_mode.blank? && @select_mode.downcase != "all"
 
     if @select_filter == []
       @excel_name = ["이름","시리얼","진단 날짜","채널","피부타입","진단으로 나온 솔루션 1","최종으로 선택된 솔루션 1","진단으로 나온 솔루션 2","최종으로 선택된 솔루션 2","진단으로 나온 세럼","최종으로 선택된 세럼",
