@@ -9,6 +9,9 @@
 
     <script>
     $ (function () {
+        <% Rails.logger.info "beau_show!!!" %>
+        <% Rails.logger.info @tabletinterview.custserial.to_i %>
+        <% Rails.logger.info @tabletinterview.measureno.to_i %>
         <% user = Custinfo.where(custserial: @tabletinterview.custserial.to_i).first %>
         try
         {

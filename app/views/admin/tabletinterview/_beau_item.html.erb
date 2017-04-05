@@ -43,8 +43,7 @@
       </script>
     </head>
     <body>
-      <% custinfo = Custinfo.where(custserial: interview.custserial).first %>
-      <tr class="table_tr" id="<%= custinfo.custserial.to_i %>/<%= interview.ch_cd %>/<%= interview.measureno.to_i %>">
+      <tr class="table_tr" id="<%= interview.custserial.to_i %>/<%= interview.ch_cd %>/<%= interview.measureno.to_i %>">
         <td id="name_<%= interview.custserial.to_i %>_<%= interview.ch_cd %>_<%= interview.measureno.to_i %>"></td>
         <td><%= interview.custserial.to_i %></td>
         <td><%= interview.ch_cd %></td>
