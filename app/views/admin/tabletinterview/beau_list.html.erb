@@ -55,15 +55,6 @@
           $("input:checkbox[name=check_box]").prop("checked", true);
         <% end %>
 
-        <% Rails.logger.info "!!!!" %>
-        <% Rails.logger.info @is_agree_thirdparty_info %>
-        <% Rails.logger.info @is_agree_thirdparty_info.nil? %>
-        <% if @is_agree_thirdparty_info.nil? || @is_agree_thirdparty_info == "T" %>
-          document.getElementById("is_agree_thirdparty_info").checked = true;
-        <% else %>
-          document.getElementById("is_agree_thirdparty_info").checked = false;
-        <% end %>
-
             $("#start_date").datepicker({
                     dateFormat: 'yy-mm-dd',
                     dayNamesMin: [
@@ -233,11 +224,6 @@
               select_channel.push(this.value)
             }
         });
-        if (document.getElementById("is_agree_thirdparty_info").checked) {
-          var is_agree_thirdparty_info = "T"
-        }else {
-          var is_agree_thirdparty_info = ""
-        }
 
         url = ""
         url += "/admin/beau_interview?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
@@ -256,7 +242,6 @@
         url += "&select_area=" + select_area;
         url += "&select_filter=" +filterStr;
         url += "&select_shop=" +$("#select_shop").val();
-        url += "&is_agree_thirdparty_info=" +is_agree_thirdparty_info;
 
         location.href = url;
       }
@@ -312,7 +297,7 @@
           :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial,
           :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
           :select_channel => @select_channel, :select_mode => @select_mode, :select_makeup => @select_makeup, :select_area => @select_area,
-          :select_filter => @params_filter, :is_agree_thirdparty_info => @is_agree_thirdparty_info, :isExcel => true) %>
+          :select_filter => @params_filter, :isExcel => true) %>
         </p>
       </div><br><br>
 
@@ -370,7 +355,6 @@
         <input class="form-control" type="text" id="start_birthmm" style="width:100px;">
         <input class="form-control" type="text" id="end_birthmm" style="width:100px;">
         <button id="birthmm_init" class="btn btn-primary">전체</button>
-        <font style="margin-left:10px;">제 3자 정보 제공 동의 고객: </font><input type="checkbox" name="is_agree_thirdparty_info" id="is_agree_thirdparty_info" checked="true">
         <button class="btn btn-warning" id="submit">조회</button>
       </div>
     </div>
