@@ -153,6 +153,11 @@
         var select_ample2 = document.getElementById("select_ample_2").options[document.getElementById("select_ample_2").selectedIndex].value;
         var select_sex = document.getElementById("select_sex").options[document.getElementById("select_sex").selectedIndex].value;
         var select_interview = document.getElementById("select_interview").options[document.getElementById("select_interview").selectedIndex].value;
+        if (document.getElementById("is_agree_thirdparty_info").checked) {
+          var is_agree_thirdparty_info = "T"
+        }else {
+          var is_agree_thirdparty_info = ""
+        }
 
         url = ""
         url += "/admin/feedback_list_cnp?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
@@ -165,6 +170,7 @@
         url += "&select_interview=" + select_interview;
         url += "&name=" + encodeURI(encodeURI(document.getElementById("name").value));
         url += "&custserial=" +document.getElementById("custserial").value;
+        url += "&is_agree_thirdparty_info=" +is_agree_thirdparty_info;
 
         if (document.getElementById("select_channel") != null) {
           var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
@@ -172,11 +178,7 @@
           url += "&select_shop=" +$("#select_shop").val();
         }
 
-        if (document.getElementById('is_agree_thirdparty_info').checked == false) {
-          location.href = "/admin/feedback_list_cnp"
-        } else {
-          location.href = url;
-        }
+        location.href = url;
       }
 
       function showDetail(userId, after_interview_id){
@@ -260,7 +262,7 @@
           Download:
           <%= link_to "Excel", admin_feedback_list_cnp_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date, :sex => @sex, :start_age => @start_age, :end_age => @end_age,
           :select_base => @select_base, :select_ample1 => @select_ample1, :select_ample2 => @select_ample2, :select_interview => @select_interview,
-          :name => @name, :custserial => @custserial, :isExcel => true, :select_channel => @ch_cd, :select_shop => @shop_cd,) %>
+          :name => @name, :custserial => @custserial, :isExcel => true, :select_channel => @ch_cd, :select_shop => @shop_cd, :is_agree_thirdparty_info => @is_agree_thirdparty_info) %>
         </p>
       </div><br><br>
       <div class="form-inline">

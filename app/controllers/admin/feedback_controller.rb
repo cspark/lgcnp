@@ -165,6 +165,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     if !name.nil?
       @name = name
     end
+    @is_agree_thirdparty_info = params[:is_agree_thirdparty_info] if !params[:is_agree_thirdparty_info].blank?
 
     @after_interviews = []
 
@@ -209,6 +210,13 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
       Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first
       custinfo = Custinfo.where(custserial: after_interview.custserial).first
+
+      if !@is_agree_thirdparty_info.nil?
+        if !custinfo.is_agree_thirdparty_info.include?(@is_agree_thirdparty_info)
+          is_contain = false
+        end
+      end
+      
       if !name.nil?
         if !custinfo.custname.include? name
            is_contain = false
