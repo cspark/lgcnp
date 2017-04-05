@@ -262,7 +262,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     start_birthmm = params[:start_birthmm]
     end_birthmm = params[:end_birthmm]
     select_mode = params[:select_mode]
-    select_makeup = params[:select_makeup]
     select_area = ""
     @params_filter = params[:select_filter]
 
@@ -278,7 +277,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @start_birthmm = start_birthmm
     @end_birthmm = end_birthmm
     @select_mode = select_mode
-    @select_makeup = select_makeup
     @select_area = params[:select_area] if !params[:select_area].blank? && params[:select_area] != "all"
 
     ch_cd = ""
@@ -346,12 +344,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       @excel_name = ["이름","시리얼","진단 날짜","채널"]
       @select_filter.each do |filter|
         @excel_name << filter
-      end
-    end
-
-    if !@select_makeup.blank?
-      if @select_makeup.downcase != "all"
-        scoped = scoped.where(a_1: @select_makeup)
       end
     end
 

@@ -156,10 +156,6 @@
             $('select[id="select_mode"]').val('<%= @select_mode %>');
           <% end %>
 
-          <% if !@select_makeup.nil? %>
-            $('select[id="select_makeup"]').val('<%= @select_makeup %>');
-          <% end %>
-
           <% if !@select_area.nil? %>
             $('select[id="select_area"]').val('<%= @select_area %>');
           <% end %>
@@ -216,7 +212,6 @@
       function load(){
         var select_sex = document.getElementById("select_sex").options[document.getElementById("select_sex").selectedIndex].value;
         var select_mode = document.getElementById("select_mode").options[document.getElementById("select_mode").selectedIndex].value;
-        var select_makeup = document.getElementById("select_makeup").options[document.getElementById("select_makeup").selectedIndex].value;
         var select_area = document.getElementById("select_area").options[document.getElementById("select_area").selectedIndex].value;
         var select_channel = []
         $('input:checkbox[name="check_box"]').each(function() {
@@ -238,7 +233,6 @@
         url += "&end_birthmm=" + document.getElementById("end_birthmm").value;
         url += "&select_channel=" + select_channel;
         url += "&select_mode=" + select_mode;
-        url += "&select_makeup=" + select_makeup;
         url += "&select_area=" + select_area;
         url += "&select_filter=" +filterStr;
         url += "&select_shop=" +$("#select_shop").val();
@@ -248,7 +242,7 @@
     </script>
     <style>
     .fixed-table-body {
-      max-height: 280px;
+      max-height: 158px;
     }
 
     .width200 {
@@ -296,7 +290,7 @@
           <%= link_to "Excel", admin_beau_interview_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
           :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial,
           :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
-          :select_channel => @select_channel, :select_mode => @select_mode, :select_makeup => @select_makeup, :select_area => @select_area,
+          :select_channel => @select_channel, :select_mode => @select_mode, :select_area => @select_area,
           :select_filter => @params_filter, :isExcel => true) %>
         </p>
       </div><br><br>
@@ -322,13 +316,6 @@
           <option value="all">전체</option>
           <option value="total">종합모드</option>
           <option value="makeup">메이크업모드</option>
-        </select>
-
-        메이크업 유무 :
-        <select class="form-control" id="select_makeup">
-          <option value="all">전체</option>
-          <option value="T">유</option>
-          <option value="F">무</option>
         </select>
 
         측정부위 :
