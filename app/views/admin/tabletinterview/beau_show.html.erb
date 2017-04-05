@@ -9,7 +9,7 @@
 
     <script>
     $ (function () {
-        <% user = Custinfo.where(custserial: @tabletinterview.custserial).first %>
+        <% user = Custinfo.where(custserial: @tabletinterview.custserial.to_i).first %>
         try
         {
           $('#name_<%= @tabletinterview.custserial.to_i %>').append( decode_utf8('<%= user.custname %>'));
@@ -17,16 +17,6 @@
         catch(err)
         {
           $('#name_<%= @tabletinterview.custserial.to_i %>').append('<%= user.custname %>');
-        }
-
-        // 메모 인코딩
-        try
-        {
-          $('#memo_<%= @tabletinterview.custserial.to_i %>').append( decode_utf8('<%= @tabletinterview.memo %>'));
-        }
-        catch(err)
-        {
-          $('#memo_<%= @tabletinterview.custserial.to_i %>').append('<%= @tabletinterview.memo %>');
         }
       });
 
@@ -41,9 +31,9 @@
       <h2 style="float:left; width:45%;">태블릿 인터뷰 정보</h2>
     </div><br>
 
-    <% user = Custinfo.where(custserial: @tabletinterview.custserial).first %>
+    <% user = Custinfo.where(custserial: @tabletinterview.custserial.to_i).first %>
     <div style="display:table; height:50px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
-      <% custinfo = Custinfo.where(custserial: @tabletinterview.custserial).first %>
+      <% custinfo = Custinfo.where(custserial: @tabletinterview.custserial.to_i).first %>
       <font size="4"><div id="name_<%= @tabletinterview.custserial.to_i %>"></div></font>
       <font size="2">시리얼: <%= @tabletinterview.custserial.to_i %><br>
       채널: <%= custinfo.ch_cd %><br>
