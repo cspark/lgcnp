@@ -159,7 +159,7 @@
           <li><a href="#" id="custinfos">고객정보</a></li>
           <li class="dropdown dropbtn"><a href="#">피드백 입력</a>
             <div class="dropdown-content">
-              <% if session[:admin_user] == "user" %>
+              <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
                 <a id="input_feedback_cnp" href="#">CNP</a>
                 <a id="input_feedback_cnpr" href="#">CNP RX</a>
               <% elsif session[:admin_user]['ch_cd'] == "CNP" %>
@@ -171,7 +171,7 @@
           </li>
           <li class="dropdown dropbtn"><a href="#">피드백 리스트</a>
             <div class="dropdown-content">
-              <% if session[:admin_user] == "user" %>
+              <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
                 <a id="feedback_list_cnp" href="#">CNP</a>
                 <a id="feedback_list_cnpr" href="#">CNP RX</a>
               <% elsif session[:admin_user]['ch_cd'] == "CNP" %>
@@ -183,7 +183,7 @@
           </li>
             <li class="dropdown dropbtn"><a href="#">고객 인터뷰</a>
               <div class="dropdown-content">
-                <% if session[:admin_user] == "user" %>
+                <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
                   <a id="cnp_interview" href="#">CNP</a>
                   <a id="beau_interview" href="#">보떼</a>
                   <a id="cnpr_interview" href="#">CNP RX</a>

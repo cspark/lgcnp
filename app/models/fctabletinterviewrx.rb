@@ -51,7 +51,10 @@ class Fctabletinterviewrx < ApplicationRecord
       corneous_value: corneous_value,
       stress_value: stress_value,
       bb_base_before: bb_base_before,
-      bb_base_after: bb_base_after
+      bb_base_after: bb_base_after,
+      recommand_program_step_1: recommand_program_step_1,
+      recommand_program_step_2: recommand_program_step_2,
+      recommand_program_step_3: recommand_program_step_3
     }
   end
 end
