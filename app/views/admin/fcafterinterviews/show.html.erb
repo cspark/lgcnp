@@ -307,10 +307,12 @@
         <input type="checkbox" name="group4[]" id="a4_3"/> 차별성 없음
         <input type="checkbox" name="group4[]" id="a4_4"/> 잘 모르겠음
         <br><br>
-        5. 3개월 후 피드백 설문에 동의하시나요?
-        <input style="margin-left:20px;" type="radio" name="is_agree_after" value="T"> 예
-        <input style="margin-left:20px;" type="radio" name="is_agree_after" value="F"> 아니오
-        <br><br>
+        <% if @after_interview.order ==  1 %>
+          5. 3개월 후 피드백 설문에 동의하시나요?
+          <input style="margin-left:20px;" type="radio" name="is_agree_after" value="T"> 예
+          <input style="margin-left:20px;" type="radio" name="is_agree_after" value="F"> 아니오
+          <br><br>
+        <% end %>
         6. 기타의견<br>구입하신 세럼을 사용하면서 좋았던 점이나 개선해야 할 사항에 대하여 의견을 주시면 감사하겠습니다.<br>
         <textarea type="text" rows="5" style="width: 500px;" id="a5" onfocus="this.value = this.value;"></textarea>
         <br>
