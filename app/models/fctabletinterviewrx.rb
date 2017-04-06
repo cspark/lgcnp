@@ -55,9 +55,9 @@ class Fctabletinterviewrx < ApplicationRecord
       recommand_program_step_1: recommand_program_step_1,
       recommand_program_step_2: recommand_program_step_2,
       recommand_program_step_3: recommand_program_step_3,
-      purchase_1: purchase_1,
-      purchase_2: purchase_2,
-      purchase_3: purchase_3
+      purchase1: purchase1,
+      purchase2: purchase2,
+      purchase3: purchase3
     }
   end
 end
