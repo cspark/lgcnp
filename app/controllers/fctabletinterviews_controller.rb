@@ -106,7 +106,7 @@ class FctabletinterviewsController < ApplicationController
         existed_interview.ch_cd = user.ch_cd
         existed_interview.save
       end
-      
+
       render json: existed_interview.to_api_hash, status: :ok
     else
       render json: "", status: 404
@@ -197,6 +197,7 @@ class FctabletinterviewsController < ApplicationController
     permitted = params.permit(:custserial, :tablet_interview_id, :a_1,:a_2,:a_3,:b_1,:b_2,:b_3,:b_4,:c_1,:d_1,:d_2,:d_3,:d_4,:d_5,:d_6,:d_7,:d_8,:d_9,:d_10,
     :skin_type,:before_solution_1,:after_solution_1,:before_solution_2,:after_solution_2,
     :before_serum,:after_serum,:before_ample_1,:after_ample_1,:before_ample_2,:after_ample_2,
-    :before_made_cosmetic,:after_made_cosmetic,:ch_cd, :base_lot, :ampoule_1_lot, :ampoule_2_lot, :is_quick_mode, :mixer_name, :fcdata_id, :memo, :is_agree_cant_refund)
+    :before_made_cosmetic,:after_made_cosmetic,:ch_cd, :base_lot, :ampoule_1_lot, :ampoule_2_lot, :is_quick_mode, :mixer_name, :fcdata_id, :memo, :is_agree_cant_refund,
+    :purchase_1, :purchase_2, :purchase_3)
   end
 end

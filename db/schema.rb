@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330055404) do
+ActiveRecord::Schema.define(version: 20170406120532) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -376,6 +376,9 @@ ActiveRecord::Schema.define(version: 20170330055404) do
     t.text     "recommand_program_step_1"
     t.text     "recommand_program_step_2"
     t.text     "recommand_program_step_3"
+    t.text     "purchase_1"
+    t.text     "purchase_2"
+    t.text     "purchase_3"
   end
 
   create_table "fctabletinterviews", force: :cascade do |t|
