@@ -57,7 +57,12 @@ class Fctabletinterviewrx < ApplicationRecord
       recommand_program_step_3: recommand_program_step_3,
       purchase1: purchase1,
       purchase2: purchase2,
-      purchase3: purchase3
+      purchase3: purchase3,
+      base_lot: base_lot,
+      ampoule_1_lot: ampoule_1_lot,
+      ampoule_2_lot: ampoule_2_lot,
+      mixer_name: mixer_name,
+      memo: memo
     }
   end
 end
