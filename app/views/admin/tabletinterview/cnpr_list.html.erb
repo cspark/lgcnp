@@ -13,6 +13,10 @@
     <script>
       var filterStr = "";
       $(function () {
+        <% if @custserial != "" %>
+          document.getElementById("custserial").value = '<%= @custserial %>'
+        <% end %>
+
         <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
           <% if !@shop_cd.nil? && @shop_cd != "" && %>
             document.getElementById("select_shop").value = '<%= @shop_cd %>'
@@ -21,6 +25,22 @@
           <% if !@name.nil? && @name != "" %>
             document.getElementById("name").value = decode_utf8('<%= @name %>')
           <% end %>
+        <% end %>
+
+        <% if @ch_cd.include?("CNPR") %>
+          $("input:checkbox[value=CNPR]").prop("checked", true);
+        <% else %>
+          $("input:checkbox[value=CNPR]").prop("checked", false);
+        <% end %>
+
+        <% if @ch_cd.include?("RLAB") %>
+          $("input:checkbox[value=RLAB]").prop("checked", true);
+        <% else %>
+          $("input:checkbox[value=RLAB]").prop("checked", false);
+        <% end %>
+
+        <% if @ch_cd == "" && @custserial.nil? %>
+          $("input:checkbox[name=check_box]").prop("checked", true);
         <% end %>
 
             $("#start_date").datepicker({
@@ -124,10 +144,6 @@
             $('select[id="select_mode"]').val('<%= @select_mode %>');
           <% end %>
 
-          <% if !@select_makeup.nil? %>
-            $('select[id="select_makeup"]').val('<%= @select_makeup %>');
-          <% end %>
-
           <% if !@select_area.nil? %>
             $('select[id="select_area"]').val('<%= @select_area %>');
           <% end %>
@@ -163,14 +179,9 @@
             window.open("/admin/tabletinterview/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&fcdata_id=" +fcdata_id, "/users/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&fcdata_id=" +fcdata_id, "scrollbars=1,resizable=1,height=600,width=600");
           });
 
-          $("input:checkbox[id='all_check']").prop("checked", true);
-          $(document).on("click", "#all_check", function (e) {
-          if (!$("input:checkbox[id='all_check']").is(":checked")){
-            window.open("/admin/tabletinterview/filter_check", "/admin/tabletinterview/filter_check", "scrollbars=1,resizable=1,height=650,width=530");
-          } else {
-            filterStr = ""
-          }
-        });
+          $('#filter-btn').click(function(){
+            window.open("/admin/tabletinterview/filter_check", "/admin/tabletinterview/filter_check", "scrollbars=1,resizable=1,height=650,width=550");
+          });
       });
       function selectFilter(select_filter){
         filterStr = select_filter
@@ -187,13 +198,23 @@
 
       function load(){
         var select_sex = document.getElementById("select_sex").options[document.getElementById("select_sex").selectedIndex].value;
-        var select_channel = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
         var select_mode = document.getElementById("select_mode").options[document.getElementById("select_mode").selectedIndex].value;
-        var select_makeup = document.getElementById("select_makeup").options[document.getElementById("select_makeup").selectedIndex].value;
         var select_area = document.getElementById("select_area").options[document.getElementById("select_area").selectedIndex].value;
+        var select_channel = []
+
+        if (document.getElementById("is_agree_thirdparty_info").checked) {
+          var is_agree_thirdparty_info = "T"
+        }else {
+          var is_agree_thirdparty_info = ""
+        }
+        $('input:checkbox[name="check_box"]').each(function() {
+            if(this.checked){
+              select_channel.push(this.value)
+            }
+        });
 
         url = ""
-        url += "/admin/tabletinterview?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
+        url += "/admin/cnpr_interview?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
         url += "&select_sex=" + select_sex;
         url += "&start_age=" + document.getElementById("start_age").value;
         url += "&end_age=" + document.getElementById("end_age").value;
@@ -205,37 +226,43 @@
         url += "&end_birthmm=" + document.getElementById("end_birthmm").value;
         url += "&select_channel=" + select_channel;
         url += "&select_mode=" + select_mode;
-        url += "&select_makeup=" + select_makeup;
         url += "&select_area=" + select_area;
         url += "&select_filter=" +filterStr;
         url += "&select_shop=" +$("#select_shop").val();
+        url += "&is_agree_thirdparty_info=" +is_agree_thirdparty_info;
 
         location.href = url;
       }
     </script>
     <style>
     .fixed-table-body {
-      max-height: 280px;
-    }
-
-    .text-center {
-        margin: 0 auto;
-        text-align: center !important;
+      max-height: 158px;
     }
 
     .width170 {
       min-width:170px
     }
 
+    .th-inner {
+      width: 200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
     .min-width100 {
       min-width:100px;
+    }
+
+    td {
+      margin: 0 auto;
+      text-align: center !important;
     }
     </style>
   </head>
 
   <body>
     <%= render "admin/header" %>
-    <h1>CNPR</h1>
+
     <div id="filter" style="background: #b1cbbb; padding: 8px;">
       <div class="form-inline">
         <p style="float:left; margin-top: 7px;">분석일:&nbsp;</p>
@@ -244,21 +271,22 @@
         <button id="date_init" class="btn btn-primary" style="float:left;">전체</button>
 
         <p style="float:left; margin-left: 20px; margin-top: 5px;">채널:&nbsp;</p>
-        <select class="form-control" id="select_channel" style="float:left; margin-left: 5px; width:200px;">
-          <option value="ALL">전체</option>
-          <option value="CNP">CNP</option>
-          <option value="CLAB">CLAB</option>
-        </select>
+        <p style="float:left; margin-left: 5px; margin-top: 5px;">CNPR&nbsp;</p>
+        <input type="checkbox" name="check_box" value="CNPR" id="CNPR" style="float:left; margin-top:9px;"/>
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">RLAB&nbsp;</p>
+        <input type="checkbox" name="check_box" value="RLAB" id="RLAB" style="float:left; margin-top:9px;"/>
 
         <p style="float:left; margin-left: 20px; margin-top: 7px;">매장 코드:&nbsp;</p>
         <input class="form-control" type="text" name="select_shop" id="select_shop" style="float:left; width: 200px;">
 
         <p style="float:right; margin-right:20px;">
           Download:
-          <%= link_to "Excel", admin_cnpr_interview_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date, :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age,
-          :name => @name, :custserial => @custserial, :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
-          :select_channel => @select_channel, :select_mode => @select_mode, :select_makeup => @select_makeup, :select_area => @select_area,
-          :select_filter => @params_filter, :isExcel => true) %>
+          <%= link_to "Excel", admin_cnpr_interview_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
+          :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age,
+          :name => @name, :custserial => @custserial, :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy,
+          :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm, :select_mode => @select_mode,
+          :select_area => @select_area, :select_filter => @params_filter,
+          :select_channel => @ch_cd, :select_shop => @shop_cd, :is_agree_thirdparty_info => @is_agree_thirdparty_info, :isExcel => true) %>
         </p>
       </div><br><br>
 
@@ -272,8 +300,8 @@
         성별 :
         <select class="form-control" id="select_sex">
           <option value="all">전체</option>
-          <option value="F">F</option>
-          <option value="M">M</option>
+          <option value="F">여자</option>
+          <option value="M">남자</option>
         </select>
       </div>
 
@@ -281,24 +309,16 @@
         모드 :
         <select class="form-control" id="select_mode">
           <option value="all">전체</option>
-          <option value="total">종합모드</option>
-          <option value="quick">간편모드</option>
-          <option value="makeup">메이크업모드</option>
-        </select>
-
-        메이크업 유무 :
-        <select class="form-control" id="select_makeup">
-          <option value="all">전체</option>
-          <option value="T">유</option>
-          <option value="F">무</option>
+          <option value="Total_Intenxiv">종합모드</option>
+          <option value="Customer">메이크업 모드</option>
         </select>
 
         측정부위 :
         <select class="form-control" id="select_area">
           <option value="all">전체</option>
-          <option value="face">전면</option>
-          <option value="left">좌</option>
-          <option value="right">우</option>
+          <option value="F">전면</option>
+          <option value="L">좌</option>
+          <option value="R">우</option>
         </select>
       </div>
 
@@ -317,13 +337,14 @@
         <input class="form-control" type="text" id="start_birthmm" style="width:100px;">
         <input class="form-control" type="text" id="end_birthmm" style="width:100px;">
         <button id="birthmm_init" class="btn btn-primary">전체</button>
-        <button class="btn btn-warning" id="submit">조회</button>
+        <font style="margin-left:10px;">제 3자 정보 제공 동의 고객: </font><input type="checkbox" name="is_agree_thirdparty_info" id="is_agree_thirdparty_info" checked="true">
+        <button class="btn btn-warning" id="submit" style="margin-left:10px;">조회</button>
       </div>
     </div>
 
-    <div id="filter" style="background: #b1cbbb; padding: 8px;">
+    <div style="background: #b1cbbb; padding: 8px;">
       <div class="form-inline">
-       필터링 전체 선택: <input type="checkbox" id="all_check">
+      <button id="filter-btn" class="btn btn-primary">필터링 선택</button>
       </div>
     </div>
 
@@ -366,15 +387,15 @@
                   <th>진단으로 나온 화장품</th>
                 <% elsif filter.include?("after_made_cosmetic") %>
                   <th>최종으로 선택된 화장품</th>
-                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+                <% elsif filter.include?("pr_graph")  %>
                   <th>모공 점수</th>
-                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+                <% elsif filter.include?("sb_graph")  %>
                   <th>트러블 점수</th>
-                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+                <% elsif filter.include?("pp_graph")  %>
                   <th>색소침착 점수</th>
-                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+                <% elsif filter.include?("wr_graph")  %>
                   <th>주름 점수</th>
-                <% elsif filter.include?("pore_score") && !fcdata.nil? %>
+                <% elsif filter.include?("el_graph")  %>
                   <th>탄력 점수</th>
                 <% else %>
                   <th class="text-center"><%= filter %></th>
@@ -422,7 +443,7 @@
       </thead>
       <tbody>
         <% @tabletinterviews.each do |tabletinterview| %>
-          <%= render partial: "admin/tabletinterview/item", locals: { tabletinterview: tabletinterview } %>
+          <%= render partial: "admin/tabletinterview/item_cnpr", locals: { tabletinterview: tabletinterview } %>
         <% end %>
       </tbody>
     </table>
