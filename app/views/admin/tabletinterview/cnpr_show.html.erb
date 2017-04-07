@@ -153,21 +153,21 @@
       최종으로 선택된 솔루션 1: <font id="after_solution_1_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
       진단으로 나온 솔루션 2: <font id="before_solution_2_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
       최종으로 선택된 솔루션 2: <font id="after_solution_2_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
-      맞춤제품 Step1: <%= URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," ") %><br>
-      맞춤제품 Step2: <%= URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," ") %><br>
-      맞춤제품 Step3: <%= URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," ") %><br>
-      <% if !tabletinterview.purchase1.nil? %>
-        <% purchase1 = URI.decode(tabletinterview.purchase1).gsub("+"," ") %>
+      맞춤제품 Step1: <%= URI.decode(@tabletinterview.recommand_program_step_1).gsub("+"," ") %><br>
+      맞춤제품 Step2: <%= URI.decode(@tabletinterview.recommand_program_step_1).gsub("+"," ") %><br>
+      맞춤제품 Step3: <%= URI.decode(@tabletinterview.recommand_program_step_1).gsub("+"," ") %><br>
+      <% if !@tabletinterview.purchase1.nil? %>
+        <% purchase1 = URI.decode(@tabletinterview.purchase1).gsub("+"," ") %>
       <% else %>
         <% purchase1 = "-" %>
       <% end %>
-      <% if !tabletinterview.purchase2.nil? %>
-        <% purchase2 = URI.decode(tabletinterview.purchase2).gsub("+"," ") %>
+      <% if !@tabletinterview.purchase2.nil? %>
+        <% purchase2 = URI.decode(@tabletinterview.purchase2).gsub("+"," ") %>
       <% else %>
         <% purchase2 = "-" %>
       <% end %>
-      <% if !tabletinterview.purchase3.nil? %>
-        <% purchase3 = URI.decode(tabletinterview.purchase3).gsub("+"," ") %>
+      <% if !@tabletinterview.purchase3.nil? %>
+        <% purchase3 = URI.decode(@tabletinterview.purchase3).gsub("+"," ") %>
       <% else %>
         <% purchase3 = "-" %>
       <% end %>
