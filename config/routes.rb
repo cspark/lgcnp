@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     get "tabletinterview/edit" => "tabletinterview#edit"
     get "tabletinterview/filter_check" => "tabletinterview#filter_check"
     get "tabletinterview/cnpr_filter_check" => "tabletinterview#cnpr_filter_check"
+    get "tabletinterview/cnpr_detail" => "tabletinterview#cnpr_show"
+    get "tabletinterview/cnpr_edit" => "tabletinterview#cnpr_edit"
 
     get "after_interview" => "fcafterinterviews#show"
     get "after_interview_1" => "fcafterinterviews#show_1"

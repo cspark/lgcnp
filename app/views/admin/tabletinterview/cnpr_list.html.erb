@@ -172,6 +172,13 @@
             load();
           });
 
+          $(document).on("click", ".table_tr", function (e) {
+            var userId = $(this).attr('id').split("/")[0]
+            var ch_cd = $(this).attr('id').split("/")[1]
+            var fcdata_id = $(this).attr('id').split("/")[2]
+            window.open("/admin/tabletinterview/cnpr_detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&fcdata_id=" +fcdata_id, "/users/detail?userId=" +userId+ "&ch_cd=" +ch_cd+ "&fcdata_id=" +fcdata_id, "scrollbars=1,resizable=1,height=600,width=600");
+          });
+
           $('#filter-btn').click(function(){
             window.open("/admin/tabletinterview/cnpr_filter_check", "/admin/tabletinterview/filter_check", "scrollbars=1,resizable=1,height=650,width=600");
           });

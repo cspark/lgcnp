@@ -224,8 +224,16 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @tabletinterview = Fcinterview.where(custserial: params[:userId]).where(ch_cd: params[:ch_cd]).where(measureno: params[:measureno]).first
   end
 
+  def cnpr_show
+    @tabletinterview = Fctabletinterviewrx.where(custserial: params[:userId]).where(ch_cd: params[:ch_cd]).where(fcdata_id: params[:fcdata_id]).first
+  end
+
   def edit
     @tabletinterview = Fctabletinterview.where(custserial: params[:userId]).where(ch_cd: params[:ch_cd]).where(fcdata_id: params[:fcdata_id]).first
+  end
+
+  def cnpr_edit
+    @tabletinterview = Fctabletinterviewrx.where(custserial: params[:userId]).where(ch_cd: params[:ch_cd]).where(fcdata_id: params[:fcdata_id]).first
   end
 
   def update
