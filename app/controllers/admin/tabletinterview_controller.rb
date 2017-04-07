@@ -551,7 +551,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     scoped.each do |tabletinterview|
       custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
-      Rails.logger.info custinfo.custname
+      Rails.logger.info URI.decode(custinfo.custname)
       is_contain = true
 
       if !@is_agree_thirdparty_info.nil?

@@ -80,7 +80,7 @@
     </head>
     <body>
       <% custinfo = Custinfo.where(custserial: tabletinterview.custserial).first %>
-      <tr class="table_tr" id="<%= custinfo.custserial.to_i %>/<%= tabletinterview.ch_cd %>/<%= tabletinterview.fcdata_id %>">
+      <tr class="table_tr" id="name_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>">
         <td id="name_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
         <td class="text-center"><%= tabletinterview.custserial.to_i %></td>
         <td><%= tabletinterview.uptdate %></td>
