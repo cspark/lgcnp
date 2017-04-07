@@ -225,6 +225,9 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
   end
 
   def cnpr_show
+    Rails.logger.info params[:userId]
+    Rails.logger.info params[:ch_cd]
+    Rails.logger.info params[:fcdata_id]
     @tabletinterview = Fctabletinterviewrx.where(custserial: params[:userId]).where(ch_cd: params[:ch_cd]).where(fcdata_id: params[:fcdata_id]).first
   end
 

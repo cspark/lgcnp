@@ -24,6 +24,7 @@
               else
                 tempUserName += "*"
             }
+            console.log(tempUserName);
             $('#name_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').append(tempUserName);
           }
           catch(err)
