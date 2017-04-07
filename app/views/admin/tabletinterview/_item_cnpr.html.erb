@@ -24,15 +24,11 @@
               else
                 tempUserName += "*"
             }
-            $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').append(tempUserName);
+            $('#name_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').append(tempUserName);
           }
           catch(err)
           {
-            <% if !tabletinterview.fcdata_id.nil? %>
-              $('#name_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').append(tempUserName);
-            <% else %>
-              $('#name_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.measureno %>').append(tempUserName);
-            <% end %>
+            $('#name_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').append(tempUserName);
           }
 
           //피부타입 한글로 변경
@@ -80,7 +76,7 @@
     </head>
     <body>
       <% user = Custinfo.where(custserial: tabletinterview.custserial).first %>
-      <tr class="table_tr" id="name_<%= user.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>">
+      <tr class="table_tr" id="<%= user.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>">
         <td id="name_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
         <td class="text-center"><%= tabletinterview.custserial.to_i %></td>
         <td><%= tabletinterview.uptdate %></td>
