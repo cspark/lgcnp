@@ -513,7 +513,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       end
     end
 
-    Rails.logger.info "!!!!!!!"
     Rails.logger.info temp_after_interviews.count
     temp_after_interviews.each do |after_interview|
       is_contain = true
