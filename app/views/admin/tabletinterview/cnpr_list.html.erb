@@ -393,6 +393,8 @@
                   <th>주름 점수</th>
                 <% elsif filter.include?("el_graph")  %>
                   <th>탄력 점수</th>
+                <% elsif filter.include?("mo_graph")  %>
+                  <th>건조 점수</th>
                 <% else %>
                   <th class="text-center"><%= filter %></th>
                 <% end %>
@@ -435,6 +437,7 @@
               <th>색소침착 점수</th>
               <th>주름 점수</th>
               <th>탄력 점수</th>
+              <th>건조 점수</th>
             <% end %>
         </tr>
       </thead>

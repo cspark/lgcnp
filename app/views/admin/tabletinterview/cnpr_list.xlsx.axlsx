@@ -145,6 +145,8 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
               temp << fcdata[:wr_graph].to_i
             elsif filter.include?("el_graph")
               temp << fcdata[:el_graph].to_i
+            elsif filter.include?("mo_graph")
+              temp << fcdata[:mo_graph].to_i
             else
               temp << tabletinterview[filter].to_s
             end
@@ -159,7 +161,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           tabletinterview.b_1.to_i, tabletinterview.b_2.to_i, tabletinterview.b_3.to_i, tabletinterview.b_4.to_i, tabletinterview.b_5.to_i,tabletinterview.b_6.to_i,
           tabletinterview.c_1.to_i, tabletinterview.d_1.to_i, tabletinterview.d_2.to_i, tabletinterview.d_3.to_i, tabletinterview.d_4.to_i, tabletinterview.d_5.to_i,
           tabletinterview.d_6.to_i, tabletinterview.d_7.to_i, tabletinterview.d_8.to_i, tabletinterview.d_9.to_i, tabletinterview.d_10.to_i, tabletinterview.d_11.to_i,
-          fcdata[:pr_graph].to_i, fcdata[:sb_graph].to_i, fcdata[:pp_graph].to_i, fcdata[:wr_graph].to_i, fcdata[:el_graph].to_i]
+          fcdata[:pr_graph].to_i, fcdata[:sb_graph].to_i, fcdata[:pp_graph].to_i, fcdata[:wr_graph].to_i, fcdata[:el_graph].to_i, fcdata[:mo_graph].to_i]
         end
     end
 end

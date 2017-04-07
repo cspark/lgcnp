@@ -123,6 +123,8 @@
               <td class="text-center"><%= fcdata[:wr_graph].to_i %></td>
             <% elsif !fcdata.nil? && filter.include?("el_graph") %>
               <td class="text-center"><%= fcdata[:el_graph].to_i %></td>
+            <% elsif !fcdata.nil? && filter.include?("mo_graph") %>
+              <td class="text-center"><%= fcdata[:mo_graph].to_i %></td>
             <% else %>
               <td class="text-center"><%= tabletinterview[filter] %></td>
             <% end %>
@@ -180,6 +182,7 @@
             <td class="text-center"><%= fcdata[:pp_graph].to_i %></td>
             <td class="text-center"><%= fcdata[:wr_graph].to_i %></td>
             <td class="text-center"><%= fcdata[:el_graph].to_i %></td>
+            <td class="text-center"><%= fcdata[:mo_graph].to_i %></td>
           <% end %>
         <% end %>
       </tr>
