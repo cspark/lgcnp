@@ -122,7 +122,7 @@
             <% elsif !fcdata.nil? && filter.include?("mo_graph") %>
               <td class="text-center"><%= fcdata[:mo_graph].to_i %></td>
             <% else %>
-              <td class="text-center"><%= tabletinterview[filter] %></td>
+              <td class="text-center"><%= tabletinterview[filter].to_i if tabletinterview[filter].to_i != -1 %></td>
             <% end %>
           <% end %>
         <% else %>
