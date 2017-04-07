@@ -431,6 +431,8 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @average_a2 = 0
     @average_a3 = 0
     @average_a4 = 0
+    @average_a5 = 0
+    @average_a6 = 0
 
     select_sex = params[:sex]
     start_date = params[:start_date]
@@ -558,6 +560,8 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       @average_a2 = @average_a2 + interview.a2.to_i
       @average_a3 = @average_a3 + interview.a3.to_i
       @average_a4 = @average_a4 + interview.a4.to_i
+      @average_a5 = @average_a5 + interview.a5.to_i
+      @average_a6 = @average_a6 + interview.a6.to_i
     end
 
     @count = @after_interviews.count
@@ -576,6 +580,12 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     end
     if @average_a4 != 0
       @average_a4 = (@average_a4 / divider).to_f
+    end
+    if @average_a5 != 0
+      @average_a5 = (@average_a5 / divider).to_f
+    end
+    if @average_a6 != 0
+      @average_a6 = (@average_a6 / divider).to_f
     end
 
     @count = @after_interviews.count
