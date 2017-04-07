@@ -84,10 +84,12 @@
             <% else %>
               <% is_feed_back_ok_2 = "O" %>
             <% end %>
-            <% if tabletinterview.is_agree_after == "F" && is_feed_back_ok_2 == "O" %>
-              <a onClick="show_after_interview(<%= f2.after_interview_id %>, <%= f2.tablet_interview_id %>, <%= f2.custserial %>)">O</a>
-            <% elsif tabletinterview.is_agree_after == "T"%>
-              <a onClick="show_after_interview(<%= f2.after_interview_id %>, <%= f2.tablet_interview_id %>, <%= f2.custserial %>)"><%= is_feed_back_ok_2 %></a>
+            <% if f2.present? %>
+              <% if tabletinterview.is_agree_after == "F" && is_feed_back_ok_2 == "O" %>
+                <a onClick="show_after_interview(<%= f2.after_interview_id %>, <%= f2.tablet_interview_id %>, <%= f2.custserial %>)">O</a>
+              <% elsif tabletinterview.is_agree_after == "T"%>
+                <a onClick="show_after_interview(<%= f2.after_interview_id %>, <%= f2.tablet_interview_id %>, <%= f2.custserial %>)"><%= is_feed_back_ok_2 %></a>
+              <% end %>
             <% end %>
           <% end %>
           </td>
@@ -100,10 +102,12 @@
             <% else %>
               <% is_feed_back_ok_3 = "O" %>
             <% end %>
-            <% if tabletinterview.is_agree_after == "F" && is_feed_back_ok_3 == "O" %>
-              <a onClick="show_after_interview(<%= f3.after_interview_id %>, <%= f3.tablet_interview_id %>, <%= f3.custserial %>)">O</a>
-            <% elsif tabletinterview.is_agree_after == "T"%>
-              <a onClick="show_after_interview(<%= f3.after_interview_id %>, <%= f3.tablet_interview_id %>, <%= f3.custserial %>)"><%= is_feed_back_ok_3 %></a>
+            <% if f3.present? %>
+              <% if tabletinterview.is_agree_after == "F" && is_feed_back_ok_3 == "O" %>
+                <a onClick="show_after_interview(<%= f3.after_interview_id %>, <%= f3.tablet_interview_id %>, <%= f3.custserial %>)">O</a>
+              <% elsif tabletinterview.is_agree_after == "T"%>
+                <a onClick="show_after_interview(<%= f3.after_interview_id %>, <%= f3.tablet_interview_id %>, <%= f3.custserial %>)"><%= is_feed_back_ok_3 %></a>
+              <% end %>
             <% end %>
           <% end %>
           </td>
