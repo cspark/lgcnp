@@ -24,7 +24,17 @@
 
         try
         {
+          $('#base_lot').append( (decode_utf8('<%= fctabletinterview.base_lot %>')).replace(/\+/g, " "));
+          $('#ampoule_1_lot').append( (decode_utf8('<%= fctabletinterview.ampoule_1_lot %>')).replace(/\+/g, " "));
+          $('#ampoule_2_lot').append( (decode_utf8('<%= fctabletinterview.ampoule_2_lot %>')).replace(/\+/g, " "));
+        }
+        catch(err)
+        {
+          // $('#name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append('<%= user.custname %>');
+        }
 
+        try
+        {
           $('#base_lot').append( (decode_utf8('<%= fctabletinterview.base_lot %>')).replace(/\+/g, " "));
           $('#ampoule_1_lot').append( (decode_utf8('<%= fctabletinterview.ampoule_1_lot %>')).replace(/\+/g, " "));
           $('#ampoule_2_lot').append( (decode_utf8('<%= fctabletinterview.ampoule_2_lot %>')).replace(/\+/g, " "));
@@ -190,13 +200,6 @@
               formData.append("is_agree_after", is_agree_after);
             <% end %>
 
-            console.log(a1);
-            console.log(a2);
-            console.log(a3);
-            console.log(a4);
-            console.log(is_agree_after);
-            console.log($('#a5').val());
-
             if(a1 != -1 && a2 != -1 && a3 != -1 && a4 != -1 && is_agree_after != null){
               formData.append("custserial", '<%= @after_interview.custserial.to_i %>');
               formData.append("tablet_interview_id", '<%= @after_interview.rx_tablet_interview_id.to_i %>');
@@ -247,13 +250,20 @@
             <font size="4">
               <b>전화번호</b> <%= user.phone %> <br>
               <b>맞춤일자</b> <%= fctabletinterview.uptdate %> <br>
-              <b>진단제품</b><br>
-              (<font id="base_lot"></font>)<br>
-              (<font id="ampoule_1_lot"></font>)<br>
-              (<font id="ampoule_2_lot"></font>)<br>
               <b>맞춤제품</b><br>
+              Step1: <%= URI.decode(fctabletinterview.recommand_program_step_1).gsub("+"," ") %><br>
+              Step2: <%= URI.decode(fctabletinterview.recommand_program_step_2).gsub("+"," ") %><br>
+              Step3: <%= URI.decode(fctabletinterview.recommand_program_step_3).gsub("+"," ") %><br>
               <b>구매제품</b><br>
-
+              <% if !fctabletinterview.purchase1.nil? %>
+              Step1: <%= URI.decode(fctabletinterview.purchase1).gsub("+"," ") %><br>
+              <% end %>
+              <% if !fctabletinterview.purchase1.nil? %>
+              Step2: <%= URI.decode(fctabletinterview.purchase2).gsub("+"," ") %><br>
+              <% end %>
+              <% if !fctabletinterview.purchase1.nil? %>
+              Step3: <%= URI.decode(fctabletinterview.purchase3).gsub("+"," ") %><br>
+              <% end %>
               <b>메모</b> <div id="memo_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></b></div> <br>
             </font>
           </div>

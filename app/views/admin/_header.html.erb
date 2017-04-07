@@ -23,9 +23,10 @@
           location.href = "/admin/feedback_list_cnp"
         });
 
-        // $("#feedback_list_cnpr").click(function(){
-        //   location.href = "/admin/feedback_list_cnpr"
-        // });
+        $("#feedback_list_cnpr").click(function(){
+          console.log("feedback_list_cnpr!!");
+          location.href = "/admin/feedback_list_cnpr"
+        });
 
         $("#input_feedback_cnp").click(function(){
           location.href = "/admin/input_cnp"
@@ -39,9 +40,9 @@
           location.href = "/admin/cnp_interview"
         });
 
-        // $("#cnpr_interview").click(function(){
-        //   location.href = "/admin/cnpr_interview"
-        // });
+        $("#cnpr_interview").click(function(){
+          location.href = "/admin/cnpr_interview"
+        });
 
         $("#beau_interview").click(function(){
           location.href = "/admin/beau_interview"
@@ -181,32 +182,32 @@
               <% end %>
             </div>
           </li>
-            <li class="dropdown dropbtn"><a href="#">고객 인터뷰</a>
-              <div class="dropdown-content">
-                <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
-                  <a id="cnp_interview" href="#">CNP</a>
-                  <a id="beau_interview" href="#">보떼</a>
-                  <a id="cnpr_interview" href="#">CNP RX</a>
-                <% elsif session[:admin_user]['ch_cd'] == "CNP" %>
-                  <a id="cnp_interview" href="#">CNP</a>
-                <% elsif session[:admin_user]['ch_cd'] == "BEAU" %>
-                  <a id="beau_interview" href="#">보떼</a>
-                <% elsif session[:admin_user]['ch_cd'] == "CNPR" %>
-                  <a id="cnpr_interview" href="#">CNP RX</a>
-                <% end %>
-              </div>
-            </li>
-            <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
-            <li id="fcavg_list"><a href="#">연령별 성별 평균</a></li>
-            <li class="dropdown dropbtn"><a href="#">야누스 측정 데이터</a>
-              <div class="dropdown-content">
-                <a id="fcdata_list_cnp" href="#">CNP</a>
-                <a id="fcdata_list_beau" href="#">보떼</a>
-                <a id="fcdata_list_cnpr" href="#">CNP RX</a>
-              </div>
-            </li>
-            <li id="fcpos_list"><a href="#">야누스 분석 영역 정보</a></li>
-            <li id="image_list"><a href="#">고객 이미지</a></li>
+          <li class="dropdown dropbtn"><a href="#">고객 인터뷰</a>
+            <div class="dropdown-content">
+              <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
+                <a id="cnp_interview" href="#">CNP</a>
+                <a id="beau_interview" href="#">보떼</a>
+                <a id="cnpr_interview" href="#">CNP RX</a>
+              <% elsif session[:admin_user]['ch_cd'] == "CNP" %>
+                <a id="cnp_interview" href="#">CNP</a>
+              <% elsif session[:admin_user]['ch_cd'] == "BEAU" %>
+                <a id="beau_interview" href="#">보떼</a>
+              <% elsif session[:admin_user]['ch_cd'] == "CNPR" %>
+                <a id="cnpr_interview" href="#">CNP RX</a>
+              <% end %>
+            </div>
+          </li>
+          <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
+          <li id="fcavg_list"><a href="#">연령별 성별 평균</a></li>
+          <li class="dropdown dropbtn"><a href="#">야누스 측정 데이터</a>
+            <div class="dropdown-content">
+              <a id="fcdata_list_cnp" href="#">CNP</a>
+              <a id="fcdata_list_beau" href="#">보떼</a>
+              <a id="fcdata_list_cnpr" href="#">CNP RX</a>
+            </div>
+          </li>
+          <li id="fcpos_list"><a href="#">야누스 분석 영역 정보</a></li>
+          <li id="image_list"><a href="#">고객 이미지</a></li>
           <% end %>
           <li id="fcschedule_list"><a href="#">예약 스케줄</a></li>
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>

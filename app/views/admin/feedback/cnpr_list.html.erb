@@ -11,10 +11,338 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
 
+    <script>
+      $(function () {
+        <% if @ch_cd != "" %>
+          $('select[id="select_channel"]').val('<%= @ch_cd %>');
+        <% end %>
+
+        <% if @custserial != "" %>
+          document.getElementById("custserial").value = '<%= @custserial %>'
+        <% end %>
+
+        <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
+          <% if !@shop_cd.nil? && @shop_cd != "" && %>
+            document.getElementById("select_shop").value = '<%= @shop_cd %>'
+          <% end %>
+
+          <% if !@name.nil? && @name != "" %>
+            document.getElementById("name").value = decode_utf8('<%= @name %>')
+          <% end %>
+        <% end %>
+
+        $("#start_date").datepicker({
+                    dateFormat: 'yy-mm-dd',
+                    dayNamesMin: [
+                        '일',
+                        '월',
+                        '화',
+                        '수',
+                        '목',
+                        '금',
+                        '토'
+                    ],
+                    monthNamesShort: [
+                        '1월',
+                        '2월',
+                        '3월',
+                        '4월',
+                        '5월',
+                        '6월',
+                        '7월',
+                        '8월',
+                        '9월',
+                        '10월',
+                        '11월',
+                        '12월'
+                    ],
+                    currentText: '오늘 날짜',
+                    changeMonth: true
+                });
+            $("#end_date").datepicker({
+                        dateFormat: 'yy-mm-dd',
+                        dayNamesMin: [
+                            '일',
+                            '월',
+                            '화',
+                            '수',
+                            '목',
+                            '금',
+                            '토'
+                        ],
+                        monthNamesShort: [
+                            '1월',
+                            '2월',
+                            '3월',
+                            '4월',
+                            '5월',
+                            '6월',
+                            '7월',
+                            '8월',
+                            '9월',
+                            '10월',
+                            '11월',
+                            '12월'
+                        ],
+                        currentText: '오늘 날짜',
+                        changeMonth: true
+                    });
+
+          $("#date_init").click(function(){
+            $("#start_date").datepicker('setDate', '2017-01-25');
+            $("#end_date").datepicker('setDate', '<%= @today %>');
+            // load();
+          });
+
+          $("#age_init").click(function(){
+            document.getElementById("start_age").value = '14'
+            document.getElementById("end_age").value = '<%= @max_age %>'
+          });
+
+          $("#start_date").datepicker('setDate', '2017-01-25');
+          $("#end_date").datepicker('setDate', '<%= @end_date %>');
+
+          document.getElementById("start_age").value = '14'
+          document.getElementById("end_age").value = '<%= @max_age %>'
+
+          // <% if !@start_age.nil? %>
+          //   document.getElementById("start_age").value = '<%= @start_age %>'
+          // <% end %>
+          <% if !@end_age.nil? %>
+            document.getElementById("end_age").value = '<%= @end_age %>'
+          <% end %>
+
+          <% if !@name.nil? %>
+            document.getElementById("name").value = decode_utf8('<%= @name %>')
+          <% end %>
+
+          <% if !@sex.nil? %>
+            $('select[id="select_sex"]').val('<%= @sex %>');
+          <% end %>
+
+          <% if !@select_ample1.nil? %>
+            $('select[id="select_ample_1"]').val('<%= @select_ample1 %>');
+          <% end %>
+
+          <% if !@select_ample2.nil? %>
+            $('select[id="select_ample_2"]').val('<%= @select_ample2 %>');
+          <% end %>
+
+          <% if !@select_interview.nil? %>
+            $('select[id="select_interview"]').val('<%= @select_interview %>');
+          <% end %>
+
+          $('#submit').click(function(){
+            load();
+          });
+
+          $(document).on("click", ".table_tr", function (e) {
+            var userId = $(this).attr('id').split("/")[0]
+            var after_interview_id = $(this).attr('id').split("/")[1]
+            window.open("/admin/feedbacks/cnpr_detail?userId=" + userId +"&after_interview_id=" +after_interview_id , "/feedbacks/cnpr_detail?userId=" + userId +"&after_interview_id=" +after_interview_id, "scrollbars=1,resizable=1,height=500,width=600");
+          });
+      });
+
+      function load(){
+        var select_ample1 = document.getElementById("select_ample_1").options[document.getElementById("select_ample_1").selectedIndex].value;
+        var select_ample2 = document.getElementById("select_ample_2").options[document.getElementById("select_ample_2").selectedIndex].value;
+        var select_sex = document.getElementById("select_sex").options[document.getElementById("select_sex").selectedIndex].value;
+        var select_interview = document.getElementById("select_interview").options[document.getElementById("select_interview").selectedIndex].value;
+        if (document.getElementById("is_agree_thirdparty_info").checked) {
+          var is_agree_thirdparty_info = "T"
+        }else {
+          var is_agree_thirdparty_info = ""
+        }
+
+        url = ""
+        url += "/admin/feedback_list_cnpr?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
+        url += "&sex=" + select_sex;
+        url += "&start_age=" + document.getElementById("start_age").value;
+        url += "&end_age=" + document.getElementById("end_age").value;
+        url += "&select_ample1=" + select_ample1;
+        url += "&select_ample2=" + select_ample2;
+        url += "&select_interview=" + select_interview;
+        url += "&name=" + encodeURI(encodeURI(document.getElementById("name").value));
+        url += "&custserial=" +document.getElementById("custserial").value;
+        url += "&is_agree_thirdparty_info=" +is_agree_thirdparty_info;
+
+        if (document.getElementById("select_channel") != null) {
+          var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
+          url += "&select_channel=" +ch_cd;
+          url += "&select_shop=" +$("#select_shop").val();
+        }
+
+        location.href = url;
+      }
+
+      function showDetail(userId, after_interview_id){
+        window.open("/admin/feedbacks/cnpr_detail?userId=" + userId +"&after_interview_id=" +after_interview_id , "/feedbacks/detail?userId=" + userId +"&after_interview_id=" +after_interview_id, "scrollbars=1,resizable=1,height=500,width=600");
+      }
+
+      function decode_utf8(s) {
+        try{
+          return decodeURI(s);
+        }catch(err){
+          console.log(err);
+          return s;
+        }
+      }
+    </script>
+    <style>
+    .fixed-table-body {
+      max-height: 280px;
+    }
+
+    .width100 {
+      min-width:100px;
+    }
+
+    .width1800 {
+      width:1800px;
+    }
+
+    .th-inner {
+      width: 150px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .max-width600 {
+      width: 600px; !important;
+    }
+
+    table.width1800.table.table-hover {
+      width: 1800px;
+    }
+
+    </style>
   </head>
 
   <body>
     <%= render "admin/header" %>
-    <h1>CNPR</h1>
+
+    <div id="filter" style="background: #b1cbbb; padding: 8px;">
+      <div class="form-inline">
+        <p style="float:left; margin-top: 7px;">진단 날짜: </p>
+        <input class="form-control" type="text" id="start_date" style="width:100px; float:left;">
+        <input class="form-control" type="text" id="end_date" style="width:100px; float:left;">
+        <button id="date_init" class="btn btn-primary" style="float:left;">전체</button>
+        <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
+          <p style="float:left; margin-left: 20px; margin-top: 7px;">채널: </p>
+          <select class="form-control" id="select_channel" style="margin-left: 5px; float:left;">
+            <option value="ALL">전체</option>
+            <option value="CNPR">CNPR</option>
+            <option value="RLAB">RLAB</option>
+          </select>
+
+          <p style="float:left; margin-left: 20px; margin-top: 7px;">매장 코드: </p>
+          <input class="form-control" type="text" name="select_shop" id="select_shop" style="float:left; width: 200px;">
+        <% end %>
+
+        <p style="float:right; margin-right:20px;">
+          Download:
+          <%= link_to "Excel", admin_feedback_list_cnpr_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date, :sex => @sex, :start_age => @start_age, :end_age => @end_age,
+          :select_ample1 => @select_ample1, :select_ample2 => @select_ample2, :select_interview => @select_interview,
+          :name => @name, :custserial => @custserial, :isExcel => true, :select_channel => @ch_cd, :select_shop => @shop_cd, :is_agree_thirdparty_info => @is_agree_thirdparty_info) %>
+        </p>
+      </div><br><br>
+      <div class="form-inline">
+        이름 :
+        <input class="form-control" type="text" id="name" style="width:100px;">
+
+        시리얼 :
+        <input class="form-control" type="text" id="custserial" style="width:100px;">
+
+        유형 :
+        <select class="form-control" id="select_interview">
+          <option value="all">전체</option>
+          <option value="today">당일</option>
+          <option value="2weeks_ago">2주 전</option>
+          <option value="3months_ago">3개월 전</option>
+        </select>
+
+        앰플 1 :
+        <select class="form-control" id="select_ample_1">
+          <option value="all">전체</option>
+          <option value="pore clinic ampoule">포어 클리닉 앰플</option>
+          <option value="carming ampoule">카밍 앰플</option>
+          <option value="luminus ampoule">루미너스 앰플</option>
+          <option value="regenerating ampoule">리제네리이팅 앰플</option>
+          <option value="perming ampoule">퍼밍 앰플</option>
+        </select>
+
+        앰플 2 :
+        <select class="form-control" id="select_ample_2">
+          <option value="all">전체</option>
+          <option value="pore clinic ampoule">포어 클리닉 앰플</option>
+          <option value="carming ampoule">카밍 앰플</option>
+          <option value="luminus ampoule">루미너스 앰플</option>
+          <option value="regenerating ampoule">리제네리이팅 앰플</option>
+          <option value="perming ampoule">퍼밍 앰플</option>
+        </select>
+      </div>
+
+      <div class="form-inline" style="margin-top:10px;">
+        성별 :
+        <select class="form-control" id="select_sex">
+          <option value="all">전체</option>
+          <option value="F">여자</option>
+          <option value="M">남자</option>
+        </select>
+
+        나이 :
+        <input class="form-control" type="text" id="start_age" style="width:100px;">
+        <input class="form-control" type="text" id="end_age" style="width:100px;">
+        <button id="age_init" class="btn btn-primary">전체</button>
+
+        <font style="margin-left:10px;">제 3자 정보 제공 동의 고객: </font><input type="checkbox" name="is_agree_thirdparty_info" id="is_agree_thirdparty_info" checked="true">
+        <button class="btn btn-warning" id="submit" style="margin-left:10px;">조회</button>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <div id="avr" style="background: #eea29a; padding: 8px;">
+          총 인원 수 : <%= @count %> / 설문 1의 평균 점수 : <%= @average_a1 %> / 설문 2의 평균 점수 : <%= @average_a2 %> / 설문 3의 평균 점수 : <%= @average_a3 %> / 설문 4의 평균 점수 : <%= @average_a4 %><br>
+        </div>
+
+        <table data-toggle="table" class="width1800">
+          <thead>
+            <tr>
+              <th class="text-center">이름</th>
+              <th>설문 날짜</th>
+              <th>진단 날짜</th>
+              <th>성별</th>
+              <th>나이</th>
+              <th>맞춤제품 Step1</th>
+              <th>맞춤제품 Step2</th>
+              <th>맞춤제품 Step3</th>
+              <th>구매제품 Step1</th>
+              <th>구매제품 Step2</th>
+              <th>구매제품 Step3</th>
+              <th>설문 1</th>
+              <th>설문 1 기타의견</th>
+              <th>설문 2</th>
+              <th>설문 3</th>
+              <th>설문 3 기타의견</th>
+              <th>설문 4</th>
+              <th>설문 5</th>
+              <th>기타의견</th>
+              <th>설문 6</th>
+              <th class="max-width600">기타의견</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @after_interviews.each do |after_interview| %>
+            <%= render partial: "admin/feedback/after_item_rx", locals: { after_interview: after_interview } %>
+            <% end %>
+          </tbody>
+        </table>
+
+        <div>
+          <%= paginate @after_interviews %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

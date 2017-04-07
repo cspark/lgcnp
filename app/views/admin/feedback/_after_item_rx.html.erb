@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script type="text/javascript" src="../js/jquery.js"></script>
+      <script type="text/javascript" src="../js/bootstrap.js"></script>
+
+      <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+      <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+      <script>
+        $(function () {
+          <% user = Custinfo.where(custserial: after_interview.custserial).first %>
+          <% tabletinterview = Fctabletinterviewrx.where(tablet_interview_id: after_interview.rx_tablet_interview_id).first %>
+          try
+          {
+            var userName = decode_utf8('<%= user.custname %>')
+            tempUserName = ""
+            for(var i = 0; i < userName.length; i++){
+              if(i == 0)
+                tempUserName += userName.slice(0, 1)
+              else if(i == userName.length - 1)
+                tempUserName += userName.slice(userName.length - 1, userName.length)
+              else
+                tempUserName += "*"
+            }
+            $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>_<%= after_interview.order.to_i %>').append(tempUserName);
+          }
+          catch(err)
+          {
+            $('#name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>_<%= after_interview.order.to_i %>').append('<%= user.custname %>');
+          }
+        });
+
+        function decode_utf8(s) {
+          return decodeURI(s);
+        }
+      </script>
+    </head>
+    <body>
+      <% custinfo = Custinfo.where(custserial: after_interview.custserial).first %>
+      <% tabletinterview = Fctabletinterviewrx.where(tablet_interview_id: after_interview.rx_tablet_interview_id).first %>
+
+      <tr class="table_tr" id="<%= custinfo.custserial.to_i %>/<%= after_interview.after_interview_id.to_i %>">
+        <td id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>_<%= after_interview.order.to_i %>"></td>
+        <% if after_interview.order == 0 %>
+          <td class="text-center">당일 설문</td>
+        <% elsif after_interview.order == 1 %>
+          <td class="text-center">2주 후 설문</td>
+        <% elsif after_interview.order == 2 %>
+          <td class="text-center">3개월 후 설문</td>
+        <% end %>
+        <td class="text-center"><%= tabletinterview.uptdate %></td>
+        <% sex = "남" %>
+        <% if custinfo.sex == "F" %>
+          <% sex = "여" %>
+        <% end %>
+        <td class="text-center"><%= sex %></td>
+        <td class="text-center"><%= custinfo.age %></td>
+        <td><%= URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," ") %></td>
+        <td><%= URI.decode(tabletinterview.recommand_program_step_2).gsub("+"," ") %></td>
+        <td><%= URI.decode(tabletinterview.recommand_program_step_3).gsub("+"," ") %></td>
+        <% if !tabletinterview.purchase1.nil? %>
+          <td class="text-center"><%= URI.decode(tabletinterview.purchase1).gsub("+"," ") %></td>
+        <% else %>
+          <td class="text-center">-</td>
+        <% end %>
+        <% if !tabletinterview.purchase2.nil? %>
+          <td class="text-center"><%= URI.decode(tabletinterview.purchase2).gsub("+"," ") %></td>
+        <% else %>
+          <td class="text-center">-</td>
+        <% end %>
+        <% if !tabletinterview.purchase3.nil? %>
+          <td class="text-center"><%= URI.decode(tabletinterview.purchase3).gsub("+"," ") %></td>
+        <% else %>
+          <td class="text-center">-</td>
+        <% end %>
+        <td class="text-center"><%= after_interview.a1.to_i %></td>
+        <td class="text-center"><%= after_interview.a1_1 %></td>
+        <td class="text-center"><%= after_interview.a2.to_i %></td>
+        <td class="text-center"><%= after_interview.a3.to_i %></td>
+        <td class="text-center"><%= after_interview.a3_1 %></td>
+        <td class="text-center"><%= after_interview.a4.to_i %></td>
+        <td class="text-center"><%= after_interview.a5.to_i %></td>
+        <td class="text-center"><%= after_interview.a5_1 %></td>
+        <td class="text-center"><%= after_interview.a6.to_i %></td>
+        <td class="text-center"><%= after_interview.a7 %></td>
+      </tr>
+    </body>
+</html>

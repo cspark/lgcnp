@@ -93,6 +93,12 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @after_interview = Fcafterinterview.where(after_interview_id: params[:after_interview_id]).first
   end
 
+  def cnpr_show
+    userId = params[:userId]
+    @user = Custinfo.where(custserial: userId).first
+    @after_interview = Fcafterinterviewrx.where(after_interview_id: params[:after_interview_id]).first
+  end
+
   def list
     if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin")
       ch_cd = ""
@@ -417,7 +423,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
 
     begin
-      @start_date = Fctabletinterview.all.minimum(:uptdate).to_date
+      @start_date = Fctabletinterviewrx.all.minimum(:uptdate).to_date
     rescue
     end
 
@@ -490,12 +496,12 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     temp_serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
     temp_measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
-    tablet_interviews = Fctabletinterview.where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array)
-    tablet_interviews2 = Fctabletinterview.where(custserial: temp_serial_array2).where(fcdata_id: temp_measureno_array)
+    tablet_interviews = Fctabletinterviewrx.where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array)
+    tablet_interviews2 = Fctabletinterviewrx.where(custserial: temp_serial_array2).where(fcdata_id: temp_measureno_array)
     tablet_interviews = tablet_interviews.or(tablet_interviews2)
     Rails.logger.info tablet_interviews.count
     array = tablet_interviews.pluck(:tablet_interview_id).map(&:to_i).uniq
-    temp_after_interviews = Fcafterinterview.where.not(a1: nil).where(tablet_interview_id: array)
+    temp_after_interviews = Fcafterinterviewrx.where.not(a1: nil).where(rx_tablet_interview_id: array)
     Rails.logger.info temp_after_interviews.count
     if select_interview != "all"
       if select_interview == "today"
@@ -507,11 +513,12 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       end
     end
 
+    Rails.logger.info "!!!!!!!"
     Rails.logger.info temp_after_interviews.count
     temp_after_interviews.each do |after_interview|
       is_contain = true
 
-      Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first
+      Fctabletinterviewrx.where(tablet_interview_id: after_interview.rx_tablet_interview_id).first
       custinfo = Custinfo.where(custserial: after_interview.custserial).first
       if !name.nil?
         if !custinfo.custname.include? name
@@ -534,16 +541,11 @@ class Admin::FeedbackController < Admin::AdminApplicationController
         is_contain = false
       end
 
-      tablet_interview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first
+      tablet_interview = Fctabletinterviewrx.where(tablet_interview_id: after_interview.rx_tablet_interview_id).first
       if !(tablet_interview.uptdate.to_date >= @start_date && tablet_interview.uptdate.to_date <= @end_date.to_date)
         is_contain = false
       end
 
-      if select_base != "all"
-        if tablet_interview.after_serum != select_base
-          is_contain = false
-        end
-      end
       if select_ample1 != "all"
         if tablet_interview.after_ample_1 != select_ample1
           is_contain = false

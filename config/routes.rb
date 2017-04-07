@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     get "feedback_list_cnp"  => "feedback#list"
     get "feedback_list_cnpr"  => "feedback#cnpr_list"
     get "feedbacks/detail"  => "feedback#show"
+    get "feedbacks/cnpr_detail"  => "feedback#cnpr_show"
     get "cnp_interview" => "tabletinterview#index"
     get "cnpr_interview" => "tabletinterview#cnpr_list"
     get "beau_interview" => "tabletinterview#beau_list"

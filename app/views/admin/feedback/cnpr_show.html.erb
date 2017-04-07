@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+    $ (function () {
+        try
+        {
+          $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append( decode_utf8('<%= @user.custname %>'));
+        }
+        catch(err)
+        {
+          $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append('<%= @user.custname %>');
+        }
+      });
+
+      function decode_utf8(s) {
+        return decodeURI(s);
+      }
+
+    </script>
+  </head>
+
+  <body style="padding: 10px;">
+    <h2>피드백 리스트 정보</h2>
+    <% tabletinterview = Fctabletinterviewrx.where(tablet_interview_id: @after_interview.rx_tablet_interview_id).first %>
+    <font size="5"><b><div id="name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>"></b></div></font>
+
+    <div style="display:table; height:50px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
+      <font size="4"><div id="name_<%= @user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
+      <% if @after_interview.order == 0 %>
+        <b>당일 설문</b>
+      <% elsif @after_interview.order == 1 %>
+        <b>2주 후 설문</b>
+      <% elsif @after_interview.order == 2 %>
+        <b>3개월 후 설문</b>
+      <% end %>
+      <font size="2">
+        <% sex = "남" %>
+        <% if @user.sex == "F" %>
+          <% sex = "여" %>
+        <% end %>
+        진단 날짜 : <%= tabletinterview.uptdate %> / 성별 : <%= sex %> / 나이 : <%= @user.age %><br>
+        맞춤제품 Step1: <%= URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," ") %><br>
+        맞춤제품 Step2: <%= URI.decode(tabletinterview.recommand_program_step_2).gsub("+"," ") %><br>
+        맞춤제품 Step3: <%= URI.decode(tabletinterview.recommand_program_step_3).gsub("+"," ") %><br>
+        구매제품 Step1:
+        <% if !tabletinterview.purchase1.nil? %>
+          <%= URI.decode(tabletinterview.purchase1).gsub("+"," ") %>
+        <% else %>
+          -
+        <% end %>
+        <br>
+        구매제품 Step2:
+        <% if !tabletinterview.purchase2.nil? %>
+          <%= URI.decode(tabletinterview.purchase2).gsub("+"," ") %>
+        <% else %>
+          -
+        <% end %>
+        <br>
+        구매제품 Step3:
+        <% if !tabletinterview.purchase3.nil? %>
+          <%= URI.decode(tabletinterview.purchase3).gsub("+"," ") %>
+        <% else %>
+          -
+        <% end %>
+        <br>
+        설문 1: <%= @after_interview.a1.to_i %> / 기타의견: <%= @after_interview.a1_1 %>
+        <br>
+        설문 2: <%= @after_interview.a2.to_i %>
+        <br>
+        설문 3: <%= @after_interview.a3.to_i %> / 기타의견: <%= @after_interview.a3_1 %>
+        <br>
+        설문 4: <%= @after_interview.a4.to_i %>
+        <br>
+        설문 5: <%= @after_interview.a5.to_i %> / 기타의견: <%= @after_interview.a5_1 %>
+        <br>
+        설문 6: <%= @after_interview.a6.to_i %>
+        <br>
+        설문 7:<br>
+        <%= @after_interview.a7 %>
+      </font>
+    </div>
+
+  </body>
+</html>
