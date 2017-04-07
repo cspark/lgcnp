@@ -156,7 +156,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           sheet.add_row [URI.decode(custinfo.custname), tabletinterview.custserial.to_i, tabletinterview.uptdate, custinfo.ch_cd,
           skin_type, before_solution_1, after_solution_1, before_solution_2, after_solution_2,
           URI.decode(tabletinterview.recommand_program_step_1), URI.decode(tabletinterview.recommand_program_step_2), URI.decode(tabletinterview.recommand_program_step_3),
-          URI.decode(tabletinterview.purchase1), URI.decode(tabletinterview.purchase2), URI.decode(tabletinterview.purchase3)
+          URI.decode(tabletinterview.purchase1), URI.decode(tabletinterview.purchase2), URI.decode(tabletinterview.purchase3),
           tabletinterview.a_1.to_i, tabletinterview.a_2.to_i, tabletinterview.a_3.to_i,
           tabletinterview.b_1.to_i, tabletinterview.b_2.to_i, tabletinterview.b_3.to_i, tabletinterview.b_4.to_i, tabletinterview.b_5.to_i,tabletinterview.b_6.to_i,
           tabletinterview.c_1.to_i, tabletinterview.d_1.to_i, tabletinterview.d_2.to_i, tabletinterview.d_3.to_i, tabletinterview.d_4.to_i, tabletinterview.d_5.to_i,
