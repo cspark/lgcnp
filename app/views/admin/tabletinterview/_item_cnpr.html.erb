@@ -76,26 +76,6 @@
             console.log(skin_type);
             return skin_type;
         }
-
-        function translate_solution(value){
-            try{
-              if(value == "elasticity solution")
-                return "탄력 솔루션";
-              else if(value == "pigment solution")
-                return "색소침착 솔루션";
-              else if(value == "pore solution")
-                return "모공 솔루션";
-              else if(value == "trouble solution")
-                return "트러블 솔루션";
-              else if(value == "wrinkle solution")
-                return "주름 솔루션";
-              else
-                return value;
-            }catch(err){
-              console.log(err);
-              return value;
-            }
-        }
       </script>
     </head>
     <body>
@@ -108,6 +88,9 @@
         <% if @select_filter != [] %>
           <% @select_filter.each do |filter| %>
             <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
+            <% if !fcdata.nil? %>
+              <% fcdata = fcdata.to_api_hash_for_admin %>
+            <% end %>
             <% if filter.include?("skin_type") %>
               <td class="text-center" id="skin_type_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
             <% elsif filter.include?("before_solution_1") %>
@@ -130,6 +113,16 @@
               <td class="text-center"><%= URI.decode(tabletinterview.purchase2) %></td>
             <% elsif filter.include?("purchase3") %>
               <td class="text-center"><%= URI.decode(tabletinterview.purchase3) %></td>
+            <% elsif !fcdata.nil? && filter.include?("pr_graph") %>
+              <td class="text-center"><%= fcdata[:pr_graph].to_i %></td>
+            <% elsif !fcdata.nil? && filter.include?("sb_graph") %>
+              <td class="text-center"><%= fcdata[:sb_graph].to_i %></td>
+            <% elsif !fcdata.nil? && filter.include?("pp_graph") %>
+              <td class="text-center"><%= fcdata[:pp_graph].to_i %></td>
+            <% elsif !fcdata.nil? && filter.include?("wr_graph") %>
+              <td class="text-center"><%= fcdata[:wr_graph].to_i %></td>
+            <% elsif !fcdata.nil? && filter.include?("el_graph") %>
+              <td class="text-center"><%= fcdata[:el_graph].to_i %></td>
             <% else %>
               <td class="text-center"><%= tabletinterview[filter] %></td>
             <% end %>
