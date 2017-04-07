@@ -438,8 +438,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     start_age = params[:start_age]
     end_age = params[:end_age]
     select_base = params[:select_base]
-    select_ample1 = params[:select_ample1]
-    select_ample2 = params[:select_ample2]
     select_interview = params[:select_interview]
     name = params[:name]
 
@@ -464,12 +462,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     if !select_base.nil?
       @select_base = select_base
     end
-    if !select_ample1.nil?
-      @select_ample1 = select_ample1
-    end
-    if !select_ample2.nil?
-      @select_ample2 = select_ample2
-    end
+
     if !select_interview.nil?
       @select_interview = select_interview
     end
@@ -543,17 +536,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       tablet_interview = Fctabletinterviewrx.where(tablet_interview_id: after_interview.rx_tablet_interview_id).first
       if !(tablet_interview.uptdate.to_date >= @start_date && tablet_interview.uptdate.to_date <= @end_date.to_date)
         is_contain = false
-      end
-
-      if select_ample1 != "all"
-        if tablet_interview.after_ample_1 != select_ample1
-          is_contain = false
-        end
-      end
-      if select_ample2 != "all"
-        if tablet_interview.after_ample_2 != select_ample2
-          is_contain = false
-        end
       end
 
       if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "true"

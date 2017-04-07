@@ -96,43 +96,6 @@
               return value;
             }
         }
-
-        function translate_serum(value){
-            try{
-              if(value.includes("deep humect"))
-                return "딥 휴멕트 세럼";
-              else if(value.includes("skin control"))
-                return "스킨 컨트롤 세럼";
-              else if(value.includes("rebalencing"))
-                return "리밸런싱 세럼";
-              else
-                return value;
-            }catch(err){
-              console.log(err);
-              return value;
-            }
-        }
-
-        function translate_ampoule(value){
-            try{
-              if(value == "pore clinic ampoule")
-                return "포어클리닉 앰플";
-              else if(value == "carming ampoule")
-                return "카밍 앰플";
-              else if(value == "luminus ampoule")
-                return "루미너스 앰플";
-              else if(value == "regenerating ampoule")
-                return "리제네레이팅 앰플";
-              else if(value == "perming ampoule")
-                return "퍼밍 앰플";
-              else
-                return value;
-            }catch(err){
-              console.log(err);
-              return value;
-            }
-        }
-
       </script>
     </head>
     <body>
@@ -145,9 +108,6 @@
         <% if @select_filter != [] %>
           <% @select_filter.each do |filter| %>
             <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
-            <% if !fcdata.nil? %>
-              <% fcdata = fcdata.to_api_hash_for_admin %>
-            <% end %>
             <% if filter.include?("skin_type") %>
               <td class="text-center" id="skin_type_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
             <% elsif filter.include?("before_solution_1") %>
@@ -158,32 +118,18 @@
               <td class="text-center" id="before_solution_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
             <% elsif filter.include?("after_solution_2") %>
               <td class="text-center" id="after_solution_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
-            <% elsif filter.include?("before_serum") %>
-              <td class="text-center" id="before_serum_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
-            <% elsif filter.include?("after_serum") %>
-              <td class="text-center" id="after_serum_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
-            <% elsif filter.include?("before_ample_1") %>
-              <td class="text-center" id="before_ampoule_1_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
-            <% elsif filter.include?("after_ample_1") %>
-              <td class="text-center" id="after_ampoule_1_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
-            <% elsif filter.include?("before_ample_2") %>
-              <td class="text-center" id="before_ampoule_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
-            <% elsif filter.include?("after_ample_2") %>
-              <td class="text-center" id="after_ampoule_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
-            <% elsif filter.include?("before_made_cosmetic") %>
-              <td class="text-center" id="before_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
-            <% elsif filter.include?("after_made_cosmetic") %>
-              <td class="text-center" id="after_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
-            <% elsif !fcdata.nil? && filter.include?("pr_graph") %>
-              <td class="text-center"><%= fcdata[:pr_graph].to_i %></td>
-            <% elsif !fcdata.nil? && filter.include?("sb_graph") %>
-              <td class="text-center"><%= fcdata[:sb_graph].to_i %></td>
-            <% elsif !fcdata.nil? && filter.include?("pp_graph") %>
-              <td class="text-center"><%= fcdata[:pp_graph].to_i %></td>
-            <% elsif !fcdata.nil? && filter.include?("wr_graph") %>
-              <td class="text-center"><%= fcdata[:wr_graph].to_i %></td>
-            <% elsif !fcdata.nil? && filter.include?("el_graph") %>
-              <td class="text-center"><%= fcdata[:el_graph].to_i %></td>
+            <% elsif filter.include?("recommand_program_step_1") %>
+              <td class="text-center"><%= URI.decode(tabletinterview.recommand_program_step_1) %></td>
+            <% elsif filter.include?("recommand_program_step_2") %>
+              <td class="text-center"><%= URI.decode(tabletinterview.recommand_program_step_2) %></td>
+            <% elsif filter.include?("recommand_program_step_3") %>
+              <td class="text-center"><%= URI.decode(tabletinterview.recommand_program_step_3) %></td>
+            <% elsif filter.include?("purchase1") %>
+              <td class="text-center"><%= URI.decode(tabletinterview.purchase1) %></td>
+            <% elsif filter.include?("purchase2") %>
+              <td class="text-center"><%= URI.decode(tabletinterview.purchase2) %></td>
+            <% elsif filter.include?("purchase3") %>
+              <td class="text-center"><%= URI.decode(tabletinterview.purchase3) %></td>
             <% else %>
               <td class="text-center"><%= tabletinterview[filter] %></td>
             <% end %>
@@ -233,7 +179,6 @@
           <td><%= tabletinterview.d_9.to_i if tabletinterview.d_9.to_i != -1 %></td>
           <td><%= tabletinterview.d_10.to_i if tabletinterview.d_10.to_i != -1 %></td>
           <td><%= tabletinterview.d_11.to_i if tabletinterview.d_11.to_i != -1 %></td>
-          <td><%= tabletinterview.d_12.to_i if tabletinterview.d_12.to_i != -1 %></td>
           <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
           <% if !fcdata.nil? %>
             <% fcdata = fcdata.to_api_hash_for_admin %>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script type="text/javascript" src="../../js/jquery.js"></script>
+      <script type="text/javascript" src="../../js/bootstrap.js"></script>
+      <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+      <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    </head>
+    <script>
+    $(function () {
+      $('#filter_submit').click(function(){
+        var select_filter = []
+        $('input:checkbox[name="check_box"]').each(function() {
+            if(this.checked){//checked 처리된 항목의 값
+              if(this.value.indexOf("_all") <= 0){
+                select_filter.push(this.value)
+              }
+            }
+         });
+         opener.selectFilter(select_filter);
+         self.close();
+      });
+
+      $("input:checkbox[name='check_box']").prop("checked", true);
+      $("input:checkbox[id='all_check']").prop("checked", true);
+
+      $(document).on("click", "#before_solution_check", function (e) {
+        if (!$("input:checkbox[id='before_solution_check']").is(":checked")){
+          $("input:checkbox[class='before_solution_check']").prop("checked", false);
+          $("#before_solution_check_detail").show();
+        } else {
+          $("input:checkbox[class='before_solution_check']").prop("checked", true);
+          $("#before_solution_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#after_solution_check", function (e) {
+        if (!$("input:checkbox[id='after_solution_check']").is(":checked")){
+          $("input:checkbox[class='after_solution_check']").prop("checked", false);
+          $("#after_solution_check_detail").show();
+        } else {
+          $("input:checkbox[class='after_solution_check']").prop("checked", true);
+          $("#after_solution_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#recommand_program_step_check", function (e) {
+        if (!$("input:checkbox[id='recommand_program_step_check']").is(":checked")){
+          $("input:checkbox[class='recommand_program_step_check']").prop("checked", false);
+          $("#recommand_program_step_check_detail").show();
+        } else {
+          $("input:checkbox[class='recommand_program_step_check']").prop("checked", true);
+          $("#recommand_program_step_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#purchase_check", function (e) {
+        if (!$("input:checkbox[id='purchase_check']").is(":checked")){
+          $("input:checkbox[class='purchase_check']").prop("checked", false);
+          $("#purchase_check_detail").show();
+        } else {
+          $("input:checkbox[class='purchase_check']").prop("checked", true);
+          $("#purchase_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#answer_check", function (e) {
+        if (!$("input:checkbox[id='answer_check']").is(":checked")){
+          $("input:checkbox[class='answer_check']").prop("checked", false);
+          $("#answer_check_detail").show();
+        } else {
+          $("input:checkbox[class='answer_check']").prop("checked", true);
+          $("#answer_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#graph_check", function (e) {
+        if (!$("input:checkbox[id='graph_check']").is(":checked")){
+          $("input:checkbox[class='graph_check']").prop("checked", false);
+          $("#graph_check_detail").show();
+        } else {
+          $("input:checkbox[class='graph_check']").prop("checked", true);
+          $("#graph_check_detail").hide();
+        }
+      });
+
+      $(document).on("click", "#all_check", function (e) {
+        if (!$("input:checkbox[id='all_check']").is(":checked")){
+          $("input:checkbox[name='check_box']").prop("checked", false);
+        } else {
+          $("input:checkbox[name='check_box']").prop("checked", true);
+        }
+      });
+
+    });
+    </script>
+
+    <body>
+      <div id="filter" style="background: #b1cbbb; padding: 8px; height: 650px;">
+        <div class="form-inline">
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>전체 Data</b></font>
+            <input type="checkbox" value="all_check" id="all_check" style="float:left; margin-left:5px;">
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>피부타입</b></font>
+            <input style="margin-left:5px;" type="checkbox" name="check_box" class="skin_type_check" value="skin_type" id="skin_type">
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>진단으로 나온 솔루션 전체</b></font>
+            <input type="checkbox" name="check_box" value="before_solution_all" id="before_solution_check" style="float:left; margin-left:5px;">
+            <div id="before_solution_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>진단으로 나온 솔루션1 </font><input type="checkbox" name="check_box" class="before_solution_check" value="before_solution_1" id="before_solution_1">
+              <font style="margin-left:5px;">진단으로 나온 솔루션2 </font><input type="checkbox" name="check_box" class="before_solution_check" value="before_solution_2" id="before_solution_2">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>최종으로 선택된 솔루션 전체</b></font>
+            <input type="checkbox" name="check_box" value="after_solution_all" id="after_solution_check" style="float:left; margin-left:5px;">
+            <div id="after_solution_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>최종으로 나온 솔루션1 </font><input type="checkbox" type="checkbox" name="check_box" class="after_solution_check" value="after_solution_1" id="after_solution_2">
+              <font style="margin-left:5px;">최종으로 나온 솔루션2 </font><input type="checkbox" name="check_box" class="after_solution_check" value="after_solution_2" id="after_solution_2">
+            </div>
+          </div><br>
+
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>맞춤제품 전체</b></font>
+            <input type="checkbox" name="check_box" value="recommand_program_step_all" id="recommand_program_step_check" style="float:left; margin-left:5px;">
+            <div id="recommand_program_step_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>맞춤제품1 </font><input type="checkbox" type="checkbox" name="check_box" class="recommand_program_step_check" value="recommand_program_step_1" id="recommand_program_step_1">
+              <font style="margin-left:5px;">맞춤제품2 </font><input type="checkbox" name="check_box" class="recommand_program_step_check" value="recommand_program_step_2" id="recommand_program_step_2">
+              <font style="margin-left:5px;">맞춤제품3 </font><input type="checkbox" name="check_box" class="recommand_program_step_check" value="recommand_program_step_3" id="recommand_program_step_3">
+            </div>
+          </div><br>
+
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>구매제품 전체</b></font>
+            <input type="checkbox" name="check_box" value="purchase_all" id="purchase_check" style="float:left; margin-left:5px;">
+            <div id="purchase_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>구매제품1 </font><input type="checkbox" type="checkbox" name="check_box" class="purchase_check" value="purchase1" id="purchase1">
+              <font style="margin-left:5px;">구매제품2 </font><input type="checkbox" name="check_box" class="purchase_check" value="purchase2" id="purchase2">
+              <font style="margin-left:5px;">구매제품3 </font><input type="checkbox" name="check_box" class="purchase_check" value="purchase3" id="purchase3">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>인터뷰 문항 답변</b></font>
+            <input type="checkbox" name="check_box" value="answer_all" id="answer_check" style="float:left; margin-left:5px;">
+            <div id="answer_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>a_1 </font><input type="checkbox" name="check_box" class="answer_check" value="a_1" id="a_1">
+              <font style="margin-left:5px;">a_2 </font><input type="checkbox" name="check_box" class="answer_check" value="a_2" id="a_2">
+              <font style="margin-left:5px;">a_3 </font><input type="checkbox" name="check_box" class="answer_check" value="a_3" id="a_3"><br>
+              <font>b_1 </font><input type="checkbox" name="check_box" class="answer_check" value="b_1" id="b_1">
+              <font style="margin-left:4px;">b_2 </font><input type="checkbox" name="check_box" class="answer_check" value="b_2" id="b_2">
+              <font style="margin-left:4px;">b_3 </font><input type="checkbox" name="check_box" class="answer_check" value="b_3" id="b_3">
+              <font style="margin-left:4px;">b_4 </font><input type="checkbox" name="check_box" class="answer_check" value="b_4" id="b_4">
+              <font style="margin-left:4px;">b_5 </font><input type="checkbox" name="check_box" class="answer_check" value="b_5" id="b_5">
+              <font style="margin-left:4px;">b_6 </font><input type="checkbox" name="check_box" class="answer_check" value="b_6" id="b_6">
+              <font>c_1 </font><input type="checkbox" name="check_box" class="answer_check" value="c_1" id="c_1"><br>
+              <font>d_1 </font><input type="checkbox" name="check_box" class="answer_check" value="d_1" id="d_1">
+              <font style="margin-left:5px;">d_2 </font><input type="checkbox" name="check_box" class="answer_check" value="d_2" id="d_2">
+              <font style="margin-left:5px;">d_3 </font><input type="checkbox" name="check_box" class="answer_check" value="d_3" id="d_3">
+              <font style="margin-left:5px;">d_4 </font><input type="checkbox" name="check_box" class="answer_check" value="d_4" id="d_4">
+              <font style="margin-left:5px;">d_5 </font><input type="checkbox" name="check_box" class="answer_check" value="d_5" id="d_5">
+              <font style="margin-left:5px;">d_6 </font><input type="checkbox" name="check_box" class="answer_check" value="d_6" id="d_6">
+              <font style="margin-left:5px;">d_7 </font><input type="checkbox" name="check_box" class="answer_check" value="d_7" id="d_7">
+              <font style="margin-left:5px;">d_8 </font><input type="checkbox" name="check_box" class="answer_check" value="d_8" id="d_8">
+              <font style="margin-left:5px;">d_9 </font><input type="checkbox" name="check_box" class="answer_check" value="d_9" id="d_9">
+              <font style="margin-left:5px;">d_10 </font><input type="checkbox" name="check_box" class="answer_check" value="d_10" id="d_10">
+              <font style="margin-left:5px;">d_11 </font><input type="checkbox" name="check_box" class="answer_check" value="d_11" id="d_11">
+            </div>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>피부 점수 전체</b></font>
+            <input type="checkbox" name="check_box" value="graph_all" id="graph_check" style="float:left; margin-left:5px;">
+            <div id="graph_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>모공 점수 </font><input type="checkbox" name="check_box" class="graph_check" value="pr_graph" id="pore_score">
+              <font style="margin-left:5px;">트러블 점수 </font><input type="checkbox" name="check_box" class="graph_check" value="sb_graph" id="sb_graph">
+              <font style="margin-left:5px;">색소침착 점수 </font><input type="checkbox" name="check_box" class="graph_check" value="pp_graph" id="pp_graph">
+              <font style="margin-left:5px;">주름 점수 </font><input type="checkbox" name="check_box" class="graph_check" value="wr_graph" id="wr_graph">
+              <font style="margin-left:5px;">탄력 점수 </font><input type="checkbox" name="check_box" class="graph_check" value="el_graph" id="el_graph">
+            </div><br>
+          </div><br><br>
+          <center>
+            <button style="margin-top: 20px;" class="btn btn-warning" id="filter_submit">필터적용</button>
+          </center>
+        </div>
+      </div>
+    </body>
+</html>

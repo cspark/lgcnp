@@ -483,10 +483,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @tabletinterviews = []
     is_contain = true
 
-    Rails.logger.info @ch_array
-    Rails.logger.info @select_area
-    Rails.logger.info @shop_cd
-
     fcdata_list = Fcdata.where("faceno LIKE ?", "%#{@select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%")
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
@@ -503,9 +499,10 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     Rails.logger.info scoped.count
     if @select_filter == []
-      @excel_name = ["이름","시리얼","진단 날짜","채널","피부타입","진단으로 나온 솔루션 1","최종으로 선택된 솔루션 1","진단으로 나온 솔루션 2","최종으로 선택된 솔루션 2","진단으로 나온 세럼","최종으로 선택된 세럼",
-      "진단으로 나온 앰플 1","최종으로 선택된 앰플 1","진단으로 나온 앰플 1","최종으로 선택된 앰플 2","진단으로 나온 화장품","최종으로 선택된 화장품",
-      "A1","A2","A3","B1","B2","B3","B4","C1","D1","D2","D3","D4","D5","D6","D7","D8","D9","D10","모공 점수","트러블 점수","색소침착 점수","주름 점수","탄력 점수"]
+      @excel_name = ["이름","시리얼","진단 날짜","채널","피부타입","진단으로 나온 솔루션 1","최종으로 선택된 솔루션 1","진단으로 나온 솔루션 2","최종으로 선택된 솔루션 2",
+      "맞춤제품 Step1","맞춤제품 Step2","맞춤제품 Step3","구매제품 Step1","구매제품 Step2","구매제품 Step3",
+      "A1","A2","A3","B1","B2","B3","B4","B5","B6","C1","D1","D2","D3","D4","D5",
+      "D6","D7","D8","D9","D10","D11","모공 점수","트러블 점수","색소침착 점수","주름 점수","탄력 점수"]
     else
       @excel_name = ["이름","시리얼","진단 날짜","채널"]
       @select_filter.each do |filter|
@@ -519,22 +516,18 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
           filter = "진단으로 나온 솔루션 2"
         elsif filter.include?("after_solution_2")
           filter = "최종으로 선택된 솔루션 2"
-        elsif filter.include?("before_serum")
-          filter = "진단으로 나온 세럼"
-        elsif filter.include?("after_serum")
-          filter = "최종으로 선택된 세럼"
-        elsif filter.include?("before_ample_1")
-          filter = "진단으로 나온 앰플 1"
-        elsif filter.include?("after_ample_1")
-          filter = "최종으로 선택된 앰플 1"
-        elsif filter.include?("before_ample_2")
-          filter = "진단으로 나온 앰플 2"
-        elsif filter.include?("after_ample_2")
-          filter = "최종으로 선택된 앰플 2"
-        elsif filter.include?("before_made_cosmetic")
-          filter = "진단으로 나온 화장품"
-        elsif filter.include?("after_made_cosmetic")
-          filter = "최종으로 선택된 화장품"
+        elsif filter.include?("recommand_program_step_1")
+          filter = "맞춤제품 Step1"
+        elsif filter.include?("recommand_program_step_2")
+          filter = "맞춤제품 Step2"
+        elsif filter.include?("recommand_program_step_3")
+          filter = "맞춤제품 Step3"
+        elsif filter.include?("purchase1")
+          filter = "구매제품 Step1"
+        elsif filter.include?("purchase2")
+          filter = "구매제품 Step2"
+        elsif filter.include?("purchase3")
+          filter = "구매제품 Step3"
         elsif filter.include?("pr_graph")
           filter = "모공 점수"
         elsif filter.include?("sb_graph")

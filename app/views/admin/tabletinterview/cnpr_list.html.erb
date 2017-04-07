@@ -180,7 +180,7 @@
           });
 
           $('#filter-btn').click(function(){
-            window.open("/admin/tabletinterview/filter_check", "/admin/tabletinterview/filter_check", "scrollbars=1,resizable=1,height=650,width=550");
+            window.open("/admin/tabletinterview/cnpr_filter_check", "/admin/tabletinterview/filter_check", "scrollbars=1,resizable=1,height=650,width=600");
           });
       });
       function selectFilter(select_filter){
@@ -371,22 +371,18 @@
                   <th>진단으로 나온 솔루션 2</th>
                 <% elsif filter.include?("after_solution_2") %>
                   <th>최종으로 선택된 솔루션 2</th>
-                <% elsif filter.include?("before_serum") %>
-                  <th>진단으로 나온 세럼</th>
-                <% elsif filter.include?("after_serum") %>
-                  <th>최종으로 선택된 세럼</th>
-                <% elsif filter.include?("before_ample_1") %>
-                  <th>진단으로 나온 앰플 1</th>
-                <% elsif filter.include?("after_ample_1") %>
-                  <th>최종으로 선택된 앰플 1</th>
-                <% elsif filter.include?("before_ample_2") %>
-                  <th>진단으로 나온 앰플 2</th>
-                <% elsif filter.include?("after_ample_2") %>
-                  <th>최종으로 선택된 앰플 2</th>
-                <% elsif filter.include?("before_made_cosmetic") %>
-                  <th>진단으로 나온 화장품</th>
-                <% elsif filter.include?("after_made_cosmetic") %>
-                  <th>최종으로 선택된 화장품</th>
+                <% elsif filter.include?("recommand_program_step_1") %>
+                  <th>맞춤제품 Step1</th>
+                <% elsif filter.include?("recommand_program_step_2") %>
+                  <th>맞춤제품 Step2</th>
+                <% elsif filter.include?("recommand_program_step_3") %>
+                  <th>맞춤제품 Step3</th>
+                <% elsif filter.include?("purchase1") %>
+                  <th>구매제품 Step1</th>
+                <% elsif filter.include?("purchase2") %>
+                  <th>구매제품 Step2</th>
+                <% elsif filter.include?("purchase3") %>
+                  <th>구매제품 Step3</th>
                 <% elsif filter.include?("pr_graph")  %>
                   <th>모공 점수</th>
                 <% elsif filter.include?("sb_graph")  %>
@@ -434,7 +430,6 @@
               <th>D9</th>
               <th>D10</th>
               <th>D11</th>
-              <th>D12</th>
               <th>모공 점수</th>
               <th>트러블 점수</th>
               <th>색소침착 점수</th>
