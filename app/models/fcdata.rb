@@ -18,6 +18,7 @@ class Fcdata < ApplicationRecord
        mo_1: get_mo_to_five(value: mo_1),
        mo_7: get_mo_to_five(value: mo_7),
        mo_8: get_mo_to_five(value: mo_8),
+       mo_graph: get_graph_mo,
        pr_1: pr_1,
        pr_2: pr_2,
        pr_7: pr_7,
@@ -667,6 +668,38 @@ class Fcdata < ApplicationRecord
       Rails.logger.info avr3
 
       return convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
+    end
+  end
+
+  def get_graph_mo
+    # 수분은 높을 수록 좋은 것
+    if self.custserial.nil?
+      return 0
+    end
+    avr = (f.mo_1.to_f + f.mo_7.to_f + f.mo_8.to_f) / 3
+    avr1 = Fcavgdata.where(age: "AgeALL_Min").first.moisture.to_i
+    avr2 = Fcavgdata.where(age: "AgeALL_Grade1").first.moisture.to_i
+    avr3 = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_i
+    avr4 = Fcavgdata.where(age: "AgeALL_Grade3").first.moisture.to_i
+
+    if avr > avr4
+      return 4
+    end
+
+    if avr > avr3 && avr <= avr4
+      return 3
+    end
+
+    if avr > avr2 && avr <= avr3
+      return 2
+    end
+
+    if avr > avr1 && avr <= avr2
+      return 1
+    end
+
+    if avr <= avr1
+      return 0
     end
   end
 
