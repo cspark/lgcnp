@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170407054258) do
+ActiveRecord::Schema.define(version: 20170407120857) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20170407054258) do
   end
 
   create_table "fcafterinterviewrxes", force: :cascade do |t|
-    t.string   "custserial",                 null: false
+    t.string   "custserial",                  null: false
     t.integer  "rx_tablet_interview_id"
     t.integer  "after_interview_id"
     t.integer  "a1"
@@ -68,10 +68,10 @@ ActiveRecord::Schema.define(version: 20170407054258) do
     t.integer  "a4"
     t.integer  "a5"
     t.integer  "order"
-    t.string   "rx_tablet_interview_update"
+    t.string   "rx_tablet_interview_uptdate"
     t.string   "uptdate"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.text     "a3_1"
     t.text     "a5_1"
     t.integer  "a6"
