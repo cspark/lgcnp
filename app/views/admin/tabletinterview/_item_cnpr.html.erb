@@ -73,6 +73,26 @@
             console.log(skin_type);
             return skin_type;
         }
+
+        function translate_solution(value){
+            try{
+              if(value == "elasticity solution")
+                return "탄력 솔루션";
+              else if(value == "pigment solution")
+                return "색소침착 솔루션";
+              else if(value == "pore solution")
+                return "모공 솔루션";
+              else if(value == "trouble solution")
+                return "트러블 솔루션";
+              else if(value == "wrinkle solution")
+                return "주름 솔루션";
+              else
+                return value;
+            }catch(err){
+              console.log(err);
+              return value;
+            }
+        }
       </script>
     </head>
     <body>
