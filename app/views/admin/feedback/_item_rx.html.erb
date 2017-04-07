@@ -59,51 +59,49 @@
         <td><%= tabletinterview.uptdate %></td>
         <td id="phone_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
           <% is_agree = "X" %>
-          <% if tabletinterview.is_agree_after == "T" && !tabletinterview.base_lot.blank? %>
+          <% if tabletinterview.is_agree_after == "T" %>
             <% is_agree = "O" %>
           <% end %>
         <td><%= is_agree %></td>
           <!-- 1차설문 조건에 상관없이 보임 -->
-          <% f1 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 0).first %>
+          <% f1 = Fcafterinterviewrx.where(rx_tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 0).first %>
           <% if f1.present? && f1.a1.nil? %>
             <% is_feed_back_ok_1 = "X" %>
           <% else %>
             <% is_feed_back_ok_1 = "O" %>
           <% end %>
-          <% if f1.present? %>
-            <td><a onClick="show_after_interview_1(<%= f1.after_interview_id %>, <%= f1.tablet_interview_id %>, <%= f1.custserial %>)"><%= is_feed_back_ok_1 %></a></td>
-          <% else %>
-            <td><a onClick="show_after_interview_1()"><%= is_feed_back_ok_1 %></a></td>
-          <% end %>
+          <td><a onClick="show_after_interview_1(<%= f1.after_interview_id %>, <%= f1.rx_tablet_interview_id %>, <%= f1.custserial %>)"><%= is_feed_back_ok_1 %></a></td>
 
-          <% f2 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 1).first %>
+          <% f2 = Fcafterinterviewrx.where(rx_tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 1).first %>
           <td>
-          <% if (!f2.nil? && !tabletinterview.base_lot.blank?) || (!f2.nil? && !f2.a1.nil?) %>
+          <% if !f2.nil? || (!f2.nil? && !f2.a1.nil?) %>
             <% if f2.present? && f2.a1.nil? %>
               <% is_feed_back_ok_2 = "X" %>
             <% else %>
               <% is_feed_back_ok_2 = "O" %>
             <% end %>
+
             <% if tabletinterview.is_agree_after == "F" && is_feed_back_ok_2 == "O" %>
-              <a onClick="show_after_interview(<%= f2.after_interview_id %>, <%= f2.tablet_interview_id %>, <%= f2.custserial %>)">O</a>
+              <a onClick="show_after_interview(<%= f2.after_interview_id %>, <%= f2.rx_tablet_interview_id %>, <%= f2.custserial %>)">O</a>
             <% elsif tabletinterview.is_agree_after == "T"%>
-              <a onClick="show_after_interview(<%= f2.after_interview_id %>, <%= f2.tablet_interview_id %>, <%= f2.custserial %>)"><%= is_feed_back_ok_2 %></a>
+              <a onClick="show_after_interview(<%= f2.after_interview_id %>, <%= f2.rx_tablet_interview_id %>, <%= f2.custserial %>)"><%= is_feed_back_ok_2 %></a>
             <% end %>
           <% end %>
           </td>
 
-          <% f3 = Fcafterinterview.where(tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 2).first %>
+          <% f3 = Fcafterinterviewrx.where(rx_tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 2).first %>
           <td>
-          <% if (!f3.nil? && !tabletinterview.base_lot.blank?) || (!f3.nil? && !f3.a1.nil?) %>
+          <% if !f3.nil? || (!f3.nil? && !f3.a1.nil?) %>
             <% if f3.a1.nil? %>
               <% is_feed_back_ok_3 = "X" %>
             <% else %>
               <% is_feed_back_ok_3 = "O" %>
             <% end %>
+
             <% if tabletinterview.is_agree_after == "F" && is_feed_back_ok_3 == "O" %>
-              <a onClick="show_after_interview(<%= f3.after_interview_id %>, <%= f3.tablet_interview_id %>, <%= f3.custserial %>)">O</a>
+              <a onClick="show_after_interview(<%= f3.after_interview_id %>, <%= f3.rx_tablet_interview_id %>, <%= f3.custserial %>)">O</a>
             <% elsif tabletinterview.is_agree_after == "T"%>
-              <a onClick="show_after_interview(<%= f3.after_interview_id %>, <%= f3.tablet_interview_id %>, <%= f3.custserial %>)"><%= is_feed_back_ok_3 %></a>
+              <a onClick="show_after_interview(<%= f3.after_interview_id %>, <%= f3.rx_tablet_interview_id %>, <%= f3.custserial %>)"><%= is_feed_back_ok_3 %></a>
             <% end %>
           <% end %>
           </td>

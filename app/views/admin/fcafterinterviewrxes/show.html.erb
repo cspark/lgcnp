@@ -11,7 +11,7 @@
     <script>
       $(function () {
         <% user = Custinfo.where(custserial: @after_interview.custserial).first %>
-        <% fctabletinterview = Fctabletinterview.where(custserial: @after_interview.custserial).where(tablet_interview_id: @after_interview.tablet_interview_id).first %>
+        <% fctabletinterview = Fctabletinterviewrx.where(custserial: @after_interview.custserial).where(tablet_interview_id: @after_interview.rx_tablet_interview_id).first %>
 
         try
         {
@@ -98,12 +98,12 @@
             $('#a4_4').prop('checked', true);
           <% end %>
 
-          <% if !@after_interview.a5.nil? %>
-            document.getElementById("a5").value = "<%= @after_interview.a5.to_s.gsub(/\r\n/, " ") %>";
+          <% if !@after_interview.a5_1.nil? %>
+            document.getElementById("a5").value = "<%= @after_interview.a5_1.to_s.gsub(/\r\n/, " ") %>";
           <% end %>
 
-          <% fctabletinterview = Fctabletinterview.where(custserial: @after_interview.custserial).where(tablet_interview_id: @after_interview.tablet_interview_id).first %>
-          <% if @after_interview.order ==  1 %>
+          <% fctabletinterview = Fctabletinterviewrx.where(custserial: @after_interview.custserial).where(tablet_interview_id: @after_interview.rx_tablet_interview_id).first %>
+          <% if @after_interview.order == 1 %>
             <% if fctabletinterview.is_agree_after== "T" %>
                 $('input:radio[name=is_agree_after]:input[value=T]').attr("checked", true);
             <% elsif fctabletinterview.is_agree_after== "F" %>
@@ -117,12 +117,12 @@
           if(r){
             var formData = new FormData($(this)[0]);
             formData.append("custserial", '<%= @after_interview.custserial.to_i %>');
-            formData.append("tablet_interview_id", '<%= @after_interview.tablet_interview_id.to_i %>');
+            formData.append("tablet_interview_id", '<%= @after_interview.rx_tablet_interview_id.to_i %>');
             formData.append("after_interview_id", '<%= @after_interview.after_interview_id.to_i %>');
             formData.append("order", '<%= @after_interview.order.to_i %>');
 
             $.ajax({
-                url: "/admin/after_interview",
+                url: "/admin/rx_after_interview",
                 type: 'DELETE',
                 data: formData,
                 async: false,
@@ -190,19 +190,26 @@
               formData.append("is_agree_after", is_agree_after);
             <% end %>
 
+            console.log(a1);
+            console.log(a2);
+            console.log(a3);
+            console.log(a4);
+            console.log(is_agree_after);
+            console.log($('#a5').val());
+
             if(a1 != -1 && a2 != -1 && a3 != -1 && a4 != -1 && is_agree_after != null){
               formData.append("custserial", '<%= @after_interview.custserial.to_i %>');
-              formData.append("tablet_interview_id", '<%= @after_interview.tablet_interview_id.to_i %>');
+              formData.append("tablet_interview_id", '<%= @after_interview.rx_tablet_interview_id.to_i %>');
               formData.append("after_interview_id", '<%= @after_interview.after_interview_id.to_i %>');
               formData.append("order", '<%= @after_interview.order.to_i %>');
               formData.append("a1", a1);
               formData.append("a2", a2);
               formData.append("a3", a3);
               formData.append("a4", a4);
-              formData.append("a5", $('#a5').val());
+              formData.append("a5_1", $('#a5').val());
 
               $.ajax({
-                  url: "/admin/update_after_interview",
+                  url: "/admin/update_rx_after_interview",
                   type: 'POST',
                   data: formData,
                   async: false,
@@ -232,7 +239,7 @@
   <body>
     <div>
         <% user = Custinfo.where(custserial: @after_interview.custserial).first %>
-        <% fctabletinterview = Fctabletinterview.where(custserial: @after_interview.custserial).where(tablet_interview_id: @after_interview.tablet_interview_id).first %>
+        <% fctabletinterview = Fctabletinterviewrx.where(custserial: @after_interview.custserial).where(tablet_interview_id: @after_interview.rx_tablet_interview_id).first %>
         <div style="background: #ffe6ee;">
           <font size="5"><b><div id="name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></b></div></font>
 
@@ -240,42 +247,12 @@
             <font size="4">
               <b>전화번호</b> <%= user.phone %> <br>
               <b>맞춤일자</b> <%= fctabletinterview.uptdate %> <br>
-              <% after_serum = fctabletinterview.after_serum %>
-              <% if fctabletinterview.after_serum == "skin control" %>
-                <% after_serum = "스킨 컨트롤 세럼" %>
-              <% elsif fctabletinterview.after_serum == "deep humect" %>
-                <% after_serum = "딥 휴멕트 세럼" %>
-              <% elsif fctabletinterview.after_serum == "rebalencing" %>
-                <% after_serum = "리밸런싱 세럼" %>
-              <% end %>
-              <b>맞춤제품</b> <%= after_serum %> (<font id="base_lot"></font>)<br>
-              <% after_ample_1 = fctabletinterview.after_ample_1 %>
-              <% if fctabletinterview.after_ample_1 == "pore clinic ampoule" %>
-                <% after_ample_1 = "포어 클리닉 앰플" %>
-              <% elsif fctabletinterview.after_ample_1 == "carming ampoule" %>
-                <% after_ample_1 = "카밍 앰플" %>
-              <% elsif fctabletinterview.after_ample_1 == "luminus ampoule" %>
-                <% after_ample_1 = "루미너스 앰플" %>
-              <% elsif fctabletinterview.after_ample_1 == "regenerating ampoule" %>
-                <% after_ample_1 = "리제네리이팅 앰플" %>
-              <% elsif fctabletinterview.after_ample_1 == "perming ampoule" %>
-                <% after_ample_1 = "퍼밍 앰플" %>
-              <% end %>
-              <%= after_ample_1 %> (<font id="ampoule_1_lot"></font>)<br>
-
-              <% after_ample_2 = fctabletinterview.after_ample_2 %>
-              <% if fctabletinterview.after_ample_2 == "pore clinic ampoule" %>
-                <% after_ample_2 = "포어 클리닉 앰플" %>
-              <% elsif fctabletinterview.after_ample_2 == "carming ampoule" %>
-                <% after_ample_2 = "카밍 앰플" %>
-              <% elsif fctabletinterview.after_ample_2 == "luminus ampoule" %>
-                <% after_ample_2 = "루미너스 앰플" %>
-              <% elsif fctabletinterview.after_ample_2 == "regenerating ampoule" %>
-                <% after_ample_2 = "리제네리이팅 앰플" %>
-              <% elsif fctabletinterview.after_ample_2 == "perming ampoule" %>
-                <% after_ample_2 = "퍼밍 앰플" %>
-              <% end %>
-              <%= after_ample_2 %>  (<font id="ampoule_2_lot"></font>) <br>
+              <b>진단제품</b><br>
+              (<font id="base_lot"></font>)<br>
+              (<font id="ampoule_1_lot"></font>)<br>
+              (<font id="ampoule_2_lot"></font>)<br>
+              <b>맞춤제품</b><br>
+              <b>구매제품</b><br>
 
               <b>메모</b> <div id="memo_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></b></div> <br>
             </font>
@@ -312,13 +289,13 @@
         <input type="checkbox" name="group4[]" id="a4_4"/> 잘 모르겠음
         <br><br>
         <% if @after_interview.order ==  1 %>
-          5. 3개월 후 피드백 설문에 동의하시나요?
+          5. 기타의견<br>구입하신 세럼을 사용하면서 좋았던 점이나 개선해야 할 사항에 대하여 의견을 주시면 감사하겠습니다.<br>
+          <textarea type="text" rows="5" style="width: 560px;" id="a5" onfocus="this.value = this.value;"></textarea>
+          <br>
+          6. 3개월 후 피드백 설문에 동의하시나요?
           <input style="margin-left:20px;" type="radio" name="is_agree_after" value="T"> 예
           <input style="margin-left:20px;" type="radio" name="is_agree_after" value="F"> 아니오
           <br><br>
-          6. 기타의견<br>구입하신 세럼을 사용하면서 좋았던 점이나 개선해야 할 사항에 대하여 의견을 주시면 감사하겠습니다.<br>
-          <textarea type="text" rows="5" style="width: 500px;" id="a5" onfocus="this.value = this.value;"></textarea>
-          <br>
         <% else %>
           5. 기타의견<br>구입하신 세럼을 사용하면서 좋았던 점이나 개선해야 할 사항에 대하여 의견을 주시면 감사하겠습니다.<br>
           <textarea type="text" rows="5" style="width: 500px;" id="a5" onfocus="this.value = this.value;"></textarea>

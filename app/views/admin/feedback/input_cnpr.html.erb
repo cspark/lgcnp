@@ -12,7 +12,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
     <script>
       $(function () {
-        <% if !@ch_cd.nil? && @ch_cd != "" && (@ch_cd == "CNP" || @ch_cd == "CLAB") %>
+        <% if !@ch_cd.nil? && @ch_cd != "" && (@ch_cd == "CNPR" || @ch_cd == "RLAB") %>
           $('select[id="select_channel"]').val('<%= @ch_cd %>');
         <% end %>
 
@@ -54,14 +54,14 @@
           $('#datepicker').change(function () {
             <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
             <% else %>
-              location.href = "/admin/feedback?date=" + $('#datepicker').val()
+              location.href = "/admin/input_cnpr?date=" + $('#datepicker').val()
             <% end %>
           });
 
           $('#submit').click(function(){
             var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
 
-            url = "/admin/feedback?date=" + $('#datepicker').val();
+            url = "/admin/input_cnpr?date=" + $('#datepicker').val();
             url += "&select_channel=" +ch_cd
             url += "&select_shop=" +$("#select_shop").val();
             location.href = url;
@@ -69,11 +69,11 @@
       });
 
       function show_after_interview(after_interview_id, tablet_interview_id, custserial){
-        window.open("/admin/after_interview?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "/after_interview?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "scrollbars=1,resizable=1,height=800,width=700");
+        window.open("/admin/rx_after_interview?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "/after_interview?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "scrollbars=1,resizable=1,height=820,width=700");
       }
 
       function show_after_interview_1(after_interview_id, tablet_interview_id, custserial){
-        window.open("/admin/after_interview_1?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "/after_interview?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "scrollbars=1,resizable=1,height=800,width=700");
+        window.open("/admin/rx_after_interview_1?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "/after_interview?custserial=" + custserial + "&after_interview_id=" + after_interview_id + "&tablet_interview_id=" + tablet_interview_id, "scrollbars=1,resizable=1,height=900,width=700");
       }
 
     </script>
@@ -112,6 +112,91 @@
 
   <body>
     <%= render "admin/header" %>
-    <h1>CNPR</h1>
+    <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
+      <div style="background: #b1cbbb; padding: 8px;">
+        <input type="text" id="datepicker" style="float:left; width:200px; margin-top:5px;">
+          <p style="float:left; margin-left: 20px; margin-top: 5px;">채널 :</p>
+          <select class="form-control" id="select_channel" style="float:left; margin-left: 5px; width:200px;">
+            <option value="ALL">전체</option>
+            <option value="CNPR">CNPR</option>
+            <option value="RLAB">RLAB</option>
+          </select>
+          <p style="float:left; margin-left: 20px; margin-top: 7px;">매장 코드 &nbsp;</p>
+        <input class="form-control" type="text" name="select_shop" id="select_shop" style="float:left; width: 200px;">
+        <button style="margin-left: 10px;" class="btn btn-warning" id="submit">조회</button>
+      </div>
+    <% else %>
+      <input type="text" id="datepicker" style="width:100%; margin-top:10px;">
+    <% end %>
+    <div>
+      <h4 style="background: #b1cbbb; padding: 8px; margin-top:1px;">당일 (<%= @date_today %>) <p style="float:right;">총 인원 수 : <%= @tablet_interviews_today.count %> 명</p></h4>
+      <div>
+          <table data-toggle="table" style="width:1200px;">
+            <thead style="width: 100%;">
+              <tr>
+                  <th>이름</th>
+                  <th>시리얼</th>
+                  <th class="width200">진단 날짜</th>
+                  <th>전화번호</th>
+                  <th>사후 피드백 서비스</th>
+                  <th>1차 설문 여부</th>
+                  <th>2차 설문 여부</th>
+                  <th>3차 설문 여부</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @tablet_interviews_today.each do |tabletinterview| %>
+                <%= render partial: "admin/feedback/item_rx", locals: { tabletinterview: tabletinterview } %>
+              <% end %>
+            </tbody>
+          </table>
+      </div>
+
+      <h4 style="background: #b1cbbb; padding: 8px;">2주 후 (<%= @date_2weeks_ago %>) <p style="float:right;">총 인원 수 : <%= @tablet_interviews_2_weeks_ago.count %> 명</p></h4>
+      <div>
+        <table data-toggle="table" style="width:1200px;">
+          <thead style="width: 100%;">
+            <tr>
+                <th>이름</th>
+                <th>시리얼</th>
+                <th class="width200">진단 날짜</th>
+                <th>전화번호</th>
+                <th>사후 피드백 서비스</th>
+                <th>1차 설문 여부</th>
+                <th>2차 설문 여부</th>
+                <th>3차 설문 여부</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @tablet_interviews_2_weeks_ago.each do |tabletinterview| %>
+              <%= render partial: "admin/feedback/item_rx", locals: { tabletinterview: tabletinterview } %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <h4 style="background: #b1cbbb; padding: 8px;">3개월 후 (<%= @date_3months_ago %>) <p style="float:right;">총 인원 수 : <%= @tablet_interviews_3_months_ago.count %> 명</p></h4>
+      <div>
+        <table data-toggle="table" style="width:1200px;">
+          <thead style="width: 100%;">
+            <tr>
+                <th>이름</th>
+                <th>시리얼</th>
+                <th class="width200">진단 날짜</th>
+                <th>전화번호</th>
+                <th>사후 피드백 서비스</th>
+                <th>1차 설문 여부</th>
+                <th>2차 설문 여부</th>
+                <th>3차 설문 여부</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @tablet_interviews_3_months_ago.each do |tabletinterview| %>
+              <%= render partial: "admin/feedback/item_rx", locals: { tabletinterview: tabletinterview } %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </body>
 </html>

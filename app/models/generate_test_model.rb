@@ -59,14 +59,70 @@ class GenerateTestModel < ApplicationRecord
       f.after_ample_2 = "perming ampoule"
       f.before_made_cosmetic = "skin control EX"
       f.after_made_cosmetic = "skin control EX"
-      f.uptdate = "2017-03-01-12-00"
+      f.uptdate = "2017-04-05-12-00"
       f.ch_cd = "CNP"
       f.fcdata_id = 1.to_s
-      f.tablet_interview_id = 3
+      f.tablet_interview_id = 2
       f.is_quick_mode = "T"
       f.is_agree_cant_refund = "T"
       f.is_agree_after = "T"
       f.base_lot = "1"
+      f.save
+      i += 1
+    end
+  end
+
+  def self.generate_test_fctabletinterviewrx
+    i = 1
+    Fctabletinterview.all.each do |f|
+      i = 1
+      f = Fctabletinterviewrx.new
+      f.custserial = 4.to_s
+      f.a_1 = i
+      f.a_2 = i
+      f.a_3 = i
+      f.b_1 = i
+      f.b_2 = i
+      f.b_3 = i
+      f.b_4 = i
+      f.b_5 = i
+      f.b_6 = i
+      f.c_1 = i
+      f.d_1 = i
+      f.d_2 = i
+      f.d_3 = i
+      f.d_4 = i
+      f.d_5 = i
+      f.d_6 = i
+      f.d_7 = i
+      f.d_8 = i
+      f.d_9 = i
+      f.d_10 = i
+      f.d_11 = i
+      f.skin_type = "skin_type_gunsung"
+      f.before_solution_1 = "elasticity solution"
+      f.after_solution_1 = "elasticity solution"
+      f.before_solution_2 = "elasticity solution"
+      f.after_solution_2 = "elasticity solution"
+      f.before_ample_1 = "perming ampoule"
+      f.after_ample_1 = "perming ampoule"
+      f.before_ample_2 = "perming ampoule"
+      f.after_ample_2 = "perming ampoule"
+      f.uptdate = "2017-04-05-12-00"
+      f.ch_cd = "CNP"
+      f.fcdata_id = 1.to_s
+      f.tablet_interview_id = 2
+      f.is_agree_cant_refund = "T"
+      f.is_agree_after = "T"
+      f.turnover_value =  2
+      f.corneous_value = 10
+      f.stress_value = 3
+      f.recommand_program_step_1 = "%EB%B0%B8%EB%9F%B0%EC%8A%A4+%ED%86%A0%EB%84%88"
+      f.recommand_program_step_2 = "%EB%A6%AC%EB%89%B4+%ED%81%AC%EB%A6%BC%2C+%EC%97%90%EB%84%88%EC%A7%80+%EC%95%B0%ED%94%8C"
+      f.recommand_program_step_3 = "%EC%9B%8C%ED%84%B0+%EC%A0%A4+%ED%81%AC%EB%A6%BC%2C+%EB%94%A5+%ED%81%AC%EB%A6%BC"
+      f.purchase1 = "%EB%B0%B8%EB%9F%B0%EC%8A%A4+%ED%86%A0%EB%84%88"
+      f.purchase2 = "%EB%A6%AC%EB%89%B4+%ED%81%AC%EB%A6%BC"
+      f.purchase3 = "%EC%9B%8C%ED%84%B0+%EC%A0%A4+%ED%81%AC%EB%A6%BC"
       f.save
       i += 1
     end
@@ -97,12 +153,12 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        f = Fcdata.new
-       f.custserial = 3.to_s
-       f.ch_cd = "CNP"
+       f.custserial = 4.to_s
+       f.ch_cd = "RLAB"
        f.faceno = "F"
-       f.measuredate = "2017-03-01-13-00-00"
+       f.measuredate = "2017-04-07-13-00-00"
        f.measureno = 1
-       f.uptdate = "2017-03-01"
+       f.uptdate = "2017-04-07"
        f.mo_1 = 1.0
        f.mo_7 = 1.0
        f.mo_8 = 1.0
@@ -191,9 +247,9 @@ class GenerateTestModel < ApplicationRecord
        f.score_r = 1
        f.score_l = 1
        f.m_skintype = 1
-       f.shop_cd = "59100"
+       f.shop_cd = "1005"
        worry_skin_1 = 1
-       worry_skin_2 = 2
+       worry_skin_2 = 1
        f.save
        i +=1;
     end
@@ -203,25 +259,25 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        user = Custinfo.new
-       user.custserial = 3.to_s
-       user.custname = "mango"
+       user.custserial = 4.to_s
+       user.custname = "kimsoomin"
        user.sex = "F"
-       user.birthyy = "2000"
-       user.birthmm = "07"
-       user.birthdd = "03"
-       user.age = "18"
+       user.birthyy = "1985"
+       user.birthmm = "11"
+       user.birthdd = "21"
+       user.age = "31"
        user.phone = "0123456789"
        user.address = "nonhyun"
        user.email = "test@test.com"
-       user.lastanaldate = "2017-03-01"
+       user.lastanaldate = "2017-04-07"
        user.measureno = 1
-       user.uptdate = "2017-03-01"
+       user.uptdate = "2017-04-07"
        user.is_agree_privacy = "T"
        user.is_agree_after = "T"
        user.is_agree_marketing = "T"
        user.is_agree_thirdparty_info = "T"
-       user.ch_cd = "CNP"
-       user.shop_cd = "59100"
+       user.ch_cd = "RLAB"
+       user.shop_cd = "1005"
        user.save
        i +=1;
     end

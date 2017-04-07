@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406123023) do
+ActiveRecord::Schema.define(version: 20170407054258) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -55,6 +55,27 @@ ActiveRecord::Schema.define(version: 20170406123023) do
     t.string   "is_agree_thirdparty_info"
     t.string   "ch_cd"
     t.string   "shop_cd"
+  end
+
+  create_table "fcafterinterviewrxes", force: :cascade do |t|
+    t.string   "custserial",                 null: false
+    t.integer  "rx_tablet_interview_id"
+    t.integer  "after_interview_id"
+    t.integer  "a1"
+    t.text     "a1_1"
+    t.integer  "a2"
+    t.integer  "a3"
+    t.integer  "a4"
+    t.integer  "a5"
+    t.integer  "order"
+    t.string   "rx_tablet_interview_update"
+    t.string   "uptdate"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.text     "a3_1"
+    t.text     "a5_1"
+    t.integer  "a6"
+    t.text     "a7"
   end
 
   create_table "fcafterinterviews", force: :cascade do |t|
@@ -379,6 +400,11 @@ ActiveRecord::Schema.define(version: 20170406123023) do
     t.text     "purchase1"
     t.text     "purchase2"
     t.text     "purchase3"
+    t.string   "base_lot"
+    t.string   "ampoule_1_lot"
+    t.string   "ampoule_2_lot"
+    t.string   "mixer_name"
+    t.text     "memo"
   end
 
   create_table "fctabletinterviews", force: :cascade do |t|

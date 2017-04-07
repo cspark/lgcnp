@@ -34,6 +34,11 @@ Rails.application.routes.draw do
     get "after_interview_1" => "fcafterinterviews#show_1"
     post "update_after_interview" => "fcafterinterviews#update"
     delete "after_interview" => "fcafterinterviews#delete"
+
+    get "rx_after_interview" => "fcafterinterviewrxes#show"
+    get "rx_after_interview_1" => "fcafterinterviewrxes#show_1"
+    post "update_rx_after_interview" => "fcafterinterviewrxes#update"
+    delete "rx_after_interview" => "fcafterinterviewrxes#delete"
     get "fcavg_list" => "fcavgdata#list"
     get "data_list_cnp" => "data#list"
     get "data_list_cnpr" => "data#cnpr_list"

@@ -1,4 +1,4 @@
-class Admin::FcafterinterviewsController < Admin::AdminApplicationController
+class Admin::FcafterinterviewrxesController < Admin::AdminApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:create, :calculate]
   skip_before_action :verify_authenticity_token
   before_action :is_admin
@@ -8,7 +8,7 @@ class Admin::FcafterinterviewsController < Admin::AdminApplicationController
     tablet_interview_id = params[:tablet_interview_id]
     after_interview_id = params[:after_interview_id]
 
-    @after_interview = Fcafterinterview.where(custserial: custserial).where(tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).first
+    @after_interview = Fcafterinterviewrx.where(custserial: custserial).where(rx_tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).first
   end
 
   def show_1
@@ -16,7 +16,7 @@ class Admin::FcafterinterviewsController < Admin::AdminApplicationController
     tablet_interview_id = params[:tablet_interview_id]
     after_interview_id = params[:after_interview_id]
 
-    @after_interview = Fcafterinterview.where(custserial: custserial).where(tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).first
+    @after_interview = Fcafterinterviewrx.where(custserial: custserial).where(rx_tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).first
     render 'show_1'
   end
 
@@ -26,9 +26,9 @@ class Admin::FcafterinterviewsController < Admin::AdminApplicationController
     after_interview_id = params[:after_interview_id]
     order = params[:order]
 
-    after_interview = Fcafterinterview.where(custserial: custserial).where(tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).where(order: order).first
+    after_interview = Fcafterinterviewrx.where(custserial: custserial).where(rx_tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).where(order: order).first
     if params[:is_agree_after].present?
-      fctabletinterview = Fctabletinterview.where(custserial: custserial, tablet_interview_id: tablet_interview_id).first
+      fctabletinterview = Fctabletinterviewrx.where(custserial: custserial, tablet_interview_id: tablet_interview_id).first
       fctabletinterview.is_agree_after = params[:is_agree_after]
       fctabletinterview.save
 
@@ -42,6 +42,27 @@ class Admin::FcafterinterviewsController < Admin::AdminApplicationController
     after_interview.a1 = params[:a1]
     after_interview.a2 = params[:a2]
     after_interview.a3 = params[:a3]
+    after_interview.a4 = params[:a4]
+    after_interview.a5 = params[:a5]
+
+    if params.has_key?(:a1_1)
+      after_interview.a1_1 = params[:a1_1]
+    end
+    if params.has_key?(:a3_1)
+      after_interview.a3_1 = params[:a3_1]
+    end
+    if params.has_key?(:a5)
+      after_interview.a5 = params[:a5]
+    end
+    if params.has_key?(:a5_1)
+      after_interview.a5_1 = params[:a5_1]
+    end
+    if params.has_key?(:a6)
+      after_interview.a6 = params[:a6]
+    end
+    if params.has_key?(:a7)
+      after_interview.a7 = params[:a7]
+    end
 
     t = Time.now
 
@@ -58,16 +79,6 @@ class Admin::FcafterinterviewsController < Admin::AdminApplicationController
     time_string = time_string.concat(t.strftime("%S"))
 
     after_interview.uptdate = time_string
-
-    if params.has_key?(:a4)
-      after_interview.a4 = params[:a4]
-    end
-
-    after_interview.a5 = params[:a5]
-
-    if params.has_key?(:a1_1)
-      after_interview.a1_1 = params[:a1_1]
-    end
     after_interview.save
   end
 
@@ -77,18 +88,22 @@ class Admin::FcafterinterviewsController < Admin::AdminApplicationController
     after_interview_id = params[:after_interview_id]
     order = params[:order]
 
-    after_interview = Fcafterinterview.where(custserial: custserial).where(tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).where(order: order).first
+    after_interview = Fcafterinterviewrx.where(custserial: custserial).where(rx_tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).where(order: order).first
 
     after_interview.a1 = nil
     after_interview.a1_1 = nil
     after_interview.a2 = nil
     after_interview.a3 = nil
+    after_interview.a3_1 = nil
     after_interview.a4 = nil
     after_interview.a5 = nil
+    after_interview.a5_1 = nil
+    after_interview.a6 = nil
+    after_interview.a7 = nil
 
     after_interview.save
 
-    fctabletinterview = Fctabletinterview.where(custserial: custserial).where(tablet_interview_id: tablet_interview_id).first
+    fctabletinterview = Fctabletinterviewrx.where(custserial: custserial).where(tablet_interview_id: tablet_interview_id).first
     fctabletinterview.is_agree_after = "F"
     fctabletinterview.save
   end
