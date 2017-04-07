@@ -182,7 +182,7 @@
       <% fcdata = Fcdata.where(custserial: @tabletinterview.custserial).where(measureno: @tabletinterview.fcdata_id).first %>
       <% if !fcdata.nil? %>
         <% fcdata = fcdata.to_api_hash %>
-        [그래프] 모공 점수 : <%= fcdata[:pr_graph].to_i %> / 트러블 점수 : <%= fcdata[:sb_graph].to_i %> / 색소침착 점수 : <%= fcdata[:pp_graph].to_i %> / 주름 점수 : <%= fcdata[:wr_graph].to_i %> / 탄력 점수 : <%= fcdata[:el_graph].to_i  / 건조 점수 : <%= fcdata[:mo_graph].to_i %>
+        [그래프] 모공 점수 : <%= fcdata[:pr_graph].to_i %> / 트러블 점수 : <%= fcdata[:sb_graph].to_i %> / 색소침착 점수 : <%= fcdata[:pp_graph].to_i %> / 주름 점수 : <%= fcdata[:wr_graph].to_i %> / 탄력 점수 : <%= fcdata[:el_graph].to_i %> / 건조 점수 : <%= fcdata[:mo_graph].to_i %>
       <% end %>
       <font size="2">메모: </font><br>
       <div id="memo_<%= @tabletinterview.custserial.to_i %>"></div>
