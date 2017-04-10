@@ -28,7 +28,17 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
 
   def fctabletinterviews_quickmode
     tabletinterview = Fctabletinterviewrx.new(permitted_param)
-    tabletinterview.tablet_interview_id = Fctabletinterviewrx.all.count
+    tablet_summary = FctabletinterviewrxSummary.order("cnpr_tablet_count desc").first
+    if tablet_summary.nil? || tablet_summary.cnpr_tablet_count.nil?
+      count = 1
+    else
+      count = tablet_summary.cnpr_tablet_count + 1
+    end
+    summay = FctabletinterviewrxSummary.new
+    summay.cnpr_tablet_count = count
+    summay.save
+
+    tabletinterview.tablet_interview_id = count
     t = Time.now
     tabletinterview.uptdate = t.strftime("%Y-%m-%d-%H-%M")
     tabletinterview.is_quick_mode = "T"
@@ -67,7 +77,17 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
 
   def create
     tabletinterview = Fctabletinterviewrx.new(permitted_param)
-    tabletinterview.tablet_interview_id = Fctabletinterviewrx.all.count
+    tablet_summary = FctabletinterviewrxSummary.order("cnpr_tablet_count desc").first
+    if tablet_summary.nil? || tablet_summary.cnpr_tablet_count.nil?
+      count = 1
+    else
+      count = tablet_summary.cnpr_tablet_count + 1
+    end
+    summay = FctabletinterviewrxSummary.new
+    summay.cnpr_tablet_count = count
+    summay.save
+
+    tabletinterview.tablet_interview_id = count
     t = Time.now
     tabletinterview.uptdate = t.strftime("%Y-%m-%d-%H-%M")
     tabletinterview.is_agree_after = "T"

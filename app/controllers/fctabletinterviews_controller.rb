@@ -31,7 +31,17 @@ class FctabletinterviewsController < ApplicationController
 
   def fctabletinterviews_quickmode
     tabletinterview = Fctabletinterview.new(permitted_param)
-    tabletinterview.tablet_interview_id = Fctabletinterview.all.count
+    tablet_summary = FctabletinterviewrxSummary.order("cnp_tablet_count desc").first
+    if tablet_summary.nil? || tablet_summary.cnp_tablet_count.nil?
+      count = 1
+    else
+      count = tablet_summary.cnp_tablet_count + 1
+    end
+    summay = FctabletinterviewrxSummary.new
+    summay.cnp_tablet_count = count
+    summay.save
+
+    tabletinterview.tablet_interview_id = count
     t = Time.now
     tabletinterview.uptdate = t.strftime("%Y-%m-%d-%H-%M")
     tabletinterview.is_quick_mode = "T"
@@ -70,7 +80,17 @@ class FctabletinterviewsController < ApplicationController
 
   def create
     tabletinterview = Fctabletinterview.new(permitted_param)
-    tabletinterview.tablet_interview_id = Fctabletinterview.all.count
+    tablet_summary = FctabletinterviewrxSummary.order("cnp_tablet_count desc").first
+    if tablet_summary.nil? || tablet_summary.cnp_tablet_count.nil?
+      count = 1
+    else
+      count = tablet_summary.cnp_tablet_count + 1
+    end
+    summay = FctabletinterviewrxSummary.new
+    summay.cnp_tablet_count = count
+    summay.save
+
+    tabletinterview.tablet_interview_id = count
     t = Time.now
     tabletinterview.uptdate = t.strftime("%Y-%m-%d-%H-%M")
     tabletinterview.is_agree_after = "T"
