@@ -30,7 +30,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
     tabletinterview = Fctabletinterviewrx.new(permitted_param)
     tablet_summary = FctabletinterviewrxSummary.order("cnpr_tablet_count desc").first
     if tablet_summary.nil? || tablet_summary.cnpr_tablet_count.nil?
-      count = 1
+      count = Fctabletinterviewrx.all.count + 1
     else
       count = tablet_summary.cnpr_tablet_count + 1
     end
@@ -79,7 +79,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
     tabletinterview = Fctabletinterviewrx.new(permitted_param)
     tablet_summary = FctabletinterviewrxSummary.order("cnpr_tablet_count desc").first
     if tablet_summary.nil? || tablet_summary.cnpr_tablet_count.nil?
-      count = 1
+      count = Fctabletinterviewrx.all.count + 1
     else
       count = tablet_summary.cnpr_tablet_count + 1
     end

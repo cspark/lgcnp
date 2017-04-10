@@ -33,7 +33,7 @@ class FctabletinterviewsController < ApplicationController
     tabletinterview = Fctabletinterview.new(permitted_param)
     tablet_summary = FctabletinterviewrxSummary.order("cnp_tablet_count desc").first
     if tablet_summary.nil? || tablet_summary.cnp_tablet_count.nil?
-      count = 1
+      count = Fctabletinterview.all.count + 1
     else
       count = tablet_summary.cnp_tablet_count + 1
     end
@@ -82,7 +82,7 @@ class FctabletinterviewsController < ApplicationController
     tabletinterview = Fctabletinterview.new(permitted_param)
     tablet_summary = FctabletinterviewrxSummary.order("cnp_tablet_count desc").first
     if tablet_summary.nil? || tablet_summary.cnp_tablet_count.nil?
-      count = 1
+      count = Fctabletinterview.all.count + 1
     else
       count = tablet_summary.cnp_tablet_count + 1
     end
