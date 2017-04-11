@@ -198,7 +198,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     tablet_interviews = tablet_interviews.or(tablet_interviews2)
     Rails.logger.info tablet_interviews.count
     array = tablet_interviews.pluck(:tablet_interview_id).map(&:to_i).uniq
-    temp_after_interviews = Fcafterinterview.where.not(a1: nil).where(tablet_interview_id: array)
+    temp_after_interviews = Fcafterinterview.where.not(a1: nil).where(tablet_interview_id: array).order("after_interview_id desc")
     Rails.logger.info temp_after_interviews.count
     if select_interview != "all"
       if select_interview == "today"
@@ -491,7 +491,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     tablet_interviews = tablet_interviews.or(tablet_interviews2)
     Rails.logger.info tablet_interviews.count
     array = tablet_interviews.pluck(:tablet_interview_id).map(&:to_i).uniq
-    temp_after_interviews = Fcafterinterviewrx.where.not(a1: nil).where(rx_tablet_interview_id: array)
+    temp_after_interviews = Fcafterinterviewrx.where.not(a1: nil).where(rx_tablet_interview_id: array).order("after_interview_id desc")
     Rails.logger.info temp_after_interviews.count
     if select_interview != "all"
       if select_interview == "today"

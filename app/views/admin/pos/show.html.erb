@@ -9,7 +9,7 @@
 
     <script>
     $ (function () {
-        <% user = Custinfo.where(custserial: @fcpos.custserial, ch_cd: @fcpos.ch_cd, measureno: @fcpos.measureno).first  %>
+        <% user = Custinfo.where(custserial: @fcpos.custserial).first  %>
         try
         {
           $('#name_<%= @fcpos.custserial.to_i %>_<%= @fcpos.ch_cd %>_<%= @fcpos.measureno.to_i %>').append( decode_utf8('<%= user.custname %>'));
