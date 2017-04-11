@@ -17,6 +17,12 @@
           document.getElementById("custserial").value = '<%= @custserial %>'
         <% end %>
 
+        <% if @is_agree_thirdparty_info.present? && @is_agree_thirdparty_info == "F" %>
+          document.getElementById("is_agree_thirdparty_info").checked = false
+        <% else %>
+          document.getElementById("is_agree_thirdparty_info").checked = true
+        <% end %>
+
         <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
           <% if !@shop_cd.nil? && @shop_cd != "" && %>
             document.getElementById("select_shop").value = '<%= @shop_cd %>'
@@ -210,7 +216,7 @@
         if (document.getElementById("is_agree_thirdparty_info").checked) {
           var is_agree_thirdparty_info = "T"
         }else {
-          var is_agree_thirdparty_info = ""
+          var is_agree_thirdparty_info = "F"
         }
         $('input:checkbox[name="check_box"]').each(function() {
             if(this.checked){
@@ -350,7 +356,7 @@
         <input class="form-control" type="text" id="start_birthmm" style="width:100px;">
         <input class="form-control" type="text" id="end_birthmm" style="width:100px;">
         <button id="birthmm_init" class="btn btn-primary">전체</button>
-        <font style="margin-left:10px;">제 3자 정보 제공 동의 고객: </font><input type="checkbox" name="is_agree_thirdparty_info" id="is_agree_thirdparty_info" checked="true">
+        <font style="margin-left:10px;">제 3자 정보 제공 동의 고객: </font><input type="checkbox" name="is_agree_thirdparty_info" id="is_agree_thirdparty_info">
         <button class="btn btn-warning" id="submit" style="margin-left:10px;">조회</button>
       </div>
     </div>

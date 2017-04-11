@@ -217,12 +217,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first
       custinfo = Custinfo.where(custserial: after_interview.custserial).first
 
-      if !@is_agree_thirdparty_info.nil?
-        if !custinfo.is_agree_thirdparty_info.include?(@is_agree_thirdparty_info)
-          is_contain = false
-        end
-      end
-
       if !name.nil?
         if !custinfo.custname.include? name
            is_contain = false
@@ -265,11 +259,11 @@ class Admin::FeedbackController < Admin::AdminApplicationController
         end
       end
 
-      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "true"
+      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "T"
         if custinfo.is_agree_thirdparty_info == "F"
           is_contain = false
         end
-      elsif params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "false"
+      elsif params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "F"
         if custinfo.is_agree_thirdparty_info == "T"
           is_contain = false
         end
@@ -471,6 +465,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     if !name.nil?
       @name = name
     end
+    @is_agree_thirdparty_info = params[:is_agree_thirdparty_info] if !params[:is_agree_thirdparty_info].blank?
 
     @after_interviews = []
 
@@ -540,11 +535,11 @@ class Admin::FeedbackController < Admin::AdminApplicationController
         is_contain = false
       end
 
-      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "true"
+      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "T"
         if custinfo.is_agree_thirdparty_info == "F"
           is_contain = false
         end
-      elsif params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "false"
+      elsif params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "F"
         if custinfo.is_agree_thirdparty_info == "T"
           is_contain = false
         end

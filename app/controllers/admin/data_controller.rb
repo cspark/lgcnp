@@ -389,8 +389,12 @@ class Admin::DataController < Admin::AdminApplicationController
       custinfo = Custinfo.where(custserial: fcdata.custserial).first
       is_contain = true
 
-      if !@is_agree_thirdparty_info.nil?
-        if !custinfo.is_agree_thirdparty_info.include?(@is_agree_thirdparty_info)
+      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "T"
+        if custinfo.is_agree_thirdparty_info == "F"
+          is_contain = false
+        end
+      elsif params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "F"
+        if custinfo.is_agree_thirdparty_info == "T"
           is_contain = false
         end
       end
@@ -1320,8 +1324,12 @@ class Admin::DataController < Admin::AdminApplicationController
       custinfo = Custinfo.where(custserial: fcdata.custserial).first
       is_contain = true
 
-      if !@is_agree_thirdparty_info.nil?
-        if !custinfo.is_agree_thirdparty_info.include?(@is_agree_thirdparty_info)
+      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "T"
+        if custinfo.is_agree_thirdparty_info == "F"
+          is_contain = false
+        end
+      elsif params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "F"
+        if custinfo.is_agree_thirdparty_info == "T"
           is_contain = false
         end
       end

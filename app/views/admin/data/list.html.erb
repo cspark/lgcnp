@@ -16,6 +16,12 @@
     <script>
       var filterStr = "";
       $(function () {
+          <% if @is_agree_thirdparty_info.present? && @is_agree_thirdparty_info == "F" %>
+            document.getElementById("is_agree_thirdparty_info").checked = false
+          <% else %>
+            document.getElementById("is_agree_thirdparty_info").checked = true
+          <% end %>
+
           <% if @ch_cd.include?("CNP") %>
             $("input:checkbox[value=CNP]").prop("checked", true);
           <% else %>
@@ -368,7 +374,7 @@
         if (document.getElementById("is_agree_thirdparty_info").checked) {
           var is_agree_thirdparty_info = "T"
         }else {
-          var is_agree_thirdparty_info = ""
+          var is_agree_thirdparty_info = "F"
         }
 
         url = ""
@@ -587,7 +593,7 @@
         <input class="form-control" type="text" id="end_birthmm" style="width:100px;">
         <button id="birthmm_init" class="btn btn-primary">전체</button>
 
-        <font style="margin-left:10px;">제 3자 정보 제공 동의 고객: </font><input type="checkbox" name="is_agree_thirdparty_info" id="is_agree_thirdparty_info" checked="true">
+        <font style="margin-left:10px;">제 3자 정보 제공 동의 고객: </font><input type="checkbox" name="is_agree_thirdparty_info" id="is_agree_thirdparty_info">
         <button class="btn btn-warning" id="submit">조회</button>
       </div>
     </div>

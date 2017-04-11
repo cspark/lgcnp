@@ -157,8 +157,12 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       Rails.logger.info custinfo.custname
       is_contain = true
 
-      if !@is_agree_thirdparty_info.nil?
-        if !custinfo.is_agree_thirdparty_info.include?(@is_agree_thirdparty_info)
+      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "T"
+        if custinfo.is_agree_thirdparty_info == "F"
+          is_contain = false
+        end
+      elsif params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "F"
+        if custinfo.is_agree_thirdparty_info == "T"
           is_contain = false
         end
       end
@@ -559,7 +563,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end
 
     scoped = scoped.order("uptdate desc")
-    Rails.logger.info "!!!"
     Rails.logger.info scoped.count
 
     scoped.each do |tabletinterview|
@@ -567,8 +570,12 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       Rails.logger.info URI.decode(custinfo.custname)
       is_contain = true
 
-      if !@is_agree_thirdparty_info.nil?
-        if !custinfo.is_agree_thirdparty_info.include?(@is_agree_thirdparty_info)
+      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "T"
+        if custinfo.is_agree_thirdparty_info == "F"
+          is_contain = false
+        end
+      elsif params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "F"
+        if custinfo.is_agree_thirdparty_info == "T"
           is_contain = false
         end
       end
