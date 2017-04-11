@@ -2,11 +2,11 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
   def index
     # CNP Tablet 앱에서 가입한 고객정보를 조건으로 고객정보 조회 (* Next 조회 필요) *추가 ADDRESS 필드
 
-    # username = URI.decode(params[:custname])
+    username = URI.decode(params[:custname])
     if params.has_key?(:phone)
-      user = Custinfo.where(custname: params[:custname], birthyy: params[:birthyy], birthmm: params[:birthmm], birthdd: params[:birthdd], ch_cd: params[:ch_cd], phone: params[:phone])
+      user = Custinfo.where(custname: username, birthyy: params[:birthyy], birthmm: params[:birthmm], birthdd: params[:birthdd], ch_cd: params[:ch_cd], phone: params[:phone])
     else
-      user = Custinfo.where(custname: params[:custname], birthyy: params[:birthyy], birthmm: params[:birthmm], birthdd: params[:birthdd], ch_cd: params[:ch_cd])
+      user = Custinfo.where(custname: username, birthyy: params[:birthyy], birthmm: params[:birthmm], birthdd: params[:birthdd], ch_cd: params[:ch_cd])
     end
 
     if user.count > 0
