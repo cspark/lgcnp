@@ -4,9 +4,9 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
 
     # username = URI.decode(params[:custname])
     if params.has_key?(:phone)
-      user = Custinfo.where(custname: username, birthyy: params[:birthyy], birthmm: params[:birthmm], birthdd: params[:birthdd], ch_cd: params[:ch_cd], phone: params[:phone])
+      user = Custinfo.where(custname: params[:custname], birthyy: params[:birthyy], birthmm: params[:birthmm], birthdd: params[:birthdd], ch_cd: params[:ch_cd], phone: params[:phone])
     else
-      user = Custinfo.where(custname: username, birthyy: params[:birthyy], birthmm: params[:birthmm], birthdd: params[:birthdd], ch_cd: params[:ch_cd])
+      user = Custinfo.where(custname: params[:custname], birthyy: params[:birthyy], birthmm: params[:birthmm], birthdd: params[:birthdd], ch_cd: params[:ch_cd])
     end
 
     if user.count > 0
