@@ -26,9 +26,9 @@ class Api::Cnp::CnpFcdataController < Api::ApplicationController
   end
 
   def destroy
-    fcdata = AdminFcdata.where(custserial: params[:id], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
-    if !fcdata.nil?
-      if fcdata.delete
+    fcdata = AdminFcdata.where(custserial: params[:id], ch_cd: params[:ch_cd], measureno: params[:measureno])
+    if fcdata.count > 0
+      if fcdata.delete_all
         render :text => "Delete Complete", status: 200
       else
         render :text => "Delete Fail", status: 404
