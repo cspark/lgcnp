@@ -16,10 +16,18 @@
     <script>
       var filterStr = "";
       $(function () {
-          <% if @is_agree_thirdparty_info.present? && @is_agree_thirdparty_info == "F" %>
-            document.getElementById("is_agree_thirdparty_info").checked = false
-          <% else %>
-            document.getElementById("is_agree_thirdparty_info").checked = true
+          <% if @is_init == true %>
+            document.getElementById("is_agree_thirdparty_info_true").checked = true
+          <% elsif @is_agree_thirdparty_info.present? && @is_agree_thirdparty_info == "F" %>
+            document.getElementById("is_agree_thirdparty_info_false").checked = true
+          <% elsif @is_agree_thirdparty_info.present? && @is_agree_thirdparty_info == "T,F" %>
+            document.getElementById("is_agree_thirdparty_info_true").checked = true
+            document.getElementById("is_agree_thirdparty_info_false").checked = true
+          <% elsif @is_agree_thirdparty_info.present? && @is_agree_thirdparty_info == "T" %>
+            document.getElementById("is_agree_thirdparty_info_true").checked = true
+          <% elsif !@is_agree_thirdparty_info.present? %>
+            document.getElementById("is_agree_thirdparty_info_true").checked = false
+            document.getElementById("is_agree_thirdparty_info_false").checked = false
           <% end %>
 
           <% if @ch_cd.include?("CNP") %>
@@ -371,11 +379,12 @@
               select_skin_anxiety2.push(this.value)
             }
         });
-        if (document.getElementById("is_agree_thirdparty_info").checked) {
-          var is_agree_thirdparty_info = "T"
-        }else {
-          var is_agree_thirdparty_info = "F"
-        }
+        var is_agree_thirdparty_info = []
+        $('input:checkbox[name="is_agree_thirdparty_info"]').each(function() {
+            if(this.checked){
+              is_agree_thirdparty_info.push(this.value)
+            }
+        });
 
         url = ""
         url += "/admin/data_list_cnp?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
@@ -592,8 +601,10 @@
         <input class="form-control" type="text" id="start_birthmm" style="width:100px;">
         <input class="form-control" type="text" id="end_birthmm" style="width:100px;">
         <button id="birthmm_init" class="btn btn-primary">전체</button>
-
-        <font style="margin-left:10px;">제 3자 정보 제공 동의 고객: </font><input type="checkbox" name="is_agree_thirdparty_info" id="is_agree_thirdparty_info">
+      </div>
+      <div class="form-inline" style="margin-top:10px;">
+        <font style="margin-left:10px;"><제 3자 정보 제공 동의 고객> 예: </font><input type="checkbox" name="is_agree_thirdparty_info" id="is_agree_thirdparty_info_true" value="T">
+        <font style="margin-left:10px;">아니오: </font><input type="checkbox" name="is_agree_thirdparty_info" id="is_agree_thirdparty_info_false" value="F">
         <button class="btn btn-warning" id="submit">조회</button>
       </div>
     </div>

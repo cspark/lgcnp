@@ -171,7 +171,12 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     if !name.nil?
       @name = name
     end
+
     @is_agree_thirdparty_info = params[:is_agree_thirdparty_info] if !params[:is_agree_thirdparty_info].blank?
+    @is_init = true
+    if params[:select_channel].present?
+      @is_init = false
+    end
 
     @after_interviews = []
 
@@ -259,14 +264,21 @@ class Admin::FeedbackController < Admin::AdminApplicationController
         end
       end
 
-      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "T"
-        if custinfo.is_agree_thirdparty_info == "F"
-          is_contain = false
+      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] != "T,F"
+        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("T")
+          if custinfo.is_agree_thirdparty_info == "F"
+            is_contain = false
+          end
         end
-      elsif params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "F"
-        if custinfo.is_agree_thirdparty_info == "T"
-          is_contain = false
+        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("F")
+          if custinfo.is_agree_thirdparty_info == "T"
+            is_contain = false
+          end
         end
+      end
+
+      if !params.has_key?(:is_agree_thirdparty_info) || params[:is_agree_thirdparty_info] == ""
+        is_contain = false
       end
 
       if is_contain == true
@@ -334,9 +346,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
     @ch_cd = ch_cd
     @shop_cd = shop_cd
-    Rails.logger.info "!!!"
-    Rails.logger.info @ch_cd
-    Rails.logger.info @shop_cd
     fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{@ch_cd}%").where("shop_cd LIKE ?", "%#{@shop_cd}%")
 
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
@@ -367,7 +376,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
   def create_new_fcafterservice_rx(relation)
     relation.each do |tabletinterview|
-      Rails.logger.info "!!!!"
       Rails.logger.info tabletinterview.custserial
       custinfo = Custinfo.where(custserial: tabletinterview.custserial).last
       if Fcafterinterviewrx.where(custserial: tabletinterview.custserial).where(rx_tablet_interview_id: tabletinterview.tablet_interview_id).count == 0 && (custinfo.ch_cd == "CNPR" || custinfo.ch_cd == "RLAB")
@@ -466,6 +474,10 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       @name = name
     end
     @is_agree_thirdparty_info = params[:is_agree_thirdparty_info] if !params[:is_agree_thirdparty_info].blank?
+    @is_init = true
+    if params[:select_channel].present?
+      @is_init = false
+    end
 
     @after_interviews = []
 
@@ -535,14 +547,21 @@ class Admin::FeedbackController < Admin::AdminApplicationController
         is_contain = false
       end
 
-      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "T"
-        if custinfo.is_agree_thirdparty_info == "F"
-          is_contain = false
+      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] != "T,F"
+        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("T")
+          if custinfo.is_agree_thirdparty_info == "F"
+            is_contain = false
+          end
         end
-      elsif params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "F"
-        if custinfo.is_agree_thirdparty_info == "T"
-          is_contain = false
+        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("F")
+          if custinfo.is_agree_thirdparty_info == "T"
+            is_contain = false
+          end
         end
+      end
+
+      if !params.has_key?(:is_agree_thirdparty_info) || params[:is_agree_thirdparty_info] == ""
+        is_contain = false
       end
 
       if is_contain == true

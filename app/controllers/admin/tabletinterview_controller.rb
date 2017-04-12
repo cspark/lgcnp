@@ -37,7 +37,13 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @select_mode = select_mode
     @select_makeup = select_makeup
     @select_area = params[:select_area] if !params[:select_area].blank? && params[:select_area] != "all"
+    
     @is_agree_thirdparty_info = params[:is_agree_thirdparty_info] if !params[:is_agree_thirdparty_info].blank?
+    @is_init = true
+    if params[:select_channel].present?
+      @is_init = false
+    end
+
     ch_cd = ""
     shop_cd = ""
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
@@ -201,6 +207,23 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
           Rails.logger.info "BIRTHMM FALSE"
           is_contain = false
         end
+      end
+
+      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] != "T,F"
+        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("T")
+          if custinfo.is_agree_thirdparty_info == "F"
+            is_contain = false
+          end
+        end
+        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("F")
+          if custinfo.is_agree_thirdparty_info == "T"
+            is_contain = false
+          end
+        end
+      end
+
+      if !params.has_key?(:is_agree_thirdparty_info) || params[:is_agree_thirdparty_info] == ""
+        is_contain = false
       end
 
       if is_contain == true
@@ -457,7 +480,13 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @select_mode = select_mode
     @select_makeup = select_makeup
     @select_area = params[:select_area] if !params[:select_area].blank? && params[:select_area] != "all"
+
     @is_agree_thirdparty_info = params[:is_agree_thirdparty_info] if !params[:is_agree_thirdparty_info].blank?
+    @is_init = true
+    if params[:select_sex].present?
+      @is_init = false
+    end
+
     ch_cd = ""
     shop_cd = ""
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
@@ -570,14 +599,21 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       Rails.logger.info URI.decode(custinfo.custname)
       is_contain = true
 
-      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "T"
-        if custinfo.is_agree_thirdparty_info == "F"
-          is_contain = false
+      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] != "T,F"
+        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("T")
+          if custinfo.is_agree_thirdparty_info == "F"
+            is_contain = false
+          end
         end
-      elsif params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "F"
-        if custinfo.is_agree_thirdparty_info == "T"
-          is_contain = false
+        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("F")
+          if custinfo.is_agree_thirdparty_info == "T"
+            is_contain = false
+          end
         end
+      end
+
+      if !params.has_key?(:is_agree_thirdparty_info) || params[:is_agree_thirdparty_info] == ""
+        is_contain = false
       end
 
       if !@name.blank?
