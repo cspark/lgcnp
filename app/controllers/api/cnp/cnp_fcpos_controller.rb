@@ -17,9 +17,9 @@ class Api::Cnp::CnpFcposController < Api::ApplicationController
   end
 
   def destroy
-    fcpos = Fcpos.where(custserial: params[:id], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
-    if !fcpos.nil?
-      if fcpos.delete
+    fcpos = Fcpos.where(custserial: params[:id], ch_cd: params[:ch_cd], measureno: params[:measureno])
+    if fcpos.count > 0
+      if fcpos.delete_all
         render :text => "Delete Complete", status: 200
       else
         render :text => "Delete Fail", status: 404
