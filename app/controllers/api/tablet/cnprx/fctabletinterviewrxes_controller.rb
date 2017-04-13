@@ -123,6 +123,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
       if !user.nil?
         existed_interview.ch_cd = user.ch_cd
         existed_interview.save
+
       end
 
       render json: existed_interview.to_api_hash, status: :ok
@@ -222,7 +223,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   end
 
   def find_n_cust_id
-    user = Custinfo.where(n_cust_id: params[:n_cust_id]).first
+    user = Custinfo.where(n_cust_id: params[:n_cust_id]).where(ch_cd: params[:ch_cd]).first
     if !user.nil?
       render json: user.to_api_hash, status: :ok
     else
