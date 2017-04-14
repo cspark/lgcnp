@@ -44,7 +44,7 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
   end
 
   def update_reservation
-    fcschedule = Fcschedule.where(ch_cd: params[:ch_cd]).where(shop_cd: params[:shop_cd]).where(reserve_yyyy: params[:reserve_yyyy]).where(reserve_mmdd: params[:reserve_mmdd]).where(reserve_hhmm: params[:reserve_hhmm]).first
+    fcschedule = Fcschedule.where(ch_cd: params[:ch_cd]).where(shop_cd: params[:shop_cd].to_s).where(reserve_yyyy: params[:reserve_yyyy].to_s).where(reserve_mmdd: params[:reserve_mmdd].to_s).where(reserve_hhmm: params[:reserve_hhmm].to_s).first
     Rails.logger.info "!!!"
     Rails.logger.info fcschedule.reserve_hhmm
     if !fcschedule.nil?
