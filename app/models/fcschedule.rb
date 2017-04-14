@@ -1,4 +1,3 @@
-require 'rubygems'
 require 'composite_primary_keys'
 
 class Fcschedule < ApplicationRecord
