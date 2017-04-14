@@ -1,6 +1,8 @@
 class Fcschedule < ApplicationRecord
   self.table_name = "fcschedule" if Rails.env.production? || Rails.env.staging?
   self.primary_key = :ch_cd if Rails.env.production? || Rails.env.staging?
+  self.primary_key = :shop_cd if Rails.env.production? || Rails.env.staging?
+  self.primary_key = :reserve_yyyy if Rails.env.production? || Rails.env.staging?
   self.primary_key = :reserve_mmdd if Rails.env.production? || Rails.env.staging?
   self.primary_key = :reserve_hhmm if Rails.env.production? || Rails.env.staging?
 
