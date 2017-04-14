@@ -130,6 +130,7 @@ Rails.application.routes.draw do
           get 'month_list'
           get 'today_list'
           put 'update_reservation'
+          delete 'delete_schedule'
         end
       end
     end

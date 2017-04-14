@@ -2,9 +2,9 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
   def index
     # Calendar 에서 월 선택 시 해당 월에 예약이 존재하는지 확인 RESERVE_MMDD 오름차순으로 정렬
     # 년월일, 채널코드, 매장코드 조건 (* Next 조회 필요)
-    fcschedule = Fcschedule.where(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd], reserve_hhmm: params[:reserve_hhmm]).first
-    if !fcschedule.nil?
-      render json: fcschedule.to_api_hash, status: :ok
+    list = Fcschedule.where(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd])
+    if list.count > 0
+      render json: api_hash_for_list(list), status: :ok
     else
       render :text => "Fcschedule is not exist!!!", status: 404
     end
@@ -69,6 +69,19 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
         render json: fcschedule.to_api_hash, status: :ok
       else
         render :text => "Fail!!!", status: 404
+      end
+    else
+      render :text => "Fcschedule is not exist!!!", status: 204
+    end
+  end
+
+  def delete_schedule
+    fcschedule = Fcschedule.where(reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd], reserve_hhmm: params[:reserve_hhmm], ch_cd: params[:ch_cd], shop_cd: params[:shop_cd])
+    if fcschedule.count > 0
+      if fcschedule.delete_all
+        render :text => "Delete Complete", status: 200
+      else
+        render :text => "Delete Fail", status: 404
       end
     else
       render :text => "Fcschedule is not exist!!!", status: 204
