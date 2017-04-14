@@ -44,7 +44,7 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
   end
 
   def update_reservation
-    schedule = Fcschedule.where(ch_cd: params[:ch_cd]).where(shop_cd: params[:shop_cd].to_s).where(reserve_yyyy: params[:reserve_yyyy].to_s).where(reserve_mmdd: params[:reserve_mmdd].to_s).where(reserve_hhmm: params[:reserve_hhmm].to_s).first
+    schedule = Fcschedule.where(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd], reserve_hhmm: params[:reserve_hhmm]).first
     if !schedule.nil?
       if params.has_key?(:phone)
         schedule.phone = params[:phone]
