@@ -45,34 +45,33 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
 
   def update_reservation
     Rails.logger.info "update_reservation!!!"
-    schedule = Fcschedule.list(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd], reserve_hhmm: params[:reserve_hhmm]).first
+    list = Fcschedule.list(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd], reserve_hhmm: params[:reserve_hhmm])
 
-    Rails.logger.info schedule.reserve_hhmm
-    if !schedule.nil?
-      if params.has_key?(:phone)
-        schedule.phone = params[:phone]
-      end
-      if params.has_key?(:custname)
-        schedule.custname = params[:custname]
-      end
-      if params.has_key?(:memo)
-        schedule.memo = params[:memo]
-      end
-      if params.has_key?(:reserve_yn)
-        schedule.reserve_yn = params[:reserve_yn]
-      end
-      if params.has_key?(:purchase_yn)
-        schedule.purchase_yn = params[:purchase_yn]
-      end
+    Rails.logger.info schedule.count
+    if list.count > 0
+      list.each do |schedule|
+        if params.has_key?(:phone)
+          schedule.phone = params[:phone]
+        end
+        if params.has_key?(:custname)
+          schedule.custname = params[:custname]
+        end
+        if params.has_key?(:memo)
+          schedule.memo = params[:memo]
+        end
+        if params.has_key?(:reserve_yn)
+          schedule.reserve_yn = params[:reserve_yn]
+        end
+        if params.has_key?(:purchase_yn)
+          schedule.purchase_yn = params[:purchase_yn]
+        end
 
-      t = Time.now
-      schedule.uptdate = t.to_s.split(" ")[0]
+        t = Time.now
+        schedule.uptdate = t.to_s.split(" ")[0]
 
-      if schedule.save
-        render json: schedule.to_api_hash, status: :ok
-      else
-        render :text => "Fail!!!", status: 404
+        schedule.save
       end
+      render json: list.first.to_api_hash, status: :ok
     else
       render :text => "Fcschedule is not exist!!!", status: 204
     end

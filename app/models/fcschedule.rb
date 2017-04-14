@@ -1,9 +1,6 @@
-require 'rubygems'
-require 'composite_primary_keys'
-
 class Fcschedule < ApplicationRecord
   self.table_name = "fcschedule" if Rails.env.production? || Rails.env.staging?
-  self.primary_keys = :ch_cd, :shop_cd, :reserve_yyyy, :reserve_mmdd, :reserve_hhmm if Rails.env.production? || Rails.env.staging?
+  self.primary_key = :ch_cd if Rails.env.production? || Rails.env.staging?
 
   def to_api_hash
     {
