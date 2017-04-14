@@ -44,31 +44,29 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
   end
 
   def update_reservation
-    fcschedule = Fcschedule.where(ch_cd: params[:ch_cd]).where(shop_cd: params[:shop_cd].to_s).where(reserve_yyyy: params[:reserve_yyyy].to_s).where(reserve_mmdd: params[:reserve_mmdd].to_s).where(reserve_hhmm: params[:reserve_hhmm].to_s).first
-    Rails.logger.info "!!!"
-    Rails.logger.info fcschedule.reserve_hhmm
-    if !fcschedule.nil?
+    schedule = Fcschedule.where(ch_cd: params[:ch_cd]).where(shop_cd: params[:shop_cd].to_s).where(reserve_yyyy: params[:reserve_yyyy].to_s).where(reserve_mmdd: params[:reserve_mmdd].to_s).where(reserve_hhmm: params[:reserve_hhmm].to_s).first
+    if !schedule.nil?
       if params.has_key?(:phone)
-        fcschedule.phone = params[:phone]
+        schedule.phone = params[:phone]
       end
       if params.has_key?(:custname)
-        fcschedule.custname = params[:custname]
+        schedule.custname = params[:custname]
       end
       if params.has_key?(:memo)
-        fcschedule.memo = params[:memo]
+        schedule.memo = params[:memo]
       end
       if params.has_key?(:reserve_yn)
-        fcschedule.reserve_yn = params[:reserve_yn]
+        schedule.reserve_yn = params[:reserve_yn]
       end
       if params.has_key?(:purchase_yn)
-        fcschedule.purchase_yn = params[:purchase_yn]
+        schedule.purchase_yn = params[:purchase_yn]
       end
 
       t = Time.now
-      fcschedule.uptdate = t.to_s.split(" ")[0]
+      schedule.uptdate = t.to_s.split(" ")[0]
 
-      if fcschedule.save
-        render json: fcschedule.to_api_hash, status: :ok
+      if schedule.save
+        render json: schedule.to_api_hash, status: :ok
       else
         render :text => "Fail!!!", status: 404
       end
