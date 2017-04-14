@@ -44,7 +44,9 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
   end
 
   def update_reservation
+    Rails.logger.info "update_reservation!!!"
     schedule = Fcschedule.where(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd], reserve_hhmm: params[:reserve_hhmm]).first
+    Rails.logger.info schedule.reserve_hhmm
     if !schedule.nil?
       if params.has_key?(:phone)
         schedule.phone = params[:phone]
