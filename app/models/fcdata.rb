@@ -682,15 +682,15 @@ class Fcdata < ApplicationRecord
     avr3 = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_i
     avr4 = Fcavgdata.where(age: "AgeALL_Grade3").first.moisture.to_i
 
-    if avr >= avr4
+    if avr > avr4
       return 4
     end
 
-    if avr >= avr3 && avr < avr4
+    if avr > avr3 && avr <= avr4
       return 3
     end
 
-    if avr >= avr2 && avr < avr3
+    if avr >= avr2 && avr <= avr3
       return 2
     end
 
