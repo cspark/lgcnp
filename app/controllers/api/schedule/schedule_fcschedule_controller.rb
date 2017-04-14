@@ -47,7 +47,7 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
     Rails.logger.info "update_reservation!!!"
     list = Fcschedule.list(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd], reserve_hhmm: params[:reserve_hhmm])
 
-    Rails.logger.info schedule.count
+    Rails.logger.info list.count
     if list.count > 0
       list.each do |schedule|
         if params.has_key?(:phone)
