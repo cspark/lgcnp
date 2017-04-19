@@ -1,7 +1,6 @@
 class Api::Beau::BeauUserController < Api::ApplicationController
-  skip_before_action :verify_authenticity_token, :only => [:create, :get_api_key]
   skip_before_action :authenticate, :only => [:get_api_key]
-  
+
   def index
     user = Custinfo.all.where(n_cust_id: params[:n_cust_id]).order('updated_at DESC')
     if user.count > 0
