@@ -198,6 +198,7 @@ class CustinfosController < ApplicationController
     custinfo.birthdd = birthdd
     custinfo.phone = phone
     custinfo.uptdate = uptdate
+    custinfo.measureno = "0"
 
     # custinfo.save
     if custinfo.save
