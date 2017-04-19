@@ -1,6 +1,4 @@
 class Api::Admin::AdminFcdataController < Api::ApplicationController
-  skip_before_action :authenticate, :only => [:get_api_key]
-  
   def index
     list = AdminFcdata.list(custserial: params[:custserial])
     if list.count > 0

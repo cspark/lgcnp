@@ -1,6 +1,4 @@
 class Api::Cnp::CnpUserController < Api::ApplicationController
-  skip_before_action :authenticate, :only => [:get_api_key]
-  
   def index
     # CNP Tablet 앱에서 가입한 고객정보를 조건으로 고객정보 조회 (* Next 조회 필요) *추가 ADDRESS 필드
 

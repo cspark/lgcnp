@@ -1,6 +1,4 @@
 class Api::Admin::AdminFcshopController < Api::ApplicationController
-  skip_before_action :authenticate, :only => [:get_api_key]
-  
   def index
     # 매장 테이블 전체 조회 (* Next 조회 필요)
     if params.has_key?(:shop_cd)

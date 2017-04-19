@@ -1,6 +1,4 @@
 class Api::Beau::BeauFcinterviewController < Api::ApplicationController
-  skip_before_action :authenticate, :only => [:get_api_key]
-  
   def show
     interview = Fcinterview.where(custserial: params[:id], measureno: params[:measureno]).first
     if !interview.nil?
