@@ -682,12 +682,6 @@ class Fcdata < ApplicationRecord
     avr2 = Fcavgdata.where(age: "AgeALL_Grade1").first.moisture.to_i
     avr3 = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_i
     avr4 = Fcavgdata.where(age: "AgeALL_Grade3").first.moisture.to_i
-    Rails.logger.info "get_graph_mo!!!"
-    Rails.logger.info avr
-    Rails.logger.info avr1
-    Rails.logger.info avr2
-    Rails.logger.info avr3
-    Rails.logger.info avr4
 
     if avr > avr4
       return 0

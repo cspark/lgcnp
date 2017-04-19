@@ -197,6 +197,7 @@ class Api::Tablet::Cnprx::CustinfosController < Api::ApplicationController
     custinfo.phone = phone
     custinfo.uptdate = uptdate
     custinfo.n_cust_id = n_cust_id
+    custinfo.measureno = "0"
 
     # custinfo.save
     if custinfo.save
