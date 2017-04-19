@@ -1,4 +1,6 @@
 class Api::Beau::BeauFcmodecntController < Api::ApplicationController
+  skip_before_action :authenticate, :only => [:get_api_key]
+  
   def index
     list = Fcmodecnt.list(shop_cd: params[:shop_cd], ch_cd: params[:ch_cd], mode_name: params[:mode_name], analdate: params[:analdate])
     if !list.nil?

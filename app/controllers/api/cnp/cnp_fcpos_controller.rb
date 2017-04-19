@@ -1,4 +1,6 @@
 class Api::Cnp::CnpFcposController < Api::ApplicationController
+  skip_before_action :authenticate, :only => [:get_api_key]
+  
   def create
     # Data 분석이 완료 된 후 해당 고객 설문값 Insert
     if !Fcpos.where(custserial: params[:custserial], ch_cd: params[:ch_cd], measureno: params[:measureno]).first.nil?

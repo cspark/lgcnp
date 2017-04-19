@@ -1,4 +1,8 @@
 class Api::ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception
+  protect_from_forgery with: :null_session
+  before_action :authenticate
+
   def api_hash_for_list(list_of_objs, page: nil, list_key:nil, add_page_info: true)
     list_key = list_key || controller_name
     result = {}
@@ -23,6 +27,7 @@ class Api::ApplicationController < ActionController::Base
     end
   end
 
+  protected
   def authenticate
     Rails.logger.info "authenticate!!!!"
     Rails.logger.info request.headers['Authorization']
@@ -37,4 +42,5 @@ class Api::ApplicationController < ActionController::Base
       Rails.logger.info token
     end
   end
+  
 end

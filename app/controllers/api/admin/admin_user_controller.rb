@@ -1,4 +1,6 @@
 class Api::Admin::AdminUserController < Api::ApplicationController
+  skip_before_action :authenticate, :only => [:get_api_key]
+  
   def index
     # 고객정보를 조건으로 CUSTSERIAL 값 조회 (고객정보 삭제 시 , Janus 분석 data 조회 시 CUSTINFO update 시)
     user = Custinfo.where(custname: params[:custname], sex: params[:sex], birthyy: params[:birthyy], birthmm: params[:birthmm], birthdd: params[:birthdd], phone: params[:phone]).first

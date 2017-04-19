@@ -1,4 +1,6 @@
 class Api::Cnp::CnpFcdataController < Api::ApplicationController
+  skip_before_action :authenticate, :only => [:get_api_key]
+  
   def show
     list = AdminFcdata.list(custserial: params[:id])
     if list.count > 0

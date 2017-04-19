@@ -1,4 +1,6 @@
 class Api::Tablet::Cnprx::FcinterviewsController < Api::ApplicationController
+  skip_before_filter :verify_authenticity_token,  :only => :create
+  
   def index
     fcinterviews = Fcinterview.all
     render json: api_hash_for_list(fcinterviews),  status: :ok

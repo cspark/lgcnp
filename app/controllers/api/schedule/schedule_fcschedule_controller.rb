@@ -1,4 +1,6 @@
 class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
+  skip_before_action :authenticate, :only => [:get_api_key]
+  
   def index
     # Calendar 에서 월 선택 시 해당 월에 예약이 존재하는지 확인 RESERVE_MMDD 오름차순으로 정렬
     # 년월일, 채널코드, 매장코드 조건 (* Next 조회 필요)

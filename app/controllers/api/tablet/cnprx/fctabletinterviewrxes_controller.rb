@@ -1,4 +1,7 @@
 class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationController
+  skip_before_filter :verify_authenticity_token, :only => [:create, :calculate]
+  skip_before_action :verify_authenticity_token
+
   def self.calculate_push_is_agree
     custinfos = Custinfo.all
     custinfos.each do |custinfo|
