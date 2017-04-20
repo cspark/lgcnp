@@ -1,7 +1,18 @@
 class Api::Admin::AdminUserController < Api::ApplicationController
   def index
     # 고객정보를 조건으로 CUSTSERIAL 값 조회 (고객정보 삭제 시 , Janus 분석 data 조회 시 CUSTINFO update 시)
-    user = Custinfo.where(custname: params[:custname], sex: params[:sex], birthyy: params[:birthyy], birthmm: params[:birthmm], birthdd: params[:birthdd], phone: params[:phone]).first
+    if !params[:birthmm].nil? && params[:birthmm].length == 1
+      birthmm = "0".concat(params[:birthmm])
+    else
+      birthmm = params[:birthmm]
+    end
+    if !params[:birthdd].nil? && params[:birthdd].length == 1
+      birthdd = "0".concat(params[:birthdd])
+    else
+      birthdd = params[:birthdd]
+    end
+
+    user = Custinfo.where(custname: params[:custname], sex: params[:sex], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, phone: params[:phone]).first
     if !user.nil?
       render :json => user.to_api_hash_for_yanus, status: :ok
     else
