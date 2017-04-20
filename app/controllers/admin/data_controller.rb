@@ -1110,23 +1110,10 @@ class Admin::DataController < Admin::AdminApplicationController
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
     scoped = scoped.where(faceno: @select_area) if !@select_area.blank? && @select_area.downcase != "all"
-
     if @select_skin_type_device_final.blank?
       scoped = scoped.where(skintype: [100])
     else
       scoped = scoped.where(skintype: @select_skin_type_device_final)
-    end
-
-    if @select_skin_anxiety1_array.blank?
-      scoped = scoped.where(worry_skin_1: [100])
-    else
-      scoped = scoped.where(worry_skin_1: @select_skin_anxiety1_array)
-    end
-
-    if @select_skin_anxiety2_array.blank?
-      scoped = scoped.where(worry_skin_2: [100])
-    else
-      scoped = scoped.where(worry_skin_2: @select_skin_anxiety2_array)
     end
 
     if @select_filter == []
@@ -1339,7 +1326,6 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     scoped = scoped.order("measuredate desc")
-    Rails.logger.info scoped.count
 
     scoped.each do |fcdata|
       custinfo = Custinfo.where(custserial: fcdata.custserial).first
@@ -1403,18 +1389,6 @@ class Admin::DataController < Admin::AdminApplicationController
       is_contain = true
 
       if !fctabletinterview.nil?
-        if @select_skin_anxiety1_array.blank?
-          scoped = scoped.where(before_solution_1: ["!!"])
-        else
-          scoped = scoped.where(before_solution_1: @select_skin_anxiety1_array)
-        end
-
-        if @select_skin_anxiety2_array.blank?
-          scoped = scoped.where(before_solution_2: ["!!"])
-        else
-          scoped = scoped.where(before_solution_2: @select_skin_anxiety2_array)
-        end
-
         if !fctabletinterview.skin_type.nil?
           if @select_senstive != "all" && @select_senstive == "yes"
             if !fctabletinterview.skin_type.include?("senstive")
