@@ -1085,17 +1085,17 @@ class Admin::DataController < Admin::AdminApplicationController
     Rails.logger.info @select_skin_type_device_final
 
     if @select_skin_anxiety1_array.blank?
-      serial_array = Fctabletinterview.where(before_solution_1: ["!!"]).pluck(:custserial).uniq
+      serial_array = Fctabletinterviewrx.where(before_solution_1: ["!!"]).pluck(:custserial).uniq
     else
-      serial_array = Fctabletinterview.where(before_solution_1: @select_skin_anxiety1_array).pluck(:custserial).uniq
+      serial_array = Fctabletinterviewrx.where(before_solution_1: @select_skin_anxiety1_array).pluck(:custserial).uniq
     end
     Rails.logger.info "serial_array!!!"
     Rails.logger.info serial_array
 
     if @select_skin_anxiety2_array.blank?
-      serial_array2 = Fctabletinterview.where(before_solution_2: ["!!"]).pluck(:custserial).uniq
+      serial_array2 = Fctabletinterviewrx.where(before_solution_2: ["!!"]).pluck(:custserial).uniq
     else
-      serial_array2 = Fctabletinterview.where(before_solution_2: @select_skin_anxiety2_array).pluck(:custserial).uniq
+      serial_array2 = Fctabletinterviewrx.where(before_solution_2: @select_skin_anxiety2_array).pluck(:custserial).uniq
     end
     serial_array = serial_array & serial_array2
     Rails.logger.info serial_array
