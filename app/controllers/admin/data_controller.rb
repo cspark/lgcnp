@@ -1326,6 +1326,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     scoped = scoped.order("measuredate desc")
+    Rails.logger.info scoped.count
 
     scoped.each do |fcdata|
       custinfo = Custinfo.where(custserial: fcdata.custserial).first
@@ -1400,15 +1401,15 @@ class Admin::DataController < Admin::AdminApplicationController
             end
           end
         end
-      end
 
-      if !@overlap.blank? && @overlap == "T"
-        if fctabletinterview.before_solution_1 != fctabletinterview.before_solution_2
-          is_contain = false
-        end
-      elsif !@overlap.blank? && @overlap == "F"
-        if fctabletinterview.before_solution_1 == fctabletinterview.before_solution_2
-          is_contain = false
+        if !@overlap.blank? && @overlap == "T"
+          if fctabletinterview.before_solution_1 != fctabletinterview.before_solution_2
+            is_contain = false
+          end
+        elsif !@overlap.blank? && @overlap == "F"
+          if fctabletinterview.before_solution_1 == fctabletinterview.before_solution_2
+            is_contain = false
+          end
         end
       end
 
@@ -1417,9 +1418,9 @@ class Admin::DataController < Admin::AdminApplicationController
       end
     end
 
-    @count = @fcdatas.count
-    @fcdatas_excel = @fcdatas
-    @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
+    @count = @fcdatas_final.count
+    @fcdatas_excel = @fcdatas_final
+    @fcdatas = Kaminari.paginate_array(@fcdatas_final).page(params[:page]).per(3)
 
     respond_to do |format|
       format.html
