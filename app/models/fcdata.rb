@@ -348,7 +348,7 @@ class Fcdata < ApplicationRecord
     end
 
     if type == "sb"
-      my_position = e_porphyrin_u
+      my_position = (e_porphyrin_u.to_f + e_porphyrin_t.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
       first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_u.to_f
