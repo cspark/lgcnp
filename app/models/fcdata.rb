@@ -678,10 +678,10 @@ class Fcdata < ApplicationRecord
     end
 
     avr = (self.mo_1.to_f + self.mo_7.to_f + self.mo_8.to_f) / 3
-    avr1 = Fcavgdata.where(age: "AgeALL_Min").first.moisture.to_i
-    avr2 = Fcavgdata.where(age: "AgeALL_Grade1").first.moisture.to_i
-    avr3 = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_i
-    avr4 = Fcavgdata.where(age: "AgeALL_Grade3").first.moisture.to_i
+    avr1 = Fcavgdata.where(age: "AgeALL_Grade1").first.moisture.to_i
+    avr2 = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_i
+    avr3 = Fcavgdata.where(age: "AgeALL_Grade3").first.moisture.to_i
+    avr4 = Fcavgdata.where(age: "AgeALL_Grade4").first.moisture.to_i
 
     if avr > avr4
       return 0
