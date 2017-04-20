@@ -175,8 +175,8 @@ class Api::Tablet::Cnprx::CustinfosController < Api::ApplicationController
     is_agree_after = params[:is_agree_after]
     n_cust_id = params[:n_cust_id]
 
-    time = Time.new
-    uptdate = time.year.to_s + "/" + time.month.to_s + "/" + time.day.to_s
+    time = Time.now
+    uptdate = time.strftime("%Y/%m/%d")
 
     custinfo = Custinfo.new
     custinfo.custserial = Custinfo.all.order('custserial ASC').last.custserial + 1

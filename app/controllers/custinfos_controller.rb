@@ -174,8 +174,8 @@ class CustinfosController < ApplicationController
     is_agree_marketing = params[:is_agree_marketing]
     is_agree_after = params[:is_agree_after]
 
-    time = Time.new
-    uptdate = time.year.to_s + "/" + time.month.to_s + "/" + time.day.to_s
+    time = Time.now
+    uptdate = time.strftime("%Y/%m/%d")
 
     custinfo = Custinfo.new
     custinfo.custserial = Custinfo.all.order('custserial ASC').last.custserial + 1
