@@ -964,8 +964,6 @@ class Admin::DataController < Admin::AdminApplicationController
     end_birthyy = params[:end_birthyy]
     start_birthmm = params[:start_birthmm]
     end_birthmm = params[:end_birthmm]
-    select_mode = params[:select_mode]
-    select_makeup = params[:select_makeup]
     select_area = params[:select_area]
     select_skin_type_device = params[:select_skin_type_device]
     select_senstive = params[:select_senstive]
@@ -986,8 +984,6 @@ class Admin::DataController < Admin::AdminApplicationController
     @end_birthyy = end_birthyy
     @start_birthmm = start_birthmm
     @end_birthmm = end_birthmm
-    @select_mode = select_mode
-    @select_makeup = select_makeup
     @select_area = select_area
     @select_senstive = select_senstive
     @select_skin_anxiety1 = select_skin_anxiety1
@@ -1033,6 +1029,8 @@ class Admin::DataController < Admin::AdminApplicationController
         @select_skin_anxiety1_array.push(anxiety)
       end
     end
+    Rails.logger.info "@select_skin_anxiety1_array"
+    Rails.logger.info @select_skin_anxiety1_array
 
     @select_skin_anxiety2_array = []
     if !select_skin_anxiety2.blank?
@@ -1040,6 +1038,8 @@ class Admin::DataController < Admin::AdminApplicationController
         @select_skin_anxiety2_array.push(anxiety)
       end
     end
+    Rails.logger.info "@select_skin_anxiety2_array"
+    Rails.logger.info @select_skin_anxiety2_array
 
     if !Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first.nil?
       min_age_custinfo = Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first
@@ -1081,12 +1081,16 @@ class Admin::DataController < Admin::AdminApplicationController
         @select_skin_type_device_final.push(9)
       end
     end
+    Rails.logger.info "@select_skin_type_device_final!!"
+    Rails.logger.info @select_skin_type_device_final
 
     if @select_skin_anxiety1_array.blank?
       serial_array = Fctabletinterview.where(before_solution_1: ["!!"]).pluck(:custserial).uniq
     else
       serial_array = Fctabletinterview.where(before_solution_1: @select_skin_anxiety1_array).pluck(:custserial).uniq
     end
+    Rails.logger.info "serial_array!!!"
+    Rails.logger.info serial_array
 
     if @select_skin_anxiety2_array.blank?
       serial_array2 = Fctabletinterview.where(before_solution_2: ["!!"]).pluck(:custserial).uniq
@@ -1094,6 +1098,7 @@ class Admin::DataController < Admin::AdminApplicationController
       serial_array2 = Fctabletinterview.where(before_solution_2: @select_skin_anxiety2_array).pluck(:custserial).uniq
     end
     serial_array = serial_array & serial_array2
+    Rails.logger.info serial_array
 
     @fcdatas = []
     @fcdatas_final = []
@@ -1105,7 +1110,6 @@ class Admin::DataController < Admin::AdminApplicationController
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
     scoped = scoped.where(faceno: @select_area) if !@select_area.blank? && @select_area.downcase != "all"
-    scoped = scoped.where(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode == 0
 
     if @select_skin_type_device_final.blank?
       scoped = scoped.where(skintype: [100])
@@ -1420,12 +1424,6 @@ class Admin::DataController < Admin::AdminApplicationController
             if fctabletinterview.skin_type.include?("senstive")
               is_contain = false
             end
-          end
-        end
-
-        if !@select_makeup.blank? && @select_makeup != "all"
-          if fctabletinterview.a_1 != @select_makeup.to_i
-            is_contain = false
           end
         end
       end
