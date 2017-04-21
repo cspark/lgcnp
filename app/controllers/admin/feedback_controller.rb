@@ -367,11 +367,11 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       @tablet_interviews_today = Fctabletinterviewrx.where(custserial: serial_array).where(fcdata_id: measureno_array)
       @tablet_interviews_2_weeks_ago = Fctabletinterviewrx.where(custserial: serial_array).where(fcdata_id: measureno_array)
       @tablet_interviews_3_months_ago = Fctabletinterviewrx.where(custserial: serial_array).where(fcdata_id: measureno_array)
-    end
 
-    create_new_fcafterservice_rx(@tablet_interviews_today)
-    create_new_fcafterservice_rx(@tablet_interviews_2_weeks_ago)
-    create_new_fcafterservice_rx(@tablet_interviews_3_months_ago)
+      create_new_fcafterservice_rx(@tablet_interviews_today)
+      create_new_fcafterservice_rx(@tablet_interviews_2_weeks_ago)
+      create_new_fcafterservice_rx(@tablet_interviews_3_months_ago)
+    end
   end
 
   def create_new_fcafterservice_rx(relation)
@@ -547,23 +547,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
         is_contain = false
       end
 
-      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] != "T,F"
-        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("T")
-          if custinfo.is_agree_thirdparty_info == "F"
-            is_contain = false
-          end
-        end
-        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("F")
-          if custinfo.is_agree_thirdparty_info == "T"
-            is_contain = false
-          end
-        end
-      end
-
-      if !params.has_key?(:is_agree_thirdparty_info) || params[:is_agree_thirdparty_info] == ""
-        is_contain = false
-      end
-
       if is_contain == true
         @after_interviews << after_interview
       end
@@ -602,7 +585,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       @average_a6 = (@average_a6 / divider).to_f
     end
 
-    @count = @after_interviews.count
     @after_interviews_excel = @after_interviews
     @after_interviews = Kaminari.paginate_array(@after_interviews).page(params[:page]).per(5)
 

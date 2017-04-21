@@ -156,9 +156,9 @@ class GenerateTestModel < ApplicationRecord
        f.custserial = 4.to_s
        f.ch_cd = "RLAB"
        f.faceno = "F"
-       f.measuredate = "2017-04-07-13-00-00"
+       f.measuredate = "2017-04-21-13-00-00"
        f.measureno = 1
-       f.uptdate = "2017-04-07"
+       f.uptdate = "2017-04-21"
        f.mo_1 = 1.0
        f.mo_7 = 1.0
        f.mo_8 = 1.0

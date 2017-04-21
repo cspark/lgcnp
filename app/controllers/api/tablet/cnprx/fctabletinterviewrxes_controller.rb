@@ -249,7 +249,67 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
     else
       render json: "", status: 404
     end
+  end
 
+  def create_afterinterviewrx
+    tabletinterviewrx = Fctabletinterviewrx.where(custserial: params[:custserial]).where(tablet_interview_id: params[:tablet_interview_id]).first
+    if !tabletinterviewrx.nil?
+      after_interview = Fcafterinterviewrx.new
+      after_interview.custserial = params[:custserial]
+      after_interview.rx_tablet_interview_id = params[:tablet_interview_id]
+      after_interview.after_interview_id = Fcafterinterviewrx.all.count
+      after_interview.rx_tablet_interview_uptdate = tabletinterviewrx.uptdate
+      after_interview.order = 0
+
+      after_interview.a1 = params[:a1]
+      after_interview.a3 = params[:a3]
+      after_interview.a4 = params[:a4]
+      after_interview.a5 = params[:a5]
+      after_interview.a5 = params[:a6]
+
+      if params.has_key?(:a2)
+        after_interview.a2 = params[:a2]
+      end
+      if params.has_key?(:a1_1)
+        after_interview.a1_1 = params[:a1_1]
+      end
+      if params.has_key?(:a5)
+        after_interview.a5 = params[:a5]
+      end
+      if params.has_key?(:a5_1)
+        after_interview.a5_1 = params[:a5_1]
+      end
+      if params.has_key?(:a6)
+        after_interview.a6 = params[:a6]
+      end
+      if params.has_key?(:a6_1)
+        after_interview.a6_1 = params[:a6_1]
+      end
+
+      t = Time.now
+
+      time_string = t.strftime("%H")
+      time_string = time_string.concat("-")
+      time_string = time_string.concat(t.strftime("%m"))
+      time_string = time_string.concat("-")
+      time_string = time_string.concat(t.strftime("%d"))
+      time_string = time_string.concat("-")
+      time_string = time_string.concat(t.strftime("%H"))
+      time_string = time_string.concat("-")
+      time_string = time_string.concat(t.strftime("%M"))
+      time_string = time_string.concat("-")
+      time_string = time_string.concat(t.strftime("%S"))
+
+      after_interview.uptdate = time_string
+
+      if after_interview.save
+        render json: after_interview.to_api_hash, status: :ok
+      else
+        render json: "", status: 404
+      end
+    else
+      render json: "", status: 404
+    end
   end
 
   def permitted_param

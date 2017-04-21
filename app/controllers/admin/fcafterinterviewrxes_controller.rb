@@ -40,16 +40,17 @@ class Admin::FcafterinterviewrxesController < Admin::AdminApplicationController
     end
 
     after_interview.a1 = params[:a1]
-    after_interview.a2 = params[:a2]
+
     after_interview.a3 = params[:a3]
     after_interview.a4 = params[:a4]
     after_interview.a5 = params[:a5]
+    after_interview.a5 = params[:a6]
 
+    if params.has_key?(:a2)
+      after_interview.a2 = params[:a2]
+    end
     if params.has_key?(:a1_1)
       after_interview.a1_1 = params[:a1_1]
-    end
-    if params.has_key?(:a3_1)
-      after_interview.a3_1 = params[:a3_1]
     end
     if params.has_key?(:a5)
       after_interview.a5 = params[:a5]
@@ -60,8 +61,8 @@ class Admin::FcafterinterviewrxesController < Admin::AdminApplicationController
     if params.has_key?(:a6)
       after_interview.a6 = params[:a6]
     end
-    if params.has_key?(:a7)
-      after_interview.a7 = params[:a7]
+    if params.has_key?(:a6_1)
+      after_interview.a6_1 = params[:a6_1]
     end
 
     t = Time.now

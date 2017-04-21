@@ -152,46 +152,48 @@ Rails.application.routes.draw do
     #CNP RX
     namespace :tablet do
       namespace :cnprx do
-	    get "get_api_key" => "custinfos#get_api_key"
-	    get "find_user" => "custinfos#find_user"
-	    get "find_users" => "custinfos#find_users"
-	    get "update_phone_number" => "custinfos#update_phone_number"
-	    get "update_name" => "custinfos#update_name"
-	    get "update_email" => "custinfos#update_email"
-	    get "update_after_service" => "custinfos#update_after_service"
-	    get "update_agreement" => "custinfos#update_agreement"
+  	    get "get_api_key" => "custinfos#get_api_key"
+  	    get "find_user" => "custinfos#find_user"
+  	    get "find_users" => "custinfos#find_users"
+  	    get "update_phone_number" => "custinfos#update_phone_number"
+  	    get "update_name" => "custinfos#update_name"
+  	    get "update_email" => "custinfos#update_email"
+  	    get "update_after_service" => "custinfos#update_after_service"
+  	    get "update_agreement" => "custinfos#update_agreement"
 
-	    resources :custinfos do
-	    end
+        resources :custinfos do
+        end
 
-	    resources :fcinterviews do
-	    end
+        resources :fcinterviews do
+        end
 
-	    resources :fcposs do
-	    end
+        resources :fcposs do
+        end
 
-	    resources :fcdatas do
-	    end
-	    get "get_before_fcdata_count" => "fcdatas#get_before_fcdata_count"
-	    get "check_yanus_status" => "fcdatas#check_yanus_status"
-	    get "face_data" => "fcdatas#face_data"
-	    get "face_data_existed" => "fcdatas#face_data_existed"
+        resources :fcdatas do
+        end
+        get "get_before_fcdata_count" => "fcdatas#get_before_fcdata_count"
+        get "check_yanus_status" => "fcdatas#check_yanus_status"
+        get "face_data" => "fcdatas#face_data"
+        get "face_data_existed" => "fcdatas#face_data_existed"
 
-	    resources :fctabletinterviewrxes do
-	    end
-      get "find_lcare_user" => "fctabletinterviewrxes#find_lcare_user"
-      get "find_n_cust_id" => "fctabletinterviewrxes#find_n_cust_id"
-	    get "find_interviewrxes" => "fctabletinterviewrxes#find_interviews"
-	    post "update_interviewrxes" => "fctabletinterviewrxes#update_interviews"
-	    post "update_interviewrxes_just_refund" => "fctabletinterviewrxes#update_interviews_just_refund"
-	    post "fctabletinterviewrxes_quickmode" => "fctabletinterviewrxes#fctabletinterviews_quickmode"
-	    post "fctabletinterviewrxes_update_lots" => "fctabletinterviewrxes#fctabletinterviews_update_lots"
-	    get "is_update" => "update#is_update"
-      post "interview_count_increase" => "fctabletinterviewrxes#interview_count_increase"
+        resources :fctabletinterviewrxes do
+        end
+        get "find_lcare_user" => "fctabletinterviewrxes#find_lcare_user"
+        get "find_n_cust_id" => "fctabletinterviewrxes#find_n_cust_id"
+        get "find_interviewrxes" => "fctabletinterviewrxes#find_interviews"
+        post "update_interviewrxes" => "fctabletinterviewrxes#update_interviews"
+        post "update_interviewrxes_just_refund" => "fctabletinterviewrxes#update_interviews_just_refund"
+        post "fctabletinterviewrxes_quickmode" => "fctabletinterviewrxes#fctabletinterviews_quickmode"
+        post "fctabletinterviewrxes_update_lots" => "fctabletinterviewrxes#fctabletinterviews_update_lots"
+        get "is_update" => "update#is_update"
+        post "interview_count_increase" => "fctabletinterviewrxes#interview_count_increase"
+        post "create_afterinterviewrx" => "fctabletinterviewrxes#create_afterinterviewrx"
+        post "update_afterinterviewrx" => "fctabletinterviewrxes#update_afterinterviewrx"
 
-	    #Related Admin
-	    get 'calculate' => 'fctabletinterviewrxes#calculate'
-	  end
+        #Related Admin
+        get 'calculate' => 'fctabletinterviewrxes#calculate'
+      end
     end
 
   end
