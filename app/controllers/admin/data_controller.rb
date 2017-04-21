@@ -991,7 +991,6 @@ class Admin::DataController < Admin::AdminApplicationController
     @select_skin_type_device = params[:select_skin_type_device]
     @overlap = overlap if !overlap.blank?
 
-    @is_agree_thirdparty_info = params[:is_agree_thirdparty_info] if !params[:is_agree_thirdparty_info].blank?
     @is_init = true
     if params[:select_sex].present?
       @is_init = false
@@ -1331,23 +1330,6 @@ class Admin::DataController < Admin::AdminApplicationController
     scoped.each do |fcdata|
       custinfo = Custinfo.where(custserial: fcdata.custserial).first
       is_contain = true
-
-      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] != "T,F"
-        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("T")
-          if custinfo.is_agree_thirdparty_info == "F"
-            is_contain = false
-          end
-        end
-        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("F")
-          if custinfo.is_agree_thirdparty_info == "T"
-            is_contain = false
-          end
-        end
-      end
-
-      if !params.has_key?(:is_agree_thirdparty_info) || params[:is_agree_thirdparty_info] == ""
-        is_contain = false
-      end
 
       if !@name.blank?
         if !custinfo.custname.include? @name
