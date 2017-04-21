@@ -72,8 +72,6 @@
           <% end %>
           <% if f1.present? %>
             <td><a onClick="show_after_interview_1(<%= f1.after_interview_id %>, <%= f1.rx_tablet_interview_id %>, <%= f1.custserial %>)"><%= is_feed_back_ok_1 %></a></td>
-          <% else %>
-            <td><a onClick="show_after_interview_1()"><%= is_feed_back_ok_1 %></a></td>
           <% end %>
 
           <% f2 = Fcafterinterviewrx.where(rx_tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 1).first %>
