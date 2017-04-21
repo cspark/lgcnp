@@ -76,14 +76,9 @@
         <% if data.reserve_yn == "N" %>
           <% reserve = "X" %>
         <% end %>
-        <% purchase = "O" %>
-        <% if data.purchase_yn == "N" %>
-          <% purchase = "X" %>
-        <% end %>
         <td><%= reserve %></td>
         <td><%= data.memo %></td>
         <td><%= data.uptdate %></td>
-        <td><%= purchase %></td>
       </tr>
     </body>
 </html>
