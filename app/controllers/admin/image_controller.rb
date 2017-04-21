@@ -32,7 +32,7 @@ class Admin::ImageController < Admin::AdminApplicationController
       scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank?
       scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-      scoped = scoped.order("uptdate desc")
+      scoped = scoped.order("measuredate desc")
 
       scoped.each do |fcdata|
         custinfo = Custinfo.where(custserial: fcdata.custserial).first
