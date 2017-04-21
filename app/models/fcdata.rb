@@ -328,6 +328,7 @@ class Fcdata < ApplicationRecord
       if ch_cd == "CNPR" || ch_cd == "RLAB"
         tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first
         if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
+          Rails.logger.info "e_porphyrin_t Customer!!!"
           my_position = e_porphyrin_t + 0.7
         end
       end
@@ -358,6 +359,7 @@ class Fcdata < ApplicationRecord
       if ch_cd == "CNPR" || ch_cd == "RLAB"
         tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first
         if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
+          Rails.logger.info "sb Customer!!!"
           my_position = (e_porphyrin_u.to_f + 0.7 + e_porphyrin_t.to_f) / 2
         end
       end
@@ -388,6 +390,7 @@ class Fcdata < ApplicationRecord
       if ch_cd == "CNPR" || ch_cd == "RLAB"
         tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first
         if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
+          Rails.logger.info "pp Customer!!!"
           my_position = sp_pl_avr+5
         end
       end
@@ -551,6 +554,7 @@ class Fcdata < ApplicationRecord
       if ch_cd == "CNPR" || ch_cd == "RLAB"
         tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first
         if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
+          Rails.logger.info "e_porphyrin_t Customer!!!"
           my_position = e_porphyrin_t + 0.7
         end
       end
@@ -674,6 +678,7 @@ class Fcdata < ApplicationRecord
       if self.ch_cd == "CNPR" || self.ch_cd == "RLAB"
         tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: self.ch_cd).where(custserial: self.custserial).where(fcdata_id: self.measureno).first
         if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
+          Rails.logger.info "sb Customer!!!"
           avr = (self.e_porphyrin_u.to_f + 0.7 + self.e_porphyrin_t.to_f) / 2
         end
       end
@@ -691,6 +696,7 @@ class Fcdata < ApplicationRecord
       if ch_cd == "CNPR" || ch_cd == "RLAB"
         tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: self.ch_cd).where(custserial: self.custserial).where(fcdata_id: self.measureno).first
         if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
+          Rails.logger.info "pp Customer!!!"
           avr = self.sp_pl_avr+5
         end
       end
