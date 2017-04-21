@@ -123,11 +123,29 @@
             <% elsif filter.include?("after_solution_2") %>
               <td class="text-center" id="after_solution_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
             <% elsif filter.include?("recommand_program_step_1") %>
-              <td class="text-center"><%= URI.decode(tabletinterview.recommand_program_step_1) %></td>
+              <td class="text-center">
+                <% if !tabletinterview.recommand_program_step_1.nil? %>
+                  <%= URI.decode(tabletinterview.recommand_program_step_1) %>
+                <% else %>
+                -
+                <% end %>
+              </td>
             <% elsif filter.include?("recommand_program_step_2") %>
-              <td class="text-center"><%= URI.decode(tabletinterview.recommand_program_step_2) %></td>
+              <td class="text-center">
+                <% if !tabletinterview.recommand_program_step_2.nil? %>
+                  <%= URI.decode(tabletinterview.recommand_program_step_2) %>
+                <% else %>
+                -
+                <% end %>
+              </td>
             <% elsif filter.include?("recommand_program_step_3") %>
-              <td class="text-center"><%= URI.decode(tabletinterview.recommand_program_step_3) %></td>
+              <td class="text-center">
+                <% if !tabletinterview.recommand_program_step_3.nil? %>
+                  <%= URI.decode(tabletinterview.recommand_program_step_3) %>
+                <% else %>
+                -
+                <% end %>
+              </td>
             <% elsif filter.include?("purchase1") %>
               <td class="text-center"><%= URI.decode(tabletinterview.purchase1) %></td>
             <% elsif filter.include?("purchase2") %>
