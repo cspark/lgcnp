@@ -91,7 +91,7 @@
           <% end %>
         <% end %>
         <td class="text-center"><%= is_agree_marketing %></td>
-        <td class="text-center"><%= Fctabletinterview.where(custserial: user.custserial).count %></td>
+        <td class="text-center"><%= user.measureno.to_i %></td>
       </tr>
     </body>
 </html>

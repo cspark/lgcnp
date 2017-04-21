@@ -38,7 +38,7 @@
       <h2 style="float:left; width:45%;">고객정보</h2>
       <% if @user.ch_cd == "CNP" || @user.ch_cd == "CLAB" %>
       <div style="float:right; width:45%; margin-top:30px;">
-        <button id="<%= @user.custserial %>/<%= @user.ch_cd %>/<%= @user.measureno %>" style="float:right; margin-right:50px;" class="btn btn-warning edit-user">수정</button>
+        <button id="<%= @user.custserial %>/<%= @user.ch_cd %>/<%= @user.measureno.to_i %>" style="float:right; margin-right:50px;" class="btn btn-warning edit-user">수정</button>
       </div>
       <% end %>
     </div><br><br>
@@ -76,7 +76,7 @@
        <% is_agree_after = "O" %>
       <% end %>
       <b>사후 피드백 서비스</b> <%= is_agree_after %> <br>
-      <b>측정 횟수</b> <%= @user.measureno %>
+      <b>측정 횟수</b> <%= @user.measureno.to_i %>
     </font>
 
   </body>

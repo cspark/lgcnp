@@ -325,6 +325,7 @@ class Fcdata < ApplicationRecord
 
     if type == "e_porphyrin_t"
       my_position = e_porphyrin_t
+      my_position = e_porphyrin_t + 0.7 if m_skintype.to_i != 0
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
       first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_t.to_f
@@ -349,6 +350,7 @@ class Fcdata < ApplicationRecord
 
     if type == "sb"
       my_position = (e_porphyrin_u.to_f + e_porphyrin_t.to_f) / 2
+      my_position = (e_porphyrin_u.to_f + 0.7 + e_porphyrin_t.to_f) / 2 if m_skintype.to_i != 0
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
       first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_u.to_f
@@ -373,6 +375,7 @@ class Fcdata < ApplicationRecord
 
     if type == "pp"
       my_position = sp_pl_avr
+      my_position = sp_pl_avr+5 if m_skintype.to_i != 0
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
       first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.spot_pl.to_f
@@ -530,6 +533,7 @@ class Fcdata < ApplicationRecord
 
     if type.to_s == "e_porphyrin_t"
       my_position = e_porphyrin_t
+      my_position = e_porphyrin_t + 0.7 if m_skintype.to_i != 0
       age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
@@ -647,7 +651,7 @@ class Fcdata < ApplicationRecord
       # 트러블
       # E_PORPHYTRIN_T	E_PORPHYTRIN_U 평균값
       avr = (self.e_porphyrin_u.to_f + self.e_porphyrin_t.to_f) / 2
-
+      avr = (self.e_porphyrin_u.to_f + 0.7 + self.e_porphyrin_t.to_f) / 2 if self.m_skintype.to_i != 0
       avr1 = (Fcavgdata.where(age: avg_grade_1_field_name).first.e_porphyrin_u.to_f + Fcavgdata.where(age: avg_grade_1_field_name).first.e_porphyrin_t.to_f) / 2
       avr2 = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_f + Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_f) / 2
       avr3 = (Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_f) / 2
@@ -659,6 +663,7 @@ class Fcdata < ApplicationRecord
     if type == "pp"
       # 색소침착 SPOT_PL
       avr = self.sp_pl_avr
+      avr = self.sp_pl_avr+5 if m_skintype.to_i != 0
       avr1 = Fcavgdata.where(age: avg_grade_1_field_name).first.spot_pl.to_i
       avr2 = Fcavgdata.where(age: avg_grade_2_field_name).first.spot_pl.to_i
       avr3 = Fcavgdata.where(age: avg_grade_3_field_name).first.spot_pl.to_i

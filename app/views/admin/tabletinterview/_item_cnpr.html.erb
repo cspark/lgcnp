@@ -76,16 +76,16 @@
 
         function translate_solution(value){
             try{
-              if(value == "elasticity solution")
+              if(value == "SCORE_ELASTICITY")
                 return "탄력 솔루션";
-              else if(value == "pigment solution")
-                return "색소침착 솔루션";
-              else if(value == "pore solution")
-                return "모공 솔루션";
-              else if(value == "trouble solution")
-                return "트러블 솔루션";
-              else if(value == "wrinkle solution")
+              else if(value == "SKIN_WRINKLE")
                 return "주름 솔루션";
+              else if(value == "SCORE_WATER")
+                return "건조 솔루션";
+              else if(value == "SCORE_TROUBLE")
+                return "트러블 솔루션";
+              else if(value == "SCORE_PIGMENT")
+                return "색소침착 솔루션";
               else
                 return value;
             }catch(err){
