@@ -363,6 +363,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       @tablet_interviews_3_months_ago = Fctabletinterviewrx.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
       @tablet_interviews_3_months_ago2 = Fctabletinterviewrx.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
       @tablet_interviews_3_months_ago = @tablet_interviews_3_months_ago.or(@tablet_interviews_3_months_ago2)
+      create_new_fcafterservice_rx(@tablet_interviews_today)
       create_new_fcafterservice_rx(@tablet_interviews_2_weeks_ago)
       create_new_fcafterservice_rx(@tablet_interviews_3_months_ago)
     else
@@ -378,7 +379,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
   def create_new_fcafterservice_rx(relation)
     Rails.logger.info "create_new_fcafterservice_rx!!!"
-    Rails.logger.info relation
+    Rails.logger.info relation.count
     relation.each do |tabletinterview|
       Rails.logger.info tabletinterview.custserial
       custinfo = Custinfo.where(custserial: tabletinterview.custserial).last

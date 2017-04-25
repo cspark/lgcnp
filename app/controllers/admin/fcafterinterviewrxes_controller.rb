@@ -17,6 +17,9 @@ class Admin::FcafterinterviewrxesController < Admin::AdminApplicationController
     after_interview_id = params[:after_interview_id]
 
     @after_interview = Fcafterinterviewrx.where(custserial: custserial).where(rx_tablet_interview_id: tablet_interview_id).where(after_interview_id: after_interview_id).first
+    Rails.logger.info "show_1!!"
+    Rails.logger.info @after_interview.custserial.to_i
+    Rails.logger.info @after_interview.rx_tablet_interview_id.to_i
     render 'show_1'
   end
 
