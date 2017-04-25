@@ -58,10 +58,10 @@
         <td><%= tabletinterview.custserial.to_i %></td>
         <td><%= tabletinterview.uptdate %></td>
         <td id="phone_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></td>
-          <% is_agree = "X" %>
-          <% if tabletinterview.is_agree_after == "T" %>
-            <% is_agree = "O" %>
-          <% end %>
+        <% is_agree = "X" %>
+        <% if tabletinterview.is_agree_after == "T" %>
+          <% is_agree = "O" %>
+        <% end %>
         <td><%= is_agree %></td>
           <!-- 1차설문 조건에 상관없이 보임 -->
           <% f1 = Fcafterinterviewrx.where(rx_tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 0).first %>
@@ -72,6 +72,8 @@
           <% end %>
           <% if f1.present? %>
             <td><a onClick="show_after_interview_1(<%= f1.after_interview_id %>, <%= f1.rx_tablet_interview_id %>, <%= f1.custserial %>)"><%= is_feed_back_ok_1 %></a></td>
+          <% else %>
+            <td><a onClick="show_after_interview_1()"><%= is_feed_back_ok_1 %></a></td>
           <% end %>
 
           <% f2 = Fcafterinterviewrx.where(rx_tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 1).first %>
