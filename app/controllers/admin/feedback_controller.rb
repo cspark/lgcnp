@@ -381,13 +381,13 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       Rails.logger.info tabletinterview.custserial
       custinfo = Custinfo.where(custserial: tabletinterview.custserial).last
       if Fcafterinterviewrx.where(custserial: tabletinterview.custserial).where(rx_tablet_interview_id: tabletinterview.tablet_interview_id).count == 0 && (custinfo.ch_cd == "CNPR" || custinfo.ch_cd == "RLAB")
-        after_interview = Fcafterinterviewrx.new
-        after_interview.custserial = tabletinterview.custserial
-        after_interview.rx_tablet_interview_id = tabletinterview.tablet_interview_id
-        after_interview.after_interview_id = Fcafterinterviewrx.all.count
-        after_interview.rx_tablet_interview_uptdate = tabletinterview.uptdate
-        after_interview.order = 0
-        after_interview.save
+        # after_interview = Fcafterinterviewrx.new
+        # after_interview.custserial = tabletinterview.custserial
+        # after_interview.rx_tablet_interview_id = tabletinterview.tablet_interview_id
+        # after_interview.after_interview_id = Fcafterinterviewrx.all.count
+        # after_interview.rx_tablet_interview_uptdate = tabletinterview.uptdate
+        # after_interview.order = 0
+        # after_interview.save
 
         after_interview = Fcafterinterviewrx.new
         after_interview.custserial = tabletinterview.custserial
