@@ -64,7 +64,11 @@
         <% end %>
         <td><%= is_agree %></td>
           <!-- 1차설문 조건에 상관없이 보임 -->
-          <% f1 = Fcafterinterviewrx.where(rx_tablet_interview_id: tabletinterview.tablet_interview_id).where(custserial: tabletinterview.custserial.to_i).where(order: 0).first %>
+          <% f1 = Fcafterinterviewrx.where(rx_tablet_interview_id: tabletinterview.tablet_interview_id.to_i).where(custserial: tabletinterview.custserial.to_i).where(order: 0).first %>
+          <% Rails.logger.info "f1!!!" %>
+          <% Rails.logger.info tabletinterview.tablet_interview_id.to_i %>
+          <% Rails.logger.info tabletinterview.custserial.to_i %>
+          <% Rails.logger.info f1 if !f1.nil? %>
           <% if f1.present? && f1.a1.nil? %>
             <% is_feed_back_ok_1 = "X" %>
           <% else %>
