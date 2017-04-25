@@ -252,6 +252,9 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   end
 
   def create_afterinterviewrx
+    Rails.logger.info "create_afterinterviewrx!!!"
+    Rails.logger.info params[:custserial]
+    Rails.logger.info params[:tablet_interview_id]
     tabletinterviewrx = Fctabletinterviewrx.where(custserial: params[:custserial]).where(tablet_interview_id: params[:tablet_interview_id]).first
     if !tabletinterviewrx.nil?
       after_interview = Fcafterinterviewrx.new
