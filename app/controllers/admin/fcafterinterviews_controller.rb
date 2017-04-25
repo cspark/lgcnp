@@ -45,7 +45,7 @@ class Admin::FcafterinterviewsController < Admin::AdminApplicationController
 
     t = Time.now
 
-    time_string = t.strftime("%Y")[2,4]
+    time_string = t.strftime("%H")
     time_string = time_string.concat("-")
     time_string = time_string.concat(t.strftime("%m"))
     time_string = time_string.concat("-")
