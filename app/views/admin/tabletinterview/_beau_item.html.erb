@@ -58,10 +58,21 @@
         <td><%= interview.interview_5 %></td>
         <td><%= interview.interview_6 %></td>
         <td><%= interview.interview_7 %></td>
-        <td><%= interview.interview_8 %></td>
-        <td><%= interview.interview_9 %></td>
-        <td><%= interview.interview_10 %></td>
+        <% if interview.interview_8 != "0" %>
+          <td><%= interview.interview_8 %></td>
+        <% else %>
+          <td>-</td>
+        <% end %>
+        <% if interview.interview_9 != "0" %>
+          <td><%= interview.interview_9 %></td>
+        <% else %>
+          <td>-</td>
+        <% end %>
+        <% if interview.interview_10 != "0" %>
+          <td><%= interview.interview_10 %></td>
+        <% else %>
+          <td>-</td>
+        <% end %>
       </tr>
-
     </body>
 </html>
