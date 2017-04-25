@@ -6,6 +6,9 @@ class Admin::UserController < Admin::AdminApplicationController
   before_action :is_admin
 
   def index
+    custserial = params[:custserial]
+    @custserial = custserial
+
     @count = 0
     if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin")
       ch_cd = ""
@@ -31,25 +34,23 @@ class Admin::UserController < Admin::AdminApplicationController
     # custserial_array = custserial_array + custserial_array2
     measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
+    scoped = Custinfo.all
+    scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     if params.has_key?(:search) && params[:search].length != 0
       @search = params[:search]
-      @users = Custinfo.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc").page(params[:page]).per(5)
-      @users2 = Custinfo.where(custserial: custserial_array2).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc").page(params[:page]).per(5)
+      @users = scoped.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
+      @users2 = scoped.where(custserial: custserial_array2).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
       @users = @users.or(@users2)
-      @all_users = Custinfo.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
-      @all_users2 = Custinfo.where(custserial: custserial_array2).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
-      @all_users = @all_users.or(@all_users2)
     else
       @search = ""
-      @users = Custinfo.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc").page(params[:page]).per(5)
-      @users2 = Custinfo.where(custserial: custserial_array2).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc").page(params[:page]).per(5)
+      @users = scoped.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc")
+      @users2 = scoped.where(custserial: custserial_array2).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc")
       @users = @users.or(@users2)
-      @all_users = Custinfo.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc")
-      @all_users2 = Custinfo.where(custserial: custserial_array2).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc")
-      @all_users = @all_users.or(@all_users2)
     end
 
-    @count = @all_users.count
+    @count = @users.count
+    @users = Kaminari.paginate_array(@users).page(params[:page]).per(5)
+
     respond_to do |format|
       format.html
       # format.csv { send_data Custinfo.to_csv(@users) }

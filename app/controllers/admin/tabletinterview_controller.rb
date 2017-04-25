@@ -351,9 +351,14 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     @beau_interviews = []
     # if Rails.env.production? || Rails.env.staging?
-    is_contain = true
-
     fcdata_list = Fcdata.where("faceno LIKE ?", "%#{@select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%")
+    if !@select_mode.blank?
+      if @select_mode.downcase != "all" && @select_mode.downcase == "total"
+        fcdata_list = Fcdata.where("faceno LIKE ?", "%#{@select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%").where((m_skintype: 0)
+      elsif @select_mode.downcase != "all" && @select_mode.downcase == "makeup"
+        fcdata_list = Fcdata.where("faceno LIKE ?", "%#{@select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%").where.not(m_skintype: 0)
+      end
+    end
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
     measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
@@ -385,12 +390,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
       Rails.logger.info custinfo.custname
       is_contain = true
-
-      if !@select_mode.blank?
-        if @select_mode.downcase != "all" && @select_mode.downcase != "total"
-          is_contain = false
-        end
-      end
 
       if !@name.blank?
         if !custinfo.custname.include? @name

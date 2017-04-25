@@ -29,6 +29,10 @@
           <% end %>
         <% end %>
 
+        <% if !@custserial.nil? %>
+          document.getElementById("custserial").value = '<%= @custserial %>'
+        <% end %>
+
         $(document).keyup(function (e) {
             if ($("#search").is(":focus") && (e.keyCode == 13)) {
                 console.log(encodeURI($("#search").val()));
@@ -55,12 +59,13 @@
         $('#submit').click(function(){
           if (document.getElementById("select_channel") != null) {
             var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
-
             url = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
             url += "&select_channel=" +ch_cd
             url += "&select_shop=" +$("#select_shop").val();
+            url += "&custserial=" + document.getElementById("custserial").value;
           } else {
             url = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
+            url += "&custserial=" + document.getElementById("custserial").value;
           }
           location.href = url;
         });
@@ -110,10 +115,10 @@
     <%= render "admin/header" %>
     <div style="background: #b1cbbb; padding: 8px;">
       <p style="float:left; margin-top:7px;">이름: &nbsp;</p>
-      <input class="form-control" type="text" id="search" placeholder="이름으로 검색" style="float:left; width: 200px;">
+      <input class="form-control" type="text" id="search" placeholder="이름으로 검색" style="float:left; width: 100px;">
       <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
       <p style="float:left; margin-left: 20px; margin-top: 5px;">채널:&nbsp;</p>
-      <select class="form-control" id="select_channel" style="float:left; margin-left: 5px; width:200px;">
+      <select class="form-control" id="select_channel" style="float:left; margin-left: 5px; width:100px;">
         <option value="ALL">전체</option>
         <option value="CNP">CNP</option>
         <option value="MART">마트</option>
@@ -125,14 +130,17 @@
         <option value="RLAB">RLAB</option>
       </select>
       <p style="float:left; margin-left: 20px; margin-top: 7px;">매장 코드:&nbsp;</p>
-      <input class="form-control" type="text" id="select_shop" style="float:left; width: 200px;">
+      <input class="form-control" type="text" id="select_shop" style="float:left; width: 100px;">
+      <p style="float:left; margin-left: 20px; margin-top: 7px;">시리얼키:&nbsp;</p>
+      <input class="form-control" type="text" id="custserial" style="float:left; width:100px;">
       <% end %>
 
       <button style="margin-left: 10px;" class="btn btn-warning" id="submit">조회</button>
       <p style="float:right; margin-right:20px; margin-top:5px;">
         Download:
         <!-- <%= link_to "CSV", admin_user_list_path(format: "csv") %> -->
-        <%= link_to "Excel", admin_user_list_path(format: "xlsx", :search => @search, :isExcel => true) %>
+        <%= link_to "Excel", admin_user_list_path(format: "xlsx", :search => @search,
+        :custserial => @custserial, :isExcel => true) %>
       </p>
     </div>
     <div id="avr" style="background: #eea29a; padding: 8px;">
