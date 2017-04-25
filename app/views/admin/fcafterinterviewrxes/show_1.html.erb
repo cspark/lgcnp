@@ -312,10 +312,10 @@
               <% if !fctabletinterview.purchase1.nil? %>
               Step1: <%= URI.decode(fctabletinterview.purchase1).gsub("+"," ") %><br>
               <% end %>
-              <% if !fctabletinterview.purchase1.nil? %>
+              <% if !fctabletinterview.purchase2.nil? %>
               Step2: <%= URI.decode(fctabletinterview.purchase2).gsub("+"," ") %><br>
               <% end %>
-              <% if !fctabletinterview.purchase1.nil? %>
+              <% if !fctabletinterview.purchase3.nil? %>
               Step3: <%= URI.decode(fctabletinterview.purchase3).gsub("+"," ") %><br>
               <% end %>
               <b>메모</b> <div id="memo_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></b></div> <br>
