@@ -149,9 +149,6 @@
             </thead>
             <tbody>
               <% @tablet_interviews_today.each do |tabletinterview| %>
-                <% Rails.logger.info "input_cnpr!!" %>
-                <% Rails.logger.info tabletinterview.custserial.to_i %>
-                <% Rails.logger.info tabletinterview.tablet_interview_id.to_i %>
                 <%= render partial: "admin/feedback/item_rx", locals: { tabletinterview: tabletinterview } %>
               <% end %>
             </tbody>

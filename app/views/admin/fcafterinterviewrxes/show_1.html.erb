@@ -299,9 +299,15 @@
               <b>전화번호</b> <%= user.phone %> <br>
               <b>맞춤일자</b> <%= fctabletinterview.uptdate %> <br>
               <b>맞춤제품</b><br>
+              <% if !fctabletinterview.recommand_program_step_1.nil? %>
               Step1: <%= URI.decode(fctabletinterview.recommand_program_step_1).gsub("+"," ") %><br>
+              <% end %>
+              <% if !fctabletinterview.recommand_program_step_2.nil? %>
               Step2: <%= URI.decode(fctabletinterview.recommand_program_step_2).gsub("+"," ") %><br>
+              <% end %>
+              <% if !fctabletinterview.recommand_program_step_3.nil? %>
               Step3: <%= URI.decode(fctabletinterview.recommand_program_step_3).gsub("+"," ") %><br>
+              <% end %>
               <b>구매제품</b><br>
               <% if !fctabletinterview.purchase1.nil? %>
               Step1: <%= URI.decode(fctabletinterview.purchase1).gsub("+"," ") %><br>

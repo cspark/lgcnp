@@ -378,8 +378,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
   end
 
   def create_new_fcafterservice_rx(relation)
-    Rails.logger.info "create_new_fcafterservice_rx!!!"
-    Rails.logger.info relation.count
     relation.each do |tabletinterview|
       Rails.logger.info tabletinterview.custserial
       custinfo = Custinfo.where(custserial: tabletinterview.custserial).last
