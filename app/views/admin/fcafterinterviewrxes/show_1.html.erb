@@ -13,6 +13,16 @@
         <% user = Custinfo.where(custserial: @after_interview.custserial).first %>
         <% fctabletinterview = Fctabletinterviewrx.where(custserial: @after_interview.custserial).where(tablet_interview_id: @after_interview.rx_tablet_interview_id).first %>
 
+        <% Rails.logger.info "function!!!" %>
+        <% Rails.logger.info @after_interview.custserial.to_i %>
+        <% Rails.logger.info fctabletinterview.custserial.to_i %>
+        <% Rails.logger.info fctabletinterview.tablet_interview_id.to_i %>
+        <% Rails.logger.info @after_interview.custserial.to_i %>
+        <% Rails.logger.info @after_interview.a1.to_i %>
+        <% Rails.logger.info @after_interview.a1_1.to_i if !@after_interview.a1_1.nil? %>
+        <% Rails.logger.info @after_interview.a6.to_i %>
+        <% Rails.logger.info @after_interview.a6_1.to_i if !@after_interview.a6_1.nil? %>
+
         try
         {
           $('#name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append( decode_utf8('<%= user.custname %>'));
@@ -88,6 +98,8 @@
           <% end %>
 
           <% if !@after_interview.a1_1.nil? %>
+            <% Rails.logger.info "!a1_1.nil?!!" %>
+            <% Rails.logger.info @after_interview.a1_1.to_s %>
             document.getElementById("a1_5_text").value = "<%= @after_interview.a1_1.to_s.gsub(/\r\n/, " ") %>";
           <% end %>
 
