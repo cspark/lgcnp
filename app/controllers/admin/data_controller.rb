@@ -149,7 +149,7 @@ class Admin::DataController < Admin::AdminApplicationController
       end
     end
 
-    if @select_skin_anxiety1_array.blank? || @skin_type_survey_array.blank?
+    if @select_skin_anxiety1_array.blank? || @skin_type_tabletinterview_controller.rbsurvey_array.blank?
       serial_array = Fctabletinterview.where(before_solution_1: ["!!"]).pluck(:custserial).uniq
     else
       serial_array = Fctabletinterview.where(before_solution_1: @select_skin_anxiety1_array).where(skin_type: @skin_type_survey_array).pluck(:custserial).uniq
@@ -167,6 +167,7 @@ class Admin::DataController < Admin::AdminApplicationController
     scoped = Fcdata.where(ch_cd: @ch_array).where(custserial: serial_array)
     Rails.logger.info "scoped count"
     Rails.logger.info scoped.count
+    Rails.logger.info @select_skin_type_device_final if !@select_skin_type_device_final.blank?
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
@@ -179,6 +180,7 @@ class Admin::DataController < Admin::AdminApplicationController
     else
       scoped = scoped.where(skintype: @select_skin_type_device_final)
     end
+    Rails.logger.info scoped.count
 
     if @select_filter == []
       @excel_name = ["이름","분석 횟수","채널구분","전면/좌/우측면","분석 일","업데이트 일","수분 측정1","수분 측정2","수분 측정3","모공 측정1","모공 측정2","모공 측정7","모공 측정8","모공 측정avr","주름 측정3", "주름 측정4", "주름 측정6", "주름 측정avr",
@@ -471,6 +473,8 @@ class Admin::DataController < Admin::AdminApplicationController
             is_contain = false
           end
         end
+
+        Rails.logger.info @select_mode if !@select_mode.blank?
 
         if !@select_mode.blank? && @select_mode != "all"
           if fctabletinterview.is_quick_mode != @select_mode
