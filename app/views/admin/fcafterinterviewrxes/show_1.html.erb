@@ -100,7 +100,7 @@
           <% if !@after_interview.a1_1.nil? %>
             <% Rails.logger.info "!a1_1.nil?!!" %>
             <% Rails.logger.info @after_interview.a1_1.to_s %>
-            document.getElementById("a1_5_text").value = "<%= @after_interview.a1_1.to_s.gsub(/\r\n/, " ") %>";
+            document.getElementById("a1_5_text").value = decode_utf8("<%= @after_interview.a1_1.to_s.gsub(/\r\n/, " ") %>");
           <% end %>
 
           <% if @after_interview.a2 == 1 %>
@@ -161,7 +161,7 @@
           <% if !@after_interview.a6_1.nil? %>
             <% Rails.logger.info "!a6_1.nil?!!" %>
             <% Rails.logger.info @after_interview.a6_1.to_s %>
-            document.getElementById("a6_5_text").value = "<%= @after_interview.a6_1.to_s.gsub("\n", "<br>") %>";
+            document.getElementById("a6_5_text").value = decode_utf8("<%= @after_interview.a6_1.to_s.gsub("\n", "<br>") %>");
           <% end %>
         <% end %>
 
