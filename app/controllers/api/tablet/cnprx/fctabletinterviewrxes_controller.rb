@@ -291,7 +291,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
 
       t = Time.now
 
-      time_string = t.strftime("%H")
+      time_string = t.strftime("%y")
       time_string = time_string.concat("-")
       time_string = time_string.concat(t.strftime("%m"))
       time_string = time_string.concat("-")
