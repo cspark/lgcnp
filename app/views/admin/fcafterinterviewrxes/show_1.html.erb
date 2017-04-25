@@ -161,7 +161,7 @@
           <% if !@after_interview.a6_1.nil? %>
             <% Rails.logger.info "!a6_1.nil?!!" %>
             <% Rails.logger.info @after_interview.a6_1.to_s %>
-            document.getElementById("a6_5_text").value = "<%= @after_interview.a6_1.to_s.gsub("\n", " ") %>";
+            document.getElementById("a6_5_text").value = "<%= @after_interview.a6_1.to_s.gsub("\n", "<br>") %>";
           <% end %>
         <% end %>
 
