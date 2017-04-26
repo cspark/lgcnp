@@ -32,7 +32,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
 
   def fctabletinterviews_quickmode
     tabletinterview = Fctabletinterviewrx.new(permitted_param)
-    tablet_summary = FctabletinterviewrxSummary.order("cnpr_tablet_count desc").first
+    tablet_summary = FctabletinterviewrxSummary.where.not(cnpr_tablet_count: nil).order("cnpr_tablet_count desc").first
     if tablet_summary.nil? || tablet_summary.cnpr_tablet_count.nil?
       count = Fctabletinterviewrx.all.count + 1
     else
@@ -81,7 +81,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
 
   def create
     tabletinterview = Fctabletinterviewrx.new(permitted_param)
-    tablet_summary = FctabletinterviewrxSummary.order("cnpr_tablet_count desc").first
+    tablet_summary = FctabletinterviewrxSummary.where.not(cnpr_tablet_count: nil).order("cnpr_tablet_count desc").first
     if tablet_summary.nil? || tablet_summary.cnpr_tablet_count.nil?
       count = Fctabletinterviewrx.all.count + 1
     else
@@ -235,8 +235,8 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   end
 
   def interview_count_increase
-    if !FctabletinterviewrxSummary.order("interview_mode_count desc").first.nil?
-      max_count = FctabletinterviewrxSummary.order("interview_mode_count desc").first.interview_mode_count
+    if !FctabletinterviewrxSummary.where.not(interview_mode_count: nil).order("interview_mode_count desc").first.nil?
+      max_count = FctabletinterviewrxSummary.where.not(interview_mode_count: nil).order("interview_mode_count desc").first.interview_mode_count
       summary = FctabletinterviewrxSummary.new
       summary.interview_mode_count = max_count + 1
     else

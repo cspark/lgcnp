@@ -31,7 +31,7 @@ class FctabletinterviewsController < ApplicationController
 
   def fctabletinterviews_quickmode
     tabletinterview = Fctabletinterview.new(permitted_param)
-    tablet_summary = FctabletinterviewrxSummary.order("cnp_tablet_count desc").first
+    tablet_summary = FctabletinterviewrxSummary.where.not(cnp_tablet_count: nil).order("cnp_tablet_count desc").first
     if tablet_summary.nil? || tablet_summary.cnp_tablet_count.nil?
       count = Fctabletinterview.all.count + 1
     else
@@ -80,7 +80,7 @@ class FctabletinterviewsController < ApplicationController
 
   def create
     tabletinterview = Fctabletinterview.new(permitted_param)
-    tablet_summary = FctabletinterviewrxSummary.order("cnp_tablet_count desc").first
+    tablet_summary = FctabletinterviewrxSummary.where.not(cnp_tablet_count: nil).order("cnp_tablet_count desc").first
     if tablet_summary.nil? || tablet_summary.cnp_tablet_count.nil?
       count = Fctabletinterview.all.count + 1
     else
