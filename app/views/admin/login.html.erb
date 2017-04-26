@@ -9,11 +9,18 @@
         <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
 
         <script>
+            var real_ip;
             $(function () {
+                $.getJSON("http://jsonip.com/?callback=?", function (data) {
+                  console.log(data.ip);
+                  real_ip = data.ip
+                });
+
                 $("#login").click(function () {
                     var formData = new FormData($(this)[0]);
                     formData.append("email", $('#ID').val());
                     formData.append("password", $('#Password').val());
+                    formData.append("real_ip", real_ip);
 
                     $.ajax({
                         url: "/admin/admin_login",

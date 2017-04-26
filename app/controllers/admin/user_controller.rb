@@ -1,7 +1,7 @@
 require 'iconv'
 
 class Admin::UserController < Admin::AdminApplicationController
-  skip_before_filter :verify_authenticity_token, :only => [:index, :calculate]
+  skip_before_action :verify_authenticity_token, :only => [:index, :calculate]
   skip_before_action :verify_authenticity_token
   before_action :is_admin
 

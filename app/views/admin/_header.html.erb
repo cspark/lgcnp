@@ -213,9 +213,6 @@
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
             <li id="manager_list"><a href="#">매장 관리자</a></li>
           <% end %>
-          <% if session[:admin_user] == "user" %>
-            <li id="image_test"><a href="#">이미지 업로드 테스트</a></li>
-          <% end %>
         </ul>
         <ul class="nav navbar-nav navbar-right">
            <li id="logout"><a href="#"><span class="glyphicon glyphicon-log-in"></span>로그아웃</a></li>

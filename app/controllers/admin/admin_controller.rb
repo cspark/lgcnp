@@ -26,10 +26,12 @@ class Admin::AdminController < Admin::AdminApplicationController
       session[:admin_user] = user
       history = LoginHistory.new
       history.email = params[:email]
-      history.ip = request.remote_ip
-      history.created_at = Time.now.to_datetime+10.minutes 
+      # history.ip = AdminUser.local_ip
+      history.ip = params[:real_ip] || request.remote_ip
+      history.created_at = Time.now.to_datetime+10.minutes
       history.save
       Rails.logger.info "Login success"
+      Rails.logger.info history.ip
     else
 
     end
