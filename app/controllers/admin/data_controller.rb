@@ -1390,15 +1390,15 @@ class Admin::DataController < Admin::AdminApplicationController
           end
         end
 
-        if !@overlap.blank? && @overlap == "T"
-          if fctabletinterview.before_solution_1 != fctabletinterview.before_solution_2
-            is_contain = false
-          end
-        elsif !@overlap.blank? && @overlap == "F"
-          if fctabletinterview.before_solution_1 == fctabletinterview.before_solution_2
-            is_contain = false
-          end
-        end
+        # if !@overlap.blank? && @overlap == "T"
+        #   if fctabletinterview.before_solution_1 != fctabletinterview.before_solution_2
+        #     is_contain = false
+        #   end
+        # elsif !@overlap.blank? && @overlap == "F"
+        #   if fctabletinterview.before_solution_1 == fctabletinterview.before_solution_2
+        #     is_contain = false
+        #   end
+        # end
       end
 
       if is_contain == true
