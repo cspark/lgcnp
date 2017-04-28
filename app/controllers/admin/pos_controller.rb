@@ -27,13 +27,13 @@ class Admin::PosController < Admin::AdminApplicationController
       users.each do |user|
         user_custserials.push(user.custserial)
       end
-      if ch_cd == ""
+      if @ch_cd == ""
         @fcpos = Fcpos.where("ch_cd LIKE ?", "%#{@ch_cd}%").where(custserial: user_custserials).order("uptdate desc")
       else
         @fcpos = Fcpos.where(ch_cd: @ch_cd).where(custserial: user_custserials).order("uptdate desc")
       end
     else
-      if ch_cd == ""
+      if @ch_cd == ""
         @fcpos = Fcpos.where("ch_cd LIKE ?", "%#{@ch_cd}%").order("uptdate desc")
       else
         @fcpos = Fcpos.where(ch_cd: @ch_cd).order("uptdate desc")
