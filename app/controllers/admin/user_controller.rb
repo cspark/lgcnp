@@ -28,7 +28,11 @@ class Admin::UserController < Admin::AdminApplicationController
     @ch_cd = ch_cd
     @shop_cd = shop_cd
 
-    fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
+    if ch_cd == ""
+      fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
+    else
+      fcdata_list = Fcdata.where(ch_cd: ch_cd).where("shop_cd LIKE ?", "%#{shop_cd}%")
+    end
     custserial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     custserial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1001, 2001).pluck(:custserial).uniq
     # custserial_array = custserial_array + custserial_array2

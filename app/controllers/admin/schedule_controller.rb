@@ -30,7 +30,11 @@ class Admin::ScheduleController < Admin::AdminApplicationController
     select_mmdd = @select_date.to_s.split("-")[1]+@select_date.to_s.split("-")[2]
 
     scoped = Fcschedule.all
-    scoped = scoped.where("shop_cd LIKE ?", "%#{shop_cd}%").where("ch_cd LIKE ?", "%#{ch_cd}%").where("reserve_yyyy = ?", select_year)
+    if ch_cd == ""
+      scoped = scoped.where("shop_cd LIKE ?", "%#{shop_cd}%").where("ch_cd LIKE ?", "%#{ch_cd}%").where("reserve_yyyy = ?", select_year)
+    else
+      scoped = scoped.where("shop_cd LIKE ?", "%#{shop_cd}%").where(ch_cd: ch_cd).where("reserve_yyyy = ?", select_year)
+    end
     scoped = scoped.where("reserve_mmdd = ?", select_mmdd)
     scoped = scoped.where("custname LIKE ?", "%#{@search}%")
     @fcschedules = scoped.order("reserve_hhmm asc")
