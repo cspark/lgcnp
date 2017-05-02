@@ -23,6 +23,36 @@ class Admin::FcafterinterviewrxesController < Admin::AdminApplicationController
     render 'show_1'
   end
 
+  def create_show_1
+    tabletinterviewrx = Fctabletinterviewrx.where(custserial: params[:custserial]).where(tablet_interview_id: params[:tablet_interview_id]).first
+
+    @after_interview = Fcafterinterviewrx.new
+    @after_interview.custserial = params[:custserial]
+    @after_interview.rx_tablet_interview_id = params[:tablet_interview_id]
+    @after_interview.after_interview_id = Fcafterinterviewrx.all.count
+    @after_interview.rx_tablet_interview_uptdate = tabletinterviewrx.uptdate
+    @after_interview.order = 0
+
+    t = Time.now
+
+    time_string = t.strftime("%Y")[2,4]
+    time_string = time_string.concat("-")
+    time_string = time_string.concat(t.strftime("%m"))
+    time_string = time_string.concat("-")
+    time_string = time_string.concat(t.strftime("%d"))
+    time_string = time_string.concat("-")
+    time_string = time_string.concat(t.strftime("%H"))
+    time_string = time_string.concat("-")
+    time_string = time_string.concat(t.strftime("%M"))
+    time_string = time_string.concat("-")
+    time_string = time_string.concat(t.strftime("%S"))
+
+    @after_interview.uptdate = time_string
+    @after_interview.save
+
+    render 'show_1'
+  end
+
   def update
     custserial = params[:custserial]
     tablet_interview_id = params[:tablet_interview_id]
