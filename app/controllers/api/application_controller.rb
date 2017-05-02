@@ -37,10 +37,11 @@ class Api::ApplicationController < ActionController::Base
   end
 
   def authenticate_token
+    Rails.logger.info "!! authenticate"
     authenticate_or_request_with_http_token do |token, options|
       Rails.logger.info "! authenticate"
       Rails.logger.info token
     end
   end
-  
+
 end
