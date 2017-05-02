@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get "/"  => "admin#index"
+    get "/manager_0501"  => "admin#index"
     get "admin_login"  => "admin#admin_login"
     post "admin_login"  => "admin#login"
     delete "admin_logout" => "admin#logout"
@@ -98,7 +98,7 @@ Rails.application.routes.draw do
       end
       resources :beau_lcare_user do
         collection do
-          get 'lcare_integrated_user_list'
+          post 'lcare_integrated_user_list'
         end
       end
       resources :beau_fcmodecnt do
@@ -127,8 +127,8 @@ Rails.application.routes.draw do
       end
       resources :schedule_fcschedule do
         collection do
-          get 'month_list'
-          get 'today_list'
+          post 'month_list'
+          post 'today_list'
           put 'update_reservation'
           delete 'delete_schedule'
         end
@@ -138,7 +138,7 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :admin_lcare_user do
         collection do
-          get 'lcare_integrated_user_list'
+          post 'lcare_integrated_user_list'
         end
       end
       resources :admin_user do
