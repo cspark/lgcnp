@@ -12,19 +12,28 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
 
   def month_list
     # 예약 스케줄 정보 추가/수정 시 해당 년월일로 조회하여 예약 스케줄 정보가 존재하는지 확인
-    list = Fcschedule.month_list(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mm: params[:reserve_mmdd][0,2])
-    if list.count > 0
-      render json: api_hash_for_list(list), status: :ok
+    if params.has_key?(:ch_cd) && params.has_key?(:shop_cd) && params.has_key?(:reserve_yyyy) && params.has_key?(:reserve_mmdd)
+      list = Fcschedule.month_list(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mm: params[:reserve_mmdd][0,2])
+      if list.count > 0
+        render json: api_hash_for_list(list), status: :ok
+      else
+        render :text => "Fcschedule is not exist!!!", status: 204
+      end
     else
       render :text => "Fcschedule is not exist!!!", status: 204
     end
+
   end
 
   def today_list
     # 예약 스케줄 관리 프로그램 실행 시 팝업되는 '금일 예약자 리스트'에 추가될 오늘 날짜에 대한 예약스케줄 정보 확인 (* Next 조회 필요)
-    list = Fcschedule.list(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd]).order('reserve_hhmm ASC')
-    if list.count > 0
-      render json: api_hash_for_list(list), status: :ok
+    if params.has_key?(:ch_cd) && params.has_key?(:shop_cd) && params.has_key?(:reserve_yyyy) && params.has_key?(:reserve_mmdd)
+      list = Fcschedule.list(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd]).order('reserve_hhmm ASC')
+      if list.count > 0
+        render json: api_hash_for_list(list), status: :ok
+      else
+        render :text => "Fcschedule is not exist!!!", status: 204
+      end
     else
       render :text => "Fcschedule is not exist!!!", status: 204
     end

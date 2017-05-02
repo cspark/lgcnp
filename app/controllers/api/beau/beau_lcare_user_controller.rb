@@ -1,10 +1,12 @@
 class Api::Beau::BeauLcareUserController < Api::ApplicationController
   def lcare_integrated_user_list
     # L-Care 통합회원 조회 이름, 생년월일, 핸드폰번호, 통합회원여부 조건으로 고객정보 조회 (* Next 조회 필요)
-    if params.has_key?(:cell_phnno)
+    if params.has_key?(:cell_phnno) && params.has_key?(:cust_hnm) && params.has_key?(:birth_year) && params.has_key?(:birth_mmdd)
       lcare_users = LcareUser.list(cust_hnm: params[:cust_hnm], birth_year: params[:birth_year], birth_mmdd: params[:birth_mmdd], cell_phnno: params[:cell_phnno])
-    else
+    elsif params.has_key?(:cust_hnm) && params.has_key?(:birth_year) && params.has_key?(:birth_mmdd)
       lcare_users = LcareUser.list(cust_hnm: params[:cust_hnm], birth_year: params[:birth_year], birth_mmdd: params[:birth_mmdd])
+    else
+      render :text => "Lcare user not exist!!!", status: 204
     end
 
     if lcare_users.count > 0
