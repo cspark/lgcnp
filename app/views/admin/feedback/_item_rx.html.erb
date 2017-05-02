@@ -69,7 +69,7 @@
           <% Rails.logger.info tabletinterview.tablet_interview_id.to_i %>
           <% Rails.logger.info tabletinterview.custserial.to_i %>
           <% Rails.logger.info f1 if !f1.nil? %>
-          <% if f1.nil? || (f1.present? && !f1.a1.nil?) %>
+          <% if f1.nil? || (f1.present? && f1.a1.nil?) %>
             <% is_feed_back_ok_1 = "X" %>
           <% else %>
             <% is_feed_back_ok_1 = "O" %>
