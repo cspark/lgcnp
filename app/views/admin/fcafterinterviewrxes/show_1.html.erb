@@ -103,10 +103,12 @@
             document.getElementById("a1_5_text").value = decode_utf8("<%= @after_interview.a1_1.to_s.gsub(/\r\n/, " ") %>");
           <% end %>
 
-          <% if @after_interview.a2 == 1 %>
-            $('#a2_1').prop('checked', true);
-          <% elsif @after_interview.a2 == 2 %>
-            $('#a2_2').prop('checked', true);
+          <% if !@after_interview.a2.nil? %>
+            <% if @after_interview.a2 == 1 %>
+              $('#a2_1').prop('checked', true);
+            <% elsif @after_interview.a2 == 2 %>
+              $('#a2_2').prop('checked', true);
+            <% end %>
           <% end %>
 
           <% if @after_interview.a3 == 1 %>
@@ -141,21 +143,23 @@
             $('#a5_3').prop('checked', true);
           <% end %>
 
-          <% if @after_interview.a6.include?("1") %>
-            $('#a6_1').prop('checked', true);
-          <% end %>
-          <% if @after_interview.a6.include?("2") %>
-            $('#a6_2').prop('checked', true);
-          <% end %>
-          <% if @after_interview.a6.include?("3") %>
-            $('#a6_3').prop('checked', true);
-          <% end %>
-          <% if @after_interview.a6.include?("4") %>
-            $('#a6_4').prop('checked', true);
-          <% end %>
-          <% if @after_interview.a6.include?("5") %>
-            $('#a6_5').prop('checked', true);
-            document.getElementById("a6_5_text").disabled = false;
+          <% if !@after_interview.a6.nil? %>
+            <% if @after_interview.a6.include?("1") %>
+              $('#a6_1').prop('checked', true);
+            <% end %>
+            <% if @after_interview.a6.include?("2") %>
+              $('#a6_2').prop('checked', true);
+            <% end %>
+            <% if @after_interview.a6.include?("3") %>
+              $('#a6_3').prop('checked', true);
+            <% end %>
+            <% if @after_interview.a6.include?("4") %>
+              $('#a6_4').prop('checked', true);
+            <% end %>
+            <% if @after_interview.a6.include?("5") %>
+              $('#a6_5').prop('checked', true);
+              document.getElementById("a6_5_text").disabled = false;
+            <% end %>
           <% end %>
 
           <% if !@after_interview.a6_1.nil? %>
