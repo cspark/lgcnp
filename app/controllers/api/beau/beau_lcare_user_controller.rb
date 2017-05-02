@@ -1,4 +1,6 @@
 class Api::Beau::BeauLcareUserController < Api::ApplicationController
+  skip_before_action :authenticate, :only => [:get_api_key]
+  
   def lcare_integrated_user_list
     # L-Care 통합회원 조회 이름, 생년월일, 핸드폰번호, 통합회원여부 조건으로 고객정보 조회 (* Next 조회 필요)
     if params.has_key?(:cust_hnm) && params.has_key?(:birth_year) && params.has_key?(:birth_mmdd)

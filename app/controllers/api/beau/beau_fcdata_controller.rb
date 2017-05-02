@@ -1,4 +1,6 @@
 class Api::Beau::BeauFcdataController < Api::ApplicationController
+  skip_before_action :authenticate, :only => [:get_api_key]
+  
   def show
     list = AdminFcdata.list(custserial: params[:id], measureno: params[:measureno])
     if list.count > 0
