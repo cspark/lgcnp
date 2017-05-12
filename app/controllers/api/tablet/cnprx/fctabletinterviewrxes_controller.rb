@@ -228,6 +228,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
         birthdd = params[:birth_mmdd][2,4]
         phone = params[:cell_phnno]
         n_cust_id = lcare_user.n_cust_id
+        sex = lcare_user.sex_cd
 
         time = Time.now
         uptdate = time.strftime("%Y/%m/%d")
@@ -250,6 +251,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
         custinfo.uptdate = uptdate
         custinfo.n_cust_id = n_cust_id
         custinfo.measureno = "0"
+        custinfo.sex = sex
 
         # custinfo.save
         if custinfo.save
