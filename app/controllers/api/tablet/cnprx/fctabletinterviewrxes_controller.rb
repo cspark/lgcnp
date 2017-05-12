@@ -216,6 +216,8 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   end
 
   def find_lcare_user
+    Rails.logger.info "!!!"
+    Rails.logger.info params[:cust_hnm]
     lcare_user = LcareUser.where(cust_hnm: params[:cust_hnm], birth_year: params[:birth_year], birth_mmdd: params[:birth_mmdd], cell_phnno: params[:cell_phnno], u_cust_yn: "Y").first
     if !lcare_user.nil?
       custinfo = Custinfo.where(n_cust_id: lcare_user.n_cust_id).where(ch_cd: params[:ch_cd]).first
