@@ -231,6 +231,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
         phone = params[:cell_phnno]
         n_cust_id = lcare_user.n_cust_id
         sex = lcare_user.sex_cd
+        Rails.logger.info lcare_user.sex_cd
 
         time = Time.now
         uptdate = time.strftime("%Y/%m/%d")
