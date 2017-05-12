@@ -14,7 +14,8 @@
     $ (function () {
       if ( '<%= @admin_user.role %>' != 'admin' && "<%= @admin_user %>" != null) {
         $("#email").val('<%= @admin_user.email %>');
-        $("#select_shop").val('<%= @admin_user.shop_cd %>');
+        $("#shop_cd").val('<%= @admin_user.shop_cd %>');
+        $("#ch_cd").val('<%= @admin_user.ch_cd %>');
       }
 
       if ("<%= @admin_user %>" != null){
@@ -30,8 +31,8 @@
         }
 
         if ( '<%= @admin_user.role %>' != 'admin' ){
-          var shop_cd = document.getElementById("select_shop").options[document.getElementById("select_shop").selectedIndex].value;
-          var ch_cd = document.getElementById("select_shop").options[document.getElementById("select_shop").selectedIndex].id;
+          var shop_cd = document.getElementById("shop_cd").value;
+          var ch_cd = document.getElementById("ch_cd").value;
           formData.append("ch_cd", ch_cd);
           formData.append("shop_cd", shop_cd);
         }
@@ -86,20 +87,11 @@
         <input class="form-control" type="password" id="password" style="width:200px;">
 
         <% if @admin_user.role != "admin" %>
-        매장 이름 :
-        <select class="form-control" id="select_shop" style="width:200px;">
-          <option id="LABO" value="1001">LG연구소</option>
-          <option id="LABO" value="1002">젠스토리</option>
-          <option id="LABO" value="1003">LG에스타워 보떼</option>
-          <option id="CLAB" value="1004">LG에스타워 CNP</option>
-          <option id="TMR" value="304639">NC 인천 올리브점</option>
-          <option id="BEAU" value="505415">수지 상현점</option>
-          <option id="BEAU" value="504130">파주 금촌점</option>
-          <option id="MART" value="505488">홈플러스 월드컵점</option>
-          <option id="TMR" value="304401">NC 안산 상록수점</option>
-          <option id="CNP" value="59100">르메디바이씨앤피 이대점</option>
-          <option id="TMR" value="304369">NC 신촌점</option>
-        </select><br>
+        <font>채널 코드</font>
+        <input class="form-control" type="text" id="ch_cd" style="width:200px;">
+
+        <font>매장 코드</font>
+        <input class="form-control" type="text" id="shop_cd" style="width:200px;">
         <% end %>
         <center>
           <button class="btn btn-warning" id="submit">수정</button>
