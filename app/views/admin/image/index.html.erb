@@ -230,8 +230,10 @@
         </tr>
       </thead>
       <tbody>
-        <% @fcdatas.each do |fcdata| %>
-          <%= render partial: "admin/image/item", locals: { fcdata: fcdata } %>
+        <% if !@is_admin_init %>
+          <% @fcdatas.each do |fcdata| %>
+            <%= render partial: "admin/image/item", locals: { fcdata: fcdata } %>
+          <% end %>
         <% end %>
       </tbody>
     </table>

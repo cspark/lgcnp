@@ -23,6 +23,11 @@ class Admin::ImageController < Admin::AdminApplicationController
     @name = name if !name.blank?
     @custserial = custserial
 
+    @is_admin_init = false
+    if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && !params.has_key?(:select_channel)
+      @is_admin_init = true
+    end
+
     @fcdatas = []
     if Rails.env.production? || Rails.env.staging?
       scoped = Fcdata.all
