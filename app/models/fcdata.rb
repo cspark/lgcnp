@@ -176,6 +176,7 @@ class Fcdata < ApplicationRecord
        el_graph: get_graph_data(type: "el"),
        sb_graph: get_graph_data(type: "sb"),
        pp_graph: get_graph_data(type: "pp"),
+       mo_graph: get_graph_mo
     }
   end
 
