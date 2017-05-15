@@ -582,7 +582,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     end
 
     @after_interviews_excel = @after_interviews
-    @after_interviews = Kaminari.paginate_array(@after_interviews).page(params[:page]).per(3)
+    @after_interviews = Kaminari.paginate_array(@after_interviews).page(params[:page]).per(5)
 
     respond_to do |format|
       format.html
