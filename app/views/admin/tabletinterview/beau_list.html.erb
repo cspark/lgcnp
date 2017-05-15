@@ -51,6 +51,12 @@
           $("input:checkbox[value=LABO]").prop("checked", false);
         <% end %>
 
+        <% if @ch_cd.include?("ONEP") %>
+          $("input:checkbox[value=ONEP]").prop("checked", true);
+        <% else %>
+          $("input:checkbox[value=ONEP]").prop("checked", false);
+        <% end %>
+
         <% if @ch_cd == "" && @custserial.nil? %>
           $("input:checkbox[name=check_box]").prop("checked", true);
         <% end %>
