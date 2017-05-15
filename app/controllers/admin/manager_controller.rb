@@ -17,7 +17,7 @@ class Admin::ManagerController < Admin::AdminApplicationController
     scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
 
     @users = scoped.order("shop_cd asc")
-    @users = Kaminari.paginate_array(@users).page(params[:page]).per(6)
+    @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
 
     respond_to do |format|
       format.html
