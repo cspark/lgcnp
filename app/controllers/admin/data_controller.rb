@@ -149,7 +149,7 @@ class Admin::DataController < Admin::AdminApplicationController
       end
     end
 
-    if @select_skin_anxiety1_array.blank? || @skin_type_tabletinterview_controller.rbsurvey_array.blank?
+    if @select_skin_anxiety1_array.blank? || @skin_type_survey_array.blank?
       serial_array = Fctabletinterview.where(before_solution_1: ["!!"]).pluck(:custserial).uniq
     else
       serial_array = Fctabletinterview.where(before_solution_1: @select_skin_anxiety1_array).where(skin_type: @skin_type_survey_array).pluck(:custserial).uniq
