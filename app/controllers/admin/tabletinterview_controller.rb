@@ -345,6 +345,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @beau_interviews = []
     # if Rails.env.production? || Rails.env.staging?
     fcdata_list = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%")
+    Rails.logger.info "@select_mode!!!!"
+    Rails.logger.info @select_mode
     if !@select_mode.blank?
       if @select_mode.downcase != "all" && @select_mode.downcase == "total"
         Rails.logger.info "mode total!!!"
