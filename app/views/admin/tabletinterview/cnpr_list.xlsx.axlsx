@@ -106,12 +106,14 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           pp_graph = fcdata[:pp_graph].to_i
           wr_graph = fcdata[:wr_graph].to_i
           el_graph = fcdata[:el_graph].to_i
+          mo_graph = fcdata[:mo_graph].to_i
         else
           pr_graph = ""
           sb_graph = ""
           pp_graph = ""
           wr_graph = ""
           el_graph = ""
+          mo_graph = ""
         end
 
         if !custinfo.custname.nil?
