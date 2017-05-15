@@ -166,7 +166,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
     serial_array = serial_array & serial_array2
 
-    Rails.logger.info @skin_type_survey_array.
+    Rails.logger.info serial_array.count
 
     @fcdatas = []
     @fcdatas_final = []
