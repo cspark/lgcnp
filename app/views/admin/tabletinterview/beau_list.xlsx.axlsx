@@ -1,0 +1,28 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "interview") do |sheet|
+    sheet.add_row ["이름","시리얼","채널","분석 일","분석 횟수","업데이트 일","설문문항1","설문문항2","설문문항3","설문문항4","설문문항5",
+    "설문문항6","설문문항7","설문문항8","설문문항9","설문문항10"]
+
+    @beau_interviews_excel.each do |interview|
+      custinfo = Custinfo.where(custserial: interview.custserial).first
+      fcdata = Fcdata.where(custserial: interview.custserial).where(measureno: interview.interview).first
+
+      interview_8 = interview.interview_8
+      if interview.interview_8 == "0"
+        interview_8 = "-"
+      end
+      interview_9 = interview.interview_9
+      if interview.interview_9 == "0"
+        interview_9 = "-"
+      end
+      interview_10 = interview.interview_10
+      if interview.interview_10 == "0"
+        interview_10 = "-"
+      end
+
+      sheet.add_row [URI.decode(custinfo.custname), interview.custserial.to_i, interview.ch_cd, interview.faceno,
+      interview.measuredate, interview.measureno.to_i, interview.uptdate, interview.interview_1, interview.interview_2,
+      interview.interview_3, interview.interview_4, interview.interview_5, interview.interview_6, interview.interview_7,
+      interview_8, interview_9, interview_10]
+    end
+end
