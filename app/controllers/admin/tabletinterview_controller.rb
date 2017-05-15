@@ -165,16 +165,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       Rails.logger.info custinfo.custname
       is_contain = true
 
-      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "T"
-        if custinfo.is_agree_thirdparty_info == "F"
-          is_contain = false
-        end
-      elsif params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] == "F"
-        if custinfo.is_agree_thirdparty_info == "T"
-          is_contain = false
-        end
-      end
-
       if !@name.blank?
         if !custinfo.custname.include? @name
           Rails.logger.info "NAME FALSE"
@@ -235,7 +225,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       end
     end
 
-    Rails.logger.info "@tabletinterviews.count"
+    Rails.logger.info "@tabletinterviews.count!!!"
     Rails.logger.info @tabletinterviews.count
 
     @count = @tabletinterviews.count
