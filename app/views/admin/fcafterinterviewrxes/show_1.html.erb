@@ -56,17 +56,24 @@
               }
             }
 
-            if(this.id == "a6_5" && $('input[id="' + this.id + '"]').is(":checked")){
+            if (document.getElementById("a6_5").checked){
               document.getElementById("a6_5_text").disabled = false;
             }else{
-              if(this.name.includes("group6")){
-                document.getElementById("a6_5_text").value = "";
-                document.getElementById("a6_5_text").disabled = true;
-              }
+              document.getElementById("a6_5_text").value = "";
+              document.getElementById("a6_5_text").disabled = true;
             }
-            if(!this.name.includes("group6")){
-              $('input[name="' + this.name + '"]').not(this).prop('checked', false);
-            }
+
+            // if(this.id == "a6_5" && $('input[id="' + this.id + '"]').is(":checked")){
+            //   document.getElementById("a6_5_text").disabled = false;
+            // }else{
+            //   if(this.name.includes("group6")){
+            //     document.getElementById("a6_5_text").value = "";
+            //     document.getElementById("a6_5_text").disabled = true;
+            //   }
+            // }
+            // if(!this.name.includes("group6")){
+            //   $('input[name="' + this.name + '"]').not(this).prop('checked', false);
+            // }
         });
 
 
