@@ -356,9 +356,11 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
     # measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
-    scoped = Fcinterview.where(custserial: serial_array).where(measureno: measureno_array)
+    # scoped = Fcinterview.where(custserial: serial_array).where(measureno: measureno_array)
     # scoped = scoped.or(Fcinterview.where(custserial: serial_array2).where(measureno: measureno_array))
     # scoped = Fcinterview.all
+    scoped = Fcinterview.where(custserial: serial_array)
+    scoped = scoped.or(Fcinterview.where(custserial: serial_array2))
     temp_end_date = @end_date.to_date+1.day
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
