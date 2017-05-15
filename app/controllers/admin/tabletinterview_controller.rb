@@ -347,8 +347,10 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     fcdata_list = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%")
     if !@select_mode.blank?
       if @select_mode.downcase != "all" && @select_mode.downcase == "total"
+        Rails.logger.info "mode total!!!"
         fcdata_list = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%").where(m_skintype: 0)
       elsif @select_mode.downcase != "all" && @select_mode.downcase == "makeup"
+        Rails.logger.info "mode makeup!!!"
         fcdata_list = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%").where.not(m_skintype: 0)
       end
     end
