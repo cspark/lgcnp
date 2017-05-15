@@ -199,7 +199,7 @@
             <% elsif !fcdata.nil? && filter.include?("el_graph") %>
               <td class="text-center"><%= fcdata[:el_graph].to_i %></td>
             <% else %>
-              <td class="text-center"><%= tabletinterview[filter] %></td>
+              <td class="text-center"><%= tabletinterview[filter].to_i %></td>
             <% end %>
           <% end %>
         <% else %>
