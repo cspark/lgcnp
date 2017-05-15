@@ -60,6 +60,7 @@ Rails.application.routes.draw do
     get "upload_test" => "image#upload_test"
 
     get "manager_list" => "manager#index"
+    get "allow_list" => "allowaccess#index"
 
     resources :user do
     end
@@ -75,6 +76,14 @@ Rails.application.routes.draw do
         get 'edit_manager'
         get 'login_history'
         post 'duplication'
+        post 'update'
+        post 'delete'
+      end
+    end
+    resources :allowaccess do
+      collection do
+        get 'add_access_range'
+        get 'edit_access_range'
         post 'update'
         post 'delete'
       end
@@ -128,8 +137,8 @@ Rails.application.routes.draw do
       end
       resources :schedule_fcschedule do
         collection do
-          post 'month_list'
-          post 'today_list'
+          get 'month_list'
+          get 'today_list'
           put 'update_reservation'
           delete 'delete_schedule'
         end
@@ -139,7 +148,7 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :admin_lcare_user do
         collection do
-          post 'lcare_integrated_user_list'
+          get 'lcare_integrated_user_list'
         end
       end
       resources :admin_user do

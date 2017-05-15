@@ -13,16 +13,6 @@
         <% user = Custinfo.where(custserial: @after_interview.custserial).first %>
         <% fctabletinterview = Fctabletinterviewrx.where(custserial: @after_interview.custserial).where(tablet_interview_id: @after_interview.rx_tablet_interview_id).first %>
 
-        <% Rails.logger.info "function!!!" %>
-        <% Rails.logger.info @after_interview.custserial.to_i %>
-        <% Rails.logger.info fctabletinterview.custserial.to_i %>
-        <% Rails.logger.info fctabletinterview.tablet_interview_id.to_i %>
-        <% Rails.logger.info @after_interview.custserial.to_i %>
-        <% Rails.logger.info @after_interview.a1.to_i %>
-        <% Rails.logger.info @after_interview.a1_1.to_i if !@after_interview.a1_1.nil? %>
-        <% Rails.logger.info @after_interview.a6.to_i %>
-        <% Rails.logger.info @after_interview.a6_1.to_i if !@after_interview.a6_1.nil? %>
-
         try
         {
           $('#name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>').append( decode_utf8('<%= user.custname %>'));
@@ -349,8 +339,8 @@
         <input type="checkbox" name="group1[]" id="a1_3"/> 홈페이지 또는 인터넷
         <input type="checkbox" name="group1[]" id="a1_4"/> 기 진단 받은 고객 추천
         <br>
-        <input type="checkbox" name="group1[]" id="a1_5"/> 기타
-        <textarea type="text" rows="1" style="width: 300px;" id="a1_5_text" onfocus="this.value = this.value;"></textarea>
+        <input type="checkbox" name="group1[]" id="a1_5"/> 기타<br>
+        <textarea type="text" rows="1" style="width: 500px; height:50px;" id="a1_5_text" onfocus="this.value = this.value;"></textarea>
         <br><br>
         2. 고객이 매장에서 클렌징을 했나요?<br>
         <input type="checkbox" name="group2[]" id="a2_1"/> 예
@@ -383,7 +373,7 @@
         <input type="checkbox" name="group6[]" id="a6_3" /> 피부 측정을 통해 추천하는 제품이라는 점에 높은 관심이나 신뢰감을 가지심<br>
         <input type="checkbox" name="group6[]" id="a6_4" /> 상담 및 제품에 대해 높은 관심을 보였으나 가격 때문에 제품 구매까지는 연결되지 않음<br>
         <input type="checkbox" name="group6[]" id="a6_5" /> 기타의견<br>
-        <textarea type="text" rows="1" style="width: 300px;" id="a6_5_text" onfocus="this.value = this.value;"></textarea>
+        <textarea type="text" rows="1" style="width: 500px; height:50px;" id="a6_5_text" onfocus="this.value = this.value;"></textarea>
         <br><br>
         <button class="btn btn-primary" id="submit" type="submit" value="Submit">입력</button>
         <button class="btn btn-danger" id="delete">삭제</button>

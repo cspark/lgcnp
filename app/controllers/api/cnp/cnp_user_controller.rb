@@ -14,13 +14,21 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
 
     username = URI.decode(params[:custname])
     if params.has_key?(:phone)
-      user = Custinfo.where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, ch_cd: params[:ch_cd], phone: params[:phone])
+      if params.has_key?(:ch_cd) && params[:ch_cd] == "CNPR"
+        user = Custinfo.where.not(ch_cd: "CNP").where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, phone: params[:phone]).order("UPTDATE asc").first
+      else
+        user = Custinfo.where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, phone: params[:phone]).order("UPTDATE asc").first
+      end
     else
-      user = Custinfo.where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, ch_cd: params[:ch_cd])
+      if params[:ch_cd] == "CNPR"
+        user = Custinfo.where.not(ch_cd: "CNP").where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, ch_cd: params[:ch_cd]).order("UPTDATE asc").first
+      else
+        user = Custinfo.where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, ch_cd: params[:ch_cd]).order("UPTDATE asc").first
+      end
     end
 
-    if user.count > 0
-      render json: api_hash_for_user_list(user), status: :ok
+    if !user.nil?
+      render json: user.to_api_hash_for_yanus, status: :ok
     else
       render :text => "Custinfo is not exist!!!", status: 204
     end
@@ -59,7 +67,7 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
       user.increase_measureno
       user.update_lastanaldate
       if user.save
-        render json: user.to_api_hash_for_yanus, status: :ok
+        render json: user.to_api_hash_for_min, status: :ok
       else
         render :text => "Fail!!!", status: 404
       end

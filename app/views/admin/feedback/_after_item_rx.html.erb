@@ -58,9 +58,21 @@
         <% end %>
         <td class="text-center"><%= sex %></td>
         <td class="text-center"><%= custinfo.age %></td>
-        <td><%= URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," ") %></td>
-        <td><%= URI.decode(tabletinterview.recommand_program_step_2).gsub("+"," ") %></td>
+        <% if !tabletinterview.recommand_program_step_1.nil? %>
+          <td><%= URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," ") %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if !tabletinterview.recommand_program_step_2.nil? %>
+          <td><%= URI.decode(tabletinterview.recommand_program_step_2).gsub("+"," ") %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if !tabletinterview.recommand_program_step_3.nil? %>
         <td><%= URI.decode(tabletinterview.recommand_program_step_3).gsub("+"," ") %></td>
+        <% else %>
+          <td></td>
+        <% end %>
         <td class="text-center"><%= after_interview.a1.to_i %></td>
         <td class="text-center"><%= after_interview.a1_1 %></td>
         <td class="text-center"><%= after_interview.a2.to_i %></td>

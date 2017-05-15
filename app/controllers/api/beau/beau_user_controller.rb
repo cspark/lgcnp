@@ -80,7 +80,7 @@ class Api::Beau::BeauUserController < Api::ApplicationController
       user.increase_measureno
       user.update_lastanaldate
       if user.save
-        render json: user.to_api_hash_for_yanus, status: :ok
+        render json: user.to_api_hash_for_min, status: :ok
       else
         render :text => "Fail!!!", status: 404
       end
