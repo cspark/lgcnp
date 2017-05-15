@@ -110,7 +110,13 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           el_graph = ""
         end
 
-        temp = [URI.decode(custinfo.custname), tabletinterview.custserial.to_i, tabletinterview.uptdate, custinfo.ch_cd]
+        if !custinfo.custname.nil?
+         custname = URI.decode(custinfo.custname)
+        else
+         custname = ""
+        end
+
+        temp = [custname, tabletinterview.custserial.to_i, tabletinterview.uptdate, custinfo.ch_cd]
         if @select_filter != []
           @select_filter.each do |filter|
             if filter.include?("skin_type")
@@ -124,17 +130,41 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
             elsif filter.include?("after_solution_2")
               temp << after_solution_2
             elsif filter.include?("recommand_program_step_1")
-              temp << URI.decode(tabletinterview.recommand_program_step_1)
+              if !tabletinterview.recommand_program_step_1.nil?
+                temp << URI.decode(tabletinterview.recommand_program_step_1)
+              else
+                temp << ""
+              end
             elsif filter.include?("recommand_program_step_2")
-              temp << URI.decode(tabletinterview.recommand_program_step_2)
+              if !tabletinterview.recommand_program_step_2.nil?
+                temp << URI.decode(tabletinterview.recommand_program_step_2)
+              else
+                temp << ""
+              end
             elsif filter.include?("recommand_program_step_3")
-              temp << URI.decode(tabletinterview.recommand_program_step_3)
+              if !tabletinterview.recommand_program_step_3.nil?
+                temp << URI.decode(tabletinterview.recommand_program_step_3)
+              else
+                temp << ""
+              end
             elsif filter.include?("purchase1")
-              temp << URI.decode(tabletinterview.purchase1)
+              if !tabletinterview.purchase1.nil?
+                temp << URI.decode(tabletinterview.purchase1)
+              else
+                temp << ""
+              end
             elsif filter.include?("purchase2")
-              temp << URI.decode(tabletinterview.purchase2)
+              if !tabletinterview.purchase2.nil?
+                temp << URI.decode(tabletinterview.purchase2)
+              else
+                temp << ""
+              end
             elsif filter.include?("purchase3")
-              temp << URI.decode(tabletinterview.purchase3)
+              if !tabletinterview.purchase3.nil?
+                temp << URI.decode(tabletinterview.purchase3)
+              else
+                temp << ""
+              end
             elsif filter.include?("pr_graph")
               temp << fcdata[:pr_graph].to_i
             elsif filter.include?("sb_graph")
@@ -168,9 +198,32 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           else
             purchase3 = ""
           end
-          sheet.add_row [URI.decode(custinfo.custname), tabletinterview.custserial.to_i, tabletinterview.uptdate, custinfo.ch_cd,
+
+          if !tabletinterview.recommand_program_step_1.nil?
+            recommand_program_step_1 = URI.decode(tabletinterview.recommand_program_step_1)
+          else
+            recommand_program_step_1 = ""
+          end
+          if !tabletinterview.recommand_program_step_2.nil?
+            recommand_program_step_2 = URI.decode(tabletinterview.recommand_program_step_2)
+          else
+            recommand_program_step_2 = ""
+          end
+          if !tabletinterview.recommand_program_step_3.nil?
+            recommand_program_step_3 = URI.decode(tabletinterview.recommand_program_step_3)
+          else
+            recommand_program_step_3 = ""
+          end
+
+          if !custinfo.custname.nil?
+           custname = URI.decode(custinfo.custname)
+          else
+           custname = ""
+          end
+
+          sheet.add_row [custname, tabletinterview.custserial.to_i, tabletinterview.uptdate, custinfo.ch_cd,
           skin_type, before_solution_1, after_solution_1, before_solution_2, after_solution_2,
-          URI.decode(tabletinterview.recommand_program_step_1), URI.decode(tabletinterview.recommand_program_step_2), URI.decode(tabletinterview.recommand_program_step_3),
+          recommand_program_step_1, recommand_program_step_2, recommand_program_step_3),
           purchase1, purchase2, purchase3,
           tabletinterview.a_1.to_i, tabletinterview.a_2.to_i, tabletinterview.a_3.to_i,
           tabletinterview.b_1.to_i, tabletinterview.b_2.to_i, tabletinterview.b_3.to_i, tabletinterview.b_4.to_i, tabletinterview.b_5.to_i,tabletinterview.b_6.to_i,
