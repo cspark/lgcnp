@@ -304,10 +304,11 @@
         <p style="float:right; margin-right:20px;">
           Download:
           <%= link_to "Excel", admin_beau_interview_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
-          :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial,
-          :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
-          :select_channel => @select_channel, :select_mode => @select_mode, :select_area => @select_area,
-          :select_filter => @params_filter, :isExcel => true) %>
+          :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age,
+          :name => @name, :custserial => @custserial, :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy,
+          :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm, :select_mode => @select_mode,
+          :select_area => @select_area,
+          :select_channel => @select_channel, :select_shop => @shop_cd, :isExcel => true) %>
         </p>
       </div><br><br>
 

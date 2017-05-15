@@ -372,18 +372,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(ch_cd: @ch_array) if !@ch_array.blank? && @ch_array != ""
 
-
-    if @select_filter == []
-      @excel_name = ["이름","시리얼","진단 날짜","채널","피부타입","진단으로 나온 솔루션 1","최종으로 선택된 솔루션 1","진단으로 나온 솔루션 2","최종으로 선택된 솔루션 2","진단으로 나온 세럼","최종으로 선택된 세럼",
-      "진단으로 나온 앰플 1","최종으로 선택된 앰플 1","진단으로 나온 앰플 1","최종으로 선택된 앰플 2","진단으로 나온 화장품","최종으로 선택된 화장품",
-      "A1","A2","A3","B1","B2","B3","B4","C1","D1","D2","D3","D4","D5","D6","D7","D8","D9","D10","모공 점수","트러블 점수","색소침착 점수","주름 점수","탄력 점수"]
-    else
-      @excel_name = ["이름","시리얼","진단 날짜","채널"]
-      @select_filter.each do |filter|
-        @excel_name << filter
-      end
-    end
-
     scoped = scoped.order("uptdate desc")
 
     scoped.each do |tabletinterview|
@@ -438,6 +426,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @beau_interviews_excel = @beau_interviews
     @beau_interviews = Kaminari.paginate_array(@beau_interviews).page(params[:page]).per(5)
 
+    Rails.logger.info @beau_interviews_excel.count
     respond_to do |format|
       format.html
       format.xlsx
