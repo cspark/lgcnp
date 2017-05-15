@@ -92,7 +92,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     # scoped = Fctabletinterview.where(custserial: serial_array).where(fcdata_id: measureno_array)
     # scoped = scoped.or(Fctabletinterview.where(custserial: serial_array2).where(fcdata_id: measureno_array))
-    scoped = Fctabletinterview.all.count
+    scoped = Fctabletinterview.all
     temp_end_date = @end_date.to_date+1.day
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
