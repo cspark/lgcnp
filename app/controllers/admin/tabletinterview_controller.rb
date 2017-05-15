@@ -237,6 +237,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(5)
     Rails.logger.info "@excel_name!!!!"
     Rails.logger.info @excel_name
+    Rails.logger.info @select_filter
 
     respond_to do |format|
       format.html
@@ -636,7 +637,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     Rails.logger.info "@excel_name!!!!"
     Rails.logger.info @excel_name
-    
+
     respond_to do |format|
       format.html
       format.xlsx
