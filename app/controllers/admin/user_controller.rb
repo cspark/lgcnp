@@ -40,15 +40,11 @@ class Admin::UserController < Admin::AdminApplicationController
 
     Rails.logger.info "user index!!!"
     Rails.logger.info ch_cd
-    Rails.logger.info fcdata_list
-    Rails.logger.info custserial_array
-    Rails.logger.info measureno_array
 
     scoped = Custinfo.all
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-    Rails.logger.info scoped.count
     if params.has_key?(:search) && params[:search].length != 0
-      @search = URI.encode(params[:search])
+      @search = params[:search]
       if ch_cd == ""
         @users = scoped.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
         @users2 = scoped.where(custserial: custserial_array2).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")

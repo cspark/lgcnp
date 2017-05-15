@@ -39,11 +39,13 @@
                 if (document.getElementById("select_channel") != null) {
                   var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
 
-                  url = "/admin/user_list?search=" + $("#search").val();
+                  url = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
                   url += "&select_channel=" +ch_cd
                   url += "&select_shop=" +$("#select_shop").val();
+                  url += "&custserial=" + document.getElementById("custserial").value;
                 } else {
-                  url = "/admin/user_list?search=" + $("#search").val();
+                  url = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
+                  url += "&custserial=" + document.getElementById("custserial").value;
                 }
                 location.href = url;
             }
@@ -59,12 +61,12 @@
         $('#submit').click(function(){
           if (document.getElementById("select_channel") != null) {
             var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
-            url = "/admin/user_list?search=" + $("#search").val();
+            url = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
             url += "&select_channel=" +ch_cd
             url += "&select_shop=" +$("#select_shop").val();
             url += "&custserial=" + document.getElementById("custserial").value;
           } else {
-            url = "/admin/user_list?search=" + $("#search").val();
+            url = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
             url += "&custserial=" + document.getElementById("custserial").value;
           }
           location.href = url;
