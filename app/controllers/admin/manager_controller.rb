@@ -68,7 +68,7 @@ class Admin::ManagerController < Admin::AdminApplicationController
 
   def login_history
     @history = LoginHistory.all.order("created_at desc")
-    @history = Kaminari.paginate_array(@history).page(params[:page]).per(5)
+    @history = Kaminari.paginate_array(@history).page(params[:page]).per(3)
   end
 
   def delete

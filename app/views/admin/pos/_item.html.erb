@@ -12,6 +12,7 @@
       <script>
         $(function () {
           <% user = Custinfo.where(custserial: data.custserial).first %>
+          <% if !user.nil? %>
           try
           {
             var userName = decode_utf8('<%= user.custname %>')
@@ -30,6 +31,7 @@
           {
             $('#name_fcpos_<%= data.custserial.to_i %>_<%= data.measureno.to_i %>').append('<%= user.custname %>');
           }
+          <% end %>
         });
 
         function decode_utf8(s) {
@@ -46,7 +48,7 @@
       <% custinfo = Custinfo.where(custserial: data.custserial).first %>
       <tr class="table_tr text-center" id="<%= data.custserial.to_i %>/<%= data.measureno %>">
         <td id="name_fcpos_<%= data.custserial.to_i %>_<%= data.measureno.to_i %>"></td>
-        <td><%= user.ch_cd %></td>
+        <td><%= data.ch_cd %></td>
         <td><%= data.faceno %></td>
         <td><%= data.measuredate %></td>
         <td><%= data.measureno.to_i %></td>

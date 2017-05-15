@@ -313,7 +313,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     @count = @after_interviews.count
     @after_interviews_excel = @after_interviews
-    @after_interviews = Kaminari.paginate_array(@after_interviews).page(params[:page]).per(5)
+    @after_interviews = Kaminari.paginate_array(@after_interviews).page(params[:page]).per(3)
 
     respond_to do |format|
       format.html
@@ -582,7 +582,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     end
 
     @after_interviews_excel = @after_interviews
-    @after_interviews = Kaminari.paginate_array(@after_interviews).page(params[:page]).per(5)
+    @after_interviews = Kaminari.paginate_array(@after_interviews).page(params[:page]).per(3)
 
     respond_to do |format|
       format.html

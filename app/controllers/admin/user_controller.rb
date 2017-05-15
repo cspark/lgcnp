@@ -66,7 +66,7 @@ class Admin::UserController < Admin::AdminApplicationController
     end
 
     @count = @users.count
-    @users = Kaminari.paginate_array(@users).page(params[:page]).per(5)
+    @users = Kaminari.paginate_array(@users).page(params[:page]).per(3)
 
     respond_to do |format|
       format.html

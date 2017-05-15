@@ -179,11 +179,24 @@
     </script>
     <style>
     .fixed-table-body {
-      max-height: 280px;
+      max-height: 158px;
+    }
+
+    .text-center {
+        margin: 0 auto;
+        text-align: center !important;
+    }
+
+    .width170 {
+      min-width:170px;
     }
 
     .width100 {
       min-width:100px;
+    }
+
+    .width300 {
+      min-width:300px;
     }
 
     .width1800 {
@@ -196,12 +209,6 @@
 
     table.width1800.table.table-hover {
       width: 1800px;
-    }
-
-    .th-inner {
-      width: 200px;
-      margin: 0 auto;
-      text-align: center;
     }
 
     th {
@@ -288,13 +295,13 @@
           <thead>
             <tr>
               <th class="text-center">이름</th>
-              <th>설문 날짜</th>
-              <th>진단 날짜</th>
+              <th class="width100">설문 날짜</th>
+              <th class="width170">진단 날짜</th>
               <th>성별</th>
               <th>나이</th>
-              <th>추천제품 Step1</th>
-              <th>추천제품 Step2</th>
-              <th>추천제품 Step3</th>
+              <th class="width300">추천제품 Step1</th>
+              <th class="width300">추천제품 Step2</th>
+              <th class="width300">추천제품 Step3</th>
               <th>설문1</th>
               <th class="max-width600">설문1 기타의견</th>
               <th>설문2</th>
