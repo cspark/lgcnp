@@ -590,22 +590,9 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     @skin_type_survey_array = []
-    Rails.logger.info "@select_senstive!!!!"
-    Rails.logger.info @select_senstive
     if !select_skin_type_survey.blank?
-      if @select_senstive == "all"
-        select_skin_type_survey.split(",").each do |skin_type|
-          @skin_type_survey_array.push(skin_type)
-          @skin_type_survey_array.push(skin_type+"_senstive")
-        end
-      elsif @select_senstive == "yes"
-        select_skin_type_survey.split(",").each do |skin_type|
-          @skin_type_survey_array.push(skin_type+"_senstive")
-        end
-      else
-        select_skin_type_survey.split(",").each do |skin_type|
-          @skin_type_survey_array.push(skin_type)
-        end
+      select_skin_type_survey.split(",").each do |skin_type|
+        @skin_type_survey_array.push(skin_type.to_i)
       end
     end
 
@@ -682,6 +669,7 @@ class Admin::DataController < Admin::AdminApplicationController
     scoped = scoped.where(faceno: @select_area) if !@select_area.blank? && @select_area.downcase != "all"
     scoped = scoped.where(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode == "F"
     scoped = scoped.where(m_skintype: [1,2,3]) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode == "T"
+
 
     if @select_skin_type_device_final.blank?
       scoped = scoped.where(skintype: [100])
