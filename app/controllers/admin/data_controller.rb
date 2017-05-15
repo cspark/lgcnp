@@ -167,13 +167,13 @@ class Admin::DataController < Admin::AdminApplicationController
     if @select_skin_anxiety1_array.blank? || @skin_type_survey_array.blank?
       serial_array = Fctabletinterview.where(before_solution_1: ["!!"]).pluck(:custserial).uniq
     else
-      serial_array = Fctabletinterview.where(before_solution_1: @select_skin_anxiety1_array).where(skin_type: @skin_type_survey_array).pluck(:custserial).uniq
+      serial_array = Fctabletinterview.where(before_solution_1: @select_skin_anxiety1_array).where(skin_type: @skin_type_survey_array).where.not(before_solution_1: nil).where.not(before_solution_2: nil).pluck(:custserial).uniq
     end
 
     if @select_skin_anxiety2_array.blank? || @skin_type_survey_array.blank?
       serial_array2 = Fctabletinterview.where(before_solution_2: ["!!"]).pluck(:custserial).uniq
     else
-      serial_array2 = Fctabletinterview.where(before_solution_2: @select_skin_anxiety2_array).where(skin_type: @skin_type_survey_array).pluck(:custserial).uniq
+      serial_array2 = Fctabletinterview.where(before_solution_2: @select_skin_anxiety2_array).where(skin_type: @skin_type_survey_array).where.not(before_solution_1: nil).where.not(before_solution_2: nil).pluck(:custserial).uniq
     end
     serial_array = serial_array & serial_array2
 
@@ -470,7 +470,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     @fcdatas.each do |fcdata|
-      fctabletinterview = Fctabletinterview.where.not(skin_type: nil).where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno.to_i).where.not(before_solution_1: nil).where.not(before_solution_2: nil).first
+      fctabletinterview = Fctabletinterview.where.not(skin_type: nil).where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno.to_i).first
       is_contain = true
 
       if !fctabletinterview.nil?
