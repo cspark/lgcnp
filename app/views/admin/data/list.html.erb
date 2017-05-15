@@ -106,10 +106,10 @@
             <% if array.include?("skin_type_jisung") %>
               $("input:checkbox[value=skin_type_jisung]").prop("checked", true);
             <% end %>
+          <% end %>
 
-            <% if array == [] && @custserial.nil? %>
-              $("input:checkbox[name=skin_type_survey_check_box]").prop("checked", true);
-            <% end %>
+          <% if @skin_type_survey_array == [] && @custserial.nil? %>
+            $("input:checkbox[name=skin_type_survey_check_box]").prop("checked", true);
           <% end %>
 
           // 피부고민1

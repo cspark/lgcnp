@@ -590,8 +590,15 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     @skin_type_survey_array = []
+    Rails.logger.info "@select_senstive!!!!"
+    Rails.logger.info @select_senstive
     if !select_skin_type_survey.blank?
-      if @select_senstive != "all" && @select_senstive == "yes"
+      if @select_senstive == "all"
+        select_skin_type_survey.split(",").each do |skin_type|
+          @skin_type_survey_array.push(skin_type)
+          @skin_type_survey_array.push(skin_type+"_senstive")
+        end
+      elsif @select_senstive == "yes"
         select_skin_type_survey.split(",").each do |skin_type|
           @skin_type_survey_array.push(skin_type+"_senstive")
         end
