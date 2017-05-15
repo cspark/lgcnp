@@ -13,6 +13,12 @@ wb.add_worksheet(name: "Feedback") do |sheet|
         elsif after_interview.order == 2
           order = "3개월 후 설문"
         end
+
+        sex = "남"
+        if custinfo.sex == "F"
+          sex = "여"
+        end
+
         if !tabletinterview.purchase1.nil?
           purchase1 = URI.decode(tabletinterview.purchase1).gsub("+"," ")
         else
@@ -29,15 +35,26 @@ wb.add_worksheet(name: "Feedback") do |sheet|
           purchase3 = "-"
         end
 
-        sex = "남"
-        if custinfo.sex == "F"
-          sex = "여"
+        if !tabletinterview.recommand_program_step_1.nil?
+          recommand_program_step_1 = URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," ")
+        else
+          recommand_program_step_1 = "-"
+        end
+
+        if !tabletinterview.recommand_program_step_2.nil?
+          recommand_program_step_2 = URI.decode(tabletinterview.recommand_program_step_2).gsub("+"," ")
+        else
+          recommand_program_step_2 = "-"
+        end
+
+        if !tabletinterview.recommand_program_step_3.nil?
+          recommand_program_step_3 = URI.decode(tabletinterview.recommand_program_step_3).gsub("+"," ")
+        else
+          recommand_program_step_3 = "-"
         end
 
         sheet.add_row [URI.decode(custinfo.custname), order, tabletinterview.uptdate, sex, custinfo.age,
-        URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," "),
-        URI.decode(tabletinterview.recommand_program_step_2).gsub("+"," "),
-        URI.decode(tabletinterview.recommand_program_step_3).gsub("+"," "),
+        recommand_program_step_1, recommand_program_step_2, recommand_program_step_3,
         purchase1, purchase2, purchase3,
         after_interview.a1.to_i, after_interview.a1_1, after_interview.a2.to_i, after_interview.a3.to_i, after_interview.a3_1,
         after_interview.a4.to_i, after_interview.a5.to_i, after_interview.a5_1, after_interview.a6.to_i, after_interview.a7]
