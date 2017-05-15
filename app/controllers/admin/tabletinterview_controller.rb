@@ -310,7 +310,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @start_birthmm = start_birthmm
     @end_birthmm = end_birthmm
     @select_mode = select_mode
-    @select_area = select_area
+    @select_area = params[:select_area]
 
     ch_cd = ""
     shop_cd = ""
@@ -345,12 +345,12 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     @beau_interviews = []
     # if Rails.env.production? || Rails.env.staging?
-    fcdata_list = Fcdata.where("faceno LIKE ?", "%#{@select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%")
+    fcdata_list = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%")
     if !@select_mode.blank?
       if @select_mode.downcase != "all" && @select_mode.downcase == "total"
-        fcdata_list = Fcdata.where("faceno LIKE ?", "%#{@select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%").where(m_skintype: 0)
+        fcdata_list = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%").where(m_skintype: 0)
       elsif @select_mode.downcase != "all" && @select_mode.downcase == "makeup"
-        fcdata_list = Fcdata.where("faceno LIKE ?", "%#{@select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%").where.not(m_skintype: 0)
+        fcdata_list = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%").where.not(m_skintype: 0)
       end
     end
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
