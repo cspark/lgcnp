@@ -419,7 +419,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end
 
     Rails.logger.info "@beau_interviews.count!!!"
-    Rails.logger.info @beau_interviews.count!!!
+    Rails.logger.info @beau_interviews.count
     @count = @beau_interviews.count
     @beau_interviews_excel = @beau_interviews
     @beau_interviews = Kaminari.paginate_array(@beau_interviews).page(params[:page]).per(5)
