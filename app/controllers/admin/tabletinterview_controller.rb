@@ -204,17 +204,20 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] != "T,F"
         if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("T")
           if custinfo.is_agree_thirdparty_info == "F"
+            Rails.logger.info "is_agree_thirdparty_info1 FALSE"
             is_contain = false
           end
         end
         if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("F")
           if custinfo.is_agree_thirdparty_info == "T"
+            Rails.logger.info "is_agree_thirdparty_info2 FALSE"
             is_contain = false
           end
         end
       end
 
       if !params.has_key?(:is_agree_thirdparty_info) || params[:is_agree_thirdparty_info] == ""
+        Rails.logger.info "is_agree_thirdparty_info3 FALSE"
         is_contain = false
       end
 
