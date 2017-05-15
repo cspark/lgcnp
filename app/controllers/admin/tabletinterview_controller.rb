@@ -345,26 +345,20 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @beau_interviews = []
     # if Rails.env.production? || Rails.env.staging?
     fcdata_list = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%")
-    Rails.logger.info "@select_mode!!!!"
     Rails.logger.info @select_mode
     if !@select_mode.blank?
       if @select_mode.downcase != "all" && @select_mode.downcase == "total"
-        Rails.logger.info "mode total!!!"
         fcdata_list = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%").where(m_skintype: 0)
       elsif @select_mode.downcase != "all" && @select_mode.downcase == "makeup"
-        Rails.logger.info "mode makeup!!!"
         fcdata_list = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array).where("shop_cd LIKE ?", "%#{@shop_cd}%").where.not(m_skintype: 0)
       end
     end
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
-    # measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
+    measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
-    # scoped = Fcinterview.where(custserial: serial_array).where(measureno: measureno_array)
-    # scoped = scoped.or(Fcinterview.where(custserial: serial_array2).where(measureno: measureno_array))
-    # scoped = Fcinterview.all
-    scoped = Fcinterview.where(custserial: serial_array)
-    scoped = scoped.or(Fcinterview.where(custserial: serial_array2))
+    scoped = Fcinterview.where(custserial: serial_array).where(measureno: measureno_array)
+    scoped = scoped.or(Fcinterview.where(custserial: serial_array2).where(measureno: measureno_array))
     temp_end_date = @end_date.to_date+1.day
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
