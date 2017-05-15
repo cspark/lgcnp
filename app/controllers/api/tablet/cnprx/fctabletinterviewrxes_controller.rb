@@ -216,67 +216,67 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   end
 
   # before
-  # def find_lcare_user
-  #   # L-Care 통합회원 조회 이름, 생년월일, 핸드폰번호, 통합회원여부 조건으로 고객정보 조회 (* Next 조회 필요)
-  #   lcare_user = LcareUser.where(cust_hnm: params[:cust_hnm], birth_year: params[:birth_year], birth_mmdd: params[:birth_mmdd], cell_phnno: params[:cell_phnno], u_cust_yn: "Y").first
-  #   if !lcare_user.nil?
-  #     render json: lcare_user.to_api_hash, status: :ok
-  #   else
-  #     render json: "", status: 404
-  #   end
-  # end
-
-  # after
   def find_lcare_user
+    # L-Care 통합회원 조회 이름, 생년월일, 핸드폰번호, 통합회원여부 조건으로 고객정보 조회 (* Next 조회 필요)
     lcare_user = LcareUser.where(cust_hnm: params[:cust_hnm], birth_year: params[:birth_year], birth_mmdd: params[:birth_mmdd], cell_phnno: params[:cell_phnno], u_cust_yn: "Y").first
     if !lcare_user.nil?
-      custinfo = Custinfo.where(n_cust_id: lcare_user.n_cust_id).where(ch_cd: params[:ch_cd]).first
-      if !custinfo.nil?
-        render json: custinfo.to_api_hash, status: :ok
-      else
-        name = URI.encode(params[:cust_hnm])
-        birthyy = params[:birth_year]
-        birthmm = params[:birth_mmdd][0,2]
-        birthdd = params[:birth_mmdd][2,4]
-        phone = params[:cell_phnno]
-        n_cust_id = lcare_user.n_cust_id
-        sex = lcare_user.sex_cd
-        Rails.logger.info lcare_user.sex_cd
-
-        time = Time.now
-        uptdate = time.strftime("%Y/%m/%d")
-
-        custinfo = Custinfo.new
-        custinfo.custserial = Custinfo.all.order('custserial ASC').last.custserial + 1
-
-        ch_cd = "CNPR"
-        if params.has_key?(:ch_cd)
-          ch_cd = params[:ch_cd]
-        end
-
-        custinfo.ch_cd = ch_cd
-        custinfo.custname = name
-        custinfo.is_agree_privacy = "T"
-        custinfo.birthyy = birthyy
-        custinfo.birthmm = birthmm
-        custinfo.birthdd = birthdd
-        custinfo.phone = phone
-        custinfo.uptdate = uptdate
-        custinfo.n_cust_id = n_cust_id
-        custinfo.measureno = "0"
-        custinfo.sex = sex
-
-        # custinfo.save
-        if custinfo.save
-          render json: custinfo.to_api_hash, status: 200
-        else
-          render json: "", status: 404
-        end
-      end
+      render json: lcare_user.to_api_hash, status: :ok
     else
       render json: "", status: 404
     end
   end
+
+  # after
+  # def find_lcare_user
+  #   lcare_user = LcareUser.where(cust_hnm: params[:cust_hnm], birth_year: params[:birth_year], birth_mmdd: params[:birth_mmdd], cell_phnno: params[:cell_phnno], u_cust_yn: "Y").first
+  #   if !lcare_user.nil?
+  #     custinfo = Custinfo.where(n_cust_id: lcare_user.n_cust_id).where(ch_cd: params[:ch_cd]).first
+  #     if !custinfo.nil?
+  #       render json: custinfo.to_api_hash, status: :ok
+  #     else
+  #       name = URI.encode(params[:cust_hnm])
+  #       birthyy = params[:birth_year]
+  #       birthmm = params[:birth_mmdd][0,2]
+  #       birthdd = params[:birth_mmdd][2,4]
+  #       phone = params[:cell_phnno]
+  #       n_cust_id = lcare_user.n_cust_id
+  #       sex = lcare_user.sex_cd
+  #       Rails.logger.info lcare_user.sex_cd
+  #
+  #       time = Time.now
+  #       uptdate = time.strftime("%Y/%m/%d")
+  #
+  #       custinfo = Custinfo.new
+  #       custinfo.custserial = Custinfo.all.order('custserial ASC').last.custserial + 1
+  #
+  #       ch_cd = "CNPR"
+  #       if params.has_key?(:ch_cd)
+  #         ch_cd = params[:ch_cd]
+  #       end
+  #
+  #       custinfo.ch_cd = ch_cd
+  #       custinfo.custname = name
+  #       custinfo.is_agree_privacy = "T"
+  #       custinfo.birthyy = birthyy
+  #       custinfo.birthmm = birthmm
+  #       custinfo.birthdd = birthdd
+  #       custinfo.phone = phone
+  #       custinfo.uptdate = uptdate
+  #       custinfo.n_cust_id = n_cust_id
+  #       custinfo.measureno = "0"
+  #       custinfo.sex = sex
+  #
+  #       # custinfo.save
+  #       if custinfo.save
+  #         render json: custinfo.to_api_hash, status: 200
+  #       else
+  #         render json: "", status: 404
+  #       end
+  #     end
+  #   else
+  #     render json: "", status: 404
+  #   end
+  # end
 
   def find_n_cust_id
     user = Custinfo.where(n_cust_id: params[:n_cust_id]).where(ch_cd: params[:ch_cd]).first
