@@ -470,7 +470,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     @fcdatas.each do |fcdata|
-      fctabletinterview = Fctabletinterview.where.not(skin_type: nil).where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno.to_i).first
+      fctabletinterview = Fctabletinterview.where.not(skin_type: nil).where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno.to_i).where.not(before_solution_1: nil).where.not(before_solution_2: nil).first
       is_contain = true
 
       if !fctabletinterview.nil?
