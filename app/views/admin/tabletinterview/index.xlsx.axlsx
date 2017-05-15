@@ -234,7 +234,20 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
             end
           rescue
           end
-
+          if !fcdata.nil?
+            fcdata = fcdata.to_api_hash_for_admin
+            pr_graph = fcdata[:pr_graph].to_i
+            sb_graph = fcdata[:sb_graph].to_i
+            pp_graph = fcdata[:pp_graph].to_i
+            wr_graph = fcdata[:wr_graph].to_i
+            el_graph = fcdata[:el_graph].to_i
+          else
+            pr_graph = ""
+            sb_graph = ""
+            pp_graph = ""
+            wr_graph = ""
+            el_graph = ""
+          end
 
           if !custinfo.custname.nil?
            custname = URI.decode(custinfo.custname)
@@ -293,7 +306,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
             tabletinterview.b_1.to_i, tabletinterview.b_2.to_i, tabletinterview.b_3.to_i, tabletinterview.b_4.to_i, tabletinterview.c_1.to_i,
             tabletinterview.d_1.to_i, tabletinterview.d_2.to_i, tabletinterview.d_3.to_i, tabletinterview.d_4.to_i, tabletinterview.d_5.to_i,
             tabletinterview.d_6.to_i, tabletinterview.d_7.to_i, tabletinterview.d_8.to_i, tabletinterview.d_9.to_i, tabletinterview.d_10.to_i,
-            ]
+            pr_graph, sb_graph, pp_graph, wr_graph, el_graph]
           end
     end
 end
