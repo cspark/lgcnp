@@ -5,6 +5,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
         custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
         fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first
         skin_type = ""
+        Rails.logger.info "1111"
         if !tabletinterview.skin_type.nil?
           if tabletinterview.skin_type.include?("skin_type_gunsung")
             skin_type = "건성"
@@ -42,6 +43,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           end
         rescue
         end
+        Rails.logger.info "2222"
         before_solution_2 = ""
         begin
           if !tabletinterview.before_solution_1.nil?
@@ -114,6 +116,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           end
         rescue
         end
+        Rails.logger.info "3333"
         after_serum = ""
         begin
           if !tabletinterview.after_serum.nil?
