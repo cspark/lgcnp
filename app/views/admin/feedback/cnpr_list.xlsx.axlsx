@@ -29,7 +29,12 @@ wb.add_worksheet(name: "Feedback") do |sheet|
           purchase3 = "-"
         end
 
-        sheet.add_row [URI.decode(custinfo.custname), order, tabletinterview.uptdate, custinfo.sex, custinfo.age,
+        sex = "남"
+        if custinfo.sex == "F"
+          sex = "여"
+        end
+
+        sheet.add_row [URI.decode(custinfo.custname), order, tabletinterview.uptdate, sex, custinfo.age,
         URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," "),
         URI.decode(tabletinterview.recommand_program_step_2).gsub("+"," "),
         URI.decode(tabletinterview.recommand_program_step_3).gsub("+"," "),
