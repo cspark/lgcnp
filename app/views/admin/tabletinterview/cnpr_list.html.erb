@@ -232,23 +232,24 @@
       max-height: 224px;
     }
 
-    .width170 {
-      min-width:170px
-    }
-
-    .th-inner {
-      width: 250px;
+    th {
       margin: 0 auto;
-      text-align: center;
-    }
-
-    .min-width100 {
-      min-width:100px;
+      text-align: center !important;
     }
 
     td {
       margin: 0 auto;
       text-align: center !important;
+    }
+
+    .width70 {
+      min-width:70px
+    }
+    .width100 {
+      min-width:100px
+    }
+    .width170 {
+      min-width:170px
     }
     </style>
   </head>
@@ -347,14 +348,14 @@
     <table data-toggle="table">
       <thead style="width: 100%;">
         <tr>
-            <th class="min-width100">이름</th>
+            <th class="width70">이름</th>
             <th>시리얼</th>
-            <th class="width170 text-center">진단 날짜</th>
-            <th>채널</th>
+            <th class="width200 text-center">진단 날짜</th>
+            <th class="width70">채널</th>
             <% if @select_filter != [] %>
               <% @select_filter.each do |filter| %>
                 <% if filter.include?("skin_type") %>
-                  <th>피부타입</th>
+                  <th class="width70">피부타입</th>
                 <% elsif filter.include?("before_solution_1") %>
                   <th>진단으로 나온 솔루션 1</th>
                 <% elsif filter.include?("after_solution_1") %>
@@ -392,7 +393,7 @@
                 <% end %>
               <% end %>
             <% else %>
-              <th>피부타입</th>
+              <th class="width70">피부타입</th>
               <th>진단으로 나온 솔루션 1</th>
               <th>진단으로 나온 솔루션 2</th>
               <th>최종으로 선택된 솔루션 1</th>
