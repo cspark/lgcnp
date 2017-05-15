@@ -55,7 +55,7 @@ class Admin::ImageController < Admin::AdminApplicationController
       end
 
       @fcdatas_excel = @fcdatas
-      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
+      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
     else
       scoped = Fcdata.all
       scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
@@ -82,7 +82,7 @@ class Admin::ImageController < Admin::AdminApplicationController
       end
 
       @fcdatas_excel = @fcdatas
-      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
+      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
     end
 
     respond_to do |format|
