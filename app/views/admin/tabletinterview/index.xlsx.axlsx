@@ -3,7 +3,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
         sheet.add_row @excel_name
         @tabletinterviews_excel.each do |tabletinterview|
           custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
-          fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first
+          fcdata = Fcdata.where(custserial: tabletinterview.custserial.to_i).where(measureno: tabletinterview.fcdata_id.to_i).first
           skin_type = ""
           if !tabletinterview.skin_type.nil?
             if tabletinterview.skin_type.include?("skin_type_gunsung")
@@ -235,7 +235,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           rescue
           end
           if !fcdata.nil?
-            fcdata = fcdata.to_api_hash
+            fcdata = fcdata.to_api_hash_for_admin
             pr_graph = fcdata[:pr_graph].to_i
             sb_graph = fcdata[:sb_graph].to_i
             pp_graph = fcdata[:pp_graph].to_i
@@ -300,12 +300,6 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
             end
             sheet.add_row temp
           else
-            if !custinfo.custname.nil?
-             custname = URI.decode(custinfo.custname)
-            else
-             custname = ""
-            end
-
             sheet.add_row [custname, tabletinterview.custserial.to_i, tabletinterview.uptdate, custinfo.ch_cd,
             skin_type, before_solution_1, after_solution_1, before_solution_2, after_solution_2, before_serum, after_serum, before_ample_1, after_ample_1,
             before_ample_2, after_ample_2, before_made_cosmetic, after_made_cosmetic, tabletinterview.a_1.to_i, tabletinterview.a_2.to_i, tabletinterview.a_3.to_i,
