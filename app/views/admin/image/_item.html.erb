@@ -12,6 +12,7 @@
       <script>
         $(function () {
           <% user = Custinfo.where(custserial: fcdata.custserial).first %>
+          <% if !user.nil? %>
           try
           {
             var userName = decode_utf8('<%= user.custname %>')
@@ -52,6 +53,7 @@
           {
             $('#phone_<%= user.custserial.to_i %>_<%= fcdata.uptdate %>').append('<%= user.phone %>');
           }
+          <% end %>
         });
 
         function decode_utf8(s) {
