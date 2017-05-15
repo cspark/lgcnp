@@ -46,9 +46,18 @@
           <% sex = "여" %>
         <% end %>
         진단 날짜 : <%= tabletinterview.uptdate %> / 성별 : <%= sex %> / 나이 : <%= @user.age %><br>
-        맞춤제품 Step1: <%= URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," ") %><br>
-        맞춤제품 Step2: <%= URI.decode(tabletinterview.recommand_program_step_2).gsub("+"," ") %><br>
-        맞춤제품 Step3: <%= URI.decode(tabletinterview.recommand_program_step_3).gsub("+"," ") %><br>
+        맞춤제품 Step1:
+        <% if !tabletinterview.recommand_program_step_1.nil? %>
+          <%= URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," ") %>
+        <% end %><br>
+        맞춤제품 Step2:
+        <% if !tabletinterview.recommand_program_step_1.nil? %>
+          <%= URI.decode(tabletinterview.recommand_program_step_2).gsub("+"," ") %>
+        <% end %><br>
+        맞춤제품 Step3:
+        <% if !tabletinterview.recommand_program_step_1.nil? %>
+          <%= URI.decode(tabletinterview.recommand_program_step_3).gsub("+"," ") %>
+        <% end %><br>
         구매제품 Step1:
         <% if !tabletinterview.purchase1.nil? %>
           <%= URI.decode(tabletinterview.purchase1).gsub("+"," ") %>
