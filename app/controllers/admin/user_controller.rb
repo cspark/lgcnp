@@ -46,26 +46,34 @@ class Admin::UserController < Admin::AdminApplicationController
     if params.has_key?(:search) && params[:search].length != 0
       @search = params[:search]
       if ch_cd == ""
-        @users = scoped.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
-        @users2 = scoped.where(custserial: custserial_array2).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
+        # @users = scoped.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
+        # @users2 = scoped.where(custserial: custserial_array2).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
+        @users = scoped.where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
+        @users2 = scoped.where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
       else
-        @users = scoped.where(custserial: custserial_array).where(measureno: measureno_array).where(ch_cd: ch_cd).where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
-        @users2 = scoped.where(custserial: custserial_array2).where(measureno: measureno_array).where(ch_cd: ch_cd).where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
+        # @users = scoped.where(custserial: custserial_array).where(measureno: measureno_array).where(ch_cd: ch_cd).where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
+        # @users2 = scoped.where(custserial: custserial_array2).where(measureno: measureno_array).where(ch_cd: ch_cd).where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
+        @users = scoped.where(ch_cd: ch_cd).where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
+        @users2 = scoped.where(ch_cd: ch_cd).where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
       end
       @users = @users.or(@users2)
     else
       @search = ""
       if ch_cd == ""
-        @users = scoped.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc")
-        @users2 = scoped.where(custserial: custserial_array2).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc")
+        # @users = scoped.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc")
+        # @users2 = scoped.where(custserial: custserial_array2).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc")
+        @users = scoped.where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc")
+        @users2 = scoped.where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc")
       else
-        @users = scoped.where(custserial: custserial_array).where(measureno: measureno_array).where(ch_cd: ch_cd).where.not(lastanaldate: nil).order("lastanaldate desc")
-        @users2 = scoped.where(custserial: custserial_array2).where(measureno: measureno_array).where(ch_cd: ch_cd).where.not(lastanaldate: nil).order("lastanaldate desc")
+        # @users = scoped.where(custserial: custserial_array).where(measureno: measureno_array).where(ch_cd: ch_cd).where.not(lastanaldate: nil).order("lastanaldate desc")
+        # @users2 = scoped.where(custserial: custserial_array2).where(measureno: measureno_array).where(ch_cd: ch_cd).where.not(lastanaldate: nil).order("lastanaldate desc")
+        @users = scoped.where(ch_cd: ch_cd).where.not(lastanaldate: nil).order("lastanaldate desc")
+        @users2 = scoped.where(ch_cd: ch_cd).where.not(lastanaldate: nil).order("lastanaldate desc")
       end
       @users = @users.or(@users2)
     end
 
-    @all_users = @users        
+    @all_users = @users
     @count = @users.count
     @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
 
