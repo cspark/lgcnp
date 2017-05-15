@@ -229,7 +229,7 @@
     </script>
     <style>
     .fixed-table-body {
-      max-height: 350px;
+      max-height: 431px;
     }
 
     th {
@@ -247,6 +247,9 @@
     }
     .width100 {
       min-width:100px
+    }
+    .width150 {
+      min-width:150px
     }
     .width200 {
       min-width:200px
@@ -355,7 +358,7 @@
             <% if @select_filter != [] %>
               <% @select_filter.each do |filter| %>
                 <% if filter.include?("skin_type") %>
-                  <th class="width200">피부타입</th>
+                  <th class="width150">피부타입</th>
                 <% elsif filter.include?("before_solution_1") %>
                   <th>진단으로 나온 솔루션 1</th>
                 <% elsif filter.include?("after_solution_1") %>
@@ -393,7 +396,7 @@
                 <% end %>
               <% end %>
             <% else %>
-              <th class="width200">피부타입</th>
+              <th class="width150">피부타입</th>
               <th>진단으로 나온 솔루션 1</th>
               <th>진단으로 나온 솔루션 2</th>
               <th>최종으로 선택된 솔루션 1</th>

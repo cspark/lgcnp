@@ -235,7 +235,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     @count = @tabletinterviews.count
     @tabletinterviews_excel = @tabletinterviews
-    @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(3)
+    @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(5)
 
     respond_to do |format|
       format.html
@@ -642,7 +642,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     @count = @tabletinterviews.count
     @tabletinterviews_excel = @tabletinterviews
-    @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(3)
+    @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(5)
 
     respond_to do |format|
       format.html
