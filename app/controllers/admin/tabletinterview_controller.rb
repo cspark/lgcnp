@@ -526,6 +526,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(mmode: @select_mode) if !@select_mode.blank? && @select_mode.downcase != "all"
 
+    Rails.logger.info "scoped.count!!!"
     Rails.logger.info scoped.count
     if @select_filter == []
       @excel_name = ["이름","시리얼","진단 날짜","채널","피부타입","진단으로 나온 솔루션 1","최종으로 선택된 솔루션 1","진단으로 나온 솔루션 2","최종으로 선택된 솔루션 2",
