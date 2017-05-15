@@ -65,6 +65,7 @@ class Admin::UserController < Admin::AdminApplicationController
       @users = @users.or(@users2)
     end
 
+    @all_users = @users        
     @count = @users.count
     @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
 
