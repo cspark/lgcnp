@@ -80,38 +80,39 @@
             $("input:checkbox[name=skin_type_device_check_box]").prop("checked", true);
           <% end %>
 
-          <% if @skin_type_survey_array.include?("skin_type_gun_boggab") %>
-            $("input:checkbox[value=skin_type_gun_boggab]").prop("checked", true);
-          <% else %>
-            $("input:checkbox[value=skin_type_gun_boggab]").prop("checked", false);
-          <% end %>
+          <% @skin_type_survey_array.each do |array| %>
+            <% if array.include?("skin_type_gun_boggab") %>
+              $("input:checkbox[value=skin_type_gun_boggab]").prop("checked", true);
+            <% else %>
+              $("input:checkbox[value=skin_type_gun_boggab]").prop("checked", false);
+            <% end %>
+            <% if array.include?("skin_type_jisung_boghab") %>
+              $("input:checkbox[value=skin_type_jisung_boghab]").prop("checked", true);
+            <% else %>
+              $("input:checkbox[value=skin_type_jisung_boghab]").prop("checked", false);
+            <% end %>
 
-          <% if @skin_type_survey_array.include?("skin_type_jisung_boghab") %>
-            $("input:checkbox[value=skin_type_jisung_boghab]").prop("checked", true);
-          <% else %>
-            $("input:checkbox[value=skin_type_jisung_boghab]").prop("checked", false);
-          <% end %>
+            <% if array.include?("skin_type_gunsung") %>
+              $("input:checkbox[value=skin_type_gunsung]").prop("checked", true);
+            <% else %>
+              $("input:checkbox[value=skin_type_gunsung]").prop("checked", false);
+            <% end %>
 
-          <% if @skin_type_survey_array.include?("skin_type_gunsung") %>
-            $("input:checkbox[value=skin_type_gunsung]").prop("checked", true);
-          <% else %>
-            $("input:checkbox[value=skin_type_gunsung]").prop("checked", false);
-          <% end %>
+            <% if array.include?("skin_type_jungsung") %>
+              $("input:checkbox[value=skin_type_jungsung]").prop("checked", true);
+            <% else %>
+              $("input:checkbox[value=skin_type_jungsung]").prop("checked", false);
+            <% end %>
 
-          <% if @skin_type_survey_array.include?("skin_type_jungsung") %>
-            $("input:checkbox[value=skin_type_jungsung]").prop("checked", true);
-          <% else %>
-            $("input:checkbox[value=skin_type_jungsung]").prop("checked", false);
-          <% end %>
+            <% if array.include?("skin_type_jisung") %>
+              $("input:checkbox[value=skin_type_jisung]").prop("checked", true);
+            <% else %>
+              $("input:checkbox[value=skin_type_jisung]").prop("checked", false);
+            <% end %>
 
-          <% if @skin_type_survey_array.include?("skin_type_jisung") %>
-            $("input:checkbox[value=skin_type_jisung]").prop("checked", true);
-          <% else %>
-            $("input:checkbox[value=skin_type_jisung]").prop("checked", false);
-          <% end %>
-
-          <% if @skin_type_survey_array == [] && @custserial.nil? %>
-            $("input:checkbox[name=skin_type_survey_check_box]").prop("checked", true);
+            <% if array == [] && @custserial.nil? %>
+              $("input:checkbox[name=skin_type_survey_check_box]").prop("checked", true);
+            <% end %>
           <% end %>
 
           // 피부고민1
