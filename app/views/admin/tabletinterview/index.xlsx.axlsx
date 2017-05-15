@@ -2,321 +2,317 @@ wb = xlsx_package.workbook
 wb.add_worksheet(name: "tabletinterview") do |sheet|
         sheet.add_row @excel_name
         @tabletinterviews_excel.each do |tabletinterview|
-        custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
-        fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first
-        skin_type = ""
-        Rails.logger.info "1111"
-        if !tabletinterview.skin_type.nil?
-          if tabletinterview.skin_type.include?("skin_type_gunsung")
-            skin_type = "건성"
-          elsif tabletinterview.skin_type.include?("skin_type_gun_boggab")
-            skin_type = "건복합성"
-          elsif tabletinterview.skin_type.include?("skin_type_jisung")
-            skin_type = "지성"
-          elsif tabletinterview.skin_type.include?("skin_type_jisung_boghab")
-            skin_type = "지복합성"
-          elsif tabletinterview.skin_type.include?("skin_type_jungsung")
-            skin_type = "중성"
-          end
-          if !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("senstive")
-            skin_type = skin_type + " (민감성)"
-          end
-        else
+          custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
+          fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first
           skin_type = ""
-        end
-        before_solution_1 = ""
-        begin
-          if !tabletinterview.before_solution_1.nil?
-            if tabletinterview.before_solution_1 == "elasticity solution"
-              before_solution_1 = "탄력 솔루션"
-            elsif tabletinterview.before_solution_1 == "pigment solution"
-              before_solution_1 = "색소침착 솔루션"
-            elsif tabletinterview.before_solution_1 == "pore solution"
-              before_solution_1 = "모공 솔루션"
-            elsif tabletinterview.before_solution_1 == "trouble solution"
-              before_solution_1 = "트러블 솔루션"
-            elsif tabletinterview.before_solution_1 == "wrinkle solution"
-              before_solution_1 = "주름 솔루션"
-            else
-              before_solution_1 = tabletinterview.before_solution_1
+          if !tabletinterview.skin_type.nil?
+            if tabletinterview.skin_type.include?("skin_type_gunsung")
+              skin_type = "건성"
+            elsif tabletinterview.skin_type.include?("skin_type_gun_boggab")
+              skin_type = "건복합성"
+            elsif tabletinterview.skin_type.include?("skin_type_jisung")
+              skin_type = "지성"
+            elsif tabletinterview.skin_type.include?("skin_type_jisung_boghab")
+              skin_type = "지복합성"
+            elsif tabletinterview.skin_type.include?("skin_type_jungsung")
+              skin_type = "중성"
+            end
+            if !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("senstive")
+              skin_type = skin_type + " (민감성)"
             end
           end
-        rescue
-        end
-        Rails.logger.info "2222"
-        before_solution_2 = ""
-        begin
-          if !tabletinterview.before_solution_1.nil?
-            if tabletinterview.before_solution_2 == "elasticity solution"
-              before_solution_2 = "탄력 솔루션"
-            elsif tabletinterview.before_solution_2 == "pigment solution"
-              before_solution_2 = "색소침착 솔루션"
-            elsif tabletinterview.before_solution_2 == "pore solution"
-              before_solution_2 = "모공 솔루션"
-            elsif tabletinterview.before_solution_2 == "trouble solution"
-              before_solution_2 = "트러블 솔루션"
-            elsif tabletinterview.before_solution_2 == "wrinkle solution"
-              before_solution_2 = "주름 솔루션"
-            else
-              before_solution_2 = tabletinterview.before_solution_2
+          before_solution_1 = ""
+          begin
+            if !tabletinterview.before_solution_1.nil?
+              if tabletinterview.before_solution_1 == "elasticity solution"
+                before_solution_1 = "탄력 솔루션"
+              elsif tabletinterview.before_solution_1 == "pigment solution"
+                before_solution_1 = "색소침착 솔루션"
+              elsif tabletinterview.before_solution_1 == "pore solution"
+                before_solution_1 = "모공 솔루션"
+              elsif tabletinterview.before_solution_1 == "trouble solution"
+                before_solution_1 = "트러블 솔루션"
+              elsif tabletinterview.before_solution_1 == "wrinkle solution"
+                before_solution_1 = "주름 솔루션"
+              else
+                before_solution_1 = tabletinterview.before_solution_1
+              end
             end
+          rescue
           end
-        rescue
-        end
-        after_solution_1 = ""
-        begin
-          if !tabletinterview.after_solution_1.nil?
-            if tabletinterview.after_solution_1 == "elasticity solution"
-              after_solution_1 = "탄력 솔루션"
-            elsif tabletinterview.after_solution_1 == "pigment solution"
-              after_solution_1 = "색소침착 솔루션"
-            elsif tabletinterview.after_solution_1 == "pore solution"
-              after_solution_1 = "모공 솔루션"
-            elsif tabletinterview.after_solution_1 == "trouble solution"
-              after_solution_1 = "트러블 솔루션"
-            elsif tabletinterview.after_solution_1 == "wrinkle solution"
-              after_solution_1 = "주름 솔루션"
-            else
-              after_solution_1 = tabletinterview.after_solution_1
+          before_solution_2 = ""
+          begin
+            if !tabletinterview.before_solution_1.nil?
+              if tabletinterview.before_solution_2 == "elasticity solution"
+                before_solution_2 = "탄력 솔루션"
+              elsif tabletinterview.before_solution_2 == "pigment solution"
+                before_solution_2 = "색소침착 솔루션"
+              elsif tabletinterview.before_solution_2 == "pore solution"
+                before_solution_2 = "모공 솔루션"
+              elsif tabletinterview.before_solution_2 == "trouble solution"
+                before_solution_2 = "트러블 솔루션"
+              elsif tabletinterview.before_solution_2 == "wrinkle solution"
+                before_solution_2 = "주름 솔루션"
+              else
+                before_solution_2 = tabletinterview.before_solution_2
+              end
             end
+          rescue
           end
-        rescue
-        end
-        after_solution_2 = ""
-        begin
-          if !tabletinterview.after_solution_2.nil?
-            if tabletinterview.after_solution_2 == "elasticity solution"
-              after_solution_2 = "탄력 솔루션"
-            elsif tabletinterview.after_solution_2 == "pigment solution"
-              after_solution_2 = "색소침착 솔루션"
-            elsif tabletinterview.after_solution_2 == "pore solution"
-              after_solution_2 = "모공 솔루션"
-            elsif tabletinterview.after_solution_2 == "trouble solution"
-              after_solution_2 = "트러블 솔루션"
-            elsif tabletinterview.after_solution_2 == "wrinkle solution"
-              after_solution_2 = "주름 솔루션"
-            else
-              after_solution_2 = tabletinterview.after_solution_2
+          after_solution_1 = ""
+          begin
+            if !tabletinterview.after_solution_1.nil?
+              if tabletinterview.after_solution_1 == "elasticity solution"
+                after_solution_1 = "탄력 솔루션"
+              elsif tabletinterview.after_solution_1 == "pigment solution"
+                after_solution_1 = "색소침착 솔루션"
+              elsif tabletinterview.after_solution_1 == "pore solution"
+                after_solution_1 = "모공 솔루션"
+              elsif tabletinterview.after_solution_1 == "trouble solution"
+                after_solution_1 = "트러블 솔루션"
+              elsif tabletinterview.after_solution_1 == "wrinkle solution"
+                after_solution_1 = "주름 솔루션"
+              else
+                after_solution_1 = tabletinterview.after_solution_1
+              end
             end
+          rescue
           end
-        rescue
-        end
-        before_serum = ""
-        begin
-          if !tabletinterview.before_serum.nil?
-            if tabletinterview.before_serum.include?("deep humect")
-              before_serum = "딥 휴멕트 세럼"
-            elsif tabletinterview.before_serum.include?("skin control")
-              before_serum = "스킨 컨트롤 세럼"
-            elsif tabletinterview.before_serum.include?("rebalencing")
-              before_serum = "리밸런싱 세럼"
-            else
-              before_serum = tabletinterview.before_serum
+          after_solution_2 = ""
+          begin
+            if !tabletinterview.after_solution_2.nil?
+              if tabletinterview.after_solution_2 == "elasticity solution"
+                after_solution_2 = "탄력 솔루션"
+              elsif tabletinterview.after_solution_2 == "pigment solution"
+                after_solution_2 = "색소침착 솔루션"
+              elsif tabletinterview.after_solution_2 == "pore solution"
+                after_solution_2 = "모공 솔루션"
+              elsif tabletinterview.after_solution_2 == "trouble solution"
+                after_solution_2 = "트러블 솔루션"
+              elsif tabletinterview.after_solution_2 == "wrinkle solution"
+                after_solution_2 = "주름 솔루션"
+              else
+                after_solution_2 = tabletinterview.after_solution_2
+              end
             end
+          rescue
           end
-        rescue
-        end
-        Rails.logger.info "3333"
-        after_serum = ""
-        begin
-          if !tabletinterview.after_serum.nil?
-            if tabletinterview.after_serum.include?("deep humect")
-              after_serum = "딥 휴멕트 세럼"
-            elsif tabletinterview.after_serum.include?("skin control")
-              after_serum = "스킨 컨트롤 세럼"
-            elsif tabletinterview.after_serum.include?("rebalencing")
-              after_serum = "리밸런싱 세럼"
-            else
-              after_serum = tabletinterview.after_serum
+          before_serum = ""
+          begin
+            if !tabletinterview.before_serum.nil?
+              if tabletinterview.before_serum.include?("deep humect")
+                before_serum = "딥 휴멕트 세럼"
+              elsif tabletinterview.before_serum.include?("skin control")
+                before_serum = "스킨 컨트롤 세럼"
+              elsif tabletinterview.before_serum.include?("rebalencing")
+                before_serum = "리밸런싱 세럼"
+              else
+                before_serum = tabletinterview.before_serum
+              end
             end
+          rescue
           end
-        rescue
-        end
-        before_made_cosmetic = ""
-        begin
-          if !tabletinterview.before_made_cosmetic.nil?
-            if tabletinterview.before_made_cosmetic.include?("deep humect")
-              before_made_cosmetic = "딥 휴멕트 세럼"
-            elsif tabletinterview.before_made_cosmetic.include?("skin control")
-              before_made_cosmetic = "스킨 컨트롤 세럼"
-            elsif tabletinterview.before_made_cosmetic.include?("rebalencing")
-              before_made_cosmetic = "리밸런싱 세럼"
-            else
-              before_made_cosmetic = tabletinterview.before_made_cosmetic
+          Rails.logger.info "3333"
+          after_serum = ""
+          begin
+            if !tabletinterview.after_serum.nil?
+              if tabletinterview.after_serum.include?("deep humect")
+                after_serum = "딥 휴멕트 세럼"
+              elsif tabletinterview.after_serum.include?("skin control")
+                after_serum = "스킨 컨트롤 세럼"
+              elsif tabletinterview.after_serum.include?("rebalencing")
+                after_serum = "리밸런싱 세럼"
+              else
+                after_serum = tabletinterview.after_serum
+              end
             end
+          rescue
           end
-        rescue
-        end
-        after_made_cosmetic = ""
-        begin
-          if !tabletinterview.after_made_cosmetic.nil?
-            if tabletinterview.after_made_cosmetic.include?("deep humect")
-              after_made_cosmetic = "딥 휴멕트 세럼"
-            elsif tabletinterview.after_made_cosmetic.include?("skin control")
-              after_made_cosmetic = "스킨 컨트롤 세럼"
-            elsif tabletinterview.after_made_cosmetic.include?("rebalencing")
-              after_made_cosmetic = "리밸런싱 세럼"
-            else
-              after_made_cosmetic = tabletinterview.after_made_cosmetic
+          before_made_cosmetic = ""
+          begin
+            if !tabletinterview.before_made_cosmetic.nil?
+              if tabletinterview.before_made_cosmetic.include?("deep humect")
+                before_made_cosmetic = "딥 휴멕트 세럼"
+              elsif tabletinterview.before_made_cosmetic.include?("skin control")
+                before_made_cosmetic = "스킨 컨트롤 세럼"
+              elsif tabletinterview.before_made_cosmetic.include?("rebalencing")
+                before_made_cosmetic = "리밸런싱 세럼"
+              else
+                before_made_cosmetic = tabletinterview.before_made_cosmetic
+              end
             end
+          rescue
           end
-        rescue
-        end
-        before_ample_1 = ""
-        begin
-          if !tabletinterview.before_ample_1.nil?
-            if tabletinterview.before_ample_1 == "pore clinic ampoule"
-              before_ample_1 = "포어클리닉 앰플"
-            elsif tabletinterview.before_ample_1 == "carming ampoule"
-              before_ample_1 = "카밍 앰플"
-            elsif tabletinterview.before_ample_1 == "luminus ampoule"
-              before_ample_1 = "루미너스 앰플"
-            elsif tabletinterview.before_ample_1 == "regenerating ampoule"
-              before_ample_1 = "리제네레이팅 앰플"
-            elsif tabletinterview.before_ample_1 == "perming ampoule"
-              before_ample_1 = "퍼밍 앰플"
-            else
-              before_ample_1 = tabletinterview.before_ample_1
+          after_made_cosmetic = ""
+          begin
+            if !tabletinterview.after_made_cosmetic.nil?
+              if tabletinterview.after_made_cosmetic.include?("deep humect")
+                after_made_cosmetic = "딥 휴멕트 세럼"
+              elsif tabletinterview.after_made_cosmetic.include?("skin control")
+                after_made_cosmetic = "스킨 컨트롤 세럼"
+              elsif tabletinterview.after_made_cosmetic.include?("rebalencing")
+                after_made_cosmetic = "리밸런싱 세럼"
+              else
+                after_made_cosmetic = tabletinterview.after_made_cosmetic
+              end
             end
+          rescue
           end
-        rescue
-        end
-        after_ample_1 = ""
-        begin
-          if !tabletinterview.after_ample_1.nil?
-            if tabletinterview.after_ample_1 == "pore clinic ampoule"
-              after_ample_1 = "포어클리닉 앰플"
-            elsif tabletinterview.after_ample_1 == "carming ampoule"
-              after_ample_1 = "카밍 앰플"
-            elsif tabletinterview.after_ample_1 == "luminus ampoule"
-              after_ample_1 = "루미너스 앰플"
-            elsif tabletinterview.after_ample_1 == "regenerating ampoule"
-              after_ample_1 = "리제네레이팅 앰플"
-            elsif tabletinterview.after_ample_1 == "perming ampoule"
-              after_ample_1 = "퍼밍 앰플"
-            else
-              after_ample_1 = tabletinterview.after_ample_1
+          before_ample_1 = ""
+          begin
+            if !tabletinterview.before_ample_1.nil?
+              if tabletinterview.before_ample_1 == "pore clinic ampoule"
+                before_ample_1 = "포어클리닉 앰플"
+              elsif tabletinterview.before_ample_1 == "carming ampoule"
+                before_ample_1 = "카밍 앰플"
+              elsif tabletinterview.before_ample_1 == "luminus ampoule"
+                before_ample_1 = "루미너스 앰플"
+              elsif tabletinterview.before_ample_1 == "regenerating ampoule"
+                before_ample_1 = "리제네레이팅 앰플"
+              elsif tabletinterview.before_ample_1 == "perming ampoule"
+                before_ample_1 = "퍼밍 앰플"
+              else
+                before_ample_1 = tabletinterview.before_ample_1
+              end
             end
+          rescue
           end
-        rescue
-        end
-        before_ample_2 = ""
-        begin
-          if !tabletinterview.before_ample_2.nil?
-            if tabletinterview.before_ample_2 == "pore clinic ampoule"
-              before_ample_2 = "포어클리닉 앰플"
-            elsif tabletinterview.before_ample_2 == "carming ampoule"
-              before_ample_2 = "카밍 앰플"
-            elsif tabletinterview.before_ample_2 == "luminus ampoule"
-              before_ample_2 = "루미너스 앰플"
-            elsif tabletinterview.before_ample_2 == "regenerating ampoule"
-              before_ample_2 = "리제네레이팅 앰플"
-            elsif tabletinterview.before_ample_2 == "perming ampoule"
-              before_ample_2 = "퍼밍 앰플"
-            else
-              before_ample_2 = tabletinterview.before_ample_2
+          after_ample_1 = ""
+          begin
+            if !tabletinterview.after_ample_1.nil?
+              if tabletinterview.after_ample_1 == "pore clinic ampoule"
+                after_ample_1 = "포어클리닉 앰플"
+              elsif tabletinterview.after_ample_1 == "carming ampoule"
+                after_ample_1 = "카밍 앰플"
+              elsif tabletinterview.after_ample_1 == "luminus ampoule"
+                after_ample_1 = "루미너스 앰플"
+              elsif tabletinterview.after_ample_1 == "regenerating ampoule"
+                after_ample_1 = "리제네레이팅 앰플"
+              elsif tabletinterview.after_ample_1 == "perming ampoule"
+                after_ample_1 = "퍼밍 앰플"
+              else
+                after_ample_1 = tabletinterview.after_ample_1
+              end
             end
+          rescue
           end
-        rescue
-        end
-        after_ample_2 = ""
-        begin
-          if !tabletinterview.after_ample_2.nil?
-            if tabletinterview.after_ample_2 == "pore clinic ampoule"
-              after_ample_2 = "포어클리닉 앰플"
-            elsif tabletinterview.after_ample_2 == "carming ampoule"
-              after_ample_2 = "카밍 앰플"
-            elsif tabletinterview.after_ample_2 == "luminus ampoule"
-              after_ample_2 = "루미너스 앰플"
-            elsif tabletinterview.after_ample_2 == "regenerating ampoule"
-              after_ample_2 = "리제네레이팅 앰플"
-            elsif tabletinterview.after_ample_2 == "perming ampoule"
-              after_ample_2 = "퍼밍 앰플"
-            else
-              after_ample_2 = tabletinterview.after_ample_2
+          before_ample_2 = ""
+          begin
+            if !tabletinterview.before_ample_2.nil?
+              if tabletinterview.before_ample_2 == "pore clinic ampoule"
+                before_ample_2 = "포어클리닉 앰플"
+              elsif tabletinterview.before_ample_2 == "carming ampoule"
+                before_ample_2 = "카밍 앰플"
+              elsif tabletinterview.before_ample_2 == "luminus ampoule"
+                before_ample_2 = "루미너스 앰플"
+              elsif tabletinterview.before_ample_2 == "regenerating ampoule"
+                before_ample_2 = "리제네레이팅 앰플"
+              elsif tabletinterview.before_ample_2 == "perming ampoule"
+                before_ample_2 = "퍼밍 앰플"
+              else
+                before_ample_2 = tabletinterview.before_ample_2
+              end
             end
+          rescue
           end
-        rescue
-        end
-        if !fcdata.nil?
-          fcdata = fcdata.to_api_hash
-          pr_graph = fcdata[:pr_graph].to_i
-          sb_graph = fcdata[:sb_graph].to_i
-          pp_graph = fcdata[:pp_graph].to_i
-          wr_graph = fcdata[:wr_graph].to_i
-          el_graph = fcdata[:el_graph].to_i
-        else
-          pr_graph = ""
-          sb_graph = ""
-          pp_graph = ""
-          wr_graph = ""
-          el_graph = ""
-        end
+          after_ample_2 = ""
+          begin
+            if !tabletinterview.after_ample_2.nil?
+              if tabletinterview.after_ample_2 == "pore clinic ampoule"
+                after_ample_2 = "포어클리닉 앰플"
+              elsif tabletinterview.after_ample_2 == "carming ampoule"
+                after_ample_2 = "카밍 앰플"
+              elsif tabletinterview.after_ample_2 == "luminus ampoule"
+                after_ample_2 = "루미너스 앰플"
+              elsif tabletinterview.after_ample_2 == "regenerating ampoule"
+                after_ample_2 = "리제네레이팅 앰플"
+              elsif tabletinterview.after_ample_2 == "perming ampoule"
+                after_ample_2 = "퍼밍 앰플"
+              else
+                after_ample_2 = tabletinterview.after_ample_2
+              end
+            end
+          rescue
+          end
+          if !fcdata.nil?
+            fcdata = fcdata.to_api_hash
+            pr_graph = fcdata[:pr_graph].to_i
+            sb_graph = fcdata[:sb_graph].to_i
+            pp_graph = fcdata[:pp_graph].to_i
+            wr_graph = fcdata[:wr_graph].to_i
+            el_graph = fcdata[:el_graph].to_i
+          else
+            pr_graph = ""
+            sb_graph = ""
+            pp_graph = ""
+            wr_graph = ""
+            el_graph = ""
+          end
 
-        if !custinfo.custname.nil?
-         custname = URI.decode(custinfo.custname)
-        else
-         custname = ""
-        end
-
-        temp = [custname, tabletinterview.custserial.to_i, tabletinterview.uptdate, custinfo.ch_cd]
-        if @select_filter != []
-          @select_filter.each do |filter|
-            if filter.include?("skin_type")
-              temp << skin_type
-            elsif filter.include?("before_solution_1")
-              temp << before_solution_1
-            elsif filter.include?("after_solution_1")
-              temp << after_solution_1
-            elsif filter.include?("before_solution_2")
-              temp << before_solution_2
-            elsif filter.include?("after_solution_2")
-              temp << after_solution_2
-            elsif filter.include?("before_serum")
-              temp << before_serum
-            elsif filter.include?("after_serum")
-              temp << after_serum
-            elsif filter.include?("before_ample_1")
-              temp << before_ample_1
-            elsif filter.include?("after_ample_1")
-              temp << after_ample_1
-            elsif filter.include?("before_ample_2")
-              temp << before_ample_2
-            elsif filter.include?("after_ample_2")
-              temp << after_ample_2
-            elsif filter.include?("before_made_cosmetic")
-              temp << before_made_cosmetic
-            elsif filter.include?("after_made_cosmetic")
-              temp << after_made_cosmetic
-            elsif filter.include?("pr_graph")
-              temp << pr_graph
-            elsif filter.include?("sb_graph")
-              temp << sb_graph
-            elsif filter.include?("pp_graph")
-              temp << pp_graph
-            elsif filter.include?("wr_graph")
-              temp << wr_graph
-            elsif filter.include?("el_graph")
-              temp << el_graph
-            else
-              temp << tabletinterview[filter].to_s
-            end
-          end
-          sheet.add_row temp
-        else
           if !custinfo.custname.nil?
            custname = URI.decode(custinfo.custname)
           else
            custname = ""
           end
 
-          sheet.add_row [custname, tabletinterview.custserial.to_i, tabletinterview.uptdate, custinfo.ch_cd,
-          skin_type, before_solution_1, after_solution_1, before_solution_2, after_solution_2, before_serum, after_serum, before_ample_1, after_ample_1,
-          before_ample_2, after_ample_2, before_made_cosmetic, after_made_cosmetic, tabletinterview.a_1.to_i, tabletinterview.a_2.to_i, tabletinterview.a_3.to_i,
-          tabletinterview.b_1.to_i, tabletinterview.b_2.to_i, tabletinterview.b_3.to_i, tabletinterview.b_4.to_i, tabletinterview.c_1.to_i,
-          tabletinterview.d_1.to_i, tabletinterview.d_2.to_i, tabletinterview.d_3.to_i, tabletinterview.d_4.to_i, tabletinterview.d_5.to_i,
-          tabletinterview.d_6.to_i, tabletinterview.d_7.to_i, tabletinterview.d_8.to_i, tabletinterview.d_9.to_i, tabletinterview.d_10.to_i,
-          pr_graph, sb_graph, pp_graph, wr_graph, el_graph]
-        end
+          temp = [custname, tabletinterview.custserial.to_i, tabletinterview.uptdate, custinfo.ch_cd]
+          if @select_filter != []
+            @select_filter.each do |filter|
+              if filter.include?("skin_type")
+                temp << skin_type
+              elsif filter.include?("before_solution_1")
+                temp << before_solution_1
+              elsif filter.include?("after_solution_1")
+                temp << after_solution_1
+              elsif filter.include?("before_solution_2")
+                temp << before_solution_2
+              elsif filter.include?("after_solution_2")
+                temp << after_solution_2
+              elsif filter.include?("before_serum")
+                temp << before_serum
+              elsif filter.include?("after_serum")
+                temp << after_serum
+              elsif filter.include?("before_ample_1")
+                temp << before_ample_1
+              elsif filter.include?("after_ample_1")
+                temp << after_ample_1
+              elsif filter.include?("before_ample_2")
+                temp << before_ample_2
+              elsif filter.include?("after_ample_2")
+                temp << after_ample_2
+              elsif filter.include?("before_made_cosmetic")
+                temp << before_made_cosmetic
+              elsif filter.include?("after_made_cosmetic")
+                temp << after_made_cosmetic
+              elsif filter.include?("pr_graph")
+                temp << pr_graph
+              elsif filter.include?("sb_graph")
+                temp << sb_graph
+              elsif filter.include?("pp_graph")
+                temp << pp_graph
+              elsif filter.include?("wr_graph")
+                temp << wr_graph
+              elsif filter.include?("el_graph")
+                temp << el_graph
+              else
+                temp << tabletinterview[filter].to_s
+              end
+            end
+            sheet.add_row temp
+          else
+            if !custinfo.custname.nil?
+             custname = URI.decode(custinfo.custname)
+            else
+             custname = ""
+            end
+
+            sheet.add_row [custname, tabletinterview.custserial.to_i, tabletinterview.uptdate, custinfo.ch_cd,
+            skin_type, before_solution_1, after_solution_1, before_solution_2, after_solution_2, before_serum, after_serum, before_ample_1, after_ample_1,
+            before_ample_2, after_ample_2, before_made_cosmetic, after_made_cosmetic, tabletinterview.a_1.to_i, tabletinterview.a_2.to_i, tabletinterview.a_3.to_i,
+            tabletinterview.b_1.to_i, tabletinterview.b_2.to_i, tabletinterview.b_3.to_i, tabletinterview.b_4.to_i, tabletinterview.c_1.to_i,
+            tabletinterview.d_1.to_i, tabletinterview.d_2.to_i, tabletinterview.d_3.to_i, tabletinterview.d_4.to_i, tabletinterview.d_5.to_i,
+            tabletinterview.d_6.to_i, tabletinterview.d_7.to_i, tabletinterview.d_8.to_i, tabletinterview.d_9.to_i, tabletinterview.d_10.to_i,
+            pr_graph, sb_graph, pp_graph, wr_graph, el_graph]
+          end
     end
 end
