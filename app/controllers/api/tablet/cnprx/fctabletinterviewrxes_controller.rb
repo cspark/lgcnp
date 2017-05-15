@@ -234,7 +234,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
       if !custinfo.nil?
         render json: custinfo.to_api_hash, status: :ok
       else
-        name = lcare_user.cust_hnm
+        name = URI.encode(params[:cust_hnm])
         birthyy = params[:birth_year]
         birthmm = params[:birth_mmdd][0,2]
         birthdd = params[:birth_mmdd][2,4]
