@@ -100,7 +100,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
         end
 
         if !fcdata.nil?
-          fcdata = fcdata.to_api_hash
+          fcdata = fcdata.to_api_hash_for_admin
           pr_graph = fcdata[:pr_graph].to_i
           sb_graph = fcdata[:sb_graph].to_i
           pp_graph = fcdata[:pp_graph].to_i
@@ -114,6 +114,44 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           wr_graph = ""
           el_graph = ""
           mo_graph = ""
+        end
+
+        if !custinfo.custname.nil?
+         custname = URI.decode(custinfo.custname)
+        else
+         custname = ""
+        end
+
+        if !tabletinterview.purchase1.nil?
+          purchase1 = URI.decode(tabletinterview.purchase1)
+        else
+          purchase1 = ""
+        end
+        if !tabletinterview.purchase2.nil?
+          purchase2 = URI.decode(tabletinterview.purchase2)
+        else
+          purchase2 = ""
+        end
+        if !tabletinterview.purchase3.nil?
+          purchase3 = URI.decode(tabletinterview.purchase3)
+        else
+          purchase3 = ""
+        end
+
+        if !tabletinterview.recommand_program_step_1.nil?
+          recommand_program_step_1 = URI.decode(tabletinterview.recommand_program_step_1)
+        else
+          recommand_program_step_1 = ""
+        end
+        if !tabletinterview.recommand_program_step_2.nil?
+          recommand_program_step_2 = URI.decode(tabletinterview.recommand_program_step_2)
+        else
+          recommand_program_step_2 = ""
+        end
+        if !tabletinterview.recommand_program_step_3.nil?
+          recommand_program_step_3 = URI.decode(tabletinterview.recommand_program_step_3)
+        else
+          recommand_program_step_3 = ""
         end
 
         if !custinfo.custname.nil?
@@ -136,41 +174,17 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
             elsif filter.include?("after_solution_2")
               temp << after_solution_2
             elsif filter.include?("recommand_program_step_1")
-              if !tabletinterview.recommand_program_step_1.nil?
-                temp << URI.decode(tabletinterview.recommand_program_step_1)
-              else
-                temp << ""
-              end
+              temp << recommand_program_step_1
             elsif filter.include?("recommand_program_step_2")
-              if !tabletinterview.recommand_program_step_2.nil?
-                temp << URI.decode(tabletinterview.recommand_program_step_2)
-              else
-                temp << ""
-              end
+              temp << recommand_program_step_2
             elsif filter.include?("recommand_program_step_3")
-              if !tabletinterview.recommand_program_step_3.nil?
-                temp << URI.decode(tabletinterview.recommand_program_step_3)
-              else
-                temp << ""
-              end
+              temp << recommand_program_step_3
             elsif filter.include?("purchase1")
-              if !tabletinterview.purchase1.nil?
-                temp << URI.decode(tabletinterview.purchase1)
-              else
-                temp << ""
-              end
+              temp << purchase1
             elsif filter.include?("purchase2")
-              if !tabletinterview.purchase2.nil?
-                temp << URI.decode(tabletinterview.purchase2)
-              else
-                temp << ""
-              end
+              temp << purchase2
             elsif filter.include?("purchase3")
-              if !tabletinterview.purchase3.nil?
-                temp << URI.decode(tabletinterview.purchase3)
-              else
-                temp << ""
-              end
+              temp << purchase3
             elsif filter.include?("pr_graph")
               temp << pr_graph
             elsif filter.include?("sb_graph")
@@ -189,44 +203,6 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           end
           sheet.add_row temp
         else
-          if !tabletinterview.purchase1.nil?
-            purchase1 = URI.decode(tabletinterview.purchase1)
-          else
-            purchase1 = ""
-          end
-          if !tabletinterview.purchase2.nil?
-            purchase2 = URI.decode(tabletinterview.purchase2)
-          else
-            purchase2 = ""
-          end
-          if !tabletinterview.purchase3.nil?
-            purchase3 = URI.decode(tabletinterview.purchase3)
-          else
-            purchase3 = ""
-          end
-
-          if !tabletinterview.recommand_program_step_1.nil?
-            recommand_program_step_1 = URI.decode(tabletinterview.recommand_program_step_1)
-          else
-            recommand_program_step_1 = ""
-          end
-          if !tabletinterview.recommand_program_step_2.nil?
-            recommand_program_step_2 = URI.decode(tabletinterview.recommand_program_step_2)
-          else
-            recommand_program_step_2 = ""
-          end
-          if !tabletinterview.recommand_program_step_3.nil?
-            recommand_program_step_3 = URI.decode(tabletinterview.recommand_program_step_3)
-          else
-            recommand_program_step_3 = ""
-          end
-
-          if !custinfo.custname.nil?
-           custname = URI.decode(custinfo.custname)
-          else
-           custname = ""
-          end
-
           sheet.add_row [custname, tabletinterview.custserial.to_i, tabletinterview.uptdate, custinfo.ch_cd,
           skin_type, before_solution_1, after_solution_1, before_solution_2, after_solution_2,
           recommand_program_step_1, recommand_program_step_2, recommand_program_step_3,
