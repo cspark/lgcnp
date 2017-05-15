@@ -92,11 +92,11 @@ class Admin::DataController < Admin::AdminApplicationController
       if @select_senstive == "all"
         select_skin_type_survey.split(",").each do |skin_type|
           @skin_type_survey_array.push(skin_type)
-          @skin_type_survey_array.push(skin_type+"_se nstive")
+          @skin_type_survey_array.push(skin_type+"_senstive")
         end
       elsif @select_senstive == "yes"
         select_skin_type_survey.split(",").each do |skin_type|
-          @skin_type_survey_array.push(skin_type+"_se nstive")
+          @skin_type_survey_array.push(skin_type+"_senstive")
         end
       else
         select_skin_type_survey.split(",").each do |skin_type|
