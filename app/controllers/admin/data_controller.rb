@@ -149,6 +149,10 @@ class Admin::DataController < Admin::AdminApplicationController
       end
     end
 
+    Rails.logger.info "@skin_type_survey_array!!!!"
+    Rails.logger.info @skin_type_survey_array
+    Rails.logger.info @select_skin_anxiety1_array
+    Rails.logger.info @select_skin_anxiety2_array
     if @select_skin_anxiety1_array.blank? || @skin_type_survey_array.blank?
       serial_array = Fctabletinterview.where(before_solution_1: ["!!"]).pluck(:custserial).uniq
     else
@@ -161,6 +165,8 @@ class Admin::DataController < Admin::AdminApplicationController
       serial_array2 = Fctabletinterview.where(before_solution_2: @select_skin_anxiety2_array).where(skin_type: @skin_type_survey_array).pluck(:custserial).uniq
     end
     serial_array = serial_array & serial_array2
+
+    Rails.logger.info @skin_type_survey_array.
 
     @fcdatas = []
     @fcdatas_final = []
