@@ -88,7 +88,11 @@
         <% else %>
           <td></td>
         <% end %>
-        <td class="text-center"><%= after_interview.a6_1.to_i %></td>
+        <% if !after_interview.a6_1.nil? %>
+          <td class="text-center"><%= URI.decode(after_interview.a6_1).gsub("+","") %></td>
+        <% else %>
+          <td></td>
+        <% end %>
       </tr>
     </body>
 </html>
