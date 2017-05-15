@@ -356,8 +356,9 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
     measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
-    scoped = Fcinterview.where(custserial: serial_array).where(measureno: measureno_array)
-    scoped = scoped.or(Fcinterview.where(custserial: serial_array2).where(measureno: measureno_array))
+    # scoped = Fcinterview.where(custserial: serial_array).where(measureno: measureno_array)
+    # scoped = scoped.or(Fcinterview.where(custserial: serial_array2).where(measureno: measureno_array))
+    scoped = Fcinterview.all
     temp_end_date = @end_date.to_date+1.day
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
@@ -417,6 +418,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       end
     end
 
+    Rails.logger.info "@beau_interviews.count!!!"
+    Rails.logger.info @beau_interviews.count!!!
     @count = @beau_interviews.count
     @beau_interviews_excel = @beau_interviews
     @beau_interviews = Kaminari.paginate_array(@beau_interviews).page(params[:page]).per(5)
