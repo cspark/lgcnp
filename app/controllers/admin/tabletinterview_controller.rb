@@ -295,6 +295,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end_birthmm = params[:end_birthmm]
     select_mode = params[:select_mode]
     select_area = ""
+    select_area = params[:select_area] if !params[:select_area].blank? && params[:select_area] != "all"
     @params_filter = params[:select_filter]
 
     @select_sex = select_sex
@@ -309,7 +310,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @start_birthmm = start_birthmm
     @end_birthmm = end_birthmm
     @select_mode = select_mode
-    @select_area = params[:select_area] if !params[:select_area].blank? && params[:select_area] != "all"
+    @select_area = select_area
 
     ch_cd = ""
     shop_cd = ""
@@ -317,13 +318,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
     @ch_cd = ch_cd
     @shop_cd = shop_cd
-
-    @select_filter = []
-    if !@params_filter.blank?
-      @params_filter.split(',').each do |filter|
-        @select_filter << filter
-      end
-    end
 
     @ch_array = []
     ch_cd.split(",").each do |channel|
@@ -374,6 +368,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     scoped = scoped.order("uptdate desc")
 
+    Rails.logger.info "scoped.count!!!!!!"
+    Rails.logger.info scoped.count
     scoped.each do |tabletinterview|
       custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
       Rails.logger.info custinfo.custname

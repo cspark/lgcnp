@@ -154,10 +154,6 @@
             document.getElementById("end_birthmm").value = '<%= @end_birthmm %>'
           <% end %>
 
-          <% if !@select_channel.nil? %>
-            $('select[id="select_channel"]').val('<%= @select_channel %>');
-          <% end %>
-
           <% if !@select_mode.nil? %>
             $('select[id="select_mode"]').val('<%= @select_mode %>');
           <% end %>
@@ -307,8 +303,7 @@
           :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age,
           :name => @name, :custserial => @custserial, :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy,
           :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm, :select_mode => @select_mode,
-          :select_area => @select_area,
-          :select_channel => @select_channel, :select_shop => @shop_cd, :isExcel => true) %>
+          :select_area => @select_area, :select_channel => @ch_cd, :select_shop => @shop_cd) %>
         </p>
       </div><br><br>
 

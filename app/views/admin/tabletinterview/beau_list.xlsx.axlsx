@@ -5,7 +5,7 @@ wb.add_worksheet(name: "interview") do |sheet|
 
     @beau_interviews_excel.each do |interview|
       custinfo = Custinfo.where(custserial: interview.custserial).first
-      fcdata = Fcdata.where(custserial: interview.custserial).where(measureno: interview.interview).first
+      fcdata = Fcdata.where(custserial: interview.custserial).where(measureno: interview.measureno).first
 
       interview_8 = interview.interview_8
       if interview.interview_8 == "0"
