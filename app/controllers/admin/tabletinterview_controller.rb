@@ -157,6 +157,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end
 
     scoped = scoped.order("uptdate desc")
+    Rails.logger.info "scoped.count!!!!"
+    Rails.logger.info scoped.count
 
     scoped.each do |tabletinterview|
       custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
@@ -232,6 +234,9 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
         Rails.logger.info @tabletinterviews.count
       end
     end
+
+    Rails.logger.info "@tabletinterviews.count"
+    Rails.logger.info @tabletinterviews.count
 
     @count = @tabletinterviews.count
     @tabletinterviews_excel = @tabletinterviews
