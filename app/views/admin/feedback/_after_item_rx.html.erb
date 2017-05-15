@@ -80,7 +80,7 @@
         <td class="text-center"><%= after_interview.a4.to_i %></td>
         <td class="text-center"><%= after_interview.a5.to_i %></td>
         <% if !after_interview.a6.nil? %>
-          <td class="text-center"><%= URI.decode(after_interview.a6) %></td>
+          <td class="text-center"><%= URI.decode(after_interview.a6).gsub("+","") %></td>
         <% else %>
           <td></td>
         <% end %>
