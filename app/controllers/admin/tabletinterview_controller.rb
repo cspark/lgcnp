@@ -90,8 +90,9 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
     measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
-    scoped = Fctabletinterview.where(custserial: serial_array).where(fcdata_id: measureno_array)
-    scoped = scoped.or(Fctabletinterview.where(custserial: serial_array2).where(fcdata_id: measureno_array))
+    # scoped = Fctabletinterview.where(custserial: serial_array).where(fcdata_id: measureno_array)
+    # scoped = scoped.or(Fctabletinterview.where(custserial: serial_array2).where(fcdata_id: measureno_array))
+    scoped = Fctabletinterview.all.count
     temp_end_date = @end_date.to_date+1.day
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
@@ -638,3 +639,10 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     params.permit(:memo)
   end
 end
+
+# serial_array.each do |serial|
+#   user = Custinfo.where(custserial: serial).first
+#   if user.is_agree_thirdparty_info == "T" && user.is_agree_thirdparty_info == "F"
+#     Rails.logger.info "!!!!"
+#   end
+# end
