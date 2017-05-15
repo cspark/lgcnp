@@ -10,6 +10,7 @@
     <script>
     $ (function () {
         <% user = Custinfo.where(custserial: @fcpos.custserial).first  %>
+        <% if !user.nil? %>
         try
         {
           $('#name_<%= @fcpos.custserial.to_i %>_<%= @fcpos.ch_cd %>_<%= @fcpos.measureno.to_i %>').append( decode_utf8('<%= user.custname %>'));
@@ -18,6 +19,7 @@
         {
           $('#name_<%= @fcpos.custserial.to_i %>_<%= @fcpos.ch_cd %>_<%= @fcpos.measureno.to_i %>').append('<%= user.custname %>');
         }
+        <% end %>
       });
 
       function decode_utf8(s) {
