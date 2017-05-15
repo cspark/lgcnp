@@ -89,8 +89,14 @@ class Admin::DataController < Admin::AdminApplicationController
 
     @skin_type_survey_array = []
     if !select_skin_type_survey.blank?
-      select_skin_type_survey.split(",").each do |skin_type|
-        @skin_type_survey_array.push(skin_type)
+      if @select_senstive != "all" && @select_senstive == "yes"
+        select_skin_type_survey.split(",").each do |skin_type|
+          @skin_type_survey_array.push(skin_type+"_senstive")
+        end
+      else
+        select_skin_type_survey.split(",").each do |skin_type|
+          @skin_type_survey_array.push(skin_type)
+        end
       end
     end
 
@@ -171,7 +177,7 @@ class Admin::DataController < Admin::AdminApplicationController
     @fcdatas = []
     @fcdatas_final = []
     scoped = Fcdata.where(ch_cd: @ch_array).where(custserial: serial_array)
-    Rails.logger.info "scoped count"
+    Rails.logger.info "scoped count!!!"
     Rails.logger.info scoped.count
     Rails.logger.info @select_skin_type_device_final if !@select_skin_type_device_final.blank?
     temp_end_date = @end_date.to_date + 1.day
@@ -398,6 +404,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     scoped = scoped.order("measuredate desc")
+    Rails.logger.info "2 scoped.count!!!!"
     Rails.logger.info scoped.count
 
     scoped.each do |fcdata|
@@ -462,18 +469,6 @@ class Admin::DataController < Admin::AdminApplicationController
       is_contain = true
 
       if !fctabletinterview.nil?
-        if !fctabletinterview.skin_type.nil?
-          if @select_senstive != "all" && @select_senstive == "yes"
-            if !fctabletinterview.skin_type.include?("senstive")
-              is_contain = false
-            end
-          elsif !fctabletinterview.skin_type.nil? && @select_senstive != "all" && @select_senstive == "no"
-            if fctabletinterview.skin_type.include?("senstive")
-              is_contain = false
-            end
-          end
-        end
-
         if !@select_makeup.blank? && @select_makeup != "all"
           if fctabletinterview.a_1 != @select_makeup.to_i
             is_contain = false
@@ -589,8 +584,14 @@ class Admin::DataController < Admin::AdminApplicationController
 
     @skin_type_survey_array = []
     if !select_skin_type_survey.blank?
-      select_skin_type_survey.split(",").each do |skin_type|
-        @skin_type_survey_array.push(skin_type.to_i)
+      if @select_senstive != "all" && @select_senstive == "yes"
+        select_skin_type_survey.split(",").each do |skin_type|
+          @skin_type_survey_array.push(skin_type+"_senstive")
+        end
+      else
+        select_skin_type_survey.split(",").each do |skin_type|
+          @skin_type_survey_array.push(skin_type)
+        end
       end
     end
 
@@ -1384,17 +1385,17 @@ class Admin::DataController < Admin::AdminApplicationController
       is_contain = true
 
       if !fctabletinterview.nil?
-        if !fctabletinterview.skin_type.nil?
-          if @select_senstive != "all" && @select_senstive == "yes"
-            if !fctabletinterview.skin_type.include?("senstive")
-              is_contain = false
-            end
-          elsif !fctabletinterview.skin_type.nil? && @select_senstive != "all" && @select_senstive == "no"
-            if fctabletinterview.skin_type.include?("senstive")
-              is_contain = false
-            end
-          end
-        end
+        # if !fctabletinterview.skin_type.nil?
+        #   if @select_senstive != "all" && @select_senstive == "yes"
+        #     if !fctabletinterview.skin_type.include?("senstive")
+        #       is_contain = false
+        #     end
+        #   elsif !fctabletinterview.skin_type.nil? && @select_senstive != "all" && @select_senstive == "no"
+        #     if fctabletinterview.skin_type.include?("senstive")
+        #       is_contain = false
+        #     end
+        #   end
+        # end
 
         # if !@overlap.blank? && @overlap == "T"
         #   if fctabletinterview.before_solution_1 != fctabletinterview.before_solution_2
