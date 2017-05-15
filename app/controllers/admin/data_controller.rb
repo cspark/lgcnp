@@ -92,7 +92,7 @@ class Admin::DataController < Admin::AdminApplicationController
       if @select_senstive != "all" && @select_senstive == "yes"
         select_skin_type_survey.split(",").each do |skin_type|
           @skin_type_survey_array.push(skin_type)
-          @skin_type_survey_array.push(skin_type+"_senstive")
+          @skin_type_survey_array.push(skin_type+"_se nstive")
         end
       else
         select_skin_type_survey.split(",").each do |skin_type|
@@ -492,7 +492,7 @@ class Admin::DataController < Admin::AdminApplicationController
 
     @count = @fcdatas_final.count
     @fcdatas_excel = @fcdatas_final
-    @fcdatas = Kaminari.paginate_array(@fcdatas_final).page(params[:page]).per(3)
+    @fcdatas = Kaminari.paginate_array(@fcdatas_final).page(params[:page]).per(5)
 
     respond_to do |format|
       format.html
@@ -948,7 +948,7 @@ class Admin::DataController < Admin::AdminApplicationController
 
     @count = @fcdatas.count
     @fcdatas_excel = @fcdatas
-    @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(3)
+    @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
 
     respond_to do |format|
       format.html
@@ -1416,7 +1416,7 @@ class Admin::DataController < Admin::AdminApplicationController
 
     @count = @fcdatas_final.count
     @fcdatas_excel = @fcdatas_final
-    @fcdatas = Kaminari.paginate_array(@fcdatas_final).page(params[:page]).per(3)
+    @fcdatas = Kaminari.paginate_array(@fcdatas_final).page(params[:page]).per(5)
 
     respond_to do |format|
       format.html
