@@ -215,15 +215,6 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
     end
   end
 
-  def find_n_cust_id
-    user = Custinfo.where(n_cust_id: params[:n_cust_id]).where(ch_cd: params[:ch_cd]).first
-    if !user.nil?
-      render json: user.to_api_hash, status: :ok
-    else
-      render json: "", status: 404
-    end
-  end
-
   # before
   def find_lcare_user
     # L-Care 통합회원 조회 이름, 생년월일, 핸드폰번호, 통합회원여부 조건으로 고객정보 조회 (* Next 조회 필요)
