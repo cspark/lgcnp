@@ -148,7 +148,7 @@
         Download:
         <!-- <%= link_to "CSV", admin_user_list_path(format: "csv") %> -->
         <%= link_to "Excel", admin_user_list_path(format: "xlsx", :search => @search,
-        :custserial => @custserial, :isExcel => true) %>
+        :custserial => @custserial, :select_channel => @ch_cd, :select_shop => @shop_cd, :isExcel => true) %>
       </p>
     </div>
     <div id="avr" style="background: #eea29a; padding: 8px;">
