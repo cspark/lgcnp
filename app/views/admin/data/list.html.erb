@@ -262,9 +262,7 @@
           $('select[id="select_sex"]').val('<%= @select_sex %>');
         <% end %>
 
-        <% if !@start_age.nil? %>
-          document.getElementById("start_age").value = '<%= @start_age %>'
-        <% end %>
+        document.getElementById("start_age").value = '14';
         <% if !@end_age.nil? %>
           document.getElementById("end_age").value = '<%= @end_age %>'
         <% end %>
@@ -309,7 +307,7 @@
         });
 
         $("#age_init").click(function(){
-          document.getElementById("start_age").value = '<%= @min_age %>';
+          document.getElementById("start_age").value = '14';
           document.getElementById("end_age").value = '<%= @max_age %>';
         });
 
