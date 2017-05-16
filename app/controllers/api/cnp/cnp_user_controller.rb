@@ -78,10 +78,7 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
   end
 
   def lcare_user_list
-    # L-Care Serial 조건으로 Janus3 DB에 해당 L-Care 회원이 존재하는지 확인
-    # 106288804  김수민
-    # 105598288  태영님
-    user = Custinfo.where(n_cust_id: params[:n_cust_id]).where.not(ch_cd: "CNPR").where.not(ch_cd: "RLAB").first
+    user = Custinfo.where(n_cust_id: params[:n_cust_id]).where(ch_cd: params[:ch_cd]).first
     if !user.nil?
       render json: user.to_api_hash_for_yanus, status: :ok
     else
