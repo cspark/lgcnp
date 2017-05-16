@@ -649,10 +649,3 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     params.permit(:memo)
   end
 end
-
-# serial_array.each do |serial|
-#   user = Custinfo.where(custserial: serial).first
-#   if user.is_agree_thirdparty_info == "T" && user.is_agree_thirdparty_info == "F"
-#     Rails.logger.info "!!!!"
-#   end
-# end
