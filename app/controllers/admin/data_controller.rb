@@ -1103,8 +1103,6 @@ class Admin::DataController < Admin::AdminApplicationController
     else
       serial_array = Fctabletinterviewrx.where(before_solution_1: @select_skin_anxiety1_array).pluck(:custserial).uniq
     end
-    Rails.logger.info "serial_array!!!"
-    Rails.logger.info serial_array
 
     if @select_skin_anxiety2_array.blank?
       serial_array2 = Fctabletinterviewrx.where(before_solution_2: ["!!"]).pluck(:custserial).uniq
@@ -1112,7 +1110,6 @@ class Admin::DataController < Admin::AdminApplicationController
       serial_array2 = Fctabletinterviewrx.where(before_solution_2: @select_skin_anxiety2_array).pluck(:custserial).uniq
     end
     serial_array = serial_array & serial_array2
-    Rails.logger.info serial_array
 
     @fcdatas = []
     @fcdatas_final = []
@@ -1340,6 +1337,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     scoped = scoped.order("measuredate desc")
+    Rails.logger.info "scoped.count!!!"
     Rails.logger.info scoped.count
 
     scoped.each do |fcdata|
