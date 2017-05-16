@@ -60,6 +60,7 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
     end
   end
 
+
   def measure_update
     # Data 분석이 완료 된 후 CUSTINFO의 분석횟수 카운트 증가시키고, 최근 분석일 Update
     user = Custinfo.where(custserial: params[:custserial]).first
@@ -73,6 +74,18 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
       end
     else
       render :text => "Custinfo is not exist!!!", status: 404
+    end
+  end
+
+  def lcare_user_list
+    # L-Care Serial 조건으로 Janus3 DB에 해당 L-Care 회원이 존재하는지 확인
+    # 106288804  김수민
+    # 105598288  태영님
+    user = Custinfo.where(n_cust_id: params[:n_cust_id]).where.not(ch_cd: "CNPR").where.not(ch_cd: "RLAB").first
+    if !user.nil?
+      render json: user.to_api_hash_for_yanus, status: :ok
+    else
+      render :text => "Custinfo is not exist!!!", status: 204
     end
   end
 

@@ -108,7 +108,7 @@ Rails.application.routes.draw do
       end
       resources :beau_lcare_user do
         collection do
-          post 'lcare_integrated_user_list'
+          get 'lcare_integrated_user_list'
         end
       end
       resources :beau_fcmodecnt do
