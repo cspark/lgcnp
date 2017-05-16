@@ -123,21 +123,18 @@ class Admin::DataController < Admin::AdminApplicationController
 
     if !Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first.nil?
       min_age_custinfo = Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first
-      @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
-      @min_birthyy = min_age_custinfo.birthyy
-      @min_birthmm = 1
       max_age_custinfo = Custinfo.where(ch_cd: @ch_array).order("birthyy asc").first
-      @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
-      @max_birthyy = max_age_custinfo.birthyy
-      @max_birthmm = 12
     else
-      @min_age = 14
-      @min_birthyy = 2005
-      @min_birthmm = 1
-      @max_age = 50
-      @max_birthyy = 1968
-      @max_birthmm = 12
+      min_age_custinfo = Custinfo.where(ch_cd: "CNP").where.not(birthyy: nil).order("birthyy desc").first
+      max_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy asc").first
     end
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+    @min_birthyy = min_age_custinfo.birthyy
+    @max_birthyy = max_age_custinfo.birthyy
+    @min_birthmm = 1
+    @max_birthmm = 12
+
 
     @select_skin_type_device_final = []
     if !@skin_type_device_array.blank?
@@ -618,21 +615,17 @@ class Admin::DataController < Admin::AdminApplicationController
 
     if !Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first.nil?
       min_age_custinfo = Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first
-      @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
-      @min_birthyy = min_age_custinfo.birthyy
-      @min_birthmm = 1
       max_age_custinfo = Custinfo.where(ch_cd: @ch_array).order("birthyy asc").first
-      @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
-      @max_birthyy = max_age_custinfo.birthyy
-      @max_birthmm = 12
     else
-      @min_age = 14
-      @min_birthyy = 2005
-      @min_birthmm = 1
-      @max_age = 50
-      @max_birthyy = 1968
-      @max_birthmm = 12
+      min_age_custinfo = Custinfo.where(ch_cd: "BEAU").where.not(birthyy: nil).order("birthyy desc").first
+      max_age_custinfo = Custinfo.where(ch_cd: "BEAU").order("birthyy asc").first
     end
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+    @min_birthyy = min_age_custinfo.birthyy
+    @max_birthyy = max_age_custinfo.birthyy
+    @min_birthmm = 1
+    @max_birthmm = 12
 
     @select_skin_type_device_final = []
     if !@skin_type_device_array.blank?
@@ -1063,21 +1056,17 @@ class Admin::DataController < Admin::AdminApplicationController
 
     if !Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first.nil?
       min_age_custinfo = Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first
-      @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
-      @min_birthyy = min_age_custinfo.birthyy
-      @min_birthmm = 1
       max_age_custinfo = Custinfo.where(ch_cd: @ch_array).order("birthyy asc").first
-      @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
-      @max_birthyy = max_age_custinfo.birthyy
-      @max_birthmm = 12
     else
-      @min_age = 14
-      @min_birthyy = 2005
-      @min_birthmm = 1
-      @max_age = 50
-      @max_birthyy = 1968
-      @max_birthmm = 12
+      min_age_custinfo = Custinfo.where(ch_cd: "CNPR").where.not(birthyy: nil).order("birthyy desc").first
+      max_age_custinfo = Custinfo.where(ch_cd: "CNPR").order("birthyy asc").first
     end
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+    @min_birthyy = min_age_custinfo.birthyy
+    @max_birthyy = max_age_custinfo.birthyy
+    @min_birthmm = 1
+    @max_birthmm = 12
 
     @select_skin_type_device_final = []
     if !@skin_type_device_array.blank?

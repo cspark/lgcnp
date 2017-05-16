@@ -28,11 +28,10 @@ class Admin::UserController < Admin::AdminApplicationController
     @ch_cd = ch_cd
     @shop_cd = shop_cd
 
-    if ch_cd == ""
-      fcdata_list = Fcdata.where(ch_cd: ch_cd).where(shop_cd: shop_cd)
-    else
-      fcdata_list = Fcdata.where(ch_cd: ch_cd).where(shop_cd: shop_cd)
-    end
+    scoped = Fcdata.all
+    scoped = scoped.where(ch_cd: ch_cd) if !ch_cd.blank?
+    scoped = scoped.where(shop_cd: shop_cd) if !shop_cd.blank?
+    fcdata_list = scoped
     custserial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     custserial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1001, 2001).pluck(:custserial).uniq
     # custserial_array = custserial_array + custserial_array2
@@ -41,29 +40,13 @@ class Admin::UserController < Admin::AdminApplicationController
     Rails.logger.info "user index!!!"
     Rails.logger.info ch_cd
 
-    scoped = Custinfo.all
+    scoped = Custinfo.where.not(lastanaldate: nil)
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-    if params.has_key?(:search) && params[:search].length != 0
-      @search = params[:search]
-      if ch_cd == ""
-        @users = scoped.where(ch_cd: ch_cd).where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
-        @users2 = scoped.where(ch_cd: ch_cd).where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
-      else
-        @users = scoped.where(ch_cd: ch_cd).where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
-        @users2 = scoped.where(ch_cd: ch_cd).where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
-      end
-      @users = @users.or(@users2)
-    else
-      @search = ""
-      if ch_cd == ""
-        @users = scoped.where(ch_cd: ch_cd).where.not(lastanaldate: nil).order("lastanaldate desc")
-        @users2 = scoped.where(ch_cd: ch_cd).where.not(lastanaldate: nil).order("lastanaldate desc")
-      else
-        @users = scoped.where(ch_cd: ch_cd).where.not(lastanaldate: nil).order("lastanaldate desc")
-        @users2 = scoped.where(ch_cd: ch_cd).where.not(lastanaldate: nil).order("lastanaldate desc")
-      end
-      @users = @users.or(@users2)
-    end
+    scoped = scoped.where(ch_cd: ch_cd) if ch_cd.blank?
+    @search = ""
+    @search = params[:search] if params.has_key?(:search) && params[:search].length != 0
+    scoped = scoped.where("custname LIKE ?", "%#{@search}%") if !@search.blank?
+    @users = scoped.order("lastanaldate desc")
 
     @all_users = @users
     @count = @users.count
