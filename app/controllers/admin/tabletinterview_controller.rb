@@ -457,7 +457,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @end_birthmm = end_birthmm
     @select_mode = select_mode
     @select_makeup = select_makeup
-    @select_area = params[:select_area] if !params[:select_area].blank? && params[:select_area] != "all"
+    @select_area = select_area if !select_area.blank? && select_area != "all"
 
     @is_init = true
     if params[:select_sex].present?
