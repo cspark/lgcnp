@@ -358,7 +358,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     scoped = Fcdata.all
     scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
-    scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd).blank?
+    scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
     fcdata_list = scoped
 
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
