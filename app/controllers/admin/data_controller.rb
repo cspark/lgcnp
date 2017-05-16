@@ -1342,16 +1342,19 @@ class Admin::DataController < Admin::AdminApplicationController
 
     scoped.each do |fcdata|
       custinfo = Custinfo.where(custserial: fcdata.custserial).first
+      Rails.logger.info fcdata.custserial.to_i
       is_contain = true
 
       if !@name.blank?
         if !custinfo.custname.include? @name
+          Rails.logger.info "NAME FALSE"
           is_contain = false
         end
       end
 
       if @select_sex != "all"
         if custinfo.sex != @select_sex
+          Rails.logger.info "SEX FALSE"
           is_contain = false
         end
       end
@@ -1359,18 +1362,21 @@ class Admin::DataController < Admin::AdminApplicationController
       if !@start_age.blank? && !@end_age.blank?
         temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
         if temp_age < @start_age.to_i || temp_age > @end_age.to_i
+          Rails.logger.info "AGE FALSE"
           is_contain = false
         end
       end
 
       if !@start_birthyy.blank? && !@end_birthyy.blank?
         if custinfo.birthyy.to_i < @start_birthyy.to_i || custinfo.birthyy.to_i > @end_birthyy.to_i
+          Rails.logger.info "BIRTHYY FALSE"
           is_contain = false
         end
       end
 
       if !@start_birthmm.blank? && !@end_birthmm.blank?
         if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
+          Rails.logger.info "BIRTHMM FALSE"
           is_contain = false
         end
       end
