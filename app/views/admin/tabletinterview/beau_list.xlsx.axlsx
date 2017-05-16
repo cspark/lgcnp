@@ -19,8 +19,13 @@ wb.add_worksheet(name: "interview") do |sheet|
       if interview.interview_10 == "0"
         interview_10 = "-"
       end
+      if !custinfo.custname.nil?
+       custname = URI.decode(custinfo.custname)
+      else
+       custname = ""
+      end
 
-      sheet.add_row [URI.decode(custinfo.custname), interview.custserial.to_i, interview.ch_cd, interview.faceno,
+      sheet.add_row [custname, interview.custserial.to_i, interview.ch_cd, interview.faceno,
       interview.measuredate, interview.measureno.to_i, interview.uptdate, interview.interview_1, interview.interview_2,
       interview.interview_3, interview.interview_4, interview.interview_5, interview.interview_6, interview.interview_7,
       interview_8, interview_9, interview_10]
