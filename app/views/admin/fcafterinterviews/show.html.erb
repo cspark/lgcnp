@@ -184,11 +184,14 @@
             else if ($('#a4_4').is(":checked"))
               a4 = 4
 
-            var formData = new FormData($(this)[0]);
-            <% if @after_interview.order ==  1 %>
-              var is_agree_after = $(':radio[name="is_agree_after"]:checked').val();
-              formData.append("is_agree_after", is_agree_after);
-            <% end %>
+              var formData = new FormData($(this)[0]);
+              var is_agree_after = undefined;
+              <% if @after_interview.order ==  1 %>
+                is_agree_after = $(':radio[name="is_agree_after"]:checked').val();
+                formData.append("is_agree_after", is_agree_after);
+              <% else %>
+                is_agree_after = ""
+              <% end %>
 
             if(a1 != -1 && a2 != -1 && a3 != -1 && a4 != -1 && is_agree_after != null){
               formData.append("custserial", '<%= @after_interview.custserial.to_i %>');
