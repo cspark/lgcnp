@@ -39,7 +39,7 @@
       <b>예약시간</b> <%= @fcschedule.reserve_yyyy %>-<%= mmdd %> , <%= hhmm %><br>
       <b>전화번호</b> <%= @fcschedule.phone %><br>
       <% reserve = "O" %>
-      <% if @fcschedule.reserve_yn == "F" %>
+      <% if @fcschedule.reserve_yn == "N" %>
         <% reserve = "X" %>
       <% end %>
       <b>상담여부</b> <%= reserve %><br>
