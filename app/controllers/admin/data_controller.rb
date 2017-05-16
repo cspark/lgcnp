@@ -179,14 +179,15 @@ class Admin::DataController < Admin::AdminApplicationController
     end
     serial_array = serial_array & serial_array2
 
+    Rails.logger.info "serial_array.count!!!"
     Rails.logger.info serial_array.count
 
     @fcdatas = []
     @fcdatas_final = []
     scoped = Fcdata.where(ch_cd: @ch_array).where(custserial: serial_array)
-    Rails.logger.info "scoped count!!!"
+    Rails.logger.info "Fcdata scoped count!!!"
     Rails.logger.info scoped.count
-    Rails.logger.info @select_skin_type_device_final if !@select_skin_type_device_final.blank?
+
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
@@ -411,7 +412,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     scoped = scoped.order("measuredate desc")
-    Rails.logger.info "2 scoped.count!!!!"
+    Rails.logger.info "fcdata scoped.count!!!!"
     Rails.logger.info scoped.count
 
     scoped.each do |fcdata|
@@ -1097,6 +1098,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
     Rails.logger.info "@select_skin_type_device_final!!"
     Rails.logger.info @select_skin_type_device_final
+    Rails.logger.info @ch_array
 
     if @select_skin_anxiety1_array.blank?
       serial_array = Fctabletinterviewrx.where(before_solution_1: ["!!"]).pluck(:custserial).uniq
