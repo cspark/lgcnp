@@ -166,6 +166,8 @@ class Admin::DataController < Admin::AdminApplicationController
     Rails.logger.info @skin_type_survey_array
     Rails.logger.info @select_skin_anxiety1_array
     Rails.logger.info @select_skin_anxiety2_array
+    Rails.logger.info @select_skin_type_device_final
+    Rails.logger.info @ch_array
     if @select_skin_anxiety1_array.blank? || @skin_type_survey_array.blank?
       serial_array = Fctabletinterview.where(before_solution_1: ["!!"]).pluck(:custserial).uniq
     else
@@ -185,7 +187,7 @@ class Admin::DataController < Admin::AdminApplicationController
     @fcdatas = []
     @fcdatas_final = []
     scoped = Fcdata.where(ch_cd: @ch_array).where(custserial: serial_array)
-    Rails.logger.info "Fcdata scoped count!!!"
+    Rails.logger.info "serial_array Fcdata scoped count!!!"
     Rails.logger.info scoped.count
 
     temp_end_date = @end_date.to_date + 1.day
@@ -195,11 +197,14 @@ class Admin::DataController < Admin::AdminApplicationController
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
     scoped = scoped.where(faceno: @select_area) if !@select_area.blank? && @select_area.downcase != "all"
+    Rails.logger.info "Fcdata scoped count!!!"
+    Rails.logger.info scoped.count
     if @select_skin_type_device_final.blank?
       scoped = scoped.where(skintype: [100])
     else
       scoped = scoped.where(skintype: @select_skin_type_device_final)
     end
+    Rails.logger.info "select_skin_type_device_final Fcdata scoped count!!!"
     Rails.logger.info scoped.count
 
     if @select_filter == []
