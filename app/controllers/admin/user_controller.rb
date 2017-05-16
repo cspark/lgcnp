@@ -29,8 +29,8 @@ class Admin::UserController < Admin::AdminApplicationController
     @shop_cd = shop_cd
 
     scoped = Fcdata.all
-    scoped = scoped.where(ch_cd: ch_cd) if !ch_cd.blank?
-    scoped = scoped.where(shop_cd: shop_cd) if !shop_cd.blank?
+    scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
+    scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
     fcdata_list = scoped
     custserial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     custserial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1001, 2001).pluck(:custserial).uniq
@@ -42,7 +42,7 @@ class Admin::UserController < Admin::AdminApplicationController
 
     scoped = Custinfo.where.not(lastanaldate: nil)
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-    scoped = scoped.where(ch_cd: ch_cd) if ch_cd.blank?
+    scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
     @search = ""
     @search = params[:search] if params.has_key?(:search) && params[:search].length != 0
     scoped = scoped.where("custname LIKE ?", "%#{@search}%") if !@search.blank?
