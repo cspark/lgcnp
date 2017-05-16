@@ -18,7 +18,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin")
       ch_cd = ""
       shop_cd = ""
-      # fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
     else
       ch_cd = session[:admin_user]['ch_cd']
       shop_cd = session[:admin_user]['shop_cd']
@@ -28,7 +27,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
     @ch_cd = ch_cd
     @shop_cd = shop_cd
-    fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
+    fcdata_list = Fcdata.where(ch_cd: ch_cd).where(shop_cd:shop_cd)
 
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
@@ -36,14 +35,14 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     Rails.logger.info serial_array.count
     if Rails.env.production? || Rails.env.staging?
-      @tablet_interviews_today = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
-      @tablet_interviews_today2 = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
+      @tablet_interviews_today = Fctabletinterview.where(ch_cd: ch_cd).where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
+      @tablet_interviews_today2 = Fctabletinterview.where(ch_cd: ch_cd).where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
       @tablet_interviews_today = @tablet_interviews_today.or(@tablet_interviews_today2)
-      @tablet_interviews_2_weeks_ago = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
-      @tablet_interviews_2_weeks_ago2 = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
+      @tablet_interviews_2_weeks_ago = Fctabletinterview.where(ch_cd: ch_cd).where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
+      @tablet_interviews_2_weeks_ago2 = Fctabletinterview.where(ch_cd: ch_cd).where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
       @tablet_interviews_2_weeks_ago = @tablet_interviews_2_weeks_ago.or(@tablet_interviews_2_weeks_ago2)
-      @tablet_interviews_3_months_ago = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
-      @tablet_interviews_3_months_ago2 = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
+      @tablet_interviews_3_months_ago = Fctabletinterview.where(ch_cd: ch_cd).where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
+      @tablet_interviews_3_months_ago2 = Fctabletinterview.where(ch_cd: ch_cd).where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
       @tablet_interviews_3_months_ago = @tablet_interviews_3_months_ago.or(@tablet_interviews_3_months_ago2)
     else
       @tablet_interviews_today = Fctabletinterview.where(custserial: serial_array).where(fcdata_id: measureno_array)
@@ -112,9 +111,9 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @end_date = Date.today
     @today = Date.today
 
-    min_age_custinfo = Custinfo.where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(birthyy: nil).order("birthyy desc").first
+    min_age_custinfo = Custinfo.where(ch_cd: ch_cd).where.not(birthyy: nil).order("birthyy desc").first
     @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
-    max_age_custinfo = Custinfo.where("ch_cd LIKE ?", "%#{ch_cd}%").order("birthyy asc").first
+    max_age_custinfo = Custinfo.where(ch_cd: ch_cd).order("birthyy asc").first
     @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
 
     begin
@@ -189,9 +188,9 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @custserial = custserial
 
     if ch_cd == ""
-      fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("custserial LIKE ?", "%#{custserial}%")
+      fcdata_list = Fcdata.where(ch_cd: ch_cd).where(custserial: custserial)
     else
-      fcdata_list = Fcdata.where("custserial LIKE ?", "%#{custserial}%").where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
+      fcdata_list = Fcdata.where(custserial: custserial).where(ch_cd: ch_cd).where(shop_cd: shop_cd)
     end
 
     temp_serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
@@ -336,7 +335,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin")
       ch_cd = ""
       shop_cd = ""
-      # fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
     else
       ch_cd = session[:admin_user]['ch_cd']
       shop_cd = session[:admin_user]['shop_cd']
@@ -346,7 +344,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
     @ch_cd = ch_cd
     @shop_cd = shop_cd
-    fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{@ch_cd}%").where("shop_cd LIKE ?", "%#{@shop_cd}%")
+    fcdata_list = Fcdata.where(ch_cd: @ch_cd).where(shop_cd: @shop_cd)
 
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
@@ -354,14 +352,14 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     Rails.logger.info serial_array.count
     if Rails.env.production? || Rails.env.staging?
-      @tablet_interviews_today = Fctabletinterviewrx.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
-      @tablet_interviews_today2 = Fctabletinterviewrx.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
+      @tablet_interviews_today = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
+      @tablet_interviews_today2 = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
       @tablet_interviews_today = @tablet_interviews_today.or(@tablet_interviews_today2)
-      @tablet_interviews_2_weeks_ago = Fctabletinterviewrx.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
-      @tablet_interviews_2_weeks_ago2 = Fctabletinterviewrx.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
+      @tablet_interviews_2_weeks_ago = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
+      @tablet_interviews_2_weeks_ago2 = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
       @tablet_interviews_2_weeks_ago = @tablet_interviews_2_weeks_ago.or(@tablet_interviews_2_weeks_ago2)
-      @tablet_interviews_3_months_ago = Fctabletinterviewrx.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
-      @tablet_interviews_3_months_ago2 = Fctabletinterviewrx.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
+      @tablet_interviews_3_months_ago = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
+      @tablet_interviews_3_months_ago2 = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
       @tablet_interviews_3_months_ago = @tablet_interviews_3_months_ago.or(@tablet_interviews_3_months_ago2)
       create_new_fcafterservice_rx(@tablet_interviews_today)
       create_new_fcafterservice_rx(@tablet_interviews_2_weeks_ago)
@@ -415,9 +413,9 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @end_date = Date.today
     @today = Date.today
 
-    min_age_custinfo = Custinfo.where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(birthyy: nil).order("birthyy desc").first
+    min_age_custinfo = Custinfo.where(ch_cd: ch_cd).where.not(birthyy: nil).order("birthyy desc").first
     @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
-    max_age_custinfo = Custinfo.where("ch_cd LIKE ?", "%#{ch_cd}%").order("birthyy asc").first
+    max_age_custinfo = Custinfo.where(ch_cd: ch_cd).order("birthyy asc").first
     @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
 
     begin
@@ -485,9 +483,9 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     custserial = params[:custserial] if !params[:custserial].blank?
 
     if ch_cd == ""
-      fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("custserial LIKE ?", "%#{custserial}%")
+      fcdata_list = Fcdata.where(ch_cd: ch_cd).where(custserial: custserial)
     else
-      fcdata_list = Fcdata.where("custserial LIKE ?", "%#{custserial}%").where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
+      fcdata_list = Fcdata.where(custserial: custserial).where(ch_cd: ch_cd).where(shop_cd: shop_cd)
     end
 
     temp_serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq

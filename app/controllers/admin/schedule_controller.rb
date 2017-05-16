@@ -31,9 +31,9 @@ class Admin::ScheduleController < Admin::AdminApplicationController
 
     scoped = Fcschedule.all
     if ch_cd == ""
-      scoped = scoped.where("shop_cd LIKE ?", "%#{shop_cd}%").where("ch_cd LIKE ?", "%#{ch_cd}%").where("reserve_yyyy = ?", select_year)
+      scoped = scoped.where(shop_cd: shop_cd).where(ch_cd: ch_cd).where("reserve_yyyy = ?", select_year)
     else
-      scoped = scoped.where("shop_cd LIKE ?", "%#{shop_cd}%").where(ch_cd: ch_cd).where("reserve_yyyy = ?", select_year)
+      scoped = scoped.where(shop_cd: shop_cd).where(ch_cd: ch_cd).where("reserve_yyyy = ?", select_year)
     end
     scoped = scoped.where("reserve_mmdd = ?", select_mmdd)
     scoped = scoped.where("custname LIKE ?", "%#{@search}%")

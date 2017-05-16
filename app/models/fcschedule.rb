@@ -25,7 +25,7 @@ class Fcschedule < ApplicationRecord
     scoped = Fcschedule.where(ch_cd: ch_cd) if ch_cd.present?
     scoped = scoped.where(shop_cd: shop_cd) if shop_cd.present?
     scoped = scoped.where(reserve_yyyy: reserve_yyyy) if reserve_yyyy.present?
-    scoped = scoped.where("reserve_mmdd LIKE ?", "#{reserve_mm}%") if reserve_mm.present?
+    scoped = scoped.where(reserve_mmdd: reserve_mmdd) if reserve_mm.present?
     scoped.order('reserve_mmdd ASC')
   end
 

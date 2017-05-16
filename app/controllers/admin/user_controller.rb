@@ -29,9 +29,9 @@ class Admin::UserController < Admin::AdminApplicationController
     @shop_cd = shop_cd
 
     if ch_cd == ""
-      fcdata_list = Fcdata.where("ch_cd LIKE ?", "%#{ch_cd}%").where("shop_cd LIKE ?", "%#{shop_cd}%")
+      fcdata_list = Fcdata.where(ch_cd: ch_cd).where(shop_cd: shop_cd)
     else
-      fcdata_list = Fcdata.where(ch_cd: ch_cd).where("shop_cd LIKE ?", "%#{shop_cd}%")
+      fcdata_list = Fcdata.where(ch_cd: ch_cd).where(shop_cd: shop_cd)
     end
     custserial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     custserial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1001, 2001).pluck(:custserial).uniq
@@ -46,13 +46,9 @@ class Admin::UserController < Admin::AdminApplicationController
     if params.has_key?(:search) && params[:search].length != 0
       @search = params[:search]
       if ch_cd == ""
-        # @users = scoped.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
-        # @users2 = scoped.where(custserial: custserial_array2).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
-        @users = scoped.where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
-        @users2 = scoped.where("ch_cd LIKE ?", "%#{ch_cd}%").where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
+        @users = scoped.where(ch_cd: ch_cd).where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
+        @users2 = scoped.where(ch_cd: ch_cd).where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
       else
-        # @users = scoped.where(custserial: custserial_array).where(measureno: measureno_array).where(ch_cd: ch_cd).where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
-        # @users2 = scoped.where(custserial: custserial_array2).where(measureno: measureno_array).where(ch_cd: ch_cd).where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
         @users = scoped.where(ch_cd: ch_cd).where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
         @users2 = scoped.where(ch_cd: ch_cd).where("custname LIKE ?", "%#{params[:search]}%").order("lastanaldate desc")
       end
@@ -60,13 +56,9 @@ class Admin::UserController < Admin::AdminApplicationController
     else
       @search = ""
       if ch_cd == ""
-        # @users = scoped.where(custserial: custserial_array).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc")
-        # @users2 = scoped.where(custserial: custserial_array2).where(measureno: measureno_array).where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc")
-        @users = scoped.where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc")
-        @users2 = scoped.where("ch_cd LIKE ?", "%#{ch_cd}%").where.not(lastanaldate: nil).order("lastanaldate desc")
+        @users = scoped.where(ch_cd: ch_cd).where.not(lastanaldate: nil).order("lastanaldate desc")
+        @users2 = scoped.where(ch_cd: ch_cd).where.not(lastanaldate: nil).order("lastanaldate desc")
       else
-        # @users = scoped.where(custserial: custserial_array).where(measureno: measureno_array).where(ch_cd: ch_cd).where.not(lastanaldate: nil).order("lastanaldate desc")
-        # @users2 = scoped.where(custserial: custserial_array2).where(measureno: measureno_array).where(ch_cd: ch_cd).where.not(lastanaldate: nil).order("lastanaldate desc")
         @users = scoped.where(ch_cd: ch_cd).where.not(lastanaldate: nil).order("lastanaldate desc")
         @users2 = scoped.where(ch_cd: ch_cd).where.not(lastanaldate: nil).order("lastanaldate desc")
       end
