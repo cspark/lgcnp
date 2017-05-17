@@ -86,6 +86,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     fcdata_list = scoped
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
+    serial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
     measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     scoped = Fctabletinterview.all
@@ -347,10 +348,12 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
+    serial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
     measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     scoped = Fcinterview.where(custserial: serial_array).where(measureno: measureno_array)
     scoped = scoped.or(Fcinterview.where(custserial: serial_array2).where(measureno: measureno_array))
+    scoped = scoped.or(Fcinterview.where(custserial: serial_array3).where(measureno: measureno_array))
     temp_end_date = @end_date.to_date+1.day
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
@@ -507,6 +510,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     fcdata_list = scoped
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
+    serial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
     measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     Rails.logger.info "scoped.count!!!"
@@ -516,6 +520,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     scoped = Fctabletinterviewrx.where(custserial: serial_array).where(fcdata_id: measureno_array)
     scoped = scoped.or(Fctabletinterviewrx.where(custserial: serial_array2).where(fcdata_id: measureno_array))
+    scoped = scoped.or(Fctabletinterviewrx.where(custserial: serial_array3).where(fcdata_id: measureno_array))
     Rails.logger.info "scoped.count!!!"
     Rails.logger.info scoped.count
 
@@ -534,7 +539,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       @excel_name = ["이름","시리얼","진단 날짜","채널","피부타입","진단으로 나온 솔루션 1","최종으로 선택된 솔루션 1","진단으로 나온 솔루션 2","최종으로 선택된 솔루션 2",
       "맞춤제품 Step1","맞춤제품 Step2","맞춤제품 Step3","구매제품 Step1","구매제품 Step2","구매제품 Step3",
       "A1","A2","A3","B1","B2","B3","B4","B5","B6","C1","D1","D2","D3","D4","D5",
-      "D6","D7","D8","D9","D10","D11","모공 점수","트러블 점수","색소침착 점수","주름 점수","탄력 점수", "건조 점수"]
+      "D6","모공 점수","트러블 점수","색소침착 점수","주름 점수","탄력 점수", "건조 점수"]
     else
       @excel_name = ["이름","시리얼","진단 날짜","채널"]
       @select_filter.each do |filter|

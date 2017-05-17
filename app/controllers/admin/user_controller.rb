@@ -30,22 +30,32 @@ class Admin::UserController < Admin::AdminApplicationController
     @shop_cd = shop_cd
     @select_address = select_address
 
-    scoped = Fcdata.all
-    scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
-    scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
-    fcdata_list = scoped
-    custserial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
-    custserial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1001, 2001).pluck(:custserial).uniq
+    # scoped = Fcdata.all
+    # scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
+    # scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
+    # fcdata_list = scoped
+    # custserial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
+    # custserial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1001, 2001).pluck(:custserial).uniq
     # custserial_array = custserial_array + custserial_array2
-    measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
+    # measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     Rails.logger.info "user index!!!"
     Rails.logger.info ch_cd
 
+
     scoped = Custinfo.where.not(lastanaldate: nil)
+    if !@shop_cd.blank?
+      data_scoped = Fcdata.where(shop_cd: @shop_cd)
+      custserial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
+      custserial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
+      custserial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
+      custserial_array = custserial_array + custserial_array2 + custserial_array3
+
+      scoped = scoped.where(custserial: custserial_array)
+      scoped = scoped.where(shop_cd: @shop_cd)
+    end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
-    scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
     scoped = scoped.where(address: @select_address) if !@select_address.blank?
     @search = ""
     @search = params[:search] if params.has_key?(:search) && params[:search].length != 0

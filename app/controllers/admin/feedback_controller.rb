@@ -35,19 +35,26 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
+    serial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
     measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     Rails.logger.info serial_array.count
     if Rails.env.production? || Rails.env.staging?
       @tablet_interviews_today = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
       @tablet_interviews_today2 = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
+      @tablet_interviews_today3 = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array3).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
       @tablet_interviews_today = @tablet_interviews_today.or(@tablet_interviews_today2)
+      @tablet_interviews_today = @tablet_interviews_today.or(@tablet_interviews_today3)
       @tablet_interviews_2_weeks_ago = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
       @tablet_interviews_2_weeks_ago2 = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
+      @tablet_interviews_2_weeks_ago3 = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array3).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
       @tablet_interviews_2_weeks_ago = @tablet_interviews_2_weeks_ago.or(@tablet_interviews_2_weeks_ago2)
+      @tablet_interviews_2_weeks_ago = @tablet_interviews_2_weeks_ago.or(@tablet_interviews_2_weeks_ago3)
       @tablet_interviews_3_months_ago = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
       @tablet_interviews_3_months_ago2 = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
+      @tablet_interviews_3_months_ago3 = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array3).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
       @tablet_interviews_3_months_ago = @tablet_interviews_3_months_ago.or(@tablet_interviews_3_months_ago2)
+      @tablet_interviews_3_months_ago = @tablet_interviews_3_months_ago.or(@tablet_interviews_3_months_ago3)
     else
       @tablet_interviews_today = Fctabletinterview.where(custserial: serial_array).where(fcdata_id: measureno_array)
       @tablet_interviews_2_weeks_ago = Fctabletinterview.where(custserial: serial_array).where(fcdata_id: measureno_array)
@@ -206,11 +213,14 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     temp_serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     temp_serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
+    temp_serial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
     temp_measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     tablet_interviews = Fctabletinterview.where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array).where.not(before_serum: nil)
     tablet_interviews2 = Fctabletinterview.where(custserial: temp_serial_array2).where(fcdata_id: temp_measureno_array).where.not(before_serum: nil)
+    tablet_interviews3 = Fctabletinterview.where(custserial: temp_serial_array3).where(fcdata_id: temp_measureno_array).where.not(before_serum: nil)
     tablet_interviews = tablet_interviews.or(tablet_interviews2)
+    tablet_interviews = tablet_interviews.or(tablet_interviews3)
     Rails.logger.info tablet_interviews.count
     array = tablet_interviews.pluck(:tablet_interview_id).map(&:to_i).uniq
     temp_after_interviews = Fcafterinterview.where.not(a1: nil).where(tablet_interview_id: array).order("after_interview_id desc")
@@ -363,19 +373,26 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
+    serial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
     measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     Rails.logger.info serial_array.count
     if Rails.env.production? || Rails.env.staging?
       @tablet_interviews_today = Fctabletinterviewrx.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
       @tablet_interviews_today2 = Fctabletinterviewrx.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
+      @tablet_interviews_today3 = Fctabletinterviewrx.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array3).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("uptdate desc")
       @tablet_interviews_today = @tablet_interviews_today.or(@tablet_interviews_today2)
+      @tablet_interviews_today = @tablet_interviews_today.or(@tablet_interviews_today3)
       @tablet_interviews_2_weeks_ago = Fctabletinterviewrx.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
       @tablet_interviews_2_weeks_ago2 = Fctabletinterviewrx.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
+      @tablet_interviews_2_weeks_ago3 = Fctabletinterviewrx.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array3).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 2.weeks).to_s)).order("uptdate desc")
       @tablet_interviews_2_weeks_ago = @tablet_interviews_2_weeks_ago.or(@tablet_interviews_2_weeks_ago2)
+      @tablet_interviews_2_weeks_ago = @tablet_interviews_2_weeks_ago.or(@tablet_interviews_2_weeks_ago3)
       @tablet_interviews_3_months_ago = Fctabletinterviewrx.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
       @tablet_interviews_3_months_ago2 = Fctabletinterviewrx.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array2).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
+      @tablet_interviews_3_months_ago3 = Fctabletinterviewrx.where("ch_cd LIKE ?", "%#{ch_cd}%").where(custserial: serial_array3).where(fcdata_id: measureno_array).where("to_char(to_date(uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("uptdate desc")
       @tablet_interviews_3_months_ago = @tablet_interviews_3_months_ago.or(@tablet_interviews_3_months_ago2)
+      @tablet_interviews_3_months_ago = @tablet_interviews_3_months_ago.or(@tablet_interviews_3_months_ago3)
       create_new_fcafterservice_rx(@tablet_interviews_today)
       create_new_fcafterservice_rx(@tablet_interviews_2_weeks_ago)
       create_new_fcafterservice_rx(@tablet_interviews_3_months_ago)
@@ -512,11 +529,14 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     temp_serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     temp_serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
+    temp_serial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
     temp_measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     tablet_interviews = Fctabletinterviewrx.where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array)
     tablet_interviews2 = Fctabletinterviewrx.where(custserial: temp_serial_array2).where(fcdata_id: temp_measureno_array)
+    tablet_interviews3 = Fctabletinterviewrx.where(custserial: temp_serial_array3).where(fcdata_id: temp_measureno_array)
     tablet_interviews = tablet_interviews.or(tablet_interviews2)
+    tablet_interviews = tablet_interviews.or(tablet_interviews3)
     Rails.logger.info tablet_interviews.count
     array = tablet_interviews.pluck(:tablet_interview_id).map(&:to_i).uniq
     temp_after_interviews = Fcafterinterviewrx.where.not(a1: nil).where(rx_tablet_interview_id: array).order("after_interview_id desc")
