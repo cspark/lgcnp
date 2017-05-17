@@ -29,23 +29,28 @@
         console.log($("#max_3").val());
         console.log($("#max_4").val());
         if ($("#min_1").val() == "" || $("#min_2").val() == "" || $("#min_3").val() == "" || $("#min_4").val() == ""){
+          console.log("1");
           alert("공란을 채워주세요!")
           return
         }
         if ($("#max_1").val() == "" || $("#max_2").val() == "" || $("#max_3").val() == "" || $("#max_4").val() == ""){
+          console.log("2");
           alert("공란을 채워주세요!")
           return
         }
         if ($("#min_1").val() > $("#max_1").val() || $("#min_2").val() > $("#max_2").val() || $("#min_3").val() > $("#max_3").val() || $("#min_4").val() > $("#max_4").val() ){
+          console.log("3");
           alert("유효한 범위를 입력 해 주세요!")
           return
         }
 
         if (parseInt($("#min_1").val()) > 255 || parseInt($("#min_2").val()) > 255 || parseInt($("#min_3").val()) > 255 || parseInt($("#min_4").val()) > 255){
+          console.log("4");
           alert("유효한 범위를 입력 해 주세요!")
           return
         }
         if (parseInt($("#max_1").val()) > 255 || parseInt($("#max_2").val()) > 255 || parseInt($("#max_3").val()) > 255 || parseInt($("#max_4").val()) > 255){
+          console.log("5");
           alert("유효한 범위를 입력 해 주세요!")
           return
         }
