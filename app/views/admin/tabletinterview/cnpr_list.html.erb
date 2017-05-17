@@ -151,6 +151,12 @@
             $('select[id="select_area"]').val('<%= @select_area %>');
           <% end %>
 
+          <% if @overlap.nil? || @overlap == "F" %>
+            $("input:checkbox[name=overlap_check_box]").prop("checked", false);
+          <% else %>
+            $("input:checkbox[name=overlap_check_box]").prop("checked", true);
+          <% end %>
+
           $("#date_init").click(function(){
             $("#start_date").datepicker('setDate', '2017-01-25');
             $("#end_date").datepicker('setDate', '<%= @today %>');
@@ -214,6 +220,11 @@
             }
         });
 
+        var overlap = "T"
+        if (!document.getElementById("overlap").checked) {
+          overlap = "F"
+        }
+
         url = ""
         url += "/admin/cnpr_interview?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
         url += "&select_sex=" + select_sex;
@@ -230,6 +241,7 @@
         url += "&select_area=" + select_area;
         url += "&select_filter=" +filterStr;
         url += "&select_shop=" +$("#select_shop").val();
+        url += "&overlap=" + overlap;
 
         location.href = url;
       }
@@ -303,8 +315,8 @@
         모드 :
         <select class="form-control" id="select_mode">
           <option value="all">전체</option>
-          <option value="Total">종합모드</option>
-          <option value="Makeup">간편모드</option>
+          <option value="Total">종합 모드</option>
+          <option value="Makeup">메이크업 모드</option>
         </select>
 
         측정부위 :
@@ -314,6 +326,9 @@
           <option value="L">좌</option>
           <option value="R">우</option>
         </select>
+
+        <p style="float:left; margin-left: 40px; margin-top: 5px;">중복샷:&nbsp;</p>
+        <input type="checkbox" name="overlap_check_box" value="overlap" id="overlap" style="float:left; margin-top:9px;">
       </div>
 
       <div class="form-inline" style="margin-top:5px;">
@@ -420,11 +435,6 @@
               <th>D4</th>
               <th>D5</th>
               <th>D6</th>
-              <th>D7</th>
-              <th>D8</th>
-              <th>D9</th>
-              <th>D10</th>
-              <th>D11</th>
               <th>모공 점수</th>
               <th>트러블 점수</th>
               <th>색소침착 점수</th>

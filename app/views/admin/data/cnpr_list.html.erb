@@ -139,10 +139,10 @@
             $("input:checkbox[name=select_skin_anxiety2]").prop("checked", true);
           <% end %>
 
-          <% if @overlap.nil? || @overlap == "T" %>
-            $("input:checkbox[name=overlap_check_box]").prop("checked", true);
-          <% else %>
+          <% if @overlap.nil? || @overlap == "F" %>
             $("input:checkbox[name=overlap_check_box]").prop("checked", false);
+          <% else %>
+            $("input:checkbox[name=overlap_check_box]").prop("checked", true);
           <% end %>
 
           $("#start_date").datepicker({

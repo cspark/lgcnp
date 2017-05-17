@@ -441,6 +441,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end_birthmm = params[:end_birthmm]
     select_mode = params[:select_mode]
     select_makeup = params[:select_makeup]
+    overlap = params[:overlap]
     @params_filter = params[:select_filter]
 
     @select_sex = select_sex
@@ -458,6 +459,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @select_makeup = select_makeup
     @select_area = ""
     @select_area = params[:select_area] if !params[:select_area].blank? && params[:select_area] != "all"
+    @overlap = overlap if !overlap.blank?
 
     @is_init = true
     if params[:select_sex].present?
@@ -523,6 +525,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(mmode: @select_mode) if !@select_mode.blank? && @select_mode.downcase != "all"
+    scoped = scoped.where.not(before_overlap: nil) if !@overlap.blank? && @overlap == "T"
+    scoped = scoped.where.not(after_overlap: nil) if !@overlap.blank? && @overlap == "T"
 
     Rails.logger.info "scoped.count!!!"
     Rails.logger.info scoped.count
