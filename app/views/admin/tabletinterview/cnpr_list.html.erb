@@ -445,8 +445,10 @@
         </tr>
       </thead>
       <tbody>
-        <% @tabletinterviews.each do |tabletinterview| %>
-          <%= render partial: "admin/tabletinterview/item_cnpr", locals: { tabletinterview: tabletinterview } %>
+        <% if @tabletinterviews.count > 0 %>
+          <% @tabletinterviews.each do |tabletinterview| %>
+            <%= render partial: "admin/tabletinterview/item_cnpr", locals: { tabletinterview: tabletinterview } %>
+          <% end %>
         <% end %>
       </tbody>
     </table>
