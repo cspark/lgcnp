@@ -28,7 +28,7 @@ class Custinfo < ApplicationRecord
 
   def to_api_hash_for_yanus
     {
-      custserial: custserial.to_i,
+      custserial: custserial,
       ch_cd: ch_cd,
       n_cust_id: n_cust_id,
       measureno: measureno.to_s,
