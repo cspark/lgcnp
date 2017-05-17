@@ -40,7 +40,7 @@
           return
         }
 
-        if ($("#min_1").val() > $("#max_1").val() || $("#min_2").val() > $("#max_2").val() || $("#min_3").val() > $("#max_3").val() || $("#min_4").val() > $("#max_4").val() ){
+        if (parseInt($("#min_1").val()) > parseInt($("#max_1").val()) || parseInt($("#min_2").val()) > parseInt($("#max_2").val()) || parseInt($("#min_3").val()) > parseInt($("#max_3").val()) || parseInt($("#min_4").val()) > parseInt($("#max_4").val()) ){
           alert("유효한 범위를 입력 해 주세요!")
           return
         }
@@ -56,8 +56,6 @@
 
         var min_ip_int = parseInt($("#min_1").val()+$("#min_2").val()+$("#min_3").val()+$("#min_4").val())
         var max_ip_int = parseInt($("#max_1").val()+$("#max_2").val()+$("#max_3").val()+$("#max_4").val())
-        console.log(parseInt($("#min_1").val()+$("#min_2").val()+$("#min_3").val()+$("#min_4").val()));
-        console.log(parseInt($("#max_1").val()+$("#max_2").val()+$("#max_3").val()+$("#max_4").val()));
 
         if (min_ip_int > max_ip_int) {
           alert("유효한 범위를 입력 해 주세요!")
@@ -65,8 +63,6 @@
         }
 
         var formData = new FormData($(this)[0]);
-        console.log($("#min_1").val()+"."+$("#min_2").val()+"."+$("#min_3").val()+"."+$("#min_4").val());
-        console.log($("#max_1").val()+"."+$("#max_2").val()+"."+$("#max_3").val()+"."+$("#max_4").val());
         formData.append("init_low_ip", '<%= @range.low_ip %>');
         formData.append("init_high_ip", '<%= @range.high_ip %>');
         formData.append("low_ip", $("#min_1").val()+"."+$("#min_2").val()+"."+$("#min_3").val()+"."+$("#min_4").val());
