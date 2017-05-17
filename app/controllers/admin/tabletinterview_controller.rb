@@ -20,7 +20,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end_birthmm = params[:end_birthmm]
     select_mode = params[:select_mode]
     select_makeup = params[:select_makeup]
-    select_area = ""
+    select_area = params[:select_area]
     @params_filter = params[:select_filter]
 
     @select_sex = select_sex
@@ -36,7 +36,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @end_birthmm = end_birthmm
     @select_mode = select_mode
     @select_makeup = select_makeup
-    @select_area = params[:select_area] if !params[:select_area].blank? && params[:select_area] != "all"
+    @select_area = select_area
 
     @is_agree_thirdparty_info = params[:is_agree_thirdparty_info] if !params[:is_agree_thirdparty_info].blank?
     @is_init = true
@@ -81,7 +81,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     # if Rails.env.production? || Rails.env.staging?
     is_contain = true
 
-    scoped = Fcdata.where("faceno LIKE ?", "%#{@select_area}%").where(ch_cd: @ch_array)
+    scoped = Fcdata.where(ch_cd: @ch_array)
+    scoped = scoped.where("faceno LIKE ?", "%#{@select_area}%") if !@select_area.blank? && @select_area != "all"
     scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
     fcdata_list = scoped
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
@@ -504,7 +505,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @tabletinterviews = []
     is_contain = true
 
-    scoped = Fcdata.where("faceno LIKE ?", "%#{@select_area}%").where(ch_cd: @ch_array)
+    scoped = Fcdata.where(ch_cd: @ch_array)
+    scoped = scoped.where("faceno LIKE ?", "%#{@select_area}%") if !@select_area.blank? && @select_area != "all"
     scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
     fcdata_list = scoped
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
