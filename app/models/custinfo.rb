@@ -28,10 +28,10 @@ class Custinfo < ApplicationRecord
 
   def to_api_hash_for_yanus
     {
-      custserial: custserial,
+      custserial: custserial.to_i,
       ch_cd: ch_cd,
       n_cust_id: n_cust_id,
-      measureno: measureno.to_i.to_s,
+      measureno: measureno.to_s,
       custname: custname,
       sex: sex,
       age: age,
