@@ -432,4 +432,15 @@ class GenerateTestModel < ApplicationRecord
       end
     end
   end
+
+  def skin_type_error
+    ft = Fctabletinterviewrx.where(before_solution_1: "SKIN_WRINKLE")
+    array = []
+    ft.each do |interview|
+      if interview.before_solution_2 == "SKIN_WRINKLE"
+        array << interview.custserial.to_i
+      end
+    end
+    array = array.uniq
+  end
 end

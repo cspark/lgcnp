@@ -22,6 +22,10 @@
           $('select[id="select_channel"]').val('<%= @ch_cd %>');
         <% end %>
 
+        <% if !@select_address.nil? && @select_address != ""%>
+          $('select[id="select_address"]').val('<%= @select_address %>');
+        <% end %>
+
         <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
           <% if !@shop_cd.nil? && @shop_cd != "" && %>
             document.getElementById("select_shop").value = '<%= @shop_cd %>'
@@ -41,14 +45,17 @@
                 console.log(encodeURI($("#search").val()));
                 if (document.getElementById("select_channel") != null) {
                   var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
+                  var address = document.getElementById("select_address").options[document.getElementById("select_address").selectedIndex].value;
 
                   url = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
                   url += "&select_channel=" +ch_cd
                   url += "&select_shop=" +$("#select_shop").val();
                   url += "&custserial=" + document.getElementById("custserial").value;
+                  url += "&select_address=" +address;
                 } else {
                   url = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
                   url += "&custserial=" + document.getElementById("custserial").value;
+                  url += "&select_address=" +address;
                 }
                 location.href = url;
             }
@@ -64,13 +71,17 @@
         $('#submit').click(function(){
           if (document.getElementById("select_channel") != null) {
             var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
+            var address = document.getElementById("select_address").options[document.getElementById("select_address").selectedIndex].value;
+
             url = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
             url += "&select_channel=" +ch_cd
             url += "&select_shop=" +$("#select_shop").val();
             url += "&custserial=" + document.getElementById("custserial").value;
+            url += "&select_address=" +address;
           } else {
             url = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
             url += "&custserial=" + document.getElementById("custserial").value;
+            url += "&select_address=" +address;
           }
           location.href = url;
         });
@@ -89,6 +100,13 @@
       }
     </script>
     <style>
+    td {
+      width: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .fixed-table-body {
       max-height: 431px;
     }
@@ -98,25 +116,7 @@
         text-align: center !important;
     }
 
-    .width70 {
-      min-width:70px
-    }
-    .width100 {
-      min-width:100px
-    }
-    .width150 {
-      min-width:150px
-    }
-    .width200 {
-      min-width:200px
-    }
-
     th {
-      margin: 0 auto;
-      text-align: center !important;
-    }
-
-    td {
       margin: 0 auto;
       text-align: center !important;
     }
@@ -149,12 +149,35 @@
       <input class="form-control" type="text" id="custserial" style="float:left; width:100px;">
       <% end %>
 
+      <p style="float:left; margin-left: 20px; margin-top: 5px;">거주지:&nbsp;</p>
+      <select class="form-control" id="select_address" style="float:left; margin-left: 5px; width:100px;">
+        <option value="ALL">전체</option>
+        <option value="10">서울특별시</option>
+        <option value="11">인천광역시</option>
+        <option value="12">경기도</option>
+        <option value="13">강원도</option>
+        <option value="14">대전광역시</option>
+        <option value="15">세종특별자치시</option>
+        <option value="16">충청북도</option>
+        <option value="17">충청남도</option>
+        <option value="18">대구광역시</option>
+        <option value="19">경상북도</option>
+        <option value="20">울산광역시</option>
+        <option value="21">부산광역시</option>
+        <option value="22">경상남도</option>
+        <option value="23">광주광역시</option>
+        <option value="24">전라남도</option>
+        <option value="25">전라북도</option>
+        <option value="26">제주도</option>
+        <option value="27">기타</option>
+      </select>
+
       <button style="margin-left: 10px;" class="btn btn-warning" id="submit">조회</button>
       <p style="float:right; margin-right:20px; margin-top:5px;">
         Download:
         <!-- <%= link_to "CSV", admin_user_list_path(format: "csv") %> -->
         <%= link_to "Excel", admin_user_list_path(format: "xlsx", :search => @search,
-        :custserial => @custserial, :select_channel => @ch_cd, :select_shop => @shop_cd, :isExcel => true) %>
+        :custserial => @custserial, :select_channel => @ch_cd, :select_shop => @shop_cd, :select_address => @select_address, :isExcel => true) %>
       </p>
     </div>
     <div id="avr" style="background: #eea29a; padding: 8px;">
@@ -163,18 +186,19 @@
       <table data-toggle="table">
         <thead style="width: 100%;">
           <tr>
-            <th class="width70 text-center">이름</th>
-            <th class="width70">채널</th>
-            <th class="width100">가입날짜</th>
-            <th class="width200">마지막 진단 날짜</th>
+            <th>이름</th>
+            <th>채널</th>
+            <th>가입날짜</th>
+            <th>마지막 진단 날짜</th>
             <th>시리얼</th>
-            <th class="width100">전화번호</th>
+            <th>전화번호</th>
             <th>성별</th>
-            <th class="width150">생년월일</th>
+            <th>생년월일</th>
             <th>개인정보 이용동의</th>
             <th>제 3자 정보 제공 동의</th>
             <th>마케팅 정보 동의</th>
             <th>측정 횟수</th>
+            <th>거주지</th>
           </tr>
         </thead>
         <tbody>

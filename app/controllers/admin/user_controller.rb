@@ -25,8 +25,10 @@ class Admin::UserController < Admin::AdminApplicationController
 
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
     shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
+    select_address = params[:select_address] if !params[:select_address].nil? && params[:select_address] != "ALL"
     @ch_cd = ch_cd
     @shop_cd = shop_cd
+    @select_address = select_address
 
     scoped = Fcdata.all
     scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
@@ -43,6 +45,7 @@ class Admin::UserController < Admin::AdminApplicationController
     scoped = Custinfo.where.not(lastanaldate: nil)
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
+    scoped = scoped.where(address: @select_address) if !@select_address.blank?
     @search = ""
     @search = params[:search] if params.has_key?(:search) && params[:search].length != 0
     scoped = scoped.where("custname LIKE ?", "%#{@search}%") if !@search.blank?

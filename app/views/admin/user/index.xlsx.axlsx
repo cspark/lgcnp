@@ -23,6 +23,6 @@ wb.add_worksheet(name: "User") do |sheet|
 
         sheet.add_row [URI.decode(user.custname), user.uptdate, user.lastanaldate, user.custserial.to_i,
         user.phone, user.sex, user.birthyy+"-"+user.birthmm+"-"+user.birthdd, is_agree_privacy,
-        is_agree_thirdparty, is_agree_marketing, user.measureno.to_i ]
+        is_agree_thirdparty, is_agree_marketing, user.measureno.to_i ], :types => [nil, :string, :string, :integer, :string]
     end
 end

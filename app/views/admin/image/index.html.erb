@@ -161,17 +161,10 @@
     }
 
     td {
-      font-size: 15px;
-    }
-
-    .width70 {
-      min-width:70px
-    }
-    .width100 {
-      min-width:100px
-    }
-    .width170 {
-      min-width:170px
+      width: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     </style>
   </head>
@@ -225,11 +218,11 @@
     <table data-toggle="table" style="width:1130px;">
       <thead style="width: 100%;">
         <tr>
-          <th class="width70 text-center">이름</th>
-          <th class="width170 text-center">분석 일</th>
-          <th class="text-center">채널</th>
-          <th class="text-center">매장</th>
-          <th class="text-center">분석 횟수</th>
+          <th>이름</th>
+          <th>분석 일</th>
+          <th>채널</th>
+          <th>매장</th>
+          <th>분석 횟수</th>
         </tr>
       </thead>
       <tbody>

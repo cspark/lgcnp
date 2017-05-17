@@ -364,6 +364,13 @@
     </script>
 
     <style>
+    td {
+      width: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .fixed-table-body {
       max-height: 280px;
     }
@@ -377,22 +384,6 @@
       font-size: 15px;
       margin: 0 auto;
       text-align: center !important;
-    }
-
-    td {
-      font-size: 15px;
-      margin: 0 auto;
-      text-align: center !important;
-    }
-
-    .width70 {
-      min-width:70px
-    }
-    .width100 {
-      min-width:100px
-    }
-    .width170 {
-      min-width:170px
     }
 
     </style>
@@ -532,12 +523,12 @@
     <table data-toggle="table">
       <thead style="width: 100%;">
         <tr>
-            <th class="width70 text-center">이름</th>
-            <th class="text-center">분석 횟수</th>
-            <th class="text-center">채널</th>
-            <th class="text-center">전면,좌,우측면</th>
-            <th class="width170 text-center">분석 일</th>
-            <th class="width100 text-center">업데이트 일</th>
+            <th>이름</th>
+            <th>분석 횟수</th>
+            <th>채널</th>
+            <th>전면,좌,우측면</th>
+            <th>분석 일</th>
+            <th>업데이트 일</th>
             <% if @select_filter != [] %>
               <% @select_filter.each do |filter| %>
                 <% if filter.include?("mo_1") %>

@@ -256,21 +256,10 @@
     }
 
     td {
-      margin: 0 auto;
-      text-align: center !important;
-    }
-
-    .width70 {
-      min-width:70px
-    }
-    .width100 {
-      min-width:100px
-    }
-    .width150 {
-      min-width:150px
-    }
-    .width200 {
-      min-width:200px
+      width: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     </style>
   </head>
@@ -368,13 +357,13 @@
     <table data-toggle="table">
       <thead style="width: 100%;">
         <tr>
-          <th class="width70">이름</th>
+          <th>이름</th>
           <th>시리얼</th>
-          <th class="width70">채널</th>
+          <th>채널</th>
           <th>측정 부위</th>
-          <th class="width200">분석 일</th>
+          <th>분석 일</th>
           <th>분석 횟수</th>
-          <th class="width150">업데이트 일</th>
+          <th>업데이트 일</th>
           <th>설문문항1</th>
           <th>설문문항2</th>
           <th>설문문항3</th>

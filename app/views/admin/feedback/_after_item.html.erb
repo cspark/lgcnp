@@ -94,9 +94,19 @@
         <% end %>
         <td><%= after_ample_2 %></td>
         <td class="text-center"><%= after_interview.a1.to_i %></td>
+        <% if !after_interview.a1_1.nil? %>
+          <td class="text-center"><%= after_interview.a1_1 %></td>
+        <% else %>
+          <td class="text-center"></td>
+        <% end %>
+
         <td class="text-center"><%= after_interview.a2.to_i %></td>
         <td class="text-center"><%= after_interview.a3.to_i %></td>
-        <td class="text-center"><%= after_interview.a4.to_i %></td>
+        <% if after_interview.order == 0 %>
+          <td class="text-center">-</td>
+        <% else %>
+          <td class="text-center"><%= after_interview.a4.to_i %></td>
+        <% end %>
         <td><%= after_interview.a5 %></td>
       </tr>
     </body>

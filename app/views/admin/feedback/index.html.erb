@@ -90,10 +90,6 @@
         text-align: center !important;
     }
 
-    .width-150 {
-      width: 150px;
-    }
-
     .th-inner {
       width: 160px;
       margin: 0 auto;
@@ -101,14 +97,10 @@
     }
 
     td {
-      margin: 0 auto;
-      text-align: center !important;
-    }
-
-    width200 {
-      width: 200px;
-      margin: 0 auto;
-      text-align: center !important;
+      width: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     </style>
   </head>
@@ -139,7 +131,7 @@
               <tr>
                   <th>이름</th>
                   <th>시리얼</th>
-                  <th class="width200">진단 날짜</th>
+                  <th>진단 날짜</th>
                   <th>전화번호</th>
                   <th>사후 피드백 서비스</th>
                   <th>1차 설문 여부</th>
@@ -162,7 +154,7 @@
             <tr>
                 <th>이름</th>
                 <th>시리얼</th>
-                <th class="width200">진단 날짜</th>
+                <th>진단 날짜</th>
                 <th>전화번호</th>
                 <th>사후 피드백 서비스</th>
                 <th>1차 설문 여부</th>
@@ -185,7 +177,7 @@
             <tr>
                 <th>이름</th>
                 <th>시리얼</th>
-                <th class="width200">진단 날짜</th>
+                <th>진단 날짜</th>
                 <th>전화번호</th>
                 <th>사후 피드백 서비스</th>
                 <th>1차 설문 여부</th>

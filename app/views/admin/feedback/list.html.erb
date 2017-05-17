@@ -214,41 +214,18 @@
       }
     </script>
     <style>
+    td {
+      width: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .fixed-table-body {
       max-height: 236px;
     }
 
-    .text-center {
-        margin: 0 auto;
-        text-align: center !important;
-    }
-
-    .width170 {
-      min-width:170px;
-    }
-
-    .width100 {
-      min-width:100px;
-    }
-
-    .max-width600 {
-      max-width:600px;
-    }
-
-    .width1800 {
-      width:1800px;
-    }
-
-    table.width1800.table.table-hover {
-      width: 1800px;
-    }
-
     th {
-      margin: 0 auto;
-      text-align: center !important;
-    }
-
-    td {
       margin: 0 auto;
       text-align: center !important;
     }
@@ -353,18 +330,19 @@
           총 인원 수 : <%= @count %> / 설문 1의 평균 점수 : <%= @average_a1 %> / 설문 2의 평균 점수 : <%= @average_a2 %> / 설문 3의 평균 점수 : <%= @average_a3 %> / 설문 4의 평균 점수 : <%= @average_a4 %><br>
         </div>
 
-        <table data-toggle="table" class="width1800">
+        <table data-toggle="table" cellspacing="0" cellpadding="0">
           <thead>
             <tr>
-                <th class="text-center">이름</th>
-                <th class="width100">설문 날짜</th>
-                <th class="width170">진단 날짜</th>
+                <th>이름</th>
+                <th>설문 날짜</th>
+                <th>진단 날짜</th>
                 <th>성별</th>
                 <th>나이</th>
-                <th class="width170">베이스</th>
-                <th class="width170">앰플 1</th>
-                <th class="width170">앰플 2</th>
+                <th>베이스</th>
+                <th>앰플 1</th>
+                <th>앰플 2</th>
                 <th>설문 1</th>
+                <th>설문 1 기타의견</th>
                 <th>설문 2</th>
                 <th>설문 3</th>
                 <th>설문 4</th>
