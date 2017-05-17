@@ -33,7 +33,10 @@
                         success: function (returndata) {
                             window.location.href = "/admin/user_list"
                         },
-                        error: function (returndata) {}
+                        error: function (returndata) {
+                          console.log(returndata);
+                          alert("허용된 IP 가 아닙니다. 관리자에게 문의 해 주세요.");
+                        }
                     });
                 });
             });

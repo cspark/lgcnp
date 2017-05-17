@@ -14,16 +14,16 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
 
     username = URI.decode(params[:custname])
     if params.has_key?(:phone)
-      if params.has_key?(:ch_cd) && params[:ch_cd] == "CNPR"
-        user = Custinfo.where.not(ch_cd: "CNP").where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, phone: params[:phone]).order("UPTDATE asc").first
+      if params.has_key?(:ch_cd) && params[:ch_cd] == "CNP"
+        user = Custinfo.where(ch_cd: "CNP").where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, phone: params[:phone]).order("UPTDATE desc").first
       else
-        user = Custinfo.where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, phone: params[:phone]).order("UPTDATE asc").first
+        user = Custinfo.where.not(ch_cd: "CNP").where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, phone: params[:phone]).order("UPTDATE desc").first
       end
     else
-      if params[:ch_cd] == "CNPR"
-        user = Custinfo.where.not(ch_cd: "CNP").where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, ch_cd: params[:ch_cd]).order("UPTDATE asc").first
+      if params.has_key?(:ch_cd) && params[:ch_cd] == "CNP"
+        user = Custinfo.where(ch_cd: "CNP").where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, ch_cd: params[:ch_cd]).order("UPTDATE desc").first
       else
-        user = Custinfo.where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, ch_cd: params[:ch_cd]).order("UPTDATE asc").first
+        user = Custinfo.where.not(ch_cd: "CNP").where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, ch_cd: params[:ch_cd]).order("UPTDATE desc").first
       end
     end
 
