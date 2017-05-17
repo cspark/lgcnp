@@ -52,7 +52,6 @@ class Admin::UserController < Admin::AdminApplicationController
       custserial_array = custserial_array + custserial_array2 + custserial_array3
 
       scoped = scoped.where(custserial: custserial_array)
-      scoped = scoped.where(shop_cd: @shop_cd)
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
