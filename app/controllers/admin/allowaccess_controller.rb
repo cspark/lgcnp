@@ -23,9 +23,14 @@ class Admin::AllowaccessController < Admin::AdminApplicationController
   def update
     range = Allowaccess.where(low_ip: params[:init_low_ip], high_ip: params[:init_high_ip]).first
     Rails.logger.info range.low_ip
-    range.update_ip(low_ip: params[:low_ip], high_ip: params[:high_ip])
+    range.low_ip = params[:low_ip]
+    range.high_ip = params[:high_ip]
 
-    render json: {}, status: :ok
+    if range.save
+      render json: {}, status: :ok
+    else
+      render json: {}, status: :bad_request
+    end
   end
 
   def delete
