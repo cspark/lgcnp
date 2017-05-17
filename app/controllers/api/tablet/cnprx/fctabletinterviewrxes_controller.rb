@@ -236,8 +236,10 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
     if !lcare_user.nil?
       custinfo = Custinfo.where(n_cust_id: lcare_user.n_cust_id).order("UPTDATE desc").first
       if !custinfo.nil?
+        Rails.logger.info "EXIST!!!"
         render json: custinfo.to_api_hash, status: :ok
       else
+        Rails.logger.info "NOT EXIST!!!"
         name = URI.encode(name)
 
         birthyy = params[:birth_year]
