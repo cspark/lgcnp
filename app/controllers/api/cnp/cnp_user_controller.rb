@@ -25,7 +25,7 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
       if params.has_key?(:ch_cd) && params[:ch_cd] == "CNP"
         user = Custinfo.where(ch_cd: "CNP").where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd).order("UPTDATE desc").first
       else
-        user = Custinfo.where.not(ch_cd: "CNP").where(custname: URI.encode(params[:custname]), birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, ch_cd: params[:ch_cd]).order("UPTDATE desc").first
+        user = Custinfo.where.not(ch_cd: "CNP").where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, ch_cd: params[:ch_cd]).order("UPTDATE desc").first
       end
     end
 
