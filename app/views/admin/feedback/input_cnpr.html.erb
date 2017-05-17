@@ -110,7 +110,7 @@
     <%= render "admin/header" %>
     <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
       <div style="background: #b1cbbb; padding: 8px;">
-        <input type="text" id="datepicker" style="float:left; width:200px; margin-top:5px;">
+        <input class="form-control" type="text" id="datepicker" style="float:left; width: 200px;">
           <p style="float:left; margin-left: 20px; margin-top: 5px;">채널 :</p>
           <select class="form-control" id="select_channel" style="float:left; margin-left: 5px; width:200px;">
             <option value="ALL">전체</option>

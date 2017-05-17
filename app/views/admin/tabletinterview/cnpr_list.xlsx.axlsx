@@ -210,8 +210,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           tabletinterview.a_1.to_i, tabletinterview.a_2.to_i, tabletinterview.a_3.to_i,
           tabletinterview.b_1.to_i, tabletinterview.b_2.to_i, tabletinterview.b_3.to_i, tabletinterview.b_4.to_i, tabletinterview.b_5.to_i,tabletinterview.b_6.to_i,
           tabletinterview.c_1.to_i, tabletinterview.d_1.to_i, tabletinterview.d_2.to_i, tabletinterview.d_3.to_i, tabletinterview.d_4.to_i, tabletinterview.d_5.to_i,
-          tabletinterview.d_6.to_i, tabletinterview.d_7.to_i, tabletinterview.d_8.to_i, tabletinterview.d_9.to_i, tabletinterview.d_10.to_i, tabletinterview.d_11.to_i,
-          pr_graph, sb_graph, pp_graph, wr_graph, el_graph, mo_graph]
+          tabletinterview.d_6.to_i, pr_graph, sb_graph, pp_graph, wr_graph, el_graph, mo_graph]
         end
     end
 end

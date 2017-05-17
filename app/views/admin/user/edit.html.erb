@@ -173,7 +173,8 @@
 
     <div style="width:100%; height:400px;">
       <font size="4">
-      (가입날짜 : <%= @user.uptdate %>  마지막 진단 날짜 : <%= @user.lastanaldate %>)<br>
+      가입날짜 : <%= @user.uptdate %><br>
+      마지막 진단 날짜 : <%= @user.lastanaldate %> <br>
       <b>시리얼</b> <%= @user.custserial.to_i %> <br>
       <b>성별</b> <%= @user.sex %> <br>
       <b>측정 횟수</b> <%= Fctabletinterview.where(custserial: @user.custserial).count %> <br>

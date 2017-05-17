@@ -1,7 +1,7 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "User") do |sheet|
     sheet.add_row ["이름", "가입날짜", "마지막 진단 날짜","시리얼", "연락처", "성별" ,"생년월일" ,"개인정보 이용 동의" ,
-    "제3자 정보 제공 동의" ,"마케팅 정보 동의" ,"측정횟수"]
+    "제3자 정보 제공 동의" ,"마케팅 정보 동의" ,"측정횟수", "거주지"]
     @all_users.each do |user|
         if !user.sex.nil? && user.sex.include?("M")
           user.sex = "남"
@@ -21,8 +21,49 @@ wb.add_worksheet(name: "User") do |sheet|
           is_agree_marketing = "O"
         end
 
+        address = ""
+        if !user.address.nil?
+          if user.address == "10"
+            address = "서울특별시"
+          elsif user.address == "11"
+            address = "인천광역시"
+          elsif user.address == "12"
+            address = "경기도"
+          elsif user.address == "13"
+            address = "강원도"
+          elsif user.address == "14"
+            address = "대전광역시"
+          elsif user.address == "15"
+            address = "세종특별자치시"
+          elsif user.address == "16"
+            address = "충청북도"
+          elsif user.address == "17"
+            address = "충청남도"
+          elsif user.address == "18"
+            address = "대구광역시"
+          elsif user.address == "19"
+            address = "경상북도"
+          elsif user.address == "20"
+            address = "울산광역시"
+          elsif user.address == "21"
+            address = "부산광역시"
+          elsif user.address == "22"
+            address = "경상남도"
+          elsif user.address == "23"
+            address = "광주광역시"
+          elsif user.address == "24"
+            address = "전라남도"
+          elsif user.address == "25"
+            address = "전라북도"
+          elsif user.address == "26"
+            address = "제주도"
+          elsif user.address == "27"
+            address = "기타"
+          end
+        end
+
         sheet.add_row [URI.decode(user.custname), user.uptdate, user.lastanaldate, user.custserial.to_i,
         user.phone, user.sex, user.birthyy+"-"+user.birthmm+"-"+user.birthdd, is_agree_privacy,
-        is_agree_thirdparty, is_agree_marketing, user.measureno.to_i ], :types => [nil, :string, :string, :integer, :string]
+        is_agree_thirdparty, is_agree_marketing, user.measureno.to_i, address], :types => [nil, :string, :string, :integer, :string]
     end
 end

@@ -69,6 +69,33 @@
             $("input:checkbox[name=skin_type_device_check_box]").prop("checked", true);
           <% end %>
 
+          // 피부타입 설문
+          <% @skin_type_survey_array.each do |array| %>
+            <% if array.include?("skin_type_gun_boggab") %>
+              $("input:checkbox[value=skin_type_gun_boggab]").prop("checked", true);
+            <% end %>
+
+            <% if array.include?("skin_type_jisung_boghab") %>
+              $("input:checkbox[value=skin_type_jisung_boghab]").prop("checked", true);
+            <% end %>
+
+            <% if array.include?("skin_type_gunsung") %>
+              $("input:checkbox[value=skin_type_gunsung]").prop("checked", true);
+            <% end %>
+
+            <% if array.include?("skin_type_jungsung") %>
+              $("input:checkbox[value=skin_type_jungsung]").prop("checked", true);
+            <% end %>
+
+            <% if array.include?("skin_type_jisung") %>
+              $("input:checkbox[value=skin_type_jisung]").prop("checked", true);
+            <% end %>
+          <% end %>
+
+          <% if @skin_type_survey_array == [] && @custserial.nil? %>
+            $("input:checkbox[name=skin_type_survey_check_box]").prop("checked", true);
+          <% end %>
+
           // 피부고민1
           <% if @select_skin_anxiety1_array.include?("SCORE_ELASTICITY") %>
             $("input:checkbox[id=select_skin_anxiety1_1]").prop("checked", true);
@@ -143,6 +170,10 @@
             $("input:checkbox[name=overlap_check_box]").prop("checked", false);
           <% else %>
             $("input:checkbox[name=overlap_check_box]").prop("checked", true);
+          <% end %>
+
+          <% if !@select_mode.nil? %>
+            $('select[id="select_mode"]').val('<%= @select_mode %>');
           <% end %>
 
           $("#start_date").datepicker({
@@ -250,6 +281,14 @@
           $('select[id="select_area"]').val('<%= @select_area %>');
         <% end %>
 
+        <% if !@select_skin_type_device.nil? %>
+          $('select[id="select_skin_type_survey"]').val('<%= @select_skin_type_survey %>');
+        <% end %>
+
+        <% if !@select_skin_type_survey.nil? %>
+          $('select[id="select_skin_type_survey"]').val('<%= @select_skin_type_survey %>');
+        <% end %>
+
         <% if !@select_senstive.nil? %>
           $('select[id="select_senstive"]').val('<%= @select_senstive %>');
         <% end %>
@@ -296,6 +335,8 @@
         var select_sex = document.getElementById("select_sex").options[document.getElementById("select_sex").selectedIndex].value;
         var select_area = document.getElementById("select_area").options[document.getElementById("select_area").selectedIndex].value;
         var select_senstive = document.getElementById("select_senstive").options[document.getElementById("select_senstive").selectedIndex].value;
+        var select_mode = document.getElementById("select_mode").options[document.getElementById("select_mode").selectedIndex].value;
+
         var select_channel = []
         $('input:checkbox[name="check_box"]').each(function() {
             if(this.checked){
@@ -306,6 +347,12 @@
         $('input:checkbox[name="skin_type_device_check_box"]').each(function() {
             if(this.checked){
               select_skin_type_device.push(this.value)
+            }
+        });
+        var select_skin_type_survey = []
+        $('input:checkbox[name="skin_type_survey_check_box"]').each(function() {
+            if(this.checked){
+              select_skin_type_survey.push(this.value)
             }
         });
         var select_skin_anxiety1 = []
@@ -340,11 +387,13 @@
         url += "&select_channel=" + select_channel;
         url += "&select_area=" + select_area;
         url += "&select_skin_type_device=" + select_skin_type_device;
+        url += "&select_skin_type_survey=" + select_skin_type_survey;
         url += "&select_senstive=" + select_senstive;
         url += "&select_skin_anxiety1=" + select_skin_anxiety1;
         url += "&select_skin_anxiety2=" + select_skin_anxiety2;
         url += "&overlap=" + overlap;
         url += "&select_filter=" +filterStr;
+        url += "&select_mode=" + select_mode;
 
         location.href = url;
       }
@@ -411,7 +460,7 @@
           :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial, :measureno => @measureno,
           :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
           :select_area => @select_area,
-          :select_skin_type_device => @select_skin_type_device, :select_senstive => @select_senstive,
+          :select_skin_type_device => @select_skin_type_device, :select_skin_type_survey => @select_skin_type_survey, :select_senstive => @select_senstive,
           :select_skin_anxiety1 => @select_skin_anxiety1, :select_skin_anxiety2 => @select_skin_anxiety2, :select_filter => @params_filter,
           :select_channel => @ch_cd, :select_shop => @shop_cd, :isExcel => true) %>
         </p>
@@ -432,6 +481,13 @@
           <option value="all">전체</option>
           <option value="F">여자</option>
           <option value="M">남자</option>
+        </select>
+
+        모드 :
+        <select class="form-control" id="select_mode">
+          <option value="all">전체</option>
+          <option value="Total">종합 모드</option>
+          <option value="Makeup">메이크업 모드</option>
         </select>
 
         측정부위 :
@@ -455,6 +511,18 @@
         <input type="checkbox" name="skin_type_device_check_box" value="t_zone_boghab" id="t_zone_boghab" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">U존 복합&nbsp;</p>
         <input type="checkbox" name="skin_type_device_check_box" value="u_zone_boghab" id="u_zone_boghab" style="float:left; margin-top:9px;">
+
+        <p style="float:left; margin-left: 40px; margin-top: 5px;">피부타입(설문):&nbsp;</p>
+        <p style="float:left; margin-left: 5px; margin-top: 5px;">건복합성&nbsp;</p>
+        <input type="checkbox" name="skin_type_survey_check_box" value="skin_type_gun_boggab" id="skin_type_gun_boggab" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">지복합성&nbsp;</p>
+        <input type="checkbox" name="skin_type_survey_check_box" value="skin_type_jisung_boghab" id="skin_type_jisung_boghab" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">건성&nbsp;</p>
+        <input type="checkbox" name="skin_type_survey_check_box" value="skin_type_gunsung" id="skin_type_gunsung" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">중성&nbsp;</p>
+        <input type="checkbox" name="skin_type_survey_check_box" value="skin_type_jungsung" id="skin_type_jungsung" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">지성&nbsp;</p>
+        <input type="checkbox" name="skin_type_survey_check_box" value="skin_type_jisung" id="skin_type_jisung" style="float:left; margin-top:9px;">
 
         <p style="float:left; margin-left: 40px; margin-top: 5px;">민감성:&nbsp;</p>
         <select class="form-control" id="select_senstive" style="float:left;">

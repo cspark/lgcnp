@@ -132,11 +132,11 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           begin
             if !tabletinterview.before_made_cosmetic.nil?
               if tabletinterview.before_made_cosmetic.include?("deep humect")
-                before_made_cosmetic = "딥 휴멕트 세럼"
+                before_made_cosmetic = "딥 휴멕트 세럼 Ex"
               elsif tabletinterview.before_made_cosmetic.include?("skin control")
-                before_made_cosmetic = "스킨 컨트롤 세럼"
+                before_made_cosmetic = "스킨 컨트롤 세럼 Ex"
               elsif tabletinterview.before_made_cosmetic.include?("rebalencing")
-                before_made_cosmetic = "리밸런싱 세럼"
+                before_made_cosmetic = "리밸런싱 세럼 Ex"
               else
                 before_made_cosmetic = tabletinterview.before_made_cosmetic
               end
@@ -147,11 +147,11 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           begin
             if !tabletinterview.after_made_cosmetic.nil?
               if tabletinterview.after_made_cosmetic.include?("deep humect")
-                after_made_cosmetic = "딥 휴멕트 세럼"
+                after_made_cosmetic = "딥 휴멕트 세럼 Ex"
               elsif tabletinterview.after_made_cosmetic.include?("skin control")
-                after_made_cosmetic = "스킨 컨트롤 세럼"
+                after_made_cosmetic = "스킨 컨트롤 세럼 Ex"
               elsif tabletinterview.after_made_cosmetic.include?("rebalencing")
-                after_made_cosmetic = "리밸런싱 세럼"
+                after_made_cosmetic = "리밸런싱 세럼 Ex"
               else
                 after_made_cosmetic = tabletinterview.after_made_cosmetic
               end
@@ -236,11 +236,11 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           end
           if !fcdata.nil?
             fcdata = fcdata.to_api_hash_for_admin
-            pr_graph = fcdata[:pr_graph].to_i
-            sb_graph = fcdata[:sb_graph].to_i
-            pp_graph = fcdata[:pp_graph].to_i
-            wr_graph = fcdata[:wr_graph].to_i
-            el_graph = fcdata[:el_graph].to_i
+            pr_graph = fcdata[:pr_graph].to_i+1
+            sb_graph = fcdata[:sb_graph].to_i+1
+            pp_graph = fcdata[:pp_graph].to_i+1
+            wr_graph = fcdata[:wr_graph].to_i+1
+            el_graph = fcdata[:el_graph].to_i+1
           else
             pr_graph = ""
             sb_graph = ""

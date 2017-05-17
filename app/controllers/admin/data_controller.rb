@@ -159,12 +159,6 @@ class Admin::DataController < Admin::AdminApplicationController
       end
     end
 
-    Rails.logger.info "@skin_type_survey_array!!!!"
-    Rails.logger.info @skin_type_survey_array
-    Rails.logger.info @select_skin_anxiety1_array
-    Rails.logger.info @select_skin_anxiety2_array
-    Rails.logger.info @select_skin_type_device_final
-    Rails.logger.info @ch_array
     if @select_skin_anxiety1_array.blank? || @skin_type_survey_array.blank?
       serial_array = Fctabletinterview.where(before_solution_1: ["!!"]).pluck(:custserial).uniq
     else
@@ -980,10 +974,12 @@ class Admin::DataController < Admin::AdminApplicationController
     end_birthmm = params[:end_birthmm]
     select_area = params[:select_area]
     select_skin_type_device = params[:select_skin_type_device]
+    select_skin_type_survey = params[:select_skin_type_survey]
     select_senstive = params[:select_senstive]
     select_skin_anxiety1 = params[:select_skin_anxiety1]
     select_skin_anxiety2 = params[:select_skin_anxiety2]
     overlap = params[:overlap]
+    select_mode = params[:select_mode]
     @params_filter = params[:select_filter]
 
     @select_sex = select_sex
@@ -1003,7 +999,9 @@ class Admin::DataController < Admin::AdminApplicationController
     @select_skin_anxiety1 = select_skin_anxiety1
     @select_skin_anxiety2 = select_skin_anxiety2
     @select_skin_type_device = params[:select_skin_type_device]
+    @select_skin_type_survey = params[:select_skin_type_survey]
     @overlap = overlap if !overlap.blank?
+    @select_mode = select_mode
 
     @is_init = true
     if params[:select_sex].present?
@@ -1036,6 +1034,26 @@ class Admin::DataController < Admin::AdminApplicationController
       end
     end
 
+    @skin_type_survey_array = []
+    Rails.logger.info "@select_senstive!!!!"
+    Rails.logger.info @select_senstive
+    if !select_skin_type_survey.blank?
+      if @select_senstive == "all"
+        select_skin_type_survey.split(",").each do |skin_type|
+          @skin_type_survey_array.push(skin_type)
+          @skin_type_survey_array.push(skin_type+"_senstive")
+        end
+      elsif @select_senstive == "yes"
+        select_skin_type_survey.split(",").each do |skin_type|
+          @skin_type_survey_array.push(skin_type+"_senstive")
+        end
+      else
+        select_skin_type_survey.split(",").each do |skin_type|
+          @skin_type_survey_array.push(skin_type)
+        end
+      end
+    end
+
     @select_skin_anxiety1_array = []
     if !select_skin_anxiety1.blank?
       select_skin_anxiety1.split(",").each do |anxiety|
@@ -1061,10 +1079,10 @@ class Admin::DataController < Admin::AdminApplicationController
       min_age_custinfo = Custinfo.where(ch_cd: "CNPR").where.not(birthyy: nil).order("birthyy desc").first
       max_age_custinfo = Custinfo.where(ch_cd: "CNPR").order("birthyy asc").first
     end
-    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
-    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
-    @min_birthyy = min_age_custinfo.birthyy
-    @max_birthyy = max_age_custinfo.birthyy
+    @min_age = 11
+    @max_age = 100
+    @min_birthyy = 1900
+    @max_birthyy = 2000
     @min_birthmm = 1
     @max_birthmm = 12
 
@@ -1094,16 +1112,16 @@ class Admin::DataController < Admin::AdminApplicationController
     Rails.logger.info @select_skin_type_device_final
     Rails.logger.info @ch_array
 
-    if @select_skin_anxiety1_array.blank?
+    if @select_skin_anxiety1_array.blank? || @skin_type_survey_array.blank?
       serial_array = Fctabletinterviewrx.where(before_solution_1: ["!!"]).pluck(:custserial).uniq
     else
-      serial_array = Fctabletinterviewrx.where(before_solution_1: @select_skin_anxiety1_array).pluck(:custserial).uniq
+      serial_array = Fctabletinterviewrx.where(before_solution_1: @select_skin_anxiety1_array).where(skin_type: @skin_type_survey_array).pluck(:custserial).uniq
     end
 
-    if @select_skin_anxiety2_array.blank?
+    if @select_skin_anxiety2_array.blank? || @skin_type_survey_array.blank?
       serial_array2 = Fctabletinterviewrx.where(before_solution_2: ["!!"]).pluck(:custserial).uniq
     else
-      serial_array2 = Fctabletinterviewrx.where(before_solution_2: @select_skin_anxiety2_array).pluck(:custserial).uniq
+      serial_array2 = Fctabletinterviewrx.where(before_solution_2: @select_skin_anxiety2_array).where(skin_type: @skin_type_survey_array).pluck(:custserial).uniq
     end
     serial_array = serial_array & serial_array2
 
@@ -1399,15 +1417,20 @@ class Admin::DataController < Admin::AdminApplicationController
         #   end
         # end
 
-        # if !@overlap.blank? && @overlap == "T"
-        #   if fctabletinterview.before_solution_1 != fctabletinterview.before_solution_2
-        #     is_contain = false
-        #   end
-        # elsif !@overlap.blank? && @overlap == "F"
-        #   if fctabletinterview.before_solution_1 == fctabletinterview.before_solution_2
-        #     is_contain = false
-        #   end
-        # end
+        if !@select_mode.blank? && @select_mode != "all"
+          if fctabletinterview.mmode != @select_mode
+            is_contain = false
+          end
+        end
+
+        if !@overlap.blank? && @overlap == "T"
+          if fctabletinterview.before_overlap.nil?
+            is_contain = false
+          end
+          if fctabletinterview.after_overlap.nil?
+            is_contain = false
+          end
+        end
       end
 
       if is_contain == true

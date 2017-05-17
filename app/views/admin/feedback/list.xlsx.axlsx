@@ -1,10 +1,12 @@
 
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "Feedback") do |sheet|
-    sheet.add_row ["이름","설문시기","진단 날짜","성별","나이","베이스","앰플1","앰플2","설문1","설문2","설문3","설문4","기타의견"]
+    sheet.add_row ["이름","시리얼","설문시기","진단 날짜","성별","나이","베이스","앰플1","앰플2","설문1","설문1의 기타의견","설문2","설문3","설문4","기타의견"]
     @after_interviews_excel.each do |after_interview|
         custinfo = Custinfo.where(custserial: after_interview.custserial).first
         tabletinterview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first
+        fcdata = Fcdata.where(custserial: tabletinterview.custserial.to_i).where(measureno: tabletinterview.fcdata_id).first
+
         if after_interview.order == 0
           order = "당일 설문"
         elsif after_interview.order == 1
@@ -56,7 +58,17 @@ wb.add_worksheet(name: "Feedback") do |sheet|
          custname = ""
         end
 
-        sheet.add_row [custname, order, tabletinterview.uptdate, sex, custinfo.age,
-        after_serum, after_ample_1, after_ample_2, after_interview.a1.to_i, after_interview.a2.to_i, after_interview.a3.to_i, after_interview.a4.to_i, after_interview.a5]
+        a4 = "-"
+        if after_interview.order != 0
+          a4 = after_interview.a4.to_i
+        end
+
+        shop_cd = ""
+        if !fcdata.shop_cd.nil?
+          shop_cd = fcdata.shop_cd
+        end
+
+        sheet.add_row [custname, tabletinterview.custserial.to_i, order, tabletinterview.uptdate, sex, custinfo.age, shop_cd,
+        after_serum, after_ample_1, after_ample_2, after_interview.a1.to_i, after_interview.a1_1, after_interview.a2.to_i, after_interview.a3.to_i, a4, after_interview.a5]
     end
 end

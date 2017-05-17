@@ -110,8 +110,8 @@
     <%= render "admin/header" %>
     <div style="background: #b1cbbb; padding: 8px;">
       <div class="form-inline">
-        <input type="text" name="email" id="email" placeholder="이메일 검색" style="width: 200px;">
-        채널 :
+        <input class="form-control" type="text" name="email" id="email" placeholder="이메일 검색" style="float:left; width: 150px;">
+        <font style="margin-left:10px;">채널 :<font>
         <select class="form-control" id="ch_cd">
           <option value="all">전체</option>
           <option value="CNP">CNP</option>
@@ -121,7 +121,7 @@
           <option value="BEAU">보떼</option>
           <option value="ONEP">방판</option>
         </select>
-        매장 :
+        <font style="margin-left:10px;">매장 :<font>
         <input type="text" name="shop_cd" id="shop_cd" placeholder="매장코드 검색" style="width: 200px;">
         <button class="btn btn-warning" id="submit">조회</button>
 

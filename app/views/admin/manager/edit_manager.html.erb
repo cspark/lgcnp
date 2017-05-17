@@ -88,10 +88,10 @@
 
         <% if @admin_user.role != "admin" %>
         <font>채널 코드</font>
-        <input class="form-control" type="text" id="ch_cd" style="width:200px;">
+        <input class="form-control" type="text" id="ch_cd" style="width:200px;" readonly="">
 
         <font>매장 코드</font>
-        <input class="form-control" type="text" id="shop_cd" style="width:200px;">
+        <input class="form-control" type="text" id="shop_cd" style="width:200px;" readonly="">
         <% end %>
         <center>
           <button class="btn btn-warning" id="submit">수정</button>
