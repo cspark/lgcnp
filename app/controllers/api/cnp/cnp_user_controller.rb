@@ -28,11 +28,8 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
     end
 
     if !user.nil?
-      Rails.logger.info "EXIST!!!"
-      Rails.logger.info user.to_api_hash_for_yanus
       render json: user.to_api_hash_for_yanus, status: :ok
     else
-      Rails.logger.info "NOT EXIST!!!"
       render :text => "Custinfo is not exist!!!", status: 204
     end
   end
