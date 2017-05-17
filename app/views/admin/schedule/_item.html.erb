@@ -23,11 +23,11 @@
               else
                 tempUserName += "*"
             }
-            $('#name_<%= data.custname %>_<%= data.reserve_hhmm %>').append(tempUserName);
+            $('#name_<%= data.reserve_mmdd %>_<%= data.reserve_hhmm %>').append(tempUserName);
           }
           catch(err)
           {
-            $('#name_<%= data.custname %>_<%= data.reserve_hhmm %>').append('<%= data.custname %>');
+            $('#name_<%= data.reserve_mmdd %>_<%= data.reserve_hhmm %>').append('<%= data.custname %>');
           }
 
           try
@@ -67,7 +67,7 @@
       <% mmdd = data.reserve_mmdd[0, 2] + "-" +data.reserve_mmdd[2, 4]%>
       <% hhmm = data.reserve_hhmm[0, 2] + ":" +data.reserve_hhmm[2, 4]%>
       <tr class="table_tr text-center" id="<%= data.ch_cd %>/<%= data.shop_cd %>/<%= data.reserve_yyyy %>/<%= data.reserve_mmdd %>/<%= data.reserve_hhmm %>">
-        <td id="name_<%= data.custname %>_<%= data.reserve_hhmm %>"></td>
+        <td id="name_<%= data.reserve_mmdd %>_<%= data.reserve_hhmm %>"></td>
         <td><%= data.ch_cd %></td>
         <td><%= data.shop_cd %></td>
         <td><%= data.reserve_yyyy %>-<%= mmdd %> , <%= hhmm %></td>
