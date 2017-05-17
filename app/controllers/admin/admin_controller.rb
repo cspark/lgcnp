@@ -38,7 +38,9 @@ class Admin::AdminController < Admin::AdminApplicationController
       Rails.logger.info high
       Rails.logger.info ip
 
-      allow_access = "true" if (low..high)===ip
+      if ip >= low && ip <= high
+        allow_access = "true"
+      end
     end
     Rails.logger.info "allow!!!"
     Rails.logger.info allow_access
