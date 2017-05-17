@@ -237,6 +237,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
       custinfo = Custinfo.where(n_cust_id: lcare_user.n_cust_id).order("UPTDATE desc").first
       if !custinfo.nil?
         Rails.logger.info "EXIST!!!"
+        Rails.logger.info custinfo.custserial.to_i
         render json: custinfo.to_api_hash, status: :ok
       else
         Rails.logger.info "NOT EXIST!!!"
