@@ -216,80 +216,77 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   end
 
   # before
-  # def find_lcare_user
-  #   lcare_user = LcareUser.where(cust_hnm: params[:cust_hnm], birth_year: params[:birth_year], birth_mmdd: params[:birth_mmdd], cell_phnno: params[:cell_phnno], u_cust_yn: "Y").first
-  #   if !lcare_user.nil?
-  #     render json: lcare_user.to_api_hash, status: :ok
-  #   else
-  #     render json: "", status: 404
-  #   end
-  # end
-
-  # after
   def find_lcare_user
-    name = params[:cust_hnm]
-    Rails.logger.info "find_lcare_user!!!"
-    Rails.logger.info name
-    Rails.logger.info URI.encode(name)
-    lcare_user = LcareUser.where(cust_hnm: name, birth_year: params[:birth_year], birth_mmdd: params[:birth_mmdd], cell_phnno: params[:cell_phnno], u_cust_yn: "Y").first
-
+    lcare_user = LcareUser.where(cust_hnm: params[:cust_hnm], birth_year: params[:birth_year], birth_mmdd: params[:birth_mmdd], cell_phnno: params[:cell_phnno], u_cust_yn: "Y").first
     if !lcare_user.nil?
-      custinfo = Custinfo.where(n_cust_id: lcare_user.n_cust_id).order("UPTDATE desc").first
-      if !custinfo.nil?
-        Rails.logger.info "EXIST!!!"
-        Rails.logger.info custinfo.custserial.to_i
-        custinfo.phone = params[:cell_phnno]
-        custinfo.save
-        render json: custinfo.to_api_hash, status: :ok
-      else
-        Rails.logger.info "NOT EXIST!!!"
-        name = URI.encode(name)
-
-        birthyy = params[:birth_year]
-        birthmm = params[:birth_mmdd][0,2]
-        birthdd = params[:birth_mmdd][2,4]
-        phone = params[:cell_phnno]
-        age = params[:age]
-
-        n_cust_id = lcare_user.n_cust_id
-        sex = lcare_user.sex_cd
-        Rails.logger.info lcare_user.sex_cd
-
-        time = Time.now
-        uptdate = time.strftime("%Y/%m/%d")
-
-        custinfo = Custinfo.new
-        custinfo.custserial = Custinfo.all.order('custserial ASC').last.custserial + 1
-
-        ch_cd = "CNPR"
-        if params.has_key?(:ch_cd)
-          ch_cd = params[:ch_cd]
-        end
-
-        custinfo.ch_cd = ch_cd
-        custinfo.custname = name
-        custinfo.is_agree_privacy = "T"
-        custinfo.birthyy = birthyy
-        custinfo.birthmm = birthmm
-        custinfo.birthdd = birthdd
-        custinfo.phone = phone
-        custinfo.uptdate = uptdate
-        custinfo.n_cust_id = n_cust_id
-        custinfo.measureno = "0"
-        custinfo.sex = sex
-        custinfo.age = age
-
-        # custinfo.save
-        if custinfo.save
-          render json: custinfo.to_api_hash, status: 200
-        else
-          render json: "", status: 404
-        end
-      end
+      render json: lcare_user.to_api_hash, status: :ok
     else
       render json: "", status: 404
     end
   end
+
+  # after
+  # def find_lcare_user
+  #   name = params[:cust_hnm]
+  #   Rails.logger.info "find_lcare_user!!!"
+  #   Rails.logger.info name
+  #   Rails.logger.info URI.encode(name)
+  #   lcare_user = LcareUser.where(cust_hnm: name, birth_year: params[:birth_year], birth_mmdd: params[:birth_mmdd], cell_phnno: params[:cell_phnno], u_cust_yn: "Y").first
+  #
+  #   if !lcare_user.nil?
+  #     custinfo = Custinfo.where(n_cust_id: lcare_user.n_cust_id).order("UPTDATE desc").first
+  #     if !custinfo.nil?
+  #       custinfo.phone = params[:cell_phnno]
+  #       custinfo.save
+  #       render json: custinfo.to_api_hash, status: :ok
+  #     else
+  #       Rails.logger.info "NOT EXIST!!!"
+  #       name = URI.encode(name)
+  #
+  #       birthyy = params[:birth_year]
+  #       birthmm = params[:birth_mmdd][0,2]
+  #       birthdd = params[:birth_mmdd][2,4]
+  #       phone = params[:cell_phnno]
+  #       age = params[:age]
+  #
+  #       n_cust_id = lcare_user.n_cust_id
+  #       sex = lcare_user.sex_cd
+  #       Rails.logger.info lcare_user.sex_cd
+  #
+  #       time = Time.now
+  #       uptdate = time.strftime("%Y/%m/%d")
+  #
+  #       custinfo = Custinfo.new
+  #       custinfo.custserial = Custinfo.all.order('custserial ASC').last.custserial + 1
+  #
+  #       ch_cd = "CNPR"
+  #       if params.has_key?(:ch_cd)
+  #         ch_cd = params[:ch_cd]
+  #       end
+  #
+  #       custinfo.ch_cd = ch_cd
+  #       custinfo.custname = name
+  #       custinfo.is_agree_privacy = "T"
+  #       custinfo.birthyy = birthyy
+  #       custinfo.birthmm = birthmm
+  #       custinfo.birthdd = birthdd
+  #       custinfo.phone = phone
+  #       custinfo.uptdate = uptdate
+  #       custinfo.n_cust_id = n_cust_id
+  #       custinfo.measureno = "0"
+  #       custinfo.sex = sex
+  #       custinfo.age = age
+  #
+  #       if custinfo.save
+  #         render json: custinfo.to_api_hash, status: 200
+  #       else
+  #         render json: "", status: 404
+  #       end
+  #     end
+  #   else
+  #     render json: "", status: 404
+  #   end
+  # end
 
   def find_n_cust_id
     user = Custinfo.where(n_cust_id: params[:n_cust_id]).where(ch_cd: params[:ch_cd]).first

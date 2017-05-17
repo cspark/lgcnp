@@ -185,6 +185,10 @@
           $('#filter-btn').click(function(){
             window.open("/admin/tabletinterview/cnpr_filter_check", "/admin/tabletinterview/filter_check", "scrollbars=1,resizable=1,height=650,width=600");
           });
+
+          $('#show_cnpr_interview').click(function(){
+            window.open("/admin/tabletinterview/show_cnpr_interview", "/admin/tabletinterview/show_cnpr_interview", "scrollbars=1,resizable=1,height=650,width=550");
+          });
       });
       function selectFilter(select_filter){
         filterStr = select_filter
@@ -292,6 +296,7 @@
           <option value="F">여자</option>
           <option value="M">남자</option>
         </select>
+        <button class="btn btn-warning" style="float:right; margin-right:20px;" id="show_cnpr_interview">설문조사</button>
       </div>
 
       <div class="form-inline" style="margin-top:5px;">

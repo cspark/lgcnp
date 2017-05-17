@@ -638,6 +638,15 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end
   end
 
+  def show_cnp_interview
+  end
+
+  def show_beau_interview
+  end
+
+  def show_cnpr_interview
+  end
+
   private
   def permitted_params
     params.permit(:memo)

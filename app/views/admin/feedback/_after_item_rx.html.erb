@@ -41,9 +41,11 @@
     <body>
       <% custinfo = Custinfo.where(custserial: after_interview.custserial).first %>
       <% tabletinterview = Fctabletinterviewrx.where(tablet_interview_id: after_interview.rx_tablet_interview_id).first %>
+      <% fcdata = Fcdata.where(custserial: tabletinterview.custserial.to_i).where(measureno: tabletinterview.fcdata_id).first %>
 
       <tr class="table_tr" id="<%= custinfo.custserial.to_i %>/<%= after_interview.after_interview_id.to_i %>">
         <td id="name_<%= user.custserial.to_i %>_<%= tabletinterview.uptdate %>_<%= after_interview.order.to_i %>"></td>
+        <td class="text-center"><%= tabletinterview.custserial.to_i %></td>
         <% if after_interview.order == 0 %>
           <td class="text-center">당일 설문</td>
         <% elsif after_interview.order == 1 %>
@@ -58,6 +60,11 @@
         <% end %>
         <td class="text-center"><%= sex %></td>
         <td class="text-center"><%= custinfo.age %></td>
+        <% if !fcdata.shop_cd.nil? %>
+          <td class="text-center"><%= fcdata.shop_cd %></td>
+        <% else %>
+          <td class="text-center"></td>
+        <% end %>
         <% if !tabletinterview.recommand_program_step_1.nil? %>
           <td><%= URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," ") %></td>
         <% else %>
