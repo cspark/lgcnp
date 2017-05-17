@@ -17,19 +17,21 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
       if params.has_key?(:ch_cd) && params[:ch_cd] == "CNP"
         user = Custinfo.where(ch_cd: "CNP").where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, phone: params[:phone]).order("UPTDATE desc").first
       else
-        user = Custinfo.where.not(ch_cd: "CNP").where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, phone: params[:phone]).order("UPTDATE desc").first
+        user = Custinfo.where.not(ch_cd: "CNP").where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, phone: params[:phone], ch_cd: params[:ch_cd]).order("UPTDATE desc").first
       end
     else
       if params.has_key?(:ch_cd) && params[:ch_cd] == "CNP"
-        user = Custinfo.where(ch_cd: "CNP").where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, ch_cd: params[:ch_cd]).order("UPTDATE desc").first
+        user = Custinfo.where(ch_cd: "CNP").where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd).order("UPTDATE desc").first
       else
         user = Custinfo.where.not(ch_cd: "CNP").where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, ch_cd: params[:ch_cd]).order("UPTDATE desc").first
       end
     end
 
     if !user.nil?
+      Rails.logger.info "EXIST!!!"
       render json: user.to_api_hash_for_yanus, status: :ok
     else
+      Rails.logger.info "NOT EXIST!!!"
       render :text => "Custinfo is not exist!!!", status: 204
     end
   end
