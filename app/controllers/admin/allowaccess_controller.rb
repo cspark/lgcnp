@@ -25,11 +25,7 @@ class Admin::AllowaccessController < Admin::AdminApplicationController
     Rails.logger.info range.low_ip
     range.update_ip(low_ip: params[:low_ip], high_ip: params[:high_ip])
 
-    if range.save
-      render json: {}, status: :ok
-    else
-      render json: {}, status: :bad_request
-    end
+    render json: {}, status: :ok
   end
 
   def delete
