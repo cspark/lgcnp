@@ -12,9 +12,6 @@ class Api::Cnp::CnpUserController < Api::ApplicationController
       birthdd = params[:birthdd]
     end
 
-    Rails.logger.info params[:custname]
-    Rails.logger.info URI.decode(params[:custname])
-
     if params.has_key?(:phone)
       if params.has_key?(:ch_cd) && params[:ch_cd] == "CNP"
         user = Custinfo.where(ch_cd: "CNP").where(custname: params[:custname], birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, phone: params[:phone]).order("UPTDATE desc").first
