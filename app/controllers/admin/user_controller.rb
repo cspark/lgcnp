@@ -45,7 +45,7 @@ class Admin::UserController < Admin::AdminApplicationController
 
     scoped = Custinfo.where.not(lastanaldate: nil)
     if !@shop_cd.blank?
-      data_scoped = Fcdata.where(shop_cd: @shop_cd)
+      fcdata_list = Fcdata.where(shop_cd: @shop_cd)
       custserial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
       custserial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
       custserial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
