@@ -238,7 +238,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
       if !custinfo.nil?
         Rails.logger.info "EXIST!!!"
         Rails.logger.info custinfo.custserial.to_i
-        custinfo.phone = phone
+        custinfo.phone = params[:cell_phnno]
         custinfo.save
         render json: custinfo.to_api_hash, status: :ok
       else

@@ -203,7 +203,7 @@
           </li>
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
           <li id="fcavg_list"><a class="top-list" id="point_avg_list" href="#">연령별 성별 평균</a></li>
-          <li class="dropdown dropbtn"><a class="top-list" id="point_fcdata_list" href="#">야누스 측정 데이터</a>
+          <li class="dropdown dropbtn"><a class="top-list" id="point_data_list" href="#">야누스 측정 데이터</a>
             <div class="dropdown-content">
               <a id="fcdata_list_cnp" href="#">CNP</a>
               <a id="fcdata_list_beau" href="#">보떼</a>
