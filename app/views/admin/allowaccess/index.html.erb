@@ -116,8 +116,10 @@
           </tr>
         </thead>
         <tbody>
-          <% @range.each do |range| %>
-          <%= render partial: "admin/allowaccess/item", locals: { range: range } %>
+          <% if @range.count > 0 %>
+            <% @range.each do |range| %>
+            <%= render partial: "admin/allowaccess/item", locals: { range: range } %>
+            <% end %>
           <% end %>
         </tbody>
       </table>
