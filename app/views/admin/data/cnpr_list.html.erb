@@ -888,7 +888,7 @@
         </tr>
       </thead>
       <tbody>
-        <% if !@is_admin_init %>
+        <% if !@is_admin_init && @fcdatas.count > 0 %>
           <% @fcdatas.each do |fcdata| %>
             <%= render partial: "admin/data/item", locals: { fcdata: fcdata } %>
           <% end %>
