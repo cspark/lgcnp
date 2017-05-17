@@ -512,6 +512,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
     serial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
+    serial_array = serial_array + serial_array2 + serial_array3
     measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     Rails.logger.info "scoped.count!!!"
