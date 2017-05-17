@@ -45,6 +45,7 @@ class Admin::UserController < Admin::AdminApplicationController
     scoped = Custinfo.where.not(lastanaldate: nil)
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
+    scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
     scoped = scoped.where(address: @select_address) if !@select_address.blank?
     @search = ""
     @search = params[:search] if params.has_key?(:search) && params[:search].length != 0
