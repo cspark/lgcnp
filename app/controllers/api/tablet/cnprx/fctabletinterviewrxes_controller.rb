@@ -238,6 +238,8 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
       if !custinfo.nil?
         Rails.logger.info "EXIST!!!"
         Rails.logger.info custinfo.custserial.to_i
+        custinfo.phone = phone
+        custinfo.save
         render json: custinfo.to_api_hash, status: :ok
       else
         Rails.logger.info "NOT EXIST!!!"
@@ -247,6 +249,8 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
         birthmm = params[:birth_mmdd][0,2]
         birthdd = params[:birth_mmdd][2,4]
         phone = params[:cell_phnno]
+        age = params[:age]
+
         n_cust_id = lcare_user.n_cust_id
         sex = lcare_user.sex_cd
         Rails.logger.info lcare_user.sex_cd
@@ -273,6 +277,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
         custinfo.n_cust_id = n_cust_id
         custinfo.measureno = "0"
         custinfo.sex = sex
+        custinfo.age = age
 
         # custinfo.save
         if custinfo.save

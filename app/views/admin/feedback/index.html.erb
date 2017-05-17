@@ -12,6 +12,9 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
     <script>
       $(function () {
+        $(".top-list").css('color', '#9d9d9d');
+        $("#point_input_feedback").css('color', 'hotpink');
+
         <% if !@ch_cd.nil? && @ch_cd != "" && (@ch_cd == "CNP" || @ch_cd == "CLAB") %>
           $('select[id="select_channel"]').val('<%= @ch_cd %>');
         <% end %>

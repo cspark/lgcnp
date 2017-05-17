@@ -16,6 +16,9 @@
     <script>
       var filterStr = "";
       $(function () {
+          $(".top-list").css('color', '#9d9d9d');
+          $("#point_data_list").css('color', 'hotpink');
+
           <% if @ch_cd.include?("CNPR") %>
             $("input:checkbox[value=CNPR]").prop("checked", true);
           <% else %>

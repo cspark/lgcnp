@@ -80,6 +80,10 @@
           location.href = "/admin/manager_list"
         });
 
+        $("#allow_list").click(function(){
+          location.href = "/admin/allow_list"
+        });
+
         $("#image_test").click(function(){
           location.href = "/admin/upload_test"
         });
@@ -157,8 +161,8 @@
           <a class="navbar-brand" href="#">맞춤형 화장품</a>
         </div>
         <ul class="nav navbar-nav">
-          <li><a href="#" id="custinfos">고객정보</a></li>
-          <li class="dropdown dropbtn"><a href="#">피드백 입력</a>
+          <li><a href="#" class="top-list" id="custinfos">고객정보</a></li>
+          <li class="dropdown dropbtn"><a class="top-list" id="point_input_feedback" href="#">피드백 입력</a>
             <div class="dropdown-content">
               <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
                 <a id="input_feedback_cnp" href="#">CNP</a>
@@ -170,7 +174,7 @@
               <% end %>
             </div>
           </li>
-          <li class="dropdown dropbtn"><a href="#">피드백 리스트</a>
+          <li class="dropdown dropbtn"><a class="top-list" id="point_feedback_list" href="#">피드백 리스트</a>
             <div class="dropdown-content">
               <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
                 <a id="feedback_list_cnp" href="#">CNP</a>
@@ -182,7 +186,7 @@
               <% end %>
             </div>
           </li>
-          <li class="dropdown dropbtn"><a href="#">고객 인터뷰</a>
+          <li class="dropdown dropbtn"><a class="top-list" id="point_interview_list" href="#">고객 인터뷰</a>
             <div class="dropdown-content">
               <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
                 <a id="cnp_interview" href="#">CNP</a>
@@ -198,20 +202,23 @@
             </div>
           </li>
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
-          <li id="fcavg_list"><a href="#">연령별 성별 평균</a></li>
-          <li class="dropdown dropbtn"><a href="#">야누스 측정 데이터</a>
+          <li id="fcavg_list"><a class="top-list" id="point_avg_list" href="#">연령별 성별 평균</a></li>
+          <li class="dropdown dropbtn"><a class="top-list" id="point_fcdata_list" href="#">야누스 측정 데이터</a>
             <div class="dropdown-content">
               <a id="fcdata_list_cnp" href="#">CNP</a>
               <a id="fcdata_list_beau" href="#">보떼</a>
               <a id="fcdata_list_cnpr" href="#">CNP RX</a>
             </div>
           </li>
-          <li id="fcpos_list"><a href="#">야누스 분석 영역 정보</a></li>
-          <li id="image_list"><a href="#">고객 이미지</a></li>
+          <li id="fcpos_list"><a class="top-list" id="point_pos_list" href="#">야누스 분석 영역 정보</a></li>
+          <li id="image_list"><a class="top-list" id="point_image_list" href="#">고객 이미지</a></li>
           <% end %>
-          <li id="fcschedule_list"><a href="#">예약 스케줄</a></li>
+          <li id="fcschedule_list"><a class="top-list" id="point_schedule_list" href="#">예약 스케줄</a></li>
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
-            <li id="manager_list"><a href="#">매장 관리자</a></li>
+            <li id="manager_list"><a class="top-list" id="point_manager_list" href="#">매장 관리자</a></li>
+          <% end %>
+          <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
+            <li id="allow_list"><a class="top-list" id="point_allow_list" href="#">허용 IP</a></li>
           <% end %>
         </ul>
         <ul class="nav navbar-nav navbar-right">

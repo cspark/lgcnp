@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script>
+        $(function () {
+
+        });
+
+        function decode_utf8(s) {
+          return decodeURI(s);
+        }
+      </script>
+    </head>
+    <body>
+      <tr class="table_tr">
+        <td class="text-center"><%= range.low_ip %> ~ <%= range.high_ip %></td>
+        <td class="text-center">
+          <button id="edit/<%= range.low_ip %>/<%= range.high_ip %>" class="btn btn-warning edit-ip">수정</button>
+          <button id="delete/<%= range.low_ip %>/<%= range.high_ip %>" class="btn btn-warning delete-ip">삭제</button>
+        </td>
+      </tr>
+    </body>
+</html>

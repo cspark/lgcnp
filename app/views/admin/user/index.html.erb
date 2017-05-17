@@ -15,6 +15,9 @@
     <script>
       <% search = "" %>
       $(function () {
+        $(".top-list").css('color', '#9d9d9d');
+        $("#custinfos").css('color', 'hotpink');
+
         <% if !@ch_cd.nil? && @ch_cd != ""%>
           $('select[id="select_channel"]').val('<%= @ch_cd %>');
         <% end %>
@@ -138,7 +141,7 @@
         <option value="TMR">NC</option>
         <option value="BEAU">보떼</option>
         <option value="LABO">LABO</option>
-        <option value="ONEP">ONEP</option>
+        <option value="ONEP">방판</option>
       </select>
       <p style="float:left; margin-left: 20px; margin-top: 7px;">매장 코드:&nbsp;</p>
       <input class="form-control" type="text" id="select_shop" style="float:left; width: 100px;">

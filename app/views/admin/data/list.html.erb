@@ -16,6 +16,9 @@
     <script>
       var filterStr = "";
       $(function () {
+          $(".top-list").css('color', '#9d9d9d');
+          $("#point_data_list").css('color', 'hotpink');
+
           <% if @is_init == true %>
             document.getElementById("is_agree_thirdparty_info_true").checked = true
           <% elsif @is_agree_thirdparty_info.present? && @is_agree_thirdparty_info == "F" %>

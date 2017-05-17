@@ -13,6 +13,9 @@
 
     <script>
       $(function () {
+        $(".top-list").css('color', '#9d9d9d');
+        $("#point_avg_list").css('color', 'hotpink');
+
         document.getElementById("select_age").addEventListener("change", function() {
             var select_option = document.getElementById("select_age").options[document.getElementById("select_age").selectedIndex].value
             location.href = "/admin/fcavg_list?select=" + select_option;

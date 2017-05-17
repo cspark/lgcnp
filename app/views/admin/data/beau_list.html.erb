@@ -16,6 +16,9 @@
     <script>
       var filterStr = "";
       $(function () {
+          $(".top-list").css('color', '#9d9d9d');
+          $("#point_data_list").css('color', 'hotpink');
+
           <% if @ch_cd.include?("BEAU") %>
             $("input:checkbox[value=BEAU]").prop("checked", true);
           <% else %>

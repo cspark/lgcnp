@@ -14,7 +14,7 @@
       <% email = "" %>
       $(function () {
         $(".top-list").css('color', '#9d9d9d');
-        $("#point_manager_list").css('color', 'hotpink');
+        $("#point_allow_list").css('color', 'hotpink');
 
         $(document).keyup(function (e) {
             if ($("#email").is(":focus") && (e.keyCode == 13) || ($("#shop_cd").is(":focus") && (e.keyCode == 13))) {
@@ -38,15 +38,17 @@
           var email = $(this).attr('id')
         });
 
-        $(document).on("click", ".delete-admin", function (e) {
+        $(document).on("click", ".delete-ip", function (e) {
           var r = confirm("정말 삭제 하시겠습니까?");
           if (r){
-            var email = $(this).attr('id')
+            var low_ip = $(this).attr('id').split("/")[1]
+            var high_ip = $(this).attr('id').split("/")[2]
             var formData = new FormData($(this)[0]);
-            formData.append("email", email);
+            formData.append("low_ip", low_ip);
+            formData.append("high_ip", high_ip);
 
             $.ajax({
-                url: "/admin/manager/delete",
+                url: "/admin/allowaccess/delete",
                 type: 'POST',
                 data: formData,
                 async: false,
@@ -54,7 +56,7 @@
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                  alert("관리자를 삭제하였습니다.");
+                  alert("허용 ip를 삭제하였습니다.");
                   location.reload();
                 },
                 error: function (response){
@@ -64,21 +66,14 @@
           }
         });
 
-        $(document).on("click", ".edit-admin", function (e) {
-          var email = $(this).attr('id')
-          window.open("/admin/manager/edit_manager?email=" + email, "/users/manager/edit_manager?email=" + email, "scrollbars=1,resizable=1,height=400,width=500");
+        $(document).on("click", ".edit-ip", function (e) {
+          var low_ip = $(this).attr('id').split("/")[1]
+          var high_ip = $(this).attr('id').split("/")[2]
+          window.open("/admin/allowaccess/edit_access_range?low_ip=" +low_ip+ "&high_ip=" +high_ip, "/users/allowaccess/edit_access_range?low_ip=" +low_ip+ "&high_ip=" +high_ip, "scrollbars=1,resizable=1,height=400,width=500");
         });
 
-        $('#submit').click(function(){
-          load();
-        });
-
-        $('#add_manager').click(function(){
-          window.open("/admin/manager/add_manager", "/admin/manager/add_manager", "scrollbars=1,resizable=1,height=400,width=500");
-        });
-
-        $('#login_history').click(function(){
-          window.open("/admin/manager/login_history", "/admin/manager/login_history", "scrollbars=1,resizable=1,height=500,width=600");
+        $('#add_access_range').click(function(){
+          window.open("/admin/allowaccess/add_access_range", "/admin/allowaccess/add_access_range", "scrollbars=1,resizable=1,height=400,width=500");
         });
       });
 
@@ -96,7 +91,8 @@
     </script>
     <style>
     .fixed-table-body {
-      max-height: 600px;
+      max-height: 350px;
+      max-height: 350px;
     }
 
     .text-center {
@@ -109,46 +105,23 @@
   <body>
     <%= render "admin/header" %>
     <div style="background: #b1cbbb; padding: 8px;">
-      <div class="form-inline">
-        <input type="text" name="email" id="email" placeholder="이메일 검색" style="width: 200px;">
-        채널 :
-        <select class="form-control" id="ch_cd">
-          <option value="all">전체</option>
-          <option value="CNP">CNP</option>
-          <option value="CNPR">CNPR</option>
-          <option value="MART">마트</option>
-          <option value="NC">NC</option>
-          <option value="BEAU">보떼</option>
-          <option value="ONEP">방판</option>
-        </select>
-        매장 :
-        <input type="text" name="shop_cd" id="shop_cd" placeholder="매장코드 검색" style="width: 200px;">
-        <button class="btn btn-warning" id="submit">조회</button>
-
-        <button style="float:right" class="btn btn-custom-3" id="login_history">로그인 기록 보기</button>
-        <button style="float:right" class="btn btn-custom-2" id="add_manager">새로운 관리자 추가</button>
-    </div>
+      <button style="margin-left: 10px;" class="btn btn-custom-3" id="add_access_range">허용 IP 추가</button>
     </div>
 
       <table data-toggle="table" style="width:1160px;">
         <thead style="width: 100%;">
           <tr>
-            <th class="text-center">이메일</th>
-            <th class="text-center">채널</th>
-            <th class="text-center">매장</th>
-            <th class="text-center">전체 관리자 여부</th>
+            <th class="text-center">IP 범위</th>
             <th class="text-center"></th>
           </tr>
         </thead>
         <tbody>
-          <% @users.each do |user| %>
-          <%= render partial: "admin/manager/item", locals: { user: user } %>
+          <% @range.each do |range| %>
+          <%= render partial: "admin/allowaccess/item", locals: { range: range } %>
           <% end %>
         </tbody>
       </table>
 
-      <div>
-        <%= paginate @users %>
-      </div>
+
   </body>
 </html>

@@ -1,0 +1,134 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+    <script>
+    $ (function () {
+      $(".onlythree").keyup(function (event) {
+        if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+            var inputVal = $(this).val();
+            $(this).val(inputVal.replace(/[^0-9]/gi, ''));
+        }
+      });
+
+      $('#submit').click(function(){
+        if ($("#min_1").val() == "" || $("#min_2").val() == "" || $("#min_3").val() == "" || $("#min_4").val() == ""){
+          alert("공란을 채워주세요!")
+          return
+        }
+        if ($("#max_1").val() == "" || $("#max_2").val() == "" || $("#max_3").val() == "" || $("#max_4").val() == ""){
+          alert("공란을 채워주세요!")
+          return
+        }
+        if ($("#min_1").val() > $("#max_1").val() || $("#min_2").val() > $("#max_2").val() || $("#min_3").val() > $("#max_3").val() || $("#min_4").val() > $("#max_4").val() ){
+          alert("유효한 범위를 입력 해 주세요!")
+          return
+        }
+
+        if (parseInt($("#min_1").val()) > 255 || parseInt($("#min_2").val()) > 255 || parseInt($("#min_3").val()) > 255 || parseInt($("#min_4").val()) > 255){
+          alert("유효한 범위를 입력 해 주세요!")
+          return
+        }
+        if (parseInt($("#max_1").val()) > 255 || parseInt($("#max_2").val()) > 255 || parseInt($("#max_3").val()) > 255 || parseInt($("#max_4").val()) > 255){
+          alert("유효한 범위를 입력 해 주세요!")
+          return
+        }
+
+        var min_ip_int = parseInt($("#min_1").val()+$("#min_2").val()+$("#min_3").val()+$("#min_4").val())
+        var max_ip_int = parseInt($("#max_1").val()+$("#max_2").val()+$("#max_3").val()+$("#max_4").val())
+        console.log(parseInt($("#min_1").val()+$("#min_2").val()+$("#min_3").val()+$("#min_4").val()));
+        console.log(parseInt($("#max_1").val()+$("#max_2").val()+$("#max_3").val()+$("#max_4").val()));
+
+        if (min_ip_int > max_ip_int) {
+          alert("유효한 범위를 입력 해 주세요!")
+          return
+        }
+
+
+        var formData = new FormData($(this)[0]);
+        console.log($("#min_1").val()+"."+$("#min_2").val()+"."+$("#min_3").val()+"."+$("#min_4").val());
+        console.log($("#max_1").val()+"."+$("#max_2").val()+"."+$("#max_3").val()+"."+$("#max_4").val());
+        formData.append("low_ip", $("#min_1").val()+"."+$("#min_2").val()+"."+$("#min_3").val()+"."+$("#min_4").val());
+        formData.append("high_ip", $("#max_1").val()+"."+$("#max_2").val()+"."+$("#max_3").val()+"."+$("#max_4").val());
+
+        $.ajax({
+            url: "/admin/allowaccess",
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+              alert("허용 IP를 추가하였습니다.");
+              window.opener.location.reload();
+              window.close();
+            },
+            error: function (response){
+              alert("실패");
+            }
+        });
+      });
+
+      $(".onlythree").keyup(function () {
+        if (this.value.length == this.maxLength) {
+          $(this).next('.onlythree').focus();
+        }
+      });
+    });
+
+    </script>
+
+    <style>
+    .fixed-table-body {
+      max-height: 350px;
+    }
+
+    .text-center {
+        margin: 0 auto;
+        text-align: center !important;
+    }
+
+    .onlythree{
+      width: 50px;
+      border: 0;
+    }
+
+    .ip_div {
+      border: 1px solid gray;
+      display: inline-block;
+    }
+    </style>
+  </head>
+
+  <body style="padding: 10px;">
+    <h2>허용 IP 추가</h2>
+    <div class="form-inline">
+      <font style="float:left;">IP</font><br>
+      <div class="ip_div">
+        <input type="text" maxlength="3" class="onlythree" id="min_1"/>.
+        <input type="text" maxlength="3" class="onlythree" id="min_2"/>.
+        <input type="text" maxlength="3" class="onlythree" id="min_3"/>.
+        <input type="text" maxlength="3" class="onlythree" id="min_4"/>
+      </div> ~
+      <div class="ip_div">
+        <input type="text" maxlength="3" class="onlythree" id="max_1"/>.
+        <input type="text" maxlength="3" class="onlythree" id="max_2"/>.
+        <input type="text" maxlength="3" class="onlythree" id="max_3"/>.
+        <input type="text" maxlength="3" class="onlythree" id="max_4"/>
+      </div>
+    </div><br>
+    <center>
+      <button class="btn btn-warning" id="submit" style="margin-right:20px;">저장</button>
+    </center>
+
+  </body>
+</html>
