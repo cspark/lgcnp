@@ -28,9 +28,16 @@ class Admin::AdminController < Admin::AdminApplicationController
     Allowaccess.all.each do |range|
       Rails.logger.info range.low_ip
       Rails.logger.info range.high_ip
+      Rails.logger.info history.ip
+
       low = IPAddr.new(range.low_ip).to_i
       high = IPAddr.new(range.high_ip).to_i
       ip = IPAddr.new(history.ip).to_i
+
+      Rails.logger.info low
+      Rails.logger.info high
+      Rails.logger.info ip
+
       allow_access = "true" if (low..high)===ip
     end
     Rails.logger.info "allow!!!"

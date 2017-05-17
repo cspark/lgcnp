@@ -420,4 +420,16 @@ class GenerateTestModel < ApplicationRecord
      f.shop_cd = "505415"
      f.save
   end
+
+  def skin_type_error
+    array = Fcdata.where(skintype: 9).pluck(:custserial).uniq
+    rx = Fctabletinterviewrx.where(mmode: "Total").where(custserial: array)
+    temp = []
+    rx.each do |interview|
+      if !interview.skin_type.include?("u_zone_boghab")
+        temp << interview.custserial.to_i
+        temp = temp.uniq
+      end
+    end
+  end
 end
