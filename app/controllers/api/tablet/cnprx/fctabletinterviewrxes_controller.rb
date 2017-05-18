@@ -380,6 +380,6 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
     :skin_type,:before_solution_1,:after_solution_1,:before_solution_2,:after_solution_2, :before_production, :after_production,
     :before_ample_1,:after_ample_1,:before_ample_2,:after_ample_2,:uptdate,:is_agree_after,:mmode,:brefore_production,:after_production,:bb_base,
     :before_cushion_1,:after_cushion_1,:before_cushion_2,:after_cushion_2,:fcdata_id,:is_agree_cant_refund,:turnover_value,:corneous_value,:stress_value,:bb_base_before,:bb_base_after,
-    :recommand_program_step_1, :recommand_program_step_2, :recommand_program_step_3, :purchase1, :purchase2, :purchase3, :base_lot, :ampoule_1_lot, :ampoule_2_lot, :mixer_name, :memo, :before_overlap, :after_overlap, :recommand_bb, :recommand_sun)
+    :recommand_program_step_1, :recommand_program_step_2, :recommand_program_step_3, :purchase1, :purchase2, :purchase3, :base_lot, :ampoule_1_lot, :ampoule_2_lot, :mixer_name, :memo, :before_overlap, :after_overlap, :recomman_bb, :recomman_sun)
   end
 end
