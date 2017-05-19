@@ -21,6 +21,7 @@ class Admin::AdminController < Admin::AdminApplicationController
 
   def check_access
     ip = params[:real_ip] || request.remote_ip
+    allow = false
 
     Allowaccess.all.each do |range|
       Rails.logger.info range.low_ip
@@ -36,11 +37,12 @@ class Admin::AdminController < Admin::AdminApplicationController
       Rails.logger.info ip
 
       if ip >= low && ip <= high
-        Rails.logger.info "Allow!!!"
-      else
-        Rails.logger.info "Not Allow!!!"
-        render json: {}, status: :bad_request
+        allow = true
       end
+    end
+
+    if !allow
+      render json: {}, status: :bad_request
     end
   end
 
