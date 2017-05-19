@@ -30,18 +30,20 @@ class Admin::AdminController < Admin::AdminApplicationController
 
       low = IPAddr.new(range.low_ip).to_i
       high = IPAddr.new(range.high_ip).to_i
-      ip = IPAddr.new(ip).to_i
+      translate_ip = IPAddr.new(ip).to_i
 
       Rails.logger.info low
       Rails.logger.info high
-      Rails.logger.info ip
+      Rails.logger.info translate_ip
 
-      if ip >= low && ip <= high
+      if translate_ip >= low && translate_ip <= high
         allow = true
       end
     end
 
-    if !allow
+    Rails.logger.info "allow!!!"
+    Rails.logger.info allow
+    if allow != true
       render json: {}, status: :bad_request
     end
   end
