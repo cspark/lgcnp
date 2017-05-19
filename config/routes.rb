@@ -9,10 +9,12 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get "/manager_2017"  => "admin#index"
+    get "manager_2017"  => "admin#index"
     get "admin_login"  => "admin#admin_login"
     post "admin_login"  => "admin#login"
+    post "check_access"  => "admin#check_access"
     delete "admin_logout" => "admin#logout"
+    get "access_restriction"  => "admin#access_restriction"
 
     get "user_list"  => "user#index"
     get "users/detail"  => "user#show"

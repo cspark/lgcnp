@@ -14,6 +14,24 @@
                 $.getJSON("http://jsonip.com/?callback=?", function (data) {
                   console.log(data.ip);
                   real_ip = data.ip
+
+                  var formData = new FormData($(this)[0]);
+                  formData.append("real_ip", real_ip);
+
+                  $.ajax({
+                      url: "/admin/check_access",
+                      type: 'POST',
+                      data: formData,
+                      async: false,
+                      cache: false,
+                      contentType: false,
+                      processData: false,
+                      success: function (returndata) {
+                      },
+                      error: function (returndata) {
+                        location.href = "/admin/access_restriction"
+                      }
+                  });
                 });
 
                 $("#login").click(function () {
@@ -34,8 +52,6 @@
                             window.location.href = "/admin/user_list"
                         },
                         error: function (returndata) {
-                          console.log(returndata);
-                          alert("허용된 IP 가 아닙니다. 관리자에게 문의 해 주세요.");
                         }
                     });
                 });

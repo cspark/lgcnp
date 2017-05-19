@@ -5,7 +5,7 @@ require 'ipaddr'
 class Admin::AdminController < Admin::AdminApplicationController
   skip_before_action :verify_authenticity_token, :only => [:login, :admin_login, :logout]
   before_action :is_admin
-  skip_before_action :is_admin, :only => [:admin_login, :login, :logout]
+  skip_before_action :is_admin, :only => [:admin_login, :login, :logout, :check_access, :access_restriction]
 
   def index
     redirect_to '/admin/user_list'
@@ -15,6 +15,35 @@ class Admin::AdminController < Admin::AdminApplicationController
     render '/admin/login'
   end
 
+  def access_restriction
+    render '/admin/access_restriction'
+  end
+
+  def check_access
+    ip = params[:real_ip] || request.remote_ip
+
+    Allowaccess.all.each do |range|
+      Rails.logger.info range.low_ip
+      Rails.logger.info range.high_ip
+      Rails.logger.info ip
+
+      low = IPAddr.new(range.low_ip).to_i
+      high = IPAddr.new(range.high_ip).to_i
+      ip = IPAddr.new(ip).to_i
+
+      Rails.logger.info low
+      Rails.logger.info high
+      Rails.logger.info ip
+
+      if ip >= low && ip <= high
+        Rails.logger.info "Allow!!!"
+      else
+        Rails.logger.info "Not Allow!!!"
+        render json: {}, status: :bad_request
+      end
+    end
+  end
+
   def login
     history = LoginHistory.new
     history.email = params[:email]
@@ -22,47 +51,19 @@ class Admin::AdminController < Admin::AdminApplicationController
     history.created_at = Time.now.to_datetime+10.minutes
     history.save
 
-    # Access ip
-    allow_access = "false"
-
-    Allowaccess.all.each do |range|
-      Rails.logger.info range.low_ip
-      Rails.logger.info range.high_ip
-      Rails.logger.info history.ip
-
-      low = IPAddr.new(range.low_ip).to_i
-      high = IPAddr.new(range.high_ip).to_i
-      ip = IPAddr.new(history.ip).to_i
-
-      Rails.logger.info low
-      Rails.logger.info high
-      Rails.logger.info ip
-
-      if ip >= low && ip <= high
-        allow_access = "true"
-      end
+    if params[:email] == "mint" && params[:password] == "mint"
+      session[:admin_user] = "user"
+      return
     end
-    Rails.logger.info "allow!!!"
-    Rails.logger.info allow_access
 
-    if allow_access == "true"
-      if params[:email] == "mint" && params[:password] == "mint"
-        session[:admin_user] = "user"
-        return
-      end
+    user = AdminUser.where(email: params[:email]).first
 
-      user = AdminUser.where(email: params[:email]).first
-
-      if user.present? && user.valid_password?(params[:password])
-        session[:admin_user] = user
-        Rails.logger.info "Login success"
-        Rails.logger.info history.ip
-      else
-        render json: {}, status: :ok
-      end
-      render json: {}, status: :ok
+    if user.present? && user.valid_password?(params[:password])
+      session[:admin_user] = user
+      Rails.logger.info "Login success"
+      Rails.logger.info history.ip
     else
-      render json: {}, status: :bad_request
+      render json: {}, status: :ok
     end
   end
 
