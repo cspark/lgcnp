@@ -2,7 +2,7 @@ class Admin::ImageController < Admin::AdminApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @start_date = "2017-01-01"
+    @start_date = "2017-01-25"
     @end_date = Date.today
     @today = Date.today
 

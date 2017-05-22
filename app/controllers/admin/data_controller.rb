@@ -8,7 +8,7 @@ class Admin::DataController < Admin::AdminApplicationController
       @is_admin_init = true
     end
 
-    @start_date = "2017-02-25"
+    @start_date = "2017-01-25"
     @end_date = Date.today
     @today = Date.today
 
