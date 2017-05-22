@@ -71,12 +71,12 @@
 
           // 피부타입 설문
           <% @skin_type_survey_array.each do |array| %>
-            <% if array.include?("skin_type_gun_boggab") %>
-              $("input:checkbox[value=skin_type_gun_boggab]").prop("checked", true);
+            <% if array.include?("skin_type_boggab") %>
+              $("input:checkbox[value=skin_type_boggab]").prop("checked", true);
             <% end %>
 
-            <% if array.include?("skin_type_jisung_boghab") %>
-              $("input:checkbox[value=skin_type_jisung_boghab]").prop("checked", true);
+            <% if array.include?("skin_type_jisung") %>
+              $("input:checkbox[value=skin_type_jisung]").prop("checked", true);
             <% end %>
 
             <% if array.include?("skin_type_gunsung") %>
@@ -85,10 +85,6 @@
 
             <% if array.include?("skin_type_jungsung") %>
               $("input:checkbox[value=skin_type_jungsung]").prop("checked", true);
-            <% end %>
-
-            <% if array.include?("skin_type_jisung") %>
-              $("input:checkbox[value=skin_type_jisung]").prop("checked", true);
             <% end %>
           <% end %>
 
@@ -517,10 +513,8 @@
         <input type="checkbox" name="skin_type_device_check_box" value="u_zone_boghab" id="u_zone_boghab" style="float:left; margin-top:9px;">
 
         <p style="float:left; margin-left: 40px; margin-top: 5px;">피부타입(설문):&nbsp;</p>
-        <p style="float:left; margin-left: 5px; margin-top: 5px;">건복합성&nbsp;</p>
-        <input type="checkbox" name="skin_type_survey_check_box" value="skin_type_gun_boggab" id="skin_type_gun_boggab" style="float:left; margin-top:9px;">
-        <p style="float:left; margin-left: 10px; margin-top: 5px;">지복합성&nbsp;</p>
-        <input type="checkbox" name="skin_type_survey_check_box" value="skin_type_jisung_boghab" id="skin_type_jisung_boghab" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 5px; margin-top: 5px;">복합성&nbsp;</p>
+        <input type="checkbox" name="skin_type_survey_check_box" value="skin_type_boggab" id="skin_type_boggab" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">건성&nbsp;</p>
         <input type="checkbox" name="skin_type_survey_check_box" value="skin_type_gunsung" id="skin_type_gunsung" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">중성&nbsp;</p>
