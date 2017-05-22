@@ -1128,6 +1128,8 @@ class Admin::DataController < Admin::AdminApplicationController
     @fcdatas = []
     @fcdatas_final = []
     scoped = Fcdata.where(ch_cd: @ch_array).where(custserial: serial_array)
+    Rails.logger.info "init scoped.count!!!"
+    Rails.logger.info scoped.count
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
