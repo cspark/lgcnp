@@ -1072,6 +1072,9 @@ class Admin::DataController < Admin::AdminApplicationController
     Rails.logger.info "@select_skin_anxiety2_array"
     Rails.logger.info @select_skin_anxiety2_array
 
+    Rails.logger.info "@skin_type_survey_array"
+    Rails.logger.info @skin_type_survey_array
+
     if !Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first.nil?
       min_age_custinfo = Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first
       max_age_custinfo = Custinfo.where(ch_cd: @ch_array).order("birthyy asc").first
@@ -1127,6 +1130,10 @@ class Admin::DataController < Admin::AdminApplicationController
 
     @fcdatas = []
     @fcdatas_final = []
+
+    Rails.logger.info "serial_array!!!"
+    Rails.logger.info serial_array
+
     scoped = Fcdata.where(ch_cd: @ch_array).where(custserial: serial_array)
     Rails.logger.info "init scoped.count!!!"
     Rails.logger.info scoped.count
