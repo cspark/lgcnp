@@ -8,7 +8,7 @@ class Admin::DataController < Admin::AdminApplicationController
       @is_admin_init = true
     end
 
-    @start_date = Date.today
+    @start_date = "2017-02-25"
     @end_date = Date.today
     @today = Date.today
 
@@ -513,7 +513,7 @@ class Admin::DataController < Admin::AdminApplicationController
       @is_admin_init = true
     end
 
-    @start_date = Date.today
+    @start_date = "2017-01-25"
     @end_date = Date.today
     @today = Date.today
 
@@ -956,7 +956,7 @@ class Admin::DataController < Admin::AdminApplicationController
       @is_admin_init = true
     end
 
-    @start_date = Date.today
+    @start_date = "2017-01-25"
     @end_date = Date.today
     @today = Date.today
 
@@ -1085,7 +1085,6 @@ class Admin::DataController < Admin::AdminApplicationController
     @max_birthyy = max_age_custinfo.birthyy
     @min_birthmm = 1
     @max_birthmm = 12
-
 
     @select_skin_type_device_final = []
     if !@skin_type_device_array.blank?

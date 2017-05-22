@@ -103,7 +103,11 @@
                         changeMonth: true
                     });
 
-          $("#start_date").datepicker('setDate', '2017-01-25');
+          <% if @start_date.nil? %>
+            $("#start_date").datepicker('setDate', '2017-01-25');
+          <% else %>
+            $("#start_date").datepicker('setDate', '<%= @start_date %>');
+          <% end %>
           $("#end_date").datepicker('setDate', '<%= @end_date %>');
 
           <% if !@name.nil? %>
