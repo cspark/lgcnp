@@ -1060,8 +1060,7 @@ class Admin::DataController < Admin::AdminApplicationController
         @select_skin_anxiety1_array.push(anxiety)
       end
     end
-    Rails.logger.info "@select_skin_anxiety1_array"
-    Rails.logger.info @select_skin_anxiety1_array
+
 
     @select_skin_anxiety2_array = []
     if !select_skin_anxiety2.blank?
@@ -1069,11 +1068,6 @@ class Admin::DataController < Admin::AdminApplicationController
         @select_skin_anxiety2_array.push(anxiety)
       end
     end
-    Rails.logger.info "@select_skin_anxiety2_array"
-    Rails.logger.info @select_skin_anxiety2_array
-
-    Rails.logger.info "@skin_type_survey_array"
-    Rails.logger.info @skin_type_survey_array
 
     if !Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first.nil?
       min_age_custinfo = Custinfo.where(ch_cd: @ch_array).where.not(birthyy: nil).order("birthyy desc").first
@@ -1114,6 +1108,9 @@ class Admin::DataController < Admin::AdminApplicationController
     Rails.logger.info "@select_skin_type_device_final!!"
     Rails.logger.info @select_skin_type_device_final
     Rails.logger.info @ch_array
+    Rails.logger.info @select_skin_anxiety1_array
+    Rails.logger.info @select_skin_anxiety2_array
+    Rails.logger.info @skin_type_survey_array
 
     if @select_skin_anxiety1_array.blank? || @skin_type_survey_array.blank?
       serial_array = Fctabletinterviewrx.where(before_solution_1: ["!!"]).pluck(:custserial).uniq
@@ -1133,6 +1130,7 @@ class Admin::DataController < Admin::AdminApplicationController
 
     Rails.logger.info "serial_array!!!"
     Rails.logger.info serial_array
+    Rails.logger.info serial_array.count
 
     scoped = Fcdata.where(ch_cd: @ch_array).where(custserial: serial_array)
     Rails.logger.info "init scoped.count!!!"
