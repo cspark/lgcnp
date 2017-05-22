@@ -39,10 +39,6 @@ class Admin::UserController < Admin::AdminApplicationController
     # custserial_array = custserial_array + custserial_array2
     # measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
-    Rails.logger.info "user index!!!"
-    Rails.logger.info ch_cd
-
-
     scoped = Custinfo.where.not(lastanaldate: nil)
     if !@shop_cd.blank?
       fcdata_list = Fcdata.where(shop_cd: @shop_cd)
@@ -61,6 +57,12 @@ class Admin::UserController < Admin::AdminApplicationController
     scoped = scoped.where("custname LIKE ?", "%#{@search}%") if !@search.blank?
     @users = scoped.order("lastanaldate desc")
 
+    Rails.logger.info "user index!!!"
+    Rails.logger.info @ch_cd
+    Rails.logger.info @shop_cd
+    Rails.logger.info @custserial
+    Rails.logger.info @search
+    
     @all_users = @users
     @count = @users.count
     @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
