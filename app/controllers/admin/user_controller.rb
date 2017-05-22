@@ -62,7 +62,8 @@ class Admin::UserController < Admin::AdminApplicationController
     Rails.logger.info @shop_cd
     Rails.logger.info @custserial
     Rails.logger.info @search
-    
+    Rails.logger.info @select_address
+
     @all_users = @users
     @count = @users.count
     @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
