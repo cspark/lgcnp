@@ -41,7 +41,7 @@ class Admin::AdminController < Admin::AdminApplicationController
       end
     end
 
-    Rails.logger.info "allow!!!"
+    Rails.logger.info "allow!!!!!!"
     Rails.logger.info allow
     if allow != true
       render json: {}, status: :bad_request
