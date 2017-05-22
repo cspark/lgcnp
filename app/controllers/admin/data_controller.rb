@@ -1079,12 +1079,13 @@ class Admin::DataController < Admin::AdminApplicationController
       min_age_custinfo = Custinfo.where(ch_cd: "CNPR").where.not(birthyy: nil).order("birthyy desc").first
       max_age_custinfo = Custinfo.where(ch_cd: "CNPR").order("birthyy asc").first
     end
-    @min_age = 11
-    @max_age = 100
-    @min_birthyy = 1900
-    @max_birthyy = 2000
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+    @min_birthyy = min_age_custinfo.birthyy
+    @max_birthyy = max_age_custinfo.birthyy
     @min_birthmm = 1
     @max_birthmm = 12
+
 
     @select_skin_type_device_final = []
     if !@skin_type_device_array.blank?
