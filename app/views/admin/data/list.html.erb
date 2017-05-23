@@ -269,9 +269,15 @@
           $('select[id="select_sex"]').val('<%= @select_sex %>');
         <% end %>
 
-        document.getElementById("start_age").value = '14';
+        <% if !@start_age.nil? %>
+          document.getElementById("start_age").value = '<%= @start_age %>'
+        <% else %>
+          document.getElementById("start_age").value = '<%= @min_age %>'
+        <% end %>
         <% if !@end_age.nil? %>
           document.getElementById("end_age").value = '<%= @end_age %>'
+        <% else %>
+          document.getElementById("end_age").value = '<%= @max_age %>'
         <% end %>
 
         <% if !@start_birthyy.nil? %>

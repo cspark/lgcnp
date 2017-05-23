@@ -105,14 +105,15 @@
           $("#start_date").datepicker('setDate', '2017-01-25');
           $("#end_date").datepicker('setDate', '<%= @end_date %>');
 
-          document.getElementById("start_age").value = '14'
-          document.getElementById("end_age").value = '<%= @max_age %>'
-
-          // <% if !@start_age.nil? %>
-          //   document.getElementById("start_age").value = '<%= @start_age %>'
-          // <% end %>
+          <% if !@start_age.nil? %>
+            document.getElementById("start_age").value = '<%= @start_age %>'
+          <% else %>
+            document.getElementById("start_age").value = '<%= @min_age %>'
+          <% end %>
           <% if !@end_age.nil? %>
             document.getElementById("end_age").value = '<%= @end_age %>'
+          <% else %>
+            document.getElementById("end_age").value = '<%= @max_age %>'
           <% end %>
 
           <% if !@name.nil? %>
