@@ -62,7 +62,11 @@ class Fctabletinterviewrx < ApplicationRecord
       ampoule_1_lot: ampoule_1_lot,
       ampoule_2_lot: ampoule_2_lot,
       mixer_name: mixer_name,
-      memo: memo
+      memo: memo,
+      before_overlap: before_overlap,
+      after_overlap: after_overlap,
+      recommand_bb: recommand_bb,
+      recommand_sun: recommand_sun
     }
   end
 end
