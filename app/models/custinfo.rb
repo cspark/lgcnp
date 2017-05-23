@@ -63,7 +63,7 @@ class Custinfo < ApplicationRecord
       custserial: custserial,
       ch_cd: ch_cd,
       n_cust_id: n_cust_id,
-      measureno: measureno.to_s
+      measureno: measureno.to_s,
       gene_barcode: gene_barcode.to_s
     }
   end
