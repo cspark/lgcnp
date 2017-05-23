@@ -159,25 +159,25 @@ class Admin::DataController < Admin::AdminApplicationController
       end
     end
 
-    if @select_skin_anxiety1_array.blank? || @skin_type_survey_array.blank?
-      serial_array = Fctabletinterview.where(before_solution_1: ["!!"]).pluck(:custserial).uniq
-    else
-      serial_array = Fctabletinterview.where(before_solution_1: @select_skin_anxiety1_array).where(skin_type: @skin_type_survey_array).where.not(before_solution_1: nil).where.not(before_solution_2: nil).pluck(:custserial).uniq
-    end
-
-    if @select_skin_anxiety2_array.blank? || @skin_type_survey_array.blank?
-      serial_array2 = Fctabletinterview.where(before_solution_2: ["!!"]).pluck(:custserial).uniq
-    else
-      serial_array2 = Fctabletinterview.where(before_solution_2: @select_skin_anxiety2_array).where(skin_type: @skin_type_survey_array).where.not(before_solution_1: nil).where.not(before_solution_2: nil).pluck(:custserial).uniq
-    end
-    serial_array = serial_array & serial_array2
-
-    Rails.logger.info "serial_array.count!!!"
-    Rails.logger.info serial_array.count
+    # if @select_skin_anxiety1_array.blank? || @skin_type_survey_array.blank?
+    #   serial_array = Fctabletinterview.where(before_solution_1: ["!!"]).pluck(:custserial).uniq
+    # else
+    #   serial_array = Fctabletinterview.where(before_solution_1: @select_skin_anxiety1_array).where(skin_type: @skin_type_survey_array).where.not(before_solution_1: nil).where.not(before_solution_2: nil).pluck(:custserial).uniq
+    # end
+    #
+    # if @select_skin_anxiety2_array.blank? || @skin_type_survey_array.blank?
+    #   serial_array2 = Fctabletinterview.where(before_solution_2: ["!!"]).pluck(:custserial).uniq
+    # else
+    #   serial_array2 = Fctabletinterview.where(before_solution_2: @select_skin_anxiety2_array).where(skin_type: @skin_type_survey_array).where.not(before_solution_1: nil).where.not(before_solution_2: nil).pluck(:custserial).uniq
+    # end
+    # serial_array = serial_array & serial_array2
+    #
+    # Rails.logger.info "serial_array.count!!!"
+    # Rails.logger.info serial_array.count
 
     @fcdatas = []
     @fcdatas_final = []
-    scoped = Fcdata.where(ch_cd: @ch_array).where(custserial: serial_array)
+    scoped = Fcdata.where(ch_cd: @ch_array)
     Rails.logger.info "serial_array Fcdata scoped count!!!"
     Rails.logger.info scoped.count
 
@@ -473,6 +473,30 @@ class Admin::DataController < Admin::AdminApplicationController
       is_contain = true
 
       if !fctabletinterview.nil?
+        if !@select_skin_anxiety1_array.blank?
+          if !@select_skin_anxiety1_array.include?(fctabletinterview.before_solution_1)
+            is_contain = false
+          end
+        else
+          is_contain = false
+        end
+
+        if !@select_skin_anxiety2_array.blank?
+          if !@select_skin_anxiety2_array.include?(fctabletinterview.before_solution_2)
+            is_contain = false
+          end
+        else
+          is_contain = false
+        end
+
+        if !@skin_type_survey_array.blank?
+          if !@skin_type_survey_array.include?(fctabletinterview.skin_type)
+            is_contain = false
+          end
+        else
+          is_contain = false
+        end
+
         if !@select_makeup.blank? && @select_makeup != "all"
           if fctabletinterview.a_1 != @select_makeup.to_i
             is_contain = false
@@ -1112,33 +1136,29 @@ class Admin::DataController < Admin::AdminApplicationController
     Rails.logger.info @select_skin_anxiety2_array
     Rails.logger.info @skin_type_survey_array
 
-    if !@select_skin_anxiety1_array.blank?
-      serial_array = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_1: @select_skin_anxiety1_array).pluck(:custserial).uniq
-    else
-      serial_array = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_1: ["!!"]).pluck(:custserial).uniq
-    end
-
-    if !@select_skin_anxiety2_array.blank?
-      serial_array2 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_2: @select_skin_anxiety2_array).pluck(:custserial).uniq
-    else
-      serial_array2 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_2: ["!!"]).pluck(:custserial).uniq
-    end
-
-    if !@skin_type_survey_array.blank?
-      serial_array3 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(skin_type: @skin_type_survey_array).pluck(:custserial).uniq
-    else
-      serial_array3 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(skin_type: ["!!"]).pluck(:custserial).uniq
-    end
-    serial_array = serial_array & serial_array2 & serial_array3
+    # if !@select_skin_anxiety1_array.blank?
+    #   serial_array = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_1: @select_skin_anxiety1_array).pluck(:custserial).uniq
+    # else
+    #   serial_array = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_1: ["!!"]).pluck(:custserial).uniq
+    # end
+    #
+    # if !@select_skin_anxiety2_array.blank?
+    #   serial_array2 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_2: @select_skin_anxiety2_array).pluck(:custserial).uniq
+    # else
+    #   serial_array2 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_2: ["!!"]).pluck(:custserial).uniq
+    # end
+    #
+    # if !@skin_type_survey_array.blank?
+    #   serial_array3 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(skin_type: @skin_type_survey_array).pluck(:custserial).uniq
+    # else
+    #   serial_array3 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(skin_type: ["!!"]).pluck(:custserial).uniq
+    # end
+    # serial_array = serial_array & serial_array2 & serial_array3
 
     @fcdatas = []
     @fcdatas_final = []
 
-    Rails.logger.info "serial_array!!!"
-    Rails.logger.info serial_array
-    Rails.logger.info serial_array.count
-
-    scoped = Fcdata.where(ch_cd: @ch_array).where(custserial: serial_array)
+    scoped = Fcdata.where(ch_cd: @ch_array)
     Rails.logger.info "init scoped.count!!!"
     Rails.logger.info scoped.count
     temp_end_date = @end_date.to_date + 1.day
@@ -1421,6 +1441,30 @@ class Admin::DataController < Admin::AdminApplicationController
       is_contain = true
 
       if !fctabletinterview.nil?
+        if !@select_skin_anxiety1_array.blank?
+          if !@select_skin_anxiety1_array.include?(fctabletinterview.before_solution_1)
+            is_contain = false
+          end
+        else
+          is_contain = false
+        end
+
+        if !@select_skin_anxiety2_array.blank?
+          if !@select_skin_anxiety2_array.include?(fctabletinterview.before_solution_2)
+            is_contain = false
+          end
+        else
+          is_contain = false
+        end
+
+        if !@skin_type_survey_array.blank?
+          if !@skin_type_survey_array.include?(fctabletinterview.skin_type)
+            is_contain = false
+          end
+        else
+          is_contain = false
+        end
+
         if !@select_mode.blank? && @select_mode.downcase != "all"
           if fctabletinterview.mmode == @select_mode
             is_contain = true
