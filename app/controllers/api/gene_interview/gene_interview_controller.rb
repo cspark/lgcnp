@@ -11,9 +11,9 @@ class Api::GeneInterview::GeneInterviewController < Api::ApplicationController
   def create
     interview = FcgeneInterview.new(permitted_params)
 
-    t = Time.now
-    yymmdd = t.to_s.split(" ")[0]
-    interview.uptdate = yymmdd.split("-")[0] +"/"+ yymmdd.split("-")[1] +"/"+ yymmdd.split("-")[2]
+    # t = Time.now
+    # yymmdd = t.to_s.split(" ")[0]
+    # interview.uptdate = yymmdd.split("-")[0] +"/"+ yymmdd.split("-")[1] +"/"+ yymmdd.split("-")[2]
 
     if interview.save
       render json: interview.to_api_hash, status: :ok
