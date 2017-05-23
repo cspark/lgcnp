@@ -22,7 +22,7 @@ class Api::GeneInterview::GeneInterviewController < Api::ApplicationController
     end
   end
 
-  def updated
+  def update
     interview = FcgeneInterview.where(custserial: params[:custserial], measureno: params[:measureno].to_i).first
     if !interview.nil?
       interview.update(permitted_params)
