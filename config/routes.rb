@@ -101,6 +101,7 @@ Rails.application.routes.draw do
         collection do
           get 'lcare_user_list'
           put 'measure_update'
+          put 'gene_barcode_update'
         end
       end
       resources :beau_fcdata do
@@ -161,6 +162,14 @@ Rails.application.routes.draw do
       resources :admin_fcdata do
       end
       resources :admin_fcshop do
+      end
+    end
+
+    namespace :gene_interview do
+      resources :gene_interview do
+        collection do
+          put 'update'
+        end
       end
     end
 

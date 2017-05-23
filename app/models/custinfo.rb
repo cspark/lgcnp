@@ -58,6 +58,16 @@ class Custinfo < ApplicationRecord
     }
   end
 
+  def to_api_hash_for_barcode
+    {
+      custserial: custserial,
+      ch_cd: ch_cd,
+      n_cust_id: n_cust_id,
+      measureno: measureno.to_s
+      gene_barcode: gene_barcode.to_s
+    }
+  end
+
   def increase_measureno
     self.measureno = (self.measureno.to_i + 1).to_s
   end

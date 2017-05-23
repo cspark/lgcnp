@@ -89,6 +89,20 @@ class Api::Beau::BeauUserController < Api::ApplicationController
     end
   end
 
+  def gene_barcode_update
+    user = Custinfo.where(custserial: params[:custserial]).first
+    if !user.nil?
+      user.gene_barcode = params[:gene_barcode]
+      if user.save
+        render json: user.to_api_hash_for_barcode, status: :ok
+      else
+        render :text => "Fail!!!", status: 404
+      end
+    else
+      render json: "Custinfo is not exist!!!", status: 404
+    end
+  end
+
   private
   def permitted_params
     params.permit(:custserial, :ch_cd, :n_cust_id, :custname, :sex, :age, :birthyy, :birthmm, :birthdd, :phone, :uptdate, :shop_cd, :is_agree_privacy, :is_agree_after, :is_agree_marketing, :is_agree_thirdparty_info, :address, :lastanaldate, :measureno, :email)

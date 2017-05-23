@@ -110,10 +110,18 @@ class AdminFcdata < ApplicationRecord
     }
   end
 
-  def self.list(custserial: nil, measureno: nil)
+  def self.list(custserial: nil, measureno: nil, ch_cd: nil)
     scoped = AdminFcdata.all
     scoped = scoped.where(custserial: custserial) if custserial.present?
     scoped = scoped.where(measureno: measureno) if measureno.present?
+    if ch_cd.present?
+      if ch_cd == "BEAU" || ch_cd == "MART" || ch_cd == "TMR"
+        ch_cd_array = ["BEAU","MART","TMR"]
+        scoped = scoped.where(ch_cd: ch_cd_array)
+      else
+        scoped = scoped.where(ch_cd: ch_cd)
+      end
+    end
     scoped.order('measureno DESC')
   end
 

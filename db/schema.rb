@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170512103144) do
+ActiveRecord::Schema.define(version: 20170523073556) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20170512103144) do
     t.string   "is_agree_thirdparty_info"
     t.string   "ch_cd"
     t.string   "shop_cd"
+    t.string   "gene_barcode"
   end
 
   create_table "fcafterinterviewrxes", force: :cascade do |t|
@@ -225,6 +226,40 @@ ActiveRecord::Schema.define(version: 20170512103144) do
     t.string   "worry_skin_1"
     t.string   "worry_skin_2"
     t.integer  "m_skintype"
+    t.integer  "uf_1"
+    t.integer  "uf_2"
+    t.integer  "uf_3"
+    t.integer  "uf_4"
+    t.integer  "uf_5"
+    t.integer  "uf_6"
+    t.integer  "uf_7"
+    t.integer  "uf_8"
+    t.integer  "uf_avr"
+  end
+
+  create_table "fcgene_interviews", force: :cascade do |t|
+    t.string   "custserial"
+    t.string   "gene_barcode"
+    t.string   "ch_cd"
+    t.integer  "measureno"
+    t.string   "shop_cd"
+    t.string   "q1_height"
+    t.string   "q1_weight"
+    t.string   "q2"
+    t.string   "q3"
+    t.string   "q4"
+    t.string   "q5"
+    t.string   "q7"
+    t.string   "q8"
+    t.string   "q9"
+    t.string   "q10"
+    t.string   "q11"
+    t.string   "q12"
+    t.string   "q13"
+    t.string   "q14"
+    t.string   "uptdate"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "fcinterviews", force: :cascade do |t|
