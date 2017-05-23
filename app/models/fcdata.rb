@@ -160,7 +160,15 @@ class Fcdata < ApplicationRecord
        dry_u_graph_min: 0,
        dry_u_graph_max: 100,
        dry_u_graph_avr: get_vertical_graph_avr(type: "moisture"),
-       m_skintype: m_skintype
+       uf_1: uf_1,
+       uf_2: uf_2,
+       uf_3: uf_3,
+       uf_4: uf_4,
+       uf_5: uf_5,
+       uf_6: uf_6,
+       uf_7: uf_7,
+       uf_8: uf_8,
+       uf_avr: uf_avr
     }
   end
 
