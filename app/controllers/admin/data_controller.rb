@@ -1411,7 +1411,7 @@ class Admin::DataController < Admin::AdminApplicationController
     Rails.logger.info @fcdatas.count if @fcdatas.nil? || @fcdatas.count > 0
 
     @fcdatas.each do |fcdata|
-      fctabletinterview = Fctabletinterviewrx.where.not(skin_type: nil).where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno.to_i).first
+      fctabletinterview = Fctabletinterviewrx.where.not(skin_type: nil).where(ch_cd: @ch_array).where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno.to_i).first
       is_contain = true
 
       if !fctabletinterview.nil?
