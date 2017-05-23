@@ -1415,18 +1415,6 @@ class Admin::DataController < Admin::AdminApplicationController
       is_contain = true
 
       if !fctabletinterview.nil?
-        # if !fctabletinterview.skin_type.nil?
-        #   if @select_senstive != "all" && @select_senstive == "yes"
-        #     if !fctabletinterview.skin_type.include?("senstive")
-        #       is_contain = false
-        #     end
-        #   elsif !fctabletinterview.skin_type.nil? && @select_senstive != "all" && @select_senstive == "no"
-        #     if fctabletinterview.skin_type.include?("senstive")
-        #       is_contain = false
-        #     end
-        #   end
-        # end
-
         if !@select_mode.blank? && @select_mode.downcase != "all"
           if fctabletinterview.mmode == @select_mode
             is_contain = true
@@ -1443,6 +1431,8 @@ class Admin::DataController < Admin::AdminApplicationController
             is_contain = false
           end
         end
+      else
+        is_contain = false
       end
 
       if is_contain == true
