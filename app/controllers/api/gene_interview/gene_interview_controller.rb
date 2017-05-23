@@ -1,4 +1,4 @@
-class Api::Gene_interview::GeneInterviewController < Api::ApplicationController
+class Api::GeneInterview::GeneInterviewController < Api::ApplicationController
   def index
     interview = FcgeneInterview.where(custserial: params[:custserial], measureno: params[:measureno].to_i).first
     if !interview.nil?
