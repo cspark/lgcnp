@@ -106,7 +106,16 @@ class AdminFcdata < ApplicationRecord
        janus_status: janus_status,
        shop_cd: shop_cd,
        worry_skin_1: worry_skin_1,
-       worry_skin_2: worry_skin_2
+       worry_skin_2: worry_skin_2,
+       uf_1: uf_1,
+       uf_2: uf_2,
+       uf_3: uf_3,
+       uf_4: uf_4,
+       uf_5: uf_5,
+       uf_6: uf_6,
+       uf_7: uf_7,
+       uf_8: uf_8,
+       uf_avr: uf_avr
     }
   end
 
