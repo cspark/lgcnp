@@ -1424,8 +1424,10 @@ class Admin::DataController < Admin::AdminApplicationController
         #   end
         # end
 
-        if !@select_mode.blank? && @select_mode != "all"
-          if fctabletinterview.mmode != @select_mode
+        if !@select_mode.blank? && @select_mode.downcase != "all"
+          if fctabletinterview.mmode == @select_mode
+            is_contain = true
+          else
             is_contain = false
           end
         end
