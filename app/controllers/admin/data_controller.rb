@@ -1112,18 +1112,24 @@ class Admin::DataController < Admin::AdminApplicationController
     Rails.logger.info @select_skin_anxiety2_array
     Rails.logger.info @skin_type_survey_array
 
-    if @select_skin_anxiety1_array.blank? || @skin_type_survey_array.blank?
-      serial_array = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_1: ["!!"]).pluck(:custserial).uniq
+    if !@select_skin_anxiety1_array.blank?
+      serial_array = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_1: @select_skin_anxiety1_array).pluck(:custserial).uniq
     else
-      serial_array = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_1: @select_skin_anxiety1_array).where(skin_type: @skin_type_survey_array).pluck(:custserial).uniq
+      serial_array = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_1: ["!!"]).pluck(:custserial).uniq
     end
 
-    if @select_skin_anxiety2_array.blank? || @skin_type_survey_array.blank?
-      serial_array2 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_2: ["!!"]).pluck(:custserial).uniq
+    if !@select_skin_anxiety2_array.blank?
+      serial_array2 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_2: @select_skin_anxiety2_array).pluck(:custserial).uniq
     else
-      serial_array2 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_2: @select_skin_anxiety2_array).where(skin_type: @skin_type_survey_array).pluck(:custserial).uniq
+      serial_array2 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_2: ["!!"]).pluck(:custserial).uniq
     end
-    serial_array = serial_array & serial_array2
+
+    if !@skin_type_survey_array.blank?
+      serial_array3 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(skin_type: @skin_type_survey_array).pluck(:custserial).uniq
+    else
+      serial_array3 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(skin_type: ["!!"]).pluck(:custserial).uniq
+    end
+    serial_array = serial_array & serial_array2 & serial_array3
 
     @fcdatas = []
     @fcdatas_final = []
