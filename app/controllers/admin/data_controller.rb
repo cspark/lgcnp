@@ -469,7 +469,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     @fcdatas.each do |fcdata|
-      fctabletinterview = Fctabletinterview.where.not(skin_type: nil).where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno.to_i).first
+      fctabletinterview = Fctabletinterview.where.not(skin_type: nil).where.not(before_solution_1: nil).where.not(before_solution_2: nil).where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno.to_i).first
       is_contain = true
 
       if !fctabletinterview.nil?
@@ -510,6 +510,8 @@ class Admin::DataController < Admin::AdminApplicationController
             is_contain = false
           end
         end
+      else
+        is_contain = false
       end
 
       if is_contain == true
@@ -1437,7 +1439,7 @@ class Admin::DataController < Admin::AdminApplicationController
     Rails.logger.info @fcdatas.count if @fcdatas.nil? || @fcdatas.count > 0
 
     @fcdatas.each do |fcdata|
-      fctabletinterview = Fctabletinterviewrx.where.not(skin_type: nil).where(ch_cd: @ch_array).where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno.to_i).first
+      fctabletinterview = Fctabletinterviewrx.where.not(skin_type: nil).where.not(before_solution_1: nil).where.not(before_solution_2: nil).where(ch_cd: @ch_array).where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno.to_i).first
       is_contain = true
 
       if !fctabletinterview.nil?
