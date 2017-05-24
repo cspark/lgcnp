@@ -176,7 +176,7 @@
             <% elsif filter.include?("corneous_value") %>
               <td class="text-center"><%= tabletinterview.corneous_value.to_i %></td>
             <% elsif filter.include?("stress_value") %>
-              <td class="text-center"><%= tabletinterview.stress_value.to_f %></td>
+              <td class="text-center"><%= tabletinterview.stress_value.to_i %></td>
             <% else %>
               <td class="text-center"><%= tabletinterview[filter].to_i if tabletinterview[filter].to_i != -1 %></td>
             <% end %>
@@ -245,7 +245,7 @@
           <% end %>
           <td class="text-center"><%= tabletinterview.turnover_value.to_i+1 %></td>
           <td class="text-center"><%= tabletinterview.corneous_value.to_i %></td>
-          <td class="text-center"><%= tabletinterview.stress_value.to_f %></td>
+          <td class="text-center"><%= tabletinterview.stress_value.to_i %></td>
         <% end %>
       </tr>
 

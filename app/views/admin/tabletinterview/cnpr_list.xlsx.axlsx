@@ -202,7 +202,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
             elsif filter.include?("corneous_value")
               temp << tabletinterview.corneous_value.to_i
             elsif filter.include?("stress_value")
-              temp << tabletinterview.stress_value.to_f
+              temp << tabletinterview.stress_value.to_i
             else
               temp << tabletinterview[filter].to_s
             end
@@ -216,7 +216,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           tabletinterview.a_1.to_i, tabletinterview.a_2.to_i, tabletinterview.a_3.to_i,
           tabletinterview.b_1.to_i, tabletinterview.b_2.to_i, tabletinterview.b_3.to_i, tabletinterview.b_4.to_i, tabletinterview.b_5.to_i,tabletinterview.b_6.to_i,
           tabletinterview.c_1.to_i, tabletinterview.d_1.to_i, tabletinterview.d_2.to_i, tabletinterview.d_3.to_i, tabletinterview.d_4.to_i, tabletinterview.d_5.to_i,
-          tabletinterview.d_6.to_i, pr_graph, sb_graph, pp_graph, wr_graph, el_graph, mo_graph,tabletinterview.turnover_value.to_i+1, tabletinterview.corneous_value.to_i, tabletinterview.stress_value.to_f]
+          tabletinterview.d_6.to_i, pr_graph, sb_graph, pp_graph, wr_graph, el_graph, mo_graph,tabletinterview.turnover_value.to_i+1, tabletinterview.corneous_value.to_i, tabletinterview.stress_value.to_i]
         end
     end
 end
