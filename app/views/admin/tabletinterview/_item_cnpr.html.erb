@@ -124,13 +124,11 @@
             <% elsif filter.include?("after_solution_2") %>
               <td class="text-center" id="after_solution_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
             <% elsif filter.include?("recommand_program_step_1") %>
-              <td class="text-center">
-                <% if !tabletinterview.recommand_program_step_1.nil? %>
-                  <td class="text-center"><%= URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," ") %></td>
-                <% else %>
-                  <td class="text-center">-</td>
-                <% end %>
-              </td>
+              <% if !tabletinterview.recommand_program_step_1.nil? %>
+                <td class="text-center"><%= URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," ") %></td>
+              <% else %>
+                <td class="text-center">-</td>
+              <% end %>
             <% elsif filter.include?("recommand_program_step_2") %>
               <% if !tabletinterview.recommand_program_step_2.nil? %>
                 <td class="text-center"><%= URI.decode(tabletinterview.recommand_program_step_2).gsub("+"," ") %></td>
@@ -145,21 +143,21 @@
               <% end %>
             <% elsif filter.include?("purchase1") %>
               <% if !tabletinterview.purchase1.nil? %>
-              <td class="text-center"><%= URI.decode(tabletinterview.purchase1) %></td>
-                <% else %>
-              <td></td>
+                <td class="text-center"><%= URI.decode(tabletinterview.purchase1) %></td>
+              <% else %>
+                <td>-</td>
               <% end %>
             <% elsif filter.include?("purchase2") %>
               <% if !tabletinterview.purchase2.nil? %>
                 <td class="text-center"><%= URI.decode(tabletinterview.purchase2) %></td>
               <% else %>
-                <td></td>
+                <td>-</td>
               <% end %>
             <% elsif filter.include?("purchase3") %>
               <% if !tabletinterview.purchase3.nil? %>
                 <td class="text-center"><%= URI.decode(tabletinterview.purchase3) %></td>
               <% else %>
-                <td></td>
+                <td>-</td>
               <% end %>
             <% elsif !fcdata.nil? && filter.include?("pr_graph") %>
               <td class="text-center"><%= fcdata[:pr_graph].to_i %></td>
