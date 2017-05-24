@@ -172,7 +172,7 @@
             <% elsif !fcdata.nil? && filter.include?("mo_graph") %>
               <td class="text-center"><%= fcdata[:mo_graph].to_i %></td>
             <% elsif filter.include?("turnover_value") %>
-              <td class="text-center"><%= tabletinterview.turnover_value.to_i %></td>
+              <td class="text-center"><%= tabletinterview.turnover_value.to_i+1 %></td>
             <% elsif filter.include?("corneous_value") %>
               <td class="text-center"><%= tabletinterview.corneous_value.to_i %></td>
             <% elsif filter.include?("stress_value") %>
@@ -243,7 +243,7 @@
             <td class="text-center"><%= fcdata[:el_graph].to_i+1 %></td>
             <td class="text-center"><%= fcdata[:mo_graph].to_i+1 %></td>
           <% end %>
-          <td class="text-center"><%= tabletinterview.turnover_value.to_i %></td>
+          <td class="text-center"><%= tabletinterview.turnover_value.to_i+1 %></td>
           <td class="text-center"><%= tabletinterview.corneous_value.to_i %></td>
           <td class="text-center"><%= tabletinterview.stress_value.to_f %></td>
         <% end %>
