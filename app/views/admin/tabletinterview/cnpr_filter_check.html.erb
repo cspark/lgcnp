@@ -81,6 +81,15 @@
           $("#graph_check_detail").hide();
         }
       });
+      $(document).on("click", "#enviroment_indices_check", function (e) {
+        if (!$("input:checkbox[id='enviroment_indices_check']").is(":checked")){
+          $("input:checkbox[class='enviroment_indices_check']").prop("checked", false);
+          $("#enviroment_indices_check_detail").show();
+        } else {
+          $("input:checkbox[class='enviroment_indices_check']").prop("checked", true);
+          $("#enviroment_indices_check_detail").hide();
+        }
+      });
 
       $(document).on("click", "#all_check", function (e) {
         if (!$("input:checkbox[id='all_check']").is(":checked")){
@@ -184,6 +193,16 @@
               <font style="margin-left:5px;">주름 점수 </font><input type="checkbox" name="check_box" class="graph_check" value="wr_graph" id="wr_graph">
               <font style="margin-left:5px;">탄력 점수 </font><input type="checkbox" name="check_box" class="graph_check" value="el_graph" id="el_graph">
               <font style="margin-left:5px;">건조 점수 </font><input type="checkbox" name="check_box" class="graph_check" value="mo_graph" id="mo_graph">
+            </div><br>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>환경 지수 전체</b></font>
+            <input type="checkbox" name="check_box" value="enviroment_indices_all" id="enviroment_indices_check" style="float:left; margin-left:5px;">
+            <div id="enviroment_indices_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>스트레스 지수 </font><input type="checkbox" name="check_box" class="enviroment_indices_check" value="turnover_value" id="turnover_value">
+              <font style="margin-left:5px;">각질 측정 </font><input type="checkbox" name="check_box" class="enviroment_indices_check" value="corneous_value" id="corneous_value">
+              <font style="margin-left:5px;">스트레스 지수 </font><input type="checkbox" name="check_box" class="enviroment_indices_check" value="stress_value" id="stress_value">
             </div><br>
           </div><br><br>
           <center>

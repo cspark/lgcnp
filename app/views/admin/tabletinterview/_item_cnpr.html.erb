@@ -161,6 +161,12 @@
               <td class="text-center"><%= fcdata[:el_graph].to_i %></td>
             <% elsif !fcdata.nil? && filter.include?("mo_graph") %>
               <td class="text-center"><%= fcdata[:mo_graph].to_i %></td>
+            <% elsif filter.include?("turnover_value") %>
+              <td class="text-center"><%= tabletinterview.turnover_value.to_i %></td>
+            <% elsif filter.include?("corneous_value") %>
+              <td class="text-center"><%= tabletinterview.corneous_value.to_i %></td>
+            <% elsif filter.include?("stress_value") %>
+              <td class="text-center"><%= tabletinterview.stress_value.to_f %></td>
             <% else %>
               <td class="text-center"><%= tabletinterview[filter].to_i if tabletinterview[filter].to_i != -1 %></td>
             <% end %>
@@ -220,13 +226,16 @@
           <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id.to_i).first %>
           <% if !fcdata.nil? %>
             <% fcdata = fcdata.to_api_hash_for_admin %>
-            <td class="text-center"><%= fcdata[:pr_graph].to_i %></td>
-            <td class="text-center"><%= fcdata[:sb_graph].to_i %></td>
-            <td class="text-center"><%= fcdata[:pp_graph].to_i %></td>
-            <td class="text-center"><%= fcdata[:wr_graph].to_i %></td>
-            <td class="text-center"><%= fcdata[:el_graph].to_i %></td>
-            <td class="text-center"><%= fcdata[:mo_graph].to_i %></td>
+            <td class="text-center"><%= fcdata[:pr_graph].to_i+1 %></td>
+            <td class="text-center"><%= fcdata[:sb_graph].to_i+1 %></td>
+            <td class="text-center"><%= fcdata[:pp_graph].to_i+1 %></td>
+            <td class="text-center"><%= fcdata[:wr_graph].to_i+1 %></td>
+            <td class="text-center"><%= fcdata[:el_graph].to_i+1 %></td>
+            <td class="text-center"><%= fcdata[:mo_graph].to_i+1 %></td>
           <% end %>
+          <td><%= tabletinterview.turnover_value.to_i %></td>
+          <td><%= tabletinterview.corneous_value.to_i %></td>
+          <td><%= tabletinterview.stress_value.to_f %></td>
         <% end %>
       </tr>
 

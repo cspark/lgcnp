@@ -411,6 +411,12 @@
                   <th>탄력 점수</th>
                 <% elsif filter.include?("mo_graph")  %>
                   <th>건조 점수</th>
+                <% elsif filter.include?("turnover_value")  %>
+                  <th>턴오버 지수</th>
+                <% elsif filter.include?("corneous_value")  %>
+                  <th>각질 측정</th>
+                <% elsif filter.include?("stress_value")  %>
+                  <th>스트레스 지수</th>
                 <% else %>
                   <th class="text-center"><%= filter %></th>
                 <% end %>
@@ -449,6 +455,9 @@
               <th>주름 점수</th>
               <th>탄력 점수</th>
               <th>건조 점수</th>
+              <th>턴오버 점수</th>
+              <th>각질 측정</th>
+              <th>스트레스 지수</th>
             <% end %>
         </tr>
       </thead>

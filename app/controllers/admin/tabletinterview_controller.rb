@@ -495,6 +495,10 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       min_age_custinfo = Custinfo.where(ch_cd: "CNPR").where.not(birthyy: nil).order("birthyy desc").first
       max_age_custinfo = Custinfo.where(ch_cd: "CNPR").order("birthyy asc").first
     end
+    # @min_age = 14
+    # @max_age = 100
+    # @min_birthyy = 1960
+    # @max_birthyy = 2000
     @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
     @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
     @min_birthyy = min_age_custinfo.birthyy
@@ -539,7 +543,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       @excel_name = ["이름","시리얼","진단 날짜","채널","피부타입","진단으로 나온 솔루션 1","최종으로 선택된 솔루션 1","진단으로 나온 솔루션 2","최종으로 선택된 솔루션 2",
       "맞춤제품 Step1","맞춤제품 Step2","맞춤제품 Step3","구매제품 Step1","구매제품 Step2","구매제품 Step3",
       "A1","A2","A3","B1","B2","B3","B4","B5","B6","C1","D1","D2","D3","D4","D5",
-      "D6","모공 점수","트러블 점수","색소침착 점수","주름 점수","탄력 점수", "건조 점수"]
+      "D6","모공 점수","트러블 점수","색소침착 점수","주름 점수","탄력 점수", "건조 점수", "턴오버 지수", "각질 측정", "스트레스 지수"]
     else
       @excel_name = ["이름","시리얼","진단 날짜","채널"]
       @select_filter.each do |filter|
@@ -577,6 +581,12 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
           filter = "탄력 점수"
         elsif filter.include?("mo_graph")
           filter = "건조 점수"
+        elsif filter.include?("turnover_value")
+          filter = "턴오버 지수"
+        elsif filter.include?("corneous_value")
+          filter = "각질 측정"
+        elsif filter.include?("stress_value")
+          filter = "스트레스 지수"
         else
           filter = filter
         end
