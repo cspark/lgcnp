@@ -11,9 +11,8 @@ class Api::GeneInterview::GeneInterviewController < Api::ApplicationController
   def create
     interview = FcgeneInterview.new(permitted_params)
 
-    # t = Time.now
-    # yymmdd = t.to_s.split(" ")[0]
-    # interview.uptdate = yymmdd.split("-")[0] +"/"+ yymmdd.split("-")[1] +"/"+ yymmdd.split("-")[2]
+    t = Time.now
+    interview.uptdate = t.to_s.split(" ")[0]
 
     if interview.save
       render json: interview.to_api_hash, status: :ok
@@ -26,6 +25,9 @@ class Api::GeneInterview::GeneInterviewController < Api::ApplicationController
     interview = FcgeneInterview.where(custserial: params[:custserial], measureno: params[:measureno].to_i).first
     if !interview.nil?
       interview.update(permitted_params)
+      t = Time.now
+      interview.uptdate = t.to_s.split(" ")[0]
+
       if interview.save
         render json: interview.to_api_hash, status: :ok
       else
