@@ -144,11 +144,23 @@
                 <td class="text-center">-</td>
               <% end %>
             <% elsif filter.include?("purchase1") %>
+              <% if !tabletinterview.purchase1.nil? %>
               <td class="text-center"><%= URI.decode(tabletinterview.purchase1) %></td>
+                <% else %>
+              <td></td>
+              <% end %>
             <% elsif filter.include?("purchase2") %>
-              <td class="text-center"><%= URI.decode(tabletinterview.purchase2) %></td>
+              <% if !tabletinterview.purchase2.nil? %>
+                <td class="text-center"><%= URI.decode(tabletinterview.purchase2) %></td>
+              <% else %>
+                <td></td>
+              <% end %>
             <% elsif filter.include?("purchase3") %>
-              <td class="text-center"><%= URI.decode(tabletinterview.purchase3) %></td>
+              <% if !tabletinterview.purchase3.nil? %>
+                <td class="text-center"><%= URI.decode(tabletinterview.purchase3) %></td>
+              <% else %>
+                <td></td>
+              <% end %>
             <% elsif !fcdata.nil? && filter.include?("pr_graph") %>
               <td class="text-center"><%= fcdata[:pr_graph].to_i %></td>
             <% elsif !fcdata.nil? && filter.include?("sb_graph") %>
@@ -233,9 +245,9 @@
             <td class="text-center"><%= fcdata[:el_graph].to_i+1 %></td>
             <td class="text-center"><%= fcdata[:mo_graph].to_i+1 %></td>
           <% end %>
-          <td><%= tabletinterview.turnover_value.to_i %></td>
-          <td><%= tabletinterview.corneous_value.to_i %></td>
-          <td><%= tabletinterview.stress_value.to_f %></td>
+          <td class="text-center"><%= tabletinterview.turnover_value.to_i %></td>
+          <td class="text-center"><%= tabletinterview.corneous_value.to_i %></td>
+          <td class="text-center"><%= tabletinterview.stress_value.to_f %></td>
         <% end %>
       </tr>
 
