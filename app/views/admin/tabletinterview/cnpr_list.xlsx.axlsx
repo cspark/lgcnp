@@ -198,11 +198,11 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
             elsif filter.include?("mo_graph")
               temp << mo_graph
             elsif filter.include?("turnover_value")
-              filter = tabletinterview.turnover_value.to_i
+              temp << tabletinterview.turnover_value.to_i
             elsif filter.include?("corneous_value")
-              filter = tabletinterview.corneous_value.to_i
+              temp << tabletinterview.corneous_value.to_i
             elsif filter.include?("stress_value")
-              filter = tabletinterview.stress_value.to_f
+              temp << tabletinterview.stress_value.to_f
             else
               temp << tabletinterview[filter].to_s
             end
