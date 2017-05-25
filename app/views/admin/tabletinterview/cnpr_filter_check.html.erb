@@ -91,6 +91,16 @@
         }
       });
 
+      $(document).on("click", "#overlap_check", function (e) {
+        if (!$("input:checkbox[id='overlap_check']").is(":checked")){
+          $("input:checkbox[class='overlap_check']").prop("checked", false);
+          $("#overlap_check_detail").show();
+        } else {
+          $("input:checkbox[class='overlap_check']").prop("checked", true);
+          $("#overlap_check_detail").hide();
+        }
+      });
+
       $(document).on("click", "#all_check", function (e) {
         if (!$("input:checkbox[id='all_check']").is(":checked")){
           $("input:checkbox[name='check_box']").prop("checked", false);
@@ -204,6 +214,20 @@
               <font style="margin-left:5px;">각질 측정 </font><input type="checkbox" name="check_box" class="enviroment_indices_check" value="corneous_value" id="corneous_value">
               <font style="margin-left:5px;">스트레스 지수 </font><input type="checkbox" name="check_box" class="enviroment_indices_check" value="stress_value" id="stress_value">
             </div><br>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>중복샷 전체</b></font>
+            <input type="checkbox" name="check_box" value="overlap_all" id="overlap_check" style="float:left; margin-left:5px;">
+            <div id="overlap_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>초기 중복샷 </font><input type="checkbox" name="check_box" class="overlap_check" value="before_overlap" id="before_overlap">
+              <font style="margin-left:5px;">최종 중복샷 </font><input type="checkbox" name="check_box" class="overlap_check" value="after_overlap" id="after_overlap">
+            </div><br>
+          </div><br>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>메모</b></font>
+            <input type="checkbox" name="check_box" value="memo" id="memo" style="float:left; margin-left:5px;">
           </div><br><br>
           <center>
             <button style="margin-top: 20px;" class="btn btn-warning" id="filter_submit">필터적용</button>

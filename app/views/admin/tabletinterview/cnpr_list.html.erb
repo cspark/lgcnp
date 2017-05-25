@@ -348,7 +348,7 @@
           <option value="R">우</option>
         </select>
 
-        <font style="margin-left:20px;">중복샷 :</font>
+        <font style="margin-left:20px;">초기 중복샷 :</font>
         <input type="checkbox" name="before_overlap_check_box" value="before_overlap" id="before_overlap" style="margin-top:9px;">
         <font style="margin-left:10px;">최종 중복샷 :</font>
         <input type="checkbox" name="after_overlap_check_box" value="after_overlap" id="after_overlap" style="margin-top:9px;">
@@ -432,6 +432,10 @@
                   <th>각질 측정</th>
                 <% elsif filter.include?("stress_value")  %>
                   <th>스트레스 지수</th>
+                <% elsif filter.include?("before_overlap")  %>
+                  <th>초기 중복샷</th>
+                <% elsif filter.include?("after_overlap")  %>
+                  <th>최종 중복샷</th>
                 <% else %>
                   <th class="text-center"><%= filter %></th>
                 <% end %>
@@ -473,6 +477,8 @@
               <th>턴오버 점수</th>
               <th>각질 측정</th>
               <th>스트레스 지수</th>
+              <th>초기 중복샷</th>
+              <th>최종 중복샷</th>
             <% end %>
         </tr>
       </thead>
