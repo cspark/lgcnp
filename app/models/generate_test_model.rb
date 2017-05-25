@@ -443,4 +443,49 @@ class GenerateTestModel < ApplicationRecord
     end
     array = array.uniq
   end
+
+  def change_before_overlap
+    fts = Fctabletinterviewrx.all
+    fts.each do |interview|
+      serial = interview.custserial.to_i.to_s
+      measureno = interview.fcdata_id.to_i.to_s
+      # serial = 1239
+      # measureno = 6
+      face_data = Fcdata.where(custserial: serial).where(measureno: measureno).last
+      data = face_data.to_api_hash_for_admin
+      Rails.logger.info data
+      sb = data[:sb_graph]
+      pp = data[:pp_graph]
+      el = data[:el_graph]
+      wr = data[:wr_graph]
+      mo = data[:mo_graph]
+
+      array = []
+      array << [sb, "SCORE_TROUBLE"]
+      array << [pp, "SCORE_PIGMENT"]
+      array << [el, "SCORE_ELASTICITY"]
+      array << [wr, "SKIN_WRINKLE"]
+      array << [mo, "SCORE_WATER"]
+      array = array.sort
+
+      if array[0][0] - array[1][0] <= -2
+        interview.before_overlap = array[0][1]
+      end
+      if interview.after_solution_1 == interview.after_solution_2
+        interview.after_overlap = interview.after_solution_2
+      end
+      interview.save
+    end
+  end
+
+  def debug_after_overlap
+    temp_array = []
+    fts = Fctabletinterviewrx.all
+    fts.each do |interview|
+      if interview.after_solution_1 == interview.after_solution_2
+        temp_array << interview.custserial.to_i
+      end
+    end
+  end
+
 end

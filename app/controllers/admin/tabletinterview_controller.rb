@@ -444,7 +444,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end_birthmm = params[:end_birthmm]
     select_mode = params[:select_mode]
     select_makeup = params[:select_makeup]
-    overlap = params[:overlap]
+    before_overlap = params[:before_overlap]
+    after_overlap = params[:after_overlap]
     select_area = params[:select_area]
     @params_filter = params[:select_filter]
 
@@ -462,7 +463,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @select_mode = select_mode
     @select_makeup = select_makeup
     @select_area = select_area
-    @overlap = overlap if !overlap.blank?
+    @before_overlap = before_overlap if !before_overlap.blank?
+    @after_overlap = after_overlap if !after_overlap.blank?
 
     @is_init = true
     if params[:select_sex].present?
@@ -495,14 +497,14 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       min_age_custinfo = Custinfo.where(ch_cd: "CNPR").where.not(birthyy: nil).order("birthyy desc").first
       max_age_custinfo = Custinfo.where(ch_cd: "CNPR").order("birthyy asc").first
     end
-    # @min_age = 14
-    # @max_age = 100
-    # @min_birthyy = 1960
-    # @max_birthyy = 2000
-    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
-    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
-    @min_birthyy = min_age_custinfo.birthyy
-    @max_birthyy = max_age_custinfo.birthyy
+    @min_age = 14
+    @max_age = 100
+    @min_birthyy = 1960
+    @max_birthyy = 2000
+    # @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
+    # @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+    # @min_birthyy = min_age_custinfo.birthyy
+    # @max_birthyy = max_age_custinfo.birthyy
     @min_birthmm = 1
     @max_birthmm = 12
 
@@ -534,8 +536,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(mmode: @select_mode) if !@select_mode.blank? && @select_mode.downcase != "all"
-    scoped = scoped.where.not(before_overlap: nil) if !@overlap.blank? && @overlap == "T"
-    scoped = scoped.where.not(after_overlap: nil) if !@overlap.blank? && @overlap == "T"
+    scoped = scoped.where.not(before_overlap: nil) if !@before_overlap.blank? && @before_overlap == "T"
+    scoped = scoped.where.not(after_overlap: nil) if !@after_overlap.blank? && @after_overlap == "T"
 
     Rails.logger.info "scoped.count!!!"
     Rails.logger.info scoped.count

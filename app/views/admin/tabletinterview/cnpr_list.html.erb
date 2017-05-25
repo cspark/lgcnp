@@ -159,10 +159,16 @@
             $('select[id="select_area"]').val('<%= @select_area %>');
           <% end %>
 
-          <% if @overlap.nil? || @overlap == "F" %>
-            $("input:checkbox[name=overlap_check_box]").prop("checked", false);
+          <% if @before_overlap.nil? || @before_overlap == "F" %>
+            $("input:checkbox[name=before_overlap_check_box]").prop("checked", false);
           <% else %>
-            $("input:checkbox[name=overlap_check_box]").prop("checked", true);
+            $("input:checkbox[name=before_overlap_check_box]").prop("checked", true);
+          <% end %>
+
+          <% if @after_overlap.nil? || @after_overlap == "F" %>
+            $("input:checkbox[name=after_overlap_check_box]").prop("checked", false);
+          <% else %>
+            $("input:checkbox[name=after_overlap_check_box]").prop("checked", true);
           <% end %>
 
           $("#date_init").click(function(){
@@ -228,9 +234,13 @@
             }
         });
 
-        var overlap = "T"
-        if (!document.getElementById("overlap").checked) {
-          overlap = "F"
+        var before_overlap = "T"
+        if (!document.getElementById("before_overlap").checked) {
+          before_overlap = "F"
+        }
+        var after_overlap = "T"
+        if (!document.getElementById("after_overlap").checked) {
+          after_overlap = "F"
         }
 
         url = ""
@@ -249,7 +259,8 @@
         url += "&select_area=" + select_area;
         url += "&select_filter=" +filterStr;
         url += "&select_shop=" +$("#select_shop").val();
-        url += "&overlap=" + overlap;
+        url += "&before_overlap=" + before_overlap;
+        url += "&after_overlap=" + after_overlap;
 
         location.href = url;
       }
@@ -337,8 +348,10 @@
           <option value="R">우</option>
         </select>
 
-        중복샷 :
-        <input type="checkbox" name="overlap_check_box" value="overlap" id="overlap" style="margin-top:9px;">
+        <font style="margin-left:20px;">중복샷 :</font>
+        <input type="checkbox" name="before_overlap_check_box" value="before_overlap" id="before_overlap" style="margin-top:9px;">
+        <font style="margin-left:10px;">최종 중복샷 :</font>
+        <input type="checkbox" name="after_overlap_check_box" value="after_overlap" id="after_overlap" style="margin-top:9px;">
       </div><br>
 
       <div class="form-inline" style="margin-top:5px;">
