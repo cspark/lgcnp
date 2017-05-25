@@ -195,9 +195,9 @@
         <% fcdata = fcdata.to_api_hash %>
         [그래프] 모공 점수 : <%= fcdata[:pr_graph].to_i %> / 트러블 점수 : <%= fcdata[:sb_graph].to_i %> / 색소침착 점수 : <%= fcdata[:pp_graph].to_i %> / 주름 점수 : <%= fcdata[:wr_graph].to_i %> / 탄력 점수 : <%= fcdata[:el_graph].to_i %> / 건조 점수 : <%= fcdata[:mo_graph].to_i %><br>
       <% end %>
-      턴오버 지수: <%= tabletinterview.turnover_value.to_i+1 %></td>
-      각질 측정: <%= tabletinterview.corneous_value.to_i %></td>
-      스트레스 지수: <%= tabletinterview.stress_value.to_i %></td>
+      턴오버 지수: <%= @tabletinterview.turnover_value.to_i+1 %></td>
+      각질 측정: <%= @tabletinterview.corneous_value.to_i %></td>
+      스트레스 지수: <%= @tabletinterview.stress_value.to_i %></td>
       초기 중복샷: <font id="before_overlap_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
       최종 중복샷: <font id="after_overlap_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
       <font size="2">메모: </font><br>
