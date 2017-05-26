@@ -169,7 +169,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @select_base = select_base if !select_base.blank?
     @select_ample1 = select_ample1 if !select_ample1.blank?
     @select_ample2 = select_ample2 if !select_ample2.blank?
-    @select_interview = select_interview !select_interview.blank?
+    @select_interview = select_interview if !select_interview.blank?
     @name = name if !name.blank?
 
     if !Custinfo.where(ch_cd: "CNP").where.not(birthyy: nil).order("birthyy desc").first.nil?
@@ -480,7 +480,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @max_birthyy = max_age_custinfo.birthyy
     @min_birthmm = 1
     @max_birthmm = 12
-    
+
     @is_agree_thirdparty_info = params[:is_agree_thirdparty_info] if !params[:is_agree_thirdparty_info].blank?
     @is_init = true
     if params[:select_channel].present?
