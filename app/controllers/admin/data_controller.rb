@@ -384,7 +384,7 @@ class Admin::DataController < Admin::AdminApplicationController
           filter = "피부톤"
         elsif filter.include?("suntype")
           filter = "선 민감도"
-        elsif filter.include?("skintype")
+        elsif filter == "skintype"
           filter = "피부타입(야누스 측정)"
         elsif filter.include?("m_skintype")
           filter = "피부타입(설문 로직)"
@@ -895,7 +895,7 @@ class Admin::DataController < Admin::AdminApplicationController
           filter = "피부톤"
         elsif filter.include?("suntype")
           filter = "선 민감도"
-        elsif filter.include?("skintype")
+        elsif filter == "skintype"
           filter = "피부타입(야누스 측정)"
         elsif filter.include?("m_skintype")
           filter = "피부타입(설문 로직)"
@@ -1360,7 +1360,7 @@ class Admin::DataController < Admin::AdminApplicationController
           filter = "피부톤"
         elsif filter.include?("suntype")
           filter = "선 민감도"
-        elsif filter.include?("skintype")
+        elsif filter == "skintype"
           filter = "피부타입(야누스 측정)"
         elsif filter.include?("m_skintype")
           filter = "피부타입(설문 로직)"
