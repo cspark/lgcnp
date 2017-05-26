@@ -243,9 +243,11 @@ class Admin::FeedbackController < Admin::AdminApplicationController
         end
       end
 
-      temp_age = Time.current.year.to_i - custinfo.birthyy.to_i + 1
-      if temp_age < start_age.to_i || temp_age > end_age.to_i
-        is_contain = false
+      if !@start_age.blank? && !@end_age.blank?
+        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i + 1
+        if temp_age < @start_age.to_i || temp_age > @end_age.to_i
+          is_contain = false
+        end
       end
 
       tablet_interview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first
@@ -461,14 +463,14 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     name = params[:name]
 
 
-    @start_date = start_date.to_time if !start_date.nil?
-    @end_date = end_date.to_time if !end_date.nil?
-    @sex = select_sex if !select_sex.nil?
-    @start_age = start_age if !start_age.nil?
-    @end_age = end_age if !end_age.nil?
-    @select_base = select_base if !select_base.nil?
-    @select_interview = select_interview if !select_interview.nil?
-    @name = name if !name.nil?
+    @start_date = start_date.to_time if !start_date.blank?
+    @end_date = end_date.to_time if !end_date.blank?
+    @sex = select_sex if !select_sex.blank?
+    @start_age = start_age if !start_age.blank?
+    @end_age = end_age if !end_age.blank?
+    @select_base = select_base if !select_base.blank?
+    @select_interview = select_interview if !select_interview.blank?
+    @name = name if !name.blank?
 
     if !Custinfo.where(ch_cd: "CNPR").where.not(birthyy: nil).order("birthyy desc").first.nil?
       min_age_custinfo = Custinfo.where(ch_cd: "CNPR").where.not(birthyy: nil).order("birthyy desc").first
@@ -547,9 +549,11 @@ class Admin::FeedbackController < Admin::AdminApplicationController
         end
       end
 
-      temp_age = Time.current.year.to_i - custinfo.birthyy.to_i + 1
-      if temp_age < start_age.to_i || temp_age > end_age.to_i
-        is_contain = false
+      if !@start_age.blank? && !@end_age.blank?
+        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i + 1
+        if temp_age < start_age.to_i || temp_age > end_age.to_i
+          is_contain = false
+        end
       end
 
       tablet_interview = Fctabletinterviewrx.where(tablet_interview_id: after_interview.rx_tablet_interview_id).first

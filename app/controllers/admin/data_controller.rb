@@ -443,7 +443,7 @@ class Admin::DataController < Admin::AdminApplicationController
       end
 
       if !@start_age.blank? && !@end_age.blank?
-        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
+        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i + 1
         if temp_age < @start_age.to_i || temp_age > @end_age.to_i
           is_contain = false
         end
@@ -940,7 +940,7 @@ class Admin::DataController < Admin::AdminApplicationController
       end
 
       if !@start_age.blank? && !@end_age.blank?
-        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
+        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i + 1
         if temp_age < @start_age.to_i || temp_age > @end_age.to_i
           is_contain = false
         end
