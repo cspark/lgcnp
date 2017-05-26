@@ -160,39 +160,28 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     select_interview = params[:select_interview]
     name = params[:name]
 
-    if !start_date.nil?
-      @start_date = start_date.to_time
-    end
-    if !end_date.nil?
-      @end_date = end_date.to_time
-    end
-    if !select_sex.nil?
-      @sex = select_sex
-    end
 
-    if !start_age.nil?
-      @start_age = start_age
-    end
+    @start_date = start_date.to_time if !start_date.blank?
+    @end_date = end_date.to_time if !end_date.blank?
+    @sex = select_sex if !select_sex.blank?
+    @start_age = start_age if !start_age.blank?
+    @end_age = end_age if !end_age.blank?
+    @select_base = select_base if !select_base.blank?
+    @select_ample1 = select_ample1 if !select_ample1.blank?
+    @select_ample2 = select_ample2 if !select_ample2.blank?
+    @select_interview = select_interview !select_interview.blank?
+    @name = name if !name.blank?
 
-    if !end_age.nil?
-      @end_age = end_age
+    if !Custinfo.where(ch_cd: "CNP").where.not(birthyy: nil).order("birthyy desc").first.nil?
+      min_age_custinfo = Custinfo.where(ch_cd: "CNP").where.not(birthyy: nil).order("birthyy desc").first
+      max_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy asc").first
     end
-
-    if !select_base.nil?
-      @select_base = select_base
-    end
-    if !select_ample1.nil?
-      @select_ample1 = select_ample1
-    end
-    if !select_ample2.nil?
-      @select_ample2 = select_ample2
-    end
-    if !select_interview.nil?
-      @select_interview = select_interview
-    end
-    if !name.nil?
-      @name = name
-    end
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+    @min_birthyy = min_age_custinfo.birthyy
+    @max_birthyy = max_age_custinfo.birthyy
+    @min_birthmm = 1
+    @max_birthmm = 12
 
     @is_agree_thirdparty_info = params[:is_agree_thirdparty_info] if !params[:is_agree_thirdparty_info].blank?
     @is_init = true
@@ -471,34 +460,27 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     select_interview = params[:select_interview]
     name = params[:name]
 
-    if !start_date.nil?
-      @start_date = start_date.to_time
-    end
-    if !end_date.nil?
-      @end_date = end_date.to_time
-    end
-    if !select_sex.nil?
-      @sex = select_sex
-    end
 
-    if !start_age.nil?
-      @start_age = start_age
-    end
+    @start_date = start_date.to_time if !start_date.nil?
+    @end_date = end_date.to_time if !end_date.nil?
+    @sex = select_sex if !select_sex.nil?
+    @start_age = start_age if !start_age.nil?
+    @end_age = end_age if !end_age.nil?
+    @select_base = select_base if !select_base.nil?
+    @select_interview = select_interview if !select_interview.nil?
+    @name = name if !name.nil?
 
-    if !end_age.nil?
-      @end_age = end_age
+    if !Custinfo.where(ch_cd: "CNPR").where.not(birthyy: nil).order("birthyy desc").first.nil?
+      min_age_custinfo = Custinfo.where(ch_cd: "CNPR").where.not(birthyy: nil).order("birthyy desc").first
+      max_age_custinfo = Custinfo.where(ch_cd: "CNPR").order("birthyy asc").first
     end
-
-    if !select_base.nil?
-      @select_base = select_base
-    end
-
-    if !select_interview.nil?
-      @select_interview = select_interview
-    end
-    if !name.nil?
-      @name = name
-    end
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+    @min_birthyy = min_age_custinfo.birthyy
+    @max_birthyy = max_age_custinfo.birthyy
+    @min_birthmm = 1
+    @max_birthmm = 12
+    
     @is_agree_thirdparty_info = params[:is_agree_thirdparty_info] if !params[:is_agree_thirdparty_info].blank?
     @is_init = true
     if params[:select_channel].present?
