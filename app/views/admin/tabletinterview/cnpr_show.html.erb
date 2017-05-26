@@ -193,7 +193,7 @@
       <% fcdata = Fcdata.where(custserial: @tabletinterview.custserial).where(measureno: @tabletinterview.fcdata_id).first %>
       <% if !fcdata.nil? %>
         <% fcdata = fcdata.to_api_hash %>
-        [그래프] 모공 점수 : <%= fcdata[:pr_graph].to_i %> / 트러블 점수 : <%= fcdata[:sb_graph].to_i %> / 색소침착 점수 : <%= fcdata[:pp_graph].to_i %> / 주름 점수 : <%= fcdata[:wr_graph].to_i %> / 탄력 점수 : <%= fcdata[:el_graph].to_i %> / 건조 점수 : <%= fcdata[:mo_graph].to_i %><br>
+        [그래프] 모공 점수 : <%= 5-fcdata[:pr_graph].to_i %> / 트러블 점수 : <%= 5-fcdata[:sb_graph].to_i %> / 색소침착 점수 : <%= 5-fcdata[:pp_graph].to_i %> / 주름 점수 : <%= 5-fcdata[:wr_graph].to_i %> / 탄력 점수 : <%= 5-fcdata[:el_graph].to_i %> / 건조 점수 : <%= 5-fcdata[:mo_graph].to_i %><br>
       <% end %>
       턴오버 지수: <%= @tabletinterview.turnover_value.to_i+1 %> / 각질 측정: <%= @tabletinterview.corneous_value.to_i %> / 스트레스 지수: <%= @tabletinterview.stress_value.to_i %><br>
       추천 중복샷: <font id="before_overlap_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id.to_i %>"></font><br>
