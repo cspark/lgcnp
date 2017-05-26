@@ -162,6 +162,33 @@
           $("#score_check_detail").hide();
         }
       });
+      $(document).on("click", "#skintype_check", function (e) {
+        if (!$("input:checkbox[id='skintype_check']").is(":checked")){
+          $("input:checkbox[class='skintype_check']").prop("checked", false);
+          $("#skintype_check_detail").show();
+        } else {
+          $("input:checkbox[class='skintype_check']").prop("checked", true);
+          $("#skintype_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#e_porphyrin_check", function (e) {
+        if (!$("input:checkbox[id='e_porphyrin_check']").is(":checked")){
+          $("input:checkbox[class='e_porphyrin_check']").prop("checked", false);
+          $("#e_porphyrin_check_detail").show();
+        } else {
+          $("input:checkbox[class='e_porphyrin_check']").prop("checked", true);
+          $("#e_porphyrin_check_detail").hide();
+        }
+      });
+      $(document).on("click", "#worry_check", function (e) {
+        if (!$("input:checkbox[id='worry_check']").is(":checked")){
+          $("input:checkbox[class='worry_check']").prop("checked", false);
+          $("#worry_check_detail").show();
+        } else {
+          $("input:checkbox[class='worry_check']").prop("checked", true);
+          $("#worry_check_detail").hide();
+        }
+      });
 
       $(document).on("click", "#all_check", function (e) {
         if (!$("input:checkbox[id='all_check']").is(":checked")){
@@ -178,202 +205,202 @@
       <div id="filter" style="background: #b1cbbb; padding: 8px;">
         <div class="form-inline">
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>전체 Data ALL</b></font>
+            <font style="float:left;"><b>전체 ALL</b></font>
             <input type="checkbox" value="all_check" id="all_check" style="float:left; margin-left:5px;">
           </div><br>
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>수분 측정 Data ALL</b></font>
+            <font style="float:left;"><b>수분 측정 ALL</b></font>
             <input type="checkbox" name="check_box" value="mo_all" id="mo_check" style="float:left; margin-left:5px;">
             <div id="mo_check_detail" style="display:none; float:left; margin-left:20px;">
-              <font>mo_1 </font><input type="checkbox" name="check_box" class="mo_check" value="mo_1" id="mo_1">
-              <font style="margin-left:5px;">mo_7 </font><input type="checkbox" name="check_box" class="mo_check" value="mo_7" id="mo_7">
-              <font style="margin-left:5px;">mo_8 </font><input type="checkbox" name="check_box" class="mo_check" value="mo_8" id="mo_8">
+              <font>수분 측정 이마 </font><input type="checkbox" name="check_box" class="mo_check" value="mo_1" id="mo_1">
+              <font style="margin-left:5px;">수분 측정 우측 볼 </font><input type="checkbox" name="check_box" class="mo_check" value="mo_7" id="mo_7">
+              <font style="margin-left:5px;">수분 측정 좌측 볼 </font><input type="checkbox" name="check_box" class="mo_check" value="mo_8" id="mo_8">
             </div>
           </div><br>
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>모공 측정 Data ALL</b></font>
+            <font style="float:left;"><b>모공 측정 ALL</b></font>
             <input type="checkbox" name="check_box" value="pr_all" id="pr_check" style="float:left; margin-left:5px;">
             <div id="pr_check_detail" style="display:none; float:left; margin-left:20px;">
-              <font>pr_1 </font><input type="checkbox" name="check_box" class="pr_check" value="pr_1" id="pr_1">
-              <font style="margin-left:5px;">pr_2 </font><input type="checkbox" name="check_box" class="pr_check" value="pr_2" id="pr_2">
-              <font style="margin-left:5px;">pr_7 </font><input type="checkbox" name="check_box" class="pr_check" value="pr_7" id="pr_7">
-              <font style="margin-left:5px;">pr_8 </font><input type="checkbox" name="check_box" class="pr_check" value="pr_8" id="pr_8">
-              <font style="margin-left:5px;">pr_avr </font><input type="checkbox" name="check_box" class="pr_check" value="pr_avr" id="pr_avr">
+              <font>모공 측정 이마 </font><input type="checkbox" name="check_box" class="pr_check" value="pr_1" id="pr_1">
+              <font style="margin-left:5px;">모공 측정 코 </font><input type="checkbox" name="check_box" class="pr_check" value="pr_2" id="pr_2">
+              <font style="margin-left:5px;">모공 측정 우측 볼 </font><input type="checkbox" name="check_box" class="pr_check" value="pr_7" id="pr_7">
+              <font style="margin-left:5px;">모공 측정 좌측 볼 </font><input type="checkbox" name="check_box" class="pr_check" value="pr_8" id="pr_8">
+              <font style="margin-left:5px;">모공 측정 평균 </font><input type="checkbox" name="check_box" class="pr_check" value="pr_avr" id="pr_avr">
             </div>
           </div><br>
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>주름 측정 Data ALL</b></font>
+            <font style="float:left;"><b>주름 측정 ALL</b></font>
             <input type="checkbox" name="check_box" value="wr_all" id="wr_check" style="float:left; margin-left:5px;">
             <div id="wr_check_detail" style="display:none; float:left; margin-left:20px;">
-              <font>wr_3 </font><input type="checkbox" type="checkbox" name="check_box" class="wr_check" value="wr_3" id="wr_3">
-              <font style="margin-left:5px;">wr_4 </font><input type="checkbox" name="check_box" class="wr_check" value="wr_4" id="wr_4">
-              <font style="margin-left:5px;">wr_5 </font><input type="checkbox" name="check_box" class="wr_check" value="wr_5" id="wr_5">
-              <font style="margin-left:5px;">wr_6 </font><input type="checkbox" name="check_box" class="wr_check" value="wr_6" id="wr_6">
-              <font style="margin-left:5px;">wr_avr </font><input type="checkbox" name="check_box" class="wr_check" value="wr_avr" id="wr_avr">
+              <font>주름 측정 우측 눈옆 </font><input type="checkbox" type="checkbox" name="check_box" class="wr_check" value="wr_3" id="wr_3">
+              <font style="margin-left:5px;">주름 측정 우측 눈밑 </font><input type="checkbox" name="check_box" class="wr_check" value="wr_4" id="wr_4">
+              <font style="margin-left:5px;">주름 측정 좌측 눈옆 </font><input type="checkbox" name="check_box" class="wr_check" value="wr_5" id="wr_5">
+              <font style="margin-left:5px;">주름 측정 좌측 눈밑 </font><input type="checkbox" name="check_box" class="wr_check" value="wr_6" id="wr_6">
+              <font style="margin-left:5px;">주름 측정 평균 </font><input type="checkbox" name="check_box" class="wr_check" value="wr_avr" id="wr_avr">
             </div>
           </div><br>
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>탄력 측정 Data ALL</b></font>
+            <font style="float:left;"><b>탄력 측정 ALL</b></font>
             <input type="checkbox" name="check_box" value="el_all" id="el_check" style="float:left; margin-left:5px;">
             <div id="el_check_detail" style="display:none; float:left; margin-left:20px;">
-              <font>el_7 </font><input type="checkbox" name="check_box" class="el_check" value="el_7" id="el_7">
-              <font style="margin-left:5px;">el_8  </font><input type="checkbox" name="check_box" class="el_check" value="el_7" id="el_8">
-              <font style="margin-left:5px;">el_avr  </font><input type="checkbox" name="check_box" class="el_check" value="el_avr" id="el_avr">
-              <font style="margin-left:5px;">el_angle_7  </font><input type="checkbox" name="check_box" class="el_check" value="el_angle_7" id="el_angle_7">
-              <font style="margin-left:5px;">el_angle_8  </font><input type="checkbox" name="check_box" class="el_check" value="el_angle_8" id="el_angle_8">
+              <font>탄력 측정 우측 볼 </font><input type="checkbox" name="check_box" class="el_check" value="el_7" id="el_7">
+              <font style="margin-left:5px;">탄력 측정 좌측 볼  </font><input type="checkbox" name="check_box" class="el_check" value="el_7" id="el_8">
+              <font style="margin-left:5px;">탄력 측정 평균  </font><input type="checkbox" name="check_box" class="el_check" value="el_avr" id="el_avr">
+              <font style="margin-left:5px;">탄력 각도 우측 볼  </font><input type="checkbox" name="check_box" class="el_check" value="el_angle_7" id="el_angle_7">
+              <font style="margin-left:5px;">탄력 각도 좌측 볼  </font><input type="checkbox" name="check_box" class="el_check" value="el_angle_8" id="el_angle_8">
             </div>
           </div><br>
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>피지 측정 Data ALL</b></font>
+            <font style="float:left;"><b>피지 측정 ALL</b></font>
             <input type="checkbox" name="check_box" value="sb_all" id="sb_check" style="float:left; margin-left:5px;">
             <div id="sb_check_detail" style="display:none; float:left; margin-left:20px;">
-              <font>sb_1 </font><input type="checkbox" name="check_box" class="sb_check" value="sb_1" id="sb_1">
-              <font style="margin-left:5px;">sb_2 </font><input type="checkbox" name="check_box" class="sb_check" value="sb_2" id="sb_2">
-              <font style="margin-left:5px;">sb_7 </font><input type="checkbox" name="check_box" class="sb_check" value="sb_7" id="sb_7">
-              <font style="margin-left:5px;">sb_8 </font><input type="checkbox" name="check_box" class="sb_check" value="sb_8" id="sb_8">
-              <font style="margin-left:5px;">sb_avr </font><input type="checkbox" name="check_box" class="sb_check" value="sb_avr" id="sb_avr">
+              <font>피지 개수 이마 </font><input type="checkbox" name="check_box" class="sb_check" value="sb_1" id="sb_1">
+              <font style="margin-left:5px;">피지 개수 코 </font><input type="checkbox" name="check_box" class="sb_check" value="sb_2" id="sb_2">
+              <font style="margin-left:5px;">피지 개수 우측 볼 </font><input type="checkbox" name="check_box" class="sb_check" value="sb_7" id="sb_7">
+              <font style="margin-left:5px;">피지 개수 좌측 볼 </font><input type="checkbox" name="check_box" class="sb_check" value="sb_8" id="sb_8">
+              <font style="margin-left:5px;">피지 개수 평균 </font><input type="checkbox" name="check_box" class="sb_check" value="sb_avr" id="sb_avr">
             </div>
           </div><br>
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>포피린 측정 Data ALL</b></font>
+            <font style="float:left;"><b>포피린 측정 ALL</b></font>
             <input type="checkbox" name="check_box" value="pp_all" id="pp_check" style="float:left; margin-left:5px;">
             <div id="pp_check_detail" style="display:none; float:left; margin-left:20px;">
-              <font>pp_1 </font><input type="checkbox" name="check_box" class="pp_check" value="pp_1" id="pp_1">
-              <font style="margin-left:5px;">pp_2 </font><input type="checkbox" name="check_box" class="pp_check" value="pp_2" id="pp_2">
-              <font style="margin-left:5px;">pp_7 </font><input type="checkbox" name="check_box" class="pp_check" value="pp_7" id="pp_7">
-              <font style="margin-left:5px;">pp_8 </font><input type="checkbox" name="check_box" class="pp_check" value="pp_8" id="pp_8">
-              <font style="margin-left:5px;">pp_avr </font><input type="checkbox" name="check_box" class="pp_check" value="pp_avr" id="pp_avr">
+              <font>포피린 개수 이마 </font><input type="checkbox" name="check_box" class="pp_check" value="pp_1" id="pp_1">
+              <font style="margin-left:5px;">포피린 개수 코 </font><input type="checkbox" name="check_box" class="pp_check" value="pp_2" id="pp_2">
+              <font style="margin-left:5px;">포피린 개수 우측 볼 </font><input type="checkbox" name="check_box" class="pp_check" value="pp_7" id="pp_7">
+              <font style="margin-left:5px;">포피린 개수 좌측 볼 </font><input type="checkbox" name="check_box" class="pp_check" value="pp_8" id="pp_8">
+              <font style="margin-left:5px;">포피린 개수 평균 </font><input type="checkbox" name="check_box" class="pp_check" value="pp_avr" id="pp_avr">
             </div>
           </div><br>
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>포피린 비 측정 Data ALL</b></font>
+            <font style="float:left;"><b>포피린 비 측정 ALL</b></font>
             <input type="checkbox" name="check_box" value="pp_ratio_all" id="pp_ratio_check" style="float:left; margin-left:5px;">
             <div id="pp_ratio_check_detail" style="display:none; float:left; margin-left:20px;">
-              <font>pp_ratio_1 </font><input type="checkbox" name="check_box" class="pp_ratio_check" value="pp_ratio_1" id="pp_ratio_1">
-              <font style="margin-left:5px;">pp_ratio_2 </font><input type="checkbox" name="check_box" class="pp_ratio_check" value="pp_ratio_2" id="pp_ratio_2">
-              <font style="margin-left:5px;">pp_ratio_7 </font><input type="checkbox" name="check_box" class="pp_ratio_check" value="pp_ratio_7" id="pp_ratio_7">
-              <font style="margin-left:5px;">pp_ratio_8 </font><input type="checkbox" name="check_box" class="pp_ratio_check" value="pp_ratio_8" id="pp_ratio_8">
-              <font style="margin-left:5px;">pp_ratio_avr </font><input type="checkbox" name="check_box" class="pp_ratio_check" value="pp_ratio_avr" id="pp_ratio_avr">
+              <font>포피린 비 이마 </font><input type="checkbox" name="check_box" class="pp_ratio_check" value="pp_ratio_1" id="pp_ratio_1">
+              <font style="margin-left:5px;">포피린 비 코 </font><input type="checkbox" name="check_box" class="pp_ratio_check" value="pp_ratio_2" id="pp_ratio_2">
+              <font style="margin-left:5px;">포피린 비 우측 볼 </font><input type="checkbox" name="check_box" class="pp_ratio_check" value="pp_ratio_7" id="pp_ratio_7">
+              <font style="margin-left:5px;">포피린 비 좌측 볼 </font><input type="checkbox" name="check_box" class="pp_ratio_check" value="pp_ratio_8" id="pp_ratio_8">
+              <font style="margin-left:5px;">포피린 비 평균 </font><input type="checkbox" name="check_box" class="pp_ratio_check" value="pp_ratio_avr" id="pp_ratio_avr">
             </div>
           </div><br>
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>편광 색소침착 Data ALL</b></font>
+            <font style="float:left;"><b>편광 색소침착 ALL</b></font>
             <input type="checkbox" name="check_box" value="sp_pl_all" id="sp_pl_check" style="float:left; margin-left:5px;">
             <div id="sp_pl_check_detail" style="display:none; float:left; margin-left:20px;">
-              <font>sp_pl_1 </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_1" id="sp_pl_1">
-              <font style="margin-left:5px;">sp_pl_2 </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_2" id="sp_pl_2">
-              <font style="margin-left:5px;">sp_pl_3 </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_3" id="sp_pl_3">
-              <font style="margin-left:5px;">sp_pl_4 </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_4" id="sp_pl_4">
-              <font style="margin-left:5px;">sp_pl_5 </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_5" id="sp_pl_5">
-              <font style="margin-left:5px;">sp_pl_6 </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_6" id="sp_pl_6">
-              <font style="margin-left:5px;">sp_pl_7 </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_7" id="sp_pl_7">
-              <font style="margin-left:5px;">sp_pl_8 </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_8" id="sp_pl_8">
-              <font style="margin-left:5px;">sp_pl_avr </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_avr" id="sp_pl_avr">
+              <font>편광 색소침착 측정 이마 </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_1" id="sp_pl_1">
+              <font style="margin-left:5px;">편광 색소침착 측정 코 </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_2" id="sp_pl_2">
+              <font style="margin-left:5px;">편광 색소침착 측정 우측 눈옆 </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_3" id="sp_pl_3">
+              <font style="margin-left:5px;">편광 색소침착 측정 우측 눈밑 </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_4" id="sp_pl_4">
+              <font style="margin-left:5px;">편광 색소침착 측정 좌측 눈옆 </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_5" id="sp_pl_5"><br>
+              <font style="margin-left:5px;">편광 색소침착 측정 좌측 눈밑 </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_6" id="sp_pl_6">
+              <font style="margin-left:5px;">편광 색소침착 측정 우측 볼 </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_7" id="sp_pl_7">
+              <font style="margin-left:5px;">편광 색소침착 측정 좌측 볼 </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_8" id="sp_pl_8">
+              <font style="margin-left:5px;">편광 색소침착 측정 평균 </font><input type="checkbox" name="check_box" class="sp_pl_check" value="sp_pl_avr" id="sp_pl_avr">
             </div>
-          </div><br>
-          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          </div><br><br>
+          <hr style="margin-top: 30px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>UV광 색소침착 Data ALL</b></font>
+            <font style="float:left;"><b>UV광 색소침착 ALL</b></font>
             <input type="checkbox" name="check_box" value="sp_uv_all" id="sp_uv_check" style="float:left; margin-left:5px;">
             <div id="sp_uv_check_detail" style="display:none; float:left; margin-left:20px;">
-              <font>sp_uv_1 </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_1" id="sp_uv_1">
-              <font style="margin-left:5px;">sp_uv_2 </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_2" id="sp_uv_2">
-              <font style="margin-left:5px;">sp_uv_3 </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_3" id="sp_uv_3">
-              <font style="margin-left:5px;">sp_uv_4 </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_4" id="sp_uv_4">
-              <font style="margin-left:5px;">sp_uv_5 </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_5" id="sp_uv_5">
-              <font style="margin-left:5px;">sp_uv_6 </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_6" id="sp_uv_6">
-              <font style="margin-left:5px;">sp_uv_7 </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_7" id="sp_uv_7">
-              <font style="margin-left:5px;">sp_uv_8 </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_8" id="sp_uv_8">
-              <font style="margin-left:5px;">sp_uv_avr </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_avr" id="sp_uv_avr">
+              <font>UV광 색소침착 측정 이마 </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_1" id="sp_uv_1">
+              <font style="margin-left:5px;">UV광 색소침착 측정 코 </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_2" id="sp_uv_2">
+              <font style="margin-left:5px;">UV광 색소침착 측정 우측 눈옆 </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_3" id="sp_uv_3">
+              <font style="margin-left:5px;">UV광 색소침착 측정 우측 눈밑 </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_4" id="sp_uv_4">
+              <font style="margin-left:5px;">UV광 색소침착 측정 좌측 눈옆 </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_5" id="sp_uv_5"><br>
+              <font style="margin-left:5px;">UV광 색소침착 측정 좌측 눈밑 </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_6" id="sp_uv_6">
+              <font style="margin-left:5px;">UV광 색소침착 측정 우측 볼 </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_7" id="sp_uv_7">
+              <font style="margin-left:5px;">UV광 색소침착 측정 좌측 볼 </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_8" id="sp_uv_8">
+              <font style="margin-left:5px;">UV광 색소침착 측정 평균 </font><input type="checkbox" name="check_box" class="sp_uv_check" value="sp_uv_avr" id="sp_uv_avr">
             </div>
-          </div><br>
-          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          </div><br><br>
+          <hr style="margin-top: 30px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>피부톤 측정 Data ALL</b></font>
+            <font style="float:left;"><b>피부톤 측정 ALL</b></font>
             <input type="checkbox" name="check_box" value="sk_c_all" id="sk_c_check" style="float:left; margin-left:5px;">
             <div id="sk_c_check_detail" style="display:none; float:left; margin-left:20px;">
-              <font>sk_c_1 </font><input type="checkbox" name="check_box" class="sk_c_check" value="sk_c_1" id="sk_c_1">
-              <font style="margin-left:5px;">sk_c_2 </font><input type="checkbox" name="check_box" class="sk_c_check" value="sk_c_2" id="sk_c_2">
-              <font style="margin-left:5px;">sk_c_4 </font><input type="checkbox" name="check_box" class="sk_c_check" value="sk_c_4" id="sk_c_4">
-              <font style="margin-left:5px;">sk_c_6 </font><input type="checkbox" name="check_box" class="sk_c_check" value="sk_c_6" id="sk_c_6">
-              <font style="margin-left:5px;">sk_c_7 </font><input type="checkbox" name="check_box" class="sk_c_check" value="sk_c_7" id="sk_c_7">
-              <font style="margin-left:5px;">sk_c_8 </font><input type="checkbox" name="check_box" class="sk_c_check" value="sk_c_8" id="sk_c_8">
-              <font style="margin-left:5px;">sk_c_avr </font><input type="checkbox" name="check_box" class="sk_c_check" value="sk_c_avr" id="sk_c_avr">
+              <font>피부톤 측정 이마 </font><input type="checkbox" name="check_box" class="sk_c_check" value="sk_c_1" id="sk_c_1">
+              <font style="margin-left:5px;">피부톤 측정 코 </font><input type="checkbox" name="check_box" class="sk_c_check" value="sk_c_2" id="sk_c_2">
+              <font style="margin-left:5px;">피부톤 측정 우측 눈밑 </font><input type="checkbox" name="check_box" class="sk_c_check" value="sk_c_4" id="sk_c_4">
+              <font style="margin-left:5px;">피부톤 측정 좌측 눈밑 </font><input type="checkbox" name="check_box" class="sk_c_check" value="sk_c_6" id="sk_c_6">
+              <font style="margin-left:5px;">피부톤 측정 우측 볼 </font><input type="checkbox" name="check_box" class="sk_c_check" value="sk_c_7" id="sk_c_7">
+              <font style="margin-left:5px;">피부톤 측정 좌측 볼 </font><input type="checkbox" name="check_box" class="sk_c_check" value="sk_c_8" id="sk_c_8">
+              <font style="margin-left:5px;">피부톤 측정 평균 </font><input type="checkbox" name="check_box" class="sk_c_check" value="sk_c_avr" id="sk_c_avr">
             </div>
-          </div><br>
+          </div><br><br>
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>피부톤 Red Data ALL</b></font>
+            <font style="float:left;"><b>피부톤 Red ALL</b></font>
             <input type="checkbox" name="check_box" value="sk_r_all" id="sk_r_check" style="float:left; margin-left:5px;">
             <div id="sk_r_check_detail" style="display:none; float:left; margin-left:20px;">
-              <font>sk_r_1 </font><input type="checkbox" name="check_box" class="sk_r_check" value="sk_r_1" id="sk_r_1">
-              <font style="margin-left:5px;">sk_r_2 </font><input type="checkbox" name="check_box" class="sk_r_check" value="sk_r_2" id="sk_r_2">
-              <font style="margin-left:5px;">sk_r_4 </font><input type="checkbox" name="check_box" class="sk_r_check" value="sk_r_4" id="sk_r_4">
-              <font style="margin-left:5px;">sk_r_6 </font><input type="checkbox" name="check_box" class="sk_r_check" value="sk_r_6" id="sk_r_6">
-              <font style="margin-left:5px;">sk_r_7 </font><input type="checkbox" name="check_box" class="sk_r_check" value="sk_r_7" id="sk_r_7">
-              <font style="margin-left:5px;">sk_r_8 </font><input type="checkbox" name="check_box" class="sk_r_check" value="sk_r_8" id="sk_r_8">
-              <font style="margin-left:5px;">sk_r_avr </font><input type="checkbox" name="check_box" class="sk_r_check" value="sk_r_avr" id="sk_r_avr">
+              <font>피부톤 Red 이마 </font><input type="checkbox" name="check_box" class="sk_r_check" value="sk_r_1" id="sk_r_1">
+              <font style="margin-left:5px;">피부톤 Red 코 </font><input type="checkbox" name="check_box" class="sk_r_check" value="sk_r_2" id="sk_r_2">
+              <font style="margin-left:5px;">피부톤 Red 우측 눈밑 </font><input type="checkbox" name="check_box" class="sk_r_check" value="sk_r_4" id="sk_r_4">
+              <font style="margin-left:5px;">피부톤 Red 좌측 눈밑 </font><input type="checkbox" name="check_box" class="sk_r_check" value="sk_r_6" id="sk_r_6">
+              <font style="margin-left:5px;">피부톤 Red 우측 볼 </font><input type="checkbox" name="check_box" class="sk_r_check" value="sk_r_7" id="sk_r_7">
+              <font style="margin-left:5px;">피부톤 Red 좌측 볼 </font><input type="checkbox" name="check_box" class="sk_r_check" value="sk_r_8" id="sk_r_8">
+              <font style="margin-left:5px;">피부톤 Red 평균 </font><input type="checkbox" name="check_box" class="sk_r_check" value="sk_r_avr" id="sk_r_avr">
             </div>
-          </div><br>
+          </div><br><br>
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>피부톤 Green Data ALL</b></font>
+            <font style="float:left;"><b>피부톤 Green ALL</b></font>
             <input type="checkbox" name="check_box" value="sk_g_all" id="sk_g_check" style="float:left; margin-left:5px;">
             <div id="sk_g_check_detail" style="display:none; float:left; margin-left:20px;">
-              <font>sk_g_1 </font><input type="checkbox" name="check_box" class="sk_g_check" value="sk_g_1" id="sk_g_1">
-              <font style="margin-left:5px;">sk_g_2 </font><input type="checkbox" name="check_box" class="sk_g_check" value="sk_g_2" id="sk_g_2">
-              <font style="margin-left:5px;">sk_g_4 </font><input type="checkbox" name="check_box" class="sk_g_check" value="sk_g_4" id="sk_g_4">
-              <font style="margin-left:5px;">sk_g_6 </font><input type="checkbox" name="check_box" class="sk_g_check" value="sk_g_6" id="sk_g_6">
-              <font style="margin-left:5px;">sk_g_7 </font><input type="checkbox" name="check_box" class="sk_g_check" value="sk_g_7" id="sk_g_7">
-              <font style="margin-left:5px;">sk_g_8 </font><input type="checkbox" name="check_box" class="sk_g_check" value="sk_g_8" id="sk_g_8">
-              <font style="margin-left:5px;">sk_g_avr </font><input type="checkbox" name="check_box" class="sk_g_check" value="sk_g_avr" id="sk_g_avr">
+              <font>피부톤 Green 이마 </font><input type="checkbox" name="check_box" class="sk_g_check" value="sk_g_1" id="sk_g_1">
+              <font style="margin-left:5px;">피부톤 Green 코 </font><input type="checkbox" name="check_box" class="sk_g_check" value="sk_g_2" id="sk_g_2">
+              <font style="margin-left:5px;">피부톤 Green 우측 눈밑 </font><input type="checkbox" name="check_box" class="sk_g_check" value="sk_g_4" id="sk_g_4">
+              <font style="margin-left:5px;">피부톤 Green 좌측 눈밑 </font><input type="checkbox" name="check_box" class="sk_g_check" value="sk_g_6" id="sk_g_6"><br>
+              <font style="margin-left:5px;">피부톤 Green 우측 볼 </font><input type="checkbox" name="check_box" class="sk_g_check" value="sk_g_7" id="sk_g_7">
+              <font style="margin-left:5px;">피부톤 Green 좌측 볼 </font><input type="checkbox" name="check_box" class="sk_g_check" value="sk_g_8" id="sk_g_8">
+              <font style="margin-left:5px;">피부톤 Green 평균 </font><input type="checkbox" name="check_box" class="sk_g_check" value="sk_g_avr" id="sk_g_avr">
             </div>
-          </div><br>
+          </div><br><br>
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>피부톤 Blue Data ALL</b></font>
+            <font style="float:left;"><b>피부톤 Blue ALL</b></font>
             <input type="checkbox" name="check_box" value="sk_b_all" id="sk_b_check" style="float:left; margin-left:5px;">
             <div id="sk_b_check_detail" style="display:none; float:left; margin-left:20px;">
-              <font>sk_b_1 </font><input type="checkbox" name="check_box" class="sk_b_check" value="sk_b_1" id="sk_b_1">
-              <font style="margin-left:5px;">sk_b_2 </font><input type="checkbox" name="check_box" class="sk_b_check" value="sk_b_2" id="sk_b_2">
-              <font style="margin-left:5px;">sk_b_4 </font><input type="checkbox" name="check_box" class="sk_b_check" value="sk_b_4" id="sk_b_4">
-              <font style="margin-left:5px;">sk_b_6 </font><input type="checkbox" name="check_box" class="sk_b_check" value="sk_b_6" id="sk_b_6">
-              <font style="margin-left:5px;">sk_b_7 </font><input type="checkbox" name="check_box" class="sk_b_check" value="sk_b_7" id="sk_b_7">
-              <font style="margin-left:5px;">sk_b_8 </font><input type="checkbox" name="check_box" class="sk_b_check" value="sk_b_8" id="sk_b_8">
-              <font style="margin-left:5px;">sk_b_avr </font><input type="checkbox" name="check_box" class="sk_b_check" value="sk_b_avr" id="sk_b_avr">
+              <font>피부톤 Blue 이마 </font><input type="checkbox" name="check_box" class="sk_b_check" value="sk_b_1" id="sk_b_1">
+              <font style="margin-left:5px;">피부톤 Blue 코 </font><input type="checkbox" name="check_box" class="sk_b_check" value="sk_b_2" id="sk_b_2">
+              <font style="margin-left:5px;">피부톤 Blue 우측 눈밑 </font><input type="checkbox" name="check_box" class="sk_b_check" value="sk_b_4" id="sk_b_4">
+              <font style="margin-left:5px;">피부톤 Blue 좌측 눈밑 </font><input type="checkbox" name="check_box" class="sk_b_check" value="sk_b_6" id="sk_b_6"><br>
+              <font style="margin-left:5px;">피부톤 Blue 우측 볼 </font><input type="checkbox" name="check_box" class="sk_b_check" value="sk_b_7" id="sk_b_7">
+              <font style="margin-left:5px;">피부톤 Blue 좌측 볼 </font><input type="checkbox" name="check_box" class="sk_b_check" value="sk_b_8" id="sk_b_8">
+              <font style="margin-left:5px;">피부톤 Blue 평균 </font><input type="checkbox" name="check_box" class="sk_b_check" value="sk_b_avr" id="sk_b_avr">
             </div>
-          </div><br>
+          </div><br><br>
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>Lab 변환 Data ALL</b></font>
+            <font style="float:left;"><b>피부색 ALL</b></font>
             <input type="checkbox" name="check_box" value="lab_all" id="lab_check" style="float:left; margin-left:5px;">
             <div id="lab_check_detail" style="display:none; float:left; margin-left:20px;">
-              <font>lab_l </font><input type="checkbox" name="check_box" class="lab_check" value="lab_l" id="lab_l">
-              <font style="margin-left:5px;">lab_a </font><input type="checkbox" name="check_box" class="lab_check" value="lab_a" id="lab_a">
-              <font style="margin-left:5px;">lab_b </font><input type="checkbox" name="check_box" class="lab_check" value="lab_b" id="lab_b">
+              <font>피부색 L 값 </font><input type="checkbox" name="check_box" class="lab_check" value="lab_l" id="lab_l">
+              <font style="margin-left:5px;">피부색 a 값 </font><input type="checkbox" name="check_box" class="lab_check" value="lab_a" id="lab_a">
+              <font style="margin-left:5px;">피부색 b 값 </font><input type="checkbox" name="check_box" class="lab_check" value="lab_b" id="lab_b">
             </div>
           </div><br>
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>피지 비(T존) </b></font>
+            <font style="float:left;"><b>피지 E 값 (T존) </b></font>
             <input style="margin-left:5px;" type="checkbox" name="check_box" class="e_sebum_t_check" value="e_sebum_t" id="e_sebum_t">
           </div><br>
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>피지 비(U존) </b></font>
+            <font style="float:left;"><b>피지 E 값 (U존) </b></font>
             <input style="margin-left:5px;" type="checkbox" name="check_box" class="e_sebum_u_check" value="e_sebum_u" id="e_sebum_u">
           </div><br>
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>피부톤 칼라 타입</b></font>
+            <font style="float:left;"><b>피부톤</b></font>
             <input style="margin-left:5px;" type="checkbox" name="check_box" class="colortype_check" value="colortype" id="colortype">
           </div><br>
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
@@ -381,15 +408,54 @@
             <font style="float:left;"><b>선 민감도</b></font>
             <input style="margin-left:5px;" type="checkbox" name="check_box" class="suntype_check" value="suntype" id="suntype">
           </div><br>
+
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>피부타입 ALL</b></font>
+            <input type="checkbox" name="check_box" value="skintype_all" id="skintype_check" style="float:left; margin-left:5px;">
+            <div id="skintype_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>피부타입(야누스 측정) </font><input type="checkbox" name="check_box" class="skintype_check" value="skintype" id="skintype">
+              <font style="margin-left:5px;">피부타입(설문 로직) </font><input type="checkbox" name="check_box" class="skintype_check" value="m_skintype" id="m_skintype">
+            </div>
+          </div><br>
+
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
             <font style="float:left;"><b>동안각도 점수 ALL</b></font>
             <input type="checkbox" name="check_box" value="score_all" id="score_check" style="float:left; margin-left:5px;">
             <div id="score_check_detail" style="display:none; float:left; margin-left:20px;">
-              <font>score_r </font><input type="checkbox" name="check_box" class="score_check" value="score_r" id="score_r">
-              <font style="margin-left:5px;">score_l </font><input type="checkbox" name="check_box" class="score_check" value="score_l" id="score_l">
+              <font>동안각도 점수 우측 </font><input type="checkbox" name="check_box" class="score_check" value="score_r" id="score_r">
+              <font style="margin-left:5px;">동안각도 점수 좌측 </font><input type="checkbox" name="check_box" class="score_check" value="score_l" id="score_l">
             </div>
           </div><br>
+
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>매장코드</b></font>
+            <input style="margin-left:5px;" type="checkbox" name="check_box" class="shop_cd_check" value="shop_cd" id="shop_cd">
+          </div><br>
+
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>포피린 E 값 ALL</b></font>
+            <input type="checkbox" name="check_box" value="e_porphyrin_all" id="e_porphyrin_check" style="float:left; margin-left:5px;">
+            <div id="e_porphyrin_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>포피린 E 값(T존) </font><input type="checkbox" name="check_box" class="e_porphyrin_check" value="e_porphyrin_t" id="e_porphyrin_t">
+              <font style="margin-left:5px;">포피린 E 값(U존) </font><input type="checkbox" name="check_box" class="e_porphyrin_check" value="e_porphyrin_u" id="e_porphyrin_u">
+            </div>
+          </div><br>
+
+          <% if @ch_cd.present? && @ch_cd == "BEAU"%>
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>피부고민 ALL</b></font>
+            <input type="checkbox" name="check_box" value="worry_all" id="worry_check" style="float:left; margin-left:5px;">
+            <div id="worry_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>피부고민 1순위 </font><input type="checkbox" name="check_box" class="worry_check" value="worry_skin_1" id="worry_skin_1">
+              <font style="margin-left:5px;">피부고민 2순위 </font><input type="checkbox" name="check_box" class="worry_check" value="worry_skin_2" id="worry_skin_2">
+            </div>
+          </div><br>
+          <% end %>
 
         </div><br>
         <center>

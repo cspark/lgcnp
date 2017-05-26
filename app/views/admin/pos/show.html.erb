@@ -35,8 +35,8 @@
     <font size="5"><b><div id="name_<%= @fcpos.custserial.to_i %>_<%= @fcpos.ch_cd %>_<%= @fcpos.measureno.to_i %>"></div></b></font>
     <div><font size="4">
       <b>채널구분</b> <%= @fcpos.ch_cd %><br>
-      <b>전면,좌,우측면</b> <%= @fcpos.faceno %><br>
-      <b>분석 일</b> <%= @fcpos.measuredate %><br>
+      <b>측정 부위</b> <%= @fcpos.faceno %><br>
+      <b>진단 날짜</b> <%= @fcpos.measuredate %><br>
       <b>분석 횟수</b> <%= @fcpos.measureno.to_i %><br>
       <b>업데이트 일</b> <%= @fcpos.uptdate %><br>
       <b>이마 영역정보</b> <%= @fcpos.fh_x.to_i %> / <%= @fcpos.fh_y.to_i %> / <%= @fcpos.fh_w.to_i %> / <%= @fcpos.fh_h.to_i %><br>

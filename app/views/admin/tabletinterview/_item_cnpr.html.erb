@@ -55,10 +55,39 @@
           <% else %>
             $('#after_overlap_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>').html("-");
           <% end %>
+
+          $('#before_production_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>').html(translate_production('<%= tabletinterview.before_production %>'));
+          $('#after_production_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>').html(translate_production('<%= tabletinterview.after_production %>'));
         });
 
         function decode_utf8(s) {
           return decodeURI(s);
+        }
+
+        function translate_production(value){
+            var production = ""
+            console.log(value);
+            try{
+              if(value.includes("SKIN_SCALING"))
+                skin_type = "SS 프로그램";
+              else if(value.includes("INTRA_PEEL"))
+                skin_type = "인트라 필 프로그램";
+              else if(value.includes("INTENSIVE_PEEL"))
+                skin_type = "인텐시브 필 프로그램";
+              else if(value.includes("REDIANCE"))
+                skin_type = "레디언스 프로그램";
+              else if(value.includes("VA"))
+                skin_type = "VA 프로그램";
+              else
+                return value;
+
+            }catch(err){
+              console.log(err);
+              return value;
+            }
+
+            console.log(skin_type);
+            return skin_type;
         }
 
         function translate_skin_type(value){
@@ -101,8 +130,11 @@
                 return "트러블 솔루션";
               else if(value == "SCORE_PIGMENT")
                 return "색소침착 솔루션";
+              else if(value == "null")
+                return "-";
               else
                 return value;
+
             }catch(err){
               console.log(err);
               return value;
@@ -115,8 +147,8 @@
       <tr class="table_tr" id="<%= user.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>">
         <td id="name_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
         <td class="text-center"><%= tabletinterview.custserial.to_i %></td>
-        <td><%= tabletinterview.uptdate %></td>
         <td><%= user.ch_cd %></td>
+        <td><%= tabletinterview.uptdate %></td>
         <% if @select_filter != [] %>
           <% @select_filter.each do |filter| %>
             <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id.to_i).first %>
@@ -133,6 +165,24 @@
               <td class="text-center" id="before_solution_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
             <% elsif filter.include?("after_solution_2") %>
               <td class="text-center" id="after_solution_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
+            <% elsif filter.include?("before_production") %>
+              <% if !tabletinterview.before_production.nil? %>
+                <td class="text-center" id="before_production_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
+              <% else %>
+                <td class="text-center">-</td>
+              <% end %>
+            <% elsif filter.include?("after_production") %>
+              <% if !tabletinterview.after_production.nil? %>
+                <td class="text-center" id="after_production_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
+              <% else %>
+                <td class="text-center">-</td>
+              <% end %>
+            <% elsif filter.include?("turnover_value") %>
+              <td class="text-center"><%= tabletinterview.turnover_value.to_i+1 %></td>
+            <% elsif filter.include?("corneous_value") %>
+              <td class="text-center"><%= tabletinterview.corneous_value.to_i %></td>
+            <% elsif filter.include?("stress_value") %>
+              <td class="text-center"><%= tabletinterview.stress_value.to_i %></td>
             <% elsif filter.include?("recommand_program_step_1") %>
               <% if !tabletinterview.recommand_program_step_1.nil? %>
                 <td class="text-center"><%= URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," ") %></td>
@@ -169,6 +219,10 @@
               <% else %>
                 <td>-</td>
               <% end %>
+            <% elsif filter.include?("before_overlap") %>
+              <td class="text-center" id="before_overlap_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
+            <% elsif filter.include?("after_overlap") %>
+              <td class="text-center" id="after_overlap_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
             <% elsif !fcdata.nil? && filter.include?("pr_graph") %>
               <td class="text-center"><%= fcdata[:pr_graph].to_i %></td>
             <% elsif !fcdata.nil? && filter.include?("sb_graph") %>
@@ -181,26 +235,45 @@
               <td class="text-center"><%= fcdata[:el_graph].to_i %></td>
             <% elsif !fcdata.nil? && filter.include?("mo_graph") %>
               <td class="text-center"><%= fcdata[:mo_graph].to_i %></td>
-            <% elsif filter.include?("turnover_value") %>
-              <td class="text-center"><%= tabletinterview.turnover_value.to_i+1 %></td>
-            <% elsif filter.include?("corneous_value") %>
-              <td class="text-center"><%= tabletinterview.corneous_value.to_i %></td>
-            <% elsif filter.include?("stress_value") %>
-              <td class="text-center"><%= tabletinterview.stress_value.to_i %></td>
-            <% elsif filter.include?("before_overlap") %>
-              <td class="text-center" id="before_overlap_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
-            <% elsif filter.include?("after_overlap") %>
-              <td class="text-center" id="after_overlap_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
             <% else %>
               <td class="text-center"><%= tabletinterview[filter].to_i if tabletinterview[filter].to_i != -1 %></td>
             <% end %>
           <% end %>
         <% else %>
+          <td><%= tabletinterview.a_1.to_i if tabletinterview.a_1.to_i != -1 %></td>
+          <td><%= tabletinterview.a_2.to_i if tabletinterview.a_2.to_i != -1 %></td>
+          <td><%= tabletinterview.a_3.to_i if tabletinterview.a_3.to_i != -1 %></td>
+          <td><%= tabletinterview.b_1.to_i if tabletinterview.b_1.to_i != -1 %></td>
+          <td><%= tabletinterview.b_2.to_i if tabletinterview.b_2.to_i != -1 %></td>
+          <td><%= tabletinterview.b_3.to_i if tabletinterview.b_3.to_i != -1 %></td>
+          <td><%= tabletinterview.b_4.to_i if tabletinterview.b_4.to_i != -1 %></td>
+          <td><%= tabletinterview.b_5.to_i if tabletinterview.b_5.to_i != -1 %></td>
+          <td><%= tabletinterview.b_6.to_i if tabletinterview.b_6.to_i != -1 %></td>
+          <td><%= tabletinterview.c_1.to_i if tabletinterview.c_1.to_i != -1 %></td>
+          <td><%= tabletinterview.d_1.to_i if tabletinterview.d_1.to_i != -1 %></td>
+          <td><%= tabletinterview.d_2.to_i if tabletinterview.d_2.to_i != -1 %></td>
+          <td><%= tabletinterview.d_3.to_i if tabletinterview.d_3.to_i != -1 %></td>
+          <td><%= tabletinterview.d_4.to_i if tabletinterview.d_4.to_i != -1 %></td>
+          <td><%= tabletinterview.d_5.to_i if tabletinterview.d_5.to_i != -1 %></td>
+          <td><%= tabletinterview.d_6.to_i if tabletinterview.d_6.to_i != -1 %></td>
           <td id="skin_type_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
           <td id="before_solution_1_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
           <td id="after_solution_1_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
           <td id="before_solution_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
           <td id="after_solution_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
+          <% if !tabletinterview.before_production.nil? %>
+            <td id="before_production_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
+          <% else %>
+            <td>-</td>
+          <% end %>
+          <% if !tabletinterview.aftere_production.nil? %>
+            <td id="after_production_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
+          <% else %>
+            <td>-</td>
+          <% end %>
+          <td class="text-center"><%= tabletinterview.turnover_value.to_i+1 %></td>
+          <td class="text-center"><%= tabletinterview.corneous_value.to_i %></td>
+          <td class="text-center"><%= tabletinterview.stress_value.to_i %></td>
           <% if !tabletinterview.recommand_program_step_1.nil? %>
             <td class="text-center"><%= URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," ") %></td>
           <% else %>
@@ -231,22 +304,9 @@
           <% else %>
             <td class="text-center">-</td>
           <% end %>
-          <td><%= tabletinterview.a_1.to_i if tabletinterview.a_1.to_i != -1 %></td>
-          <td><%= tabletinterview.a_2.to_i if tabletinterview.a_2.to_i != -1 %></td>
-          <td><%= tabletinterview.a_3.to_i if tabletinterview.a_3.to_i != -1 %></td>
-          <td><%= tabletinterview.b_1.to_i if tabletinterview.b_1.to_i != -1 %></td>
-          <td><%= tabletinterview.b_2.to_i if tabletinterview.b_2.to_i != -1 %></td>
-          <td><%= tabletinterview.b_3.to_i if tabletinterview.b_3.to_i != -1 %></td>
-          <td><%= tabletinterview.b_4.to_i if tabletinterview.b_4.to_i != -1 %></td>
-          <td><%= tabletinterview.b_5.to_i if tabletinterview.b_5.to_i != -1 %></td>
-          <td><%= tabletinterview.b_6.to_i if tabletinterview.b_6.to_i != -1 %></td>
-          <td><%= tabletinterview.c_1.to_i if tabletinterview.c_1.to_i != -1 %></td>
-          <td><%= tabletinterview.d_1.to_i if tabletinterview.d_1.to_i != -1 %></td>
-          <td><%= tabletinterview.d_2.to_i if tabletinterview.d_2.to_i != -1 %></td>
-          <td><%= tabletinterview.d_3.to_i if tabletinterview.d_3.to_i != -1 %></td>
-          <td><%= tabletinterview.d_4.to_i if tabletinterview.d_4.to_i != -1 %></td>
-          <td><%= tabletinterview.d_5.to_i if tabletinterview.d_5.to_i != -1 %></td>
-          <td><%= tabletinterview.d_6.to_i if tabletinterview.d_6.to_i != -1 %></td>
+          <td id="before_overlap_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
+          <td id="after_overlap_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
+
           <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id.to_i).first %>
           <% if !fcdata.nil? %>
             <% fcdata = fcdata.to_api_hash_for_admin %>
@@ -257,11 +317,6 @@
             <td class="text-center"><%= fcdata[:el_graph].to_i+1 %></td>
             <td class="text-center"><%= fcdata[:mo_graph].to_i+1 %></td>
           <% end %>
-          <td class="text-center"><%= tabletinterview.turnover_value.to_i+1 %></td>
-          <td class="text-center"><%= tabletinterview.corneous_value.to_i %></td>
-          <td class="text-center"><%= tabletinterview.stress_value.to_i %></td>
-          <td id="before_overlap_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
-          <td id="after_overlap_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
         <% end %>
       </tr>
 

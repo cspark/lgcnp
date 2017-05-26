@@ -140,16 +140,16 @@
             $('select[id="select_sex"]').val('<%= @select_sex %>');
           <% end %>
 
-          <% if !@start_age.nil? %>
-            document.getElementById("start_age").value = '<%= @start_age %>'
-          <% else %>
-            document.getElementById("start_age").value = '<%= @min_age %>'
-          <% end %>
-          <% if !@end_age.nil? %>
-            document.getElementById("end_age").value = '<%= @end_age %>'
-          <% else %>
-            document.getElementById("end_age").value = '<%= @max_age %>'
-          <% end %>
+          // <% if !@start_age.nil? %>
+          //   document.getElementById("start_age").value = '<%= @start_age %>'
+          // <% else %>
+          //   document.getElementById("start_age").value = '<%= @min_age %>'
+          // <% end %>
+          // <% if !@end_age.nil? %>
+          //   document.getElementById("end_age").value = '<%= @end_age %>'
+          // <% else %>
+          //   document.getElementById("end_age").value = '<%= @max_age %>'
+          // <% end %>
 
           <% if !@start_birthyy.nil? %>
             document.getElementById("start_birthyy").value = '<%= @start_birthyy %>'
@@ -374,7 +374,7 @@
           <th>시리얼</th>
           <th>채널</th>
           <th>측정 부위</th>
-          <th>분석 일</th>
+          <th>진단 날짜</th>
           <th>분석 횟수</th>
           <th>업데이트 일</th>
           <th>설문문항1</th>

@@ -86,6 +86,7 @@
           <td><%= fcdata.pr_avr.to_i %></td>
           <td><%= fcdata.wr_3.to_i %></td>
           <td><%= fcdata.wr_4.to_i %></td>
+          <td><%= fcdata.wr_5.to_i %></td>
           <td><%= fcdata.wr_6.to_i %></td>
           <td><%= fcdata.wr_avr.to_i %></td>
           <td><%= fcdata.el_7.to_i %></td>
@@ -126,6 +127,7 @@
           <td><%= fcdata.sp_uv_7.to_i %></td>
           <td><%= fcdata.sp_uv_8.to_i %></td>
           <td><%= fcdata.sp_uv_avr.to_i %></td>
+
           <td><%= fcdata.sk_c_1.to_i %></td>
           <td><%= fcdata.sk_c_2.to_i %></td>
           <td><%= fcdata.sk_c_4.to_i %></td>
@@ -161,9 +163,17 @@
           <td><%= fcdata.e_sebum_u %></td>
           <td><%= fcdata.colortype.to_i %></td>
           <td><%= fcdata.suntype.to_i %></td>
+          <td><%= fcdata.skintype.to_i %></td>
+          <td><%= fcdata.m_skintype.to_i %></td>
           <td><%= fcdata.score_r.to_i %></td>
           <td><%= fcdata.score_l.to_i %></td>
-          <td><%= fcdata.skintype.to_i %></td>
+          <td><%= fcdata.e_porphyrin_t.to_i %></td>
+          <td><%= fcdata.e_porphyrin_u.to_i %></td>
+          <td><%= fcdata.shop_cd %></td>
+          <% if fcdata.ch_cd == "BEAU" %>
+            <td><%= fcdata.worry_skin_1.to_i %></td>
+            <td><%= fcdata.worry_skin_2.to_i %></td>
+          <% end %>
         <% end %>
       </tr>
     </body>

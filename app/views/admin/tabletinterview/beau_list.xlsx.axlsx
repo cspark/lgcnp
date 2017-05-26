@@ -1,6 +1,6 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "interview") do |sheet|
-    sheet.add_row ["이름","시리얼","채널","분석 일","분석 횟수","업데이트 일","설문문항1","설문문항2","설문문항3","설문문항4","설문문항5",
+    sheet.add_row ["이름","시리얼","채널","진단 날짜","분석 횟수","업데이트 일","설문문항1","설문문항2","설문문항3","설문문항4","설문문항5",
     "설문문항6","설문문항7","설문문항8","설문문항9","설문문항10"]
 
     @beau_interviews_excel.each do |interview|

@@ -1,6 +1,6 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "Fcdata") do |sheet|
-    sheet.add_row ["이름","분석 일","채널","매장","분석 횟수"]
+    sheet.add_row ["이름","진단 날짜","채널","매장","분석 횟수"]
     @fcdatas_excel.each do |fcdata|
         custinfo = Custinfo.where(custserial: fcdata.custserial).first
         if !custinfo.custname.nil?

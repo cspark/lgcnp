@@ -52,46 +52,16 @@
     </head>
     <body>
       <tr class="table_tr" id="<%= user.custserial %>/<%= user.ch_cd %>/<%= user.measureno %>">
-        <td id="name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></td>
-        <td><%= user.ch_cd %></td>
-        <td><%= user.uptdate %></td>
-        <td><%= user.lastanaldate %></td>
         <td class="text-center" style="text-align: center !important;"><%= user.custserial.to_i %></td>
-        <td id="phone_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></td>
+        <td><%= user.ch_cd %></td>
+        <td id="name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></td>
         <% translate_sex = "남" %>
         <% if user.sex == "F" %>
           <% translate_sex = "여" %>
         <% end %>
         <td class="text-center"><%= translate_sex %></td>
         <td><%= user.birthyy %>-<%= user.birthmm %>-<%= user.birthdd %></td>
-        <% is_agree_privacy = "-" %>
-        <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX"%>
-          <% if user.is_agree_privacy == "T" %>
-            <% is_agree_privacy = "O" %>
-          <% else %>
-            <% is_agree_privacy = "X" %>
-          <% end %>
-        <% end %>
-        <td class="text-center"><%= is_agree_privacy %></td>
-        <% is_agree_thirdparty = "-" %>
-        <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX"%>
-          <% if user.is_agree_thirdparty_info == "T" %>
-            <% is_agree_thirdparty = "O" %>
-          <% else %>
-            <% is_agree_thirdparty = "X" %>
-          <% end %>
-        <% end %>
-        <td class="text-center"><%= is_agree_thirdparty %></td>
-        <% is_agree_marketing = "-" %>
-        <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX"%>
-          <% if user.is_agree_marketing == "T" %>
-            <% is_agree_marketing = "O" %>
-          <% else %>
-            <% is_agree_marketing = "X" %>
-          <% end %>
-        <% end %>
-        <td class="text-center"><%= is_agree_marketing %></td>
-        <td class="text-center"><%= user.measureno.to_i %></td>
+        <td id="phone_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></td>
         <% address = "" %>
         <% if !user.address.nil? %>
           <% if user.address == "10" %>
@@ -133,6 +103,41 @@
           <% end %>
         <% end %>
         <td class="text-center"><%= address %></td>
+        <td><%= user.lastanaldate %></td>
+        <td class="text-center"><%= user.measureno.to_i %></td>
+        <td><%= user.uptdate %></td>
+        <% is_agree_privacy = "-" %>
+        <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX"%>
+          <% if user.is_agree_privacy == "T" %>
+            <% is_agree_privacy = "O" %>
+          <% else %>
+            <% is_agree_privacy = "X" %>
+          <% end %>
+        <% end %>
+        <td class="text-center"><%= is_agree_privacy %></td>
+        <% is_agree_thirdparty = "-" %>
+        <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX"%>
+          <% if user.is_agree_thirdparty_info == "T" %>
+            <% is_agree_thirdparty = "O" %>
+          <% else %>
+            <% is_agree_thirdparty = "X" %>
+          <% end %>
+        <% end %>
+        <td class="text-center"><%= is_agree_thirdparty %></td>
+        <% is_agree_marketing = "-" %>
+        <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX"%>
+          <% if user.is_agree_marketing == "T" %>
+            <% is_agree_marketing = "O" %>
+          <% else %>
+            <% is_agree_marketing = "X" %>
+          <% end %>
+        <% end %>
+        <td class="text-center"><%= is_agree_marketing %></td>
+        <% shop_cd = "-" %>
+        <% !if user.shop_cd.nil? %>
+          <% shop_cd = user.shop_cd %>
+        <% end %>
+        <td class="text-center"><%= shop_cd %></td>
       </tr>
     </body>
 </html>

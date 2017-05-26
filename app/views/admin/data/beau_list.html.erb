@@ -271,16 +271,16 @@
           $('select[id="select_sex"]').val('<%= @select_sex %>');
         <% end %>
 
-        <% if !@start_age.nil? %>
-          document.getElementById("start_age").value = '<%= @start_age %>'
-        <% else %>
-          document.getElementById("start_age").value = '<%= @min_age %>'
-        <% end %>
-        <% if !@end_age.nil? %>
-          document.getElementById("end_age").value = '<%= @end_age %>'
-        <% else %>
-          document.getElementById("end_age").value = '<%= @max_age %>'
-        <% end %>
+        // <% if !@start_age.nil? %>
+        //   document.getElementById("start_age").value = '<%= @start_age %>'
+        // <% else %>
+        //   document.getElementById("start_age").value = '<%= @min_age %>'
+        // <% end %>
+        // <% if !@end_age.nil? %>
+        //   document.getElementById("end_age").value = '<%= @end_age %>'
+        // <% else %>
+        //   document.getElementById("end_age").value = '<%= @max_age %>'
+        // <% end %>
 
         <% if !@start_birthyy.nil? %>
           document.getElementById("start_birthyy").value = '<%= @start_birthyy %>'
@@ -343,7 +343,7 @@
         });
 
         $('#filter-btn').click(function(){
-          window.open("/admin/data/filter_check", "/admin/data/filter_check", "scrollbars=1,resizable=1,height=600,width=900");
+          window.open("/admin/data/filter_check?ch_cd=BEAU", "/admin/data/filter_check?ch_cd=BEAU", "scrollbars=1,resizable=1,height=600,width=950");
         });
 
         $('#submit').click(function(){
@@ -612,301 +612,307 @@
     <table data-toggle="table">
       <thead style="width: 100%;">
         <tr>
-            <th>이름</th>
-            <th>분석 횟수</th>
-            <th>채널</th>
-            <th>전면,좌,우측면</th>
-            <th>분석 일</th>
-            <th>업데이트 일</th>
-            <% if @select_filter != [] %>
-              <% @select_filter.each do |filter| %>
-                <% if filter.include?("mo_1") %>
-                  <th>수분 측정1</th>
-                <% elsif filter.include?("mo_7") %>
-                  <th>수분 측정7</th>
-                <% elsif filter.include?("mo_8") %>
-                  <th>수분 측정7</th>
-                <% elsif filter.include?("pr_1") %>
-                  <th>모공 측정1</th>
-                <% elsif filter.include?("pr_2") %>
-                  <th>모공 측정2</th>
-                <% elsif filter.include?("pr_7") %>
-                  <th>모공 측정7</th>
-                <% elsif filter.include?("pr_8") %>
-                  <th>모공 측정8</th>
-                <% elsif filter.include?("pr_avr") %>
-                  <th>모공 측정avr</th>
-                <% elsif filter.include?("wr_3") %>
-                  <th>주름 측정3</th>
-                <% elsif filter.include?("wr_4") %>
-                  <th>주름 측정4</th>
-                <% elsif filter.include?("wr_6") %>
-                  <th>주름 측정6</th>
-                <% elsif filter.include?("wr_avr") %>
-                  <th>수분 측정avr</th>
-                <% elsif filter.include?("el_7") %>
-                  <th>탄력 측정7</th>
-                <% elsif filter.include?("el_8") %>
-                  <th>탄력 측정8</th>
-                <% elsif filter.include?("el_avr") %>
-                  <th>탄력 측정avr</th>
-                <% elsif filter.include?("el_angle_7") %>
-                  <th>탄력 각도7</th>
-                <% elsif filter.include?("el_angle_8") %>
-                  <th>탄력 각도8</th>
-                <% elsif filter.include?("sb_1") %>
-                  <th>피지 측정1</th>
-                <% elsif filter.include?("sb_2") %>
-                  <th>피지 측정2</th>
-                <% elsif filter.include?("sb_7") %>
-                  <th>피지 측정7</th>
-                <% elsif filter.include?("sb_8") %>
-                  <th>피지 측정8</th>
-                <% elsif filter.include?("sb_avr") %>
-                  <th>피지 측정avr</th>
-                <% elsif filter.include?("pp_1") %>
-                  <th>포피린 측정1</th>
-                <% elsif filter.include?("pp_2") %>
-                  <th>포피린 측정2</th>
-                <% elsif filter.include?("pp_7") %>
-                  <th>포피린 측정7</th>
-                <% elsif filter.include?("pp_8") %>
-                  <th>포피린 측정8</th>
-                <% elsif filter.include?("pp_avr") %>
-                  <th>포피린 측정avr</th>
-                <% elsif filter.include?("pp_ratio_1") %>
-                  <th>포피린 비 측정1</th>
-                <% elsif filter.include?("pp_ratio_2") %>
-                  <th>포피린 비 측정2</th>
-                <% elsif filter.include?("pp_ratio_7") %>
-                  <th>포피린 비 측정7</th>
-                <% elsif filter.include?("pp_ratio_8") %>
-                  <th>포피린 비 측정8</th>
-                <% elsif filter.include?("pp_ratio_avr") %>
-                  <th>포피린 비 측정avr</th>
-                <% elsif filter.include?("sp_pl_1") %>
-                  <th>편광 색소침착 측정1</th>
-                <% elsif filter.include?("sp_pl_2") %>
-                  <th>편광 색소침착 측정2</th>
-                <% elsif filter.include?("sp_pl_3") %>
-                  <th>편광 색소침착 측정3</th>
-                <% elsif filter.include?("sp_pl_4") %>
-                  <th>편광 색소침착 측정4</th>
-                <% elsif filter.include?("sp_pl_5") %>
-                  <th>편광 색소침착 측정5</th>
-                <% elsif filter.include?("sp_pl_6") %>
-                  <th>편광 색소침착 측정6</th>
-                <% elsif filter.include?("sp_pl_7") %>
-                  <th>편광 색소침착 측정7</th>
-                <% elsif filter.include?("sp_pl_8") %>
-                  <th>편광 색소침착 측정8</th>
-                <% elsif filter.include?("sp_pl_avr") %>
-                  <th>편광 색소침착 측정avr</th>
-                <% elsif filter.include?("sp_uv_1") %>
-                  <th>UV광 색소침착 측정1</th>
-                <% elsif filter.include?("sp_uv_2") %>
-                  <th>UV광 색소침착 측정2</th>
-                <% elsif filter.include?("sp_uv_3") %>
-                  <th>UV광 색소침착 측정3</th>
-                <% elsif filter.include?("sp_uv_4") %>
-                  <th>UV광 색소침착 측정4</th>
-                <% elsif filter.include?("sp_uv_5") %>
-                  <th>UV광 색소침착 측정5</th>
-                <% elsif filter.include?("sp_uv_6") %>
-                  <th>UV광 색소침착 측정6</th>
-                <% elsif filter.include?("sp_uv_7") %>
-                  <th>UV광 색소침착 측정7</th>
-                <% elsif filter.include?("sp_uv_8") %>
-                  <th>UV광 색소침착 측정8</th>
-                <% elsif filter.include?("sp_uv_avr") %>
-                  <th>UV광 색소침착 측정avr</th>
-                <% elsif filter.include?("sk_c_1") %>
-                  <th>피부톤 측정1</th>
-                <% elsif filter.include?("sk_c_2") %>
-                  <th>피부톤 측정2</th>
-                <% elsif filter.include?("sk_c_3") %>
-                  <th>피부톤 측정3</th>
-                <% elsif filter.include?("sk_c_4") %>
-                  <th>피부톤 측정4</th>
-                <% elsif filter.include?("sk_c_5") %>
-                  <th>피부톤 측정5</th>
-                <% elsif filter.include?("sk_c_6") %>
-                  <th>피부톤 측정6</th>
-                <% elsif filter.include?("sk_c_7") %>
-                  <th>피부톤 측정7</th>
-                <% elsif filter.include?("sk_c_8") %>
-                  <th>피부톤 측정8</th>
-                <% elsif filter.include?("sk_c_avr") %>
-                  <th>피부톤 측정avr</th>
-                <% elsif filter.include?("sk_r_1") %>
-                  <th>피부톤 Red1</th>
-                <% elsif filter.include?("sk_r_2") %>
-                  <th>피부톤 Red2</th>
-                <% elsif filter.include?("sk_r_3") %>
-                  <th>피부톤 Red3</th>
-                <% elsif filter.include?("sk_r_4") %>
-                  <th>피부톤 Red4</th>
-                <% elsif filter.include?("sk_r_5") %>
-                  <th>피부톤 Red5</th>
-                <% elsif filter.include?("sk_r_6") %>
-                  <th>피부톤 Red6</th>
-                <% elsif filter.include?("sk_r_7") %>
-                  <th>피부톤 Red7</th>
-                <% elsif filter.include?("sk_r_8") %>
-                  <th>피부톤 Red8</th>
-                <% elsif filter.include?("sk_r_avr") %>
-                  <th>피부톤 Red_avr</th>
-                <% elsif filter.include?("sk_g_1") %>
-                  <th>피부톤 Green1</th>
-                <% elsif filter.include?("sk_g_2") %>
-                  <th>피부톤 Green2</th>
-                <% elsif filter.include?("sk_g_3") %>
-                  <th>피부톤 Green3</th>
-                <% elsif filter.include?("sk_g_4") %>
-                  <th>피부톤 Green4</th>
-                <% elsif filter.include?("sk_g_5") %>
-                  <th>피부톤 Green5</th>
-                <% elsif filter.include?("sk_g_6") %>
-                  <th>피부톤 Green6</th>
-                <% elsif filter.include?("sk_g_7") %>
-                  <th>피부톤 Green7</th>
-                <% elsif filter.include?("sk_g_8") %>
-                  <th>피부톤 Green8</th>
-                <% elsif filter.include?("sk_g_avr") %>
-                  <th>피부톤 Green_avr</th>
-                <% elsif filter.include?("sk_b_1") %>
-                  <th>피부톤 Blue1</th>
-                <% elsif filter.include?("sk_b_2") %>
-                  <th>피부톤 Blue2</th>
-                <% elsif filter.include?("sk_b_3") %>
-                  <th>피부톤 Blue3</th>
-                <% elsif filter.include?("sk_b_4") %>
-                  <th>피부톤 Blue4</th>
-                <% elsif filter.include?("sk_b_5") %>
-                  <th>피부톤 Blue5</th>
-                <% elsif filter.include?("sk_b_6") %>
-                  <th>피부톤 Blue6</th>
-                <% elsif filter.include?("sk_b_7") %>
-                  <th>피부톤 Blue7</th>
-                <% elsif filter.include?("sk_b_8") %>
-                  <th>피부톤 Blue8</th>
-                <% elsif filter.include?("sk_b_avr") %>
-                  <th>피부톤 Blue_avr</th>
-                <% elsif filter.include?("lab_l") %>
-                  <th>Lab L</th>
-                <% elsif filter.include?("lab_a") %>
-                  <th>Lab a</th>
-                <% elsif filter.include?("lab_b") %>
-                  <th>Lab b</th>
-                <% elsif filter.include?("e_sebum_t") %>
-                  <th>피부타입 기준 값 (T 존)</th>
-                <% elsif filter.include?("e_sebum_u") %>
-                  <th>피부타입 기준 값 (U 존)</th>
-                <% elsif filter.include?("colortype") %>
-                  <th>피부톤 칼라 타입</th>
-                <% elsif filter.include?("suntype") %>
-                  <th>선 민감도</th>
-                <% elsif filter.include?("score_r") %>
-                  <th>동안각도 점수 우측</th>
-                <% elsif filter.include?("score_l") %>
-                  <th>동안각도 점수 좌측</th>
-                <% elsif filter.include?("skintype") %>
-                  <th>피부타입</th>
-                <% else %>
-                  <th class="text-center"><%= filter %></th>
-                <% end %>
+          <th>이름</th>
+          <th>분석 횟수</th>
+          <th>채널</th>
+          <th>측정 부위</th>
+          <th>진단 날짜</th>
+          <th>업데이트 일</th>
+          <% if @select_filter != [] %>
+            <% @select_filter.each do |filter| %>
+              <% if filter.include?("mo_1") %>
+                <th>수분 측정 이마</th>
+              <% elsif filter.include?("mo_7") %>
+                <th>수분 측정 우측 볼</th>
+              <% elsif filter.include?("mo_8") %>
+                <th>수분 측정 좌측 볼</th>
+              <% elsif filter.include?("pr_1") %>
+                <th>모공 측정 이마</th>
+              <% elsif filter.include?("pr_2") %>
+                <th>모공 측정 코</th>
+              <% elsif filter.include?("pr_7") %>
+                <th>모공 측정 우측 볼</th>
+              <% elsif filter.include?("pr_8") %>
+                <th>모공 측정 좌측 볼</th>
+              <% elsif filter.include?("pr_avr") %>
+                <th>모공 측정 평균</th>
+              <% elsif filter.include?("wr_3") %>
+                <th>주름 측정 우측 눈옆</th>
+              <% elsif filter.include?("wr_4") %>
+                <th>주름 측정 우측 눈밑</th>
+              <% elsif filter.include?("wr_6") %>
+                <th>주름 측정 좌측 눈밑</th>
+              <% elsif filter.include?("wr_avr") %>
+                <th>수분 측정 평균</th>
+              <% elsif filter.include?("el_7") %>
+                <th>탄력 측정 우측 볼</th>
+              <% elsif filter.include?("el_8") %>
+                <th>탄력 측정 우측 볼</th>
+              <% elsif filter.include?("el_avr") %>
+                <th>탄력 측정 평균</th>
+              <% elsif filter.include?("el_angle_7") %>
+                <th>탄력 각도 우측 볼</th>
+              <% elsif filter.include?("el_angle_8") %>
+                <th>탄력 각도 좌측 볼</th>
+              <% elsif filter.include?("sb_1") %>
+                <th>피지 개수 이마</th>
+              <% elsif filter.include?("sb_2") %>
+                <th>피지 개수 코</th>
+              <% elsif filter.include?("sb_7") %>
+                <th>피지 개수 우측 볼</th>
+              <% elsif filter.include?("sb_8") %>
+                <th>피지 개수 우측 볼</th>
+              <% elsif filter.include?("sb_avr") %>
+                <th>피지 개수 평균</th>
+              <% elsif filter.include?("pp_1") %>
+                <th>포피린 개수 이마</th>
+              <% elsif filter.include?("pp_2") %>
+                <th>포피린 개수 코</th>
+              <% elsif filter.include?("pp_7") %>
+                <th>포피린 개수 우측 볼</th>
+              <% elsif filter.include?("pp_8") %>
+                <th>포피린 개수 우측 볼</th>
+              <% elsif filter.include?("pp_avr") %>
+                <th>포피린 개수 평균</th>
+              <% elsif filter.include?("pp_ratio_1") %>
+                <th>포피린 비 이마</th>
+              <% elsif filter.include?("pp_ratio_2") %>
+                <th>포피린 비 코</th>
+              <% elsif filter.include?("pp_ratio_7") %>
+                <th>포피린 비 우측 볼</th>
+              <% elsif filter.include?("pp_ratio_8") %>
+                <th>포피린 비 우측 볼</th>
+              <% elsif filter.include?("pp_ratio_avr") %>
+                <th>포피린 비 평균</th>
+              <% elsif filter.include?("sp_pl_1") %>
+                <th>편광 색소침착 측정 이마</th>
+              <% elsif filter.include?("sp_pl_2") %>
+                <th>편광 색소침착 측정 코</th>
+              <% elsif filter.include?("sp_pl_3") %>
+                <th>편광 색소침착 측정 우측 눈옆</th>
+              <% elsif filter.include?("sp_pl_4") %>
+                <th>편광 색소침착 측정 우측 눈밑</th>
+              <% elsif filter.include?("sp_pl_5") %>
+                <th>편광 색소침착 측정 좌측 눈옆</th>
+              <% elsif filter.include?("sp_pl_6") %>
+                <th>편광 색소침착 측정 좌측 눈밑</th>
+              <% elsif filter.include?("sp_pl_7") %>
+                <th>편광 색소침착 측정 우측 볼</th>
+              <% elsif filter.include?("sp_pl_8") %>
+                <th>편광 색소침착 측정 우측 볼</th>
+              <% elsif filter.include?("sp_pl_avr") %>
+                <th>편광 색소침착 측정 평균</th>
+              <% elsif filter.include?("sp_uv_1") %>
+                <th>UV광 색소침착 측정 이마</th>
+              <% elsif filter.include?("sp_uv_2") %>
+                <th>UV광 색소침착 측정 코</th>
+              <% elsif filter.include?("sp_uv_3") %>
+                <th>UV광 색소침착 측정 우측 눈옆</th>
+              <% elsif filter.include?("sp_uv_4") %>
+                <th>UV광 색소침착 측정 우측 눈밑</th>
+              <% elsif filter.include?("sp_uv_5") %>
+                <th>UV광 색소침착 측정 좌측 눈옆</th>
+              <% elsif filter.include?("sp_uv_6") %>
+                <th>UV광 색소침착 측정 좌측 눈밑</th>
+              <% elsif filter.include?("sp_uv_7") %>
+                <th>UV광 색소침착 측정 우측 볼</th>
+              <% elsif filter.include?("sp_uv_8") %>
+                <th>UV광 색소침착 측정 우측 볼</th>
+              <% elsif filter.include?("sp_uv_avr") %>
+                <th>UV광 색소침착 측정 평균</th>
+              <% elsif filter.include?("sk_c_1") %>
+                <th>피부톤 측정 이마</th>
+              <% elsif filter.include?("sk_c_2") %>
+                <th>피부톤 측정 코</th>
+              <% elsif filter.include?("sk_c_3") %>
+                <th>피부톤 측정 우측 눈옆</th>
+              <% elsif filter.include?("sk_c_4") %>
+                <th>피부톤 측정 우측 눈밑</th>
+              <% elsif filter.include?("sk_c_5") %>
+                <th>피부톤 측정 좌측 눈옆</th>
+              <% elsif filter.include?("sk_c_6") %>
+                <th>피부톤 측정 좌측 눈밑</th>
+              <% elsif filter.include?("sk_c_7") %>
+                <th>피부톤 측정 우측 볼</th>
+              <% elsif filter.include?("sk_c_8") %>
+                <th>피부톤 측정 우측 볼</th>
+              <% elsif filter.include?("sk_c_avr") %>
+                <th>피부톤 측정 평균</th>
+              <% elsif filter.include?("sk_r_1") %>
+                <th>피부톤 Red 이마</th>
+              <% elsif filter.include?("sk_r_2") %>
+                <th>피부톤 Red 코</th>
+              <% elsif filter.include?("sk_r_4") %>
+                <th>피부톤 Red 우측 눈밑</th>
+              <% elsif filter.include?("sk_r_6") %>
+                <th>피부톤 Red 좌측 눈밑</th>
+              <% elsif filter.include?("sk_r_7") %>
+                <th>피부톤 Red 우측 볼</th>
+              <% elsif filter.include?("sk_r_8") %>
+                <th>피부톤 Red 좌측 볼</th>
+              <% elsif filter.include?("sk_r_avr") %>
+                <th>피부톤 Red 평균</th>
+              <% elsif filter.include?("sk_g_1") %>
+                <th>피부톤 Green 이마</th>
+              <% elsif filter.include?("sk_g_2") %>
+                <th>피부톤 Green 코</th>
+              <% elsif filter.include?("sk_g_4") %>
+                <th>피부톤 Green 우측 눈밑</th>
+              <% elsif filter.include?("sk_g_6") %>
+                <th>피부톤 Green 좌측 눈밑</th>
+              <% elsif filter.include?("sk_g_7") %>
+                <th>피부톤 Green 우측 볼</th>
+              <% elsif filter.include?("sk_g_8") %>
+                <th>피부톤 Green 좌측 볼</th>
+              <% elsif filter.include?("sk_g_avr") %>
+                <th>피부톤 Green 평균</th>
+              <% elsif filter.include?("sk_b_1") %>
+                <th>피부톤 Blue 이마</th>
+              <% elsif filter.include?("sk_b_2") %>
+                <th>피부톤 Blue 코</th>
+              <% elsif filter.include?("sk_b_4") %>
+                <th>피부톤 Blue 우측 눈밑</th>
+              <% elsif filter.include?("sk_b_6") %>
+                <th>피부톤 Blue 좌측 눈밑</th>
+              <% elsif filter.include?("sk_b_7") %>
+                <th>피부톤 Blue 우측 볼</th>
+              <% elsif filter.include?("sk_b_8") %>
+                <th>피부톤 Blue 좌측 볼</th>
+              <% elsif filter.include?("sk_b_avr") %>
+                <th>피부톤 Blue 평균</th>
+              <% elsif filter.include?("lab_l") %>
+                <th>피부색 L 값</th>
+              <% elsif filter.include?("lab_a") %>
+                <th>피부색 a 값</th>
+              <% elsif filter.include?("lab_b") %>
+                <th>피부색 b 값</th>
+              <% elsif filter.include?("e_sebum_t") %>
+                <th>피지 T 값(T존)</th>
+              <% elsif filter.include?("e_sebum_u") %>
+                <th>피지 E 값(U존)</th>
+              <% elsif filter.include?("colortype") %>
+                <th>피부톤</th>
+              <% elsif filter.include?("suntype") %>
+                <th>선 민감도</th>
+              <% elsif filter.include?("skintype") %>
+                <th>피부타입(야누스 측정)</th>
+              <% elsif filter.include?("m_skintype") %>
+                <th>피부타입(설문 로직)</th>
+              <% elsif filter.include?("score_r") %>
+                <th>동안각도 점수 우측</th>
+              <% elsif filter.include?("score_l") %>
+                <th>동안각도 점수 좌측</th>
+              <% elsif filter.include?("e_porphyrin_t") %>
+                <th>포피린 E 값(T존)</th>
+              <% elsif filter.include?("e_porphyrin_u") %>
+                <th>포피린 E 값(U존)</th>
+              <% elsif filter.include?("shop_cd") %>
+                <th>매장코드</th>
+              <% elsif filter.include?("worry_skin_1") %>
+                <th>피부고민 1순위</th>
+              <% elsif filter.include?("worry_skin_2") %>
+                <th>피부고민 1순위</th>
+              <% else %>
+                <th class="text-center"><%= filter %></th>
               <% end %>
-            <% else %>
-              <th>수분 측정1</th>
-              <th>수분 측정7</th>
-              <th>수분 측정8</th>
-              <th>모공 측정1</th>
-              <th>모공 측정2</th>
-              <th>모공 측정7</th>
-              <th>모공 측정8</th>
-              <th>모공 측정avr</th>
-              <th>주름 측정3</th>
-              <th>주름 측정4</th>
-              <th>주름 측정6</th>
-              <th>주름 측정avr</th>
-              <th>탄력 측정7</th>
-              <th>탄력 측정8</th>
-              <th>탄력 측정avr</th>
-              <th>탄력 각도7</th>
-              <th>탄력 각도8</th>
-              <th>피지 측정1</th>
-              <th>피지 측정2</th>
-              <th>피지 측정7</th>
-              <th>피지 측정8</th>
-              <th>피지 측정avr</th>
-              <th>포피린 측정1</th>
-              <th>포피린 측정2</th>
-              <th>포피린 측정7</th>
-              <th>포피린 측정8</th>
-              <th>포피린 측정avr</th>
-              <th>포피린 비 측정1</th>
-              <th>포피린 비 측정2</th>
-              <th>포피린 비 측정7</th>
-              <th>포피린 비 측정8</th>
-              <th>포피린 비 측정avr</th>
-              <th>편광 색소침착 측정1</th>
-              <th>편광 색소침착 측정2</th>
-              <th>편광 색소침착 측정3</th>
-              <th>편광 색소침착 측정4</th>
-              <th>편광 색소침착 측정5</th>
-              <th>편광 색소침착 측정6</th>
-              <th>편광 색소침착 측정7</th>
-              <th>편광 색소침착 측정8</th>
-              <th>편광 색소침착 측정avr</th>
-              <th>UV광 색소침착 측정1</th>
-              <th>UV광 색소침착 측정2</th>
-              <th>UV광 색소침착 측정3</th>
-              <th>UV광 색소침착 측정4</th>
-              <th>UV광 색소침착 측정5</th>
-              <th>UV광 색소침착 측정6</th>
-              <th>UV광 색소침착 측정7</th>
-              <th>UV광 색소침착 측정8</th>
-              <th>UV광 색소침착 측정avr</th>
-              <th>피부톤 측정1</th>
-              <th>피부톤 측정2</th>
-              <th>피부톤 측정4</th>
-              <th>피부톤 측정6</th>
-              <th>피부톤 측정7</th>
-              <th>피부톤 측정8</th>
-              <th>피부톤 측정avr</th>
-              <th>피부톤 Red1</th>
-              <th>피부톤 Red2</th>
-              <th>피부톤 Red4</th>
-              <th>피부톤 Red6</th>
-              <th>피부톤 Red7</th>
-              <th>피부톤 Red8</th>
-              <th>피부톤 Red_avr</th>
-              <th>피부톤 Green1</th>
-              <th>피부톤 Green2</th>
-              <th>피부톤 Green4</th>
-              <th>피부톤 Green6</th>
-              <th>피부톤 Green7</th>
-              <th>피부톤 Green8</th>
-              <th>피부톤 Green_avr</th>
-              <th>피부톤 Blue1</th>
-              <th>피부톤 Blue2</th>
-              <th>피부톤 Blue4</th>
-              <th>피부톤 Blue6</th>
-              <th>피부톤 Blue7</th>
-              <th>피부톤 Blue8</th>
-              <th>피부톤 Blue_avr</th>
-              <th>Lab L</th>
-              <th>Lab a</th>
-              <th>Lab b</th>
-              <th>피부타입 기준 값 (T 존)</th>
-              <th>피부타입 기준 값 (U 존)</th>
-              <th>피부톤 칼라 타입</th>
-              <th>선 민감도</th>
-              <th>동안각도 점수 우측</th>
-              <th>동안각도 점수 좌측</th>
-              <th>피부타입</th>
             <% end %>
-
+          <% else %>
+            <th>수분 측정 이마</th>
+            <th>수분 측정 우측 볼</th>
+            <th>수분 측정 좌측 볼</th>
+            <th>모공 측정 이마</th>
+            <th>모공 측정 코</th>
+            <th>모공 측정 우측 볼</th>
+            <th>모공 측정 좌측 볼</th>
+            <th>모공 측정 평균</th>
+            <th>주름 측정 우측 눈옆</th>
+            <th>주름 측정 우측 눈밑</th>
+            <th>주름 측정 좌측 눈옆</th>
+            <th>주름 측정 좌측 눈밑</th>
+            <th>주름 측정 평균</th>
+            <th>탄력 측정 우측 볼</th>
+            <th>탄력 측정 좌측 볼</th>
+            <th>탄력 측정 평균</th>
+            <th>탄력 각도 우측 볼</th>
+            <th>탄력 각도 좌측 볼</th>
+            <th>피지 개수 이마</th>
+            <th>피지 개수 코</th>
+            <th>피지 개수 우측 볼</th>
+            <th>피지 개수 좌측 볼</th>
+            <th>피지 개수 평균</th>
+            <th>포피린 개수 이마</th>
+            <th>포피린 개수 코</th>
+            <th>포피린 개수 우측 볼</th>
+            <th>포피린 개수 좌측 볼</th>
+            <th>포피린 개수 평균</th>
+            <th>포피린 비 이마</th>
+            <th>포피린 비 코</th>
+            <th>포피린 비 우측 볼</th>
+            <th>포피린 비 좌측 볼</th>
+            <th>포피린 비 평균</th>
+            <th>편광 색소침착 측정 이마</th>
+            <th>편광 색소침착 측정 코</th>
+            <th>편광 색소침착 측정 우측 눈옆</th>
+            <th>편광 색소침착 측정 우측 눈밑</th>
+            <th>편광 색소침착 측정 좌측 눈옆</th>
+            <th>편광 색소침착 측정 좌측 눈밑</th>
+            <th>편광 색소침착 측정 우측 볼</th>
+            <th>편광 색소침착 측정 좌측 볼</th>
+            <th>편광 색소침착 측정 평균</th>
+            <th>UV광 색소침착 측정 이마</th>
+            <th>UV광 색소침착 측정 코</th>
+            <th>UV광 색소침착 측정 우측 눈옆</th>
+            <th>UV광 색소침착 측정 우측 눈밑</th>
+            <th>UV광 색소침착 측정 좌측 눈옆</th>
+            <th>UV광 색소침착 측정 좌측 눈밑</th>
+            <th>UV광 색소침착 측정 우측 볼</th>
+            <th>UV광 색소침착 측정 좌측 볼</th>
+            <th>UV광 색소침착 측정 평균</th>
+            <th>피부톤 측정 이마</th>
+            <th>피부톤 측정 코</th>
+            <th>피부톤 측정 우측 눈밑</th>
+            <th>피부톤 측정 좌측 눈밑</th>
+            <th>피부톤 측정 우측 볼</th>
+            <th>피부톤 측정 좌측 볼</th>
+            <th>피부톤 측정 평균</th>
+            <th>피부톤 Red 이마</th>
+            <th>피부톤 Red 코</th>
+            <th>피부톤 Red 우측 눈밑</th>
+            <th>피부톤 Red 좌측 눈밑</th>
+            <th>피부톤 Red 우측 볼</th>
+            <th>피부톤 Red 좌측 볼</th>
+            <th>피부톤 Red 평균</th>
+            <th>피부톤 Green 이마</th>
+            <th>피부톤 Green 코</th>
+            <th>피부톤 Green 우측 눈밑</th>
+            <th>피부톤 Green 좌측 눈밑</th>
+            <th>피부톤 Green 우측 볼</th>
+            <th>피부톤 Green 좌측 볼</th>
+            <th>피부톤 Green 평균</th>
+            <th>피부톤 Blue 이마</th>
+            <th>피부톤 Blue 코</th>
+            <th>피부톤 Blue 우측 눈밑</th>
+            <th>피부톤 Blue 좌측 눈밑</th>
+            <th>피부톤 Blue 우측 볼</th>
+            <th>피부톤 Blue 좌측 볼</th>
+            <th>피부톤 Blue 평균</th>
+            <th>피부색 L 값</th>
+            <th>피부색 a 값</th>
+            <th>피부색 b 값</th>
+            <th>피지 E 값 (T 존)</th>
+            <th>피지 E 값 (U 존)</th>
+            <th>피부톤</th>
+            <th>선 민감도</th>
+            <th>피부타입(야누스 측정)</th>
+            <th>피부타입(설문 로직)</th>
+            <th>동안각도 점수 우측</th>
+            <th>동안각도 점수 좌측</th>
+            <th>포피린 E 값(T존)</th>
+            <th>포피린 E 값(U존)</th>
+            <th>매장코드</th>
+            <th>피부고민 1순위</th>
+            <th>피부고민 2순위</th>
+          <% end %>
         </tr>
       </thead>
       <tbody>

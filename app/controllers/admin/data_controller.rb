@@ -199,207 +199,205 @@ class Admin::DataController < Admin::AdminApplicationController
     Rails.logger.info scoped.count
 
     if @select_filter == []
-      @excel_name = ["이름","분석 횟수","채널구분","전면/좌/우측면","분석 일","업데이트 일","수분 측정1","수분 측정2","수분 측정3","모공 측정1","모공 측정2","모공 측정7","모공 측정8","모공 측정avr","주름 측정3", "주름 측정4", "주름 측정6", "주름 측정avr",
-      "탄력 측정7", "탄력 측정8", "탄력 측정avr", "탄력 각도7", "탄력 각도8", "피지 측정1", "피지 측정2", "피지 측정7", "피지 측정8", "피지 측정avr", "포피린 측정1", "포피린 측정2", "포피린 측정7", "포피린 측정8", "포피린 측정avr",
-      "포피린 비 측정1", "포피린 비 측정2", "포피린 비 측정7", "포피린 비 측정8", "포피린 비 측정avr", "편광 색소침착 측정1", "편광 색소침착 측정2", "편광 색소침착 측정3", "편광 색소침착 측정4", "편광 색소침착 측정5", "편광 색소침착 측정6", "편광 색소침착 측정7", "편광 색소침착 측정8", "편광 색소침착 측정avr",
-      "UV광 색소침착 측정1", "UV광 색소침착 측정2", "UV광 색소침착 측정3","UV광 색소침착 측정4","UV광 색소침착 측정5","UV광 색소침착 측정6","UV광 색소침착 측정7","UV광 색소침착 측정8","UV광 색소침착 측정avr","피부톤 측정1","피부톤 측정2","피부톤 측정4","피부톤 측정6","피부톤 측정7","피부톤 측정8","피부톤 측정avr",
-      "피부톤 Red 측정1","피부톤 Red 측정2","피부톤 Red 측정4","피부톤 Red 측정6","피부톤 Red 측정7","피부톤 Red 측정8","피부톤 Red 측정avr","피부톤 Green 측정1","피부톤 Green 측정2","피부톤 Green 측정4","피부톤 Green 측정6","피부톤 Green 측정7","피부톤 Green 측정8","피부톤 Green 측정avr",
-      "피부톤 Blue 측정1","피부톤 Blue 측정2","피부톤 Blue 측정4","피부톤 Blue 측정6","피부톤 Blue 측정7","피부톤 Blue 측정8","피부톤 Blue 측정avr","Lab L","Lab a","Lab b","피부타입 기준 값 (T 존)","피부타입 기준 값 (U 존)","피부톤 칼라 타입","선 민감도","동안각도 점수 우측","동안각도 점수 좌측","피부타입"]
+      @excel_name = ["이름","분석 횟수","채널","측정 부위","진단 날짜","업데이트 일","수분 측정 우측 볼","수분 측정 좌측 볼","수분 측정 이마","모공 측정 이마","모공 측정 코","모공 측정 우측 볼","모공 측정 좌측 볼","모공 측정 평균","주름 측정 우측 눈옆", "주름 측정 우측 눈밑", "주름 측정 좌측 눈옆",
+        "주름 측정 좌측 눈밑", "주름 측정 평균",
+      "탄력 측정 우측 볼", "탄력 측정 좌측 볼", "탄력 측정 평균", "탄력 각도 우측 볼", "탄력 각도 좌측 볼", "피지 개수 이마", "피지 개수 코", "피지 개수 우측 볼", "피지 개수 좌측 볼", "피지 개수 평균", "포피린 개수 이마", "포피린 개수 코", "포피린 개수 우측 볼", "포피린 개수 좌측 볼", "포피린 개수 평균",
+      "포피린 비 이마", "포피린 비 코", "포피린 비 우측 볼", "포피린 비 좌측 볼", "포피린 비 평균", "편광 색소침착 측정 이마", "편광 색소침착 측정 코", "편광 색소침착 측정 우측 눈옆", "편광 색소침착 측정 우측 눈밑", "편광 색소침착 측정 좌측 눈옆", "편광 색소침착 측정 좌측 눈밑", "편광 색소침착 측정 우측 볼",
+      "편광 색소침착 측정 좌측 볼", "편광 색소침착 측정 평균",
+      "UV광 색소침착 측정 이마", "UV광 색소침착 측정 코", "UV광 색소침착 측정 우측 눈옆","UV광 색소침착 측정 우측 눈밑","UV광 색소침착 측정 좌측 눈옆","UV광 색소침착 측정 좌측 눈밑","UV광 색소침착 측정 우측 볼",
+      "UV광 색소침착 측정 좌측 볼","UV광 색소침착 측정 평균","피부톤 측정 이마","피부톤 측정 코","피부톤 측정 우측 눈밑","피부톤 측정 좌측 눈밑","피부톤 측정 우측 볼","피부톤 측정 좌측 볼","피부톤 측정 평균",
+      "피부톤 Red 이마","피부톤 Red 코","피부톤 Red 우측 눈밑","피부톤 Red 좌측 눈밑","피부톤 Red 우측 볼","피부톤 Red 좌측 볼","피부톤 Red 평균","피부톤 Green 이마","피부톤 Green 코","피부톤 Green 우측 눈밑","피부톤 Green 좌측 눈밑","피부톤 Green 우측 볼","피부톤 Green 좌측 볼","피부톤 Green 평균",
+      "피부톤 Blue 이마","피부톤 Blue 코","피부톤 Blue 우측 눈밑","피부톤 Blue 좌측 눈밑","피부톤 Blue 우측 볼","피부톤 Blue 좌측 볼","피부톤 Blue 평균","피부색 L 값","피부색 a 값","피부색 b 값","피지 E 값 (T 존)","피지 E 값 (U 존)","피부톤","선 민감도","피부타입(야누스 측정)","피부타입(설문 로직)","동안각도 점수 우측","동안각도 점수 좌측",
+      "포피린 E 값(T존)","포피린 E 값(U존)","매장코드"]
     else
-      @excel_name = ["이름","분석 횟수","채널구분","전면/좌/우측면","분석 일","업데이트 일"]
+      @excel_name = ["이름","분석 횟수","채널구분","측정 부위","진단 날짜","업데이트 일"]
       @select_filter.each do |filter|
         if filter.include?("mo_1")
-          filter = "수분 측정1"
+          filter = "수분 측정 우측 볼"
         elsif filter.include?("mo_7")
-          filter = "수분 측정7"
+          filter = "수분 우측 볼"
         elsif filter.include?("mo_8")
-          filter = "수분 측정7"
+          filter = "수분 좌측 볼"
         elsif filter.include?("pr_1")
-          filter = "모공 측정1"
+          filter = "모공 측정 이마"
         elsif filter.include?("pr_2")
-          filter = "모공 측정2"
+          filter = "모공 측정 코"
         elsif filter.include?("pr_7")
-          filter = "모공 측정7"
+          filter = "모공 측정 우측 볼"
         elsif filter.include?("pr_8")
-          filter = "모공 측정8"
+          filter = "모공 측정 좌측 볼"
         elsif filter.include?("pr_avr")
-          filter = "모공 측정avr"
+          filter = "모공 측정 평균"
         elsif filter.include?("wr_3")
-          filter = "주름 측정3"
+          filter = "주름 측정 우측 눈옆"
         elsif filter.include?("wr_4")
-          filter = "주름 측정4"
+          filter = "주름 측정 우측 눈밑"
+        elsif filter.include?("wr_5")
+          filter = "주름 측정 좌측 눈옆"
         elsif filter.include?("wr_6")
-          filter = "주름 측정6"
+          filter = "주름 측정 좌측 눈밑"
         elsif filter.include?("wr_avr")
-          filter = "수분 측정avr"
+          filter = "수분 평균"
         elsif filter.include?("el_7")
-          filter = "탄력 측정7"
+          filter = "탄력 측정 우측 볼"
         elsif filter.include?("el_8")
-          filter = "탄력 측정8"
+          filter = "탄력 측정 좌측 볼"
         elsif filter.include?("el_avr")
-          filter = "탄력 측정avr"
+          filter = "탄력 측정 평균"
         elsif filter.include?("el_angle_7")
-          filter = "탄력 각도7"
+          filter = "탄력 각도 우측 볼"
         elsif filter.include?("el_angle_8")
-          filter = "탄력 각도8"
+          filter = "탄력 각도 좌측 볼"
         elsif filter.include?("sb_1")
-          filter = "피지 측정1"
+          filter = "피지 개수 이마"
         elsif filter.include?("sb_2")
-          filter = "피지 측정2"
+          filter = "피지 개수 코"
         elsif filter.include?("sb_7")
-          filter = "피지 측정7"
+          filter = "피지 개수 우측 볼"
         elsif filter.include?("sb_8")
-          filter = "피지 측정8"
+          filter = "피지 개수 좌측 볼"
         elsif filter.include?("sb_avr")
-          filter = "피지 측정avr"
+          filter = "피지 개수 평균"
         elsif filter.include?("pp_1")
-          filter = "포피린 측정1"
+          filter = "포피린 개수 이마"
         elsif filter.include?("pp_2")
-          filter = "포피린 측정2"
+          filter = "포피린 개수 코"
         elsif filter.include?("pp_7")
-          filter = "포피린 측정7"
+          filter = "포피린 개수 우측 볼"
         elsif filter.include?("pp_8")
-          filter = "포피린 측정8"
+          filter = "포피린 개수 좌측 볼"
         elsif filter.include?("pp_avr")
-          filter = "포피린 측정avr"
+          filter = "포피린 개수 평균"
         elsif filter.include?("pp_ratio_1")
-          filter = "포피린 비 측정1"
+          filter = "포피린 비 이마"
         elsif filter.include?("pp_ratio_2")
-          filter = "포피린 비 측정2"
+          filter = "포피린 비 코"
         elsif filter.include?("pp_ratio_7")
-          filter = "포피린 비 측정7"
+          filter = "포피린 비 우측 볼"
         elsif filter.include?("pp_ratio_8")
-          filter = "포피린 비 측정8"
+          filter = "포피린 비 좌측 볼"
         elsif filter.include?("pp_ratio_avr")
-          filter = "포피린 비 측정avr"
+          filter = "포피린 비 평균"
         elsif filter.include?("sp_pl_1")
-          filter = "편광 색소침착 측정1"
+          filter = "편광 색소침착 측정 이마"
         elsif filter.include?("sp_pl_2")
-          filter = "편광 색소침착 측정2"
+          filter = "편광 색소침착 측정 코"
         elsif filter.include?("sp_pl_3")
-          filter = "편광 색소침착 측정3"
+          filter = "편광 색소침착 측정 우측 눈옆"
         elsif filter.include?("sp_pl_4")
-          filter = "편광 색소침착 측정4"
+          filter = "편광 색소침착 측정 우측 눈밑"
         elsif filter.include?("sp_pl_5")
-          filter = "편광 색소침착 측정5"
+          filter = "편광 색소침착 측정 좌측 눈옆"
         elsif filter.include?("sp_pl_6")
-          filter = "편광 색소침착 측정6"
+          filter = "편광 색소침착 측정 좌측 눈밑"
         elsif filter.include?("sp_pl_7")
-          filter = "편광 색소침착 측정7"
+          filter = "편광 색소침착 측정 우측 볼"
         elsif filter.include?("sp_pl_8")
-          filter = "편광 색소침착 측정8"
+          filter = "편광 색소침착 측정 좌측 볼"
         elsif filter.include?("sp_pl_avr")
-          filter = "편광 색소침착 측정avr"
+          filter = "편광 색소침착 측정 평균"
         elsif filter.include?("sp_uv_1")
-          filter = "UV광 색소침착 측정1"
+          filter = "UV광 색소침착 측정 이마"
         elsif filter.include?("sp_uv_2")
-          filter = "UV광 색소침착 측정2"
+          filter = "UV광 색소침착 측정 코"
         elsif filter.include?("sp_uv_3")
-          filter = "UV광 색소침착 측정3"
+          filter = "UV광 색소침착 측정 우측 눈옆"
         elsif filter.include?("sp_uv_4")
-          filter = "UV광 색소침착 측정4"
+          filter = "UV광 색소침착 측정 우측 눈밑"
         elsif filter.include?("sp_uv_5")
-          filter = "UV광 색소침착 측정5"
+          filter = "UV광 색소침착 측정 좌측 눈옆"
         elsif filter.include?("sp_uv_6")
-          filter = "UV광 색소침착 측정6"
+          filter = "UV광 색소침착 측정 좌측 눈밑"
         elsif filter.include?("sp_uv_7")
-          filter = "UV광 색소침착 측정7"
+          filter = "UV광 색소침착 측정 우측 볼"
         elsif filter.include?("sp_uv_8")
-          filter = "UV광 색소침착 측정8"
+          filter = "UV광 색소침착 측정 좌측 볼"
         elsif filter.include?("sp_uv_avr")
-          filter = "UV광 색소침착 측정avr"
+          filter = "UV광 색소침착 측정 평균"
         elsif filter.include?("sk_c_1")
-          filter = "피부톤 측정1"
+          filter = "피부톤 측정 이마"
         elsif filter.include?("sk_c_2")
-          filter = "피부톤 측정2"
-        elsif filter.include?("sk_c_3")
-          filter = "피부톤 측정3"
+          filter = "피부톤 측정 코"
         elsif filter.include?("sk_c_4")
-          filter = "피부톤 측정4"
-        elsif filter.include?("sk_c_5")
-          filter = "피부톤 측정5"
+          filter = "피부톤 측정 우측 눈밑"
         elsif filter.include?("sk_c_6")
-          filter = "피부톤 측정6"
+          filter = "피부톤 측정 좌측 눈밑"
         elsif filter.include?("sk_c_7")
-          filter = "피부톤 측정7"
+          filter = "피부톤 측정 우측 볼"
         elsif filter.include?("sk_c_8")
-          filter = "피부톤 측정8"
+          filter = "피부톤 측정 좌측 볼"
         elsif filter.include?("sk_c_avr")
-          filter = "피부톤 측정avr"
+          filter = "피부톤 측정 평균"
         elsif filter.include?("sk_r_1")
-          filter = "피부톤 Red1"
+          filter = "피부톤 Red 이마"
         elsif filter.include?("sk_r_2")
-          filter = "피부톤 Red2"
-        elsif filter.include?("sk_r_3")
-          filter = "피부톤 Red3"
+          filter = "피부톤 Red 코"
         elsif filter.include?("sk_r_4")
-          filter = "피부톤 Red4"
-        elsif filter.include?("sk_r_5")
-          filter = "피부톤 Red5"
+          filter = "피부톤 Red 우측 눈밑"
         elsif filter.include?("sk_r_6")
-          filter = "피부톤 Red6"
+          filter = "피부톤 Red 좌측 눈밑"
         elsif filter.include?("sk_r_7")
-          filter = "피부톤 Red7"
+          filter = "피부톤 Red 우측 볼"
         elsif filter.include?("sk_r_8")
-          filter = "피부톤 Red8"
+          filter = "피부톤 Red 좌측 볼"
         elsif filter.include?("sk_r_avr")
-          filter = "피부톤 Red_avr"
+          filter = "피부톤 Red 평균"
         elsif filter.include?("sk_g_1")
-          filter = "피부톤 Green1"
+          filter = "피부톤 Green 이마"
         elsif filter.include?("sk_g_2")
-          filter = "피부톤 Green2"
-        elsif filter.include?("sk_g_3")
-          filter = "피부톤 Green3"
+          filter = "피부톤 Green 코"
         elsif filter.include?("sk_g_4")
-          filter = "피부톤 Green4"
-        elsif filter.include?("sk_g_5")
-          filter = "피부톤 Green5"
+          filter = "피부톤 Green 우측 눈밑"
         elsif filter.include?("sk_g_6")
-          filter = "피부톤 Green6"
+          filter = "피부톤 Green 좌측 눈밑"
         elsif filter.include?("sk_g_7")
-          filter = "피부톤 Green7"
+          filter = "피부톤 Green 우측 볼"
         elsif filter.include?("sk_g_8")
-          filter = "피부톤 Green8"
+          filter = "피부톤 Green 좌측 볼"
         elsif filter.include?("sk_g_avr")
-          filter = "피부톤 Green_avr"
+          filter = "피부톤 Green 평균"
         elsif filter.include?("sk_b_1")
-          filter = "피부톤 Blue1"
+          filter = "피부톤 Blue 이마"
         elsif filter.include?("sk_b_2")
-          filter = "피부톤 Blue2"
-        elsif filter.include?("sk_b_3")
-          filter = "피부톤 Blue3"
+          filter = "피부톤 Blue 코"
         elsif filter.include?("sk_b_4")
-          filter = "피부톤 Blue4"
-        elsif filter.include?("sk_b_5")
-          filter = "피부톤 Blue5"
+          filter = "피부톤 Blue 우측 눈밑"
         elsif filter.include?("sk_b_6")
-          filter = "피부톤 Blue6"
+          filter = "피부톤 Blue 좌측 눈밑"
         elsif filter.include?("sk_b_7")
-          filter = "피부톤 Blue7"
+          filter = "피부톤 Blue 우측 볼"
         elsif filter.include?("sk_b_8")
-          filter = "피부톤 Blue8"
+          filter = "피부톤 Blue 좌측 볼"
         elsif filter.include?("sk_b_avr")
-          filter = "피부톤 Blue_avr"
+          filter = "피부톤 Blue 평균"
         elsif filter.include?("lab_l")
-          filter = "Lab L"
+          filter = "피부색 L 값"
         elsif filter.include?("lab_a")
-          filter = "Lab a"
+          filter = "피부색 a 값"
         elsif filter.include?("lab_b")
-          filter = "Lab b"
+          filter = "피부색 b 값"
         elsif filter.include?("e_sebum_t")
-          filter = "피부타입 기준 값 (T 존)"
+          filter = "피지 E 값 (T 존)"
         elsif filter.include?("e_sebum_u")
-          filter = "피부타입 기준 값 (U 존)"
+          filter = "피지 E 값 (U 존)"
         elsif filter.include?("colortype")
-          filter = "피부톤 칼라 타입"
+          filter = "피부톤"
         elsif filter.include?("suntype")
           filter = "선 민감도"
+        elsif filter.include?("skintype")
+          filter = "피부타입(야누스 측정)"
+        elsif filter.include?("m_skintype")
+          filter = "피부타입(설문 로직)"
         elsif filter.include?("score_r")
           filter = "동안각도 점수 우측"
         elsif filter.include?("score_l")
           filter = "동안각도 점수 좌측"
-        elsif filter.include?("skintype")
-          filter = "피부타입"
+        elsif filter.include?("e_porphyrin_t")
+          filter = "포피린 E 값(T존)"
+        elsif filter.include?("e_porphyrin_u")
+          filter = "포피린 E 값(U존)"
+        elsif filter.include?("shop_cd")
+          filter = "매장코드"
         else
           filter = filter
         end
@@ -715,207 +713,206 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     if @select_filter == []
-      @excel_name = ["이름","분석 횟수","채널구분","전면/좌/우측면","분석 일","업데이트 일","수분 측정1","수분 측정2","수분 측정3","모공 측정1","모공 측정2","모공 측정7","모공 측정8","모공 측정avr","주름 측정3", "주름 측정4", "주름 측정6", "주름 측정avr",
-      "탄력 측정7", "탄력 측정8", "탄력 측정avr", "탄력 각도7", "탄력 각도8", "피지 측정1", "피지 측정2", "피지 측정7", "피지 측정8", "피지 측정avr", "포피린 측정1", "포피린 측정2", "포피린 측정7", "포피린 측정8", "포피린 측정avr",
-      "포피린 비 측정1", "포피린 비 측정2", "포피린 비 측정7", "포피린 비 측정8", "포피린 비 측정avr", "편광 색소침착 측정1", "편광 색소침착 측정2", "편광 색소침착 측정3", "편광 색소침착 측정4", "편광 색소침착 측정5", "편광 색소침착 측정6", "편광 색소침착 측정7", "편광 색소침착 측정8", "편광 색소침착 측정avr",
-      "UV광 색소침착 측정1", "UV광 색소침착 측정2", "UV광 색소침착 측정3","UV광 색소침착 측정4","UV광 색소침착 측정5","UV광 색소침착 측정6","UV광 색소침착 측정7","UV광 색소침착 측정8","UV광 색소침착 측정avr","피부톤 측정1","피부톤 측정2","피부톤 측정4","피부톤 측정6","피부톤 측정7","피부톤 측정8","피부톤 측정avr",
-      "피부톤 Red 측정1","피부톤 Red 측정2","피부톤 Red 측정4","피부톤 Red 측정6","피부톤 Red 측정7","피부톤 Red 측정8","피부톤 Red 측정avr","피부톤 Green 측정1","피부톤 Green 측정2","피부톤 Green 측정4","피부톤 Green 측정6","피부톤 Green 측정7","피부톤 Green 측정8","피부톤 Green 측정avr",
-      "피부톤 Blue 측정1","피부톤 Blue 측정2","피부톤 Blue 측정4","피부톤 Blue 측정6","피부톤 Blue 측정7","피부톤 Blue 측정8","피부톤 Blue 측정avr","Lab L","Lab a","Lab b","피부타입 기준 값 (T 존)","피부타입 기준 값 (U 존)","피부톤 칼라 타입","선 민감도","동안각도 점수 우측","동안각도 점수 좌측","피부타입"]
+      @excel_name = ["이름","분석 횟수","채널구분","측정 부위","진단 날짜","업데이트 일","수분 측정 우측 볼","수분 측정 좌측 볼","수분 측정 이마","모공 측정 이마","모공 측정 코","모공 측정 우측 볼","모공 측정 좌측 볼","모공 측정 평균","주름 측정 우측 눈옆", "주름 측정 우측 눈밑", "주름 측정 좌측 눈옆","주름 측정 좌측 눈밑", "주름 측정 평균",
+      "탄력 측정 우측 볼", "탄력 측정 좌측 볼", "탄력 측정 평균", "탄력 각도 우측 볼", "탄력 각도 좌측 볼", "피지 개수 이마", "피지 개수 코", "피지 개수 우측 볼", "피지 개수 좌측 볼", "피지 개수 평균", "포피린 개수 이마", "포피린 개수 코", "포피린 개수 우측 볼", "포피린 개수 좌측 볼", "포피린 개수 평균",
+      "포피린 비 이마", "포피린 비 코", "포피린 비 우측 볼", "포피린 비 좌측 볼", "포피린 비 평균", "편광 색소침착 측정 이마", "편광 색소침착 측정 코", "편광 색소침착 측정 우측 눈옆", "편광 색소침착 측정 우측 눈밑", "편광 색소침착 측정 좌측 눈옆", "편광 색소침착 측정 좌측 눈밑", "편광 색소침착 측정 우측 볼", "편광 색소침착 측정 좌측 볼", "편광 색소침착 측정 평균",
+      "UV광 색소침착 측정 이마", "UV광 색소침착 측정 코", "UV광 색소침착 측정 우측 눈옆","UV광 색소침착 측정 우측 눈밑","UV광 색소침착 측정 좌측 눈옆","UV광 색소침착 측정 좌측 눈밑","UV광 색소침착 측정 우측 볼","UV광 색소침착 측정 좌측 볼","UV광 색소침착 측정 평균","피부톤 측정 이마","피부톤 측정 코","피부톤 측정 우측 눈밑","피부톤 측정 좌측 눈밑","피부톤 측정 우측 볼","피부톤 측정 좌측 볼","피부톤 측정 평균",
+      "피부톤 Red 이마","피부톤 Red 코","피부톤 Red 우측 눈밑","피부톤 Red 좌측 눈밑","피부톤 Red 우측 볼","피부톤 Red 좌측 볼","피부톤 Red 평균","피부톤 Green 이마","피부톤 Green 코","피부톤 Green 우측 눈밑","피부톤 Green 좌측 눈밑","피부톤 Green 우측 볼","피부톤 Green 좌측 볼","피부톤 Green 평균",
+      "피부톤 Blue 이마","피부톤 Blue 코","피부톤 Blue 우측 눈밑","피부톤 Blue 좌측 눈밑","피부톤 Blue 우측 볼","피부톤 Blue 좌측 볼","피부톤 Blue 평균","피부색 L 값","피부색 a 값","피부색 b 값","피지 E 값 (T 존)","피지 E 값 (U 존)","피부톤","선 민감도","피부타입(야누스 측정)","피부타입(설문 로직)","동안각도 점수 우측","동안각도 점수 좌측",
+      "포피린 E 값(T존)","포피린 E 값(U존)","매장코드","피부고민 1순위","피부고민 2순위"]
     else
-      @excel_name = ["이름","분석 횟수","채널구분","전면/좌/우측면","분석 일","업데이트 일"]
+      @excel_name = ["이름","분석 횟수","채널구분","측정 부위","진단 날짜","업데이트 일"]
       @select_filter.each do |filter|
         if filter.include?("mo_1")
-          filter = "수분 측정1"
+          filter = "수분 측정 우측 볼"
         elsif filter.include?("mo_7")
-          filter = "수분 측정7"
+          filter = "수분 우측 볼"
         elsif filter.include?("mo_8")
-          filter = "수분 측정7"
+          filter = "수분 우측 볼"
         elsif filter.include?("pr_1")
-          filter = "모공 측정1"
+          filter = "모공 측정 이마"
         elsif filter.include?("pr_2")
-          filter = "모공 측정2"
+          filter = "모공 측정 코"
         elsif filter.include?("pr_7")
-          filter = "모공 측정7"
+          filter = "모공 측정 우측 볼"
         elsif filter.include?("pr_8")
-          filter = "모공 측정8"
+          filter = "모공 측정 좌측 볼"
         elsif filter.include?("pr_avr")
-          filter = "모공 측정avr"
+          filter = "모공 측정 평균"
         elsif filter.include?("wr_3")
-          filter = "주름 측정3"
+          filter = "주름 측정 우측 눈옆"
         elsif filter.include?("wr_4")
-          filter = "주름 측정4"
+          filter = "주름 측정 우측 눈밑"
+        elsif filter.include?("wr_5")
+          filter = "주름 측정 좌측 눈옆"
         elsif filter.include?("wr_6")
-          filter = "주름 측정6"
+          filter = "주름 측정 좌측 눈밑"
         elsif filter.include?("wr_avr")
-          filter = "수분 측정avr"
+          filter = "수분 측정 평균"
         elsif filter.include?("el_7")
-          filter = "탄력 측정7"
+          filter = "탄력 측정 우측 볼"
         elsif filter.include?("el_8")
-          filter = "탄력 측정8"
+          filter = "탄력 측정 좌측 볼"
         elsif filter.include?("el_avr")
-          filter = "탄력 측정avr"
+          filter = "탄력 측정 평균"
         elsif filter.include?("el_angle_7")
-          filter = "탄력 각도7"
+          filter = "탄력 각도 우측 볼"
         elsif filter.include?("el_angle_8")
-          filter = "탄력 각도8"
+          filter = "탄력 각도 좌측 볼"
         elsif filter.include?("sb_1")
-          filter = "피지 측정1"
+          filter = "피지 개수 이마"
         elsif filter.include?("sb_2")
-          filter = "피지 측정2"
+          filter = "피지 개수 코"
         elsif filter.include?("sb_7")
-          filter = "피지 측정7"
+          filter = "피지 개수 우측 볼"
         elsif filter.include?("sb_8")
-          filter = "피지 측정8"
+          filter = "피지 개수 좌측 볼"
         elsif filter.include?("sb_avr")
-          filter = "피지 측정avr"
+          filter = "피지 개수 평균"
         elsif filter.include?("pp_1")
-          filter = "포피린 측정1"
+          filter = "포피린 개수 이마"
         elsif filter.include?("pp_2")
-          filter = "포피린 측정2"
+          filter = "포피린 개수 코"
         elsif filter.include?("pp_7")
-          filter = "포피린 측정7"
+          filter = "포피린 개수 우측 볼"
         elsif filter.include?("pp_8")
-          filter = "포피린 측정8"
+          filter = "포피린 개수 좌측 볼"
         elsif filter.include?("pp_avr")
-          filter = "포피린 측정avr"
+          filter = "포피린 개수 평균"
         elsif filter.include?("pp_ratio_1")
-          filter = "포피린 비 측정1"
+          filter = "포피린 비 이마"
         elsif filter.include?("pp_ratio_2")
-          filter = "포피린 비 측정2"
+          filter = "포피린 비 코"
         elsif filter.include?("pp_ratio_7")
-          filter = "포피린 비 측정7"
+          filter = "포피린 비 우측 볼"
         elsif filter.include?("pp_ratio_8")
-          filter = "포피린 비 측정8"
+          filter = "포피린 비 좌측 볼"
         elsif filter.include?("pp_ratio_avr")
-          filter = "포피린 비 측정avr"
+          filter = "포피린 비 평균"
         elsif filter.include?("sp_pl_1")
-          filter = "편광 색소침착 측정1"
+          filter = "편광 색소침착 측정 이마"
         elsif filter.include?("sp_pl_2")
-          filter = "편광 색소침착 측정2"
+          filter = "편광 색소침착 측정 코"
         elsif filter.include?("sp_pl_3")
-          filter = "편광 색소침착 측정3"
+          filter = "편광 색소침착 측정 우측 눈옆"
         elsif filter.include?("sp_pl_4")
-          filter = "편광 색소침착 측정4"
+          filter = "편광 색소침착 측정 우측 눈밑"
         elsif filter.include?("sp_pl_5")
-          filter = "편광 색소침착 측정5"
+          filter = "편광 색소침착 측정 좌측 눈옆"
         elsif filter.include?("sp_pl_6")
-          filter = "편광 색소침착 측정6"
+          filter = "편광 색소침착 측정 좌측 눈밑"
         elsif filter.include?("sp_pl_7")
-          filter = "편광 색소침착 측정7"
+          filter = "편광 색소침착 측정 우측 볼"
         elsif filter.include?("sp_pl_8")
-          filter = "편광 색소침착 측정8"
+          filter = "편광 색소침착 측정 좌측 볼"
         elsif filter.include?("sp_pl_avr")
-          filter = "편광 색소침착 측정avr"
+          filter = "편광 색소침착 측정 평균"
         elsif filter.include?("sp_uv_1")
-          filter = "UV광 색소침착 측정1"
+          filter = "UV광 색소침착 측정 이마"
         elsif filter.include?("sp_uv_2")
-          filter = "UV광 색소침착 측정2"
+          filter = "UV광 색소침착 측정 코"
         elsif filter.include?("sp_uv_3")
-          filter = "UV광 색소침착 측정3"
+          filter = "UV광 색소침착 측정 우측 눈옆"
         elsif filter.include?("sp_uv_4")
-          filter = "UV광 색소침착 측정4"
+          filter = "UV광 색소침착 측정 우측 눈밑"
         elsif filter.include?("sp_uv_5")
-          filter = "UV광 색소침착 측정5"
+          filter = "UV광 색소침착 측정 좌측 눈옆"
         elsif filter.include?("sp_uv_6")
-          filter = "UV광 색소침착 측정6"
+          filter = "UV광 색소침착 측정 좌측 눈밑"
         elsif filter.include?("sp_uv_7")
-          filter = "UV광 색소침착 측정7"
+          filter = "UV광 색소침착 측정 우측 볼"
         elsif filter.include?("sp_uv_8")
-          filter = "UV광 색소침착 측정8"
+          filter = "UV광 색소침착 측정 좌측 볼"
         elsif filter.include?("sp_uv_avr")
-          filter = "UV광 색소침착 측정avr"
+          filter = "UV광 색소침착 측정 평균"
         elsif filter.include?("sk_c_1")
-          filter = "피부톤 측정1"
+          filter = "피부톤 측정 이마"
         elsif filter.include?("sk_c_2")
-          filter = "피부톤 측정2"
-        elsif filter.include?("sk_c_3")
-          filter = "피부톤 측정3"
+          filter = "피부톤 측정 코"
         elsif filter.include?("sk_c_4")
-          filter = "피부톤 측정4"
-        elsif filter.include?("sk_c_5")
-          filter = "피부톤 측정5"
+          filter = "피부톤 측정 우측 눈밑"
         elsif filter.include?("sk_c_6")
-          filter = "피부톤 측정6"
+          filter = "피부톤 측정 좌측 눈밑"
         elsif filter.include?("sk_c_7")
-          filter = "피부톤 측정7"
+          filter = "피부톤 측정 우측 볼"
         elsif filter.include?("sk_c_8")
-          filter = "피부톤 측정8"
+          filter = "피부톤 측정 좌측 볼"
         elsif filter.include?("sk_c_avr")
-          filter = "피부톤 측정avr"
+          filter = "피부톤 측정 평균"
         elsif filter.include?("sk_r_1")
-          filter = "피부톤 Red1"
+          filter = "피부톤 Red 이마"
         elsif filter.include?("sk_r_2")
-          filter = "피부톤 Red2"
-        elsif filter.include?("sk_r_3")
-          filter = "피부톤 Red3"
+          filter = "피부톤 Red 코"
         elsif filter.include?("sk_r_4")
-          filter = "피부톤 Red4"
-        elsif filter.include?("sk_r_5")
-          filter = "피부톤 Red5"
+          filter = "피부톤 Red 우측 눈밑"
         elsif filter.include?("sk_r_6")
-          filter = "피부톤 Red6"
+          filter = "피부톤 Red 좌측 눈밑"
         elsif filter.include?("sk_r_7")
-          filter = "피부톤 Red7"
+          filter = "피부톤 Red 우측 볼"
         elsif filter.include?("sk_r_8")
-          filter = "피부톤 Red8"
+          filter = "피부톤 Red 좌측 볼"
         elsif filter.include?("sk_r_avr")
-          filter = "피부톤 Red_avr"
+          filter = "피부톤 Red 평균"
         elsif filter.include?("sk_g_1")
-          filter = "피부톤 Green1"
+          filter = "피부톤 Green 이마"
         elsif filter.include?("sk_g_2")
-          filter = "피부톤 Green2"
-        elsif filter.include?("sk_g_3")
-          filter = "피부톤 Green3"
+          filter = "피부톤 Green 코"
         elsif filter.include?("sk_g_4")
-          filter = "피부톤 Green4"
-        elsif filter.include?("sk_g_5")
-          filter = "피부톤 Green5"
+          filter = "피부톤 Green 우측 눈밑"
         elsif filter.include?("sk_g_6")
-          filter = "피부톤 Green6"
+          filter = "피부톤 Green 좌측 눈밑"
         elsif filter.include?("sk_g_7")
-          filter = "피부톤 Green7"
+          filter = "피부톤 Green 우측 볼"
         elsif filter.include?("sk_g_8")
-          filter = "피부톤 Green8"
+          filter = "피부톤 Green 좌측 볼"
         elsif filter.include?("sk_g_avr")
-          filter = "피부톤 Green_avr"
+          filter = "피부톤 Green 평균"
         elsif filter.include?("sk_b_1")
-          filter = "피부톤 Blue1"
+          filter = "피부톤 Blue 이마"
         elsif filter.include?("sk_b_2")
-          filter = "피부톤 Blue2"
-        elsif filter.include?("sk_b_3")
-          filter = "피부톤 Blue3"
+          filter = "피부톤 Blue 코"
         elsif filter.include?("sk_b_4")
-          filter = "피부톤 Blue4"
-        elsif filter.include?("sk_b_5")
-          filter = "피부톤 Blue5"
+          filter = "피부톤 Blue 우측 눈밑"
         elsif filter.include?("sk_b_6")
-          filter = "피부톤 Blue6"
+          filter = "피부톤 Blue 좌측 눈밑"
         elsif filter.include?("sk_b_7")
-          filter = "피부톤 Blue7"
+          filter = "피부톤 Blue 우측 볼"
         elsif filter.include?("sk_b_8")
-          filter = "피부톤 Blue8"
+          filter = "피부톤 Blue 좌측 볼"
         elsif filter.include?("sk_b_avr")
-          filter = "피부톤 Blue_avr"
+          filter = "피부톤 Blue 평균"
         elsif filter.include?("lab_l")
-          filter = "Lab L"
+          filter = "피부색 L 값"
         elsif filter.include?("lab_a")
-          filter = "Lab a"
+          filter = "피부색 a 값"
         elsif filter.include?("lab_b")
-          filter = "Lab b"
+          filter = "피부색 b 값"
         elsif filter.include?("e_sebum_t")
-          filter = "피부타입 기준 값 (T 존)"
+          filter = "피지 E 값 (T 존)"
         elsif filter.include?("e_sebum_u")
-          filter = "피부타입 기준 값 (U 존)"
+          filter = "피지 E 값 (U 존)"
         elsif filter.include?("colortype")
-          filter = "피부톤 칼라 타입"
+          filter = "피부톤"
         elsif filter.include?("suntype")
           filter = "선 민감도"
+        elsif filter.include?("skintype")
+          filter = "피부타입(야누스 측정)"
+        elsif filter.include?("m_skintype")
+          filter = "피부타입(설문 로직)"
         elsif filter.include?("score_r")
           filter = "동안각도 점수 우측"
         elsif filter.include?("score_l")
           filter = "동안각도 점수 좌측"
-        elsif filter.include?("skintype")
-          filter = "피부타입"
+        elsif filter.include?("e_porphyrin_t")
+          filter = "포피린 E 값(T존)"
+        elsif filter.include?("e_porphyrin_u")
+          filter = "포피린 E 값(U존)"
+        elsif filter.include?("shop_cd")
+          filter = "매장코드"
+        elsif filter.include?("worry_skin_1")
+          filter = "피부고민 1순위"
+        elsif filter.include?("worry_skin_2")
+          filter = "피부고민 2순위"
         else
           filter = filter
         end
@@ -1102,6 +1099,10 @@ class Admin::DataController < Admin::AdminApplicationController
       min_age_custinfo = Custinfo.where(ch_cd: "CNPR").where.not(birthyy: nil).order("birthyy desc").first
       max_age_custinfo = Custinfo.where(ch_cd: "CNPR").order("birthyy asc").first
     end
+    # @min_age = 14
+    # @max_age = 100
+    # @min_birthyy = 2000
+    # @max_birthyy = 1900
     @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
     @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
     @min_birthyy = min_age_custinfo.birthyy
@@ -1177,207 +1178,202 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     if @select_filter == []
-      @excel_name = ["이름","분석 횟수","채널구분","전면/좌/우측면","분석 일","업데이트 일","수분 측정1","수분 측정2","수분 측정3","모공 측정1","모공 측정2","모공 측정7","모공 측정8","모공 측정avr","주름 측정3", "주름 측정4", "주름 측정6", "주름 측정avr",
-      "탄력 측정7", "탄력 측정8", "탄력 측정avr", "탄력 각도7", "탄력 각도8", "피지 측정1", "피지 측정2", "피지 측정7", "피지 측정8", "피지 측정avr", "포피린 측정1", "포피린 측정2", "포피린 측정7", "포피린 측정8", "포피린 측정avr",
-      "포피린 비 측정1", "포피린 비 측정2", "포피린 비 측정7", "포피린 비 측정8", "포피린 비 측정avr", "편광 색소침착 측정1", "편광 색소침착 측정2", "편광 색소침착 측정3", "편광 색소침착 측정4", "편광 색소침착 측정5", "편광 색소침착 측정6", "편광 색소침착 측정7", "편광 색소침착 측정8", "편광 색소침착 측정avr",
-      "UV광 색소침착 측정1", "UV광 색소침착 측정2", "UV광 색소침착 측정3","UV광 색소침착 측정4","UV광 색소침착 측정5","UV광 색소침착 측정6","UV광 색소침착 측정7","UV광 색소침착 측정8","UV광 색소침착 측정avr","피부톤 측정1","피부톤 측정2","피부톤 측정4","피부톤 측정6","피부톤 측정7","피부톤 측정8","피부톤 측정avr",
-      "피부톤 Red 측정1","피부톤 Red 측정2","피부톤 Red 측정4","피부톤 Red 측정6","피부톤 Red 측정7","피부톤 Red 측정8","피부톤 Red 측정avr","피부톤 Green 측정1","피부톤 Green 측정2","피부톤 Green 측정4","피부톤 Green 측정6","피부톤 Green 측정7","피부톤 Green 측정8","피부톤 Green 측정avr",
-      "피부톤 Blue 측정1","피부톤 Blue 측정2","피부톤 Blue 측정4","피부톤 Blue 측정6","피부톤 Blue 측정7","피부톤 Blue 측정8","피부톤 Blue 측정avr","Lab L","Lab a","Lab b","피부타입 기준 값 (T 존)","피부타입 기준 값 (U 존)","피부톤 칼라 타입","선 민감도","동안각도 점수 우측","동안각도 점수 좌측","피부타입"]
+      @excel_name = ["이름","분석 횟수","채널구분","측정 부위","진단 날짜","업데이트 일","수분 측정 우측 볼","수분 측정 좌측 볼","수분 측정 이마","모공 측정 이마","모공 측정 코","모공 측정 우측 볼","모공 측정 좌측 볼","모공 측정 평균","주름 측정 우측 눈옆", "주름 측정 우측 눈밑", "주름 측정 좌측 눈옆","주름 측정 좌측 눈밑", "주름 측정 평균",
+      "탄력 측정 우측 볼", "탄력 측정 좌측 볼", "탄력 측정 평균", "탄력 각도 우측 볼", "탄력 각도 좌측 볼", "피지 개수 이마", "피지 개수 코", "피지 개수 우측 볼", "피지 개수 좌측 볼", "피지 개수 평균", "포피린 개수 이마", "포피린 개수 코", "포피린 개수 우측 볼", "포피린 개수 좌측 볼", "포피린 개수 평균",
+      "포피린 비 이마", "포피린 비 코", "포피린 비 우측 볼", "포피린 비 좌측 볼", "포피린 비 평균", "편광 색소침착 측정 이마", "편광 색소침착 측정 코", "편광 색소침착 측정 우측 눈옆", "편광 색소침착 측정 우측 눈밑", "편광 색소침착 측정 좌측 눈옆", "편광 색소침착 측정 좌측 눈밑", "편광 색소침착 측정 우측 볼", "편광 색소침착 측정 좌측 볼", "편광 색소침착 측정 평균",
+      "UV광 색소침착 측정 이마", "UV광 색소침착 측정 코", "UV광 색소침착 측정 우측 눈옆","UV광 색소침착 측정 우측 눈밑","UV광 색소침착 측정 좌측 눈옆","UV광 색소침착 측정 좌측 눈밑","UV광 색소침착 측정 우측 볼","UV광 색소침착 측정 좌측 볼","UV광 색소침착 측정 평균","피부톤 측정 이마","피부톤 측정 코","피부톤 측정 우측 눈밑","피부톤 측정 좌측 눈밑","피부톤 측정 우측 볼","피부톤 측정 좌측 볼","피부톤 측정 평균",
+      "피부톤 Red 이마","피부톤 Red 코","피부톤 Red 우측 눈밑","피부톤 Red 좌측 눈밑","피부톤 Red 우측 볼","피부톤 Red 좌측 볼","피부톤 Red 평균","피부톤 Green 이마","피부톤 Green 코","피부톤 Green 우측 눈밑","피부톤 Green 좌측 눈밑","피부톤 Green 우측 볼","피부톤 Green 좌측 볼","피부톤 Green 평균",
+      "피부톤 Blue 이마","피부톤 Blue 코","피부톤 Blue 우측 눈밑","피부톤 Blue 좌측 눈밑","피부톤 Blue 우측 볼","피부톤 Blue 좌측 볼","피부톤 Blue 평균","피부색 L 값","피부색 a 값","피부색 b 값","피지 E 값 (T 존)","피지 E 값 (U 존)","피부톤","선 민감도","피부타입(야누스 측정)","피부타입(설문 로직)","동안각도 점수 우측","동안각도 점수 좌측",
+      "포피린 E 값(T존)","포피린 E 값(U존)","매장코드"]
     else
-      @excel_name = ["이름","분석 횟수","채널구분","전면/좌/우측면","분석 일","업데이트 일"]
+      @excel_name = ["이름","분석 횟수","채널구분","측정 부위","진단 날짜","업데이트 일"]
       @select_filter.each do |filter|
         if filter.include?("mo_1")
-          filter = "수분 측정1"
+          filter = "수분 측정 우측 볼"
         elsif filter.include?("mo_7")
-          filter = "수분 측정7"
+          filter = "수분 우측 볼"
         elsif filter.include?("mo_8")
-          filter = "수분 측정7"
+          filter = "수분 좌측 볼"
         elsif filter.include?("pr_1")
-          filter = "모공 측정1"
+          filter = "모공 측정 이마"
         elsif filter.include?("pr_2")
-          filter = "모공 측정2"
+          filter = "모공 측정 코"
         elsif filter.include?("pr_7")
-          filter = "모공 측정7"
+          filter = "모공 측정 우측 볼"
         elsif filter.include?("pr_8")
-          filter = "모공 측정8"
+          filter = "모공 측정 좌측 볼"
         elsif filter.include?("pr_avr")
-          filter = "모공 측정avr"
+          filter = "모공 측정 평균"
         elsif filter.include?("wr_3")
-          filter = "주름 측정3"
+          filter = "주름 측정 우측 눈옆"
         elsif filter.include?("wr_4")
-          filter = "주름 측정4"
+          filter = "주름 측정 우측 눈밑"
+        elsif filter.include?("wr_5")
+          filter = "주름 측정 좌측 눈옆"
         elsif filter.include?("wr_6")
-          filter = "주름 측정6"
+          filter = "주름 측정 좌측 눈밑"
         elsif filter.include?("wr_avr")
-          filter = "수분 측정avr"
+          filter = "수분 측정 평균"
         elsif filter.include?("el_7")
-          filter = "탄력 측정7"
+          filter = "탄력 측정 우측 볼"
         elsif filter.include?("el_8")
-          filter = "탄력 측정8"
+          filter = "탄력 측정 좌측 볼"
         elsif filter.include?("el_avr")
-          filter = "탄력 측정avr"
+          filter = "탄력 측정 평균"
         elsif filter.include?("el_angle_7")
-          filter = "탄력 각도7"
+          filter = "탄력 각도 우측 볼"
         elsif filter.include?("el_angle_8")
-          filter = "탄력 각도8"
+          filter = "탄력 각도 좌측 볼"
         elsif filter.include?("sb_1")
-          filter = "피지 측정1"
+          filter = "피지 개수 이마"
         elsif filter.include?("sb_2")
-          filter = "피지 측정2"
+          filter = "피지 개수 코"
         elsif filter.include?("sb_7")
-          filter = "피지 측정7"
+          filter = "피지 개수 우측 볼"
         elsif filter.include?("sb_8")
-          filter = "피지 측정8"
+          filter = "피지 개수 좌측 볼"
         elsif filter.include?("sb_avr")
-          filter = "피지 측정avr"
+          filter = "피지 개수 평균"
         elsif filter.include?("pp_1")
-          filter = "포피린 측정1"
+          filter = "포피린 개수 이마"
         elsif filter.include?("pp_2")
-          filter = "포피린 측정2"
+          filter = "포피린 개수 코"
         elsif filter.include?("pp_7")
-          filter = "포피린 측정7"
+          filter = "포피린 개수 우측 볼"
         elsif filter.include?("pp_8")
-          filter = "포피린 측정8"
+          filter = "포피린 개수 좌측 볼"
         elsif filter.include?("pp_avr")
-          filter = "포피린 측정avr"
+          filter = "포피린 개수 평균"
         elsif filter.include?("pp_ratio_1")
-          filter = "포피린 비 측정1"
+          filter = "포피린 비 이마"
         elsif filter.include?("pp_ratio_2")
-          filter = "포피린 비 측정2"
+          filter = "포피린 비 코"
         elsif filter.include?("pp_ratio_7")
-          filter = "포피린 비 측정7"
+          filter = "포피린 비 우측 볼"
         elsif filter.include?("pp_ratio_8")
-          filter = "포피린 비 측정8"
+          filter = "포피린 비 좌측 볼"
         elsif filter.include?("pp_ratio_avr")
-          filter = "포피린 비 측정avr"
+          filter = "포피린 비 평균"
         elsif filter.include?("sp_pl_1")
-          filter = "편광 색소침착 측정1"
+          filter = "편광 색소침착 측정 이마"
         elsif filter.include?("sp_pl_2")
-          filter = "편광 색소침착 측정2"
+          filter = "편광 색소침착 측정 코"
         elsif filter.include?("sp_pl_3")
-          filter = "편광 색소침착 측정3"
+          filter = "편광 색소침착 측정 우측 눈옆"
         elsif filter.include?("sp_pl_4")
-          filter = "편광 색소침착 측정4"
+          filter = "편광 색소침착 측정 우측 눈밑"
         elsif filter.include?("sp_pl_5")
-          filter = "편광 색소침착 측정5"
+          filter = "편광 색소침착 측정 좌측 눈옆"
         elsif filter.include?("sp_pl_6")
-          filter = "편광 색소침착 측정6"
+          filter = "편광 색소침착 측정 좌측 눈밑"
         elsif filter.include?("sp_pl_7")
-          filter = "편광 색소침착 측정7"
+          filter = "편광 색소침착 측정 우측 볼"
         elsif filter.include?("sp_pl_8")
-          filter = "편광 색소침착 측정8"
+          filter = "편광 색소침착 측정 좌측 볼"
         elsif filter.include?("sp_pl_avr")
-          filter = "편광 색소침착 측정avr"
+          filter = "편광 색소침착 측정 평균"
         elsif filter.include?("sp_uv_1")
-          filter = "UV광 색소침착 측정1"
+          filter = "UV광 색소침착 측정 이마"
         elsif filter.include?("sp_uv_2")
-          filter = "UV광 색소침착 측정2"
+          filter = "UV광 색소침착 측정 코"
         elsif filter.include?("sp_uv_3")
-          filter = "UV광 색소침착 측정3"
+          filter = "UV광 색소침착 측정 우측 눈옆"
         elsif filter.include?("sp_uv_4")
-          filter = "UV광 색소침착 측정4"
+          filter = "UV광 색소침착 측정 우측 눈밑"
         elsif filter.include?("sp_uv_5")
-          filter = "UV광 색소침착 측정5"
+          filter = "UV광 색소침착 측정 좌측 눈옆"
         elsif filter.include?("sp_uv_6")
-          filter = "UV광 색소침착 측정6"
+          filter = "UV광 색소침착 측정 좌측 눈밑"
         elsif filter.include?("sp_uv_7")
-          filter = "UV광 색소침착 측정7"
+          filter = "UV광 색소침착 측정 우측 볼"
         elsif filter.include?("sp_uv_8")
-          filter = "UV광 색소침착 측정8"
+          filter = "UV광 색소침착 측정 좌측 볼"
         elsif filter.include?("sp_uv_avr")
-          filter = "UV광 색소침착 측정avr"
+          filter = "UV광 색소침착 측정 평균"
         elsif filter.include?("sk_c_1")
-          filter = "피부톤 측정1"
+          filter = "피부톤 측정 이마"
         elsif filter.include?("sk_c_2")
-          filter = "피부톤 측정2"
-        elsif filter.include?("sk_c_3")
-          filter = "피부톤 측정3"
+          filter = "피부톤 측정 코"
         elsif filter.include?("sk_c_4")
-          filter = "피부톤 측정4"
-        elsif filter.include?("sk_c_5")
-          filter = "피부톤 측정5"
+          filter = "피부톤 측정 우측 눈밑"
         elsif filter.include?("sk_c_6")
-          filter = "피부톤 측정6"
+          filter = "피부톤 측정 좌측 눈밑"
         elsif filter.include?("sk_c_7")
-          filter = "피부톤 측정7"
+          filter = "피부톤 측정 우측 볼"
         elsif filter.include?("sk_c_8")
-          filter = "피부톤 측정8"
+          filter = "피부톤 측정 좌측 볼"
         elsif filter.include?("sk_c_avr")
-          filter = "피부톤 측정avr"
+          filter = "피부톤 측정 평균"
         elsif filter.include?("sk_r_1")
-          filter = "피부톤 Red1"
+          filter = "피부톤 Red 이마"
         elsif filter.include?("sk_r_2")
-          filter = "피부톤 Red2"
-        elsif filter.include?("sk_r_3")
-          filter = "피부톤 Red3"
+          filter = "피부톤 Red 코"
         elsif filter.include?("sk_r_4")
-          filter = "피부톤 Red4"
-        elsif filter.include?("sk_r_5")
-          filter = "피부톤 Red5"
+          filter = "피부톤 Red 우측 눈밑"
         elsif filter.include?("sk_r_6")
-          filter = "피부톤 Red6"
+          filter = "피부톤 Red 좌측 눈밑"
         elsif filter.include?("sk_r_7")
-          filter = "피부톤 Red7"
+          filter = "피부톤 Red 우측 볼"
         elsif filter.include?("sk_r_8")
-          filter = "피부톤 Red8"
+          filter = "피부톤 Red 좌측 볼"
         elsif filter.include?("sk_r_avr")
-          filter = "피부톤 Red_avr"
+          filter = "피부톤 Red 평균"
         elsif filter.include?("sk_g_1")
-          filter = "피부톤 Green1"
+          filter = "피부톤 Green 이마"
         elsif filter.include?("sk_g_2")
-          filter = "피부톤 Green2"
-        elsif filter.include?("sk_g_3")
-          filter = "피부톤 Green3"
+          filter = "피부톤 Green 코"
         elsif filter.include?("sk_g_4")
-          filter = "피부톤 Green4"
-        elsif filter.include?("sk_g_5")
-          filter = "피부톤 Green5"
+          filter = "피부톤 Green 우측 눈밑"
         elsif filter.include?("sk_g_6")
-          filter = "피부톤 Green6"
+          filter = "피부톤 Green 좌측 눈밑"
         elsif filter.include?("sk_g_7")
-          filter = "피부톤 Green7"
+          filter = "피부톤 Green 우측 볼"
         elsif filter.include?("sk_g_8")
-          filter = "피부톤 Green8"
+          filter = "피부톤 Green 좌측 볼"
         elsif filter.include?("sk_g_avr")
-          filter = "피부톤 Green_avr"
+          filter = "피부톤 Green 평균"
         elsif filter.include?("sk_b_1")
-          filter = "피부톤 Blue1"
+          filter = "피부톤 Blue 이마"
         elsif filter.include?("sk_b_2")
-          filter = "피부톤 Blue2"
-        elsif filter.include?("sk_b_3")
-          filter = "피부톤 Blue3"
+          filter = "피부톤 Blue 코"
         elsif filter.include?("sk_b_4")
-          filter = "피부톤 Blue4"
-        elsif filter.include?("sk_b_5")
-          filter = "피부톤 Blue5"
+          filter = "피부톤 Blue 우측 눈밑"
         elsif filter.include?("sk_b_6")
-          filter = "피부톤 Blue6"
+          filter = "피부톤 Blue 좌측 눈밑"
         elsif filter.include?("sk_b_7")
-          filter = "피부톤 Blue7"
+          filter = "피부톤 Blue 우측 볼"
         elsif filter.include?("sk_b_8")
-          filter = "피부톤 Blue8"
+          filter = "피부톤 Blue 좌측 볼"
         elsif filter.include?("sk_b_avr")
-          filter = "피부톤 Blue_avr"
+          filter = "피부톤 Blue 평균"
         elsif filter.include?("lab_l")
-          filter = "Lab L"
+          filter = "피부색 L 값"
         elsif filter.include?("lab_a")
-          filter = "Lab a"
+          filter = "피부색 a 값"
         elsif filter.include?("lab_b")
-          filter = "Lab b"
+          filter = "피부색 b 값"
         elsif filter.include?("e_sebum_t")
-          filter = "피부타입 기준 값 (T 존)"
+          filter = "피지 E 값 (T 존)"
         elsif filter.include?("e_sebum_u")
-          filter = "피부타입 기준 값 (U 존)"
+          filter = "피지 E 값 (U 존)"
         elsif filter.include?("colortype")
-          filter = "피부톤 칼라 타입"
+          filter = "피부톤"
         elsif filter.include?("suntype")
           filter = "선 민감도"
+        elsif filter.include?("skintype")
+          filter = "피부타입(야누스 측정)"
+        elsif filter.include?("m_skintype")
+          filter = "피부타입(설문 로직)"
         elsif filter.include?("score_r")
           filter = "동안각도 점수 우측"
         elsif filter.include?("score_l")
           filter = "동안각도 점수 좌측"
-        elsif filter.include?("skintype")
-          filter = "피부타입"
+        elsif filter.include?("e_porphyrin_t")
+          filter = "포피린 E 값(T존)"
+        elsif filter.include?("e_porphyrin_u")
+          filter = "포피린 E 값(U존)"
+        elsif filter.include?("shop_cd")
+          filter = "매장코드"
         else
           filter = filter
         end
@@ -1497,6 +1493,12 @@ class Admin::DataController < Admin::AdminApplicationController
     respond_to do |format|
       format.html
       format.xlsx
+    end
+  end
+
+  def filter_check
+    if params.has_key?(:ch_cd)
+      @ch_cd = params[:ch_cd]
     end
   end
 end

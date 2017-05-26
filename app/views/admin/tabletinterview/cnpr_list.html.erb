@@ -122,16 +122,16 @@
             $('select[id="select_sex"]').val('<%= @select_sex %>');
           <% end %>
 
-          <% if !@start_age.nil? %>
-            document.getElementById("start_age").value = '<%= @start_age %>'
-          <% else %>
-            document.getElementById("start_age").value = '<%= @min_age %>'
-          <% end %>
-          <% if !@end_age.nil? %>
-            document.getElementById("end_age").value = '<%= @end_age %>'
-          <% else %>
-            document.getElementById("end_age").value = '<%= @max_age %>'
-          <% end %>
+          // <% if !@start_age.nil? %>
+          //   document.getElementById("start_age").value = '<%= @start_age %>'
+          // <% else %>
+          //   document.getElementById("start_age").value = '<%= @min_age %>'
+          // <% end %>
+          // <% if !@end_age.nil? %>
+          //   document.getElementById("end_age").value = '<%= @end_age %>'
+          // <% else %>
+          //   document.getElementById("end_age").value = '<%= @max_age %>'
+          // <% end %>
 
           <% if !@start_birthyy.nil? %>
             document.getElementById("start_birthyy").value = '<%= @start_birthyy %>'
@@ -177,7 +177,7 @@
           });
 
           $("#age_init").click(function(){
-            document.getElementById("start_age").value = '<%= @min_age %>';
+            document.getElementById("start_age").value = '14';
             document.getElementById("end_age").value = '<%= @max_age %>';
           });
 
@@ -348,9 +348,9 @@
           <option value="R">우</option>
         </select>
 
-        <font style="margin-left:20px;">초기 중복샷 :</font>
+        <font style="margin-left:20px;">추천 중복샷 :</font>
         <input type="checkbox" name="before_overlap_check_box" value="before_overlap" id="before_overlap" style="margin-top:9px;">
-        <font style="margin-left:10px;">최종 중복샷 :</font>
+        <font style="margin-left:10px;">변경 중복샷 :</font>
         <input type="checkbox" name="after_overlap_check_box" value="after_overlap" id="after_overlap" style="margin-top:9px;">
       </div><br>
 
@@ -388,8 +388,8 @@
         <tr>
             <th>이름</th>
             <th>시리얼</th>
-            <th>진단 날짜</th>
             <th>채널</th>
+            <th>진단 날짜</th>
             <% if @select_filter != [] %>
               <% @select_filter.each do |filter| %>
                 <% if filter.include?("skin_type") %>
@@ -433,25 +433,14 @@
                 <% elsif filter.include?("stress_value")  %>
                   <th>스트레스 지수</th>
                 <% elsif filter.include?("before_overlap")  %>
-                  <th>초기 중복샷</th>
+                  <th>추천 중복샷</th>
                 <% elsif filter.include?("after_overlap")  %>
-                  <th>최종 중복샷</th>
+                  <th>변경 중복샷</th>
                 <% else %>
                   <th class="text-center"><%= filter %></th>
                 <% end %>
               <% end %>
             <% else %>
-              <th>피부타입</th>
-              <th>진단으로 나온 솔루션 1</th>
-              <th>진단으로 나온 솔루션 2</th>
-              <th>최종으로 선택된 솔루션 1</th>
-              <th>최종으로 선택된 솔루션 2</th>
-              <th>맞춤제품 Step1</th>
-              <th>맞춤제품 Step2</th>
-              <th>맞춤제품 Step3</th>
-              <th>구매제품 Step1</th>
-              <th>구매제품 Step2</th>
-              <th>구매제품 Step3</th>
               <th>A1</th>
               <th>A2</th>
               <th>A3</th>
@@ -468,17 +457,30 @@
               <th>D4</th>
               <th>D5</th>
               <th>D6</th>
+              <th>피부타입</th>
+              <th>진단으로 나온 솔루션 1</th>
+              <th>최종으로 선택된 솔루션 1</th>
+              <th>진단으로 나온 솔루션 2</th>
+              <th>최종으로 선택된 솔루션 2</th>
+              <th>추천 프로그램</th>
+              <th>최종 선택 프로그램</th>
+              <th>턴오버 점수</th>
+              <th>각질 측정</th>
+              <th>스트레스 지수</th>
+              <th>맞춤제품 Step1</th>
+              <th>맞춤제품 Step2</th>
+              <th>맞춤제품 Step3</th>
+              <th>구매제품 Step1</th>
+              <th>구매제품 Step2</th>
+              <th>구매제품 Step3</th>
+              <th>추천 중복샷</th>
+              <th>변경 중복샷</th>
               <th>모공 점수</th>
               <th>트러블 점수</th>
               <th>색소침착 점수</th>
               <th>주름 점수</th>
               <th>탄력 점수</th>
               <th>건조 점수</th>
-              <th>턴오버 점수</th>
-              <th>각질 측정</th>
-              <th>스트레스 지수</th>
-              <th>초기 중복샷</th>
-              <th>최종 중복샷</th>
             <% end %>
         </tr>
       </thead>

@@ -112,23 +112,27 @@
           });
 
           $("#age_init").click(function(){
-            document.getElementById("start_age").value = '14';
+            <% if !@start_age.nil? %>
+              document.getElementById("start_age").value = '<%= @start_age %>'
+            <% else %>
+              document.getElementById("start_age").value = '<%= @min_age %>'
+            <% end %>
             document.getElementById("end_age").value = '<%= @max_age %>';
           });
 
           $("#start_date").datepicker('setDate', '2017-01-25');
           $("#end_date").datepicker('setDate', '<%= @end_date %>');
 
-          <% if !@start_age.nil? %>
-            document.getElementById("start_age").value = '<%= @start_age %>'
-          <% else %>
-            document.getElementById("start_age").value = '<%= @min_age %>'
-          <% end %>
-          <% if !@end_age.nil? %>
-            document.getElementById("end_age").value = '<%= @end_age %>'
-          <% else %>
-            document.getElementById("end_age").value = '<%= @max_age %>'
-          <% end %>
+          // <% if !@start_age.nil? %>
+          //   document.getElementById("start_age").value = '<%= @start_age %>'
+          // <% else %>
+          //   document.getElementById("start_age").value = '<%= @min_age %>'
+          // <% end %>
+          // <% if !@end_age.nil? %>
+          //   document.getElementById("end_age").value = '<%= @end_age %>'
+          // <% else %>
+          //   document.getElementById("end_age").value = '<%= @max_age %>'
+          // <% end %>
 
           <% if !@name.nil? %>
             document.getElementById("name").value = decode_utf8('<%= @name %>')
