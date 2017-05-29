@@ -13,7 +13,7 @@ class Api::Beau::BeauLcareUserController < Api::ApplicationController
       else
         render :text => "Lcare user not exist!!!", status: 204
       end
-    elsif params.has_key?(:cust_hnm) && params.has_key?(:cell_phnno) && !params.has_key?(:cell_phnno)
+    elsif params.has_key?(:cust_hnm) && params.has_key?(:cell_phnno) && !params.has_key?(:birth_year)
       lcare_users = LcareUser.list(cust_hnm: params[:cust_hnm], cell_phnno: params[:cell_phnno])
       if lcare_users.count > 0
         render json: api_hash_for_list(lcare_users), status: :ok
