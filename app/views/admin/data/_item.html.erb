@@ -170,7 +170,7 @@
           <td><%= fcdata.e_porphyrin_t.to_i %></td>
           <td><%= fcdata.e_porphyrin_u.to_i %></td>
           <td><%= fcdata.shop_cd %></td>
-          <% if fcdata.ch_cd == "BEAU" %>
+          <% if fcdata.ch_cd == "BEAU" || fcdata.ch_cd == "TMR" || fcdata.ch_cd == "MART" || fcdata.ch_cd == "LABO" %>
             <td><%= fcdata.worry_skin_1.to_i %></td>
             <td><%= fcdata.worry_skin_2.to_i %></td>
           <% end %>
