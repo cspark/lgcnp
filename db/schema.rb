@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523073556) do
+ActiveRecord::Schema.define(version: 20170529083056) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -452,8 +452,8 @@ ActiveRecord::Schema.define(version: 20170523073556) do
     t.text     "memo"
     t.string   "before_overlap"
     t.string   "after_overlap"
-    t.string   "recommand_bb"
-    t.string   "recommand_sun"
+    t.string   "recommand_program1"
+    t.string   "recommand_program2"
   end
 
   create_table "fctabletinterviews", force: :cascade do |t|
