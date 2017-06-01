@@ -22,6 +22,7 @@ class Fcdata < ApplicationRecord
        mo_1: get_mo_to_five(value: mo_1),
        mo_7: get_mo_to_five(value: mo_7),
        mo_8: get_mo_to_five(value: mo_8),
+       mo_avg: get_mo_avg,
        mo_graph: get_graph_mo,
        pr_1: pr_1,
        pr_2: pr_2,
@@ -724,6 +725,10 @@ class Fcdata < ApplicationRecord
 
       return convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
     end
+  end
+
+  def get_mo_avg
+    return (self.mo_1.to_f + self.mo_7.to_f + self.mo_8.to_f) / 3
   end
 
   def get_graph_mo
