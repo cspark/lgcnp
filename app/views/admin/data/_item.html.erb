@@ -65,6 +65,7 @@
     <body>
       <% custinfo = Custinfo.where(custserial: fcdata.custserial).first %>
       <tr class="table_tr text-center" id="<%= fcdata.custserial.to_i %>/<%= fcdata.measureno %>">
+        <td><%= fcdata.custserial.to_i %></td>
         <td id="name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno.to_i %>"></td>
         <td><%= fcdata.measureno.to_i %></td>
         <td><%= fcdata.ch_cd %></td>
@@ -127,7 +128,6 @@
           <td><%= fcdata.sp_uv_7.to_i %></td>
           <td><%= fcdata.sp_uv_8.to_i %></td>
           <td><%= fcdata.sp_uv_avr.to_i %></td>
-
           <td><%= fcdata.sk_c_1.to_i %></td>
           <td><%= fcdata.sk_c_2.to_i %></td>
           <td><%= fcdata.sk_c_4.to_i %></td>

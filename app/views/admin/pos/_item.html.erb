@@ -47,6 +47,7 @@
     <body>
       <% custinfo = Custinfo.where(custserial: data.custserial).first %>
       <tr class="table_tr text-center" id="<%= data.custserial.to_i %>/<%= data.measureno %>">
+        <td><%= data.custserial.to_i %></td>
         <td id="name_fcpos_<%= data.custserial.to_i %>_<%= data.measureno.to_i %>"></td>
         <td><%= data.ch_cd %></td>
         <td><%= data.faceno %></td>
