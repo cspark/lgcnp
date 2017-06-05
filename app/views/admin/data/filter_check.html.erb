@@ -431,18 +431,18 @@
 
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
-            <font style="float:left;"><b>매장코드</b></font>
-            <input style="margin-left:5px;" type="checkbox" name="check_box" class="shop_cd_check" value="shop_cd" id="shop_cd">
-          </div><br>
-
-          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
-          <div style="display: block; float:left; margin-top:10px;">
             <font style="float:left;"><b>포피린 E 값 ALL</b></font>
             <input type="checkbox" name="check_box" value="e_porphyrin_all" id="e_porphyrin_check" style="float:left; margin-left:5px;">
             <div id="e_porphyrin_check_detail" style="display:none; float:left; margin-left:20px;">
               <font>포피린 E 값(T존) </font><input type="checkbox" name="check_box" class="e_porphyrin_check" value="e_porphyrin_t" id="e_porphyrin_t">
               <font style="margin-left:5px;">포피린 E 값(U존) </font><input type="checkbox" name="check_box" class="e_porphyrin_check" value="e_porphyrin_u" id="e_porphyrin_u">
             </div>
+          </div><br>
+
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>매장코드</b></font>
+            <input style="margin-left:5px;" type="checkbox" name="check_box" class="shop_cd_check" value="shop_cd" id="shop_cd">
           </div><br>
 
           <% if @ch_cd.present? && @ch_cd == "BEAU"%>
