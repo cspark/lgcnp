@@ -640,9 +640,9 @@ class Fcdata < ApplicationRecord
       value = 99.9
     end
 
-    # if type != 'moisture' && type != 'pore' && type != 'sb' && type != 'pp' && type != 'dry_t' && type != 'dry_u'
-    #   value = 99.9 - value
-    # end
+    if type != 'moisture' && type != 'pore' && type != 'sb' && type != 'pp' && type != 'dry_t' && type != 'dry_u'
+      value = 99.9 - value
+    end
 
     if type == "dry_t"
       Rails.logger.info "dry_t!!!"

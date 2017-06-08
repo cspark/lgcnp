@@ -489,15 +489,16 @@ class GenerateTestModel < ApplicationRecord
   end
 
   def change_before_solution
+    change_before_solution_1_array = []
+    change_before_solution_2_array = []
+
     fts = Fctabletinterview.all
     fts.each do |interview|
       serial = interview.custserial.to_i.to_s
       measureno = interview.fcdata_id.to_i.to_s
-      # serial = 1239
-      # measureno = 6
+      
       face_data = Fcdata.where(custserial: serial).where(measureno: measureno).last
       data = face_data.to_api_hash_for_debug
-      Rails.logger.info data
       sb = data[:sb_graph]
       pp = data[:pp_graph]
       el = data[:el_graph]
@@ -518,6 +519,14 @@ class GenerateTestModel < ApplicationRecord
       array << [el, el_graph_me, 5, "elasticity solution"]
 
       array = array.sort
+
+
+      if !interview.before_solution_1.nil? && interview.before_solution_1 == array.first[3]
+        change_before_solution_1_array << interview.custserial.to_i
+      end
+      if !interview.before_solution_2.nil? && interview.before_solution_2 == array.second[3]
+        change_before_solution_2_array << interview.custserial.to_i
+      end
 
       interview.before_solution_1 = array.first[3]
       interview.before_solution_2 = array.second[3]
