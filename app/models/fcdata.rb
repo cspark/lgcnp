@@ -190,6 +190,27 @@ class Fcdata < ApplicationRecord
     }
   end
 
+  def to_api_hash_for_debug
+    {
+       custserial: custserial,
+       faceno: faceno,
+       measuredate: measuredate,
+       measureno: measureno.to_i,
+       uptdate: uptdate,
+       pr_graph: get_graph_data(type: "pore"),
+       wr_graph: get_graph_data(type: "wr"),
+       el_graph: get_graph_data(type: "el"),
+       sb_graph: get_graph_data(type: "sb"),
+       pp_graph: get_graph_data(type: "pp"),
+       mo_graph: get_graph_mo,
+       pr_graph_me: get_vertical_graph_me(type: "pore"),
+       wr_graph_me: get_vertical_graph_me(type: "wr"),
+       el_graph_me: get_vertical_graph_me(type: "el"),
+       sb_graph_me: get_vertical_graph_me(type: "sb"),
+       pp_graph_me: get_vertical_graph_me(type: "pp")
+    }
+  end
+
   #TZone 이마 수분 측정 평균값 : Moisture 본인값 : MO_1
   #UZone 양볼 수분 측정 평균값 : Moisture 본인값 : MO_7 / 8 의 평균
 
@@ -380,8 +401,8 @@ class Fcdata < ApplicationRecord
       end
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_u.to_f
-      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.e_porphyrin_u.to_f
+      first_split_point = (Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_u.to_f + Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_t.to_f) / 2
+      second_split_point = (Fcavgdata.where(age: "AgeALL_Grade3").first.e_porphyrin_u.to_f + Fcavgdata.where(age: "AgeALL_Grade3").first.e_porphyrin_u.to_f) /2
     end
 
     if type == "wr"

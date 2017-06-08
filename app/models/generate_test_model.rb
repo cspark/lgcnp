@@ -488,4 +488,41 @@ class GenerateTestModel < ApplicationRecord
     end
   end
 
+  def change_before_solution
+    fts = Fctabletinterview.all
+    fts.each do |interview|
+      serial = interview.custserial.to_i.to_s
+      measureno = interview.fcdata_id.to_i.to_s
+      # serial = 1239
+      # measureno = 6
+      face_data = Fcdata.where(custserial: serial).where(measureno: measureno).last
+      data = face_data.to_api_hash_for_debug
+      Rails.logger.info data
+      sb = data[:sb_graph]
+      pp = data[:pp_graph]
+      el = data[:el_graph]
+      wr = data[:wr_graph]
+      pr = data[:pr_graph]
+
+      array = []
+      array << [pr, 5, "모공 관리를 위한 효능성분", "pr"]
+      array << [sb, 4, "트러블 케어를 위한 효능성분", "sb"]
+      array << [pp, 3, "화이트닝을 위한 효능성분", "pp"]
+      array << [wr, 2, "링클 케어를 위한 효능성분", "wr"]
+      array << [el, 1, "탄력 강화를 위한 효능성분", "el"]
+
+      array = array.sort.reverse
+
+      if array.first[0] ==  array.second[0]
+        if condition
+
+        end
+
+
+      end
+
+      interview.save
+    end
+  end
+
 end
