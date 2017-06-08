@@ -504,22 +504,23 @@ class GenerateTestModel < ApplicationRecord
       wr = data[:wr_graph]
       pr = data[:pr_graph]
 
+      pr_graph_me = data[:pr_graph_me]
+      wr_graph_me = data[:wr_graph_me]
+      el_graph_me = data[:el_graph_me]
+      sb_graph_me = data[:sb_graph_me]
+      pp_graph_me = data[:pp_graph_me]
+
       array = []
-      array << [pr, 5, "모공 관리를 위한 효능성분", "pr"]
-      array << [sb, 4, "트러블 케어를 위한 효능성분", "sb"]
-      array << [pp, 3, "화이트닝을 위한 효능성분", "pp"]
-      array << [wr, 2, "링클 케어를 위한 효능성분", "wr"]
-      array << [el, 1, "탄력 강화를 위한 효능성분", "el"]
+      array << [pr, pr_graph_me, 1, "pore solution"]
+      array << [sb, wr_graph_me, 2, "trouble solution"]
+      array << [pp, pp_graph_me, 3, "pigment solution"]
+      array << [wr, sb_graph_me, 4, "wrinkle solution"]
+      array << [el, el_graph_me, 5, "elasticity solution"]
 
-      array = array.sort.reverse
+      array = array.sort
 
-      if array.first[0] ==  array.second[0]
-        if condition
-
-        end
-
-
-      end
+      interview.before_solution_1 = array.first[3]
+      interview.before_solution_2 = array.second[3]
 
       interview.save
     end
