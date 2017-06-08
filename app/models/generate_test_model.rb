@@ -496,7 +496,7 @@ class GenerateTestModel < ApplicationRecord
     fts.each do |interview|
       serial = interview.custserial.to_i.to_s
       measureno = interview.fcdata_id.to_i.to_s
-      
+
       face_data = Fcdata.where(custserial: serial).where(measureno: measureno).last
       data = face_data.to_api_hash_for_debug
       sb = data[:sb_graph]
