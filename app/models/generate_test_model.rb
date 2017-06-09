@@ -491,47 +491,49 @@ class GenerateTestModel < ApplicationRecord
   def change_before_solution
     change_before_solution_1_array = []
     change_before_solution_2_array = []
-
+    interview = Fctabletinterview.order("custserial desc").second
     fts = Fctabletinterview.all
     fts.each do |interview|
-      serial = interview.custserial.to_i.to_s
-      measureno = interview.fcdata_id.to_i.to_s
+      serial = interview.custserial.to_i
+      measureno = interview.fcdata_id.to_i
 
-      face_data = Fcdata.where(custserial: serial).where(measureno: measureno).last
-      data = face_data.to_api_hash_for_debug
-      sb = data[:sb_graph]
-      pp = data[:pp_graph]
-      el = data[:el_graph]
-      wr = data[:wr_graph]
-      pr = data[:pr_graph]
+      if measureno != 0
+        face_data = Fcdata.where(custserial: serial).where(measureno: measureno).last
+        data = face_data.to_api_hash_for_debug
+        sb = data[:sb_graph]
+        pp = data[:pp_graph]
+        el = data[:el_graph]
+        wr = data[:wr_graph]
+        pr = data[:pr_graph]
 
-      pr_graph_me = data[:pr_graph_me]
-      wr_graph_me = data[:wr_graph_me]
-      el_graph_me = data[:el_graph_me]
-      sb_graph_me = data[:sb_graph_me]
-      pp_graph_me = data[:pp_graph_me]
+        pr_graph_me = 99.9 - data[:pr_graph_me]
+        wr_graph_me = data[:wr_graph_me]
+        el_graph_me = data[:el_graph_me]
+        sb_graph_me = 99.9 - data[:sb_graph_me]
+        pp_graph_me = 99.9 - data[:pp_graph_me]
 
-      array = []
-      array << [pr, pr_graph_me, 1, "pore solution"]
-      array << [sb, wr_graph_me, 2, "trouble solution"]
-      array << [pp, pp_graph_me, 3, "pigment solution"]
-      array << [wr, sb_graph_me, 4, "wrinkle solution"]
-      array << [el, el_graph_me, 5, "elasticity solution"]
+        array = []
+        array << [pr, pr_graph_me, 1, "pore solution"]
+        array << [sb, sb_graph_me, 2, "trouble solution"]
+        array << [pp, pp_graph_me, 3, "pigment solution"]
+        array << [wr, wr_graph_me, 4, "wrinkle solution"]
+        array << [el, el_graph_me, 5, "elasticity solution"]
 
-      array = array.sort
+        array = array.sort
 
 
-      if !interview.before_solution_1.nil? && interview.before_solution_1 == array.first[3]
-        change_before_solution_1_array << interview.custserial.to_i
+        if !interview.before_solution_1.nil? && interview.before_solution_1 != array.first[3]
+          change_before_solution_1_array << interview.custserial.to_i
+        end
+        if !interview.before_solution_2.nil? && interview.before_solution_2 != array.second[3]
+          change_before_solution_2_array << interview.custserial.to_i
+        end
+
+        interview.before_solution_1 = array.first[3]
+        interview.before_solution_2 = array.second[3]
+        interview.save
       end
-      if !interview.before_solution_2.nil? && interview.before_solution_2 == array.second[3]
-        change_before_solution_2_array << interview.custserial.to_i
-      end
 
-      interview.before_solution_1 = array.first[3]
-      interview.before_solution_2 = array.second[3]
-
-      interview.save
     end
   end
 
