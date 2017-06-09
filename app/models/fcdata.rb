@@ -418,7 +418,7 @@ class Fcdata < ApplicationRecord
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
       first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.wrinkle.to_f
-      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.wrinkle.to_f
+      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").firry_st.wrinkle.to_f
     end
 
     if type == "el"
@@ -662,11 +662,11 @@ class Fcdata < ApplicationRecord
       Rails.logger.info value
     end
 
-    if (type == 'pore' || type == 'sb' || type == 'wr' || type == 'el' || type == 'pp') && !is_avr
-      if get_graph_data(type: type) == 2
-        value = get_vertical_graph_avr(type: type)
-      end
-    end
+    # if (type == 'pore' || type == 'sb' || type == 'wr' || type == 'el' || type == 'pp') && !is_avr
+    #   if get_graph_data(type: type) == 2
+    #     value = get_vertical_graph_avr(type: type)
+    #   end
+    # end
     return value
   end
 
