@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170529083056) do
+ActiveRecord::Schema.define(version: 20170609062210) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -235,6 +235,7 @@ ActiveRecord::Schema.define(version: 20170529083056) do
     t.integer  "uf_7"
     t.integer  "uf_8"
     t.integer  "uf_avr"
+    t.string   "age"
   end
 
   create_table "fcgene_interviews", force: :cascade do |t|

@@ -115,7 +115,8 @@ class AdminFcdata < ApplicationRecord
        uf_6: uf_6,
        uf_7: uf_7,
        uf_8: uf_8,
-       uf_avr: uf_avr
+       uf_avr: uf_avr,
+       age: age
     }
   end
 
