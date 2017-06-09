@@ -404,6 +404,7 @@ class Fcdata < ApplicationRecord
       max_value = get_vertical_graph_max(type: type)
 
       if ch_cd == "CNP" || ch_cd == "CLAB"
+        Rails.logger.info "Fcdata Model CNP@@@"
         first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_u.to_f
         second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.e_porphyrin_u.to_f
       else
