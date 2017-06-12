@@ -757,7 +757,7 @@ class Fcdata < ApplicationRecord
   end
 
   def get_mo_avg
-    return (self.mo_1.to_f + self.mo_7.to_f + self.mo_8.to_f) / 3
+    return ((self.mo_1.to_f + self.mo_7.to_f + self.mo_8.to_f) / 3).round
   end
 
   def get_graph_mo
@@ -766,7 +766,7 @@ class Fcdata < ApplicationRecord
       return 0
     end
 
-    avr = (self.mo_1.to_f + self.mo_7.to_f + self.mo_8.to_f) / 3
+    avr = ((self.mo_1.to_f + self.mo_7.to_f + self.mo_8.to_f) / 3).round
     avr1 = Fcavgdata.where(age: "AgeALL_Grade1").first.moisture.to_i
     avr2 = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_i
     avr3 = Fcavgdata.where(age: "AgeALL_Grade3").first.moisture.to_i
