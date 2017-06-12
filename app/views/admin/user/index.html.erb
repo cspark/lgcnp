@@ -43,9 +43,10 @@
         $(document).keyup(function (e) {
             if ($("#search").is(":focus") && (e.keyCode == 13)) {
                 console.log(encodeURI($("#search").val()));
+                var address = document.getElementById("select_address").options[document.getElementById("select_address").selectedIndex].value;
+
                 if (document.getElementById("select_channel") != null) {
                   var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
-                  var address = document.getElementById("select_address").options[document.getElementById("select_address").selectedIndex].value;
 
                   url = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
                   url += "&select_channel=" +ch_cd
@@ -69,9 +70,10 @@
         });
 
         $('#submit').click(function(){
+          var address = document.getElementById("select_address").options[document.getElementById("select_address").selectedIndex].value;
+
           if (document.getElementById("select_channel") != null) {
             var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
-            var address = document.getElementById("select_address").options[document.getElementById("select_address").selectedIndex].value;
 
             url = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
             url += "&select_channel=" +ch_cd
