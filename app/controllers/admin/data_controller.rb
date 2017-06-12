@@ -461,6 +461,10 @@ class Admin::DataController < Admin::AdminApplicationController
         end
       end
 
+      if custinfo.nil?
+        is_contain = false
+      end
+      
       if is_contain == true
         @fcdatas << fcdata
       end
@@ -958,6 +962,10 @@ class Admin::DataController < Admin::AdminApplicationController
         end
       end
 
+      if custinfo.nil?
+        is_contain = false
+      end
+
       if is_contain == true
         @fcdatas << fcdata
       end
@@ -1424,6 +1432,10 @@ class Admin::DataController < Admin::AdminApplicationController
           Rails.logger.info "BIRTHMM FALSE"
           is_contain = false
         end
+      end
+
+      if custinfo.nil?
+        is_contain = false
       end
 
       if is_contain == true
