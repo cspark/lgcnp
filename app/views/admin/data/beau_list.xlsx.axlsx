@@ -3,7 +3,8 @@ wb.add_worksheet(name: "Fcdata") do |sheet|
     sheet.add_row @excel_name
     @fcdatas_excel.each do |fcdata|
         custinfo = Custinfo.where(custserial: fcdata.custserial).first
-        if !custinfo.custname.nil?
+
+        if !custinfo.nil? && !custinfo.custname.nil?
          custname = URI.decode(custinfo.custname)
         else
          custname = ""
