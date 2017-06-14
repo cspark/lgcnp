@@ -149,7 +149,7 @@
       <tr class="table_tr" id="<%= user.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>">
         <td id="name_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
         <td class="text-center"><%= tabletinterview.custserial.to_i %></td>
-        <td><%= user.ch_cd %></td>
+        <td><%= tabletinterview.ch_cd %></td>
         <td><%= tabletinterview.uptdate %></td>
         <% if @select_filter != [] %>
           <% @select_filter.each do |filter| %>
