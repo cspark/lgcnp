@@ -1,6 +1,6 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "Schedule") do |sheet|
-    sheet.add_row ["이름","채널구분","매장구분","예약시간","전화번호","상담여부","메모","등록날짜"]
+    sheet.add_row ["이름","채널","매장","예약시간","연락처","상담예약 여부","메모","등록날짜"]
     @fcschedules_excel.each do |data|
         mmdd = data.reserve_mmdd[0, 2] + "-" +data.reserve_mmdd[2, 4]
         hhmm = data.reserve_hhmm[0, 2] + ":" +data.reserve_hhmm[2, 4]

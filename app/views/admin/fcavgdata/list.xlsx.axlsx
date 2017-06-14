@@ -1,6 +1,6 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "Fcavgdata") do |sheet|
-    sheet.add_row ["등급","모공","주름","색소침착 편광","색소침착 UV광","탄력","포피린 비","T존 피지","U존 피지","수분","T존 포피린","U존 포피린"]
+    sheet.add_row ["등급","모공","주름","색소침착 편광","색소침착 UV광","탄력","포피린 비","T존 피지 E값","U존 피지 E값","수분","T존 포피린 E값","U존 포피린 E값"]
     @fcavgdatas_list.each do |data|
         title = data.age
         temp1 = title.split("_")[0]

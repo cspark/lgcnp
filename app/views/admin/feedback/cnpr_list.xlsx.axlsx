@@ -1,10 +1,13 @@
 
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "Feedback") do |sheet|
-    sheet.add_row ["이름","설문시기","진단 날짜","성별","나이","맞춤제품 Step1","맞춤제품 Step2","맞춤제품 Step3","추천제품 Step1","추천제품 Step2","추천제품 Step3",
+    sheet.add_row ["이름","시리얼","설문 시기","진단 날짜","성별","나이","매장코드","추천제품 Step1","추천제품 Step2","추천제품 Step3",
     "설문1","설문1 기타의견","설문2","설문3","설문4","설문5","설문6","설문6 기타의견"]
     @after_interviews_excel.each do |after_interview|
         custinfo = Custinfo.where(custserial: after_interview.custserial).first
+        tabletinterview = Fctabletinterviewrx.where(tablet_interview_id: after_interview.rx_tablet_interview_id).first
+        fcdata = Fcdata.where(custserial: after_interview.custserial.to_i).where(measureno: tabletinterview.fcdata_id).first
+
         if !custinfo.custname.nil?
          custname = URI.decode(custinfo.custname)
         else
@@ -75,9 +78,13 @@ wb.add_worksheet(name: "Feedback") do |sheet|
           a6_1 = "-"
         end
 
-        sheet.add_row [custname, order, tabletinterview.uptdate, sex, custinfo.age,
+        shop_cd = ""
+        if !fcdata.shop_cd.nil?
+          shop_cd = fcdata.shop_cd
+        end
+
+        sheet.add_row [custname, after_interview.custserial, order, tabletinterview.uptdate, sex, custinfo.age, shop_cd,
         recommand_program_step_1, recommand_program_step_2, recommand_program_step_3,
-        purchase1, purchase2, purchase3,
         after_interview.a1.to_i, a1_1, after_interview.a2.to_i, after_interview.a3.to_i,
         after_interview.a4.to_i, after_interview.a5.to_i, a6, a6_1]
     end

@@ -1,7 +1,7 @@
 
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "Feedback") do |sheet|
-    sheet.add_row ["이름","시리얼","설문시기","진단 날짜","성별","나이","베이스","앰플1","앰플2","설문1","설문1의 기타의견","설문2","설문3","설문4","기타의견"]
+    sheet.add_row ["이름","시리얼","설문 시기","진단 날짜","성별","나이","매장코드","베이스","앰플1","앰플2","설문1","설문1의 기타의견","설문2","설문3","설문4","기타의견"]
     @after_interviews_excel.each do |after_interview|
         custinfo = Custinfo.where(custserial: after_interview.custserial).first
         tabletinterview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first

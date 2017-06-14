@@ -105,7 +105,7 @@
               else if(value.includes("skin_type_jungsung"))
                 skin_type = "중성";
               else if(value.includes("skin_type_boggab"))
-                skin_type = "복합";
+                skin_type = "복합성";
 
               if(value.includes("senstive"))
                 skin_type = skin_type + " (민감성)";
@@ -310,12 +310,11 @@
           <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id.to_i).first %>
           <% if !fcdata.nil? %>
             <% fcdata = fcdata.to_api_hash_for_admin %>
-            <td class="text-center"><%= 5-fcdata[:pr_graph].to_i %></td>
-            <td class="text-center"><%= 5-fcdata[:sb_graph].to_i %></td>
-            <td class="text-center"><%= 5-fcdata[:pp_graph].to_i %></td>
-            <td class="text-center"><%= 5-fcdata[:wr_graph].to_i %></td>
-            <td class="text-center"><%= 5-fcdata[:el_graph].to_i %></td>
-            <td class="text-center"><%= 5-fcdata[:mo_graph].to_i %></td>
+              <td class="text-center"><%= 5-fcdata[:sb_graph].to_i %></td>
+              <td class="text-center"><%= 5-fcdata[:pp_graph].to_i %></td>
+              <td class="text-center"><%= 5-fcdata[:wr_graph].to_i %></td>
+              <td class="text-center"><%= 5-fcdata[:el_graph].to_i %></td>
+              <td class="text-center"><%= 5-fcdata[:mo_graph].to_i %></td>
           <% end %>
         <% end %>
       </tr>

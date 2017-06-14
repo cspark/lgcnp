@@ -16,6 +16,8 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
             skin_type = "지복합성"
           elsif !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("skin_type_jungsung")
             skin_type = "중성"
+          elsif !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("skin_type_boggab")
+            skin_type = "복합성"
           end
           if !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("senstive")
             skin_type = skin_type + " (민감성)"
@@ -229,7 +231,6 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
             elsif filter.include?("purchase3")
               temp << purchase3
             elsif filter.include?("pr_graph")
-              temp << pr_graph
             elsif filter.include?("sb_graph")
               temp << sb_graph
             elsif filter.include?("pp_graph")
@@ -258,14 +259,15 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           end
           sheet.add_row temp
         else
-          sheet.add_row [custname, tabletinterview.custserial.to_i, tabletinterview.uptdate, custinfo.ch_cd,
-          skin_type, before_solution_1, after_solution_1, before_solution_2, after_solution_2,
-          recommand_program_step_1, recommand_program_step_2, recommand_program_step_3,
-          purchase1, purchase2, purchase3,
+          sheet.add_row [custname, tabletinterview.custserial.to_i, custinfo.ch_cd, tabletinterview.uptdate,
           tabletinterview.a_1.to_i, tabletinterview.a_2.to_i, tabletinterview.a_3.to_i,
           tabletinterview.b_1.to_i, tabletinterview.b_2.to_i, tabletinterview.b_3.to_i, tabletinterview.b_4.to_i, tabletinterview.b_5.to_i,tabletinterview.b_6.to_i,
-          tabletinterview.c_1.to_i, tabletinterview.d_1.to_i, tabletinterview.d_2.to_i, tabletinterview.d_3.to_i, tabletinterview.d_4.to_i, tabletinterview.d_5.to_i,
-          tabletinterview.d_6.to_i, pr_graph, sb_graph, pp_graph, wr_graph, el_graph, mo_graph,tabletinterview.turnover_value.to_i+1, tabletinterview.corneous_value.to_i, tabletinterview.stress_value.to_i, before_overlap, after_overlap, memo]
+          tabletinterview.c_1.to_i, tabletinterview.d_1.to_i, tabletinterview.d_2.to_i, tabletinterview.d_3.to_i, tabletinterview.d_4.to_i, tabletinterview.d_5.to_i,tabletinterview.d_6.to_i,
+          skin_type, before_solution_1, after_solution_1, before_solution_2, after_solution_2,
+          tabletinterview.turnover_value.to_i+1, tabletinterview.corneous_value.to_i, tabletinterview.stress_value.to_i,
+          recommand_program_step_1, recommand_program_step_2, recommand_program_step_3,
+          purchase1, purchase2, purchase3, before_overlap, after_overlap,
+          sb_graph, pp_graph, wr_graph, el_graph, mo_graph]
         end
     end
 end
