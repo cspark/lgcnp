@@ -39,7 +39,7 @@ class Admin::UserController < Admin::AdminApplicationController
     # custserial_array = custserial_array + custserial_array2
     # measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
-    scoped = Custinfo.where.not(lastanaldate: nil)
+    scoped = Custinfo.all
     if !@shop_cd.blank? && (@ch_cd == "CNP" || @ch_cd == "CLAB" || @ch_cd == "CNPR" || @ch_cd == "RLAB")
       fcdata_list = Fcdata.where(shop_cd: @shop_cd)
       custserial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq

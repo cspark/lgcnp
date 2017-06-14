@@ -103,8 +103,16 @@
           <% end %>
         <% end %>
         <td class="text-center"><%= address %></td>
-        <td><%= user.lastanaldate %></td>
-        <td class="text-center"><%= user.measureno.to_i %></td>
+        <% lastanaldate = "" %>
+        <% if !user.lastanaldate.nil? %>
+          <% lastanaldate = user.lastanaldate %>
+        <% end %>
+        <td><%= lastanaldate %></td>
+        <% measureno = 0 %>
+        <% if !user.measureno.nil? %>
+          <% measureno = user.measureno.to_i %>
+        <% end %>
+        <td class="text-center"><%= measureno %></td>
         <td><%= user.uptdate %></td>
         <% is_agree_privacy = "-" %>
         <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX"%>
