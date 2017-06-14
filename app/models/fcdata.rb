@@ -820,7 +820,7 @@ class Fcdata < ApplicationRecord
 
   def generate_age_data_field(age: age)
     field_name = "Age"
-    if age.to_i < 10
+    if age.to_i <= 10
       return field_name.concat("1-10_Grade")
     end
 
