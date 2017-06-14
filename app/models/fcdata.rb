@@ -307,7 +307,7 @@ class Fcdata < ApplicationRecord
     end
 
     user = Custinfo.where(custserial: self.custserial).first
-    age = Date.current.year - user.birthyy.to_i
+    age = Date.current.year - user.birthyy.to_i - 1
     avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
     avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
@@ -453,7 +453,7 @@ class Fcdata < ApplicationRecord
     end
 
     user = Custinfo.where(custserial: self.custserial).first
-    age = Date.current.year - user.birthyy.to_i
+    age = Date.current.year - user.birthyy.to_i - 1
     avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
     avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
@@ -558,7 +558,7 @@ class Fcdata < ApplicationRecord
     end
 
     user = Custinfo.where(custserial: self.custserial).first
-    age = Date.current.year - user.birthyy.to_i
+    age = Date.current.year - user.birthyy.to_i - 1
     avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
     avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
@@ -676,7 +676,7 @@ class Fcdata < ApplicationRecord
       return 0
     end
     user = Custinfo.where(custserial: self.custserial).first
-    age = Date.current.year - user.birthyy.to_i
+    age = Date.current.year - user.birthyy.to_i - 1
 
     avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
     avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
