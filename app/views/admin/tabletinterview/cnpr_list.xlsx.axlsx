@@ -156,40 +156,34 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           mo_graph = ""
         end
 
-        if !custinfo.custname.nil?
-         custname = URI.decode(custinfo.custname)
-        else
-         custname = ""
-        end
-
         if !tabletinterview.purchase1.nil?
-          purchase1 = URI.decode(tabletinterview.purchase1)
+          purchase1 = URI.decode(tabletinterview.purchase1).gsub("+"," ")
         else
           purchase1 = ""
         end
         if !tabletinterview.purchase2.nil?
-          purchase2 = URI.decode(tabletinterview.purchase2)
+          purchase2 = URI.decode(tabletinterview.purchase2).gsub("+"," ")
         else
           purchase2 = ""
         end
         if !tabletinterview.purchase3.nil?
-          purchase3 = URI.decode(tabletinterview.purchase3)
+          purchase3 = URI.decode(tabletinterview.purchase3).gsub("+"," ")
         else
           purchase3 = ""
         end
 
         if !tabletinterview.recommand_program_step_1.nil?
-          recommand_program_step_1 = URI.decode(tabletinterview.recommand_program_step_1)
+          recommand_program_step_1 = URI.decode(tabletinterview.recommand_program_step_1).gsub("+"," ")
         else
           recommand_program_step_1 = ""
         end
         if !tabletinterview.recommand_program_step_2.nil?
-          recommand_program_step_2 = URI.decode(tabletinterview.recommand_program_step_2)
+          recommand_program_step_2 = URI.decode(tabletinterview.recommand_program_step_2).gsub("+"," ")
         else
           recommand_program_step_2 = ""
         end
         if !tabletinterview.recommand_program_step_3.nil?
-          recommand_program_step_3 = URI.decode(tabletinterview.recommand_program_step_3)
+          recommand_program_step_3 = URI.decode(tabletinterview.recommand_program_step_3).gsub("+"," ")
         else
           recommand_program_step_3 = ""
         end
@@ -295,6 +289,51 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           d_6 = ""
         end
 
+        before_production = ""
+        begin
+          if !tabletinterview.before_production.nil?
+            if tabletinterview.before_production.include?("SKIN_SCALING")
+              before_production = "SS 프로그램"
+            elsif tabletinterview.before_production.include?("INTRA_PEEL")
+              before_production = "인트라 필 프로그램"
+            elsif tabletinterview.before_production.include?("INTENSIVE_PEEL")
+              before_production = "인텐시브 필 프로그램"
+            elsif tabletinterview.before_production.include?("REDIANCE")
+              before_production = "레디언스 프로그램"
+            elsif tabletinterview.before_production.include?("VA")
+              before_production = "VA 프로그램"
+            elsif tabletinterview.before_production.include?("null")
+              before_production = ""
+            else
+              before_production = tabletinterview.before_production
+            end
+          end
+        rescue
+        end
+
+        after_production = ""
+        begin
+          if !tabletinterview.after_production.nil?
+            if tabletinterview.after_production.include?("SKIN_SCALING")
+              after_production = "SS 프로그램"
+            elsif tabletinterview.after_production.include?("INTRA_PEEL")
+              after_production = "인트라 필 프로그램"
+            elsif tabletinterview.after_production.include?("INTENSIVE_PEEL")
+              after_production = "인텐시브 필 프로그램"
+            elsif tabletinterview.after_production.include?("REDIANCE")
+              after_production = "레디언스 프로그램"
+            elsif tabletinterview.after_production.include?("VA")
+              after_production = "VA 프로그램"
+            elsif tabletinterview.after_production.include?("null")
+              after_production = ""
+            else
+              after_production = tabletinterview.after_production
+            end
+          end
+        rescue
+        end
+
+
         temp = [custname, tabletinterview.custserial.to_i, tabletinterview.uptdate, custinfo.ch_cd]
         if @select_filter != []
           @select_filter.each do |filter|
@@ -351,7 +390,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
         else
           sheet.add_row [custname, tabletinterview.custserial.to_i, custinfo.ch_cd, tabletinterview.uptdate,
           tabletinterview.a_1.to_i, a_2, a_3,b_1, b_2, b_3, b_4, b_5, b_6, c_1, d_1, d_2, d_3, d_4, d_5,d_6,
-          skin_type, before_solution_1, after_solution_1, before_solution_2, after_solution_2,
+          skin_type, before_solution_1, after_solution_1, before_solution_2, after_solution_2, before_production, after_production
           tabletinterview.turnover_value.to_i+1, tabletinterview.corneous_value.to_i, tabletinterview.stress_value.to_i,
           recommand_program_step_1, recommand_program_step_2, recommand_program_step_3,
           purchase1, purchase2, purchase3, before_overlap, after_overlap,
