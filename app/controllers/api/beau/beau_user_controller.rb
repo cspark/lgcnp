@@ -78,7 +78,13 @@ class Api::Beau::BeauUserController < Api::ApplicationController
     user = Custinfo.where(custserial: params[:custserial]).first
     if !user.nil?
       user.increase_measureno
-      user.update_lastanaldate
+
+      if params.has_key?(:lastanaldate)
+        user.lastanaldate = params[:lastanaldate]
+      else
+        user.update_lastanaldate
+      end
+
       if user.save
         render json: user.to_api_hash_for_min, status: :ok
       else
