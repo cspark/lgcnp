@@ -2,6 +2,7 @@ class Admin::ImageController < Admin::AdminApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
+    @is_admin_init = false
     if params.has_key?(:select_channel)
       @start_date = "2017-01-25"
       @end_date = Date.today
@@ -24,7 +25,6 @@ class Admin::ImageController < Admin::AdminApplicationController
       @name = name if !name.blank?
       @custserial = custserial
 
-      @is_admin_init = false
       if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && !params.has_key?(:select_channel)
         @is_admin_init = true
       end
