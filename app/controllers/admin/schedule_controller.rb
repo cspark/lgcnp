@@ -21,7 +21,7 @@ class Admin::ScheduleController < Admin::AdminApplicationController
     search = ""
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
     search = params[:search] if params.has_key?(:search) && params[:search].length != 0
-    shop_cd = params[:shop_cd]
+    shop_cd = params[:select_shop]
     @shop_cd = shop_cd if !shop_cd.blank?
     @ch_cd = ch_cd
     @search = search

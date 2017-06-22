@@ -25,8 +25,7 @@ class Admin::UserController < Admin::AdminApplicationController
 
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
     select_address = params[:select_address] if !params[:select_address].nil? && params[:select_address] != "ALL"
-    shop_cd = params[:shop_cd]
-
+    shop_cd = params[:select_shop]
     @shop_cd = shop_cd if !shop_cd.blank?
     @ch_cd = ch_cd
     @select_address = select_address
