@@ -496,7 +496,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
     shop_cd = params[:select_shop]
     @shop_cd = shop_cd if !shop_cd.blank?
-    @shop_cd = shop_cd
+    @ch_cd = ch_cd
     custserial = ""
     custserial = params[:custserial] if !params[:custserial].blank?
 
