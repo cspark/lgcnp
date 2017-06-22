@@ -3,6 +3,7 @@ class Admin::ImageController < Admin::AdminApplicationController
 
   def index
     @is_admin_init = false
+    @fcdatas = []
     if params.has_key?(:select_channel)
       @start_date = "2017-01-25"
       @end_date = Date.today
@@ -29,7 +30,6 @@ class Admin::ImageController < Admin::AdminApplicationController
         @is_admin_init = true
       end
 
-      @fcdatas = []
       if Rails.env.production? || Rails.env.staging?
         scoped = Fcdata.all
         temp_end_date = @end_date.to_date + 1.day
