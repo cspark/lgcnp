@@ -66,7 +66,9 @@ class Fctabletinterviewrx < ApplicationRecord
       before_overlap: before_overlap,
       after_overlap: after_overlap,
       recommand_program1: recommand_program1,
-      recommand_program2: recommand_program2
+      recommand_program2: recommand_program2,
+      before_solution_1_new: before_solution_1_new,
+      before_solution_2_new: before_solution_2_new
     }
   end
 end
