@@ -521,16 +521,8 @@ class GenerateTestModel < ApplicationRecord
 
         array = array.sort
 
-
-        if !interview.before_solution_1.nil? && interview.before_solution_1 != array.first[3]
-          change_before_solution_1_array << interview.custserial.to_i
-        end
-        if !interview.before_solution_2.nil? && interview.before_solution_2 != array.second[3]
-          change_before_solution_2_array << interview.custserial.to_i
-        end
-
-        interview.before_solution_1 = array.first[3]
-        interview.before_solution_2 = array.second[3]
+        interview.before_solution_1_new = array.first[3]
+        interview.before_solution_2_new = array.second[3]
         interview.save
       end
 

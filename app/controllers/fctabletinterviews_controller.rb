@@ -218,6 +218,6 @@ class FctabletinterviewsController < ApplicationController
     :skin_type,:before_solution_1,:after_solution_1,:before_solution_2,:after_solution_2,
     :before_serum,:after_serum,:before_ample_1,:after_ample_1,:before_ample_2,:after_ample_2,
     :before_made_cosmetic,:after_made_cosmetic,:ch_cd, :base_lot, :ampoule_1_lot, :ampoule_2_lot, :is_quick_mode, :mixer_name, :fcdata_id, :memo, :is_agree_cant_refund,
-    :purchase_1, :purchase_2, :purchase_3)
+    :purchase_1, :purchase_2, :purchase_3, :before_solution_1_new, :before_solution_2_new)
   end
 end
