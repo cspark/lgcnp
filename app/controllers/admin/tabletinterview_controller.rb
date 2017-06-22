@@ -51,6 +51,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @shop_cd = shop_cd if !shop_cd.blank?
     @ch_cd = ch_cd
 
+    Rails.logger.info @ch_cd
+    Rails.logger.info @shop_cd
     @select_filter = []
     if !@params_filter.blank?
       @params_filter.split(',').each do |filter|
