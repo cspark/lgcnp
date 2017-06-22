@@ -46,7 +46,9 @@ class Fctabletinterview < ApplicationRecord
       mixer_name: mixer_name,
       is_make_up: is_make_up,
       memo: memo,
-      is_agree_cant_refund: is_agree_cant_refund
+      is_agree_cant_refund: is_agree_cant_refund,
+      before_solution_1_new: before_solution_1_new,
+      before_solution_2_new: before_solution_2_new
     }
   end
 end
