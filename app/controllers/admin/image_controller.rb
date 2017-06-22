@@ -2,92 +2,94 @@ class Admin::ImageController < Admin::AdminApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @start_date = "2017-01-25"
-    @end_date = Date.today
-    @today = Date.today
+    if params.has_key?(:select_channel)
+      @start_date = "2017-01-25"
+      @end_date = Date.today
+      @today = Date.today
 
-    start_date = params[:start_date]
-    end_date = params[:end_date]
-    name = params[:name]
-    measureno = params[:measureno]
-    select_channel = params[:select_channel]
-    shop_cd = params[:shop_cd]
-    custserial = params[:custserial]
+      start_date = params[:start_date]
+      end_date = params[:end_date]
+      name = params[:name]
+      measureno = params[:measureno]
+      select_channel = params[:select_channel]
+      shop_cd = params[:shop_cd]
+      custserial = params[:custserial]
 
-    @start_date = start_date if !start_date.blank?
-    @end_date = end_date  if !end_date.blank?
-    @name = name if !name.blank?
-    @measureno = measureno if !measureno.blank?
-    @select_channel = select_channel if select_channel != "all"
-    @shop_cd = shop_cd if !shop_cd.blank?
-    @name = name if !name.blank?
-    @custserial = custserial
+      @start_date = start_date if !start_date.blank?
+      @end_date = end_date  if !end_date.blank?
+      @name = name if !name.blank?
+      @measureno = measureno if !measureno.blank?
+      @select_channel = select_channel if select_channel != "all"
+      @shop_cd = shop_cd if !shop_cd.blank?
+      @name = name if !name.blank?
+      @custserial = custserial
 
-    @is_admin_init = false
-    if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && !params.has_key?(:select_channel)
-      @is_admin_init = true
-    end
+      @is_admin_init = false
+      if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && !params.has_key?(:select_channel)
+        @is_admin_init = true
+      end
 
-    @fcdatas = []
-    if Rails.env.production? || Rails.env.staging?
-      scoped = Fcdata.all
-      temp_end_date = @end_date.to_date + 1.day
-      scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
-      scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
-      scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank?
-      scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
-      scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-      scoped = scoped.order("measuredate desc")
+      @fcdatas = []
+      if Rails.env.production? || Rails.env.staging?
+        scoped = Fcdata.all
+        temp_end_date = @end_date.to_date + 1.day
+        scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
+        scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
+        scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank?
+        scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
+        scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
+        scoped = scoped.order("measuredate desc")
 
-      scoped.each do |fcdata|
-        custinfo = Custinfo.where(custserial: fcdata.custserial).first
-        is_contain = true
+        scoped.each do |fcdata|
+          custinfo = Custinfo.where(custserial: fcdata.custserial).first
+          is_contain = true
 
-        if !@name.blank?
-          if !custinfo.custname.include? @name
-            is_contain = false
+          if !@name.blank?
+            if !custinfo.custname.include? @name
+              is_contain = false
+            end
+          end
+
+          if is_contain == true
+            @fcdatas << fcdata
           end
         end
 
-        if is_contain == true
-          @fcdatas << fcdata
-        end
-      end
+        @fcdatas_excel = @fcdatas
+        @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
+      else
+        scoped = Fcdata.all
+        scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
+        scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank?
+        scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
+        scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
+        scoped = scoped.order("uptdate desc")
 
-      @fcdatas_excel = @fcdatas
-      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
-    else
-      scoped = Fcdata.all
-      scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
-      scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank?
-      scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
-      scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-      scoped = scoped.order("uptdate desc")
+        @name = URI.decode(@name) if !@name.blank?
 
-      @name = URI.decode(@name) if !@name.blank?
+        scoped.each do |fcdata|
+          custinfo = Custinfo.where(custserial: fcdata.custserial).first
+          is_contain = true
 
-      scoped.each do |fcdata|
-        custinfo = Custinfo.where(custserial: fcdata.custserial).first
-        is_contain = true
+          if !@name.blank?
+            if !custinfo.custname.include? @name
+              is_contain = false
+            end
+          end
 
-        if !@name.blank?
-          if !custinfo.custname.include? @name
-            is_contain = false
+          if is_contain == true
+            @fcdatas << fcdata
           end
         end
 
-        if is_contain == true
-          @fcdatas << fcdata
-        end
+        @fcdatas_excel = @fcdatas
+        @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
       end
 
-      @fcdatas_excel = @fcdatas
-      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
-    end
-
-    respond_to do |format|
-      format.html
-      format.xlsx
+      respond_to do |format|
+        format.html
+        format.xlsx
+      end
     end
   end
 
