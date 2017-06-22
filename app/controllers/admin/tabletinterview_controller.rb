@@ -44,6 +44,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       @is_init = false
     end
 
+    ch_cd = ""
+    shop_cd = ""
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
     shop_cd = params[:select_shop]
     @shop_cd = shop_cd if !shop_cd.blank?
