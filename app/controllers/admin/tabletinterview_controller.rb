@@ -47,9 +47,9 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     ch_cd = ""
     shop_cd = ""
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
-    shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
+    shop_cd = params[:shop_cd]
+    @shop_cd = shop_cd if !shop_cd.blank?
     @ch_cd = ch_cd
-    @shop_cd = shop_cd
 
     @select_filter = []
     if !@params_filter.blank?
@@ -316,9 +316,9 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     ch_cd = ""
     shop_cd = ""
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
-    shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
+    shop_cd = params[:shop_cd]
+    @shop_cd = shop_cd if !shop_cd.blank?
     @ch_cd = ch_cd
-    @shop_cd = shop_cd
 
     @ch_array = []
     ch_cd.split(",").each do |channel|
@@ -475,9 +475,9 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     ch_cd = ""
     shop_cd = ""
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
-    shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
+    shop_cd = params[:shop_cd]
+    @shop_cd = shop_cd if !shop_cd.blank?
     @ch_cd = ch_cd
-    @shop_cd = shop_cd
 
     @select_filter = []
     if !@params_filter.blank?

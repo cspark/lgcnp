@@ -71,9 +71,9 @@ class Admin::DataController < Admin::AdminApplicationController
     ch_cd = ""
     shop_cd = ""
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
-    shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
+    shop_cd = params[:shop_cd]
+    @shop_cd = shop_cd if !shop_cd.blank?
     @ch_cd = ch_cd
-    @shop_cd = shop_cd
 
     @ch_array = []
     ch_cd.split(",").each do |channel|
@@ -178,6 +178,7 @@ class Admin::DataController < Admin::AdminApplicationController
     @fcdatas = []
     @fcdatas_final = []
     scoped = Fcdata.where(ch_cd: @ch_array)
+    scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
     Rails.logger.info "serial_array Fcdata scoped count!!!"
     Rails.logger.info scoped.count
 
@@ -597,9 +598,9 @@ class Admin::DataController < Admin::AdminApplicationController
     ch_cd = ""
     shop_cd = ""
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
-    shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
+    shop_cd = params[:shop_cd]
+    @shop_cd = shop_cd if !shop_cd.blank?
     @ch_cd = ch_cd
-    @shop_cd = shop_cd
 
     @ch_array = []
     ch_cd.split(",").each do |channel|
@@ -679,6 +680,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     scoped = Fcdata.where(ch_cd: @ch_array)
+    scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
     scoped = scoped.where(custserial: serial_array) if @select_senstive != "all"
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
@@ -1048,9 +1050,9 @@ class Admin::DataController < Admin::AdminApplicationController
     ch_cd = ""
     shop_cd = ""
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
-    shop_cd = params[:select_shop] if !params[:select_shop].nil? && params[:select_shop] != "ALL"
+    shop_cd = params[:shop_cd]
+    @shop_cd = shop_cd if !shop_cd.blank?
     @ch_cd = ch_cd
-    @shop_cd = shop_cd
 
     @ch_array = []
     ch_cd.split(",").each do |channel|
@@ -1171,6 +1173,7 @@ class Admin::DataController < Admin::AdminApplicationController
     scoped = Fcdata.where(ch_cd: @ch_array)
     Rails.logger.info "init scoped.count!!!"
     Rails.logger.info scoped.count
+    scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)

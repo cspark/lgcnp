@@ -491,7 +491,7 @@ class GenerateTestModel < ApplicationRecord
   def change_before_solution
     change_before_solution_1_array = []
     change_before_solution_2_array = []
-    interview = Fctabletinterview.order("custserial desc").second
+    interview = Fctabletinterview.where(custserial: 1258).first
     fts = Fctabletinterview.all
     fts.each do |interview|
       serial = interview.custserial.to_i
