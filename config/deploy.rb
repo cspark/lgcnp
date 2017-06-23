@@ -14,6 +14,8 @@ set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rben
 set :rbenv_roles, :all # default value
 # set :linked_dirs, %w{log public/CNP}
 
+set :linked_dirs, fetch(:linked_dirs, []).push('public/', 'log', 'public/')
+
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 # set :deploy_to, '/var/www/my_app'
 set :scm, :git
