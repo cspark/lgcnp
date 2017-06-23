@@ -17,8 +17,13 @@ set :rbenv_roles, :all # default value
 set :linked_dirs, fetch(:linked_dirs, []).push('public/TEST', 'log', 'public/TEST')
 set :linked_dirs, fetch(:linked_dirs, []).push('public/CNPR', 'log', 'public/BEAU')
 set :linked_dirs, fetch(:linked_dirs, []).push('public/CNPR', 'log', 'public/CNP')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/CNPR', 'log', 'public/CLAB')
 set :linked_dirs, fetch(:linked_dirs, []).push('public/CNPR', 'log', 'public/CNPR')
 set :linked_dirs, fetch(:linked_dirs, []).push('public/CNPR', 'log', 'public/RLAB')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/CNPR', 'log', 'public/LABO')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/CNPR', 'log', 'public/MART')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/CNPR', 'log', 'public/TMR')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/CNPR', 'log', 'public/ONEP')
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 # set :deploy_to, '/var/www/my_app'
