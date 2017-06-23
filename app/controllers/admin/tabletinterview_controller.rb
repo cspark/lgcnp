@@ -174,62 +174,65 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     scoped.each do |tabletinterview|
       custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
-      Rails.logger.info custinfo.custname
       is_contain = true
 
-      if !@name.blank?
-        if !custinfo.custname.include? @name
-          Rails.logger.info "NAME FALSE"
-          is_contain = false
-        end
-      end
-
-      if @select_sex != "all"
-        if custinfo.sex != @select_sex
-          Rails.logger.info "SEX FALSE"
-          is_contain = false
-        end
-      end
-
-      if !@start_age.blank? && !@end_age.blank?
-        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
-        if temp_age < @start_age.to_i || temp_age > @end_age.to_i
-          Rails.logger.info "AGE FALSE"
-          is_contain = false
-        end
-      end
-
-      if !@start_birthyy.blank? && !@end_birthyy.blank?
-        if custinfo.birthyy.to_i < @start_birthyy.to_i || custinfo.birthyy.to_i > @end_birthyy.to_i
-          Rails.logger.info "BIRTHYY FALSE"
-          is_contain = false
-        end
-      end
-
-      if !@start_birthmm.blank? && !@end_birthmm.blank?
-        if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
-          Rails.logger.info "BIRTHMM FALSE"
-          is_contain = false
-        end
-      end
-
-      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] != "T,F"
-        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("T")
-          if custinfo.is_agree_thirdparty_info == "F"
-            Rails.logger.info "is_agree_thirdparty_info1 FALSE"
+      if !custinfo.nil?
+        if !@name.blank?
+          if !custinfo.custname.include? @name
+            Rails.logger.info "NAME FALSE"
             is_contain = false
           end
         end
-        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("F")
-          if custinfo.is_agree_thirdparty_info == "T"
-            Rails.logger.info "is_agree_thirdparty_info2 FALSE"
+
+        if @select_sex != "all"
+          if custinfo.sex != @select_sex
+            Rails.logger.info "SEX FALSE"
             is_contain = false
           end
         end
-      end
 
-      if !params.has_key?(:is_agree_thirdparty_info) || params[:is_agree_thirdparty_info] == ""
-        Rails.logger.info "is_agree_thirdparty_info3 FALSE"
+        if !@start_age.blank? && !@end_age.blank?
+          temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
+          if temp_age < @start_age.to_i || temp_age > @end_age.to_i
+            Rails.logger.info "AGE FALSE"
+            is_contain = false
+          end
+        end
+
+        if !@start_birthyy.blank? && !@end_birthyy.blank?
+          if custinfo.birthyy.to_i < @start_birthyy.to_i || custinfo.birthyy.to_i > @end_birthyy.to_i
+            Rails.logger.info "BIRTHYY FALSE"
+            is_contain = false
+          end
+        end
+
+        if !@start_birthmm.blank? && !@end_birthmm.blank?
+          if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
+            Rails.logger.info "BIRTHMM FALSE"
+            is_contain = false
+          end
+        end
+
+        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] != "T,F"
+          if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("T")
+            if custinfo.is_agree_thirdparty_info == "F"
+              Rails.logger.info "is_agree_thirdparty_info1 FALSE"
+              is_contain = false
+            end
+          end
+          if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("F")
+            if custinfo.is_agree_thirdparty_info == "T"
+              Rails.logger.info "is_agree_thirdparty_info2 FALSE"
+              is_contain = false
+            end
+          end
+        end
+
+        if !params.has_key?(:is_agree_thirdparty_info) || params[:is_agree_thirdparty_info] == ""
+          Rails.logger.info "is_agree_thirdparty_info3 FALSE"
+          is_contain = false
+        end
+      else
         is_contain = false
       end
 
@@ -621,40 +624,44 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
       is_contain = true
 
-      if !@name.blank?
-        if !custinfo.custname.include? @name
-          Rails.logger.info "NAME FALSE"
-          is_contain = false
+      if !custinfo.nil?
+        if !@name.blank?
+          if !custinfo.custname.include? @name
+            Rails.logger.info "NAME FALSE"
+            is_contain = false
+          end
         end
-      end
 
-      if @select_sex != "all"
-        if custinfo.sex != @select_sex
-          Rails.logger.info "SEX FALSE"
-          is_contain = false
+        if @select_sex != "all"
+          if custinfo.sex != @select_sex
+            Rails.logger.info "SEX FALSE"
+            is_contain = false
+          end
         end
-      end
 
-      if !@start_age.blank? && !@end_age.blank?
-        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
-        if temp_age < @start_age.to_i || temp_age > @end_age.to_i
-          Rails.logger.info "AGE FALSE"
-          is_contain = false
+        if !@start_age.blank? && !@end_age.blank?
+          temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
+          if temp_age < @start_age.to_i || temp_age > @end_age.to_i
+            Rails.logger.info "AGE FALSE"
+            is_contain = false
+          end
         end
-      end
 
-      if !@start_birthyy.blank? && !@end_birthyy.blank?
-        if custinfo.birthyy.to_i < @start_birthyy.to_i || custinfo.birthyy.to_i > @end_birthyy.to_i
-          Rails.logger.info "BIRTHYY FALSE"
-          is_contain = false
+        if !@start_birthyy.blank? && !@end_birthyy.blank?
+          if custinfo.birthyy.to_i < @start_birthyy.to_i || custinfo.birthyy.to_i > @end_birthyy.to_i
+            Rails.logger.info "BIRTHYY FALSE"
+            is_contain = false
+          end
         end
-      end
 
-      if !@start_birthmm.blank? && !@end_birthmm.blank?
-        if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
-          Rails.logger.info "BIRTHMM FALSE"
-          is_contain = false
+        if !@start_birthmm.blank? && !@end_birthmm.blank?
+          if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
+            Rails.logger.info "BIRTHMM FALSE"
+            is_contain = false
+          end
         end
+      else
+        is_contain = false
       end
 
       if is_contain == true
