@@ -12,15 +12,17 @@ set :rbenv_ruby, '2.3.1'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 # set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all # default value
-set :linked_dirs, %w{log public/BEAU}
 set :linked_dirs, %w{log public/CNP}
-set :linked_dirs, %w{log public/CLAB}
-set :linked_dirs, %w{log public/CNPR}
-set :linked_dirs, %w{log public/RLAB}
-set :linked_dirs, %w{log public/LABO}
-set :linked_dirs, %w{log public/MART}
-set :linked_dirs, %w{log public/TMR}
-set :linked_dirs, %w{log public/ONEP}
+
+set :linked_dirs, fetch(:linked_dirs, []).push('public/CNP', 'log', 'public/BEAU')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/CNP', 'log', 'public/CNP')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/CNP', 'log', 'public/CLAB')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/CNP', 'log', 'public/CNPR')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/CNP', 'log', 'public/RLAB')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/CNP', 'log', 'public/LABO')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/CNP', 'log', 'public/MART')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/CNP', 'log', 'public/TMR')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/CNP', 'log', 'public/ONEP')
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 # set :deploy_to, '/var/www/my_app'
