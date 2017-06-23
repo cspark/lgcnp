@@ -62,6 +62,46 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           end
         rescue
         end
+
+        before_solution_1_new = ""
+        begin
+          if !tabletinterview.before_solution_1_new.nil?
+            if tabletinterview.before_solution_1_new == "SCORE_ELASTICITY"
+              before_solution_1_new = "탄력 솔루션"
+            elsif tabletinterview.before_solution_1_new == "SKIN_WRINKLE"
+              before_solution_1_new = "주름 솔루션"
+            elsif tabletinterview.before_solution_1_new == "SCORE_WATER"
+              before_solution_1_new = "건조 솔루션"
+            elsif tabletinterview.before_solution_1_new == "SCORE_TROUBLE"
+              before_solution_1_new = "트러블 솔루션"
+            elsif tabletinterview.before_solution_1_new == "SCORE_PIGMENT"
+              before_solution_1_new = "색소침착 솔루션"
+            else
+              before_solution_1_new = tabletinterview.before_solution_1_new
+            end
+          end
+        rescue
+        end
+        before_solution_2_new = ""
+        begin
+          if !tabletinterview.before_solution_2_new.nil?
+            if tabletinterview.before_solution_2_new == "SCORE_ELASTICITY"
+              before_solution_2_new = "탄력 솔루션"
+            elsif tabletinterview.before_solution_2_new == "SKIN_WRINKLE"
+              before_solution_2_new = "주름 솔루션"
+            elsif tabletinterview.before_solution_2_new == "SCORE_WATER"
+              before_solution_2_new = "건조 솔루션"
+            elsif tabletinterview.before_solution_2_new == "SCORE_TROUBLE"
+              before_solution_2_new = "트러블 솔루션"
+            elsif tabletinterview.before_solution_2_new == "SCORE_PIGMENT"
+              before_solution_2_new = "색소침착 솔루션"
+            else
+              before_solution_2_new = tabletinterview.before_solution_2_new
+            end
+          end
+        rescue
+        end
+
         after_solution_1 = ""
         begin
           if !tabletinterview.after_solution_1.nil?
@@ -339,12 +379,16 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           @select_filter.each do |filter|
             if filter.include?("skin_type")
               temp << skin_type
+            elsif filter.include?("before_solution_1_new")
+              temp << before_solution_1_new
+            elsif filter.include?("before_solution_2_new")
+              temp << before_solution_2_new
             elsif filter.include?("before_solution_1")
               temp << before_solution_1
-            elsif filter.include?("after_solution_1")
-              temp << after_solution_1
             elsif filter.include?("before_solution_2")
               temp << before_solution_2
+            elsif filter.include?("after_solution_1")
+              temp << after_solution_1
             elsif filter.include?("after_solution_2")
               temp << after_solution_2
             elsif filter.include?("recommand_program_step_1")
@@ -390,7 +434,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
         else
           sheet.add_row [custname, tabletinterview.custserial.to_i, tabletinterview.ch_cd, tabletinterview.uptdate,
           tabletinterview.a_1.to_i, a_2, a_3,b_1, b_2, b_3, b_4, b_5, b_6, c_1, d_1, d_2, d_3, d_4, d_5,d_6,
-          skin_type, before_solution_1, after_solution_1, before_solution_2, after_solution_2, before_production, after_production,
+          skin_type, before_solution_1_new, before_solution_2_new, before_solution_1, before_solution_2, after_solution_1,  after_solution_2, before_production, after_production,
           tabletinterview.turnover_value.to_i+1, tabletinterview.corneous_value.to_i, tabletinterview.stress_value.to_i,
           recommand_program_step_1, recommand_program_step_2, recommand_program_step_3,
           purchase1, purchase2, purchase3, before_overlap, after_overlap,

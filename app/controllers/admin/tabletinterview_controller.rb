@@ -109,7 +109,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     if @select_filter == []
       @excel_name = ["이름","시리얼","채널","진단 날짜","A1","A2","A3","B1","B2","B3","B4","C1","D1","D2","D3","D4","D5","D6","D7","D8","D9","D10",
-        "피부타입","진단으로 나온 솔루션 1","최종으로 선택된 솔루션 1","진단으로 나온 솔루션 2","최종으로 선택된 솔루션 2","진단으로 나온 세럼","최종으로 선택된 세럼",
+        "피부타입","진단으로 나온 솔루션 1(최근)","진단으로 나온 솔루션 2(최근)","진단으로 나온 솔루션 1","진단으로 나온 솔루션 2","최종으로 선택된 솔루션 1","최종으로 선택된 솔루션 2","진단으로 나온 세럼","최종으로 선택된 세럼",
         "진단으로 나온 앰플 1","최종으로 선택된 앰플 1","진단으로 나온 앰플 2","최종으로 선택된 앰플 2","진단으로 나온 화장품","최종으로 선택된 화장품",
         "모공 점수","트러블 점수","색소침착 점수","주름 점수","탄력 점수"]
     else
@@ -117,12 +117,16 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       @select_filter.each do |filter|
         if filter.include?("skin_type")
           filter = "피부타입"
+        elsif filter.include?("before_solution_1_new")
+          filter = "진단으로 나온 솔루션 1(최근)"
+        elsif filter.include?("before_solution_2_new")
+          filter = "진단으로 나온 솔루션 2(최근)"
         elsif filter.include?("before_solution_1")
           filter = "진단으로 나온 솔루션 1"
-        elsif filter.include?("after_solution_1")
-          filter = "최종으로 선택된 솔루션 1"
         elsif filter.include?("before_solution_2")
           filter = "진단으로 나온 솔루션 2"
+        elsif filter.include?("after_solution_1")
+          filter = "최종으로 선택된 솔루션 1"
         elsif filter.include?("after_solution_2")
           filter = "최종으로 선택된 솔루션 2"
         elsif filter.include?("before_serum")
@@ -547,7 +551,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     Rails.logger.info scoped.count
     if @select_filter == []
       @excel_name = ["이름","시리얼","채널","진단 날짜","A1","A2","A3","B1","B2","B3","B4","B5","B6","C1","D1","D2","D3","D4","D5","D6",
-      "피부타입","진단으로 나온 솔루션 1","최종으로 선택된 솔루션 1","진단으로 나온 솔루션 2","최종으로 선택된 솔루션 2","추천 프로그램","최종 선택 프로그램",
+      "피부타입","진단으로 나온 솔루션 1(최근)","진단으로 나온 솔루션 2(최근)","진단으로 나온 솔루션 1","진단으로 나온 솔루션 2","최종으로 선택된 솔루션 1","최종으로 선택된 솔루션 2","추천 프로그램","최종 선택 프로그램",
       "턴오버 점수","각질 측정","스트레스 지수","맞춤제품 Step1","맞춤제품 Step2","맞춤제품 Step3","구매제품 Step1","구매제품 Step2","구매제품 Step3","추천 중복샷", "변경 중복샷",
       "트러블 점수","색소침착 점수","주름 점수","탄력 점수", "건조 점수"]
     else
@@ -555,12 +559,16 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       @select_filter.each do |filter|
         if filter.include?("skin_type")
           filter = "피부타입"
+        elsif filter.include?("before_solution_1_new")
+          filter = "진단으로 나온 솔루션 1(최근)"
+        elsif filter.include?("before_solution_2_new")
+          filter = "진단으로 나온 솔루션 2(최근)"
         elsif filter.include?("before_solution_1")
           filter = "진단으로 나온 솔루션 1"
-        elsif filter.include?("after_solution_1")
-          filter = "최종으로 선택된 솔루션 1"
         elsif filter.include?("before_solution_2")
           filter = "진단으로 나온 솔루션 2"
+        elsif filter.include?("after_solution_1")
+          filter = "최종으로 선택된 솔루션 1"
         elsif filter.include?("after_solution_2")
           filter = "최종으로 선택된 솔루션 2"
         elsif filter.include?("recommand_program_step_1")
