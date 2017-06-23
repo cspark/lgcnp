@@ -3,7 +3,3 @@
 every :day, :at => '03:49am' do
   rake "image:remove_image"
 end
-
-every :day, :at => '09:44pm' do
-  rake "image:remove_image"
-end
