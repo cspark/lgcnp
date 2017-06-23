@@ -540,8 +540,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(mmode: @select_mode) if !@select_mode.blank? && @select_mode.downcase != "all"
-    scoped = scoped.where.not(before_overlap: nil) if !@before_overlap.blank? && @before_overlap == "T"
-    scoped = scoped.where.not(after_overlap: nil) if !@after_overlap.blank? && @after_overlap == "T"
+    scoped = scoped.where.not(before_overlap: nil).where.not(before_overlap: "null") if !@before_overlap.blank? && @before_overlap == "T"
+    scoped = scoped.where.not(after_overlap: nil).where.not(after_overlap: "null") if !@after_overlap.blank? && @after_overlap == "T"
 
     Rails.logger.info "scoped.count!!!"
     Rails.logger.info scoped.count
