@@ -15,16 +15,16 @@ set :rbenv_roles, :all # default value
 # set :linked_dirs, %w{log}
 
 set :linked_dirs, fetch(:linked_dirs, []).push('log')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/BEAU')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/CNP')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/CLAB')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/CNPR')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/RLAB')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/LABO')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/MART')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/TMR')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/ONEP')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/TEST')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/BEAU')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/CNP')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/CLAB')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/CNPR')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/RLAB')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/LABO')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/MART')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/TMR')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/ONEP')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/TEST')
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 # set :deploy_to, '/var/www/my_app'
