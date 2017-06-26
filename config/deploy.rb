@@ -12,19 +12,29 @@ set :rbenv_ruby, '2.3.1'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 # set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all # default value
-# set :linked_dirs, %w{log public/CNP}
+# set :linked_dirs, %w{log}
+set :linked_files, %w{public/TEST public/uploads/TEST}
+set :linked_files, %w{public/BEAU public/uploads/BEAU}
+set :linked_files, %w{public/CNP public/uploads/CNP}
+set :linked_files, %w{public/CLAB public/uploads/CLAB}
+set :linked_files, %w{public/CNPR public/uploads/CNPR}
+set :linked_files, %w{public/RLAB public/uploads/RLAB}
+set :linked_files, %w{public/LABO public/uploads/LABO}
+set :linked_files, %w{public/MART public/uploads/MART}
+set :linked_files, %w{public/TMR public/uploads/TMR}
+set :linked_files, %w{public/ONEP public/uploads/ONEP}
 
 # set :linked_dirs, fetch(:linked_dirs, []).push('public', 'log', 'public')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/TEST', 'log', 'public/uploads/TEST')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/BEAU', 'log', 'public/uploads/BEAU')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/CNP', 'log', 'public/uploads/CNP')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/CLAB', 'log', 'public/uploads/CLAB')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/CNPR', 'log', 'public/uploads/CNPR')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/RLAB', 'log', 'public/uploads/RLAB')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/LABO', 'log', 'public/uploads/LABO')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/MART', 'log', 'public/uploads/MART')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/TMR', 'log', 'public/uploads/TMR')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/ONEP', 'log', 'public/uploads/ONEP')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/TEST', 'log', 'public/TEST')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/BEAU', 'log', 'public/uploads/BEAU')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/CNP', 'log', 'public/uploads/CNP')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/CLAB', 'log', 'public/uploads/CLAB')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/CNPR', 'log', 'public/uploads/CNPR')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/RLAB', 'log', 'public/uploads/RLAB')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/LABO', 'log', 'public/uploads/LABO')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/MART', 'log', 'public/uploads/MART')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/TMR', 'log', 'public/uploads/TMR')
+# set :linked_dirs, fetch(:linked_dirs, []).push('public/ONEP', 'log', 'public/uploads/ONEP')
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 # set :deploy_to, '/var/www/my_app'
