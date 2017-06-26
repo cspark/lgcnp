@@ -81,52 +81,52 @@ namespace :deploy do
       execute "rm -rf #{current_path}/public/TEST"
       execute "rm -rf #{shared_path}/public/uploads/TEST"
       execute "mkdir #{current_path}/public/TEST"
-      execute "ln -s #{current_path}/public/TEST #{shared_path}/public/uploads/"
+      execute "ln -s #{shared_path}/public/uploads/ #{current_path}/public/TEST"
 
       execute "rm -rf #{current_path}/public/BEAU"
       execute "rm -rf #{shared_path}/public/uploads/BEAU"
       execute "mkdir #{current_path}/public/BEAU"
-      execute "ln -s #{current_path}/public/BEAU #{shared_path}/public/uploads/"
+      execute "ln -s #{shared_path}/public/uploads/ #{current_path}/public/BEAU"
 
       execute "rm -rf #{current_path}/public/CNP"
       execute "rm -rf #{shared_path}/public/uploads/CNP"
       execute "mkdir #{current_path}/public/CNP"
-      execute "ln -s #{current_path}/public/CNP #{shared_path}/public/uploads/"
+      execute "ln -s #{shared_path}/public/uploads/ #{current_path}/public/CNP"
 
       execute "rm -rf #{current_path}/public/CLAB"
       execute "rm -rf #{shared_path}/public/uploads/CLAB"
       execute "mkdir #{current_path}/public/CLAB"
-      execute "ln -s #{current_path}/public/CLAB #{shared_path}/public/uploads/"
+      execute "ln -s #{shared_path}/public/uploads/ #{current_path}/public/CLAB"
 
       execute "rm -rf #{current_path}/public/CNPR"
       execute "rm -rf #{shared_path}/public/uploads/CNPR"
       execute "mkdir #{current_path}/public/CNPR"
-      execute "ln -s #{current_path}/public/CNPR #{shared_path}/public/uploads/"
+      execute "ln -s #{shared_path}/public/uploads/ #{current_path}/public/CNPR"
 
       execute "rm -rf #{current_path}/public/RLAB"
       execute "rm -rf #{shared_path}/public/uploads/RLAB"
       execute "mkdir #{current_path}/public/RLAB"
-      execute "ln -s #{current_path}/public/RLAB #{shared_path}/public/uploads/"
+      execute "ln -s #{shared_path}/public/uploads/ #{current_path}/public/RLAB"
 
       execute "rm -rf #{current_path}/public/LABO"
       execute "rm -rf #{shared_path}/public/uploads/LABO"
       execute "mkdir #{current_path}/public/LABO"
-      execute "ln -s #{current_path}/public/LABO #{shared_path}/public/uploads/"
+      execute "ln -s #{shared_path}/public/uploads/ #{current_path}/public/LABO"
 
       execute "rm -rf #{current_path}/public/MART"
       execute "rm -rf #{shared_path}/public/uploads/MART"
       execute "mkdir #{current_path}/public/MART"
-      execute "ln -s #{current_path}/public/MART #{shared_path}/public/uploads/"
+      execute "ln -s #{shared_path}/public/uploads/ #{current_path}/public/MART"
 
       execute "rm -rf #{current_path}/public/TMR"
       execute "rm -rf #{shared_path}/public/uploads/TMR"
       execute "mkdir #{current_path}/public/TMR"
-      execute "ln -s #{current_path}/public/TMR #{shared_path}/public/uploads/"
+      execute "ln -s #{shared_path}/public/uploads/ #{current_path}/public/TMR"
 
       execute "rm -rf #{current_path}/public/ONEP"
       execute "rm -rf #{shared_path}/public/uploads/ONEP"
       execute "mkdir #{current_path}/public/ONEP"
-      execute "ln -s #{current_path}/public/ONEP #{shared_path}/public/uploads/"
+      execute "ln -s #{shared_path}/public/uploads/ #{current_path}/public/ONEP"
     end
   end
 
