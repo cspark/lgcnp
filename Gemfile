@@ -45,7 +45,7 @@ gem "axlsx_rails"
 gem 'whenever', :require => false
 gem 'slack-notifier'
 gem 'composite_primary_keys', '= 9.0.6'
-gem 'sys-filesystem'
+gem 'sys-filesystem', '~> 1.1', '>= 1.1.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
