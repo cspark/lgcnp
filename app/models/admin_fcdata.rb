@@ -123,7 +123,6 @@ class AdminFcdata < ApplicationRecord
   def self.list(custserial: nil, measureno: nil, ch_cd: nil)
     scoped = AdminFcdata.all
     if ch_cd.present?
-      Rails.logger.info ch_cd
       if ch_cd == "BEAU" || ch_cd == "MART" || ch_cd == "TMR"
         ch_cd_array = ["BEAU","MART","TMR"]
         scoped = scoped.where(ch_cd: ch_cd_array)
@@ -137,8 +136,6 @@ class AdminFcdata < ApplicationRecord
   end
 
   def self.image_combine(relation: nil, path: nil, type: nil)
-    Rails.logger.info "image_combine!!!"
-    Rails.logger.info File.exist?("public/"+relation.ch_cd+"/"+path+type+"merge.jpg")
     if !File.exist?("public/"+relation.ch_cd+"/"+path+type+"merge.jpg")
       image_list = Magick::ImageList.new
       i = 1
