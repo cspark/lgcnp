@@ -102,7 +102,8 @@ class Admin::ImageController < Admin::AdminApplicationController
     ch_cd = params[:ch_cd]
 
     Rails.logger.info "image show!!!!!"
-    Rails.logger.info GenerateTestModel.disk_size
+    Rails.logger.info GenerateTestModel.disk_size_vda1
+    Rails.logger.info GenerateTestModel.disk_size_mount_disk
 
     if Rails.env.production? || Rails.env.staging?
       @fcdata = AdminFcdata.where(custserial: serial, ch_cd: ch_cd, measureno: measureno).first

@@ -530,8 +530,14 @@ class GenerateTestModel < ApplicationRecord
     end
   end
 
-  def self.disk_size
+  def self.disk_size_vda1
     stat = Sys::Filesystem.stat("/dev/vda1")
+    mb_available = stat.block_size * stat.blocks_available / 1024 / 1024
+    return mb_available
+  end
+
+  def self.disk_size_mount_disk
+    stat = Sys::Filesystem.stat("/dev/mapper/DATAVG-lv_data")
     mb_available = stat.block_size * stat.blocks_available / 1024 / 1024
     return mb_available
   end
