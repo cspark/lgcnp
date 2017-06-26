@@ -77,7 +77,7 @@ namespace :deploy do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
       execute "mkdir /home/janustabuser/lgcare/current/public/TEST"
-      # execute :rsync, "/home/janustabuser/lgcare/current/public/TEST", "/home/janustabuser/lgcare/shared/public/uploads/TEST"
+      execute :rsync, "/home/janustabuser/lgcare/current/public/TEST", "/home/janustabuser/lgcare/shared/public/uploads/TEST"
     end
   end
 
