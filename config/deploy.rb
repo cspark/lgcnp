@@ -68,6 +68,8 @@ set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default value for keep_releases is 5
 set :keep_releases, 1
+set :current_path, "/home/janustabuser/lgcare/current/public"
+set :shared_path, "/home/janustabuser/lgcare/shared/public/uploads"
 
 namespace :deploy do
   desc 'Restart application'
@@ -76,8 +78,65 @@ namespace :deploy do
       invoke 'unicorn:legacy_restart'
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
-      execute "mkdir /home/janustabuser/lgcare/current/public/TEST"
-      execute :rsync, "/home/janustabuser/lgcare/current/public/TEST", "/home/janustabuser/lgcare/shared/public/uploads/TEST"
+      execute "rm -rf #{current_path}/TEST"
+      execute "rm -rf #{shared_path}/TEST"
+      execute "mkdir #{current_path}/TEST"
+      execute "mkdir #{shared_path}/TEST"
+      execute "ln -s #{current_path}/TEST #{shared_path}/TEST"
+
+      execute "rm -rf #{current_path}/BEAU"
+      execute "rm -rf #{shared_path}/BEAU"
+      execute "mkdir #{current_path}/BEAU"
+      execute "mkdir #{shared_path}/BEAU"
+      execute "ln -s #{current_path}/BEAU #{shared_path}/BEAU"
+
+      execute "rm -rf #{current_path}/CNP"
+      execute "rm -rf #{shared_path}/CNP"
+      execute "mkdir #{current_path}/CNP"
+      execute "mkdir #{shared_path}/CNP"
+      execute "ln -s #{current_path}/CNP #{shared_path}/CNP"
+
+      execute "rm -rf #{current_path}/CLAB"
+      execute "rm -rf #{shared_path}/CLAB"
+      execute "mkdir #{current_path}/CLAB"
+      execute "mkdir #{shared_path}/CLAB"
+      execute "ln -s #{current_path}/CLAB #{shared_path}/CLAB"
+
+      execute "rm -rf #{current_path}/CNPR"
+      execute "rm -rf #{shared_path}/CNPR"
+      execute "mkdir #{current_path}/CNPR"
+      execute "mkdir #{shared_path}/CNPR"
+      execute "ln -s #{current_path}/CNPR #{shared_path}/CNPR"
+
+      execute "rm -rf #{current_path}/RLAB"
+      execute "rm -rf #{shared_path}/RLAB"
+      execute "mkdir #{current_path}/RLAB"
+      execute "mkdir #{shared_path}/RLAB"
+      execute "ln -s #{current_path}/RLAB #{shared_path}/RLAB"
+
+      execute "rm -rf #{current_path}/LABO"
+      execute "rm -rf #{shared_path}/LABO"
+      execute "mkdir #{current_path}/LABO"
+      execute "mkdir #{shared_path}/LABO"
+      execute "ln -s #{current_path}/LABO #{shared_path}/LABO"
+
+      execute "rm -rf #{current_path}/MART"
+      execute "rm -rf #{shared_path}/MART"
+      execute "mkdir #{current_path}/MART"
+      execute "mkdir #{shared_path}/MART"
+      execute "ln -s #{current_path}/MART #{shared_path}/MART"
+
+      execute "rm -rf #{current_path}/TMR"
+      execute "rm -rf #{shared_path}/TMR"
+      execute "mkdir #{current_path}/TMR"
+      execute "mkdir #{shared_path}/TMR"
+      execute "ln -s #{current_path}/TMR #{shared_path}/TMR"
+
+      execute "rm -rf #{current_path}/ONEP"
+      execute "rm -rf #{shared_path}/ONEP"
+      execute "mkdir #{current_path}/ONEP"
+      execute "mkdir #{shared_path}/ONEP"
+      execute "ln -s #{current_path}/ONEP #{shared_path}/ONEP"
     end
   end
 
