@@ -14,17 +14,6 @@ set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rben
 set :rbenv_roles, :all # default value
 # set :linked_dirs, %w{log public/CNP}
 
-set :linked_dirs, %w{public/TEST public/uploads/TEST}
-set :linked_dirs, %w{public/BEAU public/uploads/BEAU}
-set :linked_dirs, %w{public/CNP public/uploads/CNP}
-set :linked_dirs, %w{public/CLAB public/uploads/CLAB}
-set :linked_dirs, %w{public/CNPR public/uploads/CNPR}
-set :linked_dirs, %w{public/RLAB public/uploads/RLAB}
-set :linked_dirs, %w{public/LABO public/uploads/LABO}
-set :linked_dirs, %w{public/MART public/uploads/MART}
-set :linked_dirs, %w{public/TMR public/uploads/TMR}
-set :linked_dirs, %w{public/ONEP public/uploads/ONEP}
-
 # set :linked_dirs, fetch(:linked_dirs, []).push('public/TEST', 'log', 'public/TEST')
 # set :linked_dirs, fetch(:linked_dirs, []).push('public/BEAU', 'log', 'public/BEAU')
 # set :linked_dirs, fetch(:linked_dirs, []).push('public/CNP', 'log', 'public/CNP')
@@ -45,7 +34,7 @@ set :pty, false
 set :port, 10022
 # set :linked_files, %w{config/database.yml}
 # set :linked_files, %w{config/database.yml config/secrets.yml}
-# set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/uploads')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/uploads')
 
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
