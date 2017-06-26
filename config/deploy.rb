@@ -87,8 +87,7 @@ namespace :deploy do
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
-      execute :mkdir, "#{root}home/janustabuser/lgcare/current/public/TEST"
-      execute :rsync, "#{root}home/janustabuser/lgcare/current/public/TEST", "#{root}home/janustabuser/lgcare/shared/public/upload/TEST"
+      execute :rsync, "/home/janustabuser/lgcare/current/public/TEST", "#{root}home/janustabuser/lgcare/shared/public/upload/TEST"
     end
   end
 end
