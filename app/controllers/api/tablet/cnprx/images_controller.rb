@@ -4,7 +4,7 @@ class Api::Tablet::Cnprx::ImagesController < ApplicationController
     Rails.logger.info "image show!!!!!"
     Rails.logger.info GenerateTestModel.disk_size
 
-    if GenerateTestModel.disk_size.to_i < 2048
+    if GenerateTestModel.disk_size_mount_disk.to_i < 2048
       system("rm -rf public/BEAU/*")
       system("rm -rf public/CNP/*")
       system("rm -rf public/CLAB/*")
