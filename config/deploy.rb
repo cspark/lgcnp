@@ -25,7 +25,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push('public/MART')
 set :linked_dirs, fetch(:linked_dirs, []).push('public/TMR')
 set :linked_dirs, fetch(:linked_dirs, []).push('public/ONEP')
 
-set :linked_dirs, fetch(:linked_dirs, ['public/uploads/TEST']).push('public/TEST')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/TEST')
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 # set :deploy_to, '/var/www/my_app'
