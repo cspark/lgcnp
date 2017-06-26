@@ -1,16 +1,5 @@
 namespace :image do
   task :remove_image do
-    system("mkdir public/BEAU")
-    system("mkdir public/CNP")
-    system("mkdir public/CLAB")
-    system("mkdir public/CNPR")
-    system("mkdir public/RLAB")
-    system("mkdir public/LABO")
-    system("mkdir public/MART")
-    system("mkdir public/TMR")
-    system("mkdir public/ONEP")
-    system("mkdir public/TEST")
-
     system("rm -rf public/BEAU/*")
     system("rm -rf public/CNP/*")
     system("rm -rf public/CLAB/*")
