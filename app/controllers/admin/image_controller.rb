@@ -101,10 +101,9 @@ class Admin::ImageController < Admin::AdminApplicationController
     measureno = params[:measureno]
     ch_cd = params[:ch_cd]
 
-    spaceMb_i = `df -m /dev/sda1`.split(/\b/)[24].to_i
     Rails.logger.info "image show!!!!!"
-    Rails.logger.info spaceMb_i
-    
+    Rails.logger.info GenerateTestModel.disk_size
+
     if Rails.env.production? || Rails.env.staging?
       @fcdata = AdminFcdata.where(custserial: serial, ch_cd: ch_cd, measureno: measureno).first
       @path = ""

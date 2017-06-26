@@ -1,3 +1,5 @@
+require 'sys/filesystem'
+
 class GenerateTestModel < ApplicationRecord
 
   def self.generate_test_custinfo
@@ -525,8 +527,13 @@ class GenerateTestModel < ApplicationRecord
         interview.before_solution_2_new = array.second[3]
         interview.save
       end
-
     end
+  end
+
+  def self.disk_size
+    stat = Sys::Filesystem.stat("/")
+    mb_available = stat.block_size * stat.blocks_available / 1024 / 1024
+    return mb_available
   end
 
 end
