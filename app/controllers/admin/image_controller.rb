@@ -101,9 +101,22 @@ class Admin::ImageController < Admin::AdminApplicationController
     measureno = params[:measureno]
     ch_cd = params[:ch_cd]
 
+    # 디스크 크기 확인 후 삭제
     Rails.logger.info "image show!!!!!"
-    Rails.logger.info GenerateTestModel.disk_size_vda1
-    Rails.logger.info GenerateTestModel.disk_size_mount_disk
+    Rails.logger.info GenerateTestModel.disk_size
+
+    if GenerateTestModel.disk_size.to_i < 2048
+      system("rm -rf public/BEAU/*")
+      system("rm -rf public/CNP/*")
+      system("rm -rf public/CLAB/*")
+      system("rm -rf public/CNPR/*")
+      system("rm -rf public/RLAB/*")
+      system("rm -rf public/LABO/*")
+      system("rm -rf public/MART/*")
+      system("rm -rf public/TMR/*")
+      system("rm -rf public/ONEP/*")
+      system("rm -rf public/TEST/*")
+    end
 
     if Rails.env.production? || Rails.env.staging?
       @fcdata = AdminFcdata.where(custserial: serial, ch_cd: ch_cd, measureno: measureno).first

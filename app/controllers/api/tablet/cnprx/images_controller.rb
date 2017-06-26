@@ -1,5 +1,21 @@
 class Api::Tablet::Cnprx::ImagesController < ApplicationController
   def create
+    # 디스크 크기 확인 후 삭제
+    Rails.logger.info "image show!!!!!"
+    Rails.logger.info GenerateTestModel.disk_size
+
+    if GenerateTestModel.disk_size.to_i < 2048
+      system("rm -rf public/BEAU/*")
+      system("rm -rf public/CNP/*")
+      system("rm -rf public/CLAB/*")
+      system("rm -rf public/CNPR/*")
+      system("rm -rf public/RLAB/*")
+      system("rm -rf public/LABO/*")
+      system("rm -rf public/MART/*")
+      system("rm -rf public/TMR/*")
+      system("rm -rf public/ONEP/*")
+      system("rm -rf public/TEST/*")
+    end
     # 폴더 만들기
     custserial = params[:custserial]
     ch_cd = params[:ch_cd]

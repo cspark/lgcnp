@@ -530,7 +530,7 @@ class GenerateTestModel < ApplicationRecord
     end
   end
 
-  def self.disk_size_vda1
+  def self.disk_size
     stat = Sys::Filesystem.stat("/")
     mb_available = stat.block_size * stat.blocks_available / 1024 / 1024
     return mb_available
@@ -538,11 +538,6 @@ class GenerateTestModel < ApplicationRecord
 
   def self.disk_size_mount_disk
     stat = Sys::Filesystem.stat("/dev/mapper/DATAVG-lv_data")
-    Rails.logger.info "mount_disk stat!!!!!"
-    Rails.logger.info stat.files_available
-    Rails.logger.info stat.path
-    Rails.logger.info stat.block_size
-    Rails.logger.info stat.blocks_available
     mb_available = stat.block_size * stat.blocks_available / 1024 / 1024
     return mb_available
   end
