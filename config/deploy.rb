@@ -76,6 +76,8 @@ namespace :deploy do
       invoke 'unicorn:legacy_restart'
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
+      execute "mkdir /home/janustabuser/lgcare/current/public/TEST"
+      # execute :rsync, "/home/janustabuser/lgcare/current/public/TEST", "/home/janustabuser/lgcare/shared/public/uploads/TEST"
     end
   end
 
@@ -87,7 +89,6 @@ namespace :deploy do
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
-      execute :rsync, "/home/janustabuser/lgcare/current/public/TEST", "/home/janustabuser/lgcare/shared/public/uploads/TEST"
     end
   end
 end
