@@ -105,7 +105,8 @@ class Admin::ImageController < Admin::AdminApplicationController
     Rails.logger.info "image show!!!!!"
     Rails.logger.info GenerateTestModel.disk_size
 
-    if GenerateTestModel.disk_size.to_i < 2048
+    if GenerateTestModel.disk_size.to_i < 16000
+      Rails.logger.info "GenerateTestModel.disk_size < 16000 !!!!"
       system("rm -rf public/BEAU/*")
       system("rm -rf public/CNP/*")
       system("rm -rf public/CLAB/*")
