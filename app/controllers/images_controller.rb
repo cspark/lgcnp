@@ -2,10 +2,11 @@ class ImagesController < ApplicationController
   def create
     # 폴더 만들기
     # 디스크 크기 확인 후 삭제
-    Rails.logger.info "image show!!!!!"
-    Rails.logger.info GenerateTestModel.disk_size
-
-    if GenerateTestModel.disk_size_mount_disk.to_i < 2048
+    spaceMb_i = `df -m /dev/mapper/DATAVG-lv_data`.split(/\b/)[28].to_i
+    Rails.logger.info "spaceMb_i !!!!!"
+    Rails.logger.info spaceMb_i
+    if spaceMb_i < 2048
+      Rails.logger.info "spaceMb_i < 2048 !!!!"
       system("rm -rf public/BEAU/*")
       system("rm -rf public/CNP/*")
       system("rm -rf public/CLAB/*")
