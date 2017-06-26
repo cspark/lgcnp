@@ -535,6 +535,8 @@ class GenerateTestModel < ApplicationRecord
     Rails.logger.info "vda1 stat!!!!!"
     Rails.logger.info stat.files_available
     Rails.logger.info stat.path
+    Rails.logger.info block_size
+    Rails.logger.info blocks_available
     mb_available = stat.block_size * stat.blocks_available / 1024 / 1024
     return mb_available
   end
@@ -544,6 +546,8 @@ class GenerateTestModel < ApplicationRecord
     Rails.logger.info "mount_disk stat!!!!!"
     Rails.logger.info stat.files_available
     Rails.logger.info stat.path
+    Rails.logger.info block_size
+    Rails.logger.info blocks_available
     mb_available = stat.block_size * stat.blocks_available / 1024 / 1024
     return mb_available
   end
