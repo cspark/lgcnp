@@ -15,16 +15,16 @@ set :rbenv_roles, :all # default value
 # set :linked_dirs, %w{log public/CNP}
 
 # set :linked_dirs, fetch(:linked_dirs, []).push('public', 'log', 'public')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/TEST', 'log', 'public/uploads/TEST')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/BEAU', 'log', 'public/uploads/BEAU')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/CNP', 'log', 'public/uploads/CNP')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/CLAB', 'log', 'public/uploads/CLAB')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/CNPR', 'log', 'public/uploads/CNPR')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/RLAB', 'log', 'public/uploads/RLAB')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/LABO', 'log', 'public/uploads/LABO')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/MART', 'log', 'public/uploads/MART')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/TMR', 'log', 'public/uploads/TMR')
-set :linked_dirs, fetch(:linked_dirs, []).push('public/ONEP', 'log', 'public/uploads/ONEP')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/uploads/TEST', 'log', 'public/TEST')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/uploads/BEAU', 'log', 'public/BEAU')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/uploads/CNP', 'log', 'public/CNP')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/uploads/CLAB', 'log', 'public/CLAB')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/uploads/CNPR', 'log', 'public/CNPR')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/uploads/RLAB', 'log', 'public/RLAB')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/uploads/LABO', 'log', 'public/LABO')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/uploads/MART', 'log', 'public/MART')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/uploads/TMR', 'log', 'public/TMR')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/uploads/ONEP', 'log', 'public/ONEP')
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 # set :deploy_to, '/var/www/my_app'
