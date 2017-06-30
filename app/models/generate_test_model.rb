@@ -558,11 +558,11 @@ class GenerateTestModel < ApplicationRecord
         pp_graph_me = 99.9 - data[:pp_graph_me]
 
         array = []
-        array << [mo, pr_graph_me, 1, "SCORE_WATER"]
-        array << [sb, sb_graph_me, 2, "SCORE_TROUBLE"]
-        array << [pp, pp_graph_me, 3, "SCORE_PIGMENT"]
-        array << [wr, wr_graph_me, 4, "SKIN_WRINKLE"]
-        array << [el, el_graph_me, 5, "SCORE_ELASTICITY"]
+        array << [mo, mo_graph_me, 3, "SCORE_WATER"]
+        array << [sb, sb_graph_me, 4, "SCORE_TROUBLE"]
+        array << [pp, pp_graph_me, 2, "SCORE_PIGMENT"]
+        array << [wr, wr_graph_me, 0, "SKIN_WRINKLE"]
+        array << [el, el_graph_me, 1, "SCORE_ELASTICITY"]
 
         array = array.sort
 
