@@ -207,7 +207,9 @@ class Fcdata < ApplicationRecord
        wr_graph_me: get_vertical_graph_me(type: "wr"),
        el_graph_me: get_vertical_graph_me(type: "el"),
        sb_graph_me: get_vertical_graph_me(type: "sb"),
-       pp_graph_me: get_vertical_graph_me(type: "pp")
+       pp_graph_me: get_vertical_graph_me(type: "pp"),
+       dry_t: get_vertical_graph_me(type: "dry_t"),
+       dry_u: get_vertical_graph_me(type: "dry_u")
     }
   end
 

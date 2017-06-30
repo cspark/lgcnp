@@ -493,7 +493,7 @@ class GenerateTestModel < ApplicationRecord
   def change_before_solution
     change_before_solution_1_array = []
     change_before_solution_2_array = []
-    interview = Fctabletinterview.where(custserial: 1258).first
+    interview = Fctabletinterview.where(custserial: 2944).first
     fts = Fctabletinterview.all
     fts.each do |interview|
       serial = interview.custserial.to_i
@@ -520,6 +520,49 @@ class GenerateTestModel < ApplicationRecord
         array << [pp, pp_graph_me, 3, "pigment solution"]
         array << [wr, wr_graph_me, 4, "wrinkle solution"]
         array << [el, el_graph_me, 5, "elasticity solution"]
+
+        array = array.sort
+
+        interview.before_solution_1_new = array.first[3]
+        interview.before_solution_2_new = array.second[3]
+        interview.save
+      end
+    end
+  end
+
+  def change_before_solution_rx
+    change_before_solution_1_array = []
+    change_before_solution_2_array = []
+    interview = Fctabletinterviewrx.where(custserial: 1793).first
+    fts = Fctabletinterviewrx.all
+    fts.each do |interview|
+      serial = interview.custserial.to_i
+      measureno = interview.fcdata_id.to_i
+
+      if measureno != 0
+        face_data = Fcdata.where(custserial: serial).where(measureno: measureno).last
+        data = face_data.to_api_hash_for_debug
+        sb = data[:sb_graph]
+        pp = data[:pp_graph]
+        el = data[:el_graph]
+        wr = data[:wr_graph]
+        mo = data[:mo_graph]
+
+        dry_u = data[:dry_u]
+        dry_t = data[:dry_t]
+
+        mo_graph_me = (dry_u / 2 + dry_t ) * 3
+        wr_graph_me = data[:wr_graph_me]
+        el_graph_me = data[:el_graph_me]
+        sb_graph_me = 99.9 - data[:sb_graph_me]
+        pp_graph_me = 99.9 - data[:pp_graph_me]
+
+        array = []
+        array << [mo, pr_graph_me, 1, "SCORE_WATER"]
+        array << [sb, sb_graph_me, 2, "SCORE_TROUBLE"]
+        array << [pp, pp_graph_me, 3, "SCORE_PIGMENT"]
+        array << [wr, wr_graph_me, 4, "SKIN_WRINKLE"]
+        array << [el, el_graph_me, 5, "SCORE_ELASTICITY"]
 
         array = array.sort
 
