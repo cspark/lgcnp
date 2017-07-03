@@ -91,12 +91,16 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     temp_serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     temp_serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
     temp_serial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
+    temp_serial_array4 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 3000, 4001).pluck(:custserial).uniq
+    temp_serial_array5 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 4000, 5001).pluck(:custserial).uniq
     temp_measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     tablet_interviews = Fctabletinterview.where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array).where.not(before_serum: nil)
     tablet_interviews2 = Fctabletinterview.where(custserial: temp_serial_array2).where(fcdata_id: temp_measureno_array).where.not(before_serum: nil)
     tablet_interviews3 = Fctabletinterview.where(custserial: temp_serial_array3).where(fcdata_id: temp_measureno_array).where.not(before_serum: nil)
-    tablet_interviews = tablet_interviews.or(tablet_interviews2).or(tablet_interviews3)
+    tablet_interviews4 = Fctabletinterview.where(custserial: temp_serial_array4).where(fcdata_id: temp_measureno_array).where.not(before_serum: nil)
+    tablet_interviews5 = Fctabletinterview.where(custserial: temp_serial_array5).where(fcdata_id: temp_measureno_array).where.not(before_serum: nil)
+    tablet_interviews = tablet_interviews.or(tablet_interviews2).or(tablet_interviews3).or(tablet_interviews4).or(tablet_interviews5)
 
     scoped = tablet_interviews
     temp_end_date = @end_date.to_date+1.day
