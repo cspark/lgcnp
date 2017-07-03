@@ -59,7 +59,7 @@ class Admin::UserController < Admin::AdminApplicationController
     scoped = scoped.where("custname LIKE ?", "%#{@search}%") if !@search.blank?
     lastanaldate_not_nil_user = scoped.where.not(lastanaldate: nil).order("lastanaldate desc")
     lastanaldate_nil_user = scoped.where(lastanaldate: nil).order("lastanaldate desc")
-    @users = lastanaldate_nil_user.or(lastanaldate_not_nil_user)
+    @users = lastanaldate_not_nil_user + lastanaldate_nil_user
 
     Rails.logger.info "user index!!!"
     Rails.logger.info @ch_cd
