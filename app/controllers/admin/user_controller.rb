@@ -45,7 +45,9 @@ class Admin::UserController < Admin::AdminApplicationController
       custserial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
       custserial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
       custserial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
-      custserial_array = custserial_array + custserial_array2 + custserial_array3
+      custserial_array4 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 3000, 4001).pluck(:custserial).uniq
+      custserial_array5 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 4000, 5001).pluck(:custserial).uniq
+      custserial_array = custserial_array + custserial_array2 + custserial_array3 + custserial_array4 + custserial_array5
 
       scoped = scoped.where(custserial: custserial_array)
     elsif !@shop_cd.blank?
