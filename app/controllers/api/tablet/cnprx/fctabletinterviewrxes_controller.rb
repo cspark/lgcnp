@@ -231,11 +231,16 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
     Rails.logger.info "find_lcare_user!!!"
     Rails.logger.info name
     Rails.logger.info URI.encode(name)
+    ch_cd = "CNPR"
+    if params.has_key?(:ch_cd)
+      ch_cd = params[:ch_cd]
+    end
+
     lcare_user = LcareUser.where(cust_hnm: name, birth_year: params[:birth_year], birth_mmdd: params[:birth_mmdd], cell_phnno: params[:cell_phnno], u_cust_yn: "Y").first
 
     if !lcare_user.nil?
       Rails.logger.info lcare_user.n_cust_id
-      custinfo = Custinfo.where(n_cust_id: lcare_user.n_cust_id).order("UPTDATE desc").first
+      custinfo = Custinfo.where(n_cust_id: lcare_user.n_cust_id).where(ch_cd: ch_cd).order("UPTDATE desc").first
       if !custinfo.nil?
         custinfo.phone = params[:cell_phnno]
         custinfo.save
@@ -259,11 +264,6 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
 
         custinfo = Custinfo.new
         custinfo.custserial = Custinfo.all.order('custserial ASC').last.custserial + 1
-
-        ch_cd = "CNPR"
-        if params.has_key?(:ch_cd)
-          ch_cd = params[:ch_cd]
-        end
 
         custinfo.ch_cd = ch_cd
         custinfo.custname = name
