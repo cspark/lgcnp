@@ -40,8 +40,9 @@ class Admin::UserController < Admin::AdminApplicationController
     # measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     scoped = Custinfo.all
-    if !@shop_cd.blank? && (@ch_cd == "CNP" || @ch_cd == "CLAB" || @ch_cd == "CNPR" || @ch_cd == "RLAB")
-      fcdata_list = Fcdata.where(shop_cd: @shop_cd)
+    if (@ch_cd == "CNP" || @ch_cd == "CLAB" || @ch_cd == "CNPR" || @ch_cd == "RLAB")
+      fcdata_list = Fcdata.all
+      fcdata_list = fcdata_list.where(shop_cd: @shop_cd) if !@shop_cd.blank?
       custserial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
       custserial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
       custserial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
@@ -50,8 +51,8 @@ class Admin::UserController < Admin::AdminApplicationController
       custserial_array = custserial_array + custserial_array2 + custserial_array3 + custserial_array4 + custserial_array5
 
       scoped = scoped.where(custserial: custserial_array)
-    elsif !@shop_cd.blank?
-      scoped = scoped.where("shop_cd LIKE ?", "%#{@shop_cd}%")
+    else
+      scoped = scoped.where("shop_cd LIKE ?", "%#{@shop_cd}%") if !@shop_cd.blank?
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
