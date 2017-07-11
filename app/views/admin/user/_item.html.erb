@@ -142,7 +142,7 @@
         <% end %>
         <td class="text-center"><%= is_agree_marketing %></td>
         <% shop_cd = "-" %>
-        <% !if user.shop_cd.nil? %>
+        <% if !user.shop_cd.nil? %>
           <% shop_cd = user.shop_cd %>
         <% end %>
         <td class="text-center"><%= shop_cd %></td>
