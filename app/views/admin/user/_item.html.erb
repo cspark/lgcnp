@@ -133,7 +133,7 @@
         <% end %>
         <td class="text-center"><%= is_agree_thirdparty %></td>
         <% is_agree_marketing = "-" %>
-        <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX"%>
+        <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX" %>
           <% if user.is_agree_marketing == "T" %>
             <% is_agree_marketing = "O" %>
           <% else %>
@@ -142,6 +142,7 @@
         <% end %>
         <td class="text-center"><%= is_agree_marketing %></td>
         <% shop_cd = "-" %>
+        <% Rails.logger.info user.shop_cd %>
         <% if !user.shop_cd.nil? %>
           <% shop_cd = user.shop_cd %>
         <% end %>
