@@ -1,7 +1,7 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "User") do |sheet|
     sheet.add_row ["이름", "가입날짜", "마지막 진단 날짜","시리얼", "연락처", "성별" ,"생년월일" ,"개인정보 이용 동의" ,
-    "제3자 정보 제공 동의" ,"마케팅 정보 동의" ,"측정횟수", "거주지"]
+    "제3자 정보 제공 동의" ,"마케팅 정보 동의" ,"측정횟수", "거주지", "매장코드"]
     @all_users.each do |user|
         if !user.sex.nil? && user.sex.include?("M")
           user.sex = "남"
@@ -62,8 +62,13 @@ wb.add_worksheet(name: "User") do |sheet|
           end
         end
 
+        shop_cd = ""
+        if !user.shop_cd.nil?
+          shop_cd = user.shop_cd
+        end
+
         sheet.add_row [URI.decode(user.custname), user.uptdate, user.lastanaldate, user.custserial.to_i,
         user.phone, user.sex, user.birthyy+"-"+user.birthmm+"-"+user.birthdd, is_agree_privacy,
-        is_agree_thirdparty, is_agree_marketing, user.measureno.to_i, address], :types => [nil, :string, :string, :integer, :string]
+        is_agree_thirdparty, is_agree_marketing, user.measureno.to_i, address, shop_cd], :types => [nil, :string, :string, :integer, :string]
     end
 end
