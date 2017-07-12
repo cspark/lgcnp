@@ -39,31 +39,35 @@ class Admin::UserController < Admin::AdminApplicationController
     # custserial_array = custserial_array + custserial_array2
     # measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
-    scoped = Custinfo.all
-    if (@ch_cd == "CNP" || @ch_cd == "CLAB" || @ch_cd == "CNPR" || @ch_cd == "RLAB")
-      fcdata_list = Fcdata.all
-      fcdata_list = fcdata_list.where(shop_cd: @shop_cd) if !@shop_cd.blank?
-      custserial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
-      custserial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
-      custserial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
-      custserial_array4 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 3000, 4001).pluck(:custserial).uniq
-      custserial_array5 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 4000, 5001).pluck(:custserial).uniq
-      custserial_array = custserial_array + custserial_array2 + custserial_array3 + custserial_array4 + custserial_array5
+    if @is_admin_init
+      scoped = Custinfo.all
+      if (@ch_cd == "CNP" || @ch_cd == "CLAB" || @ch_cd == "CNPR" || @ch_cd == "RLAB")
+        fcdata_list = Fcdata.all
+        fcdata_list = fcdata_list.where(shop_cd: @shop_cd) if !@shop_cd.blank?
+        custserial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
+        custserial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
+        custserial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
+        custserial_array4 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 3000, 4001).pluck(:custserial).uniq
+        custserial_array5 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 4000, 5001).pluck(:custserial).uniq
+        custserial_array = custserial_array + custserial_array2 + custserial_array3 + custserial_array4 + custserial_array5
 
-      scoped = scoped.where(custserial: custserial_array)
+        scoped = scoped.where(custserial: custserial_array)
+      else
+        scoped = scoped.where("shop_cd LIKE ?", "%#{@shop_cd}%") if !@shop_cd.blank?
+      end
+      scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
+      scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
+      scoped = scoped.where(address: @select_address) if !@select_address.blank?
+      @search = ""
+      @search = params[:search] if params.has_key?(:search) && params[:search].length != 0
+      scoped = scoped.where("custname LIKE ?", "%#{@search}%") if !@search.blank?
+      lastanaldate_not_nil_user = scoped.where.not(lastanaldate: nil).order("lastanaldate desc")
+      lastanaldate_nil_user = scoped.where(lastanaldate: nil).order("lastanaldate desc")
+      @users = lastanaldate_not_nil_user + lastanaldate_nil_user
     else
-      scoped = scoped.where("shop_cd LIKE ?", "%#{@shop_cd}%") if !@shop_cd.blank?
+      @users = Custinfo.where(ch_cd: @ch_cd)
     end
-    scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-    scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
-    scoped = scoped.where(address: @select_address) if !@select_address.blank?
-    @search = ""
-    @search = params[:search] if params.has_key?(:search) && params[:search].length != 0
-    scoped = scoped.where("custname LIKE ?", "%#{@search}%") if !@search.blank?
-    lastanaldate_not_nil_user = scoped.where.not(lastanaldate: nil).order("lastanaldate desc")
-    lastanaldate_nil_user = scoped.where(lastanaldate: nil).order("lastanaldate desc")
-    @users = lastanaldate_not_nil_user + lastanaldate_nil_user
-
+    
     Rails.logger.info "user index!!!"
     Rails.logger.info @ch_cd
     Rails.logger.info @shop_cd
