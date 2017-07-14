@@ -240,10 +240,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
 
     if !lcare_user.nil?
       Rails.logger.info lcare_user.n_cust_id
-      custinfo = Custinfo.where(n_cust_id: lcare_user.n_cust_id).where(ch_cd: ch_cd).order("UPTDATE desc").first
-      if custinfo.nil?
-        custinfo = Custinfo.where(n_cust_id: lcare_user.n_cust_id).order("UPTDATE desc").first
-      end
+      custinfo = Custinfo.where(n_cust_id: lcare_user.n_cust_id).order("UPTDATE desc").first
       if !custinfo.nil?
         custinfo.phone = params[:cell_phnno]
         custinfo.save
