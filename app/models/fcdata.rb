@@ -437,7 +437,7 @@ class Fcdata < ApplicationRecord
         tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first
         if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
           Rails.logger.info "pp Customer!!!"
-          my_position = sp_pl_avr+5
+          my_position = sp_pl_avr+7
         end
       end
       min_value = get_vertical_graph_min(type: type)
@@ -769,6 +769,13 @@ class Fcdata < ApplicationRecord
     end
 
     avr = ((self.mo_1.to_f + self.mo_7.to_f + self.mo_8.to_f) / 3).round
+    if ch_cd == "CNPR" || ch_cd == "RLAB"
+      tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first
+      if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
+        avr = ((self.mo_1.to_f + self.mo_7.to_f + self.mo_8.to_f) / 3).round + 4
+      end
+    end
+
     avr1 = Fcavgdata.where(age: "AgeALL_Grade1").first.moisture.to_i
     avr2 = Fcavgdata.where(age: "AgeALL_Grade2").first.moisture.to_i
     avr3 = Fcavgdata.where(age: "AgeALL_Grade3").first.moisture.to_i
