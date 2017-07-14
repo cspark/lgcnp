@@ -99,6 +99,15 @@ class Api::Tablet::Cnprx::FcdatasController < Api::ApplicationController
     image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Spot_Cust")
     image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Wr_Cust")
 
+    image_download(serial: serial, measureno: measureno, number: nil, type: "_FM_WH_Forehead")
+    image_download(serial: serial, measureno: measureno, number: nil, type: "_FM_WH_LE_Side")
+    image_download(serial: serial, measureno: measureno, number: nil, type: "_FM_WH_LE_Under")
+    image_download(serial: serial, measureno: measureno, number: nil, type: "_FM_WH_L_Side")
+    image_download(serial: serial, measureno: measureno, number: nil, type: "_FM_WH_Nose")
+    image_download(serial: serial, measureno: measureno, number: nil, type: "_FM_WH_RE_Side")
+    image_download(serial: serial, measureno: measureno, number: nil, type: "_FM_WH_RE_Under")
+    image_download(serial: serial, measureno: measureno, number: nil, type: "_FM_WH_R_Side")
+
     if face_data.present?
       render json: face_data.to_api_hash, status: 200
     else
