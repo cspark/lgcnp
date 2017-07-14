@@ -20,7 +20,8 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
 
   def find_interviews
     serial = params[:custserial].to_s
-    tabletinterviews = Fctabletinterviewrx.where(custserial: serial)
+    ch_cd = params[:ch_cd]
+    tabletinterviews = Fctabletinterviewrx.where(custserial: serial).where(ch_cd: ch_cd)
 
     Rails.logger.info tabletinterviews.count
     if tabletinterviews.count.to_i > 0
@@ -290,7 +291,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   end
 
   def find_n_cust_id
-    user = Custinfo.where(n_cust_id: params[:n_cust_id]).where(ch_cd: params[:ch_cd]).first
+    user = Custinfo.where(n_cust_id: params[:n_cust_id]).first
     if !user.nil?
       render json: user.to_api_hash, status: :ok
     else
