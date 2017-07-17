@@ -23,7 +23,7 @@ class Admin::UserController < Admin::AdminApplicationController
       @is_admin_init = true
     end
 
-    ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
+    ch_cd = params[:select_channel] if !params[:select_channel].nil?
     select_address = params[:select_address] if !params[:select_address].nil? && params[:select_address] != "ALL"
     shop_cd = params[:select_shop]
     @shop_cd = shop_cd if !shop_cd.blank?
@@ -61,14 +61,14 @@ class Admin::UserController < Admin::AdminApplicationController
         scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
       end
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-      scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
+      scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank? && @ch_cd != "ALL"
       scoped = scoped.where(address: @select_address) if !@select_address.blank?
       @search = ""
       @search = params[:search] if params.has_key?(:search) && params[:search].length != 0
       scoped = scoped.where("custname LIKE ?", "%#{@search}%") if !@search.blank?
       lastanaldate_not_nil_user = scoped.where.not(lastanaldate: nil).order("lastanaldate desc")
       lastanaldate_nil_user = scoped.where(lastanaldate: nil).order("lastanaldate desc")
-      @users = lastanaldate_not_nil_user.or(lastanaldate_nil_user)
+      @users = lastanaldate_nil_user.or(lastanaldate_not_nil_user)
     else
       @users = Custinfo.where(ch_cd: @ch_cd)
     end
