@@ -22,6 +22,9 @@ class Admin::UserController < Admin::AdminApplicationController
     if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && !params.has_key?(:select_channel)
       @is_admin_init = true
     end
+    Rails.logger.info "!!!!!"
+    Rails.logger.info !params.has_key?(:select_channel)
+    Rails.logger.info @is_admin_init
 
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
     select_address = params[:select_address] if !params[:select_address].nil? && params[:select_address] != "ALL"
@@ -67,7 +70,7 @@ class Admin::UserController < Admin::AdminApplicationController
     else
       @users = Custinfo.where(ch_cd: @ch_cd)
     end
-    
+
     Rails.logger.info "user index!!!"
     Rails.logger.info @ch_cd
     Rails.logger.info @shop_cd
