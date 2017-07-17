@@ -19,11 +19,11 @@ class Admin::UserController < Admin::AdminApplicationController
     end
 
     @is_admin_init = false
-    if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && !params.has_key?(:select_channel)
+    if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && params.has_key?(:select_channel) != true
       @is_admin_init = true
     end
     Rails.logger.info "!!!!!"
-    Rails.logger.info !params.has_key?(:select_channel)
+    Rails.logger.info params.has_key?(:select_channel) != true
     Rails.logger.info @is_admin_init
 
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
