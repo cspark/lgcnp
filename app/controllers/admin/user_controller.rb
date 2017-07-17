@@ -22,9 +22,6 @@ class Admin::UserController < Admin::AdminApplicationController
     if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && params.has_key?(:select_channel) != true
       @is_admin_init = true
     end
-    Rails.logger.info "!!!!!"
-    Rails.logger.info params.has_key?(:select_channel) != true
-    Rails.logger.info @is_admin_init
 
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
     select_address = params[:select_address] if !params[:select_address].nil? && params[:select_address] != "ALL"
@@ -42,7 +39,7 @@ class Admin::UserController < Admin::AdminApplicationController
     # custserial_array = custserial_array + custserial_array2
     # measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
-    if @is_admin_init
+    if !@is_admin_init
       scoped = Custinfo.all
       if (@ch_cd == "CNP" || @ch_cd == "CLAB" || @ch_cd == "CNPR" || @ch_cd == "RLAB")
         fcdata_list = Fcdata.all
