@@ -67,7 +67,7 @@ class Admin::UserController < Admin::AdminApplicationController
       @search = params[:search] if params.has_key?(:search) && params[:search].length != 0
       scoped = scoped.where("custname LIKE ?", "%#{@search}%") if !@search.blank?
       lastanaldate_not_nil_user = scoped.where.not(lastanaldate: nil).order("lastanaldate desc")
-      lastanaldate_nil_user = scoped.where(lastanaldate: nil)
+      lastanaldate_nil_user = scoped.where(lastanaldate: nil).order("custserial desc")
       @users = lastanaldate_nil_user.or(lastanaldate_not_nil_user)
     else
       @users = Custinfo.where(ch_cd: @ch_cd)
