@@ -30,8 +30,8 @@ class Admin::UserController < Admin::AdminApplicationController
     select_address = params[:select_address] if !params[:select_address].nil? && params[:select_address] != "ALL"
     shop_cd = params[:select_shop]
     @shop_cd = shop_cd if !shop_cd.blank?
-    @ch_cd = ch_cd
-    @select_address = select_address
+    @ch_cd = ch_cd if !ch_cd.blank?
+    @select_address = select_address if !select_address.blank?
 
     # scoped = Fcdata.all
     # scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
@@ -56,7 +56,7 @@ class Admin::UserController < Admin::AdminApplicationController
 
         scoped = scoped.where(custserial: custserial_array)
       else
-        scoped = scoped.where("shop_cd LIKE ?", "%#{@shop_cd}%") if !@shop_cd.blank?
+        scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
       end
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
       scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
