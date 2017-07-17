@@ -79,6 +79,7 @@ class Admin::UserController < Admin::AdminApplicationController
     Rails.logger.info @custserial
     Rails.logger.info @search
     Rails.logger.info @select_address
+    Rails.logger.info @users.count
 
     @all_users = @users
     @count = @users.count
