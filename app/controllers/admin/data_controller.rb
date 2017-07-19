@@ -426,7 +426,7 @@ class Admin::DataController < Admin::AdminApplicationController
         end
       end
 
-      if !params.has_key?(:is_agree_thirdparty_info) || params[:is_agree_thirdparty_info] == ""
+      if params.has_key?(:is_agree_thirdparty_info) != nil || params[:is_agree_thirdparty_info] == ""
         is_contain = false
       end
 
