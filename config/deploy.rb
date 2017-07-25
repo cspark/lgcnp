@@ -2,11 +2,11 @@
 lock '3.8.0'
 
 set :application, 'lgcare'
-set :repo_url, 'http://Kim@gitlab.mintech.kr/cnp/lgcare-cnp-server.git'
+set :repo_url, 'https://github.com/ShakeJ/LGCNP.git'
 # set :repo_tree, 'server/cnp'
-set :default_env, {
-  'LD_LIBRARY_PATH' => "/usr/lib/oracle/11.2/client64/lib/"
-}
+# set :default_env, {
+#   'LD_LIBRARY_PATH' => "/usr/lib/oracle/11.2/client64/lib/"
+# }
 # set :rbenv_ruby, '2.2.3'
 set :rbenv_ruby, '2.3.1'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
