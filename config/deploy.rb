@@ -2,8 +2,8 @@
 lock '3.8.0'
 
 set :application, 'lgcare'
-set :repository, 'https://github.com/ShakeJ/LGCNP.git'
-set :branch, "master"
+set :repo_url, 'https://github.com/ShakeJ/LGCNP.git'
+set :branch, 'master'
 
 # set :repo_tree, 'server/cnp'
 set :default_env, {
