@@ -1,7 +1,7 @@
 set :stage, :staging
 set :deploy_to, "/home/janustabuser/lgcare"
 
-server 'janustabuser@203.247.132.106', roles: %w{web app db}, port:22
+server 'janustabuser@203.247.132.106', roles: %w{web app db}
 
 set :branch, 'master'
 set :rails_env, 'staging'
