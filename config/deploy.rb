@@ -28,7 +28,7 @@ set :linked_dirs, %w{log}
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 # set :deploy_to, '/var/www/my_app'
-set :scm, :git
+# set :scm, :git
 # set :format, :pretty
 # set :log_level, :debug
 set :pty, false
