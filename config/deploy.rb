@@ -33,7 +33,7 @@ set :linked_dirs, %w{log}
 # set :format, :pretty
 # set :log_level, :debug
 set :pty, false
-# set :port, 10022
+set :port, 10022
 # set :linked_files, %w{config/database.yml}
 # set :linked_files, %w{config/database.yml config/secrets.yml}
 # set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/uploads')
