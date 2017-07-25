@@ -2,7 +2,9 @@
 lock '3.8.0'
 
 set :application, 'lgcare'
-set :repo_url, 'git@gitlab.mintech.kr:cnp/lgcare-cnp-server.git'
+set :repository, 'https://github.com/ShakeJ/LGCNP.git'
+set :branch, "master"
+
 # set :repo_tree, 'server/cnp'
 set :default_env, {
   'LD_LIBRARY_PATH' => "/usr/lib/oracle/11.2/client64/lib/"
