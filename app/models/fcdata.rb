@@ -743,7 +743,7 @@ class Fcdata < ApplicationRecord
         tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: self.ch_cd).where(custserial: self.custserial).where(fcdata_id: self.measureno).first
         if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
           Rails.logger.info "pp Customer!!!"
-          avr = self.sp_pl_avr+5
+          avr = self.sp_pl_avr+7
         end
       end
       avr1 = Fcavgdata.where(age: avg_grade_1_field_name).first.spot_pl.to_i
