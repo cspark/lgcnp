@@ -670,15 +670,15 @@ class Fcdata < ApplicationRecord
       value = 99.9
     end
 
+    if type != 'moisture' && type != 'pore' && type != 'sb' && type != 'pp' && type != 'dry_t' && type != 'dry_u'
+      value = 99.9 - value
+    end
+
     if tablet_ch_cd != "CNP"
       Rails.logger.info "tablet_ch_cd != CNP"
       value = (value * 0.85) + 15
     end
     Rails.logger.info value
-
-    if type != 'moisture' && type != 'pore' && type != 'sb' && type != 'pp' && type != 'dry_t' && type != 'dry_u'
-      value = 99.9 - value
-    end
 
     # if (type == 'pore' || type == 'sb' || type == 'wr' || type == 'el' || type == 'pp') && !is_avr
     #   if get_graph_data(type: type) == 2
