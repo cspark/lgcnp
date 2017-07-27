@@ -660,6 +660,7 @@ class Fcdata < ApplicationRecord
 
     Rails.logger.info "convert_graph_max_100!!"
     Rails.logger.info is_avr
+    Rails.logger.info type
     Rails.logger.info value
 
     if value > 99.9
