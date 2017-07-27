@@ -447,8 +447,7 @@ class Fcdata < ApplicationRecord
     end
 
     tablet_ch_cd = "CNP"
-    tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first
-    if tabletinterviewrx != nil && (tabletinterviewrx.ch_cd == "CNPR" || tabletinterviewrx.ch_cd == "RLAB")
+    if !Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first.nil?
       tablet_ch_cd = "CNPR"
     end
 
@@ -554,8 +553,7 @@ class Fcdata < ApplicationRecord
     end
 
     tablet_ch_cd = "CNP"
-    tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first
-    if tabletinterviewrx != nil && (tabletinterviewrx.ch_cd == "CNPR" || tabletinterviewrx.ch_cd == "RLAB")
+    if !Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first.nil?
       tablet_ch_cd = "CNPR"
     end
 
