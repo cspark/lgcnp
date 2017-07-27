@@ -402,8 +402,8 @@ class Fcdata < ApplicationRecord
         end
       end
 
-      min_value = Fcavgdata.where(age: avg_grade_1_field_name).first.sb.to_i
-      min_value = Fcavgdata.where(age: avg_grade_4_field_name).first.sb.to_i
+      min_value = (Fcavgdata.where(age: avg_grade_1_field_name).first.e_porphyrin_u.to_f + Fcavgdata.where(age: avg_grade_1_field_name).first.e_porphyrin_t.to_f) / 2
+      max_value = (Fcavgdata.where(age: avg_grade_4_field_name).first.e_porphyrin_u.to_f + Fcavgdata.where(age: avg_grade_4_field_name).first.e_porphyrin_t.to_f) / 2
 
       if ch_cd == "CNP" || ch_cd == "CLAB"
         Rails.logger.info "Fcdata Model CNP@@@"
