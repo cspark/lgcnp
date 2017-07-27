@@ -282,7 +282,7 @@ class Fcdata < ApplicationRecord
     end
 
     if type == "pore"
-        return Fcavgdata.where(age: "AgeALL_Max").first.pore.to_f
+      return Fcavgdata.where(age: "AgeALL_Max").first.pore.to_f
     end
 
     if type == "sb"
@@ -664,9 +664,14 @@ class Fcdata < ApplicationRecord
     if value > 99.9
       value = 99.9
     end
-
-    if type != 'moisture' && type != 'dry_t' && type != 'dry_u'
-      value = 99.9 - value
+    if tablet_ch_cd != "CNP"
+      if type != 'moisture' && type != 'dry_t' && type != 'dry_u'
+        value = 99.9 - value
+      end
+    else
+      if type != 'moisture' && type != 'pore' && type != 'sb' && type != 'pp' && type != 'dry_t' && type != 'dry_u'
+        value = 99.9 - value
+      end
     end
 
     if tablet_ch_cd != "CNP"
