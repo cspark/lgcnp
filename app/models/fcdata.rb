@@ -644,6 +644,11 @@ class Fcdata < ApplicationRecord
   end
 
   def convert_graph_max_100(type: nil, value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil, is_avr: false, tablet_ch_cd: "CNP")
+    Rails.logger.info "convert_graph_max_100!!"
+    Rails.logger.info is_avr
+    Rails.logger.info type
+    Rails.logger.info value
+
     if value.to_f < first_split_point.to_f
       denominator = (first_split_point.to_f - min_value.to_f)
       denominator = 1 if denominator == 0
@@ -658,9 +663,6 @@ class Fcdata < ApplicationRecord
       value = (((value.to_f - second_split_point.to_f) / denominator) * 33.3) + 66.6
     end
 
-    Rails.logger.info "convert_graph_max_100!!"
-    Rails.logger.info is_avr
-    Rails.logger.info type
     Rails.logger.info value
 
     if value > 99.9
@@ -670,6 +672,7 @@ class Fcdata < ApplicationRecord
     if tablet_ch_cd != "CNP"
       value = (value * 0.85) + 15
     end
+    Rails.logger.info value
 
     if type != 'moisture' && type != 'pore' && type != 'sb' && type != 'pp' && type != 'dry_t' && type != 'dry_u'
       value = 99.9 - value
