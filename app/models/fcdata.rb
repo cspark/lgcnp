@@ -417,18 +417,18 @@ class Fcdata < ApplicationRecord
 
     if type == "wr"
       my_position = wr_avr
-      min_value = get_vertical_graph_min(type: type)
-      max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.wrinkle.to_f
-      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.wrinkle.to_f
+      min_value = Fcavgdata.where(age: avg_grade_1_field_name).first.wrinkle.to_i
+      max_value = Fcavgdata.where(age: avg_grade_4_field_name).first.wrinkle.to_i
+      first_split_point = Fcavgdata.where(age: avg_grade_2_field_name).first.wrinkle.to_f
+      second_split_point = Fcavgdata.where(age: avg_grade_3_field_name).first.wrinkle.to_f
     end
 
     if type == "el"
       my_position = el_avr
-      min_value = get_vertical_graph_min(type: type)
-      max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.elasticity.to_f
-      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.elasticity.to_f
+      min_value = Fcavgdata.where(age: avg_grade_1_field_name).first.elasticity.to_i
+      max_value = Fcavgdata.where(age: avg_grade_4_field_name).first.elasticity.to_i
+      first_split_point = Fcavgdata.where(age: avg_grade_2_field_name).first.elasticity.to_f
+      second_split_point = Fcavgdata.where(age: avg_grade_3_field_name).first.elasticity.to_f
     end
 
     if type == "pp"
@@ -440,10 +440,11 @@ class Fcdata < ApplicationRecord
           my_position = sp_pl_avr+7
         end
       end
-      min_value = get_vertical_graph_min(type: type)
-      max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: "AgeALL_Grade2").first.spot_pl.to_f
-      second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.spot_pl.to_f
+
+      min_value = Fcavgdata.where(age: avg_grade_1_field_name).first.spot_pl.to_i
+      max_value = Fcavgdata.where(age: avg_grade_4_field_name).first.spot_pl.to_i
+      first_split_point = Fcavgdata.where(age: avg_grade_2_field_name).first.spot_pl.to_f
+      second_split_point = Fcavgdata.where(age: avg_grade_3_field_name).first.spot_pl.to_f
     end
 
     tablet_ch_cd = "CNP"
