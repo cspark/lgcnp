@@ -412,8 +412,12 @@ class Admin::DataController < Admin::AdminApplicationController
     scoped.each do |fcdata|
       custinfo = Custinfo.where(custserial: fcdata.custserial).first
       is_contain = true
-      if !custinfo.nil?
+      Rails.logger.info "each do!!!"
+
+      if custinfo != nil
         if custinfo.is_agree_thirdparty_info != nil && params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] != "T,F"
+          Rails.logger.info params[:is_agree_thirdparty_info]
+          Rails.logger.info custinfo.is_agree_thirdparty_info
           if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("T") && custinfo.is_agree_thirdparty_info == "F"
             is_contain = false
           end
