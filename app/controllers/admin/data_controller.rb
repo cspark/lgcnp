@@ -422,7 +422,7 @@ class Admin::DataController < Admin::AdminApplicationController
           end
         end
 
-        if (params.has_key?(:is_agree_thirdparty_info) != nil || params[:is_agree_thirdparty_info] == "") && !custinfo.is_agree_thirdparty_info.nil?
+        if (params.has_key?(:is_agree_thirdparty_info) != nil && params[:is_agree_thirdparty_info] == "") && !custinfo.is_agree_thirdparty_info.nil?
           is_contain = false
         end
 
