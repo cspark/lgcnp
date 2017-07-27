@@ -407,7 +407,6 @@ class Fcdata < ApplicationRecord
       max_value = get_vertical_graph_max(type: type)
       first_split_point = (Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_u.to_f + Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_t.to_f) / 2
       second_split_point = (Fcavgdata.where(age: "AgeALL_Grade3").first.e_porphyrin_u.to_f + Fcavgdata.where(age: "AgeALL_Grade3").first.e_porphyrin_t.to_f) / 2
-      end
     end
 
     if type == "wr"
@@ -522,8 +521,8 @@ class Fcdata < ApplicationRecord
       age_avr = (avr_e_porphyrin_u + avr_e_porphyrin_t) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = ( Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_u.to_f + Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_t.to_f ) / 2
-      second_split_point = ( Fcavgdata.where(age: "AgeALL_Grade3").first.e_porphyrin_u.to_f + Fcavgdata.where(age: "AgeALL_Grade3").first.e_porphyrin_t.to_f ) / 2
+      first_split_point = (Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_u.to_f + Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_t.to_f ) / 2
+      second_split_point = (Fcavgdata.where(age: "AgeALL_Grade3").first.e_porphyrin_u.to_f + Fcavgdata.where(age: "AgeALL_Grade3").first.e_porphyrin_t.to_f ) / 2
     end
 
     if type == "wr"
