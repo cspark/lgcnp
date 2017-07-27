@@ -675,16 +675,6 @@ class Fcdata < ApplicationRecord
       value = 99.9 - value
     end
 
-    if type == "dry_t"
-      Rails.logger.info "dry_t!!!"
-      Rails.logger.info value
-    end
-
-    if type == "dry_u"
-      Rails.logger.info "dry_u!!!"
-      Rails.logger.info value
-    end
-
     # if (type == 'pore' || type == 'sb' || type == 'wr' || type == 'el' || type == 'pp') && !is_avr
     #   if get_graph_data(type: type) == 2
     #     value = get_vertical_graph_avr(type: type)
