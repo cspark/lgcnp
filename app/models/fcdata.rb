@@ -638,7 +638,7 @@ class Fcdata < ApplicationRecord
     description
   end
 
-  def convert_graph_max_100(type: nil, value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil, is_avr: false, tablet_ch_cd: "CNP")
+  def convert_graph_max_100(type: nil, value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil, is_avr: false, tablet_ch_cd: nil)
     Rails.logger.info "convert_graph_max_100!!"
     Rails.logger.info tablet_ch_cd
     Rails.logger.info is_avr
