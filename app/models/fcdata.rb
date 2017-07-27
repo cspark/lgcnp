@@ -669,6 +669,7 @@ class Fcdata < ApplicationRecord
     end
 
     if tablet_ch_cd != "CNP"
+      Rails.logger.info "tablet_ch_cd != CNP"
       value = (value * 0.85) + 15
     end
     Rails.logger.info value
