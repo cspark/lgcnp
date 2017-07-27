@@ -644,45 +644,26 @@ class Fcdata < ApplicationRecord
   end
 
   def convert_graph_max_100(type: nil, value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil, is_avr: false, tablet_ch_cd: "CNP")
-    if tablet_ch_cd = "CNP"
-      if value.to_f < first_split_point.to_f
-        denominator = (first_split_point.to_f - min_value.to_f)
-        denominator = 1 if denominator == 0
-        value = ((value.to_f - min_value.to_f) / denominator) * 33.3
-      elsif value.to_f >= first_split_point.to_f && value.to_f < second_split_point.to_f
-        denominator = (second_split_point.to_f - first_split_point.to_f)
-        denominator = 1 if denominator == 0
-        value = (((value.to_f - first_split_point.to_f) / denominator) * 33.3) + 33.3
-      elsif value.to_f >= second_split_point.to_f
-        denominator = (max_value.to_f - second_split_point.to_f)
-        denominator = 1 if denominator == 0
-        value = (((value.to_f - second_split_point.to_f) / denominator) * 33.3) + 66.6
-      end
-    else
-      if value.to_f < first_split_point.to_f
-        denominator = (first_split_point.to_f - min_value.to_f)
-        denominator = 1 if denominator == 0
-        value = ((value.to_f - min_value.to_f) / denominator) * 33.3
-        value = (value * 0.85) + 15
-      elsif value.to_f >= first_split_point.to_f && value.to_f < second_split_point.to_f
-        denominator = (second_split_point.to_f - first_split_point.to_f)
-        denominator = 1 if denominator == 0
-        value = (((value.to_f - first_split_point.to_f) / denominator) * 33.3) + 33.3
-        value = (value * 0.85) + 15
-      elsif value.to_f >= second_split_point.to_f
-        denominator = (max_value.to_f - second_split_point.to_f)
-        denominator = 1 if denominator == 0
-        value = (((value.to_f - second_split_point.to_f) / denominator) * 33.3) + 66.6
-        value = (value * 0.85) + 15 - 1
-      end
+    if value.to_f < first_split_point.to_f
+      denominator = (first_split_point.to_f - min_value.to_f)
+      denominator = 1 if denominator == 0
+      value = ((value.to_f - min_value.to_f) / denominator) * 33.3
+    elsif value.to_f >= first_split_point.to_f && value.to_f < second_split_point.to_f
+      denominator = (second_split_point.to_f - first_split_point.to_f)
+      denominator = 1 if denominator == 0
+      value = (((value.to_f - first_split_point.to_f) / denominator) * 33.3) + 33.3
+    elsif value.to_f >= second_split_point.to_f
+      denominator = (max_value.to_f - second_split_point.to_f)
+      denominator = 1 if denominator == 0
+      value = (((value.to_f - second_split_point.to_f) / denominator) * 33.3) + 66.6
     end
 
     Rails.logger.info "convert_graph_max_100!!"
     Rails.logger.info is_avr
     Rails.logger.info value
 
-    if value > 98.9
-      value = 98.9
+    if value > 99.9
+      value = 99.9
     end
 
     if type != 'moisture' && type != 'pore' && type != 'sb' && type != 'pp' && type != 'dry_t' && type != 'dry_u'
@@ -699,6 +680,9 @@ class Fcdata < ApplicationRecord
       Rails.logger.info value
     end
 
+    if tablet_ch_cd != "CNP"
+      value = (value * 0.85) + 15
+    end
     # if (type == 'pore' || type == 'sb' || type == 'wr' || type == 'el' || type == 'pp') && !is_avr
     #   if get_graph_data(type: type) == 2
     #     value = get_vertical_graph_avr(type: type)

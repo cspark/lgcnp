@@ -413,17 +413,21 @@ class Admin::DataController < Admin::AdminApplicationController
       custinfo = Custinfo.where(custserial: fcdata.custserial).first
       is_contain = true
 
-      if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] != "T,F"
-        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("T")
-          if custinfo.is_agree_thirdparty_info == "F"
-            is_contain = false
+      if custinfo.is_agree_thirdparty_info != nil
+        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] != "T,F"
+          if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("T")
+            if custinfo.is_agree_thirdparty_info == "F"
+              is_contain = false
+            end
+          end
+          if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("F")
+            if custinfo.is_agree_thirdparty_info == "T"
+              is_contain = false
+            end
           end
         end
-        if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("F")
-          if custinfo.is_agree_thirdparty_info == "T"
-            is_contain = false
-          end
-        end
+      else
+        is_contain = false
       end
 
       if params.has_key?(:is_agree_thirdparty_info) != nil || params[:is_agree_thirdparty_info] == ""
