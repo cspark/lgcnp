@@ -446,7 +446,13 @@ class Fcdata < ApplicationRecord
       second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.spot_pl.to_f
     end
 
-    return convert_graph_max_100(type: type, value: my_position, min_value: min_value, max_value: max_value, first_split_point: first_split_point, second_split_point: second_split_point)
+    tablet_ch_cd = "CNP"
+    tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first
+    if tabletinterviewrx != nil && (tabletinterviewrx.ch_cd == "CNPR" || tabletinterviewrx.ch_cd == "RLAB")
+      tablet_ch_cd = "CNPR"
+    end
+
+    return convert_graph_max_100(type: type, value: my_position, min_value: min_value, max_value: max_value, first_split_point: first_split_point, second_split_point: second_split_point, tablet_ch_cd: tablet_ch_cd)
   end
 
   def get_vertical_graph_avr(type: nil)
@@ -551,7 +557,13 @@ class Fcdata < ApplicationRecord
       second_split_point = Fcavgdata.where(age: "AgeALL_Grade3").first.spot_pl.to_f
     end
 
-    return convert_graph_max_100(type: type, value: age_avr, min_value: min_value, max_value: max_value, first_split_point: first_split_point, second_split_point: second_split_point, is_avr: true)
+    tablet_ch_cd = "CNP"
+    tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first
+    if tabletinterviewrx != nil && (tabletinterviewrx.ch_cd == "CNPR" || tabletinterviewrx.ch_cd == "RLAB")
+      tablet_ch_cd = "CNPR"
+    end
+
+    return convert_graph_max_100(type: type, value: age_avr, min_value: min_value, max_value: max_value, first_split_point: first_split_point, second_split_point: second_split_point, is_avr: true, tablet_ch_cd: tablet_ch_cd)
   end
 
   def get_vertical_graph_description(type: nil)
@@ -631,23 +643,46 @@ class Fcdata < ApplicationRecord
     description
   end
 
-  def convert_graph_max_100(type: nil, value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil, is_avr: false)
-    if value.to_f < first_split_point.to_f
-      denominator = (first_split_point.to_f - min_value.to_f)
-      denominator = 1 if denominator == 0
-      value = ((value.to_f - min_value.to_f) / denominator) * 33.3
-    elsif value.to_f >= first_split_point.to_f && value.to_f < second_split_point.to_f
-      denominator = (second_split_point.to_f - first_split_point.to_f)
-      denominator = 1 if denominator == 0
-      value = (((value.to_f - first_split_point.to_f) / denominator) * 33.3) + 33.3
-    elsif value.to_f >= second_split_point.to_f
-      denominator = (max_value.to_f - second_split_point.to_f)
-      denominator = 1 if denominator == 0
-      value = (((value.to_f - second_split_point.to_f) / denominator) * 33.3) + 66.6
+  def convert_graph_max_100(type: nil, value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil, is_avr: false, tablet_ch_cd: "CNP")
+    if tablet_ch_cd = "CNP"
+      if value.to_f < first_split_point.to_f
+        denominator = (first_split_point.to_f - min_value.to_f)
+        denominator = 1 if denominator == 0
+        value = ((value.to_f - min_value.to_f) / denominator) * 33.3
+      elsif value.to_f >= first_split_point.to_f && value.to_f < second_split_point.to_f
+        denominator = (second_split_point.to_f - first_split_point.to_f)
+        denominator = 1 if denominator == 0
+        value = (((value.to_f - first_split_point.to_f) / denominator) * 33.3) + 33.3
+      elsif value.to_f >= second_split_point.to_f
+        denominator = (max_value.to_f - second_split_point.to_f)
+        denominator = 1 if denominator == 0
+        value = (((value.to_f - second_split_point.to_f) / denominator) * 33.3) + 66.6
+      end
+    else
+      if value.to_f < first_split_point.to_f
+        denominator = (first_split_point.to_f - min_value.to_f)
+        denominator = 1 if denominator == 0
+        value = ((value.to_f - min_value.to_f) / denominator) * 33.3
+        value = (value * 0.85) + 15
+      elsif value.to_f >= first_split_point.to_f && value.to_f < second_split_point.to_f
+        denominator = (second_split_point.to_f - first_split_point.to_f)
+        denominator = 1 if denominator == 0
+        value = (((value.to_f - first_split_point.to_f) / denominator) * 33.3) + 33.3
+        value = (value * 0.85) + 15
+      elsif value.to_f >= second_split_point.to_f
+        denominator = (max_value.to_f - second_split_point.to_f)
+        denominator = 1 if denominator == 0
+        value = (((value.to_f - second_split_point.to_f) / denominator) * 33.3) + 66.6
+        value = (value * 0.85) + 15 - 1
+      end
     end
 
-    if value > 99.9
-      value = 99.9
+    Rails.logger.info "convert_graph_max_100!!"
+    Rails.logger.info is_avr
+    Rails.logger.info value
+
+    if value > 98.9
+      value = 98.9
     end
 
     if type != 'moisture' && type != 'pore' && type != 'sb' && type != 'pp' && type != 'dry_t' && type != 'dry_u'
