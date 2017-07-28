@@ -626,7 +626,7 @@ class Fcdata < ApplicationRecord
     if value.to_f < first_split_point.to_f
       denominator = (first_split_point.to_f - min_value.to_f)
       denominator = 1 if denominator == 0
-      value = (((value.to_f - min_value.to_f) / denominator) * 33.3) + 1
+      value = ((value.to_f - min_value.to_f) / denominator) * 32.3
     elsif value.to_f >= first_split_point.to_f && value.to_f < second_split_point.to_f
       denominator = (second_split_point.to_f - first_split_point.to_f)
       denominator = 1 if denominator == 0
@@ -646,16 +646,16 @@ class Fcdata < ApplicationRecord
       if type != 'moisture' && type != 'dry_t' && type != 'dry_u'
         value = 99.9 - value
       end
+      if value <= 32.3
+        value = value + 1
+      end
+      value = (value * 0.85) + 15
     else
       if type != 'moisture' && type != 'pore' && type != 'sb' && type != 'pp' && type != 'dry_t' && type != 'dry_u'
         value = 99.9 - value
       end
     end
 
-    if tablet_ch_cd != "CNP"
-      Rails.logger.info "tablet_ch_cd != CNP"
-      value = (value * 0.85) + 15
-    end
     Rails.logger.info value
 
     # if (type == 'pore' || type == 'sb' || type == 'wr' || type == 'el' || type == 'pp') && !is_avr
