@@ -363,13 +363,6 @@ class Fcdata < ApplicationRecord
 
     if type == "e_porphyrin_t"
       my_position = e_porphyrin_t
-      if ch_cd == "CNPR" || ch_cd == "RLAB"
-        tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first
-        if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
-          Rails.logger.info "e_porphyrin_t Customer!!!"
-          my_position = e_porphyrin_t + 0.7
-        end
-      end
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
 
@@ -395,14 +388,6 @@ class Fcdata < ApplicationRecord
 
     if type == "sb"
       my_position = (e_porphyrin_u.to_f + e_porphyrin_t.to_f) / 2
-      if ch_cd == "CNPR" || ch_cd == "RLAB"
-        tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first
-        if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
-          Rails.logger.info "sb Customer!!!"
-          my_position = (e_porphyrin_u.to_f + 0.7 + e_porphyrin_t.to_f) / 2
-        end
-      end
-
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
       first_split_point = (Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_u.to_f + Fcavgdata.where(age: "AgeALL_Grade2").first.e_porphyrin_t.to_f) / 2
@@ -600,13 +585,6 @@ class Fcdata < ApplicationRecord
 
     if type.to_s == "e_porphyrin_t"
       my_position = e_porphyrin_t
-      if ch_cd == "CNPR" || ch_cd == "RLAB"
-        tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first
-        if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
-          Rails.logger.info "e_porphyrin_t Customer!!!"
-          my_position = e_porphyrin_t + 0.7
-        end
-      end
       age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
@@ -737,13 +715,6 @@ class Fcdata < ApplicationRecord
       # 트러블
       # E_PORPHYTRIN_T	E_PORPHYTRIN_U 평균값
       avr = (self.e_porphyrin_u.to_f + self.e_porphyrin_t.to_f) / 2
-      if self.ch_cd == "CNPR" || self.ch_cd == "RLAB"
-        tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: self.ch_cd).where(custserial: self.custserial).where(fcdata_id: self.measureno).first
-        if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
-          Rails.logger.info "sb Customer!!!"
-          avr = (self.e_porphyrin_u.to_f + 0.7 + self.e_porphyrin_t.to_f) / 2
-        end
-      end
       avr1 = (Fcavgdata.where(age: avg_grade_1_field_name).first.e_porphyrin_u.to_f + Fcavgdata.where(age: avg_grade_1_field_name).first.e_porphyrin_t.to_f) / 2
       avr2 = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_f + Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_f) / 2
       avr3 = (Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_f) / 2
