@@ -9,23 +9,30 @@
 
     <script>
     $ (function () {
-        <% Rails.logger.info "beau_show!!!" %>
-        <% Rails.logger.info @tabletinterview.custserial.to_i %>
-        <% Rails.logger.info @tabletinterview.measureno.to_i %>
-        <% user = Custinfo.where(custserial: @tabletinterview.custserial.to_i).first %>
-        try
-        {
-          $('#name_<%= @tabletinterview.custserial.to_i %>').append( decode_utf8('<%= user.custname %>'));
+      <% user = Custinfo.where(custserial: @tabletinterview.custserial).first %>
+      try
+      {
+        var userName = decode_utf8('<%= user.custname %>')
+        tempUserName = ""
+        for(var i = 0; i < userName.length; i++){
+          if(i == 0)
+            tempUserName += userName.slice(0, 1)
+          else if(i == userName.length - 1)
+            tempUserName += userName.slice(userName.length - 1, userName.length)
+          else
+            tempUserName += "*"
         }
-        catch(err)
-        {
-          $('#name_<%= @tabletinterview.custserial.to_i %>').append('<%= user.custname %>');
-        }
-      });
-
-      function decode_utf8(s) {
-        return decodeURI(s);
+        $('#name_<%= @tabletinterview.custserial.to_i %>').append(tempUserName);
       }
+      catch(err)
+      {
+        $('#name_<%= @tabletinterview.custserial.to_i %>').append('<%= user.custname %>');
+      }
+    });
+
+    function decode_utf8(s) {
+      return decodeURI(s);
+    }
     </script>
   </head>
 
