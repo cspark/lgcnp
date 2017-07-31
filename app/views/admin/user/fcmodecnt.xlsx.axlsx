@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Fcmodecnt") do |sheet|
+    sheet.add_row ["모드 시리얼", "모드", "분석일","채널", "매장코드"]
+    @fcmodecnt.each do |fcmode|
+      sheet.add_row [fcmode.modecnt_serial.to_i, fcmode.mode_name, fcmode.analdate, fcmode.ch_cd, fcmode.shop_cd]
+    end
+end

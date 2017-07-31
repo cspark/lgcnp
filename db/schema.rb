@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170609062210) do
+ActiveRecord::Schema.define(version: 20170703011349) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -524,6 +524,14 @@ ActiveRecord::Schema.define(version: 20170609062210) do
     t.string   "ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "privacyaccesshistories", force: :cascade do |t|
+    t.string   "adminuser_id"
+    t.string   "email"
+    t.integer  "ip"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
 end

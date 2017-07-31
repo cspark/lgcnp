@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <script>
+      <% search = "" %>
+      $(function () {
+        $(".top-list").css('color', '#9d9d9d');
+        $("#fcmodecnt").css('color', 'hotpink');
+      });
+
+      function decode_utf8(s) {
+        return decodeURI(s);
+      }
+
+    </script>
+    <style>
+    td {
+      width: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0 auto;
+      text-align: center !important;
+    }
+
+    .fixed-table-body {
+      max-height: 431px;
+    }
+
+    .text-center {
+        margin: 0 auto;
+        text-align: center !important;
+    }
+
+    th {
+      margin: 0 auto;
+      text-align: center !important;
+    }
+
+    </style>
+  </head>
+
+  <body>
+    <%= render "admin/header" %>
+    <div style="background: #b1cbbb; padding: 8px;">
+      <button style="margin-left: 10px;" class="btn btn-warning" id="submit">조회</button>
+      <p style="float:right; margin-right:20px; margin-top:5px;">
+        Download:
+        <!-- <%= link_to "CSV", admin_user_list_path(format: "csv") %> -->
+        <%= link_to "Excel", admin_fcmodecnt_path(format: "xlsx") %>
+      </p>
+    </div>
+    <table data-toggle="table">
+      <thead style="width: 100%;">
+        <tr>
+          <th>모드 시리얼</th>
+          <th>모드</th>
+          <th>분석일</th>
+          <th>채널</th>
+          <th>매장코드</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @fcmodecnt.each do |fcmode| %>
+        <%= render partial: "admin/user/fcmodecnt_item", locals: { fcmode: fcmode } %>
+        <% end %>
+      </tbody>
+    </table>
+  </body>
+</html>
