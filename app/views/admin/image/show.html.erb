@@ -10,14 +10,26 @@
     <script>
     $ (function () {
         <% user = Custinfo.where(custserial: @fcdata.custserial).first %>
-        try
-        {
-          $('#name_<%= @fcdata.custserial.to_i %>').append( decode_utf8('<%= user.custname %>'));
-        }
-        catch(err)
-        {
-          $('#name_<%= @fcdata.custserial.to_i %>').append('<%= user.custname %>');
-        }
+        <% if !user.nil? %>
+          try
+          {
+            var userName = decode_utf8('<%= user.custname %>')
+            tempUserName = ""
+            for(var i = 0; i < userName.length; i++){
+              if(i == 0)
+                tempUserName += userName.slice(0, 1)
+              else if(i == userName.length - 1)
+                tempUserName += userName.slice(userName.length - 1, userName.length)
+              else
+                tempUserName += "*"
+            }
+            $('#name_<%= @fcdata.custserial.to_i %>').append(tempUserName);
+          }
+          catch(err)
+          {
+            $('#name_<%= @fcdata.custserial.to_i %>').append('<%= user.custname %>');
+          }
+        <% end %>
       });
 
       function decode_utf8(s) {
