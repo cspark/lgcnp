@@ -9,15 +9,25 @@
 
     <script>
     $ (function () {
-        try
-        {
-          $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append( decode_utf8('<%= @user.custname %>'));
+      try
+      {
+        var userName = decode_utf8('<%= @user.custname %>')
+        tempUserName = ""
+        for(var i = 0; i < userName.length; i++){
+          if(i == 0)
+            tempUserName += userName.slice(0, 1)
+          else if(i == userName.length - 1)
+            tempUserName += userName.slice(userName.length - 1, userName.length)
+          else
+            tempUserName += "*"
         }
-        catch(err)
-        {
-          $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append('<%= @user.custname %>');
-        }
-      });
+        $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append(tempUserName);
+      }
+      catch(err)
+      {
+        $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append('<%= @user.custname %>');
+      }
+    });
 
       function decode_utf8(s) {
         return decodeURI(s);
@@ -29,7 +39,7 @@
   <body style="padding: 10px;">
     <h2>피드백 리스트 정보</h2>
     <% tabletinterview = Fctabletinterviewrx.where(tablet_interview_id: @after_interview.rx_tablet_interview_id).first %>
-    <font size="5"><b><div id="name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>"></b></div></font>
+    <font size="5"><b><div id="name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>"></div></b></font>
 
     <div style="display:table; height:50px; width: 100%; float:left; background: #cecece; margin: 2px; padding: 8px;">
       <font size="4"><div id="name_<%= @user.custserial.to_i %>_<%= tabletinterview.uptdate %>"></div></font>
@@ -39,7 +49,7 @@
         <b>2주 후 설문</b>
       <% elsif @after_interview.order == 2 %>
         <b>3개월 후 설문</b>
-      <% end %>
+      <% end %><br>
       <font size="2">
         <% sex = "남" %>
         <% if @user.sex == "F" %>
