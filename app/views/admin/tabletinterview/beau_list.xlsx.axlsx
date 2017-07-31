@@ -7,6 +7,27 @@ wb.add_worksheet(name: "interview") do |sheet|
       custinfo = Custinfo.where(custserial: interview.custserial).first
       fcdata = Fcdata.where(custserial: interview.custserial).where(measureno: interview.measureno).first
 
+      if !custinfo.custname.nil?
+        begin
+          userName = URI.decode(user.custname)
+          tempUserName = ""
+          i = 0
+          userName.each_char do |character|
+            if i == 0
+              tempUserName += userName.slice(0, 1)
+            elsif i == userName.length - 1
+              tempUserName += userName.slice(userName.length - 1, userName.length)
+            else
+              tempUserName += "*"
+            end
+            i += 1
+          end
+          userName = tempUserName
+        rescue
+          userName = user.custname
+        end
+      end
+
       interview_8 = interview.interview_8
       if interview.interview_8 == "0"
         interview_8 = "-"
@@ -25,7 +46,7 @@ wb.add_worksheet(name: "interview") do |sheet|
        custname = ""
       end
 
-      sheet.add_row [custname, interview.custserial.to_i, interview.ch_cd, interview.faceno,
+      sheet.add_row [userName, interview.custserial.to_i, interview.ch_cd, interview.faceno,
       interview.measuredate, interview.measureno.to_i, interview.uptdate, interview.interview_1, interview.interview_2,
       interview.interview_3, interview.interview_4, interview.interview_5, interview.interview_6, interview.interview_7,
       interview_8, interview_9, interview_10]

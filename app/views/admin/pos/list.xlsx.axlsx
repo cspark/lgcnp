@@ -3,20 +3,39 @@ wb.add_worksheet(name: "Pos") do |sheet|
     sheet.add_row @excel_name
     @fcpos_excel.each do |data|
         custinfo = Custinfo.where(custserial: data.custserial).first
-        custname = ""
+        userName = ""
         if !custinfo.nil?
           if !custinfo.custname.nil?
-           custname = URI.decode(custinfo.custname)
+            begin
+              userName = URI.decode(user.custname)
+              tempUserName = ""
+              i = 0
+              userName.each_char do |character|
+                if i == 0
+                  tempUserName += userName.slice(0, 1)
+                elsif i == userName.length - 1
+                  tempUserName += userName.slice(userName.length - 1, userName.length)
+                else
+                  tempUserName += "*"
+                end
+                i += 1
+              end
+              userName = tempUserName
+            rescue
+              userName = user.custname
+            end
+          else
+            userName = ""
           end
 
-          temp = [data.custserial.to_i, custname, data.ch_cd, data.faceno, data.measuredate, data.measureno.to_i, data.uptdate]
+          temp = [data.custserial.to_i, userName, data.ch_cd, data.faceno, data.measuredate, data.measureno.to_i, data.uptdate]
           if @select_filter != []
             @select_filter.each do |filter|
               temp << data[filter].to_s
             end
             sheet.add_row temp
           else
-            sheet.add_row [data.custserial.to_i, custname, data.ch_cd, data.faceno, data.measuredate, data.measureno.to_i, data.uptdate, data.fh_x.to_i, data.fh_y.to_i, data.fh_w.to_i, data.fh_h.to_i, data.ns_x.to_i,
+            sheet.add_row [data.custserial.to_i, userName, data.ch_cd, data.faceno, data.measuredate, data.measureno.to_i, data.uptdate, data.fh_x.to_i, data.fh_y.to_i, data.fh_w.to_i, data.fh_h.to_i, data.ns_x.to_i,
             data.ns_y.to_i, data.ns_w.to_i, data.ns_h.to_i, data.res_x.to_i, data.res_y.to_i, data.res_w.to_i, data.res_h.to_i, data.reu_x.to_i, data.reu_y.to_i, data.reu_w.to_i, data.reu_h.to_i,
             data.les_x.to_i, data.les_y.to_i, data.les_w.to_i, data.les_h.to_i, data.leu_x.to_i, data.leu_y.to_i, data.leu_w.to_i, data.leu_h.to_i, data.rs_x.to_i, data.rs_y.to_i, data.rs_w.to_i, data.rs_h.to_i,
             data.ls_x.to_i, data.ls_y.to_i, data.ls_w.to_i, data.ls_h.to_i, data.rt_re_l.to_i, data.rt_re_t.to_i, data.rt_re_r.to_i, data.rt_re_b.to_i, data.rt_le_l.to_i, data.rt_le_t.to_i, data.rt_le_r.to_i, data.rt_le_b.to_i,

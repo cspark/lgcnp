@@ -2,10 +2,29 @@ wb = xlsx_package.workbook
 wb.add_worksheet(name: "Schedule") do |sheet|
     sheet.add_row ["이름","채널","매장","예약시간","연락처","상담예약 여부","메모","등록날짜"]
     @fcschedules_excel.each do |data|
-        mmdd = data.reserve_mmdd[0, 2] + "-" +data.reserve_mmdd[2, 4]
-        hhmm = data.reserve_hhmm[0, 2] + ":" +data.reserve_hhmm[2, 4]
+      mmdd = data.reserve_mmdd[0, 2] + "-" +data.reserve_mmdd[2, 4]
+      hhmm = data.reserve_hhmm[0, 2] + ":" +data.reserve_hhmm[2, 4]
 
-        sheet.add_row [URI.decode(data.custname), data.ch_cd, data.shop_cd, data.reserve_yyyy+"-"+mmdd+"/"+hhmm, data.phone,
-        data.reserve_yn, data.memo, data.uptdate]
+      begin
+        userName = URI.decode(data.custname)
+        tempUserName = ""
+        i = 0
+        userName.each_char do |character|
+          if i == 0
+            tempUserName += userName.slice(0, 1)
+          elsif i == userName.length - 1
+            tempUserName += userName.slice(userName.length - 1, userName.length)
+          else
+            tempUserName += "*"
+          end
+          i += 1
+        end
+        userName = tempUserName
+      rescue
+        userName = data.custname
+      end
+
+      sheet.add_row [userName, data.ch_cd, data.shop_cd, data.reserve_yyyy+"-"+mmdd+"/"+hhmm, data.phone,
+      data.reserve_yn, data.memo, data.uptdate]
     end
 end

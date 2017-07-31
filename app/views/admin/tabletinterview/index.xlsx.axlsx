@@ -4,6 +4,28 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
         @tabletinterviews_excel.each do |tabletinterview|
           custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
           fcdata = Fcdata.where(custserial: tabletinterview.custserial.to_i).where(measureno: tabletinterview.fcdata_id.to_i).first
+
+          if !custinfo.custname.nil?
+            begin
+              userName = URI.decode(user.custname)
+              tempUserName = ""
+              i = 0
+              userName.each_char do |character|
+                if i == 0
+                  tempUserName += userName.slice(0, 1)
+                elsif i == userName.length - 1
+                  tempUserName += userName.slice(userName.length - 1, userName.length)
+                else
+                  tempUserName += "*"
+                end
+                i += 1
+              end
+              userName = tempUserName
+            rescue
+              userName = user.custname
+            end
+          end
+
           skin_type = ""
           if !tabletinterview.skin_type.nil?
             if tabletinterview.skin_type.include?("skin_type_gunsung")
@@ -344,7 +366,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
             end
             sheet.add_row temp
           else
-            sheet.add_row [custname, tabletinterview.custserial.to_i, custinfo.ch_cd, tabletinterview.uptdate,
+            sheet.add_row [userName, tabletinterview.custserial.to_i, custinfo.ch_cd, tabletinterview.uptdate,
             tabletinterview.a_1.to_i, tabletinterview.a_2.to_i, tabletinterview.a_3.to_i, tabletinterview.b_1.to_i, tabletinterview.b_2.to_i, tabletinterview.b_3.to_i, tabletinterview.b_4.to_i, tabletinterview.c_1.to_i,
             tabletinterview.d_1.to_i, tabletinterview.d_2.to_i, tabletinterview.d_3.to_i, tabletinterview.d_4.to_i, tabletinterview.d_5.to_i,
             tabletinterview.d_6.to_i, tabletinterview.d_7.to_i, tabletinterview.d_8.to_i, tabletinterview.d_9.to_i, tabletinterview.d_10.to_i,

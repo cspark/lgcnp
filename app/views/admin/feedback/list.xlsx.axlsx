@@ -7,6 +7,27 @@ wb.add_worksheet(name: "Feedback") do |sheet|
         tabletinterview = Fctabletinterview.where(tablet_interview_id: after_interview.tablet_interview_id).first
         fcdata = Fcdata.where(custserial: tabletinterview.custserial.to_i).where(measureno: tabletinterview.fcdata_id).first
 
+        if !custinfo.custname.nil?
+          begin
+            userName = URI.decode(user.custname)
+            tempUserName = ""
+            i = 0
+            userName.each_char do |character|
+              if i == 0
+                tempUserName += userName.slice(0, 1)
+              elsif i == userName.length - 1
+                tempUserName += userName.slice(userName.length - 1, userName.length)
+              else
+                tempUserName += "*"
+              end
+              i += 1
+            end
+            userName = tempUserName
+          rescue
+            userName = user.custname
+          end
+        end
+        
         if after_interview.order == 0
           order = "당일 설문"
         elsif after_interview.order == 1

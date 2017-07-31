@@ -4,11 +4,28 @@ wb.add_worksheet(name: "Fcdata") do |sheet|
     @fcdatas_excel.each do |fcdata|
         custinfo = Custinfo.where(custserial: fcdata.custserial).first
         if !custinfo.custname.nil?
-         custname = URI.decode(custinfo.custname)
+          begin
+            userName = URI.decode(user.custname)
+            tempUserName = ""
+            i = 0
+            userName.each_char do |character|
+              if i == 0
+                tempUserName += userName.slice(0, 1)
+              elsif i == userName.length - 1
+                tempUserName += userName.slice(userName.length - 1, userName.length)
+              else
+                tempUserName += "*"
+              end
+              i += 1
+            end
+            userName = tempUserName
+          rescue
+            userName = user.custname
+          end
         else
-         custname = ""
+         userName = ""
         end
 
-        sheet.add_row [fcdata.custserial.to_i ,custname, fcdata.measuredate, fcdata.ch_cd, fcdata.shop_cd, fcdata.measureno.to_i]
+        sheet.add_row [fcdata.custserial.to_i ,userName, fcdata.measuredate, fcdata.ch_cd, fcdata.shop_cd, fcdata.measureno.to_i]
     end
 end

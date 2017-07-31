@@ -9,9 +9,24 @@ wb.add_worksheet(name: "Feedback") do |sheet|
         fcdata = Fcdata.where(custserial: after_interview.custserial.to_i).where(measureno: tabletinterview.fcdata_id).first
 
         if !custinfo.custname.nil?
-         custname = URI.decode(custinfo.custname)
-        else
-         custname = ""
+          begin
+            userName = URI.decode(user.custname)
+            tempUserName = ""
+            i = 0
+            userName.each_char do |character|
+              if i == 0
+                tempUserName += userName.slice(0, 1)
+              elsif i == userName.length - 1
+                tempUserName += userName.slice(userName.length - 1, userName.length)
+              else
+                tempUserName += "*"
+              end
+              i += 1
+            end
+            userName = tempUserName
+          rescue
+            userName = user.custname
+          end
         end
 
         tabletinterview = Fctabletinterviewrx.where(tablet_interview_id: after_interview.rx_tablet_interview_id).first
@@ -83,7 +98,7 @@ wb.add_worksheet(name: "Feedback") do |sheet|
           shop_cd = fcdata.shop_cd
         end
 
-        sheet.add_row [custname, after_interview.custserial, order, tabletinterview.uptdate, sex, custinfo.age, shop_cd,
+        sheet.add_row [userName, after_interview.custserial, order, tabletinterview.uptdate, sex, custinfo.age, shop_cd,
         recommand_program_step_1, recommand_program_step_2, recommand_program_step_3,
         after_interview.a1.to_i, a1_1, after_interview.a2.to_i, after_interview.a3.to_i,
         after_interview.a4.to_i, after_interview.a5.to_i, a6, a6_1]
