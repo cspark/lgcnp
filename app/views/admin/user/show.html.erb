@@ -11,11 +11,43 @@
     $ (function () {
         try
         {
-          $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append( decode_utf8('<%= @user.custname %>'));
+          var userName = decode_utf8('<%= @user.custname %>')
+          tempUserName = ""
+          for(var i = 0; i < userName.length; i++){
+            if(i == 0)
+              tempUserName += userName.slice(0, 1)
+            else if(i == userName.length - 1)
+              tempUserName += userName.slice(userName.length - 1, userName.length)
+            else
+              tempUserName += "*"
+          }
+          $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append(tempUserName);
         }
         catch(err)
         {
           $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append('<%= @user.custname %>');
+        }
+
+        try
+        {
+          var phone = '<%= @user.phone %>'
+          tempPhone = ""
+          for(var i = 0; i < phone.length; i++){
+            if(i == 0 || i == 1 || (i > phone.length - 5 && i != phone.length - 1))
+              continue
+
+            if(i == 2)
+              tempPhone += phone.slice(0, 3)
+            else if(i == phone.length - 1)
+              tempPhone += phone.slice(phone.length - 4, phone.length)
+            else
+              tempPhone += "*"
+          }
+          $('#phone_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append(tempPhone);
+        }
+        catch(err)
+        {
+          $('#phone_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append('<%= @user.phone %>');
         }
 
         $(document).on("click", ".edit-user", function (e) {
@@ -49,7 +81,7 @@
       <b>가입날짜</b>  <%= @user.uptdate %> <br>
       <b>마지막 진단 날짜</b> <%= @user.lastanaldate %> <br>
       <b>시리얼</b> <%= @user.custserial.to_i %> <br>
-      <b>전화번호</b> <%= @user.phone %> <br>
+      <b>전화번호</b> <font id="phone_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>"></font><br>
       <% sex = "남" %>
       <% if @user.sex == "F" %>
         <% sex = "여" %>

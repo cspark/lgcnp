@@ -88,6 +88,10 @@
           location.href = "/admin/upload_test"
         });
 
+        $("#fcmodecnt").click(function(){
+          location.href = "/admin/fcmodecnt"
+        });
+
         $("#logout").click(function(){
           var formData = new FormData($(this)[0]);
 
@@ -221,6 +225,9 @@
           <% end %>
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
             <li id="allow_list"><a class="top-list" id="point_allow_list" href="#">허용 IP</a></li>
+          <% end %>
+          <% if session[:admin_user] == "user" %>
+            <li><a href="#" class="top-list" id="fcmodecnt">fcmodcnt</a></li>
           <% end %>
         </ul>
         <ul class="nav navbar-nav navbar-right">

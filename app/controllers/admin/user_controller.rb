@@ -134,6 +134,14 @@ class Admin::UserController < Admin::AdminApplicationController
     end
   end
 
+  def fcmodecnt
+    @fcmodecnt = Fcmodecnt.all
+    respond_to do |format|
+      format.html
+      format.xlsx
+    end
+  end
+
   private
   def permitted_params
     params.permit(:custserial, :userId, :ch_cd, :measureno, :phone, :birthyy, :birthmm, :birthdd, :email, :is_agree_privacy, :is_agree_thirdparty_info, :is_agree_marketing, :is_agree_after)

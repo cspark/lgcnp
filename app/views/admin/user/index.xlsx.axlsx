@@ -3,72 +3,113 @@ wb.add_worksheet(name: "User") do |sheet|
     sheet.add_row ["이름", "가입날짜", "마지막 진단 날짜","시리얼", "연락처", "성별" ,"생년월일" ,"개인정보 이용 동의" ,
     "제3자 정보 제공 동의" ,"마케팅 정보 동의" ,"측정횟수", "거주지", "매장코드"]
     @all_users.each do |user|
-        if !user.sex.nil? && user.sex.include?("M")
-          user.sex = "남"
-        else
-          user.sex = "여"
-        end
-        is_agree_privacy = "X"
-        if !user.is_agree_privacy.nil? && user.is_agree_privacy.include?("T")
-          is_agree_privacy = "O"
-        end
-        is_agree_thirdparty = "X"
-        if !user.is_agree_thirdparty_info.nil? && user.is_agree_thirdparty_info.include?("T")
-          is_agree_thirdparty = "O"
-        end
-        is_agree_marketing = "X"
-        if !user.is_agree_marketing.nil? && user.is_agree_marketing.include?("T")
-          is_agree_marketing = "O"
-        end
-
-        address = ""
-        if !user.address.nil?
-          if user.address == "10"
-            address = "서울특별시"
-          elsif user.address == "11"
-            address = "인천광역시"
-          elsif user.address == "12"
-            address = "경기도"
-          elsif user.address == "13"
-            address = "강원도"
-          elsif user.address == "14"
-            address = "대전광역시"
-          elsif user.address == "15"
-            address = "세종특별자치시"
-          elsif user.address == "16"
-            address = "충청북도"
-          elsif user.address == "17"
-            address = "충청남도"
-          elsif user.address == "18"
-            address = "대구광역시"
-          elsif user.address == "19"
-            address = "경상북도"
-          elsif user.address == "20"
-            address = "울산광역시"
-          elsif user.address == "21"
-            address = "부산광역시"
-          elsif user.address == "22"
-            address = "경상남도"
-          elsif user.address == "23"
-            address = "광주광역시"
-          elsif user.address == "24"
-            address = "전라남도"
-          elsif user.address == "25"
-            address = "전라북도"
-          elsif user.address == "26"
-            address = "제주도"
-          elsif user.address == "27"
-            address = "기타"
+      begin
+        userName = URI.decode(user.custname)
+        tempUserName = ""
+        i = 0
+        userName.each_char do |character|
+          if i == 0
+            tempUserName += userName.slice(0, 1)
+          elsif i == userName.length - 1
+            tempUserName += userName.slice(userName.length - 1, userName.length)
+          else
+            tempUserName += "*"
           end
+          i += 1
         end
+        userName = tempUserName
+      rescue
+        userName = user.custname
+      end
 
-        shop_cd = ""
-        if !user.shop_cd.nil?
-          shop_cd = user.shop_cd
+      begin
+        userPhone = user.phone
+        tempPhone = ""
+        i = 0
+        userPhone.each_char do |character|
+          if i == 2
+            tempPhone += userPhone.slice(0, 3)
+          elsif i == userPhone.length - 1
+            tempPhone += userPhone.slice(userPhone.length - 4, userPhone.length)
+          else
+            if i == 0 || i == 1 || (i > userPhone.length - 5 && i != userPhone.length - 1)
+            else
+              tempPhone += "*"
+            end
+          end
+          i += 1
         end
+        userPhone = tempPhone
+      rescue
+        userPhone = user.phone
+      end
 
-        sheet.add_row [URI.decode(user.custname), user.uptdate, user.lastanaldate, user.custserial.to_i,
-        user.phone, user.sex, user.birthyy+"-"+user.birthmm+"-"+user.birthdd, is_agree_privacy,
-        is_agree_thirdparty, is_agree_marketing, user.measureno.to_i, address, shop_cd], :types => [nil, :string, :string, :integer, :string]
+      if !user.sex.nil? && user.sex.include?("M")
+        user.sex = "남"
+      else
+        user.sex = "여"
+      end
+      is_agree_privacy = "X"
+      if !user.is_agree_privacy.nil? && user.is_agree_privacy.include?("T")
+        is_agree_privacy = "O"
+      end
+      is_agree_thirdparty = "X"
+      if !user.is_agree_thirdparty_info.nil? && user.is_agree_thirdparty_info.include?("T")
+        is_agree_thirdparty = "O"
+      end
+      is_agree_marketing = "X"
+      if !user.is_agree_marketing.nil? && user.is_agree_marketing.include?("T")
+        is_agree_marketing = "O"
+      end
+
+      address = ""
+      if !user.address.nil?
+        if user.address == "10"
+          address = "서울특별시"
+        elsif user.address == "11"
+          address = "인천광역시"
+        elsif user.address == "12"
+          address = "경기도"
+        elsif user.address == "13"
+          address = "강원도"
+        elsif user.address == "14"
+          address = "대전광역시"
+        elsif user.address == "15"
+          address = "세종특별자치시"
+        elsif user.address == "16"
+          address = "충청북도"
+        elsif user.address == "17"
+          address = "충청남도"
+        elsif user.address == "18"
+          address = "대구광역시"
+        elsif user.address == "19"
+          address = "경상북도"
+        elsif user.address == "20"
+          address = "울산광역시"
+        elsif user.address == "21"
+          address = "부산광역시"
+        elsif user.address == "22"
+          address = "경상남도"
+        elsif user.address == "23"
+          address = "광주광역시"
+        elsif user.address == "24"
+          address = "전라남도"
+        elsif user.address == "25"
+          address = "전라북도"
+        elsif user.address == "26"
+          address = "제주도"
+        elsif user.address == "27"
+          address = "기타"
+        end
+      end
+
+      shop_cd = ""
+      if !user.shop_cd.nil?
+        shop_cd = user.shop_cd
+      end
+
+      sheet.add_row [userName, user.uptdate, user.lastanaldate, user.custserial.to_i,
+      userPhone, user.sex, user.birthyy+"-"+user.birthmm+"-"+user.birthdd, is_agree_privacy,
+      is_agree_thirdparty, is_agree_marketing, user.measureno.to_i, address, shop_cd], :types => [nil, :string, :string, :integer, :string]
     end
 end
