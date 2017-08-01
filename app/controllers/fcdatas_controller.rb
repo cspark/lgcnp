@@ -38,7 +38,7 @@ class FcdatasController < ApplicationController
   def face_data
     serial = params[:custserial].to_s
 
-    face_data = Fcdata.where(custserial: serial).last
+    face_data = Fcdata.where(custserial: serial).order("measureno asc").last
     measureno = face_data.measureno
     # face_data = Fcdata.all.first
 
