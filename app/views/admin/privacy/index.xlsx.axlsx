@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "PrivacyAccessHistory") do |sheet|
+    sheet.add_row ["인덱스", "관리자 ID", "이메일", "IP", "취급일"]
+    @privacies.each do |privacy|
+      sheet.add_row [privacy.id, privacy.adminuser_id, privacy.email, privacy.ip, privacy.created_at]
+    end
+end

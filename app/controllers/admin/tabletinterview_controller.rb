@@ -3,6 +3,20 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
   before_action :is_admin
 
   def index
+    if params.has_key?(:isExcel) && params[:isExcel]
+      history = Privacyaccesshistory.new
+      serial = 1
+      if Privacyaccesshistory.count > 1
+        serial = Privacyaccesshistory.order("id desc").first.id.to_i + 1
+      end
+      user = session[:admin_user]
+      history.id = serial
+      history.adminuser_id = user['id']
+      history.email = user['email']
+      history.ip = session[:ip].to_s
+      history.save
+    end
+
     @start_date = Fctabletinterview.all.order('uptdate asc').first.uptdate[0,10]
     @end_date = Date.today
     @today = Date.today
@@ -298,6 +312,20 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
   end
 
   def beau_list
+    if params.has_key?(:isExcel) && params[:isExcel]
+      history = Privacyaccesshistory.new
+      serial = 1
+      if Privacyaccesshistory.count > 1
+        serial = Privacyaccesshistory.order("id desc").first.id.to_i + 1
+      end
+      user = session[:admin_user]
+      history.id = serial
+      history.adminuser_id = user['id']
+      history.email = user['email']
+      history.ip = session[:ip].to_s
+      history.save
+    end
+
     @start_date = Fcinterview.all.order('uptdate asc').first.uptdate[0,10]
     @end_date = Date.today
     @today = Date.today
@@ -449,6 +477,20 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
   end
 
   def cnpr_list
+    if params.has_key?(:isExcel) && params[:isExcel]
+      history = Privacyaccesshistory.new
+      serial = 1
+      if Privacyaccesshistory.count > 1
+        serial = Privacyaccesshistory.order("id desc").first.id.to_i + 1
+      end
+      user = session[:admin_user]
+      history.id = serial
+      history.adminuser_id = user['id']
+      history.email = user['email']
+      history.ip = session[:ip].to_s
+      history.save
+    end
+
     @start_date = Fctabletinterviewrx.all.order('uptdate asc').first.uptdate[0,10]
     @end_date = Date.today
     @today = Date.today

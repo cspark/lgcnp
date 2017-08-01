@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     delete "admin_logout" => "admin#logout"
     get "access_restriction"  => "admin#access_restriction"
     get "fcmodecnt" => "user#fcmodecnt"
+    get "privacy_access_history" => "privacy#index"
 
     get "user_list"  => "user#index"
     get "users/detail"  => "user#show"

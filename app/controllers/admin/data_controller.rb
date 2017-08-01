@@ -3,6 +3,20 @@ class Admin::DataController < Admin::AdminApplicationController
   before_action :is_admin
 
   def list
+    if params.has_key?(:isExcel) && params[:isExcel]
+      history = Privacyaccesshistory.new
+      serial = 1
+      if Privacyaccesshistory.count > 1
+        serial = Privacyaccesshistory.order("id desc").first.id.to_i + 1
+      end
+      user = session[:admin_user]
+      history.id = serial
+      history.adminuser_id = user['id']
+      history.email = user['email']
+      history.ip = session[:ip].to_s
+      history.save
+    end
+
     @is_admin_init = false
     if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && !params.has_key?(:select_channel)
       @is_admin_init = true
@@ -531,6 +545,20 @@ class Admin::DataController < Admin::AdminApplicationController
   end
 
   def beau_list
+    if params.has_key?(:isExcel) && params[:isExcel]
+      history = Privacyaccesshistory.new
+      serial = 1
+      if Privacyaccesshistory.count > 1
+        serial = Privacyaccesshistory.order("id desc").first.id.to_i + 1
+      end
+      user = session[:admin_user]
+      history.id = serial
+      history.adminuser_id = user['id']
+      history.email = user['email']
+      history.ip = session[:ip].to_s
+      history.save
+    end
+
     @is_admin_init = false
     if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && !params.has_key?(:select_channel)
       @is_admin_init = true
@@ -978,6 +1006,20 @@ class Admin::DataController < Admin::AdminApplicationController
   end
 
   def cnpr_list
+    if params.has_key?(:isExcel) && params[:isExcel]
+      history = Privacyaccesshistory.new
+      serial = 1
+      if Privacyaccesshistory.count > 1
+        serial = Privacyaccesshistory.order("id desc").first.id.to_i + 1
+      end
+      user = session[:admin_user]
+      history.id = serial
+      history.adminuser_id = user['id']
+      history.email = user['email']
+      history.ip = session[:ip].to_s
+      history.save
+    end
+
     @is_admin_init = false
     if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && !params.has_key?(:select_channel)
       @is_admin_init = true

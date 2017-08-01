@@ -1,0 +1,215 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <script>
+      <% search = "" %>
+      $(function () {
+        $(".top-list").css('color', '#9d9d9d');
+        $("#point_privacy_access_history").css('color', 'hotpink');
+
+        <% if !@ch_cd.nil? && @ch_cd != "" %>
+          $('select[id="select_channel"]').val('<%= @ch_cd %>');
+        <% end %>
+
+        <% if !@shop_cd.nil? && @shop_cd != "" && %>
+          document.getElementById("select_shop").value = '<%= @shop_cd %>'
+        <% end %>
+
+        <% if !@search.nil? && @search != "" %>
+          document.getElementById("search").value = decode_utf8('<%= @search %>')
+        <% end %>
+
+        $("#start_date").datepicker({
+            dateFormat: 'yy-mm-dd',
+            dayNamesMin: [
+                '일',
+                '월',
+                '화',
+                '수',
+                '목',
+                '금',
+                '토'
+            ],
+            monthNamesShort: [
+                '1월',
+                '2월',
+                '3월',
+                '4월',
+                '5월',
+                '6월',
+                '7월',
+                '8월',
+                '9월',
+                '10월',
+                '11월',
+                '12월'
+            ],
+            currentText: '오늘 날짜',
+            changeMonth: true
+        });
+        $("#end_date").datepicker({
+            dateFormat: 'yy-mm-dd',
+            dayNamesMin: [
+                '일',
+                '월',
+                '화',
+                '수',
+                '목',
+                '금',
+                '토'
+            ],
+            monthNamesShort: [
+                '1월',
+                '2월',
+                '3월',
+                '4월',
+                '5월',
+                '6월',
+                '7월',
+                '8월',
+                '9월',
+                '10월',
+                '11월',
+                '12월'
+            ],
+            currentText: '오늘 날짜',
+            changeMonth: true
+        });
+        <% if @start_date.nil? %>
+          $("#start_date").datepicker('setDate', '2017-01-25');
+        <% else %>
+          $("#start_date").datepicker('setDate', '<%= @start_date %>');
+        <% end %>
+        $("#end_date").datepicker('setDate', '<%= @end_date %>');
+
+        $("#date_init").click(function(){
+          $("#start_date").datepicker('setDate', '2017-01-25');
+          $("#end_date").datepicker('setDate', '<%= @today %>');
+        });
+
+        $('#submit').click(function(){
+          var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
+
+          url = "/admin/privacy_access_history?search=" + encodeURI(encodeURI($("#search").val()));
+          url += "&select_channel=" +ch_cd
+          url += "&select_shop=" +$("#select_shop").val();
+          url += "&start_date=" +$('#start_date').val() + "&end_date=" + $('#end_date').val();
+
+          location.href = url;
+        });
+
+        $(document).keyup(function (e) {
+          if (e.keyCode == 13){
+            var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
+
+            url = "/admin/privacy_access_history?search=" + encodeURI(encodeURI($("#search").val()));
+            url += "&select_channel=" +ch_cd
+            url += "&select_shop=" +$("#select_shop").val();
+            url += "&start_date=" +$('#start_date').val() + "&end_date=" + $('#end_date').val();
+
+            location.href = url;
+          }
+        });
+      });
+
+      function decode_utf8(s) {
+        return decodeURI(s);
+      }
+    </script>
+    <style>
+    td {
+      width: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0 auto;
+      text-align: center !important;
+    }
+
+    .fixed-table-body {
+      max-height: 431px;
+    }
+
+    .text-center {
+        margin: 0 auto;
+        text-align: center !important;
+    }
+
+    th {
+      margin: 0 auto;
+      text-align: center !important;
+    }
+
+    </style>
+  </head>
+
+  <body>
+    <%= render "admin/header" %>
+    <div style="background: #b1cbbb; padding: 8px;">
+      <p style="float:left; margin-top: 7px;">취급일:&nbsp;</p>
+      <input class="form-control" type="text" id="start_date" style="float:left; width:100px;">
+      <input class="form-control" type="text" id="end_date" style="float:left; width:100px;">
+      <button id="date_init" class="btn btn-primary" style="float:left;">전체</button>
+
+      <p style="float:left; margin-left: 20px; margin-top:7px;">이메일: &nbsp;</p>
+      <input class="form-control" type="text" id="search" placeholder="이메일로 검색" style="float:left; width: 150px;">
+      <p style="float:left; margin-left: 20px; margin-top: 5px;">채널:&nbsp;</p>
+      <select class="form-control" id="select_channel" style="float:left; margin-left: 5px; width:100px;">
+        <option value="ALL">전체</option>
+        <option value="CNP">CNP</option>
+        <option value="CLAB">CNP TEST</option>
+        <option value="CNPR">CNPR</option>
+        <option value="RLAB">CNPR TEST</option>
+        <option value="MART">마트</option>
+        <option value="TMR">NC</option>
+        <option value="BEAU">보떼</option>
+        <option value="LABO">LABO</option>
+        <option value="ONEP">방판</option>
+      </select>
+      <p style="float:left; margin-left: 20px; margin-top: 7px;">매장 코드:&nbsp;</p>
+      <input class="form-control" type="text" id="select_shop" style="float:left; width: 100px;">
+
+      <button style="margin-left: 10px;" class="btn btn-warning" id="submit">조회</button>
+      <p style="float:right; margin-right:20px; margin-top:5px;">
+        Download:
+        <!-- <%= link_to "CSV", admin_user_list_path(format: "csv") %> -->
+        <%= link_to "Excel", admin_privacy_access_history_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
+        :search => @search, :select_channel => @ch_cd, :select_shop => @shop_cd, :isExcel => true) %>
+      </p>
+    </div>
+    <div id="avr" style="background: #eea29a; padding: 8px;">
+      총 인원 수 : <%= @count %> 명<br>
+    </div>
+      <table data-toggle="table">
+        <thead style="width: 100%;">
+          <tr>
+            <th>인덱스</th>
+            <th>관리자 ID</th>
+            <th>이메일</th>
+            <th>IP</th>
+            <th>취급일</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @privacies.each do |privacy| %>
+          <%= render partial: "admin/privacy/item", locals: { privacy: privacy } %>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div>
+        <%= paginate @privacies %>
+      </div>
+  </body>
+</html>

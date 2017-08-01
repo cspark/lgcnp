@@ -51,6 +51,7 @@ class Admin::AdminController < Admin::AdminApplicationController
   def login
     history = LoginHistory.new
     history.email = params[:email]
+    session[:ip] = params[:real_ip] || request.remote_ip
     history.ip = params[:real_ip] || request.remote_ip
     history.created_at = Time.now.to_datetime+10.minutes
     history.save
@@ -73,5 +74,6 @@ class Admin::AdminController < Admin::AdminApplicationController
 
   def logout
     session[:admin_user] = nil
+    session[:ip] = nil
   end
 end
