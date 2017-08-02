@@ -180,6 +180,8 @@ class Api::Tablet::Cnprx::FcdatasController < Api::ApplicationController
     image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Pore_Cust")
     image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Spot_Cust")
     image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Wr_Cust")
+    image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Tr_Cust")
+    image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Ela_Cust")
 
     image_download(serial: serial, measureno: measureno, number: nil, type: "_3D_FM_WH_Forehead")
     image_download(serial: serial, measureno: measureno, number: nil, type: "_3D_FM_WH_LE_Side")
