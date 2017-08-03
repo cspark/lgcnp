@@ -31,6 +31,11 @@ class Admin::ManagerController < Admin::AdminApplicationController
   def create
     admin_user = AdminUser.new(permitted_params)
     admin_user.ch_cd = params[:ch_cd].upcase
+    serial = 1
+    if AdminUser.count > 1
+      serial = AdminUser.count + 1
+    end
+    admin_user.id = serial
 
     if admin_user.save
       render json: {}, status: :ok
