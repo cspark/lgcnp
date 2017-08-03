@@ -20,7 +20,7 @@ wb.add_worksheet(name: "Fcdata") do |sheet|
             end
             userName = tempUserName
           rescue
-            userName = user.custname
+            userName = ""
           end
         else
          userName = ""
