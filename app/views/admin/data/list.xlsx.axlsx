@@ -7,7 +7,7 @@ wb.add_worksheet(name: "Fcdata") do |sheet|
         if !custinfo.nil?
           if !custinfo.custname.nil?
             begin
-              userName = URI.decode(user.custname)
+              userName = URI.decode(custinfo.custname)
               tempUserName = ""
               i = 0
               userName.each_char do |character|

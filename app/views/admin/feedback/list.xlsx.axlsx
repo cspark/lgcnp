@@ -9,7 +9,7 @@ wb.add_worksheet(name: "Feedback") do |sheet|
 
         if !custinfo.custname.nil?
           begin
-            userName = URI.decode(user.custname)
+            userName = URI.decode(custinfo.custname)
             tempUserName = ""
             i = 0
             userName.each_char do |character|
@@ -27,7 +27,7 @@ wb.add_worksheet(name: "Feedback") do |sheet|
             userName = user.custname
           end
         end
-        
+
         if after_interview.order == 0
           order = "당일 설문"
         elsif after_interview.order == 1

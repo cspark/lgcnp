@@ -10,7 +10,7 @@ wb.add_worksheet(name: "Feedback") do |sheet|
 
         if !custinfo.custname.nil?
           begin
-            userName = URI.decode(user.custname)
+            userName = URI.decode(custinfo.custname)
             tempUserName = ""
             i = 0
             userName.each_char do |character|

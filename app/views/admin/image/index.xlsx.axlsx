@@ -5,7 +5,7 @@ wb.add_worksheet(name: "Fcdata") do |sheet|
         custinfo = Custinfo.where(custserial: fcdata.custserial).first
         if !custinfo.custname.nil?
           begin
-            userName = URI.decode(user.custname)
+            userName = URI.decode(custinfo.custname)
             tempUserName = ""
             i = 0
             userName.each_char do |character|
