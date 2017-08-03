@@ -24,7 +24,7 @@ class Admin::PrivacyController < Admin::AdminApplicationController
     Rails.logger.info @end_date
     temp_end_date = @end_date.to_date + 1.day
 
-    scoped = Privacyaccesshistory.all.order("created_at desc")
+    scoped = Privacyaccesshistory.all.order("id desc")
     scoped = scoped.where("email LIKE ?", "%#{@search}%") if !@search.blank?
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.where("to_date(created_at) >= ? AND to_date(created_at) < ?", @start_date.to_date, temp_end_date)

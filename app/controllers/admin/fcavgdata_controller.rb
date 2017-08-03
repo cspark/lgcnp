@@ -9,14 +9,14 @@ class Admin::FcavgdataController < Admin::AdminApplicationController
       if Privacyaccesshistory.count > 1
         serial = Privacyaccesshistory.order("id desc").first.id.to_i + 1
       end
-      user = session[:admin_user]
+      user = session[:admin_user] if session[:admin_user] != "user" && !session[:admin_user].nil?
       history.id = serial
       history.adminuser_id = user['id']
       history.email = user['email']
       history.ip = session[:ip].to_s
       history.save
     end
-    
+
     @select_option = params[:select]
 
     if @select_option.blank?
