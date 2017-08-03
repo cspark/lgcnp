@@ -6,6 +6,22 @@ class Admin::UserController < Admin::AdminApplicationController
   before_action :is_admin
 
   def index
+    # if params.has_key?(:isExcel) && params[:isExcel] && session[:admin_user] != "user"
+    if params.has_key?(:isExcel) && params[:isExcel]
+      history = Privacyaccesshistory.new
+      serial = 1
+      if Privacyaccesshistory.count > 1
+        serial = Privacyaccesshistory.order("id desc").first.id.to_i + 1
+      end
+      user = session[:admin_user]
+      history.id = serial
+      history.adminuser_id = user['id']
+      history.email = user['email']
+      history.ip = session[:ip].to_s
+      history.save
+      Rails.logger.info session[:ip]
+    end
+
     custserial = params[:custserial]
     @custserial = custserial
 
@@ -73,14 +89,6 @@ class Admin::UserController < Admin::AdminApplicationController
     else
       @users = Custinfo.where(ch_cd: @ch_cd)
     end
-
-    Rails.logger.info "user index!!!"
-    Rails.logger.info @ch_cd
-    Rails.logger.info @shop_cd
-    Rails.logger.info @custserial
-    Rails.logger.info @search
-    Rails.logger.info @select_address
-    Rails.logger.info @users.count
 
     @all_users = @users
     @count = @users.count

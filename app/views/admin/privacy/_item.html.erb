@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script>
+        $(function () {
+
+        });
+      </script>
+    </head>
+    <body>
+      <tr class="table_tr" id="<%= privacy.id %>/<%= privacy.email %>">
+        <td class="text-center" style="text-align: center !important;"><%= privacy.id %></td>
+        <td><%= privacy.adminuser_id %></td>
+        <td><%= privacy.email %></td>
+        <td><%= privacy.ip %></td>
+        <td><%= privacy.created_at %></td>
+      </tr>
+    </body>
+</html>

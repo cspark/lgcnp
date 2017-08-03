@@ -92,6 +92,10 @@
           location.href = "/admin/fcmodecnt"
         });
 
+        $("#privacy_access_history").click(function(){
+          location.href = "/admin/privacy_access_history"
+        });
+
         $("#logout").click(function(){
           var formData = new FormData($(this)[0]);
 
@@ -228,6 +232,9 @@
           <% end %>
           <% if session[:admin_user] == "user" %>
             <li><a href="#" class="top-list" id="fcmodecnt">fcmodcnt</a></li>
+          <% end %>
+          <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
+            <li id="privacy_access_history"><a class="top-list" id="point_privacy_access_history" href="#">개인정보 취급 기록</a></li>
           <% end %>
         </ul>
         <ul class="nav navbar-nav navbar-right">
