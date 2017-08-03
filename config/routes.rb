@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     get "access_restriction"  => "admin#access_restriction"
     get "fcmodecnt" => "user#fcmodecnt"
     get "privacy_access_history" => "privacy#index"
-    post "save_privacy_access_image" => "image#save_privacy_access"
+    get "save_privacy_access_image" => "image#save_privacy_access"
 
     get "user_list"  => "user#index"
     get "users/detail"  => "user#show"

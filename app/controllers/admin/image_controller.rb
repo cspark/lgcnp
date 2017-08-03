@@ -2,13 +2,13 @@ class Admin::ImageController < Admin::AdminApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    if params.has_key?(:isExcel) && params[:isExcel]
+    if params.has_key?(:isExcel) && params[:isExcel] && session[:admin_user] != "user" && !session[:admin_user].nil?
       history = Privacyaccesshistory.new
       serial = 1
       if Privacyaccesshistory.count > 1
         serial = Privacyaccesshistory.order("id desc").first.id.to_i + 1
       end
-      user = session[:admin_user] if session[:admin_user] != "user" && !session[:admin_user].nil?
+      user = session[:admin_user]
       history.id = serial
       history.adminuser_id = user['id']
       history.email = user['email']
@@ -404,18 +404,21 @@ class Admin::ImageController < Admin::AdminApplicationController
   end
 
   def save_privacy_access
-    history = Privacyaccesshistory.new
-    serial = 1
-    if Privacyaccesshistory.count > 1
-      serial = Privacyaccesshistory.order("id desc").first.id.to_i + 1
+    if session[:admin_user] != "user" && !session[:admin_user].nil?
+      history = Privacyaccesshistory.new
+      serial = 1
+      if Privacyaccesshistory.count > 1
+        serial = Privacyaccesshistory.order("id desc").first.id.to_i + 1
+      end
+
+      user = session[:admin_user]
+      Rails.logger.info user
+      history.id = serial
+      history.adminuser_id = user['id']
+      history.email = user['email']
+      history.ip = session[:ip].to_s
+      history.save
     end
-    user = session[:admin_user] if session[:admin_user] != "user" && !session[:admin_user].nil?
-    Rails.logger.info user['id']
-    history.id = serial
-    history.adminuser_id = user['id']
-    history.email = user['email']
-    history.ip = session[:ip].to_s
-    history.save
   end
 
   def upload_test

@@ -115,13 +115,13 @@ class Admin::FeedbackController < Admin::AdminApplicationController
   end
 
   def list
-    if params.has_key?(:isExcel) && params[:isExcel]
+    if params.has_key?(:isExcel) && params[:isExcel] && session[:admin_user] != "user" && !session[:admin_user].nil?
       history = Privacyaccesshistory.new
       serial = 1
       if Privacyaccesshistory.count > 1
         serial = Privacyaccesshistory.order("id desc").first.id.to_i + 1
       end
-      user = session[:admin_user] if session[:admin_user] != "user" && !session[:admin_user].nil?
+      user = session[:admin_user]
       history.id = serial
       history.adminuser_id = user['id']
       history.email = user['email']
@@ -453,13 +453,13 @@ class Admin::FeedbackController < Admin::AdminApplicationController
   end
 
   def cnpr_list
-    if params.has_key?(:isExcel) && params[:isExcel]
+    if params.has_key?(:isExcel) && params[:isExcel] && session[:admin_user] != "user" && !session[:admin_user].nil?
       history = Privacyaccesshistory.new
       serial = 1
       if Privacyaccesshistory.count > 1
         serial = Privacyaccesshistory.order("id desc").first.id.to_i + 1
       end
-      user = session[:admin_user] if session[:admin_user] != "user" && !session[:admin_user].nil?
+      user = session[:admin_user]
       history.id = serial
       history.adminuser_id = user['id']
       history.email = user['email']
