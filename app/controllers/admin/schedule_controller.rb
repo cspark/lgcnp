@@ -12,7 +12,6 @@ class Admin::ScheduleController < Admin::AdminApplicationController
       end
       user = session[:admin_user]
       history.id = serial
-      history.adminuser_id = user['id']
       history.email = user['email']
       history.ip = session[:ip].to_s
       history.save

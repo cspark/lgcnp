@@ -10,7 +10,6 @@ class Admin::ImageController < Admin::AdminApplicationController
       end
       user = session[:admin_user]
       history.id = serial
-      history.adminuser_id = user['id']
       history.email = user['email']
       history.ip = session[:ip].to_s
       history.save
@@ -414,7 +413,6 @@ class Admin::ImageController < Admin::AdminApplicationController
       user = session[:admin_user]
       Rails.logger.info user
       history.id = serial
-      history.adminuser_id = user['id']
       history.email = user['email']
       history.ip = session[:ip].to_s
       history.save
