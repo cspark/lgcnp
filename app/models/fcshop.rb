@@ -1,5 +1,6 @@
 class Fcshop < ApplicationRecord
 self.table_name = "fcshop" if Rails.env.production? || Rails.env.staging?
+self.primary_key = :shop_cd, :shop_name if Rails.env.production? || Rails.env.staging?
 
   def to_api_hash
     {
