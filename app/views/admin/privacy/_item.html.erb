@@ -3,15 +3,46 @@
     <head>
       <script>
         $(function () {
-
+          <% if !privacy.category.nil? %>
+            $('#category_<%= privacy.id.to_i %>').html(translate_category('<%= privacy.category %>'));
+          <% else %>
+            $('#category_<%= privacy.id.to_i %>').html("-");
+          <% end %>
         });
+
+        function translate_category(value){
+          try{
+            if(value == "Custinfo")
+              return "고객정보";
+            else if(value == "Feedback")
+              return "피드백 리스트";
+            else if(value == "Fctabletinterview")
+              return "고객 인터뷰";
+            else if(value == "Fcavgdata")
+              return "연령별 성별 평균";
+            else if(value == "Fcdata")
+              return "야누스 측정 데이터";
+            else if(value == "Fcpos")
+              return "야누스 분석 영역 정보";
+            else if(value == "Image User List")
+              return "고객 이미지 엑셀";
+            else if(value == "Image Download")
+              return "고객 이미지 다운로드";
+            else
+              return value;
+
+          }catch(err){
+            console.log(err);
+            return value;
+          }
+        }
       </script>
     </head>
     <body>
       <tr class="table_tr" id="<%= privacy.id %>/<%= privacy.email %>">
         <td class="text-center" style="text-align: center !important;"><%= privacy.id.to_i %></td>
         <td><%= privacy.email %></td>
-        <td><%= privacy.category %></td>
+        <td id="category_<%= privacy.id.to_i %>"></td>
         <td><%= privacy.ip %></td>
         <td><%= privacy.created_at %></td>
       </tr>
