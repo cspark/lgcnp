@@ -170,7 +170,11 @@ class Fcdata < ApplicationRecord
        uf_6: uf_6,
        uf_7: uf_7,
        uf_8: uf_8,
-       uf_avr: uf_avr
+       uf_avr: uf_avr,
+       el_cnt_7: el_cnt_7,
+       el_cnt_8: el_cnt_8,
+       worry_skin_new_1: worry_skin_new_1,
+       worry_skin_new_2: worry_skin_new_2
     }
   end
 
