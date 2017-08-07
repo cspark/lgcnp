@@ -14,6 +14,7 @@ class Admin::DataController < Admin::AdminApplicationController
       history.id = serial
       history.email = user['email']
       history.ip = session[:ip].to_s
+      history.category = "Fcdata"
       history.save
     end
 
@@ -555,6 +556,7 @@ class Admin::DataController < Admin::AdminApplicationController
       history.id = serial
       history.email = user['email']
       history.ip = session[:ip].to_s
+      history.category = "Fcdata"
       history.save
     end
 
@@ -1015,6 +1017,7 @@ class Admin::DataController < Admin::AdminApplicationController
       history.id = serial
       history.email = user['email']
       history.ip = session[:ip].to_s
+      history.category = "Fcdata"
       history.save
     end
 

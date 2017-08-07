@@ -12,6 +12,7 @@ class Admin::ImageController < Admin::AdminApplicationController
       history.id = serial
       history.email = user['email']
       history.ip = session[:ip].to_s
+      history.category = "Image User List"
       history.save
     end
 
@@ -415,6 +416,7 @@ class Admin::ImageController < Admin::AdminApplicationController
       history.id = serial
       history.email = user['email']
       history.ip = session[:ip].to_s
+      history.category = "Image Download"
       history.save
     end
   end

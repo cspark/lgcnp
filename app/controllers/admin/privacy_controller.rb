@@ -19,9 +19,6 @@ class Admin::PrivacyController < Admin::AdminApplicationController
     @start_date = start_date if !start_date.blank?
     @end_date = end_date if !end_date.blank?
 
-    Rails.logger.info "!!!!"
-    Rails.logger.info @start_date
-    Rails.logger.info @end_date
     temp_end_date = @end_date.to_date + 1.day
 
     scoped = Privacyaccesshistory.all.order("id desc")

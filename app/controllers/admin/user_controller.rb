@@ -17,8 +17,8 @@ class Admin::UserController < Admin::AdminApplicationController
       history.id = serial
       history.email = user['email']
       history.ip = session[:ip].to_s
+      history.category = "Custinfo"
       history.save
-      Rails.logger.info session[:ip]
     end
 
     custserial = params[:custserial]

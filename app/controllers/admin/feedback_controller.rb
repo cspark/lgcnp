@@ -125,6 +125,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       history.id = serial
       history.email = user['email']
       history.ip = session[:ip].to_s
+      history.category = "Feedback"
       history.save
     end
 
@@ -462,6 +463,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       history.id = serial
       history.email = user['email']
       history.ip = session[:ip].to_s
+      history.category = "Feedback"
       history.save
     end
 
