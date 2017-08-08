@@ -1,10 +1,9 @@
 class Api::Admin::AdminFcshopController < Api::ApplicationController
   def index
     # 매장 테이블 전체 조회 (* Next 조회 필요)
-
-    list = Fcshop.list(shop_cd: params[:shop_cd], shop_name: params[:shop_name], ch_cd: params[:ch_cd], tel_no: params[:tel_no], address: params[:address])
-    if !list.nil?
-      render json: api_hash_for_list(list), status: :ok
+    shop = Fcshop.list(shop_cd: params[:shop_cd], shop_name: params[:shop_name], ch_cd: params[:ch_cd], tel_no: params[:tel_no], address: params[:address]).first
+    if !shop.nil?
+      render json: shop.to_api_hash, status: :ok
     else
       render :text => "Fail!!!", status: 404
     end
