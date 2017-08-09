@@ -21,7 +21,11 @@
             else
               tempUserName += "*"
           }
-          $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append(tempUserName);
+          if ('<%= @user.ch_cd %>' == "CNP") {
+            $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append(userName);
+          } else {
+              $('#name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append(tempUserName);
+          }
         }
         catch(err)
         {
@@ -43,7 +47,11 @@
             else
               tempPhone += "*"
           }
-          $('#phone_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append(tempPhone);
+          if ('<%= @user.ch_cd %>' == "CNP") {
+            $('#phone_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append(phone);
+          } else {
+              $('#phone_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append(tempPhone);
+          }
         }
         catch(err)
         {
