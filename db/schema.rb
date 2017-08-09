@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170807010756) do
+ActiveRecord::Schema.define(version: 20170809073424) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 20170807010756) do
   end
 
   create_table "fcdata", force: :cascade do |t|
-    t.string   "custserial",                null: false
+    t.string   "custserial",                   null: false
     t.string   "faceno"
     t.string   "measuredate"
     t.integer  "measureno"
@@ -213,9 +213,9 @@ ActiveRecord::Schema.define(version: 20170807010756) do
     t.integer  "skintype"
     t.integer  "score_r"
     t.integer  "score_l"
-    t.integer  "yanus_status",  default: 1
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.integer  "yanus_status",     default: 1
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "ch_cd"
     t.float    "e_sebum_t"
     t.float    "e_sebum_u"
@@ -236,6 +236,10 @@ ActiveRecord::Schema.define(version: 20170807010756) do
     t.integer  "uf_8"
     t.integer  "uf_avr"
     t.string   "age"
+    t.integer  "el_cnt_7"
+    t.integer  "el_cnt_8"
+    t.integer  "worry_skin_new_1"
+    t.integer  "worry_skin_new_2"
   end
 
   create_table "fcgene_interviews", force: :cascade do |t|
@@ -261,6 +265,7 @@ ActiveRecord::Schema.define(version: 20170807010756) do
     t.string   "uptdate"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "q6"
   end
 
   create_table "fcinterviews", force: :cascade do |t|

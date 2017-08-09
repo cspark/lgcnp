@@ -50,26 +50,73 @@
             $('#before_solution_2_new_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>').html("-");
           <% end %>
 
-          $('#before_solution_1_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_solution('<%= tabletinterview.before_solution_1 %>'));
-          $('#before_solution_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_solution('<%= tabletinterview.before_solution_2 %>'));
+          <% if !tabletinterview.before_solution_1.nil? %>
+            $('#before_solution_1_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_solution('<%= tabletinterview.before_solution_1 %>'));
+          <% else %>
+            $('#before_solution_1_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html("");
+          <% end %>
+          <% if !tabletinterview.before_solution_2.nil? %>
+            $('#before_solution_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_solution('<%= tabletinterview.before_solution_2 %>'));
+          <% else %>
+            $('#before_solution_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html("");
+          <% end %>
 
-          $('#after_solution_1_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_solution('<%= tabletinterview.after_solution_1 %>'));
-          $('#after_solution_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_solution('<%= tabletinterview.after_solution_2 %>'));
+          <% if !tabletinterview.after_solution_1.nil? %>
+            $('#after_solution_1_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_solution('<%= tabletinterview.after_solution_1 %>'));
+          <% else %>
+            $('#after_solution_1_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html("");
+          <% end %>
+          <% if !tabletinterview.after_solution_2.nil? %>
+            $('#after_solution_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_solution('<%= tabletinterview.after_solution_2 %>'));
+          <% else %>
+            $('#after_solution_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html("");
+          <% end %>
 
           //세럼 한글 변경
-          $('#before_serum_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_serum('<%= tabletinterview.before_serum %>'));
-          $('#after_serum_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_serum('<%= tabletinterview.after_serum %>'));
+          <% if !tabletinterview.before_serum.nil? %>
+            $('#before_serum_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_serum('<%= tabletinterview.before_serum %>'));
+          <% else %>
+            $('#before_serum_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html("");
+          <% end %>
+          <% if !tabletinterview.before_serum.nil? %>
+            $('#after_serum_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_serum('<%= tabletinterview.after_serum %>'));
+          <% else %>
+            $('#after_serum_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html("");
+          <% end %>
 
           //앰플 한글 변경
-          $('#before_ampoule_1_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_ampoule('<%= tabletinterview.before_ample_1 %>'));
-          $('#after_ampoule_1_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_ampoule('<%= tabletinterview.after_ample_1 %>'));
-          $('#before_ampoule_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_ampoule('<%= tabletinterview.before_ample_2 %>'));
-          $('#after_ampoule_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_ampoule('<%= tabletinterview.after_ample_2 %>'));
+          <% if !tabletinterview.before_ample_1.nil? %>
+            $('#before_ampoule_1_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_ampoule('<%= tabletinterview.before_ample_1 %>'));
+          <% else %>
+            $('#before_ampoule_1_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html("");
+          <% end %>
+          <% if !tabletinterview.after_ample_1.nil? %>
+            $('#after_ampoule_1_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_ampoule('<%= tabletinterview.after_ample_1 %>'));
+          <% else %>
+            $('#after_ampoule_1_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html("");
+          <% end %>
+          <% if !tabletinterview.before_ample_2.nil? %>
+            $('#before_ampoule_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_ampoule('<%= tabletinterview.before_ample_2 %>'));
+          <% else %>
+            $('#before_ampoule_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html("");
+          <% end %>
+          <% if !tabletinterview.after_ample_2.nil? %>
+            $('#after_ampoule_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_ampoule('<%= tabletinterview.after_ample_2 %>'));
+          <% else %>
+            $('#after_ampoule_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html("");
+          <% end %>
 
           //제품 한글 변경
-          $('#before_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_serum('<%= tabletinterview.before_made_cosmetic %>')+ "Ex");
-          $('#after_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_serum('<%= tabletinterview.after_made_cosmetic %>')+ "Ex");
-
+          <% if !tabletinterview.before_made_cosmetic.nil? %>
+            $('#before_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_serum('<%= tabletinterview.before_made_cosmetic %>')+ "Ex");
+          <% else %>
+            $('#before_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html("");
+          <% end %>
+          <% if !tabletinterview.after_made_cosmetic.nil? %>
+            $('#after_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html(translate_serum('<%= tabletinterview.after_made_cosmetic %>')+ "Ex");
+          <% else %>
+            $('#after_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').html("");
+          <% end %>
         });
 
         function decode_utf8(s) {
