@@ -40,7 +40,10 @@ class Api::Tablet::Cnprx::FcdatasController < Api::ApplicationController
 
     face_data = Fcdata.where(custserial: serial).order("measureno asc").last
     measureno = face_data.measureno
-    ch_cd = params[:ch_cd]
+    ch_cd = "CNPR"
+    if params.has_key?(:ch_cd)
+      ch_cd = params[:ch_cd]
+    end
     # face_data = Fcdata.all.first
 
     image_download(serial: serial, ch_cd: ch_cd, measureno: measureno, number: "1", type: "_Sym_L_")
@@ -121,7 +124,10 @@ class Api::Tablet::Cnprx::FcdatasController < Api::ApplicationController
   def face_data_existed
     serial = params[:custserial]
     measureno = params[:measureno]
-    ch_cd = params[:ch_cd]
+    ch_cd = "CNPR"
+    if params.has_key?(:ch_cd)
+      ch_cd = params[:ch_cd]
+    end
 
     face_data = Fcdata.where(custserial: serial).where(measureno: measureno).last
     # face_data = Fcdata.all.first
