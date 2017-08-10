@@ -73,12 +73,6 @@ wb.add_worksheet(name: "Feedback") do |sheet|
           sex = "여"
         end
 
-        if !custinfo.custname.nil?
-         custname = URI.decode(custinfo.custname)
-        else
-         custname = ""
-        end
-
         a4 = "-"
         if after_interview.order != 0
           a4 = after_interview.a4.to_i
@@ -89,7 +83,7 @@ wb.add_worksheet(name: "Feedback") do |sheet|
           shop_cd = fcdata.shop_cd
         end
 
-        sheet.add_row [custname, tabletinterview.custserial.to_i, order, tabletinterview.uptdate, sex, custinfo.age, shop_cd,
+        sheet.add_row [userName, tabletinterview.custserial.to_i, order, tabletinterview.uptdate, sex, custinfo.age, shop_cd,
         after_serum, after_ample_1, after_ample_2, after_interview.a1.to_i, after_interview.a1_1, after_interview.a2.to_i, after_interview.a3.to_i, a4, after_interview.a5]
     end
 end

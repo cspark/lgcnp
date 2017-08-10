@@ -64,6 +64,7 @@
     </head>
     <body>
       <% custinfo = Custinfo.where(custserial: fcdata.custserial).first %>
+      <% interview = FcgeneInterview.where(custserial: fcdata.custserial).where(measureno: fcdata.measureno).first %>
       <tr class="table_tr text-center" id="<%= fcdata.custserial.to_i %>/<%= fcdata.measureno %>">
         <td><%= fcdata.custserial.to_i %></td>
         <td id="name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno.to_i %>"></td>
@@ -72,6 +73,11 @@
         <td><%= fcdata.faceno %></td>
         <td><%= fcdata.measuredate %></td>
         <td><%= fcdata.uptdate %></td>
+        <% if (fcdata.ch_cd == "BEAU" || fcdata.ch_cd == "TMR" || fcdata.ch_cd == "MART" || fcdata.ch_cd == "LABO" || fcdata.ch_cd == "ONEP") && !interview.nil? %>
+          <td><%= interview.gene_barcode %></td>
+        <% else %>
+          <td>-</td>
+        <% end %>
         <% if @select_filter != [] %>
           <% @select_filter.each do |filter| %>
             <td><%= fcdata[filter] %></td>
