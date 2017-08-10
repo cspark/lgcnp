@@ -97,9 +97,9 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
     tabletinterview.uptdate = t.strftime("%Y-%m-%d-%H-%M")
     tabletinterview.is_agree_after = "T"
 
-    user = Custinfo.where(custserial: tabletinterview.custserial).first
-    if !user.nil?
-      tabletinterview.ch_cd = user.ch_cd
+    ch_cd = "CNPR"
+    if !params.has_key?(:ch_cd)
+      tabletinterview.ch_cd = ch_cd
     end
 
     if tabletinterview.save
@@ -123,13 +123,6 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
     Rails.logger.info params[:tablet_interview_id]
     existed_interview = Fctabletinterviewrx.where(tablet_interview_id: params[:tablet_interview_id]).last
     if existed_interview.update(permitted_param)
-      user = Custinfo.where(custserial: existed_interview.custserial).first
-      if !user.nil?
-        existed_interview.ch_cd = user.ch_cd
-        existed_interview.save
-
-      end
-
       render json: existed_interview.to_api_hash, status: :ok
     else
       render json: "", status: 404
@@ -378,7 +371,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   end
 
   def permitted_param
-    permitted = params.permit(:custserial, :tablet_interview_id, :a_1,:a_2,:a_3,:b_1,:b_2,:b_3,:b_4,:b_5,:b_6,:c_1,:d_1,:d_2,:d_3,:d_4,:d_5,:d_6,:d_7,:d_8,:d_9,:d_10,:d_11,
+    permitted = params.permit(:custserial, :ch_cd, :tablet_interview_id, :a_1,:a_2,:a_3,:b_1,:b_2,:b_3,:b_4,:b_5,:b_6,:c_1,:d_1,:d_2,:d_3,:d_4,:d_5,:d_6,:d_7,:d_8,:d_9,:d_10,:d_11,
     :skin_type,:before_solution_1,:after_solution_1,:before_solution_2,:after_solution_2, :before_production, :after_production,
     :before_ample_1,:after_ample_1,:before_ample_2,:after_ample_2,:uptdate,:is_agree_after,:mmode,:brefore_production,:after_production,:bb_base,
     :before_cushion_1,:after_cushion_1,:before_cushion_2,:after_cushion_2,:fcdata_id,:is_agree_cant_refund,:turnover_value,:corneous_value,:stress_value,:bb_base_before,:bb_base_after,
