@@ -27,7 +27,7 @@ wb.add_worksheet(name: "Fcdata") do |sheet|
        userName = ""
       end
 
-      sheet.add_row [interview.custserial.to_i, userName, interview.gene_barcode.to_s, interview.ch_cd, interview.measureno.to_i, interview.shop_cd, interview.q1_height, interview.q1_weight, interview.q2, interview.q3,
+      sheet.add_row [interview.custserial.to_i, userName, interview.gene_barcode.to_i, interview.ch_cd, interview.measureno.to_i, interview.shop_cd, interview.q1_height, interview.q1_weight, interview.q2, interview.q3,
       interview.q4, interview.q5, interview.q6, interview.q7, interview.q8, interview.q9, interview.q10, interview.q11, interview.q12, interview.q13, interview.q14,
       interview.uptdate, custinfo.birthyy+"-"+custinfo.birthmm+"-"+custinfo.birthdd, custinfo.sex, custinfo.age]
     end
