@@ -48,6 +48,10 @@
           location.href = "/admin/beau_interview"
         });
 
+        $("#gene_interview_list").click(function(){
+          location.href = "/admin/geneinterview"
+        });
+
         $("#fcavg_list").click(function(){
           location.href = "/admin/fcavg_list"
         });
@@ -209,6 +213,10 @@
               <% end %>
             </div>
           </li>
+          <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
+          <li class="dropdown dropbtn"><a class="top-list" id="gene_interview_list" href="#">유전자 진단</a>
+          </li>
+          <% end %>
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
           <li id="fcavg_list"><a class="top-list" id="point_avg_list" href="#">연령별 성별 평균</a></li>
           <li class="dropdown dropbtn"><a class="top-list" id="point_data_list" href="#">야누스 측정 데이터</a>

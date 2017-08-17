@@ -4,23 +4,23 @@ class GenerateTestModel < ApplicationRecord
 
   def self.generate_test_custinfo
     c = Custinfo.new
-    c.custserial = "11"
-    c.n_cust_id = "11"
-    c.custname = "망고"
-    c.sex = "M"
-    c.birthyy = "2000"
-    c.birthmm = "07"
-    c.birthdd = "03"
-    c.age = "18"
+    c.custserial = "2"
+    c.n_cust_id = "2"
+    c.custname = "%EA%B9%80%ED%9D%AC%EC%A0%95"
+    c.sex = "F"
+    c.birthyy = "1985"
+    c.birthmm = "12"
+    c.birthdd = "16"
+    c.age = "33"
     c.phone = "0123456789"
-    c.lastanaldate = "2017-01-15-18-00"
+    c.lastanaldate = "2017-08-08-18-00"
     c.measureno = "1"
-    c.uptdate = "2017/01/15"
+    c.uptdate = "2017/08/08"
     c.is_agree_privacy = "T"
     c.is_agree_after = "T"
     c.is_agree_marketing = "T"
     c.is_agree_thirdparty_info = "T"
-    c.ch_cd = "CNP"
+    c.ch_cd = "BEAU"
     c.save
   end
 
@@ -155,12 +155,12 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        f = Fcdata.new
-       f.custserial = 4.to_s
-       f.ch_cd = "RLAB"
+       f.custserial = 2.to_s
+       f.ch_cd = "BEAU"
        f.faceno = "F"
-       f.measuredate = "2017-04-21-13-00-00"
-       f.measureno = 1
-       f.uptdate = "2017-04-21"
+       f.measuredate = "2017-08-08-18-00-00"
+       f.measureno = 2
+       f.uptdate = "2017-08-08"
        f.mo_1 = 1.0
        f.mo_7 = 1.0
        f.mo_8 = 1.0
@@ -249,9 +249,9 @@ class GenerateTestModel < ApplicationRecord
        f.score_r = 1
        f.score_l = 1
        f.m_skintype = 1
-       f.shop_cd = "1005"
-       worry_skin_1 = 1
-       worry_skin_2 = 1
+       f.shop_cd = "505415"
+       f.worry_skin_1 = "1"
+       f.worry_skin_2 = "2"
        f.save
        i +=1;
     end
@@ -584,6 +584,32 @@ class GenerateTestModel < ApplicationRecord
     stat = Sys::Filesystem.stat("/dev/mapper/DATAVG-lv_data")
     mb_available = stat.block_size * stat.blocks_available / 1024 / 1024
     return mb_available
+  end
+
+  def self.generate_test_fcgene_interviews
+    f = FcgeneInterview.new
+    f.custserial = 2.to_s
+    f.gene_barcode = "0000000000002"
+    f.ch_cd = "BEAU"
+    f.measureno = 1
+    f.shop_cd = "505415"
+    f.q1_height = "165"
+    f.q1_weight = "50"
+    f.q2 = "1"
+    f.q3 = "2"
+    f.q4 = "3"
+    f.q5 = "1"
+    f.q6 = "2"
+    f.q7 = "3"
+    f.q8 = "1"
+    f.q9 = "2"
+    f.q10 = "3"
+    f.q11 = "1"
+    f.q12 = "2"
+    f.q13 = "3"
+    f.q13 = "1"
+    f.uptdate = "2017-08-08"
+    f.save
   end
 
 end

@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+    $ (function () {
+        <% user = Custinfo.where(custserial: @interview.custserial).first %>
+        try
+        {
+          var userName = decode_utf8('<%= user.custname %>')
+          tempUserName = ""
+          for(var i = 0; i < userName.length; i++){
+            if(i == 0)
+              tempUserName += userName.slice(0, 1)
+            else if(i == userName.length - 1)
+              tempUserName += userName.slice(userName.length - 1, userName.length)
+            else
+              tempUserName += "*"
+          }
+          $('#name_<%= @interview.custserial.to_i %>_<%= @interview.ch_cd %>_<%= @interview.measureno.to_i %>').append(tempUserName);
+        }
+        catch(err)
+        {
+          $('#name_<%= @interview.custserial.to_i %>_<%= @interview.ch_cd %>_<%= @interview.measureno.to_i %>').append('<%= user.custname %>');
+        }
+      });
+
+      function decode_utf8(s) {
+        return decodeURI(s);
+      }
+
+    </script>
+  </head>
+
+  <body style="padding: 10px;">
+    <% custinfo = Custinfo.where(custserial: @interview.custserial).first %>
+
+    <h2>고객정보</h2>
+    <font size="5"><b><div id="name_<%= @interview.custserial.to_i %>_<%= @interview.ch_cd %>_<%= @interview.measureno.to_i %>"></div></b></font>
+    <div><font size="4">
+      <b>고객번호</b> <%= @interview.custserial.to_i %><br>
+      <b>유전자 바코드</b> <%= @interview.gene_barcode.to_s %><br>
+      <b>채널코드</b> <%= @interview.ch_cd %><br>
+      <b>야누스 측정 횟수</b> <%= @interview.measureno.to_i %><br>
+      <b>매장 코드</b> <%= @interview.shop_cd %><br>
+      <b>설문1(키)</b> <%= @interview.q1_height %><br>
+      <b>설문1(몸무게)</b> <%= @interview.q1_weight %><br>
+      <b>설문2</b> <%= @interview.q2 %><br>
+      <b>설문3</b> <%= @interview.q3 %><br>
+      <b>설문4</b> <%= @interview.q4 %><br>
+      <b>설문5</b> <%= @interview.q5 %><br>
+      <b>설문6</b> <%= @interview.q6 %><br>
+      <b>설문7</b> <%= @interview.q7 %><br>
+      <b>설문8</b> <%= @interview.q8 %><br>
+      <b>설문9</b> <%= @interview.q9 %><br>
+      <b>설문10</b> <%= @interview.q10 %><br>
+      <b>설문11</b> <%= @interview.q11 %><br>
+      <b>설문12</b> <%= @interview.q12 %><br>
+      <b>설문13</b> <%= @interview.q13 %><br>
+      <b>설문14</b> <%= @interview.q14 %><br>
+      <b>유전자 진단날짜</b> <%= @interview.uptdate %><br>
+      <b>생년월일</b> <%= custinfo.birthyy %>-<%= custinfo.birthmm %>-<%= custinfo.birthdd %><br>
+      <b>성별</</b> <%= custinfo.sex %><br>
+      <b>나이</b> <%= custinfo.age %><br>
+    </font>
+  </body>
+</html>

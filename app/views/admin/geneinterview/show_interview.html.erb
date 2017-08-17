@@ -1,0 +1,101 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+      $ (function () {
+
+      });
+
+      function decode_utf8(s) {
+        return decodeURI(s);
+      }
+
+    </script>
+  </head>
+
+  <body style="padding: 10px;">
+    <div style="display:inline;">
+      <h2 style="float:left; width:80%; margin-left:20px;">유전자 진단 설문 문항</h2><br>
+    </div><br><br><br>
+    <div style="margin-left:20px;">
+      <font>1. 키와 몸무게 정보를 입력해주세요.</font><br>
+      <font>키 : (    )cm</font><br>
+      <font>몸무게 : (    )kg</font><br><br>
+
+      <font>2. 폐경 여부에 대해 선택하여 주세요.</font><br>
+      <font>네 ( )</font><br>
+      <font>아니오 ( )</font><br><br>
+
+      <font>3. 아래 항목을 진단 받으신 적이 있는지 선택하여 주세요.</font><br>
+      <font>심장질환 있음( ) 없음( )   고혈압 있음( ) 없음( )</font><br>
+      <font>고지혈증 있음( ) 없음( )   지방간 있음( ) 없음( )</font><br>
+      <font>신장질환 있음( ) 없음( )   당뇨 있음( ) 없음( )</font><br>
+      <font>암 있음( ) 없음( )</font><br><br>
+
+      <font>4. 평균적으로 하루에 햇빛에 노출되는 정도를 선택하여 주세요.</font><br>
+      <font>① 실외생활 위주의 장시간(3시간 이상)노출</font><br>
+      <font>② 잦은 이동에 따른 일상적 노출</font><br>
+      <font>③ 실내생활 위주의 단시간(1시간 미만) 노출</font><br><br>
+
+      <font>5. 평상시 외출시 자외선 차단제는 바르고 계신가요?</font><br>
+      <font>① 전혀 사용하지 않음</font><br>
+      <font>② 가끔 사용</font><br>
+      <font>③ 항상 사용</font><br><br>
+
+      <font>6. 일주일에 야외활동(이동, 운동 등)을 얼마나 하시나요?</font><br>
+      <font>① 실외 활동 및 운동 자주 하는 편(3회 이상)</font><br>
+      <font>② 주말 중심으로 야외활동 하는 편</font><br>
+      <font>③ 거의 하지 않음</font><br><br>
+
+      <font>7. 하루 평균 물(음료, 커피 제외)을 얼마나 마시나요? (머그컵 250 mL 기준)</font><br>
+      <font>① 물을 거의 마시지 않음</font><br>
+      <font>② 갈증이 날 때만 마</font><br>
+      <font>③ 수시로 마심(1일 6잔 이상)</font><br><br>
+
+      <font>8. 일주일에 술을 얼마나 자주 마시나요?</font><br>
+      <font>① 수시로 과량 마시는 편(3회 이상)</font><br>
+      <font>② 가끔 마심 (1회 이하)</font><br>
+      <font>③ 마시지 않음</font><br><br>
+
+      <font>9. 흡연을 하시나요?</font><br>
+      <font>① 습관적 흡연(지속적으로 흡연)</font><br>
+      <font>② 간헐적 흡연(생각날때마다 흡연) </font><br>
+      <font>③ 비흡연</font><br><br>
+
+      <font>10. 하루에 평균 몇 시간 정도 수면을 취하시나요?</font><br>
+      <font>① 3~4시간</font><br>
+      <font>② 5~6시간</font><br>
+      <font>③ 7~8시간</font><br>
+      <font>④ 9시간 이상</font><br><br>
+
+      <font>11. 당신은 아침형 사람, 저녁형 사람 중에 어디에 속하시나요?</font><br>
+      <font>① 확실히 저녁형 (오전중의 작업 효율이 낮다)</font><br>
+      <font>② 저녁형에 가까움</font><br>
+      <font>③ 아침형에 가까움</font><br>
+      <font>④ 확실히 아침형 (취침과·기상시각이 거의 일정하다) </font><br><br>
+
+      <font>12. 육식 위주의 식사를 하시나요? </font><br>
+      <font>① 일주일에 4회 이상</font><br>
+      <font>② 일주일에 2-3회</font><br>
+      <font>③ 일주일에 1회</font><br>
+      <font>④ 전혀 하지 않음(채식주의자의 경우)</font><br><br>
+
+      <font>13. 일주일에 기름진 음식을 얼마나 드시나요?</font><br>
+      <font>① 대체로 그러함</font><br>
+      <font>② 보통</font><br>
+      <font>③ 거의 하지 않음</font><br>
+      <font>④ 전혀 하지 않음</font><br><br>
+
+      <font>14. 평소에 비타민이 함유된 영양제나 과일을 챙겨서 드시나요?</font><br>
+      <font>① 거의 먹지 않음</font><br>
+      <font>② 영양제는 먹지 않고 과일 위주로 섭취함</font><br>
+      <font>③ 규칙적으로 영양제를 섭취함</font><br><br>
+    </div><br>
+  </body>
+</html>
