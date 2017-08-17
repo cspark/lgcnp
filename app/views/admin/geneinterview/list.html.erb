@@ -298,10 +298,10 @@
 
         <p style="float:right; margin-right:20px; margin-top:10px;">
           Download:
-          <%= link_to "Excel", admin_data_list_beau_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
+          <%= link_to "Excel", admin_geneinterview_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
           :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial,
           :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
-          :select_channel => @ch_cd, :select_shop => @shop_cd, :isExcel => true) %>
+          :select_channel => @ch_cd, :select_shop => @shop_cd, :gene_barcode => @gene_barcode, :isExcel => true) %>
         </p>
       </div><br><br>
 
