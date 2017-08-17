@@ -155,17 +155,6 @@
           document.getElementById("gene_barcode").value = '<%= @gene_barcode %>'
         <% end %>
 
-        <% if !@start_age.nil? %>
-          document.getElementById("start_age").value = '<%= @start_age %>'
-        <% else %>
-          document.getElementById("start_age").value = '<%= @min_age %>'
-        <% end %>
-        <% if !@end_age.nil? %>
-          document.getElementById("end_age").value = '<%= @end_age %>'
-        <% else %>
-          document.getElementById("end_age").value = '<%= @max_age %>'
-        <% end %>
-
         $("#date_init").click(function(){
           $("#start_date").datepicker('setDate', '2017-01-25');
           $("#end_date").datepicker('setDate', '<%= @today %>');
