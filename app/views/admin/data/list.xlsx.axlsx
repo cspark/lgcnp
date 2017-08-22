@@ -3,6 +3,7 @@ wb.add_worksheet(name: "Fcdata") do |sheet|
     sheet.add_row @excel_name
     @fcdatas_excel.each do |fcdata|
         custinfo = Custinfo.where(custserial: fcdata.custserial).first
+
         custname = ""
         if !custinfo.nil?
           if !custinfo.custname.nil?
@@ -28,6 +29,8 @@ wb.add_worksheet(name: "Fcdata") do |sheet|
            userName = ""
           end
 
+          gene_barcode = "-"
+
           temp = [fcdata.custserial.to_i, userName, fcdata.measureno.to_i, fcdata.ch_cd, fcdata.faceno, fcdata.measuredate, fcdata.uptdate]
           if @select_filter != []
             @select_filter.each do |filter|
@@ -35,7 +38,7 @@ wb.add_worksheet(name: "Fcdata") do |sheet|
             end
             sheet.add_row temp
           else
-            sheet.add_row [fcdata.custserial.to_i, userName, fcdata.measureno.to_i, fcdata.ch_cd, fcdata.faceno, fcdata.measuredate, fcdata.uptdate, fcdata.mo_1, fcdata.mo_7, fcdata.mo_8,
+            sheet.add_row [fcdata.custserial.to_i, userName, Date.current.year - custinfo.birthyy.to_i - 1, custinfo.sex, gene_barcode, custinfo.birthyy+"-"+custinfo.birthmm+"-"+custinfo.birthdd, fcdata.measureno.to_i, fcdata.ch_cd, fcdata.faceno, fcdata.measuredate, fcdata.uptdate, fcdata.mo_1, fcdata.mo_7, fcdata.mo_8,
             fcdata.pr_1.to_i, fcdata.pr_2.to_i, fcdata.pr_7.to_i, fcdata.pr_8.to_i, fcdata.pr_avr.to_i, fcdata.wr_3.to_i, fcdata.wr_4.to_i, fcdata.wr_5.to_i, fcdata.wr_6.to_i, fcdata.wr_avr.to_i,
             fcdata.el_7.to_i, fcdata.el_8.to_i, fcdata.el_avr.to_i, fcdata.el_angle_7, fcdata.el_angle_8, fcdata.sb_1.to_i, fcdata.sb_2.to_i, fcdata.sb_7.to_i, fcdata.sb_8.to_i,
             fcdata.sb_avr.to_i, fcdata.pp_1.to_i, fcdata.pp_2.to_i, fcdata.pp_7.to_i, fcdata.pp_8.to_i, fcdata.pp_avr.to_i, fcdata.pp_ratio_1.to_i, fcdata.pp_ratio_2.to_i, fcdata.pp_ratio_7.to_i, fcdata.pp_ratio_8.to_i,

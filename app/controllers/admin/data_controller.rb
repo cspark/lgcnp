@@ -143,8 +143,8 @@ class Admin::DataController < Admin::AdminApplicationController
       min_age_custinfo = Custinfo.where(ch_cd: "CNP").where.not(birthyy: nil).order("birthyy desc").first
       max_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy asc").first
     end
-    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
-    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
     @min_birthyy = min_age_custinfo.birthyy
     @max_birthyy = max_age_custinfo.birthyy
     @min_birthmm = 1
@@ -215,7 +215,7 @@ class Admin::DataController < Admin::AdminApplicationController
     Rails.logger.info scoped.count
 
     if @select_filter == []
-      @excel_name = ["시리얼","이름","분석 횟수","채널","측정 부위","진단 날짜","업데이트 일","수분 측정 이마","수분 측정 우측 볼","수분 측정 좌측 볼","모공 측정 이마","모공 측정 코","모공 측정 우측 볼","모공 측정 좌측 볼","모공 측정 평균","주름 측정 우측 눈옆", "주름 측정 우측 눈밑", "주름 측정 좌측 눈옆","주름 측정 좌측 눈밑", "주름 측정 평균",
+      @excel_name = ["시리얼","이름","측정 당시 만 나이","성별","바코드","생년월일","분석 횟수","채널","측정 부위","진단 날짜","업데이트 일","수분 측정 이마","수분 측정 우측 볼","수분 측정 좌측 볼","모공 측정 이마","모공 측정 코","모공 측정 우측 볼","모공 측정 좌측 볼","모공 측정 평균","주름 측정 우측 눈옆", "주름 측정 우측 눈밑", "주름 측정 좌측 눈옆","주름 측정 좌측 눈밑", "주름 측정 평균",
       "탄력 측정 우측 볼", "탄력 측정 좌측 볼", "탄력 측정 평균", "탄력 각도 우측 볼", "탄력 각도 좌측 볼", "피지 개수 이마", "피지 개수 코", "피지 개수 우측 볼", "피지 개수 좌측 볼", "피지 개수 평균", "포피린 개수 이마", "포피린 개수 코", "포피린 개수 우측 볼", "포피린 개수 좌측 볼", "포피린 개수 평균",
       "포피린 비 이마", "포피린 비 코", "포피린 비 우측 볼", "포피린 비 좌측 볼", "포피린 비 평균", "편광 색소침착 측정 이마", "편광 색소침착 측정 코", "편광 색소침착 측정 우측 눈옆", "편광 색소침착 측정 우측 눈밑", "편광 색소침착 측정 좌측 눈옆", "편광 색소침착 측정 좌측 눈밑", "편광 색소침착 측정 우측 볼",
       "편광 색소침착 측정 좌측 볼", "편광 색소침착 측정 평균",
@@ -225,7 +225,7 @@ class Admin::DataController < Admin::AdminApplicationController
       "피부톤 Blue 이마","피부톤 Blue 코","피부톤 Blue 우측 눈밑","피부톤 Blue 좌측 눈밑","피부톤 Blue 우측 볼","피부톤 Blue 좌측 볼","피부톤 Blue 평균","피부색 L 값","피부색 a 값","피부색 b 값","피지 E 값 (T 존)","피지 E 값 (U 존)","피부톤","선 민감도","피부타입(야누스 측정)","피부타입(설문 로직)","동안각도 점수 우측","동안각도 점수 좌측",
       "포피린 E 값(T존)","포피린 E 값(U존)","매장코드"]
     else
-      @excel_name = ["시리얼","이름","분석 횟수","채널","측정 부위","진단 날짜","업데이트 일"]
+      @excel_name = ["시리얼","이름","측정 당시 만 나이","성별","바코드","생년월일","분석 횟수","채널","측정 부위","진단 날짜","업데이트 일"]
       @select_filter.each do |filter|
         if filter.include?("mo_1")
           filter = "수분 측정 이마"
@@ -454,7 +454,7 @@ class Admin::DataController < Admin::AdminApplicationController
         end
 
         if !@start_age.blank? && !@end_age.blank?
-          temp_age = Time.current.year.to_i - custinfo.birthyy.to_i + 1
+          temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
           if temp_age < @start_age.to_i || temp_age > @end_age.to_i
             is_contain = false
           end
@@ -666,8 +666,14 @@ class Admin::DataController < Admin::AdminApplicationController
       min_age_custinfo = Custinfo.where(ch_cd: "BEAU").where.not(birthyy: nil).order("birthyy desc").first
       max_age_custinfo = Custinfo.where(ch_cd: "BEAU").order("birthyy asc").first
     end
-    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
-    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+
+    if min_age_custinfo.nil?
+      min_age_custinfo = Custinfo.where.not(birthyy: nil).order("birthyy desc").first
+      max_age_custinfo = Custinfo.order("birthyy asc").first
+    end
+
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
     @min_birthyy = min_age_custinfo.birthyy
     @max_birthyy = max_age_custinfo.birthyy
     @min_birthmm = 1
@@ -742,7 +748,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     if @select_filter == []
-      @excel_name = ["시리얼","이름","분석 횟수","채널","측정 부위","진단 날짜","업데이트 일","수분 측정 이마","수분 측정 우측 볼","수분 측정 좌측 볼","모공 측정 이마","모공 측정 코","모공 측정 우측 볼","모공 측정 좌측 볼","모공 측정 평균","주름 측정 우측 눈옆", "주름 측정 우측 눈밑", "주름 측정 좌측 눈옆","주름 측정 좌측 눈밑", "주름 측정 평균",
+      @excel_name = ["시리얼","이름","측정 당시 만 나이","성별","바코드","생년월일","분석 횟수","채널","측정 부위","진단 날짜","업데이트 일","수분 측정 이마","수분 측정 우측 볼","수분 측정 좌측 볼","모공 측정 이마","모공 측정 코","모공 측정 우측 볼","모공 측정 좌측 볼","모공 측정 평균","주름 측정 우측 눈옆", "주름 측정 우측 눈밑", "주름 측정 좌측 눈옆","주름 측정 좌측 눈밑", "주름 측정 평균",
       "탄력 측정 우측 볼", "탄력 측정 좌측 볼", "탄력 측정 평균", "탄력 각도 우측 볼", "탄력 각도 좌측 볼", "피지 개수 이마", "피지 개수 코", "피지 개수 우측 볼", "피지 개수 좌측 볼", "피지 개수 평균", "포피린 개수 이마", "포피린 개수 코", "포피린 개수 우측 볼", "포피린 개수 좌측 볼", "포피린 개수 평균",
       "포피린 비 이마", "포피린 비 코", "포피린 비 우측 볼", "포피린 비 좌측 볼", "포피린 비 평균", "편광 색소침착 측정 이마", "편광 색소침착 측정 코", "편광 색소침착 측정 우측 눈옆", "편광 색소침착 측정 우측 눈밑", "편광 색소침착 측정 좌측 눈옆", "편광 색소침착 측정 좌측 눈밑", "편광 색소침착 측정 우측 볼", "편광 색소침착 측정 좌측 볼", "편광 색소침착 측정 평균",
       "UV광 색소침착 측정 이마", "UV광 색소침착 측정 코", "UV광 색소침착 측정 우측 눈옆","UV광 색소침착 측정 우측 눈밑","UV광 색소침착 측정 좌측 눈옆","UV광 색소침착 측정 좌측 눈밑","UV광 색소침착 측정 우측 볼","UV광 색소침착 측정 좌측 볼","UV광 색소침착 측정 평균","피부톤 측정 이마","피부톤 측정 코","피부톤 측정 우측 눈밑","피부톤 측정 좌측 눈밑","피부톤 측정 우측 볼","피부톤 측정 좌측 볼","피부톤 측정 평균",
@@ -750,7 +756,7 @@ class Admin::DataController < Admin::AdminApplicationController
       "피부톤 Blue 이마","피부톤 Blue 코","피부톤 Blue 우측 눈밑","피부톤 Blue 좌측 눈밑","피부톤 Blue 우측 볼","피부톤 Blue 좌측 볼","피부톤 Blue 평균","피부색 L 값","피부색 a 값","피부색 b 값","피지 E 값 (T 존)","피지 E 값 (U 존)","피부톤","선 민감도","피부타입(야누스 측정)","피부타입(설문 로직)","동안각도 점수 우측","동안각도 점수 좌측",
       "포피린 E 값(T존)","포피린 E 값(U존)","매장코드","피부고민 1순위","피부고민 2순위"]
     else
-      @excel_name = ["시리얼","이름","분석 횟수","채널","측정 부위","진단 날짜","업데이트 일"]
+      @excel_name = ["시리얼","이름","측정 당시 만 나이","성별","바코드","생년월일","분석 횟수","채널","측정 부위","진단 날짜","업데이트 일"]
       @select_filter.each do |filter|
         if filter.include?("mo_1")
           filter = "수분 측정 이마"
@@ -969,7 +975,7 @@ class Admin::DataController < Admin::AdminApplicationController
       end
 
       if !@start_age.blank? && !@end_age.blank?
-        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i + 1
+        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
         if temp_age < @start_age.to_i || temp_age > @end_age.to_i
           is_contain = false
         end
@@ -1146,12 +1152,13 @@ class Admin::DataController < Admin::AdminApplicationController
       min_age_custinfo = Custinfo.where(ch_cd: "CNPR").where.not(birthyy: nil).order("birthyy desc").first
       max_age_custinfo = Custinfo.where(ch_cd: "CNPR").order("birthyy asc").first
     end
-    # @min_age = 14
-    # @max_age = 100
-    # @min_birthyy = 2000
-    # @max_birthyy = 1900
-    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
-    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+
+    if min_age_custinfo.nil?
+      min_age_custinfo = Custinfo.where.not(birthyy: nil).order("birthyy desc").first
+      max_age_custinfo = Custinfo.order("birthyy asc").first
+    end
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
     @min_birthyy = min_age_custinfo.birthyy
     @max_birthyy = max_age_custinfo.birthyy
     @min_birthmm = 1
@@ -1226,7 +1233,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     if @select_filter == []
-      @excel_name = ["시리얼","이름","분석 횟수","채널","측정 부위","진단 날짜","업데이트 일","수분 측정 이마","수분 측정 우측 볼","수분 측정 좌측 볼","모공 측정 이마","모공 측정 코","모공 측정 우측 볼","모공 측정 좌측 볼","모공 측정 평균","주름 측정 우측 눈옆", "주름 측정 우측 눈밑", "주름 측정 좌측 눈옆","주름 측정 좌측 눈밑", "주름 측정 평균",
+      @excel_name = ["시리얼","이름","측정 당시 만 나이","성별","바코드","생년월일","분석 횟수","채널","측정 부위","진단 날짜","업데이트 일","수분 측정 이마","수분 측정 우측 볼","수분 측정 좌측 볼","모공 측정 이마","모공 측정 코","모공 측정 우측 볼","모공 측정 좌측 볼","모공 측정 평균","주름 측정 우측 눈옆", "주름 측정 우측 눈밑", "주름 측정 좌측 눈옆","주름 측정 좌측 눈밑", "주름 측정 평균",
       "탄력 측정 우측 볼", "탄력 측정 좌측 볼", "탄력 측정 평균", "탄력 각도 우측 볼", "탄력 각도 좌측 볼", "피지 개수 이마", "피지 개수 코", "피지 개수 우측 볼", "피지 개수 좌측 볼", "피지 개수 평균", "포피린 개수 이마", "포피린 개수 코", "포피린 개수 우측 볼", "포피린 개수 좌측 볼", "포피린 개수 평균",
       "포피린 비 이마", "포피린 비 코", "포피린 비 우측 볼", "포피린 비 좌측 볼", "포피린 비 평균", "편광 색소침착 측정 이마", "편광 색소침착 측정 코", "편광 색소침착 측정 우측 눈옆", "편광 색소침착 측정 우측 눈밑", "편광 색소침착 측정 좌측 눈옆", "편광 색소침착 측정 좌측 눈밑", "편광 색소침착 측정 우측 볼", "편광 색소침착 측정 좌측 볼", "편광 색소침착 측정 평균",
       "UV광 색소침착 측정 이마", "UV광 색소침착 측정 코", "UV광 색소침착 측정 우측 눈옆","UV광 색소침착 측정 우측 눈밑","UV광 색소침착 측정 좌측 눈옆","UV광 색소침착 측정 좌측 눈밑","UV광 색소침착 측정 우측 볼","UV광 색소침착 측정 좌측 볼","UV광 색소침착 측정 평균","피부톤 측정 이마","피부톤 측정 코","피부톤 측정 우측 눈밑","피부톤 측정 좌측 눈밑","피부톤 측정 우측 볼","피부톤 측정 좌측 볼","피부톤 측정 평균",
@@ -1234,7 +1241,7 @@ class Admin::DataController < Admin::AdminApplicationController
       "피부톤 Blue 이마","피부톤 Blue 코","피부톤 Blue 우측 눈밑","피부톤 Blue 좌측 눈밑","피부톤 Blue 우측 볼","피부톤 Blue 좌측 볼","피부톤 Blue 평균","피부색 L 값","피부색 a 값","피부색 b 값","피지 E 값 (T 존)","피지 E 값 (U 존)","피부톤","선 민감도","피부타입(야누스 측정)","피부타입(설문 로직)","동안각도 점수 우측","동안각도 점수 좌측",
       "포피린 E 값(T존)","포피린 E 값(U존)","매장코드"]
     else
-      @excel_name = ["시리얼","이름","분석 횟수","채널","측정 부위","진단 날짜","업데이트 일"]
+      @excel_name = ["시리얼","이름","측정 당시 만 나이","성별","바코드","생년월일","분석 횟수","채널","측정 부위","진단 날짜","업데이트 일"]
       @select_filter.each do |filter|
         if filter.include?("mo_1")
           filter = "수분 측정 이마"
@@ -1475,6 +1482,7 @@ class Admin::DataController < Admin::AdminApplicationController
       end
 
       if custinfo.nil?
+        Rails.logger.info "custinfo.nil?"
         is_contain = false
       end
 
@@ -1484,12 +1492,11 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     Rails.logger.info "@fcdatas.count"
-    Rails.logger.info @fcdatas.count if @fcdatas.nil? || @fcdatas.count > 0
+    Rails.logger.info @fcdatas.count if !@fcdatas.nil? || @fcdatas.count > 0
 
     @fcdatas.each do |fcdata|
       fctabletinterview = Fctabletinterviewrx.where.not(skin_type: nil).where.not(before_solution_1: nil).where.not(before_solution_2: nil).where(ch_cd: @ch_array).where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno.to_i).first
       is_contain = true
-
       if !fctabletinterview.nil?
         if !@select_skin_anxiety1_array.blank?
           if !@select_skin_anxiety1_array.include?(fctabletinterview.before_solution_1)

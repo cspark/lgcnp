@@ -153,12 +153,14 @@
       </script>
     </head>
     <body>
-      <% user = Custinfo.where(custserial: tabletinterview.custserial).first %>
-      <tr class="table_tr" id="<%= user.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>">
+      <% custinfo = Custinfo.where(custserial: tabletinterview.custserial).first %>
+      <tr class="table_tr" id="<%= custinfo.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>">
         <td id="name_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id.to_i %>"></td>
         <td class="text-center"><%= tabletinterview.custserial.to_i %></td>
         <td><%= tabletinterview.ch_cd %></td>
         <td><%= tabletinterview.uptdate %></td>
+        <td><%= tabletinterview.fcdata_id %></td>
+        <td><%= custinfo.birthyy %>-<%= custinfo.birthmm %>-<%= custinfo.birthdd %></td>
         <% if @select_filter != [] %>
           <% @select_filter.each do |filter| %>
             <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id.to_i).first %>

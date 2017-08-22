@@ -454,7 +454,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           end
           sheet.add_row temp
         else
-          sheet.add_row [userName, tabletinterview.custserial.to_i, tabletinterview.ch_cd, tabletinterview.uptdate,
+          sheet.add_row [userName, tabletinterview.custserial.to_i, tabletinterview.ch_cd, tabletinterview.uptdate, tabletinterview.fcdata_id.to_i, custinfo.birthyy+"-"+custinfo.birthmm+"-"+custinfo.birthdd,
           tabletinterview.a_1.to_i, a_2, a_3,b_1, b_2, b_3, b_4, b_5, b_6, c_1, d_1, d_2, d_3, d_4, d_5,d_6,
           skin_type, before_solution_1_new, before_solution_2_new, before_solution_1, before_solution_2, after_solution_1,  after_solution_2, before_production, after_production,
           tabletinterview.turnover_value.to_i+1, tabletinterview.corneous_value.to_i, tabletinterview.stress_value.to_i,

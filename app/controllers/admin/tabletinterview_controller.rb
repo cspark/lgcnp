@@ -86,8 +86,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       min_age_custinfo = Custinfo.where(ch_cd: "CNP").where.not(birthyy: nil).order("birthyy desc").first
       max_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy asc").first
     end
-    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
-    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
     @min_birthyy = min_age_custinfo.birthyy
     @max_birthyy = max_age_custinfo.birthyy
     @min_birthmm = 1
@@ -126,12 +126,12 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     scoped = scoped.where(is_quick_mode: @select_mode) if !@select_mode.blank? && @select_mode.downcase != "all"
 
     if @select_filter == []
-      @excel_name = ["이름","시리얼","채널","진단 날짜","A1","A2","A3","B1","B2","B3","B4","C1","D1","D2","D3","D4","D5","D6","D7","D8","D9","D10",
+      @excel_name = ["이름","시리얼","채널","진단 날짜","진단횟수","생년월일","A1","A2","A3","B1","B2","B3","B4","C1","D1","D2","D3","D4","D5","D6","D7","D8","D9","D10",
         "피부타입","진단으로 나온 솔루션 1(최근)","진단으로 나온 솔루션 2(최근)","진단으로 나온 솔루션 1","진단으로 나온 솔루션 2","최종으로 선택된 솔루션 1","최종으로 선택된 솔루션 2","진단으로 나온 세럼","최종으로 선택된 세럼",
         "진단으로 나온 앰플 1","최종으로 선택된 앰플 1","진단으로 나온 앰플 2","최종으로 선택된 앰플 2","진단으로 나온 화장품","최종으로 선택된 화장품",
         "모공 점수","트러블 점수","색소침착 점수","주름 점수","탄력 점수"]
     else
-      @excel_name = ["이름","시리얼","진단 날짜","채널"]
+      @excel_name = ["이름","시리얼","채널","진단 날짜","진단횟수","생년월일"]
       @select_filter.each do |filter|
         if filter.include?("skin_type")
           filter = "피부타입"
@@ -379,8 +379,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       min_age_custinfo = Custinfo.where(ch_cd: "BEAU").where.not(birthyy: nil).order("birthyy desc").first
       max_age_custinfo = Custinfo.where(ch_cd: "BEAU").order("birthyy asc").first
     end
-    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
-    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
     @min_birthyy = min_age_custinfo.birthyy
     @max_birthyy = max_age_custinfo.birthyy
     @min_birthmm = 1
@@ -561,12 +561,13 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       min_age_custinfo = Custinfo.where(ch_cd: "CNPR").where.not(birthyy: nil).order("birthyy desc").first
       max_age_custinfo = Custinfo.where(ch_cd: "CNPR").order("birthyy asc").first
     end
-    # @min_age = 14
-    # @max_age = 100
-    # @min_birthyy = 2000
-    # @max_birthyy = 1900
-    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
-    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+
+    if min_age_custinfo.nil?
+      min_age_custinfo = Custinfo.where.not(birthyy: nil).order("birthyy desc").first
+      max_age_custinfo = Custinfo.order("birthyy asc").first
+    end
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
     @min_birthyy = min_age_custinfo.birthyy
     @max_birthyy = max_age_custinfo.birthyy
     @min_birthmm = 1
@@ -603,12 +604,12 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     Rails.logger.info "scoped.count!!!"
     Rails.logger.info scoped.count
     if @select_filter == []
-      @excel_name = ["이름","시리얼","채널","진단 날짜","A1","A2","A3","B1","B2","B3","B4","B5","B6","C1","D1","D2","D3","D4","D5","D6",
+      @excel_name = ["이름","시리얼","채널","진단 날짜","진단횟수","생년월일","A1","A2","A3","B1","B2","B3","B4","B5","B6","C1","D1","D2","D3","D4","D5","D6",
       "피부타입","진단으로 나온 솔루션 1(최근)","진단으로 나온 솔루션 2(최근)","진단으로 나온 솔루션 1","진단으로 나온 솔루션 2","최종으로 선택된 솔루션 1","최종으로 선택된 솔루션 2","추천 프로그램","최종 선택 프로그램",
       "턴오버 점수","각질 측정","스트레스 지수","맞춤제품 Step1","맞춤제품 Step2","맞춤제품 Step3","구매제품 Step1","구매제품 Step2","구매제품 Step3","추천 중복샷", "변경 중복샷",
       "트러블 점수","색소침착 점수","주름 점수","탄력 점수", "건조 점수"]
     else
-      @excel_name = ["이름","시리얼","진단 날짜","채널"]
+      @excel_name = ["이름","시리얼","채널","진단 날짜","진단횟수","생년월일"]
       @select_filter.each do |filter|
         if filter.include?("skin_type")
           filter = "피부타입"

@@ -89,7 +89,7 @@
         <td><%= interview.uptdate %></td>
         <td><%= custinfo.birthyy %>-<%= custinfo.birthmm %>-<%= custinfo.birthdd %></td>
         <td><%= custinfo.sex %></td>
-        <td><%= custinfo.age %></td>
+        <td><%= Date.current.year - custinfo.birthyy.to_i - 1 %></td>
       </tr>
     </body>
 </html>

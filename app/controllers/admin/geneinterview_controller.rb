@@ -77,8 +77,8 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
       min_age_custinfo = Custinfo.where(ch_cd: "BEAU").where.not(birthyy: nil).order("birthyy desc").first
       max_age_custinfo = Custinfo.where(ch_cd: "BEAU").order("birthyy asc").first
     end
-    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
-    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
     @min_birthyy = min_age_custinfo.birthyy
     @max_birthyy = max_age_custinfo.birthyy
     @min_birthmm = 1
@@ -112,7 +112,7 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
         end
 
         if !@start_age.blank? && !@end_age.blank?
-          temp_age = Time.current.year.to_i - custinfo.birthyy.to_i + 1
+          temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
           if temp_age < @start_age.to_i || temp_age > @end_age.to_i
             is_contain = false
           end

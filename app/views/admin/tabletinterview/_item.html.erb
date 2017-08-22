@@ -214,6 +214,8 @@
         <td class="text-center"><%= tabletinterview.custserial.to_i %></td>
         <td><%= tabletinterview.ch_cd %></td>
         <td><%= tabletinterview.uptdate %></td>
+        <td><%= tabletinterview.fcdata_id %></td>
+        <td><%= custinfo.birthyy %>-<%= custinfo.birthmm %>-<%= custinfo.birthdd %></td>
         <% if @select_filter != [] %>
           <% @select_filter.each do |filter| %>
             <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>

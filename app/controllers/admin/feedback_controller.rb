@@ -150,13 +150,13 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     if !ch_cd.blank?
       min_age_custinfo = Custinfo.where(ch_cd: ch_cd).where.not(birthyy: nil).order("birthyy desc").first
     end
-    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
 
     max_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy asc").first
     if !ch_cd.blank?
       max_age_custinfo = Custinfo.where(ch_cd: ch_cd).order("birthyy asc").first
     end
-    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
 
     @start_date = Date.today
     @end_date = Date.today
@@ -199,8 +199,8 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       min_age_custinfo = Custinfo.where(ch_cd: "CNP").where.not(birthyy: nil).order("birthyy desc").first
       max_age_custinfo = Custinfo.where(ch_cd: "CNP").order("birthyy asc").first
     end
-    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
-    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
     @min_birthyy = min_age_custinfo.birthyy
     @max_birthyy = max_age_custinfo.birthyy
     @min_birthmm = 1
@@ -271,7 +271,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       end
 
       if !@start_age.blank? && !@end_age.blank?
-        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i + 1
+        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
         if temp_age < @start_age.to_i || temp_age > @end_age.to_i
           is_contain = false
         end
@@ -483,13 +483,13 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     if !ch_cd.blank?
       min_age_custinfo = Custinfo.where(ch_cd: ch_cd).where.not(birthyy: nil).order("birthyy desc").first
     end
-    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
 
     max_age_custinfo = Custinfo.where(ch_cd: "CNPR").order("birthyy asc").first
     if !ch_cd.blank?
       max_age_custinfo = Custinfo.where(ch_cd: ch_cd).order("birthyy asc").first
     end
-    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
 
     begin
       @start_date = Fctabletinterviewrx.all.minimum(:uptdate).to_date
@@ -526,8 +526,8 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       min_age_custinfo = Custinfo.where(ch_cd: "CNPR").where.not(birthyy: nil).order("birthyy desc").first
       max_age_custinfo = Custinfo.where(ch_cd: "CNPR").order("birthyy asc").first
     end
-    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i + 1
-    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i + 1
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
     @min_birthyy = min_age_custinfo.birthyy
     @max_birthyy = max_age_custinfo.birthyy
     @min_birthmm = 1
@@ -604,7 +604,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       end
 
       if !@start_age.blank? && !@end_age.blank?
-        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i + 1
+        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
         if temp_age < start_age.to_i || temp_age > end_age.to_i
           is_contain = false
         end

@@ -68,16 +68,19 @@
       <tr class="table_tr text-center" id="<%= fcdata.custserial.to_i %>/<%= fcdata.measureno %>">
         <td><%= fcdata.custserial.to_i %></td>
         <td id="name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno.to_i %>"></td>
-        <td><%= fcdata.measureno.to_i %></td>
-        <td><%= fcdata.ch_cd %></td>
-        <td><%= fcdata.faceno %></td>
-        <td><%= fcdata.measuredate %></td>
-        <td><%= fcdata.uptdate %></td>
+        <td><%= Date.current.year - custinfo.birthyy.to_i - 1 %></td>
+        <td><%= custinfo.sex %></td>
         <% if (fcdata.ch_cd == "BEAU" || fcdata.ch_cd == "TMR" || fcdata.ch_cd == "MART" || fcdata.ch_cd == "LABO" || fcdata.ch_cd == "ONEP") && !interview.nil? %>
           <td><%= interview.gene_barcode %></td>
         <% else %>
           <td>-</td>
         <% end %>
+        <td><%= custinfo.birthyy %>-<%= custinfo.birthmm %>-<%= custinfo.birthdd %></td>
+        <td><%= fcdata.measureno.to_i %></td>
+        <td><%= fcdata.ch_cd %></td>
+        <td><%= fcdata.faceno %></td>
+        <td><%= fcdata.measuredate %></td>
+        <td><%= fcdata.uptdate %></td>
         <% if @select_filter != [] %>
           <% @select_filter.each do |filter| %>
             <td><%= fcdata[filter] %></td>

@@ -29,7 +29,7 @@ class GenerateTestModel < ApplicationRecord
     Fctabletinterview.all.each do |f|
       i = 1
       f = Fctabletinterview.new
-      f.custserial = 3.to_s
+      f.custserial = 1.to_s
       f.a_1 = i
       f.a_2 = i
       f.a_3 = i
@@ -64,7 +64,7 @@ class GenerateTestModel < ApplicationRecord
       f.uptdate = "2017-04-05-12-00"
       f.ch_cd = "CNP"
       f.fcdata_id = 1.to_s
-      f.tablet_interview_id = 2
+      f.tablet_interview_id = 1
       f.is_quick_mode = "T"
       f.is_agree_cant_refund = "T"
       f.is_agree_after = "T"
@@ -79,7 +79,7 @@ class GenerateTestModel < ApplicationRecord
     Fctabletinterview.all.each do |f|
       i = 1
       f = Fctabletinterviewrx.new
-      f.custserial = 4.to_s
+      f.custserial = 2.to_s
       f.a_1 = i
       f.a_2 = i
       f.a_3 = i
@@ -102,17 +102,17 @@ class GenerateTestModel < ApplicationRecord
       f.d_10 = i
       f.d_11 = i
       f.skin_type = "skin_type_gunsung"
-      f.before_solution_1 = "elasticity solution"
-      f.after_solution_1 = "elasticity solution"
-      f.before_solution_2 = "elasticity solution"
-      f.after_solution_2 = "elasticity solution"
+      f.before_solution_1 = "SCORE_PIGMENT"
+      f.after_solution_1 = "SCORE_PIGMENT"
+      f.before_solution_2 = "SKIN_WRINKLE"
+      f.after_solution_2 = "SKIN_WRINKLE"
       f.before_ample_1 = "perming ampoule"
       f.after_ample_1 = "perming ampoule"
       f.before_ample_2 = "perming ampoule"
       f.after_ample_2 = "perming ampoule"
       f.uptdate = "2017-04-05-12-00"
-      f.ch_cd = "CNP"
-      f.fcdata_id = 1.to_s
+      f.ch_cd = "RLAB"
+      f.fcdata_id = 3.to_s
       f.tablet_interview_id = 2
       f.is_agree_cant_refund = "T"
       f.is_agree_after = "T"
@@ -155,12 +155,12 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        f = Fcdata.new
-       f.custserial = 2.to_s
-       f.ch_cd = "BEAU"
-       f.faceno = "F"
-       f.measuredate = "2017-08-08-18-00-00"
-       f.measureno = 2
-       f.uptdate = "2017-08-08"
+       f.custserial = 1.to_s
+       f.ch_cd = "CNP"
+       f.faceno = "M"
+       f.measuredate = "2017-08-21-18-00-00"
+       f.measureno = 1
+       f.uptdate = "2017-08-21"
        f.mo_1 = 1.0
        f.mo_7 = 1.0
        f.mo_8 = 1.0
@@ -249,7 +249,7 @@ class GenerateTestModel < ApplicationRecord
        f.score_r = 1
        f.score_l = 1
        f.m_skintype = 1
-       f.shop_cd = "505415"
+       f.shop_cd = "59100"
        f.worry_skin_1 = "1"
        f.worry_skin_2 = "2"
        f.save
@@ -589,9 +589,9 @@ class GenerateTestModel < ApplicationRecord
   def self.generate_test_fcgene_interviews
     f = FcgeneInterview.new
     f.custserial = 2.to_s
-    f.gene_barcode = "0000000000002"
+    f.gene_barcode = "0000000000000"
     f.ch_cd = "BEAU"
-    f.measureno = 1
+    f.measureno = 6
     f.shop_cd = "505415"
     f.q1_height = "165"
     f.q1_weight = "50"
@@ -608,7 +608,7 @@ class GenerateTestModel < ApplicationRecord
     f.q12 = "2"
     f.q13 = "3"
     f.q13 = "1"
-    f.uptdate = "2017-08-08"
+    f.uptdate = "2017-08-21"
     f.save
   end
 

@@ -43,6 +43,7 @@
       </script>
     </head>
     <body>
+      <% custinfo = Custinfo.where(custserial: interview.custserial).first %>
       <tr class="table_tr" id="<%= interview.custserial.to_i %>/<%= interview.ch_cd %>/<%= interview.measureno.to_i %>">
         <td id="name_<%= interview.custserial.to_i %>_<%= interview.ch_cd %>_<%= interview.measureno.to_i %>"></td>
         <td><%= interview.custserial.to_i %></td>
@@ -50,6 +51,7 @@
         <td><%= interview.faceno %></td>
         <td><%= interview.measuredate %></td>
         <td><%= interview.measureno.to_i %></td>
+        <td><%= custinfo.birthyy %>-<%= custinfo.birthmm %>-<%= custinfo.birthdd %></td>
         <td><%= interview.uptdate %></td>
         <td><%= interview.interview_1 %></td>
         <td><%= interview.interview_2 %></td>

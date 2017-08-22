@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170809073424) do
+ActiveRecord::Schema.define(version: 20170822090824) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -462,10 +462,12 @@ ActiveRecord::Schema.define(version: 20170809073424) do
     t.string   "after_overlap"
     t.string   "recommand_program1"
     t.string   "recommand_program2"
+    t.string   "before_solution_1_new"
+    t.string   "before_solution_2_new"
   end
 
   create_table "fctabletinterviews", force: :cascade do |t|
-    t.string   "custserial",           null: false
+    t.string   "custserial",            null: false
     t.integer  "a_1"
     t.integer  "a_2"
     t.integer  "a_3"
@@ -495,8 +497,8 @@ ActiveRecord::Schema.define(version: 20170809073424) do
     t.string   "after_ample_1"
     t.string   "before_ample_2"
     t.string   "after_ample_2"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.string   "uptdate"
     t.string   "before_made_cosmetic"
     t.string   "after_made_cosmetic"
@@ -512,6 +514,8 @@ ActiveRecord::Schema.define(version: 20170809073424) do
     t.string   "is_agree_cant_refund"
     t.string   "is_agree_after"
     t.string   "shop_cd"
+    t.string   "before_solution_1_new"
+    t.string   "before_solution_2_new"
   end
 
   create_table "lcare_users", force: :cascade do |t|
