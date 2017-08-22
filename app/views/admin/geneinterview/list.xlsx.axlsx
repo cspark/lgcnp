@@ -1,7 +1,7 @@
 wb = xlsx_package.workbook
-wb.add_worksheet(name: "Fcdata") do |sheet|
+wb.add_worksheet(name: "FcgeneInterview") do |sheet|
     sheet.add_row ["고객번호","이름","유전자 바코드","채널코드","야누스 측정 횟수","매장 코드","설문1(키)","설문1(몸무게)","설문2","설문3","설문4","설문5","설문6","설문7","설문8","설문9","설문10","설문11","설문12","설문13","설문14","유전자 진단날짜","생년월일","성별","나이"]
-    @fcgene_interviews.each do |interview|
+    @fcgene_interviews_excel.each do |interview|
       custinfo = Custinfo.where(custserial: interview.custserial).first
 
       if !custinfo.nil? && !custinfo.custname.nil?

@@ -86,7 +86,7 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
 
 
     @fcgene_interviews = []
-    scoped = FcgeneInterview.where(ch_cd: @ch_array)
+    scoped = FcgeneInterview.where(ch_cd: @ch_array).order("uptdate desc")
     scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
@@ -138,6 +138,7 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
       end
     end
 
+    @fcgene_interviews_excel = @fcgene_interviews
     @count = @fcgene_interviews.count
     @fcgene_interviews = Kaminari.paginate_array(@fcgene_interviews).page(params[:page]).per(5)
   end
