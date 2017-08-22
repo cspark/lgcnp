@@ -4,7 +4,7 @@ working_directory APP_PATH + "current/"
 
 preload_app true
 
-timeout 30
+timeout 120
 # rails_env = 'production'
 
 # This is where we specify the socket.
