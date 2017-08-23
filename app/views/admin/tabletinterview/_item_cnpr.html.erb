@@ -159,7 +159,7 @@
         <td class="text-center"><%= tabletinterview.custserial.to_i %></td>
         <td><%= tabletinterview.ch_cd %></td>
         <td><%= tabletinterview.uptdate %></td>
-        <td><%= tabletinterview.fcdata_id %></td>
+        <td><%= tabletinterview.fcdata_id.to_i %></td>
         <td><%= custinfo.birthyy %>-<%= custinfo.birthmm %>-<%= custinfo.birthdd %></td>
         <% if @select_filter != [] %>
           <% @select_filter.each do |filter| %>
@@ -261,10 +261,10 @@
           <td><%= tabletinterview.a_3.to_i if tabletinterview.a_3.to_i != -1 %></td>
           <td><%= tabletinterview.b_1.to_i if tabletinterview.b_1.to_i != -1 %></td>
           <td><%= tabletinterview.b_2.to_i if tabletinterview.b_2.to_i != -1 %></td>
-          <td><%= tabletinterview.b_3.to_i if tabletinterview.b_3.to_i != -1 %></td>
-          <td><%= tabletinterview.b_4.to_i if tabletinterview.b_4.to_i != -1 %></td>
-          <td><%= tabletinterview.b_5.to_i if tabletinterview.b_5.to_i != -1 %></td>
-          <td><%= tabletinterview.b_6.to_i if tabletinterview.b_6.to_i != -1 %></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
           <td><%= tabletinterview.c_1.to_i if tabletinterview.c_1.to_i != -1 %></td>
           <td><%= tabletinterview.d_1.to_i if tabletinterview.d_1.to_i != -1 %></td>
           <td><%= tabletinterview.d_2.to_i if tabletinterview.d_2.to_i != -1 %></td>
