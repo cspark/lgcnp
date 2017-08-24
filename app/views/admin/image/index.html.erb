@@ -189,7 +189,7 @@
 
         <p style="float:right; margin-right:20px;">
           Download:
-          <%= link_to "Excel", admin_image_list_path(format: "xlsx", :search => @search,
+          <%= link_to "Excel", admin_image_list_path(format: "xlsx", :name => @name,
           :custserial => @custserial, :select_channel => @select_channel, :shop_cd => @shop_cd,
           :measureno => @measureno, :isExcel => true) %>
         </p>

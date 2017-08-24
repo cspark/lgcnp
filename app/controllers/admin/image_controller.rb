@@ -61,7 +61,7 @@ class Admin::ImageController < Admin::AdminApplicationController
           custinfo = Custinfo.where(custserial: fcdata.custserial).first
           is_contain = true
 
-          if !@name.blank?
+          if !custinfo.nil? && !custinfo.custname.nil? && !@name.blank?
             if !custinfo.custname.include? @name
               is_contain = false
             end
@@ -83,13 +83,11 @@ class Admin::ImageController < Admin::AdminApplicationController
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
       scoped = scoped.order("uptdate desc")
 
-      @name = URI.decode(@name) if !@name.blank?
-
       scoped.each do |fcdata|
         custinfo = Custinfo.where(custserial: fcdata.custserial).first
         is_contain = true
 
-        if !@name.blank?
+        if !custinfo.nil? && !custinfo.custname.nil? && !@name.blank?
           if !custinfo.custname.include? @name
             is_contain = false
           end
