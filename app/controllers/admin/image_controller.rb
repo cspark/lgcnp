@@ -61,9 +61,11 @@ class Admin::ImageController < Admin::AdminApplicationController
           custinfo = Custinfo.where(custserial: fcdata.custserial).first
           is_contain = true
 
-          if !custinfo.nil? && !custinfo.custname.nil? && !@name.blank?
-            if !custinfo.custname.include? @name
-              is_contain = false
+          if !custinfo.nil?
+            if !custinfo.custname.nil? && !@name.blank?
+              if !custinfo.custname.include? @name
+                is_contain = false
+              end
             end
           end
 
@@ -87,9 +89,11 @@ class Admin::ImageController < Admin::AdminApplicationController
         custinfo = Custinfo.where(custserial: fcdata.custserial).first
         is_contain = true
 
-        if !custinfo.nil? && !custinfo.custname.nil? && !@name.blank?
-          if !custinfo.custname.include? @name
-            is_contain = false
+        if !custinfo.nil?
+          if !custinfo.custname.nil? && !@name.blank?
+            if !custinfo.custname.include? @name
+              is_contain = false
+            end
           end
         end
 
