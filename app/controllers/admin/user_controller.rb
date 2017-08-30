@@ -64,14 +64,18 @@ class Admin::UserController < Admin::AdminApplicationController
         custserial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
         custserial_array4 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 3000, 4001).pluck(:custserial).uniq
         custserial_array5 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 4000, 5001).pluck(:custserial).uniq
+        custserial_array6 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 5000, 6001).pluck(:custserial).uniq
+        custserial_array7 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 7001).pluck(:custserial).uniq
 
         array_result = scoped.where(custserial: custserial_array)
         array_result2 = scoped.where(custserial: custserial_array2)
         array_result3 = scoped.where(custserial: custserial_array3)
         array_result4 = scoped.where(custserial: custserial_array4)
         array_result5 = scoped.where(custserial: custserial_array5)
+        array_result6 = scoped.where(custserial: custserial_array6)
+        array_result7 = scoped.where(custserial: custserial_array7)
 
-        scoped = array_result.or(array_result2).or(array_result3).or(array_result4).or(array_result5)
+        scoped = array_result.or(array_result2).or(array_result3).or(array_result4).or(array_result5).or(array_result6).or(array_result7)
       else
         scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
       end
