@@ -8,6 +8,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :update do
+    collection do
+      get 'update_launcher_download'
+      post 'update_launcher_upload'
+    end
+  end
+
   namespace :admin do
     get "manager_2017"  => "admin#index"
     get "admin_login"  => "admin#admin_login"
