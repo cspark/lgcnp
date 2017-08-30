@@ -1,4 +1,24 @@
 class UpdateController < ApplicationController
+  def index
+    list = FcupdateHistory.list(version_name: params[:version_name])
+
+    if list.count > 0
+      render json: api_hash_for_list(list), status: :ok
+    else
+      render :text => "FcupdateHistory is not exist!!!", status: 204
+    end
+  end
+
+  def create
+    fcupdate_history = FcupdateHistory.new(permitted_params)
+
+    if fcupdate_history.save
+      render json: {}, status: :ok
+    else
+      render json: {}, status: :bad_request
+    end
+  end
+  
   def is_update
     version_code = params[:version_code]
 
@@ -79,5 +99,10 @@ class UpdateController < ApplicationController
     uploader = LauncherUploader.new
     uploader.temp_save_update_launcher(file_name: file_name)
     uploader.store!(params[:image])
+  end
+
+  private
+  def permitted_params
+    params.permit(:release_date, :version_name, :launcher_yn, :upt_entry_num, :upt_total_filesize, :upt_comment)
   end
 end

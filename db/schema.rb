@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170822090824) do
+ActiveRecord::Schema.define(version: 20170830103223) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -516,6 +516,15 @@ ActiveRecord::Schema.define(version: 20170822090824) do
     t.string   "shop_cd"
     t.string   "before_solution_1_new"
     t.string   "before_solution_2_new"
+  end
+
+  create_table "fcupdate_history", force: :cascade do |t|
+    t.string  "release_date",       null: false
+    t.string  "version_name",       null: false
+    t.string  "launcher_yn"
+    t.integer "upt_entry_num"
+    t.integer "upt_total_filesize"
+    t.string  "upt_comment"
   end
 
   create_table "lcare_users", force: :cascade do |t|
