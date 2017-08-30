@@ -45,15 +45,6 @@ class Admin::UserController < Admin::AdminApplicationController
     @ch_cd = ch_cd if !ch_cd.blank?
     @select_address = select_address if !select_address.blank?
 
-    # scoped = Fcdata.all
-    # scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
-    # scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
-    # fcdata_list = scoped
-    # custserial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
-    # custserial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1001, 2001).pluck(:custserial).uniq
-    # custserial_array = custserial_array + custserial_array2
-    # measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
-
     if !@is_admin_init
       scoped = Custinfo.all
       if (@ch_cd == "CNP" || @ch_cd == "CLAB" || @ch_cd == "CNPR" || @ch_cd == "RLAB")
@@ -75,6 +66,8 @@ class Admin::UserController < Admin::AdminApplicationController
         array_result6 = scoped.where(custserial: custserial_array6)
         array_result7 = scoped.where(custserial: custserial_array7)
 
+        Rails.logger.info "======="
+        Rails.logger.info array_result7
         scoped = array_result.or(array_result2).or(array_result3).or(array_result4).or(array_result5).or(array_result6).or(array_result7)
       else
         scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
