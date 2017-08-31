@@ -14,6 +14,6 @@ class LauncherUploader < CarrierWave::Uploader::Base
 
    def temp_save_update_launcher(file_name: nil)
      @@file_name = file_name
-     @@file_extension = ".zip"
+     @@file_extension = "zip"
    end
 end
