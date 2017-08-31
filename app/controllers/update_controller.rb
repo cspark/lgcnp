@@ -76,7 +76,6 @@ class UpdateController < ApplicationController
 
     Rails.logger.info "update_launcher_upload!!!"
     file_name = params[:file_name]
-    Rails.logger.info file_name
 
     make_dir_command = "mkdir "
     make_dir_command << "public/Admin"
@@ -90,7 +89,9 @@ class UpdateController < ApplicationController
 
     file_exist_command = "public/Admin/Update/"
     file_exist_command << file_name
+    file_exist_command << ".zip"
 
+    Rails.logger.info file_exist_command
     if File.exist?(file_exist_command)
       render :text => "Success!!!", status: :ok
     else
