@@ -18,7 +18,7 @@ class UpdateController < ApplicationController
       render json: {}, status: :bad_request
     end
   end
-  
+
   def is_update
     version_code = params[:version_code]
 
@@ -33,9 +33,11 @@ class UpdateController < ApplicationController
   end
 
   def update_launcher_download
+    check_was_disk
+
     Rails.logger.info "update_launcher_download!!!"
-    filename = params[:filename]
-    Rails.logger.info filename
+    file_name = params[:file_name]
+    Rails.logger.info file_name
 
     make_dir_command = "mkdir "
     make_dir_command << "public/Admin"
@@ -45,7 +47,8 @@ class UpdateController < ApplicationController
     system(make_dir_command)
 
     ftp_path = ""
-    ftp_path << "ftp://165.244.88.27/Admin/Update/"+filename
+    ftp_path << "ftp://165.244.88.27/Admin/Update/"
+    ftp_path << file_name
 
     file_get_command = "wget --user janus --password pielgahn2012#1 "
     file_get_command << ftp_path
@@ -56,7 +59,8 @@ class UpdateController < ApplicationController
     # wget --user janus --password pielgahn2012#1 ftp://165.244.88.27/CNP/100-P/41-1/41-1_F_PW_SK_L_SIDE.jpg -N -P public/CNP/100-P/41-1
     system(file_get_command)
 
-    file_exist_command = "public/Admin/Update/".concat(filename)
+    file_exist_command = "public/Admin/Update/"
+    file_exist_command << file_name
 
     if File.exist?(file_exist_command)
       render :text => "Success!!!", status: :ok
@@ -68,10 +72,30 @@ class UpdateController < ApplicationController
   end
 
   def update_launcher_upload
-    Rails.logger.info "update_launcher_upload!!!"
-    filename = params[:filename]
-    Rails.logger.info filename
+    check_was_disk
 
+    Rails.logger.info "update_launcher_upload!!!"
+    file_name = params[:file_name]
+    Rails.logger.info file_name
+
+    make_dir_command = "mkdir "
+    make_dir_command << "public/Admin"
+    system(make_dir_command)
+    make_dir_command << "/Update"
+    system(make_dir_command)
+
+    uploader = LauncherUploader.new
+    uploader.temp_save_update_launcher(file_name: file_name)
+    uploader.store!(params[:file])
+  end
+
+  def move_update_launcher
+    # file_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' -Q '-DELE 839-1_Sym_L_1.jpg' --ftp-create-dirs"
+    # folder_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1' -u 'janus:pielgahn2012#1' -Q '-RMD 839-1' --ftp-create-dirs"
+
+  end
+
+  def check_was_disk
     spaceMb_i = `df -m /dev/mapper/DATAVG-lv_data`.split(/\b/)[28].to_i
     Rails.logger.info "spaceMb_i !!!!!"
     Rails.logger.info spaceMb_i
@@ -88,17 +112,6 @@ class UpdateController < ApplicationController
       system("rm -rf public/ONEP/*")
       system("rm -rf public/TEST/*")
     end
-
-    make_dir_command = "mkdir "
-    make_dir_command << "public/Admin"
-    Rails.logger.info make_dir_command
-    system(make_dir_command)
-    make_dir_command << "/Update"
-    system(make_dir_command)
-
-    uploader = LauncherUploader.new
-    uploader.temp_save_update_launcher(file_name: file_name)
-    uploader.store!(params[:image])
   end
 
   private
