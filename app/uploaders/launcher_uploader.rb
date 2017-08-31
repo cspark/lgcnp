@@ -5,7 +5,7 @@ class LauncherUploader < CarrierWave::Uploader::Base
   storage :file
 
   def store_dir
-    "Admin/Update/"
+    "Admin/Update"
   end
 
    def filename
