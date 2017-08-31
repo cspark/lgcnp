@@ -25,6 +25,6 @@ class Api::Admin::AdminFcshopController < Api::ApplicationController
 
   private
   def permitted_params
-    params.permit(:shop_cd, :shop_name, :ch_cd, :tel_no, :address)
+    params.permit(:shop_cd, :shop_name, :ch_cd, :tel_no, :address, :version_name)
   end
 end

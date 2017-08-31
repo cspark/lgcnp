@@ -8,7 +8,8 @@ self.primary_key = :shop_cd, :shop_name if Rails.env.production? || Rails.env.st
       shop_name: shop_name,
       ch_cd: ch_cd,
       tel_no: tel_no,
-      address: address
+      address: address,
+      version_name: version_name
     }
   end
 
