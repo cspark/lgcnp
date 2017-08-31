@@ -87,6 +87,15 @@ class UpdateController < ApplicationController
     uploader = LauncherUploader.new
     uploader.temp_save_update_launcher(file_name: file_name)
     uploader.store!(params[:file])
+
+    file_exist_command = "public/Admin/Update/"
+    file_exist_command << file_name
+
+    if File.exist?(file_exist_command)
+      render :text => "Success!!!", status: :ok
+    else
+      render :text => "Fail!!!", status: 404
+    end
   end
 
   def move_update_launcher
