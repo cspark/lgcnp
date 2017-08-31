@@ -9,11 +9,11 @@ class LauncherUploader < CarrierWave::Uploader::Base
   end
 
    def filename
-     "#{@@file_name}.#{@@file_extension}"
+     "#{@@filename}.#{@@file_extension}"
    end
 
-   def temp_save_update_launcher(file_name: nil)
-     @@file_name = file_name
+   def temp_save_update_launcher(filename: nil)
+     @@filename = filename
      @@file_extension = "zip"
    end
 end

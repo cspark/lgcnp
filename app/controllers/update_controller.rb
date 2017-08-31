@@ -36,8 +36,8 @@ class UpdateController < ApplicationController
     check_was_disk
 
     Rails.logger.info "update_launcher_download!!!"
-    file_name = params[:file_name]
-    Rails.logger.info file_name
+    filename = params[:filename]
+    Rails.logger.info filename
 
     make_dir_command = "mkdir "
     make_dir_command << "public/Admin"
@@ -48,7 +48,7 @@ class UpdateController < ApplicationController
 
     ftp_path = ""
     ftp_path << "ftp://165.244.88.27/Admin/Update/"
-    ftp_path << file_name
+    ftp_path << filename
 
     file_get_command = "wget --user janus --password pielgahn2012#1 "
     file_get_command << ftp_path
@@ -60,7 +60,7 @@ class UpdateController < ApplicationController
     system(file_get_command)
 
     file_exist_command = "public/Admin/Update/"
-    file_exist_command << file_name
+    file_exist_command << filename
 
     if File.exist?(file_exist_command)
       render :text => "Success!!!", status: :ok
@@ -68,14 +68,14 @@ class UpdateController < ApplicationController
       render :text => "Fail!!!", status: 404
     end
     # "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/public/CNP/900-P/839-1/839-1_Sym_L_1.jpg' --ftp-create-dirs"
-    #  ls_command = "curl -l 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' --ftp-create-dirs"
+    #  ls_command = "curl -l 'ftp://165.244.88.27/Admin/Update//' -u 'janus:pielgahn2012#1' --ftp-create-dirs"
   end
 
   def update_launcher_upload
     check_was_disk
 
     Rails.logger.info "update_launcher_upload!!!"
-    file_name = params[:file_name]
+    filename = params[:filename]
 
     make_dir_command = "mkdir "
     make_dir_command << "public/Admin"
@@ -84,11 +84,28 @@ class UpdateController < ApplicationController
     system(make_dir_command)
 
     uploader = LauncherUploader.new
-    uploader.temp_save_update_launcher(file_name: file_name)
+    uploader.temp_save_update_launcher(filename: filename)
     uploader.store!(params[:file])
 
+    ftp_path = ""
+    ftp_path << "ftp://165.244.88.27/Admin/Update/"
+
+    file_path = ""
+    file_path << "public/Admin/Update/"
+    file_path << filename
+    file_path << ".zip"
+
+    file_copy_command = ""
+    file_copy_command = "curl -p --insecure '"
+    file_copy_command << ftp_path
+    file_copy_command << "' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/"
+    file_copy_command << file_path
+    file_copy_command << "' --ftp-create-dirs"
+    Rails.logger.info file_copy_command
+    system(file_copy_command)
+
     file_exist_command = "public/Admin/Update/"
-    file_exist_command << file_name
+    file_exist_command << filename
     file_exist_command << ".zip"
 
     Rails.logger.info file_exist_command
@@ -100,6 +117,80 @@ class UpdateController < ApplicationController
   end
 
   def move_update_launcher
+    check_was_disk
+
+    Rails.logger.info "update_launcher_download!!!"
+    filename = params[:filename]
+    origin_path = params[:origin_path]
+    destination_path = params[:destination_path]
+    file_extension = params[:file_extension]
+    Rails.logger.info filename
+
+    make_dir_command = "mkdir "
+    make_dir_command << "public"
+    make_dir_command << origin_path
+    Rails.logger.info make_dir_command
+    system(make_dir_command)
+    make_dir_command << "/Update"
+    system(make_dir_command)
+
+    ftp_path = ""
+    ftp_path << "ftp://165.244.88.27"
+    ftp_path << origin_path
+    ftp_path << "/"
+
+    file_get_command = "wget --user janus --password pielgahn2012#1 "
+    file_get_command << ftp_path
+    file_get_command << filename
+    file_get_command << "."
+    file_get_command << file_extension
+    file_get_command << " -N -P "
+    file_get_command << "public"
+    file_get_command << origin_path
+
+    Rails.logger.info file_get_command
+    # wget --user janus --password pielgahn2012#1 ftp://165.244.88.27/Admin/Update/Update_2-17-805-0.zip -N -P public/Admin/Update
+    system(file_get_command)
+
+    # file_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' -Q '-DELE 839-1_Sym_L_1.jpg' --ftp-create-dirs"
+
+    file_delete_command = "curl -p --insecure "
+    file_delete_command << ftp_path
+    file_delete_command << " -u 'janus:pielgahn2012#1' -Q '-DELE "
+    file_delete_command << filename
+    file_delete_command << "."
+    file_delete_command << file_extension
+    file_delete_command << "' --ftp-create-dirs"
+    system(file_delete_command)
+
+
+    file_path = ""
+    file_path << "public"
+    file_path << origin_path
+    file_path << "/"
+    file_path << filename
+    file_path << "."
+    file_path << file_extension
+
+    file_copy_command = ""
+    file_copy_command = "curl -p --insecure '"
+    file_copy_command << "ftp://165.244.88.27"
+    file_copy_command << destination_path
+    file_copy_command << "' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/"
+    file_copy_command << file_path
+    file_copy_command << "' --ftp-create-dirs"
+    Rails.logger.info file_copy_command
+    system(file_copy_command)
+
+    file_exist_command = "public/Admin/Update/"
+    file_exist_command << filename
+
+    if File.exist?(file_exist_command)
+      render :text => "Success!!!", status: :ok
+    else
+      render :text => "Fail!!!", status: 404
+    end
+
     # file_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' -Q '-DELE 839-1_Sym_L_1.jpg' --ftp-create-dirs"
     # folder_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1' -u 'janus:pielgahn2012#1' -Q '-RMD 839-1' --ftp-create-dirs"
 
