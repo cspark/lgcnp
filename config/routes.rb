@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     collection do
       get 'update_launcher_download'
       post 'update_launcher_upload'
+      get 'move_update_launcher'
     end
   end
 
