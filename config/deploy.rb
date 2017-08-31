@@ -37,7 +37,7 @@ set :port, 10022
 # set :linked_files, %w{config/database.yml}
 # set :linked_files, %w{config/database.yml config/secrets.yml}
 # set :linked_dirs, fetch(:linked_dirs, []).push('public/system', 'log', 'public/uploads')
-# set :linked_dirs, fetch(:linked_dirs, []).push('public/Admin/Update', 'log', 'public/Admin/Update')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/Admin/Update', 'log', 'public/Admin/Update')
 
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
