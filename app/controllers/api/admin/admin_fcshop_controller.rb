@@ -33,6 +33,37 @@ class Api::Admin::AdminFcshopController < Api::ApplicationController
     end
   end
 
+  def update
+    if params.has_key?(:id)
+      shop = Fcshop.where(shop_cd: params[:id]).first
+      if !shop.nil?
+        if params.has_key?(:shop_name)
+          shop.shop_name = params[:shop_name]
+        end
+
+        if params.has_key?(:tel_no)
+          shop.tel_no = params[:tel_no]
+        end
+
+        if params.has_key?(:address)
+          shop.address = params[:address]
+        end
+
+        if params.has_key?(:version_name)
+          shop.version_name = params[:version_name]
+        end
+
+        if shop.save
+          render json: shop.to_api_hash, status: :ok
+        else
+          render :text => "Fail!!!", status: 404
+        end
+      else
+        render :text => "Fcshop is not exist!!!", status: 204
+      end
+    end
+  end
+
   private
   def permitted_params
     params.permit(:shop_cd, :shop_name, :ch_cd, :tel_no, :address, :version_name)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170831052755) do
+ActiveRecord::Schema.define(version: 20170905043337) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -118,6 +118,15 @@ ActiveRecord::Schema.define(version: 20170831052755) do
     t.integer  "moisture"
     t.float    "e_porphyrin_t"
     t.float    "e_porphyrin_u"
+  end
+
+  create_table "fccuration_histories", force: :cascade do |t|
+    t.string   "upload_date",         null: false
+    t.string   "version_name"
+    t.string   "cura_entry_filename"
+    t.string   "cura_comment"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "fcdata", force: :cascade do |t|
@@ -290,12 +299,32 @@ ActiveRecord::Schema.define(version: 20170831052755) do
     t.string   "shop_cd"
   end
 
+  create_table "fclog_admins", force: :cascade do |t|
+    t.string   "admin_id",     null: false
+    t.string   "ip"
+    t.string   "log_date"
+    t.string   "work_name"
+    t.string   "work_comment"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "fcmodecnts", force: :cascade do |t|
     t.string   "modecnt_serial"
     t.string   "shop_cd"
     t.string   "ch_cd"
     t.string   "analdate"
     t.string   "mode_name"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "fcnotice_histories", force: :cascade do |t|
+    t.string   "upload_date",    null: false
+    t.string   "begin_date"
+    t.string   "end_date"
+    t.string   "file_name"
+    t.string   "notice_comment"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end

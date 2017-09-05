@@ -218,6 +218,71 @@ class Fcdata < ApplicationRecord
     }
   end
 
+  def to_api_hash_for_yanus
+    {
+      custserial: custserial,
+      measuredate: measuredate,
+      measureno: measureno.to_i,
+      shop_cd: shop_cd
+    }
+  end
+
+  def api_hash_for_list_join_custinfo
+    {
+      custserial: custserial,
+      custname: custinfo_custname(custserial: custserial),
+      sex: custinfo_sex(custserial: custserial),
+      birthyy: custinfo_birthyy(custserial: custserial),
+      birthmm: custinfo_birthmm(custserial: custserial),
+      birthdd: custinfo_birthdd(custserial: custserial),
+      phone: custinfo_phone(custserial: custserial),
+      measuredate: measuredate,
+      measureno: measureno.to_i,
+      shop_cd: shop_cd,
+      m_skintype: m_skintype,
+      colortype: colortype,
+      skintype: skintype,
+      worry_skin_1: worry_skin_1,
+      worry_skin_2: worry_skin_2
+    }
+  end
+
+  def custinfo_custname(custserial: nil)
+    return "" if custserial.nil?
+    user = Custinfo.where(custserial: custserial).first
+    return URI.decode(user.custname)
+  end
+
+  def custinfo_sex(custserial: nil)
+    return "M" if custserial.nil?
+    user = Custinfo.where(custserial: custserial).first
+    return user.sex
+  end
+
+  def custinfo_birthyy(custserial: nil)
+    return "" if custserial.nil?
+    user = Custinfo.where(custserial: custserial).first
+    return user.birthyy
+  end
+
+  def custinfo_birthmm(custserial: nil)
+    return "" if custserial.nil?
+    user = Custinfo.where(custserial: custserial).first
+    return user.birthmm
+  end
+
+  def custinfo_birthdd(custserial: nil)
+    return "" if custserial.nil?
+    user = Custinfo.where(custserial: custserial).first
+    return user.birthdd
+  end
+
+  def custinfo_phone(custserial: nil)
+    return "" if custserial.nil?
+    user = Custinfo.where(custserial: custserial).first
+    return user.phone
+  end
+
   #TZone 이마 수분 측정 평균값 : Moisture 본인값 : MO_1
   #UZone 양볼 수분 측정 평균값 : Moisture 본인값 : MO_7 / 8 의 평균
 
@@ -914,5 +979,12 @@ class Fcdata < ApplicationRecord
     scoped = Fcdata.all
     scoped = scoped.where(custserial: custserial) if custserial.present?
     scoped.order('measureno DESC')
+  end
+
+  def self.fcdata_month_list(shop_cd: nil, measuredate: nil)
+    scoped = Fcdata.all
+    scoped = scoped.where(shop_cd: shop_cd) if shop_cd.present?
+    scoped = scoped.where("measuredate LIKE ?", "%#{measuredate}%") if measuredate.present?
+    scoped.order('measureno ASC')
   end
 end

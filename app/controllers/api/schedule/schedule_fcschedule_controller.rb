@@ -99,6 +99,31 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
     end
   end
 
+  def fcdata_month_list
+    if params.has_key?(:anal_yyyy) && params.has_key?(:anal_mm)
+      measuredate = params[:anal_yyyy].concat("-").concat(params[:anal_mm])
+    end
+
+    list = Fcdata.fcdata_month_list(shop_cd: params[:shop_cd], measuredate: measuredate)
+    if !list.nil?
+      render json: api_hash_for_user_list(list), status: :ok
+    else
+      render :text => "Fcdata is not exist!!!", status: 204
+    end
+  end
+
+  def fcdata_join_custinfo_month_list
+    if params.has_key?(:anal_yyyy) && params.has_key?(:anal_mm)
+      measuredate = params[:anal_yyyy].concat("-").concat(params[:anal_mm]).concat("-")
+    end
+    list = Fcdata.fcdata_month_list(shop_cd: params[:shop_cd], measuredate: measuredate)
+    if !list.nil?
+      render json: api_hash_for_list_fcdata_join_custinfo(list), status: :ok
+    else
+      render :text => "Fcdata is not exist!!!", status: 204
+    end
+  end
+
   private
   def permitted_params
     params.permit(:ch_cd, :shop_cd, :reserve_yyyy, :reserve_mmdd, :reserve_mm, :reserve_hhmm, :custname, :phone, :reserve_yn, :memo, :uptdate, :purchase_yn, :custname)
