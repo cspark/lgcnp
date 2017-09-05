@@ -259,7 +259,7 @@ class Fcdata < ApplicationRecord
     return "" if custserial.nil?
     user = Custinfo.where(custserial: custserial).first
     return "" if user.nil?
-    return "" if user.sex?
+    return "" if user.sex.nil?
     return user.sex
   end
 
@@ -267,7 +267,7 @@ class Fcdata < ApplicationRecord
     return "" if custserial.nil?
     user = Custinfo.where(custserial: custserial).first
     return "" if user.nil?
-    return "" if user.birthyy?
+    return "" if user.birthyy.nil?
     return user.birthyy
   end
 
@@ -275,7 +275,7 @@ class Fcdata < ApplicationRecord
     return "" if custserial.nil?
     user = Custinfo.where(custserial: custserial).first
     return "" if user.nil?
-    return "" if user.birthmm?
+    return "" if user.birthmm.nil?
     return user.birthmm
   end
 
@@ -283,7 +283,7 @@ class Fcdata < ApplicationRecord
     return "" if custserial.nil?
     user = Custinfo.where(custserial: custserial).first
     return "" if user.nil?
-    return "" if user.birthdd?
+    return "" if user.birthdd.nil?
     return user.birthdd
   end
 
