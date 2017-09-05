@@ -250,36 +250,48 @@ class Fcdata < ApplicationRecord
   def custinfo_custname(custserial: nil)
     return "" if custserial.nil?
     user = Custinfo.where(custserial: custserial).first
+    return "" if user.nil?
+    return "" if user.custname.nil?
     return URI.decode(user.custname)
   end
 
   def custinfo_sex(custserial: nil)
-    return "M" if custserial.nil?
+    return "" if custserial.nil?
     user = Custinfo.where(custserial: custserial).first
+    return "" if user.nil?
+    return "" if user.sex?
     return user.sex
   end
 
   def custinfo_birthyy(custserial: nil)
     return "" if custserial.nil?
     user = Custinfo.where(custserial: custserial).first
+    return "" if user.nil?
+    return "" if user.birthyy?
     return user.birthyy
   end
 
   def custinfo_birthmm(custserial: nil)
     return "" if custserial.nil?
     user = Custinfo.where(custserial: custserial).first
+    return "" if user.nil?
+    return "" if user.birthmm?
     return user.birthmm
   end
 
   def custinfo_birthdd(custserial: nil)
     return "" if custserial.nil?
     user = Custinfo.where(custserial: custserial).first
+    return "" if user.nil?
+    return "" if user.birthdd?
     return user.birthdd
   end
 
   def custinfo_phone(custserial: nil)
     return "" if custserial.nil?
     user = Custinfo.where(custserial: custserial).first
+    return "" if user.nil?
+    return "" if user.phone?
     return user.phone
   end
 
