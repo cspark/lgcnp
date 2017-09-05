@@ -105,7 +105,7 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
     end
 
     list = Fcdata.fcdata_month_list(shop_cd: params[:shop_cd], measuredate: measuredate)
-    if !list.nil?
+    if list.count > 0
       render json: api_hash_for_user_list(list), status: :ok
     else
       render :text => "Fcdata is not exist!!!", status: 204
@@ -120,7 +120,7 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
     end
     Rails.logger.info measuredate
     list = Fcdata.fcdata_month_list(shop_cd: params[:shop_cd], measuredate: measuredate)
-    if !list.nil?
+    if list.count > 0
       render json: api_hash_for_list_fcdata_join_custinfo(list), status: :ok
     else
       render :text => "Fcdata is not exist!!!", status: 204
