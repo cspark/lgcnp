@@ -300,6 +300,39 @@
           <td id="after_ampoule_2_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
           <td id="before_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
           <td id="after_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
+
+          <% if !tabletinterview.is_quick_mode.nil %>
+            <% if tabletinterview.is_quick_mode == "T" %>
+              <% is_quick_mode = "O" %>
+            <% else %>
+              <% is_quick_mode = "X" %>
+            <% end %>
+          <% else %>
+            <% is_quick_mode = "-" %>
+          <% end %>
+          <td><%= is_quick_mode %></td>
+
+          <% if !tabletinterview.base_lot.nil %>
+            <% base_lot = tabletinterview.base_lot %>
+          <% else %>
+            <% base_lot = "-" %>
+          <% end %>
+          <td><%= base_lot %></td>
+
+          <% if !tabletinterview.ampoule_1_lot.nil %>
+            <% ampoule_1_lot = tabletinterview.ampoule_1_lot %>
+          <% else %>
+            <% ampoule_1_lot = "-" %>
+          <% end %>
+          <td><%= ampoule_1_lot %></td>
+
+          <% if !tabletinterview.ampoule_2_lot.nil %>
+            <% ampoule_2_lot = tabletinterview.ampoule_2_lot %>
+          <% else %>
+            <% ampoule_2_lot = "-" %>
+          <% end %>
+          <td><%= ampoule_2_lot %></td>
+
           <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
           <% if !fcdata.nil? %>
             <% fcdata = fcdata.to_api_hash_for_admin %>
