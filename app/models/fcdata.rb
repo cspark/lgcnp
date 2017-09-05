@@ -291,7 +291,7 @@ class Fcdata < ApplicationRecord
     return "" if custserial.nil?
     user = Custinfo.where(custserial: custserial).first
     return "" if user.nil?
-    return "" if user.phone?
+    return "" if user.phone.nil?
     return user.phone
   end
 
