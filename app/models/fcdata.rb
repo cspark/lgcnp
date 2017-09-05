@@ -997,6 +997,6 @@ class Fcdata < ApplicationRecord
     scoped = Fcdata.all
     scoped = scoped.where(shop_cd: shop_cd) if shop_cd.present?
     scoped = scoped.where("measuredate LIKE ?", "%#{measuredate}%") if measuredate.present?
-    scoped.order('measureno ASC')
+    scoped.order('measuredate ASC')
   end
 end
