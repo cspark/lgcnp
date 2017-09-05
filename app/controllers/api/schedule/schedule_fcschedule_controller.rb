@@ -113,8 +113,10 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
   end
 
   def fcdata_join_custinfo_month_list
-    if params.has_key?(:anal_yyyy) && params.has_key?(:anal_mm)
-      measuredate = params[:anal_yyyy].concat("-").concat(params[:anal_mm]).concat("-")
+    if params.has_key?(:anal_yyyy) && params.has_key?(:anal_mmdd)
+      anal_mm = params[:anal_mmdd][0,2]
+      anal_dd = params[:anal_mmdd][2,4]
+      measuredate = params[:anal_yyyy].concat("-").concat(anal_mm).concat("-").concat(anal_dd)
     end
     list = Fcdata.fcdata_month_list(shop_cd: params[:shop_cd], measuredate: measuredate)
     if !list.nil?
