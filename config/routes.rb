@@ -162,7 +162,7 @@ Rails.application.routes.draw do
           put 'update_reservation'
           delete 'delete_schedule'
           get 'fcdata_month_list'
-          get 'fcdata_join_custinfo_month_list'
+          get 'delete_schedule'
         end
       end
     end
@@ -185,6 +185,13 @@ Rails.application.routes.draw do
       resources :gene_interview do
         collection do
           put 'update'
+        end
+      end
+    end
+
+    namespace :log_admin do
+      resources :log_admin do
+        collection do
         end
       end
     end
