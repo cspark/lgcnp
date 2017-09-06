@@ -1,6 +1,6 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "User") do |sheet|
-    sheet.add_row ["시리얼","채널","이름","성별","생년월일","전화번호","거주지","마지막 진단 날짜","측정 횟수","가입날짜","개인정보 이용동의","제3자 정보 제공 동의","마케팅 정보 동의""매장코드"]
+    sheet.add_row ["시리얼","채널","이름","성별","생년월일","전화번호","거주지","마지막 진단 날짜","측정 횟수","가입날짜","개인정보 이용동의","제3자 정보 제공 동의","마케팅 정보 동의","매장코드"]
     @all_users.each do |user|
       begin
         userName = URI.decode(user.custname)
