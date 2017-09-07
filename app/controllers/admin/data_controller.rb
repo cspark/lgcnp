@@ -918,9 +918,9 @@ class Admin::DataController < Admin::AdminApplicationController
           filter = "피부고민 1순위"
         elsif filter.include?("worry_skin_2")
           filter = "피부고민 2순위"
-        elsif filter.include?("worry_skin_1_new")
+        elsif filter.include?("worry_skin_new_1")
           filter = "피부고민 1순위 최근"
-        elsif filter.include?("worry_skin_2_new")
+        elsif filter.include?("worry_skin_new_2")
           filter = "피부고민 2순위 최근"
         else
           filter = filter
