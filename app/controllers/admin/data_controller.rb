@@ -587,6 +587,9 @@ class Admin::DataController < Admin::AdminApplicationController
     select_skin_type_device = params[:select_skin_type_device]
     select_skin_type_survey = params[:select_skin_type_survey]
     select_senstive = params[:select_senstive]
+    select_skin_anxiety1 = params[:select_skin_anxiety1]
+    select_skin_anxiety2 = params[:select_skin_anxiety2]
+
     @params_filter = params[:select_filter]
 
     @select_sex = select_sex
@@ -605,6 +608,8 @@ class Admin::DataController < Admin::AdminApplicationController
     @select_makeup = select_makeup
     @select_area = select_area
     @select_senstive = select_senstive
+    @select_skin_anxiety1 = select_skin_anxiety1
+    @select_skin_anxiety2 = select_skin_anxiety2
     @select_skin_type_device = params[:select_skin_type_device]
     @select_skin_type_survey = params[:select_skin_type_survey]
 
@@ -638,6 +643,20 @@ class Admin::DataController < Admin::AdminApplicationController
     if !select_skin_type_survey.blank?
       select_skin_type_survey.split(",").each do |skin_type|
         @skin_type_survey_array.push(skin_type.to_i)
+      end
+    end
+
+    @select_skin_anxiety1_array = []
+    if !select_skin_anxiety1.blank?
+      select_skin_anxiety1.split(",").each do |anxiety|
+        @select_skin_anxiety1_array.push(anxiety.to_i)
+      end
+    end
+
+    @select_skin_anxiety2_array = []
+    if !select_skin_anxiety2.blank?
+      select_skin_anxiety2.split(",").each do |anxiety|
+        @select_skin_anxiety2_array.push(anxiety.to_i)
       end
     end
 
