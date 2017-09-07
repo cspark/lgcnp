@@ -162,6 +162,7 @@ Rails.application.routes.draw do
           put 'update_reservation'
           delete 'delete_schedule'
           get 'fcdata_month_list'
+          get 'fcdata_join_custinfo_month_list'
           get 'delete_schedule'
         end
       end

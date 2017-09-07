@@ -26,14 +26,23 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     Rails.logger.info filename
 
     make_dir_command = "mkdir "
-    make_dir_command << "public/Admin"
+    if params.has_key?(:staging)
+      make_dir_command << "public/Admin_Test"
+    else
+      make_dir_command << "public/Admin"
+    end
     Rails.logger.info make_dir_command
     system(make_dir_command)
     make_dir_command << "/Notice"
     system(make_dir_command)
 
     ftp_path = ""
-    ftp_path << "ftp://165.244.88.27/Admin/Notice/"
+    if params.has_key?(:staging)
+      ftp_path << "ftp://165.244.88.27/Admin_Test/Notice/"
+    else
+      ftp_path << "ftp://165.244.88.27/Admin/Notice/"
+    end
+
     ftp_path << filename
 
     file_get_command = "wget --user janus --password pielgahn2012#1 "
@@ -45,7 +54,12 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     # wget --user janus --password pielgahn2012#1 ftp://165.244.88.27/CNP/100-P/41-1/41-1_F_PW_SK_L_SIDE.jpg -N -P public/CNP/100-P/41-1
     system(file_get_command)
 
-    file_exist_command = "public/Admin/Notice/"
+    if params.has_key?(:staging)
+      file_exist_command = "public/Admin_Test/Notice/"
+    else
+      file_exist_command = "public/Admin/Notice/"
+    end
+
     file_exist_command << filename
 
     Rails.logger.info file_exist_command
@@ -73,10 +87,20 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     uploader.store!(params[:file])
 
     ftp_path = ""
-    ftp_path << "ftp://165.244.88.27/Admin/Notice/"
+
+    if params.has_key?(:staging)
+      ftp_path << "ftp://165.244.88.27/Admin_Test/Notice/"
+    else
+      ftp_path << "ftp://165.244.88.27/Admin/Notice/"
+    end
+
 
     file_path = ""
-    file_path << "public/Admin/Notice/"
+    if params.has_key?(:staging)
+      file_path << "public/Admin/Notice/"
+    else
+      file_path << "public/Admin_Test/Notice/"
+    end
     file_path << filename
     file_path << ".zip"
 
@@ -89,7 +113,11 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     Rails.logger.info file_copy_command
     system(file_copy_command)
 
-    file_exist_command = "public/Admin/Notice/"
+    if params.has_key?(:staging)
+      file_exist_command = "public/Admin_Test/Notice/"
+    else
+      file_exist_command = "public/Admin/Notice/"
+    end
     file_exist_command << filename
     file_exist_command << ".zip"
 
