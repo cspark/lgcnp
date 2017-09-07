@@ -5,15 +5,21 @@ class CurationUploader < CarrierWave::Uploader::Base
   storage :file
 
   def store_dir
-    "Admin/Curation"
+    if @@staging
+      "Admin_Test/Curation"
+    else
+      "Admin/Curation"
+    end
   end
 
    def filename
      "#{@@filename}.#{@@file_extension}"
    end
 
-   def temp_save_update_launcher(filename: nil)
+   def temp_save_update_launcher(filename: nil, staging: nil)
      @@filename = filename
      @@file_extension = "zip"
+     @@staging = false
+     @@staging = true  if staging
    end
 end

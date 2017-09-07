@@ -93,8 +93,12 @@ class Api::Curation::CurationHistoryController < Api::ApplicationController
     system(make_dir_command)
 
     uploader = CurationUploader.new
-    uploader.store_dir = "Admin_Test/Curation"
-    uploader.temp_save_update_launcher(filename: filename)
+    if params.has_key?(:staging)
+      uploader.temp_save_update_launcher(filename: filename, staging: true)
+    else
+      uploader.temp_save_update_launcher(filename: filename, staging: false)
+    end
+
     uploader.store!(params[:file])
 
     ftp_path = ""

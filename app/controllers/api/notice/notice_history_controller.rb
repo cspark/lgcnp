@@ -93,7 +93,12 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     system(make_dir_command)
 
     uploader = NoticeUploader.new
-    uploader.temp_save_update_launcher(filename: filename)
+    if params.has_key?(:staging)
+      uploader.temp_save_update_launcher(filename: filename, staging: true)
+    else
+      uploader.temp_save_update_launcher(filename: filename, staging: false)
+    end
+
     uploader.store!(params[:file])
 
     ftp_path = ""
