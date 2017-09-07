@@ -199,6 +199,8 @@ Rails.application.routes.draw do
     namespace :notice do
       resources :notice_history do
         collection do
+          get 'notice_download'
+          post 'notice_download'
         end
       end
     end
@@ -206,6 +208,8 @@ Rails.application.routes.draw do
     namespace :curation do
       resources :curation_history do
         collection do
+          get 'curation_download'
+          post 'curation_upload'
         end
       end
     end
