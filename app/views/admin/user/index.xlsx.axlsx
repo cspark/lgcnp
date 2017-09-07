@@ -43,11 +43,11 @@ wb.add_worksheet(name: "User") do |sheet|
         userPhone = user.phone
       end
 
-      if !user.sex.nil? && user.sex.include?("M")
-        sex = "남"
-      else
-        sex = "여"
+      translate_sex = "남"
+      if !user.sex.nil? && user.sex == "F"
+        translate_sex = "여"
       end
+
       is_agree_privacy = "X"
       if !user.is_agree_privacy.nil? && user.is_agree_privacy.include?("T")
         is_agree_privacy = "O"
@@ -117,8 +117,8 @@ wb.add_worksheet(name: "User") do |sheet|
         measureno = user.measureno.to_i
       end
 
-      sheet.add_row [user.custserial.to_i, user.ch_cd, userName, sex, user.birthyy+"-"+user.birthmm+"-"+user.birthdd,
+      sheet.add_row [user.custserial.to_i, user.ch_cd, userName, translate_sex, user.birthyy+"-"+user.birthmm+"-"+user.birthdd,
       userPhone, address, lastanaldate, measureno, user.uptdate,
-      is_agree_privacy, is_agree_thirdparty, is_agree_marketing, shop_cd], :types => [nil, :string, :string, :integer, :string]
+      is_agree_privacy, is_agree_thirdparty, is_agree_marketing, shop_cd], :types => [nil, :string, :string, :string, :string]
     end
 end
