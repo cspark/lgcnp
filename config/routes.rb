@@ -200,7 +200,7 @@ Rails.application.routes.draw do
       resources :notice_history do
         collection do
           get 'notice_download'
-          post 'notice_download'
+          post 'notice_upload'
         end
       end
     end
