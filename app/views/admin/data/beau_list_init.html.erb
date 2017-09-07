@@ -116,6 +116,87 @@
           <% end %>
 
           // 피부고민1
+          <% if @select_skin_anxiety1_array.include?(1) %>
+            $("input:checkbox[id=select_skin_anxiety1_1]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[id=select_skin_anxiety1_1]").prop("checked", false);
+          <% end %>
+
+          <% if @select_skin_anxiety1_array.include?(2) %>
+            $("input:checkbox[id=select_skin_anxiety1_2]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[id=select_skin_anxiety1_2]").prop("checked", false);
+          <% end %>
+
+          <% if @select_skin_anxiety1_array.include?(3) %>
+            $("input:checkbox[id=select_skin_anxiety1_3]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[id=select_skin_anxiety1_3]").prop("checked", false);
+          <% end %>
+
+          <% if @select_skin_anxiety1_array.include?(4) %>
+            $("input:checkbox[id=select_skin_anxiety1_4]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[id=select_skin_anxiety1_4]").prop("checked", false);
+          <% end %>
+
+          <% if @select_skin_anxiety1_array.include?(5) %>
+            $("input:checkbox[id=select_skin_anxiety1_5]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[id=select_skin_anxiety1_5]").prop("checked", false);
+          <% end %>
+
+          <% if @select_skin_anxiety1_array.include?(6) %>
+            $("input:checkbox[id=select_skin_anxiety1_6]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[id=select_skin_anxiety1_6]").prop("checked", false);
+          <% end %>
+
+          <% if @select_skin_anxiety1_array == [] && @custserial.nil? %>
+            $("input:checkbox[name=select_skin_anxiety1]").prop("checked", true);
+          <% end %>
+
+          // 피부고민2
+          <% if @select_skin_anxiety2_array.include?(1) %>
+            $("input:checkbox[id=select_skin_anxiety2_1]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[id=select_skin_anxiety2_1]").prop("checked", false);
+          <% end %>
+
+          <% if @select_skin_anxiety2_array.include?(2) %>
+            $("input:checkbox[id=select_skin_anxiety2_2]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[id=select_skin_anxiety2_2]").prop("checked", false);
+          <% end %>
+
+          <% if @select_skin_anxiety2_array.include?(3) %>
+            $("input:checkbox[id=select_skin_anxiety2_3]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[id=select_skin_anxiety2_3]").prop("checked", false);
+          <% end %>
+
+          <% if @select_skin_anxiety2_array.include?(4) %>
+            $("input:checkbox[id=select_skin_anxiety2_4]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[id=select_skin_anxiety2_4]").prop("checked", false);
+          <% end %>
+
+          <% if @select_skin_anxiety2_array.include?(5) %>
+            $("input:checkbox[id=select_skin_anxiety2_5]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[id=select_skin_anxiety2_5]").prop("checked", false);
+          <% end %>
+
+          <% if @select_skin_anxiety2_array.include?(6) %>
+            $("input:checkbox[id=select_skin_anxiety2_6]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[id=select_skin_anxiety2_6]").prop("checked", false);
+          <% end %>
+
+          <% if @select_skin_anxiety2_array == [] && @custserial.nil? %>
+            $("input:checkbox[name=select_skin_anxiety2]").prop("checked", true);
+          <% end %>
+
           $("#start_date").datepicker({
                   dateFormat: 'yy-mm-dd',
                   dayNamesMin: [
@@ -306,6 +387,18 @@
               select_skin_type_survey.push(this.value)
             }
         });
+        var select_skin_anxiety1 = []
+        $('input:checkbox[name="select_skin_anxiety1"]').each(function() {
+            if(this.checked){
+              select_skin_anxiety1.push(this.value)
+            }
+        });
+        var select_skin_anxiety2 = []
+        $('input:checkbox[name="select_skin_anxiety2"]').each(function() {
+            if(this.checked){
+              select_skin_anxiety2.push(this.value)
+            }
+        });
 
         url = ""
         url += "/admin/data_list_beau?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
@@ -325,6 +418,8 @@
         url += "&select_skin_type_device=" + select_skin_type_device;
         url += "&select_skin_type_survey=" + select_skin_type_survey;
         url += "&select_senstive=" + select_senstive;
+        url += "&select_skin_anxiety1=" + select_skin_anxiety1;
+        url += "&select_skin_anxiety2=" + select_skin_anxiety2;
         url += "&select_filter=" +filterStr;
         url += "&select_shop=" +$("#select_shop").val();
 
@@ -401,7 +496,7 @@
           :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
           :select_mode => @select_mode, :select_makeup => @select_makeup, :select_area => @select_area,
           :select_skin_type_device => @select_skin_type_device, :select_skin_type_survey => @select_skin_type_survey, :select_senstive => @select_senstive,
-          :select_filter => @params_filter, :select_channel => @ch_cd, :select_shop => @shop_cd, :isExcel => true) %>
+          :select_skin_anxiety1 => @select_skin_anxiety1, :select_skin_anxiety2 => @select_skin_anxiety2, :select_filter => @params_filter, :select_channel => @ch_cd, :select_shop => @shop_cd, :isExcel => true) %>
         </p>
       </div><br><br>
 
