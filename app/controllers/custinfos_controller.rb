@@ -143,6 +143,7 @@ class CustinfosController < ApplicationController
   def update_agreement
       is_agree_marketing = params[:is_agree_marketing]
       is_agree_thirdparty_info = params[:is_agree_thirdparty_info]
+      is_agree_privacy_residence = params[:is_agree_privacy_residence]
       serial = params[:serial]
 
       ch_cd = "CNP"
@@ -152,6 +153,7 @@ class CustinfosController < ApplicationController
 
       custinfo = Custinfo.where(custserial: serial).where(ch_cd: ch_cd).first
       custinfo.is_agree_marketing = is_agree_marketing
+      custinfo.is_agree_privacy_residence = is_agree_privacy_residence
       custinfo.is_agree_thirdparty_info = is_agree_thirdparty_info
       if custinfo.save
         render json: custinfo.to_api_hash, status: 200
@@ -172,6 +174,7 @@ class CustinfosController < ApplicationController
     is_agree_privacy = params[:is_agree_privacy]
     is_agree_thirdparty_info = params[:is_agree_thirdparty_info]
     is_agree_marketing = params[:is_agree_marketing]
+    is_agree_privacy_residence = params[:is_agree_privacy_residence]
     is_agree_after = params[:is_agree_after]
 
     time = Time.now
@@ -190,6 +193,7 @@ class CustinfosController < ApplicationController
     custinfo.is_agree_privacy = "T"
     custinfo.is_agree_thirdparty_info = is_agree_thirdparty_info
     custinfo.is_agree_marketing = is_agree_marketing
+    custinfo.is_agree_privacy_residence = is_agree_privacy_residence
     custinfo.is_agree_after = is_agree_after
     custinfo.sex = sex
     custinfo.age = age

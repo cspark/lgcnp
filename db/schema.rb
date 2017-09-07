@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170905043337) do
+ActiveRecord::Schema.define(version: 20170907005656) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20170905043337) do
   end
 
   create_table "custinfos", force: :cascade do |t|
-    t.string   "custserial",               null: false
+    t.string   "custserial",                 null: false
     t.string   "n_cust_id"
     t.string   "custname"
     t.string   "sex"
@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 20170905043337) do
     t.string   "lastanaldate"
     t.string   "measureno"
     t.string   "uptdate"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "is_agree_privacy"
     t.string   "is_agree_after"
     t.string   "is_agree_marketing"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20170905043337) do
     t.string   "ch_cd"
     t.string   "shop_cd"
     t.string   "gene_barcode"
+    t.string   "is_agree_privacy_residence"
   end
 
   create_table "fcafterinterviewrxes", force: :cascade do |t|
