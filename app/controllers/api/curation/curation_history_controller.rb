@@ -1,27 +1,27 @@
-class Api::Notice::NoticeHistoryController < Api::ApplicationController
+class Api::Curation::CurationHistoryController < Api::ApplicationController
   def index
-    list = FcnoticeHistory.all.order("end_date desc")
+    list = FccurationHistory.all.order("version_name asc")
     if list.count > 0
       render json: api_hash_for_list(list), status: :ok
     else
-      render :text => "FcnoticeHistory is not exist!!!", status: 204
+      render :text => "FccurationHistory is not exist!!!", status: 204
     end
   end
 
   def create
-    notice_history = FcnoticeHistory.new(permitted_params)
+    fccuration_history = FccurationHistory.new(permitted_params)
 
-    if notice_history.save
-      render json: notice_history.to_api_hash, status: :ok
+    if fccuration_history.save
+      render json: fccuration_history.to_api_hash, status: :ok
     else
       render :text => "Fail!!!", status: 404
     end
   end
 
-  def notice_download
+  def curation_download
     check_was_disk
 
-    Rails.logger.info "notice_download!!!"
+    Rails.logger.info "curation_download!!!"
     filename = params[:filename]
     Rails.logger.info filename
 
@@ -29,23 +29,23 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     make_dir_command << "public/Admin"
     Rails.logger.info make_dir_command
     system(make_dir_command)
-    make_dir_command << "/Notice"
+    make_dir_command << "/Curation"
     system(make_dir_command)
 
     ftp_path = ""
-    ftp_path << "ftp://165.244.88.27/Admin/Notice/"
+    ftp_path << "ftp://165.244.88.27/Admin/Curation/"
     ftp_path << filename
 
     file_get_command = "wget --user janus --password pielgahn2012#1 "
     file_get_command << ftp_path
     file_get_command << " -N -P "
-    file_get_command << "public/Admin/Notice"
+    file_get_command << "public/Admin/Curation"
 
     Rails.logger.info file_get_command
     # wget --user janus --password pielgahn2012#1 ftp://165.244.88.27/CNP/100-P/41-1/41-1_F_PW_SK_L_SIDE.jpg -N -P public/CNP/100-P/41-1
     system(file_get_command)
 
-    file_exist_command = "public/Admin/Notice/"
+    file_exist_command = "public/Admin/Curation/"
     file_exist_command << filename
 
     Rails.logger.info file_exist_command
@@ -56,27 +56,27 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     end
   end
 
-  def notice_upload
+  def curation_upload
     check_was_disk
 
-    Rails.logger.info "notice_upload!!!"
+    Rails.logger.info "curation_upload!!!"
     filename = params[:filename]
 
     make_dir_command = "mkdir "
     make_dir_command << "public/Admin"
     system(make_dir_command)
-    make_dir_command << "/Notice"
+    make_dir_command << "/Curation"
     system(make_dir_command)
 
-    uploader = NoticeUploader.new
+    uploader = CurationUploader.new
     uploader.temp_save_update_launcher(filename: filename)
     uploader.store!(params[:file])
 
     ftp_path = ""
-    ftp_path << "ftp://165.244.88.27/Admin/Notice/"
+    ftp_path << "ftp://165.244.88.27/Admin/Curation/"
 
     file_path = ""
-    file_path << "public/Admin/Notice/"
+    file_path << "public/Admin/Curation/"
     file_path << filename
     file_path << ".zip"
 
@@ -89,7 +89,7 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     Rails.logger.info file_copy_command
     system(file_copy_command)
 
-    file_exist_command = "public/Admin/Notice/"
+    file_exist_command = "public/Admin/Curation/"
     file_exist_command << filename
     file_exist_command << ".zip"
 
@@ -122,6 +122,6 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
 
   private
   def permitted_params
-    params.permit(:upload_date, :begin_date, :end_date, :file_name, :notice_comment)
+    params.permit(:upload_date, :version_name, :cura_entry_filename, :cura_comment)
   end
 end

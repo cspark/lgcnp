@@ -196,6 +196,20 @@ Rails.application.routes.draw do
       end
     end
 
+    namespace :notice do
+      resources :notice_history do
+        collection do
+        end
+      end
+    end
+
+    namespace :curation do
+      resources :curation_history do
+        collection do
+        end
+      end
+    end
+
     #CNP RX
     namespace :tablet do
       namespace :cnprx do
