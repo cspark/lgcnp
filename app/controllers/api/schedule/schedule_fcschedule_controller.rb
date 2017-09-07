@@ -112,7 +112,7 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
     end
   end
 
-  def fcdata_join_custinfo_month_list
+  def fcdata_join_custinfo_day_list
     if params.has_key?(:anal_yyyy) && params.has_key?(:anal_mmdd)
       anal_mm = params[:anal_mmdd][0,2]
       anal_dd = params[:anal_mmdd][2,4]
