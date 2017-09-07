@@ -724,7 +724,7 @@ class Admin::DataController < Admin::AdminApplicationController
       "UV광 색소침착 측정 이마", "UV광 색소침착 측정 코", "UV광 색소침착 측정 우측 눈옆","UV광 색소침착 측정 우측 눈밑","UV광 색소침착 측정 좌측 눈옆","UV광 색소침착 측정 좌측 눈밑","UV광 색소침착 측정 우측 볼","UV광 색소침착 측정 좌측 볼","UV광 색소침착 측정 평균","피부톤 측정 이마","피부톤 측정 코","피부톤 측정 우측 눈밑","피부톤 측정 좌측 눈밑","피부톤 측정 우측 볼","피부톤 측정 좌측 볼","피부톤 측정 평균",
       "피부톤 Red 이마","피부톤 Red 코","피부톤 Red 우측 눈밑","피부톤 Red 좌측 눈밑","피부톤 Red 우측 볼","피부톤 Red 좌측 볼","피부톤 Red 평균","피부톤 Green 이마","피부톤 Green 코","피부톤 Green 우측 눈밑","피부톤 Green 좌측 눈밑","피부톤 Green 우측 볼","피부톤 Green 좌측 볼","피부톤 Green 평균",
       "피부톤 Blue 이마","피부톤 Blue 코","피부톤 Blue 우측 눈밑","피부톤 Blue 좌측 눈밑","피부톤 Blue 우측 볼","피부톤 Blue 좌측 볼","피부톤 Blue 평균","피부색 L 값","피부색 a 값","피부색 b 값","피지 E 값 (T 존)","피지 E 값 (U 존)","피부톤","선 민감도","피부타입(야누스 측정)","피부타입(설문 로직)","동안각도 점수 우측","동안각도 점수 좌측",
-      "포피린 E 값(T존)","포피린 E 값(U존)","매장코드","피부고민 1순위","피부고민 2순위"]
+      "포피린 E 값(T존)","포피린 E 값(U존)","매장코드","피부고민 1순위","피부고민 2순위","피부고민 1순위 최근","피부고민 2순위 최근"]
     else
       @excel_name = ["시리얼","이름","측정 당시 만 나이","성별","바코드","생년월일","분석 횟수","채널","측정 부위","진단 날짜","업데이트 일"]
       @select_filter.each do |filter|
@@ -918,6 +918,10 @@ class Admin::DataController < Admin::AdminApplicationController
           filter = "피부고민 1순위"
         elsif filter.include?("worry_skin_2")
           filter = "피부고민 2순위"
+        elsif filter.include?("worry_skin_1_new")
+          filter = "피부고민 1순위 최근"
+        elsif filter.include?("worry_skin_2_new")
+          filter = "피부고민 2순위 최근"
         else
           filter = filter
         end
