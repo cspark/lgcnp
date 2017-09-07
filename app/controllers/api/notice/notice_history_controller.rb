@@ -48,7 +48,12 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     file_get_command = "wget --user janus --password pielgahn2012#1 "
     file_get_command << ftp_path
     file_get_command << " -N -P "
-    file_get_command << "public/Admin/Notice"
+    if params.has_key?(:staging)
+      file_get_command << "public/Admin_Test/Notice"
+    else
+      file_get_command << "public/Admin/Notice"
+    end
+
 
     Rails.logger.info file_get_command
     # wget --user janus --password pielgahn2012#1 ftp://165.244.88.27/CNP/100-P/41-1/41-1_F_PW_SK_L_SIDE.jpg -N -P public/CNP/100-P/41-1
@@ -77,7 +82,12 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     filename = params[:filename]
 
     make_dir_command = "mkdir "
-    make_dir_command << "public/Admin"
+    if params.has_key?(:staging)
+      make_dir_command << "public/Admin_Test"
+    else
+      make_dir_command << "public/Admin"
+    end
+
     system(make_dir_command)
     make_dir_command << "/Notice"
     system(make_dir_command)

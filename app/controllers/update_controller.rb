@@ -40,26 +40,43 @@ class UpdateController < ApplicationController
     Rails.logger.info filename
 
     make_dir_command = "mkdir "
-    make_dir_command << "public/Admin"
+    if params.has_key?(:staging)
+      make_dir_command << "public/Admin_Test"
+    else
+      make_dir_command << "public/Admin"
+    end
     Rails.logger.info make_dir_command
     system(make_dir_command)
     make_dir_command << "/Update"
     system(make_dir_command)
 
     ftp_path = ""
-    ftp_path << "ftp://165.244.88.27/Admin/Update/"
+    if params.has_key?(:staging)
+      ftp_path << "ftp://165.244.88.27/Admin_Test/Update/"
+    else
+      ftp_path << "ftp://165.244.88.27/Admin/Update/"
+    end
+
     ftp_path << filename
 
     file_get_command = "wget --user janus --password pielgahn2012#1 "
     file_get_command << ftp_path
     file_get_command << " -N -P "
-    file_get_command << "public/Admin/Update"
+    if params.has_key?(:staging)
+      file_get_command << "public/Admin_Test/Update"
+    else
+      file_get_command << "public/Admin/Update"
+    end
 
     Rails.logger.info file_get_command
     # wget --user janus --password pielgahn2012#1 ftp://165.244.88.27/CNP/100-P/41-1/41-1_F_PW_SK_L_SIDE.jpg -N -P public/CNP/100-P/41-1
     system(file_get_command)
 
-    file_exist_command = "public/Admin/Update/"
+    if params.has_key?(:staging)
+      file_exist_command = "public/Admin_Test/Update/"
+    else
+      file_exist_command = "public/Admin/Update/"
+    end
     file_exist_command << filename
 
     Rails.logger.info file_exist_command
@@ -79,7 +96,12 @@ class UpdateController < ApplicationController
     filename = params[:filename]
 
     make_dir_command = "mkdir "
-    make_dir_command << "public/Admin"
+    if params.has_key?(:staging)
+      make_dir_command << "public/Admin_Test"
+    else
+      make_dir_command << "public/Admin"
+    end
+
     system(make_dir_command)
     make_dir_command << "/Update"
     system(make_dir_command)
@@ -89,10 +111,20 @@ class UpdateController < ApplicationController
     uploader.store!(params[:file])
 
     ftp_path = ""
-    ftp_path << "ftp://165.244.88.27/Admin/Update/"
+    if params.has_key?(:staging)
+      ftp_path << "ftp://165.244.88.27/Admin_Test/Update/"
+    else
+      ftp_path << "ftp://165.244.88.27/Admin/Update/"
+    end
+
 
     file_path = ""
-    file_path << "public/Admin/Update/"
+    if params.has_key?(:staging)
+      file_path << "public/Admin_Test/Update/"
+    else
+      file_path << "public/Admin/Update/"
+    end
+
     file_path << filename
     file_path << ".zip"
 
@@ -105,7 +137,12 @@ class UpdateController < ApplicationController
     Rails.logger.info file_copy_command
     system(file_copy_command)
 
-    file_exist_command = "public/Admin/Update/"
+    if params.has_key?(:staging)
+      file_exist_command = "public/Admin_Test/Update/"
+    else
+      file_exist_command = "public/Admin/Update/"
+    end
+
     file_exist_command << filename
     file_exist_command << ".zip"
 
@@ -115,86 +152,6 @@ class UpdateController < ApplicationController
     else
       render :text => "Fail!!!", status: 404
     end
-  end
-
-  def move_update_launcher
-    check_was_disk
-
-    Rails.logger.info "update_launcher_download!!!"
-    filename = params[:filename]
-    origin_path = params[:origin_path]
-    destination_path = params[:destination_path]
-    file_extension = params[:file_extension]
-    Rails.logger.info filename
-
-    make_dir_command = "mkdir "
-    make_dir_command << "public"
-    make_dir_command << origin_path
-    Rails.logger.info make_dir_command
-    system(make_dir_command)
-    make_dir_command << "/Update"
-    system(make_dir_command)
-
-    ftp_path = ""
-    ftp_path << "ftp://165.244.88.27"
-    ftp_path << origin_path
-    ftp_path << "/"
-
-    file_get_command = "wget --user janus --password pielgahn2012#1 "
-    file_get_command << ftp_path
-    file_get_command << filename
-    file_get_command << "."
-    file_get_command << file_extension
-    file_get_command << " -N -P "
-    file_get_command << "public"
-    file_get_command << origin_path
-
-    Rails.logger.info file_get_command
-    # wget --user janus --password pielgahn2012#1 ftp://165.244.88.27/Admin/Update/Update_2-17-805-0.zip -N -P public/Admin/Update
-    system(file_get_command)
-
-    # file_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' -Q '-DELE 839-1_Sym_L_1.jpg' --ftp-create-dirs"
-
-    file_delete_command = "curl -p --insecure "
-    file_delete_command << ftp_path
-    file_delete_command << " -u 'janus:pielgahn2012#1' -Q '-DELE "
-    file_delete_command << filename
-    file_delete_command << "."
-    file_delete_command << file_extension
-    file_delete_command << "' --ftp-create-dirs"
-    system(file_delete_command)
-
-
-    file_path = ""
-    file_path << "public"
-    file_path << origin_path
-    file_path << "/"
-    file_path << filename
-    file_path << "."
-    file_path << file_extension
-
-    file_copy_command = ""
-    file_copy_command = "curl -p --insecure '"
-    file_copy_command << "ftp://165.244.88.27"
-    file_copy_command << destination_path
-    file_copy_command << "' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/"
-    file_copy_command << file_path
-    file_copy_command << "' --ftp-create-dirs"
-    Rails.logger.info file_copy_command
-    system(file_copy_command)
-
-    file_exist_command = "public/Admin/Update/"
-    file_exist_command << filename
-
-    if File.exist?(file_exist_command)
-      render :text => "Success!!!", status: :ok
-    else
-      render :text => "Fail!!!", status: 404
-    end
-
-    # file_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' -Q '-DELE 839-1_Sym_L_1.jpg' --ftp-create-dirs"
-    # folder_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1' -u 'janus:pielgahn2012#1' -Q '-RMD 839-1' --ftp-create-dirs"
-
   end
 
   def check_was_disk

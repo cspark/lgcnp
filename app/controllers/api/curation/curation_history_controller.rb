@@ -26,26 +26,45 @@ class Api::Curation::CurationHistoryController < Api::ApplicationController
     Rails.logger.info filename
 
     make_dir_command = "mkdir "
-    make_dir_command << "public/Admin"
+    if params.has_key?(:staging)
+      make_dir_command << "public/Admin_Test"
+    else
+      make_dir_command << "public/Admin"
+    end
+
     Rails.logger.info make_dir_command
     system(make_dir_command)
     make_dir_command << "/Curation"
     system(make_dir_command)
 
     ftp_path = ""
-    ftp_path << "ftp://165.244.88.27/Admin/Curation/"
+    if params.has_key?(:staging)
+      ftp_path << "ftp://165.244.88.27/Admin_Test/Curation/"
+    else
+      ftp_path << "ftp://165.244.88.27/Admin/Curation/"
+    end
+
     ftp_path << filename
 
     file_get_command = "wget --user janus --password pielgahn2012#1 "
     file_get_command << ftp_path
     file_get_command << " -N -P "
-    file_get_command << "public/Admin/Curation"
+    if params.has_key?(:staging)
+      file_get_command << "public/Admin_Test/Curation"
+    else
+      file_get_command << "public/Admin/Curation"
+    end
 
     Rails.logger.info file_get_command
     # wget --user janus --password pielgahn2012#1 ftp://165.244.88.27/CNP/100-P/41-1/41-1_F_PW_SK_L_SIDE.jpg -N -P public/CNP/100-P/41-1
     system(file_get_command)
 
-    file_exist_command = "public/Admin/Curation/"
+    if params.has_key?(:staging)
+      file_exist_command = "public/Admin_Test/Curation/"
+    else
+      file_exist_command = "public/Admin/Curation/"
+    end
+
     file_exist_command << filename
 
     Rails.logger.info file_exist_command
@@ -63,7 +82,12 @@ class Api::Curation::CurationHistoryController < Api::ApplicationController
     filename = params[:filename]
 
     make_dir_command = "mkdir "
-    make_dir_command << "public/Admin"
+    if params.has_key?(:staging)
+      make_dir_command << "public/Admin_Test"
+    else
+      make_dir_command << "public/Admin"
+    end
+
     system(make_dir_command)
     make_dir_command << "/Curation"
     system(make_dir_command)
@@ -73,10 +97,19 @@ class Api::Curation::CurationHistoryController < Api::ApplicationController
     uploader.store!(params[:file])
 
     ftp_path = ""
-    ftp_path << "ftp://165.244.88.27/Admin/Curation/"
+    if params.has_key?(:staging)
+      ftp_path << "ftp://165.244.88.27/Admin_Test/Curation/"
+    else
+      ftp_path << "ftp://165.244.88.27/Admin/Curation/"
+    end
 
     file_path = ""
-    file_path << "public/Admin/Curation/"
+    if params.has_key?(:staging)
+      file_path << "public/Admin_Test/Curation/"
+    else
+      file_path << "public/Admin/Curation/"
+    end
+
     file_path << filename
     file_path << ".zip"
 
@@ -89,7 +122,12 @@ class Api::Curation::CurationHistoryController < Api::ApplicationController
     Rails.logger.info file_copy_command
     system(file_copy_command)
 
-    file_exist_command = "public/Admin/Curation/"
+    if params.has_key?(:staging)
+      file_exist_command = "public/Admin_Test/Curation/"
+    else
+      file_exist_command = "public/Admin/Curation/"
+    end
+
     file_exist_command << filename
     file_exist_command << ".zip"
 

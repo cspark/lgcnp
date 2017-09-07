@@ -40,6 +40,9 @@ set :port, 10022
 set :linked_dirs, fetch(:linked_dirs, []).push('public/Admin/Update')
 set :linked_dirs, fetch(:linked_dirs, []).push('public/Admin/Notice')
 set :linked_dirs, fetch(:linked_dirs, []).push('public/Admin/Curation')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/Admin_Test/Update')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/Admin_Test/Notice')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/Admin_Test/Curation')
 
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
