@@ -301,7 +301,7 @@
           <td id="before_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
           <td id="after_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
 
-          <% if !tabletinterview.is_quick_mode.nil %>
+          <% if !tabletinterview.is_quick_mode.nil? %>
             <% if tabletinterview.is_quick_mode == "T" %>
               <% is_quick_mode = "O" %>
             <% else %>
