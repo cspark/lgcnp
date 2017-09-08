@@ -216,9 +216,9 @@
       진단으로 나온 화장품: <font id="before_made_cosmetic_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
       최종으로 선택된 화장품: <font id="after_made_cosmetic_<%= @tabletinterview.custserial.to_i %>_<%= @tabletinterview.ch_cd %>_<%= @tabletinterview.fcdata_id %>"></font><br>
       퀵모드 여부: <font><%= is_quick_mode %></font><br>
-      베이스 제품 LOT 번호: <font><%= is_quick_mode %></font><br>
-      앰플 1 LOT 번호: <font><%= is_quick_mode %></font><br>
-      앰플 2 LOT 번호: <font><%= is_quick_mode %></font><br>
+      베이스 제품 LOT 번호: <font><%= base_lot %></font><br>
+      앰플 1 LOT 번호: <font><%= ampoule_1_lot %></font><br>
+      앰플 2 LOT 번호: <font><%= ampoule_2_lot %></font><br>
       <font size="2"> A1: <%= @tabletinterview.a_1.to_i %> / A2: <%= @tabletinterview.a_2.to_i %> / A3: <%= @tabletinterview.a_3.to_i %><br>
       B1: <%= @tabletinterview.b_1.to_i %> / B2: <%= @tabletinterview.b_2.to_i %> / B3: <%= @tabletinterview.b_3.to_i %> / B4: <%= @tabletinterview.b_4.to_i %><br>
       C1: <%= @tabletinterview.c_1.to_i %><br>
