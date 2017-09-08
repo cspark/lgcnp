@@ -112,9 +112,9 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
 
     file_path = ""
     if params.has_key?(:staging)
-      file_path << "public/Admin/Notice/"
-    else
       file_path << "public/Admin_Test/Notice/"
+    else
+      file_path << "public/Admin/Notice/"
     end
     file_path << filename
     file_path << ".zip"
