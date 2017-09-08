@@ -252,6 +252,42 @@
               <td class="text-center" id="before_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
             <% elsif filter.include?("after_made_cosmetic") %>
               <td class="text-center" id="after_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
+              <% elsif filter.include?("after_made_cosmetic") %>
+                <td class="text-center" id="after_made_cosmetic_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>"></td>
+
+            <% elsif filter.include?("is_quick_mode") %>
+              <% if !tabletinterview.is_quick_mode.nil? %>
+                <% if tabletinterview.is_quick_mode == "T" %>
+                  <% is_quick_mode = "O" %>
+                <% else %>
+                  <% is_quick_mode = "X" %>
+                <% end %>
+              <% else %>
+                <% is_quick_mode = "-" %>
+              <% end %>
+              <td><%= is_quick_mode %></td>
+            <% elsif filter.include?("base_lot") %>
+              <% if !tabletinterview.base_lot.nil? && tabletinterview.base_lot != "null" %>
+                <% base_lot = tabletinterview.base_lot %>
+              <% else %>
+                <% base_lot = "-" %>
+              <% end %>
+              <td><%= base_lot %></td>
+            <% elsif filter.include?("ampoule_1_lot") %>
+              <% if !tabletinterview.ampoule_1_lot.nil? && tabletinterview.ampoule_1_lot != "null" %>
+                <% ampoule_1_lot = tabletinterview.ampoule_1_lot %>
+              <% else %>
+                <% ampoule_1_lot = "-" %>
+              <% end %>
+              <td><%= ampoule_1_lot %></td>
+            <% elsif filter.include?("ampoule_1_lot") %>
+              <% if !tabletinterview.ampoule_2_lot.nil? && tabletinterview.ampoule_2_lot != "null" %>
+                <% ampoule_2_lot = tabletinterview.ampoule_2_lot %>
+              <% else %>
+                <% ampoule_2_lot = "-" %>
+              <% end %>
+              <td><%= ampoule_2_lot %></td>
+
             <% elsif !fcdata.nil? && filter.include?("pr_graph") %>
               <td class="text-center"><%= 5-fcdata[:pr_graph].to_i %></td>
             <% elsif !fcdata.nil? && filter.include?("sb_graph") %>

@@ -327,19 +327,19 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
             is_quick_mode = "-"
           end
 
-          if !tabletinterview.base_lot.nil?
+          if !tabletinterview.base_lot.nil? && tabletinterview.base_lot != "null"
             base_lot = tabletinterview.base_lot
           else
             base_lot = "-"
           end
 
-          if !tabletinterview.ampoule_1_lot.nil?
+          if !tabletinterview.ampoule_1_lot.nil? && tabletinterview.ampoule_1_lot != "null"
             ampoule_1_lot = tabletinterview.ampoule_1_lot
           else
             ampoule_1_lot = "-"
           end
 
-          if !tabletinterview.ampoule_2_lot.nil?
+          if !tabletinterview.ampoule_2_lot.nil? && tabletinterview.ampoule_2_lot != "null"
             ampoule_2_lot = tabletinterview.ampoule_2_lot
           else
             ampoule_2_lot = "-"
