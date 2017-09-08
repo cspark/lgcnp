@@ -379,13 +379,13 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
               elsif filter.include?("after_made_cosmetic")
                 temp << after_made_cosmetic
               elsif filter.include?("is_quick_mode")
-                temp << "퀵 모드 여부"
+                temp << is_quick_mode
               elsif filter.include?("base_lot")
-                temp << "베이스 제품 LOT 번호"
+                temp << base_lot
               elsif filter.include?("ampoule_1_lot")
-                temp << "앰플 1 LOT 번호"
+                temp << ampoule_1_lot
               elsif filter.include?("ampoule_2_lot")
-                temp << "앰플 2 LOT 번호"
+                temp << ampoule_2_lot
               elsif filter.include?("pr_graph")
                 temp << pr_graph
               elsif filter.include?("sb_graph")

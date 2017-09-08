@@ -312,21 +312,21 @@
           <% end %>
           <td><%= is_quick_mode %></td>
 
-          <% if !tabletinterview.base_lot.nil? %>
+          <% if !tabletinterview.base_lot.nil? && tabletinterview.base_lot != "null" %>
             <% base_lot = tabletinterview.base_lot %>
           <% else %>
             <% base_lot = "-" %>
           <% end %>
           <td><%= base_lot %></td>
 
-          <% if !tabletinterview.ampoule_1_lot.nil? %>
+          <% if !tabletinterview.ampoule_1_lot.nil? && tabletinterview.ampoule_1_lot != "null" %>
             <% ampoule_1_lot = tabletinterview.ampoule_1_lot %>
           <% else %>
             <% ampoule_1_lot = "-" %>
           <% end %>
           <td><%= ampoule_1_lot %></td>
 
-          <% if !tabletinterview.ampoule_2_lot.nil? %>
+          <% if !tabletinterview.ampoule_2_lot.nil? && tabletinterview.ampoule_2_lot != "null" %>
             <% ampoule_2_lot = tabletinterview.ampoule_2_lot %>
           <% else %>
             <% ampoule_2_lot = "-" %>
@@ -334,7 +334,14 @@
           <td><%= ampoule_2_lot %></td>
 
           <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
-
+          <% if !fcdata.nil? %>
+            <% fcdata = fcdata.to_api_hash_for_admin %>
+            <td class="text-center"><%= 5-fcdata[:pr_graph].to_i %></td>
+            <td class="text-center"><%= 5-fcdata[:sb_graph].to_i %></td>
+            <td class="text-center"><%= 5-fcdata[:pp_graph].to_i %></td>
+            <td class="text-center"><%= 5-fcdata[:wr_graph].to_i %></td>
+            <td class="text-center"><%= 5-fcdata[:el_graph].to_i %></td>
+          <% end %>
         <% end %>
       </tr>
 

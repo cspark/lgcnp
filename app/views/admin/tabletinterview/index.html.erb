@@ -444,6 +444,14 @@
                 <th>진단으로 나온 화장품</th>
               <% elsif filter.include?("after_made_cosmetic") %>
                 <th>최종으로 선택된 화장품</th>
+              <% elsif filter.include?("is_quick_mode") %>
+                <th>퀵 모드 여부</th>
+              <% elsif filter.include?("base_lot") %>
+                <th>베이스 제품 LOT 번호</th>
+              <% elsif filter.include?("ampoule_1_lot") %>
+                <th>앰플 1 LOT 번호</th>
+              <% elsif filter.include?("ampoule_2_lot") %>
+                <th>앰플 2 LOT 번호</th>
               <% elsif filter.include?("pr_graph")  %>
                 <th>모공 점수</th>
               <% elsif filter.include?("sb_graph")  %>
