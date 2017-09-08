@@ -27,6 +27,18 @@ class Api::ApplicationController < ActionController::Base
     end
   end
 
+  def api_hash_for_fcdata_month_list(list_of_objs, page: nil, list_key:nil, add_page_info: true)
+    list_key = list_key || controller_name
+    result = {}
+    result[list_key] = list_of_objs.map do |obj|
+      if block_given?
+        yield(obj)
+      else
+        obj.try(:to_api_hash_for_fcdata_month_list)
+      end
+    end
+  end
+
   def api_hash_for_list_fcdata_join_custinfo(list_of_objs, page: nil, list_key:nil, add_page_info: true)
     list_key = list_key || controller_name
     result = {}
@@ -34,7 +46,7 @@ class Api::ApplicationController < ActionController::Base
       if block_given?
         yield(obj)
       else
-        obj.try(:api_hash_for_list_join_custinfo)
+        obj.try(:to_api_hash_for_list_fcdata_join_custinfo)
       end
     end
   end

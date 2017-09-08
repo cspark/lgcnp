@@ -106,7 +106,7 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
 
     list = Fcdata.fcdata_month_list(shop_cd: params[:shop_cd], measuredate: measuredate)
     if list.count > 0
-      render json: api_hash_for_user_list(list), status: :ok
+      render json: api_hash_for_fcdata_month_list(list), status: :ok
     else
       render :text => "Fcdata is not exist!!!", status: 204
     end

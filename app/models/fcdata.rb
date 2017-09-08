@@ -227,7 +227,16 @@ class Fcdata < ApplicationRecord
     }
   end
 
-  def api_hash_for_list_join_custinfo
+  def to_api_hash_for_fcdata_month_list
+    {
+      custserial: custserial,
+      measuredate: measuredate,
+      measureno: measureno.to_i.to_s,
+      shop_cd: shop_cd
+    }
+  end
+
+  def to_api_hash_for_list_fcdata_join_custinfo
     {
       custserial: custserial,
       custname: custinfo_custname(custserial: custserial),
@@ -237,7 +246,7 @@ class Fcdata < ApplicationRecord
       birthdd: custinfo_birthdd(custserial: custserial),
       phone: custinfo_phone(custserial: custserial),
       measuredate: measuredate,
-      measureno: measureno.to_i,
+      measureno: measureno.to_i.to_s,
       shop_cd: shop_cd,
       m_skintype: m_skintype,
       colortype: colortype,
