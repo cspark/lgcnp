@@ -312,21 +312,21 @@
           <% end %>
           <td><%= is_quick_mode %></td>
 
-          <% if !tabletinterview.base_lot.nil %>
+          <% if !tabletinterview.base_lot.nil? %>
             <% base_lot = tabletinterview.base_lot %>
           <% else %>
             <% base_lot = "-" %>
           <% end %>
           <td><%= base_lot %></td>
 
-          <% if !tabletinterview.ampoule_1_lot.nil %>
+          <% if !tabletinterview.ampoule_1_lot.nil? %>
             <% ampoule_1_lot = tabletinterview.ampoule_1_lot %>
           <% else %>
             <% ampoule_1_lot = "-" %>
           <% end %>
           <td><%= ampoule_1_lot %></td>
 
-          <% if !tabletinterview.ampoule_2_lot.nil %>
+          <% if !tabletinterview.ampoule_2_lot.nil? %>
             <% ampoule_2_lot = tabletinterview.ampoule_2_lot %>
           <% else %>
             <% ampoule_2_lot = "-" %>
