@@ -28,15 +28,15 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
 
           skin_type = ""
           if !tabletinterview.skin_type.nil?
-            if tabletinterview.skin_type == "skin_type_gunsung"
+            if tabletinterview.skin_type.include?("skin_type_gunsung")
               skin_type = "건성"
-            elsif tabletinterview.skin_type == "skin_type_gun_boggab"
+            elsif tabletinterview.skin_type.include?("skin_type_gun_boggab")
               skin_type = "건복합성"
-            elsif tabletinterview.skin_type == "skin_type_jisung"
-              skin_type = "지성"
-            elsif tabletinterview.skin_type == "skin_type_jisung_boghab"
+            elsif tabletinterview.skin_type.include?("skin_type_jisung_boghab")
               skin_type = "지복합성"
-            elsif tabletinterview.skin_type == "skin_type_jungsung"
+            elsif tabletinterview.skin_type.include?("skin_type_jisung")
+              skin_type = "지성"
+            elsif tabletinterview.skin_type.include?("skin_type_jungsung")
               skin_type = "중성"
             end
             if !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("senstive")
@@ -317,6 +317,34 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
            custname = ""
           end
 
+          if !tabletinterview.is_quick_mode.nil?
+            if tabletinterview.is_quick_mode == "T"
+              is_quick_mode = "O"
+            else
+              is_quick_mode = "X"
+            end
+          else
+            is_quick_mode = "-"
+          end
+
+          if !tabletinterview.base_lot.nil?
+            base_lot = tabletinterview.base_lot
+          else
+            base_lot = "-"
+          end
+
+          if !tabletinterview.ampoule_1_lot.nil?
+            ampoule_1_lot = tabletinterview.ampoule_1_lot
+          else
+            ampoule_1_lot = "-"
+          end
+
+          if !tabletinterview.ampoule_2_lot.nil?
+            ampoule_2_lot = tabletinterview.ampoule_2_lot
+          else
+            ampoule_2_lot = "-"
+          end
+
           temp = [custname, tabletinterview.custserial.to_i, tabletinterview.uptdate, custinfo.ch_cd]
           if @select_filter != []
             @select_filter.each do |filter|
@@ -350,6 +378,14 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
                 temp << before_made_cosmetic
               elsif filter.include?("after_made_cosmetic")
                 temp << after_made_cosmetic
+              elsif filter.include?("is_quick_mode")
+                temp << "퀵 모드 여부"
+              elsif filter.include?("base_lot")
+                temp << "베이스 제품 LOT 번호"
+              elsif filter.include?("ampoule_1_lot")
+                temp << "앰플 1 LOT 번호"
+              elsif filter.include?("ampoule_2_lot")
+                temp << "앰플 2 LOT 번호"
               elsif filter.include?("pr_graph")
                 temp << pr_graph
               elsif filter.include?("sb_graph")
@@ -371,7 +407,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
             tabletinterview.d_1.to_i, tabletinterview.d_2.to_i, tabletinterview.d_3.to_i, tabletinterview.d_4.to_i, tabletinterview.d_5.to_i,
             tabletinterview.d_6.to_i, tabletinterview.d_7.to_i, tabletinterview.d_8.to_i, tabletinterview.d_9.to_i, tabletinterview.d_10.to_i,
             skin_type, before_solution_1_new, before_solution_2_new, before_solution_1, before_solution_2, after_solution_1, after_solution_2, before_serum, after_serum, before_ample_1, after_ample_1,
-            before_ample_2, after_ample_2, before_made_cosmetic, after_made_cosmetic,
+            before_ample_2, after_ample_2, before_made_cosmetic, after_made_cosmetic, is_quick_mode, base_lot, ampoule_1_lot, ampoule_2_lot,
             pr_graph, sb_graph, pp_graph, wr_graph, el_graph]
           end
     end

@@ -127,15 +127,15 @@
             var skin_type = ""
             console.log(value);
             try{
-              if(value == "skin_type_gunsung")
+              if(value.includes("skin_type_gunsung"))
                 skin_type = "건성";
-              else if(value == "skin_type_gun_boggab")
+              else if(value.includes("skin_type_gun_boggab"))
                 skin_type = "건복합성";
-              else if(value == "skin_type_jisung")
-                skin_type = "지성";
-              else if(value == "skin_type_jisung_boghab")
+              else if(value.includes("skin_type_jisung_boghab"))
                 skin_type = "지복합성";
-              else if(value == "skin_type_jungsung")
+              else if(value.includes("skin_type_jisung"))
+                skin_type = "지성";
+              else if(value.includes("skin_type_jungsung"))
                 skin_type = "중성";
 
               if(value.includes("senstive"))
@@ -334,14 +334,7 @@
           <td><%= ampoule_2_lot %></td>
 
           <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
-          <% if !fcdata.nil? %>
-            <% fcdata = fcdata.to_api_hash_for_admin %>
-            <td class="text-center"><%= 5-fcdata[:pr_graph].to_i %></td>
-            <td class="text-center"><%= 5-fcdata[:sb_graph].to_i %></td>
-            <td class="text-center"><%= 5-fcdata[:pp_graph].to_i %></td>
-            <td class="text-center"><%= 5-fcdata[:wr_graph].to_i %></td>
-            <td class="text-center"><%= 5-fcdata[:el_graph].to_i %></td>
-          <% end %>
+
         <% end %>
       </tr>
 

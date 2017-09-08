@@ -81,6 +81,15 @@
           $("#graph_check_detail").hide();
         }
       });
+      $(document).on("click", "#lot_check", function (e) {
+        if (!$("input:checkbox[id='lot_check']").is(":checked")){
+          $("input:checkbox[class='lot_check']").prop("checked", false);
+          $("#lot_check_detail").show();
+        } else {
+          $("input:checkbox[class='lot_check']").prop("checked", true);
+          $("#lot_check_detail").hide();
+        }
+      });
 
       $(document).on("click", "#all_check", function (e) {
         if (!$("input:checkbox[id='all_check']").is(":checked")){
@@ -121,7 +130,7 @@
             <font style="float:left;"><b>최종으로 선택된 솔루션 전체</b></font>
             <input type="checkbox" name="check_box" value="after_solution_all" id="after_solution_check" style="float:left; margin-left:5px;">
             <div id="after_solution_check_detail" style="display:none; float:left; margin-left:20px;">
-              <font>최종으로 나온 솔루션1 </font><input type="checkbox" type="checkbox" name="check_box" class="after_solution_check" value="after_solution_1" id="after_solution_2">
+              <font>최종으로 나온 솔루션1 </font><input type="checkbox" type="checkbox" name="check_box" class="after_solution_check" value="after_solution_1" id="after_solution_1">
               <font style="margin-left:5px;">최종으로 나온 솔루션2 </font><input type="checkbox" name="check_box" class="after_solution_check" value="after_solution_2" id="after_solution_2">
             </div>
           </div><br>
@@ -163,6 +172,23 @@
           <div style="display: block; float:left; margin-top:10px;">
             <font style="float:left;"><b>최종으로 선택된 화장품</b></font>
             <input style="margin-left:5px;" type="checkbox" name="check_box" class="after_made_cosmetic_check" value="after_made_cosmetic" id="after_made_cosmetic">
+          </div><br>
+
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>퀵 모드 여부</b></font>
+            <input style="margin-left:5px;" type="checkbox" name="check_box" class="is_quick_mode_check" value="is_quick_mode" id="is_quick_mode">
+          </div><br>
+
+          <hr style="margin-top: 20px; margin-bottom: 0px;"/>
+          <div style="display: block; float:left; margin-top:10px;">
+            <font style="float:left;"><b>LOT 번호 전체</b></font>
+            <input type="checkbox" name="check_box" value="lot_all" id="lot_check" style="float:left; margin-left:5px;">
+            <div id="lot_check_detail" style="display:none; float:left; margin-left:20px;">
+              <font>베이스 제품 LOT 번호 </font><input type="checkbox" type="checkbox" name="check_box" class="lot_check" value="base_lot" id="base_lot">
+              <font style="margin-left:5px;">앰플 1 LOT 번호 </font><input type="checkbox" name="check_box" class="lot_check" value="ampoule_1_lot" id="ampoule_1_lot">
+              <font style="margin-left:5px;">앰플 2 LOT 번호 </font><input type="checkbox" name="check_box" class="lot_check" value="ampoule_2_lot" id="ampoule_2_lot">
+            </div>
           </div><br>
           <hr style="margin-top: 20px; margin-bottom: 0px;"/>
           <div style="display: block; float:left; margin-top:10px;">
