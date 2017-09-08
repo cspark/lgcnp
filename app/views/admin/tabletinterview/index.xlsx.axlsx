@@ -28,15 +28,15 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
 
           skin_type = ""
           if !tabletinterview.skin_type.nil?
-            if tabletinterview.skin_type.include?("skin_type_gunsung")
+            if tabletinterview.skin_type == "skin_type_gunsung"
               skin_type = "건성"
-            elsif tabletinterview.skin_type.include?("skin_type_gun_boggab")
+            elsif tabletinterview.skin_type == "skin_type_gun_boggab"
               skin_type = "건복합성"
-            elsif tabletinterview.skin_type.include?("skin_type_jisung")
+            elsif tabletinterview.skin_type == "skin_type_jisung"
               skin_type = "지성"
-            elsif tabletinterview.skin_type.include?("skin_type_jisung_boghab")
+            elsif tabletinterview.skin_type == "skin_type_jisung_boghab"
               skin_type = "지복합성"
-            elsif tabletinterview.skin_type.include?("skin_type_jungsung")
+            elsif tabletinterview.skin_type == "skin_type_jungsung"
               skin_type = "중성"
             end
             if !tabletinterview.skin_type.nil? && tabletinterview.skin_type.include?("senstive")
