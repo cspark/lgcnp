@@ -111,13 +111,13 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     temp_serial_array7 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 7001).pluck(:custserial).uniq
     temp_measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
-    tablet_interviews = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array).where.not(before_serum: nil)
-    tablet_interviews2 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array2).where(fcdata_id: temp_measureno_array).where.not(before_serum: nil)
-    tablet_interviews3 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array3).where(fcdata_id: temp_measureno_array).where.not(before_serum: nil)
-    tablet_interviews4 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array4).where(fcdata_id: temp_measureno_array).where.not(before_serum: nil)
-    tablet_interviews5 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array5).where(fcdata_id: temp_measureno_array).where.not(before_serum: nil)
-    tablet_interviews6 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array6).where(fcdata_id: temp_measureno_array).where.not(before_serum: nil)
-    tablet_interviews7 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array7).where(fcdata_id: temp_measureno_array).where.not(before_serum: nil)
+    tablet_interviews = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array)
+    tablet_interviews2 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array2).where(fcdata_id: temp_measureno_array)
+    tablet_interviews3 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array3).where(fcdata_id: temp_measureno_array)
+    tablet_interviews4 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array4).where(fcdata_id: temp_measureno_array)
+    tablet_interviews5 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array5).where(fcdata_id: temp_measureno_array)
+    tablet_interviews6 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array6).where(fcdata_id: temp_measureno_array)
+    tablet_interviews7 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array7).where(fcdata_id: temp_measureno_array)
     tablet_interviews = tablet_interviews.or(tablet_interviews2).or(tablet_interviews3).or(tablet_interviews4).or(tablet_interviews5).or(tablet_interviews6).or(tablet_interviews7)
 
     scoped = tablet_interviews

@@ -48,7 +48,7 @@ class GenerateTestModel < ApplicationRecord
       f.d_8 = i
       f.d_9 = i
       f.d_10 = i
-      f.skin_type = "skin_type_gunsung"
+      f.skin_type = "skin_type_jisung_boghab_senstive"
       f.before_solution_1 = "elasticity solution"
       f.after_solution_1 = "elasticity solution"
       f.before_solution_2 = "elasticity solution"
@@ -63,12 +63,12 @@ class GenerateTestModel < ApplicationRecord
       f.after_made_cosmetic = "skin control EX"
       f.uptdate = "2017-04-05-12-00"
       f.ch_cd = "CNP"
-      f.fcdata_id = 1.to_s
-      f.tablet_interview_id = 1
-      f.is_quick_mode = "T"
+      f.fcdata_id = 2.to_s
+      f.tablet_interview_id = 2
+      f.is_quick_mode = "F"
       f.is_agree_cant_refund = "T"
       f.is_agree_after = "T"
-      f.base_lot = "1"
+      f.base_lot = "2"
       f.save
       i += 1
     end
