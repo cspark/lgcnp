@@ -340,7 +340,7 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           end
 
           if !tabletinterview.ampoule_2_lot.nil? && tabletinterview.ampoule_2_lot != "null"
-            ampoule_2_lot = URI.decode((tabletinterview.ampoule_2_lot)
+            ampoule_2_lot = URI.decode(tabletinterview.ampoule_2_lot)
           else
             ampoule_2_lot = "-"
           end
