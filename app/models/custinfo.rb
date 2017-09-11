@@ -22,6 +22,7 @@ class Custinfo < ApplicationRecord
       is_agree_thirdparty_info: is_agree_thirdparty_info,
       is_agree_marketing: is_agree_marketing,
       is_agree_after: is_agree_after,
+      is_agree_privacy_residence: is_agree_privacy_residence,
       address: address
     }
   end
@@ -45,6 +46,7 @@ class Custinfo < ApplicationRecord
       is_agree_thirdparty_info: is_agree_thirdparty_info,
       is_agree_marketing: is_agree_marketing,
       is_agree_after: is_agree_after,
+      is_agree_privacy_residence: is_agree_privacy_residence,
       address: address
     }
   end
