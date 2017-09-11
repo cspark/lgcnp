@@ -328,19 +328,19 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
           end
 
           if !tabletinterview.base_lot.nil? && tabletinterview.base_lot != "null"
-            base_lot = tabletinterview.base_lot
+            base_lot = URI.decode(tabletinterview.base_lot)
           else
             base_lot = "-"
           end
 
           if !tabletinterview.ampoule_1_lot.nil? && tabletinterview.ampoule_1_lot != "null"
-            ampoule_1_lot = tabletinterview.ampoule_1_lot
+            ampoule_1_lot = URI.decode(tabletinterview.ampoule_1_lot)
           else
             ampoule_1_lot = "-"
           end
 
           if !tabletinterview.ampoule_2_lot.nil? && tabletinterview.ampoule_2_lot != "null"
-            ampoule_2_lot = tabletinterview.ampoule_2_lot
+            ampoule_2_lot = URI.decode((tabletinterview.ampoule_2_lot)
           else
             ampoule_2_lot = "-"
           end
