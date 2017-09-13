@@ -175,6 +175,9 @@ Rails.application.routes.draw do
         end
       end
       resources :admin_user do
+        collection do
+          get 'user_list'
+        end
       end
       resources :admin_fcdata do
       end

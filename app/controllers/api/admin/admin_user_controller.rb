@@ -20,6 +20,32 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     end
   end
 
+  def user_list
+    # Custinfo 테이블에서 고객이름,생년월일,핸드폰,성별 파라미터로 고객 조회
+    if !params[:birthmm].nil? && params[:birthmm].length == 1
+      birthmm = "0".concat(params[:birthmm])
+    else
+      birthmm = params[:birthmm]
+    end
+    if !params[:birthdd].nil? && params[:birthdd].length == 1
+      birthdd = "0".concat(params[:birthdd])
+    else
+      birthdd = params[:birthdd]
+    end
+    
+    custname = nil
+    if params.has_key?(:custname)
+      custname = URI.encode(params[:custname])
+    end
+
+    list = Custinfo.list(custname: custname, birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, phone: params[:phone])
+    if list.count > 0
+      render json: api_hash_for_list(list), status: :ok
+    else
+      render :text => "Custinfo is not exist!!!", status: 204
+    end
+  end
+
   def update
     # Janus3 고객DB에 존재하는 고객인 경우 L-Care 핸드폰번호만 Update
     # address 추가

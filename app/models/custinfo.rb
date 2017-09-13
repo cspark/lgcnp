@@ -94,4 +94,14 @@ class Custinfo < ApplicationRecord
       end
     end
   end
+
+  def self.list(custname: nil, birthyy: nil, birthmm: nil, birthdd: nil, phone: nil)
+    scoped = Custinfo.all
+    scoped = scoped.where(custname: custname) if custname.present?
+    scoped = scoped.where(birthyy: birthyy) if birthyy.present?
+    scoped = scoped.where(birthmm: birthmm) if birthmm.present?
+    scoped = scoped.where(birthdd: birthdd) if birthdd.present?
+    scoped = scoped.where(phone: phone) if phone.present?
+    scoped.order('custserial asc')
+  end
 end
