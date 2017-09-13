@@ -20,6 +20,6 @@ self.primary_key = :shop_cd, :shop_name if Rails.env.production? || Rails.env.st
     scoped = scoped.where(ch_cd: ch_cd) if ch_cd.present?
     scoped = scoped.where(tel_no: tel_no) if tel_no.present?
     scoped = scoped.where(address: address) if address.present?
-    return scoped
+    scoped.order('shop_name asc')
   end
 end

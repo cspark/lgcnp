@@ -9,7 +9,7 @@ class Api::Admin::AdminFcshopController < Api::ApplicationController
         render :text => "Shop is not exist!!! !!!", status: 404
       end
     else
-      list = Fcshop.list(shop_cd: params[:shop_cd], shop_name: params[:shop_name], ch_cd: params[:ch_cd], tel_no: params[:tel_no], address: params[:address]).order('shop_cd DESC')
+      list = Fcshop.list(shop_cd: params[:shop_cd], shop_name: params[:shop_name], ch_cd: params[:ch_cd], tel_no: params[:tel_no], address: params[:address])
       if list.count > 0
         render json: api_hash_for_list(list), status: :ok
       else
