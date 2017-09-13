@@ -23,7 +23,9 @@ class Custinfo < ApplicationRecord
       is_agree_marketing: is_agree_marketing,
       is_agree_after: is_agree_after,
       is_agree_privacy_residence: is_agree_privacy_residence,
-      address: address
+      address: address,
+      gene_barcode: gene_barcode.to_s,
+      shop_cd: shop_cd
     }
   end
 
@@ -47,7 +49,9 @@ class Custinfo < ApplicationRecord
       is_agree_marketing: is_agree_marketing,
       is_agree_after: is_agree_after,
       is_agree_privacy_residence: is_agree_privacy_residence,
-      address: address
+      address: address,
+      gene_barcode: gene_barcode.to_s,
+      shop_cd: shop_cd
     }
   end
 
@@ -56,7 +60,9 @@ class Custinfo < ApplicationRecord
       custserial: custserial,
       ch_cd: ch_cd,
       n_cust_id: n_cust_id,
-      measureno: measureno.to_s
+      measureno: measureno.to_s,
+      gene_barcode: gene_barcode.to_s,
+      shop_cd: shop_cd
     }
   end
 
@@ -66,7 +72,8 @@ class Custinfo < ApplicationRecord
       ch_cd: ch_cd,
       n_cust_id: n_cust_id,
       measureno: measureno.to_s,
-      gene_barcode: gene_barcode.to_s
+      gene_barcode: gene_barcode.to_s,
+      shop_cd: shop_cd
     }
   end
 
