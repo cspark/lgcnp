@@ -63,6 +63,12 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       if params.has_key?(:is_agree_thirdparty_info)
         user.is_agree_thirdparty_info = params[:is_agree_thirdparty_info]
       end
+      if params.has_key?(:address)
+        user.address = params[:address]
+      end
+      if params.has_key?(:phone)
+        user.phone = params[:phone]
+      end
 
       if user.save
         render json: user.to_api_hash_for_yanus, status: :ok
