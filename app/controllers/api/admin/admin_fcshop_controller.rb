@@ -64,6 +64,19 @@ class Api::Admin::AdminFcshopController < Api::ApplicationController
     end
   end
 
+  def destroy
+    fcshop = Fcshop.where(shop_cd: params[:id]).first
+    if !fcshop.nil?
+      if fcshop.delete
+        render :text => "Delete Complete", status: 200
+      else
+        render :text => "Delete Fail", status: 404
+      end
+    else
+      render :text => "Fcshop is not exist!!!", status: 204
+    end
+  end
+
   private
   def permitted_params
     params.permit(:shop_cd, :shop_name, :ch_cd, :tel_no, :address, :version_name)

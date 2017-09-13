@@ -32,7 +32,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     else
       birthdd = params[:birthdd]
     end
-    
+
     custname = nil
     if params.has_key?(:custname)
       custname = URI.encode(params[:custname])
@@ -40,7 +40,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
 
     list = Custinfo.list(custname: custname, birthyy: params[:birthyy], birthmm: birthmm, birthdd: birthdd, phone: params[:phone])
     if list.count > 0
-      render json: api_hash_for_list(list), status: :ok
+      render json: api_hash_for_user_list(list), status: :ok
     else
       render :text => "Custinfo is not exist!!!", status: 204
     end
