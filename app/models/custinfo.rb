@@ -50,7 +50,7 @@ class Custinfo < ApplicationRecord
       is_agree_after: is_agree_after,
       is_agree_privacy_residence: is_agree_privacy_residence,
       address: address,
-      gene_barcode: gene_barcode.to_s,
+      gene_barcode: gene_barcode,
       shop_cd: shop_cd
     }
   end
@@ -61,7 +61,7 @@ class Custinfo < ApplicationRecord
       ch_cd: ch_cd,
       n_cust_id: n_cust_id,
       measureno: measureno.to_s,
-      gene_barcode: gene_barcode.to_s,
+      gene_barcode: gene_barcode,
       shop_cd: shop_cd
     }
   end
@@ -72,7 +72,7 @@ class Custinfo < ApplicationRecord
       ch_cd: ch_cd,
       n_cust_id: n_cust_id,
       measureno: measureno.to_s,
-      gene_barcode: gene_barcode.to_s,
+      gene_barcode: gene_barcode,
       shop_cd: shop_cd
     }
   end
