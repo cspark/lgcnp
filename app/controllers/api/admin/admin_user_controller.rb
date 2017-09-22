@@ -95,68 +95,72 @@ class Api::Admin::AdminUserController < Api::ApplicationController
         measureno = user_list.order("measureno desc").first.measureno.to_i
       end
 
-      if user_list.count > 0 && !measureno.nil? && Rails.env.production? || Rails.env.staging?
-        (1..measureno.to_i).each do |num|
-          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_Sym_L_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_Sym_L_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_Sym_L_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_Sym_L_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_Sym_R_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_Sym_R_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_Sym_R_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_Sym_R_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_UV_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_UV_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_UV_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_UV_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_WH_PWC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_WH_PWC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_WH_PWC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_WH_PWC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_WH_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_WH_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_WH_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_WH_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_UVGR_SBC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_UVGR_SBC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_UVGR_SBC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_UVGR_SBC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_UV_GR_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_UV_GR_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_UV_GR_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_UV_GR_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_PL_PLC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_PL_PLC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_PL_PLC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_PL_PLC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_UVGR_UVC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_UVGR_UVC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_UVGR_UVC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_UVGR_UVC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_PL_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_PL_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_PL_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_PL_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "1", type: "_F_FM_PL_UVC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "2", type: "_F_FM_PL_UVC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "3", type: "_F_FM_PL_UVC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: "4", type: "_F_FM_PL_UVC_", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_F_FM_WH_PWC_W", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_F_FM_WH_E", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_Sp_Pore_Cust", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_Sp_Spot_Cust", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_Sp_Wr_Cust", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_F_PW_SK_L_SIDE", lastMeasureno: measureno)
-          image_remove(serial: serial, measureno: num.to_s, number: nil, type: "_END", lastMeasureno: measureno)
+      if user_list.count > 0 && !params.has_key?(:staging) && Rails.env.production? || Rails.env.staging?
+        fcdata_list = Fcdata.where(custserial: serial)
+
+        fcdata_list.each do |fcdata|
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "1", type: "_Sym_L_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "2", type: "_Sym_L_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "3", type: "_Sym_L_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "4", type: "_Sym_L_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "1", type: "_Sym_R_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "2", type: "_Sym_R_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "3", type: "_Sym_R_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "4", type: "_Sym_R_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "1", type: "_F_FM_UV_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "2", type: "_F_FM_UV_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "3", type: "_F_FM_UV_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "4", type: "_F_FM_UV_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "1", type: "_F_FM_WH_PWC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "2", type: "_F_FM_WH_PWC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "3", type: "_F_FM_WH_PWC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "4", type: "_F_FM_WH_PWC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "1", type: "_F_FM_WH_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "2", type: "_F_FM_WH_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "3", type: "_F_FM_WH_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "4", type: "_F_FM_WH_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "1", type: "_F_FM_UVGR_SBC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "2", type: "_F_FM_UVGR_SBC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "3", type: "_F_FM_UVGR_SBC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "4", type: "_F_FM_UVGR_SBC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "1", type: "_F_FM_UV_GR_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "2", type: "_F_FM_UV_GR_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "3", type: "_F_FM_UV_GR_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "4", type: "_F_FM_UV_GR_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "1", type: "_F_FM_PL_PLC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "2", type: "_F_FM_PL_PLC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "3", type: "_F_FM_PL_PLC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "4", type: "_F_FM_PL_PLC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "1", type: "_F_FM_UVGR_UVC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "2", type: "_F_FM_UVGR_UVC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "3", type: "_F_FM_UVGR_UVC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "4", type: "_F_FM_UVGR_UVC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "1", type: "_F_FM_PL_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "2", type: "_F_FM_PL_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "3", type: "_F_FM_PL_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "4", type: "_F_FM_PL_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "1", type: "_F_FM_PL_UVC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "2", type: "_F_FM_PL_UVC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "3", type: "_F_FM_PL_UVC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "4", type: "_F_FM_PL_UVC_",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: nil, type: "_F_FM_WH_PWC_W",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: nil, type: "_F_FM_WH_E",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: nil, type: "_Sp_Pore_Cust",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: nil, type: "_Sp_Spot_Cust",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: nil, type: "_Sp_Wr_Cust",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: nil, type: "_F_PW_SK_L_SIDE",  ch_cd: ch_cd)
+          image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: nil, type: "_END",  ch_cd: ch_cd)
         end
       end
       # serial = "839"
       if user_list.count > 0
         Fctabletinterview.where(custserial: serial).delete_all
+        Fctabletinterviewrx.where(custserial: serial).delete_all
         Fcafterinterview.where(custserial: serial).delete_all
         Fcdata.where(custserial: serial).delete_all
         Fcpos.where(custserial: serial).delete_all
         Fcinterview.where(custserial: serial).delete_all
+        FcgeneInterview.where(custserial: serial).delete_all
         user_list.delete_all
       end
 
@@ -170,22 +174,21 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     end
   end
 
-  def image_remove(serial: nil, measureno: nil, number: nil, type: nil, lastMeasureno: nil)
+  def image_remove(serial: nil, measureno: nil, number: nil, type: nil, ch_cd: nil)
     #이미지 삭제하기
     Rails.logger.info serial
     # serial = "839"
     # measureno = "1"
     # number = "1"
     # type = "_Sym_L_"
-    user = Custinfo.where(custserial: serial, measureno: lastMeasureno).first
     sub_folder_name = (((serial.to_i / 100) * 100) + 100).to_s
     sub_folder_name << "-P"
     Rails.logger.info sub_folder_name
 
     ftp_path = ""
-    if !user.ch_cd.nil?
+    if !ch_cd.nil?
       ftp_path = "'ftp://165.244.88.27/"
-      ftp_path << user.ch_cd.to_s
+      ftp_path << ch_cd.to_s
       ftp_path << "/"
     else
       ftp_path = "'ftp://165.244.88.27/CNP/'"
@@ -231,9 +234,9 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       system(folder_delete_command)
 
       rm_rf_command = "rm -rf "
-      if !user.ch_cd.nil?
+      if !ch_cd.nil?
         rm_rf_command << "public/"
-        rm_rf_command << user.ch_cd.to_s
+        rm_rf_command << ch_cd.to_s
         rm_rf_command << "/"
       else
         rm_rf_command << "public/CNP/"

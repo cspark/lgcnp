@@ -218,6 +218,11 @@ Rails.application.routes.draw do
       end
     end
 
+    namespace :fcadmin do
+      resources :fcadmin_user do
+      end
+    end
+
     #CNP RX
     namespace :tablet do
       namespace :cnprx do

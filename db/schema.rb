@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170907005656) do
+ActiveRecord::Schema.define(version: 20170922083549) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20170907005656) do
     t.string   "ch_cd"
     t.string   "shop_cd"
     t.string   "role"
+    t.string   "password_salt"
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
@@ -64,6 +65,16 @@ ActiveRecord::Schema.define(version: 20170907005656) do
     t.string   "shop_cd"
     t.string   "gene_barcode"
     t.string   "is_agree_privacy_residence"
+  end
+
+  create_table "fcadmin_users", force: :cascade do |t|
+    t.string   "admin_id",        null: false
+    t.string   "encrypted_pw",    null: false
+    t.string   "pw_uptdate"
+    t.string   "create_date"
+    t.string   "last_login_date"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "fcafterinterviewrxes", force: :cascade do |t|
