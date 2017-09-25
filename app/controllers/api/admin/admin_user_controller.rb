@@ -91,13 +91,9 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     user_list = Custinfo.where(custserial: serial)
     Rails.logger.info user_list.count
     if user_list.count > 0
-      if !user_list.order("measureno desc").first.nil?
-        measureno = user_list.order("measureno desc").first.measureno.to_i
-      end
-
-      if user_list.count > 0 && !params.has_key?(:staging) && Rails.env.production? || Rails.env.staging?
+      if user_list.count > 0 && Rails.env.production? || Rails.env.staging?
         fcdata_list = Fcdata.where(custserial: serial)
-
+        Rails.logger.info fcdata_list.count
         fcdata_list.each do |fcdata|
           image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "1", type: "_Sym_L_",  ch_cd: ch_cd)
           image_remove(serial: fcdata.serial, measureno: fcdata.measureno.to_s, number: "2", type: "_Sym_L_",  ch_cd: ch_cd)
