@@ -15,7 +15,6 @@ class FcadminUser < ApplicationRecord
   end
 
   def to_api_hash_has_encrypted_pw
-    Rails.logger.info "to_api_hash_has_encrypted_pw"
     {
       admin_id: admin_id,
       encrypted_pw: encrypted_pw,
