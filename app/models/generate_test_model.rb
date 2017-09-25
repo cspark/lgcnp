@@ -4,23 +4,23 @@ class GenerateTestModel < ApplicationRecord
 
   def self.generate_test_custinfo
     c = Custinfo.new
-    c.custserial = "2"
-    c.n_cust_id = "2"
-    c.custname = "%EA%B9%80%ED%9D%AC%EC%A0%95"
-    c.sex = "F"
+    c.custserial = "1311"
+    c.n_cust_id = "1311"
+    c.custname = "%EA%B9%80%EC%88%98%EB%AF%BC"
+    c.sex = "M"
     c.birthyy = "1985"
-    c.birthmm = "12"
-    c.birthdd = "16"
+    c.birthmm = "11"
+    c.birthdd = "21"
     c.age = "33"
-    c.phone = "0123456789"
+    c.phone = "01086919942"
     c.lastanaldate = "2017-08-08-18-00"
-    c.measureno = "1"
+    c.measureno = "2"
     c.uptdate = "2017/08/08"
     c.is_agree_privacy = "T"
     c.is_agree_after = "T"
     c.is_agree_marketing = "T"
     c.is_agree_thirdparty_info = "T"
-    c.ch_cd = "BEAU"
+    c.ch_cd = "RLAB"
     c.save
   end
 
@@ -155,11 +155,11 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        f = Fcdata.new
-       f.custserial = 1.to_s
-       f.ch_cd = "CNP"
+       f.custserial = 1311.to_s
+       f.ch_cd = "RLAB"
        f.faceno = "M"
        f.measuredate = "2017-08-21-18-00-00"
-       f.measureno = 1
+       f.measureno = 2
        f.uptdate = "2017-08-21"
        f.mo_1 = 1.0
        f.mo_7 = 1.0
@@ -249,7 +249,7 @@ class GenerateTestModel < ApplicationRecord
        f.score_r = 1
        f.score_l = 1
        f.m_skintype = 1
-       f.shop_cd = "59100"
+       f.shop_cd = "1005"
        f.worry_skin_1 = "1"
        f.worry_skin_2 = "2"
        f.save

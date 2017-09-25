@@ -51,6 +51,18 @@ class Api::ApplicationController < ActionController::Base
     end
   end
 
+  def api_hash_for_list_has_encrypted_pw(list_of_objs, page: nil, list_key:nil, add_page_info: true)
+    list_key = list_key || controller_name
+    result = {}
+    result[list_key] = list_of_objs.map do |obj|
+      if block_given?
+        yield(obj)
+      else
+        obj.try(:to_api_hash_has_encrypted_pw)
+      end
+    end
+  end
+
   protected
   def authenticate
     Rails.logger.info "authenticate!!!!"

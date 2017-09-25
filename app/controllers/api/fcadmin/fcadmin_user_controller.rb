@@ -3,7 +3,11 @@ class Api::Fcadmin::FcadminUserController < Api::ApplicationController
     Rails.logger.info ""
     list = FcadminUser.list(admin_id: params[:admin_id])
     if list.count > 0
-      render json: api_hash_for_list(list), status: :ok
+      if params.has_key?(:admin_id)
+        render json: api_hash_for_list_has_encrypted_pw(list), status: :ok
+      else
+        render json: api_hash_for_list(list), status: :ok
+      end
     else
       render :text => "FcadminUser is not exist!!!", status: 204
     end
