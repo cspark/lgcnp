@@ -144,6 +144,8 @@ class Api::Admin::AdminUserController < Api::ApplicationController
           image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_Sp_Pore_Cust",  ch_cd: fcdata.ch_cd)
           image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_Sp_Spot_Cust",  ch_cd: fcdata.ch_cd)
           image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_Sp_Wr_Cust",  ch_cd: fcdata.ch_cd)
+          image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_Sp_Ela_Cust",  ch_cd: fcdata.ch_cd)
+          image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_Sp_Tr_Cust",  ch_cd: fcdata.ch_cd)
           image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_F_PW_SK_L_SIDE",  ch_cd: fcdata.ch_cd)
 
           image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_3D_FM_WH_Forehead", ch_cd: fcdata.ch_cd)
