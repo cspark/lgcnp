@@ -145,6 +145,16 @@ class Api::Admin::AdminUserController < Api::ApplicationController
           image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_Sp_Spot_Cust",  ch_cd: fcdata.ch_cd)
           image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_Sp_Wr_Cust",  ch_cd: fcdata.ch_cd)
           image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_F_PW_SK_L_SIDE",  ch_cd: fcdata.ch_cd)
+
+          image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_3D_FM_WH_Forehead", ch_cd: fcdata.ch_cd)
+          image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_3D_FM_WH_LE_Side", ch_cd: fcdata.ch_cd)
+          image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_3D_FM_WH_LE_Under", ch_cd: fcdata.ch_cd)
+          image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_3D_FM_WH_L_Side", ch_cd: fcdata.ch_cd)
+          image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_3D_FM_WH_Nose", ch_cd: fcdata.ch_cd)
+          image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_3D_FM_WH_RE_Side", ch_cd: fcdata.ch_cd)
+          image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_3D_FM_WH_RE_Under", ch_cd: fcdata.ch_cd)
+          image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_3D_FM_WH_R_Side", ch_cd: fcdata.ch_cd)
+
           image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: nil, type: "_END",  ch_cd: fcdata.ch_cd)
         end
       end
