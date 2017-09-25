@@ -1,5 +1,6 @@
-class Api::Admin::FcadminUserController < Api::ApplicationController
+class Api::Fcadmin::FcadminUserController < Api::ApplicationController
   def index
+    Rails.logger.info ""
     list = FcadminUser.list(admin_id: params[:admin_id])
     if list.count > 0
       render json: api_hash_for_list(list), status: :ok
