@@ -238,6 +238,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       folder_delete_command << " -u 'janus:pielgahn2012#1' -Q '-RMD "
       folder_delete_command << serial.to_i.to_s+ "-" +measureno.to_i.to_s
       folder_delete_command << "' --ftp-create-dirs"
+      Rails.logger.info "FTP FOLDER DELETE!!"
       Rails.logger.info folder_delete_command
       system(folder_delete_command)
 
