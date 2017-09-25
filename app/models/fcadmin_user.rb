@@ -3,7 +3,7 @@ require 'composite_primary_keys'
 
 class FcadminUser < ApplicationRecord
   self.table_name = "fcadmin_user" if Rails.env.production? || Rails.env.staging?
-  self.primary_key = :admin_id,:encrypted_password  if Rails.env.production? || Rails.env.staging?
+  self.primary_key = :admin_id  if Rails.env.production? || Rails.env.staging?
 
   def to_api_hash
     {
