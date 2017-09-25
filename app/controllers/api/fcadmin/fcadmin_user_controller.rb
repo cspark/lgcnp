@@ -22,7 +22,9 @@ class Api::Fcadmin::FcadminUserController < Api::ApplicationController
   def update
     # Janus3 고객DB에 존재하는 고객인 경우 L-Care 핸드폰번호만 Update
     # address 추가
-    fcadmin_user = FcadminUser.where(admin_id: params[:id]).first
+    Rails.logger.info ""
+    Rails.logger.info params[:id]
+    fcadmin_user = FcadminUser.where(admin_id: params[:id]).order("admin_id asc").first
     if !fcadmin_user.nil?
       if params.has_key?(:encrypted_pw)
         fcadmin_user.encrypted_pw = params[:encrypted_pw]
@@ -46,7 +48,7 @@ class Api::Fcadmin::FcadminUserController < Api::ApplicationController
 
   def destroy
     Rails.logger.info "destroy!!!"
-    fcadmin_user = FcadminUser.where(admin_id: params[:id]).first
+    fcadmin_user = FcadminUser.where(admin_id: params[:id]).order("admin_id asc").first
     if !fcadmin_user.nil?
       if fcadmin_user.delete
         render :text => "Delete Complete", status: 200
