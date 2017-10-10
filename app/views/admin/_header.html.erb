@@ -100,6 +100,11 @@
           location.href = "/admin/privacy_access_history"
         });
 
+        $("#edit_admin_user").click(function(){
+          var email = '<%= $user.email %>'
+          window.open("/admin/manager/edit_manager?email=" + email, "/users/manager/edit_manager?email=" + email, "scrollbars=1,resizable=1,height=400,width=600");
+        });
+
         $("#logout").click(function(){
           var formData = new FormData($(this)[0]);
 
@@ -247,6 +252,9 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
            <li id="logout"><a href="#"><span class="glyphicon glyphicon-log-in"></span>로그아웃</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+           <li id="edit_admin_user"><a href="#"><span class="glyphicon glyphicon-log-in"></span>회원정보 수정</a></li>
         </ul>
       </div>
     </nav>

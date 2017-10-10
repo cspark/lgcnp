@@ -66,7 +66,7 @@
 
         $(document).on("click", ".edit-admin", function (e) {
           var email = $(this).attr('id')
-          window.open("/admin/manager/edit_manager?email=" + email, "/users/manager/edit_manager?email=" + email, "scrollbars=1,resizable=1,height=400,width=500");
+          window.open("/admin/manager/edit_manager?email=" + email, "/users/manager/edit_manager?email=" + email, "scrollbars=1,resizable=1,height=400,width=600");
         });
 
         $('#submit').click(function(){
@@ -74,7 +74,7 @@
         });
 
         $('#add_manager').click(function(){
-          window.open("/admin/manager/add_manager", "/admin/manager/add_manager", "scrollbars=1,resizable=1,height=400,width=500");
+          window.open("/admin/manager/add_manager", "/admin/manager/add_manager", "scrollbars=1,resizable=1,height=400,width=600");
         });
 
         $('#login_history').click(function(){
