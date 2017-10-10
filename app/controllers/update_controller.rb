@@ -1,6 +1,6 @@
 class UpdateController < ApplicationController
   def index
-    list = FcupdateHistory.list(version_name: params[:version_name])
+    list = FcupdateHistory.list(version_name: params[:version_name], ch_cd: params[:ch_cd])
 
     if list.count > 0
       render json: api_hash_for_list(list), status: :ok

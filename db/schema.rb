@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170922083549) do
+ActiveRecord::Schema.define(version: 20171010075143) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -261,6 +261,8 @@ ActiveRecord::Schema.define(version: 20170922083549) do
     t.integer  "el_cnt_8"
     t.integer  "worry_skin_new_1"
     t.integer  "worry_skin_new_2"
+    t.integer  "uf_l0"
+    t.integer  "uf_l_total"
   end
 
   create_table "fcgene_interviews", force: :cascade do |t|
@@ -567,6 +569,7 @@ ActiveRecord::Schema.define(version: 20170922083549) do
     t.integer "upt_entry_num"
     t.integer "upt_total_filesize"
     t.string  "upt_comment"
+    t.string  "ch_cd"
   end
 
   create_table "lcare_users", force: :cascade do |t|

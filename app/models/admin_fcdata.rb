@@ -120,7 +120,9 @@ class AdminFcdata < ApplicationRecord
        el_cnt_7: el_cnt_7,
        el_cnt_8: el_cnt_8,
        worry_skin_new_1: worry_skin_new_1,
-       worry_skin_new_2: worry_skin_new_2
+       worry_skin_new_2: worry_skin_new_2,
+       uf_l0: uf_l0,
+       uf_l_total: uf_l_total
     }
   end
 

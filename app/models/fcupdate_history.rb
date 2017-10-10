@@ -9,13 +9,15 @@ class FcupdateHistory < ApplicationRecord
       launcher_yn: launcher_yn,
       upt_entry_num: upt_entry_num,
       upt_total_filesize: upt_total_filesize,
-      upt_comment: upt_comment
+      upt_comment: upt_comment,
+      ch_cd: ch_cd
     }
   end
 
-  def self.list(version_name: nil)
+  def self.list(version_name: nil, ch_cd: nil)
     scoped = FcupdateHistory.all
     scoped = scoped.where(version_name: version_name) if version_name.present?
+    scoped = scoped.where(ch_cd: ch_cd) if ch_cd.present?
     scoped.order('release_date ASC')
   end
 end

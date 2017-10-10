@@ -1,6 +1,6 @@
 class Api::Notice::NoticeHistoryController < Api::ApplicationController
   def index
-    list = FcnoticeHistory.all.order("end_date desc")
+    list = FcnoticeHistory.list(ch_cd: params[:ch_cd])
     if list.count > 0
       render json: api_hash_for_list(list), status: :ok
     else
@@ -15,6 +15,28 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
       render json: notice_history.to_api_hash, status: :ok
     else
       render :text => "Fail!!!", status: 404
+    end
+  end
+
+  def update
+    fcnotice_history = FcnoticeHistory.where(upload_date: params[:id]).first
+    if !fcnotice_history.nil?
+      if params[:begin_date].present?
+        fcnotice_history.begin_date = params[:begin_date]
+      end
+      if params[:end_date].present?
+        fcnotice_history.end_date = params[:end_date]
+      end
+      if params[:notice_comment].present?
+        fcnotice_history.notice_comment = params[:notice_comment]
+      end
+      if fcnotice_history.save
+        render json: fcnotice_history.to_api_hash, status: :ok
+      else
+        render :text => "Fail!!!", status: 404
+      end
+    else
+      render json: "FcnoticeHistory is not exist!!!", status: 204
     end
   end
 
@@ -165,6 +187,6 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
 
   private
   def permitted_params
-    params.permit(:upload_date, :begin_date, :end_date, :file_name, :notice_comment)
+    params.permit(:upload_date, :begin_date, :end_date, :file_name, :notice_comment, ch_cd: ch_cd)
   end
 end

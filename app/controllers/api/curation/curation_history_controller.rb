@@ -18,6 +18,22 @@ class Api::Curation::CurationHistoryController < Api::ApplicationController
     end
   end
 
+  def update
+    fccuration_history = FccurationHistory.where(upload_date: params[:id]).first
+    if !fccuration_history.nil?
+      if params[:cura_comment].present?
+        fccuration_history.cura_comment = params[:cura_comment]
+      end
+      if fccuration_history.save
+        render json: fccuration_history.to_api_hash, status: :ok
+      else
+        render :text => "Fail!!!", status: 404
+      end
+    else
+      render json: "FcnoticeHistory is not exist!!!", status: 204
+    end
+  end
+
   def curation_download
     check_was_disk
 
