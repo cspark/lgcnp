@@ -19,7 +19,7 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
   end
 
   def update
-    fcnotice_history = FcnoticeHistory.where(upload_date: params[:id]).first
+    fcnotice_history = FcnoticeHistory.where(upload_date: params[:upload_date]).first
     if !fcnotice_history.nil?
       if params[:begin_date].present?
         fcnotice_history.begin_date = params[:begin_date]

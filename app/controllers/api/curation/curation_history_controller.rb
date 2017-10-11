@@ -19,7 +19,7 @@ class Api::Curation::CurationHistoryController < Api::ApplicationController
   end
 
   def update
-    fccuration_history = FccurationHistory.where(upload_date: params[:id]).first
+    fccuration_history = FccurationHistory.where(upload_date: params[:upload_date]).first
     if !fccuration_history.nil?
       if params[:cura_comment].present?
         fccuration_history.cura_comment = params[:cura_comment]

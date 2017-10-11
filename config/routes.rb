@@ -205,6 +205,7 @@ Rails.application.routes.draw do
         collection do
           get 'notice_download'
           post 'notice_upload'
+          put 'update'
         end
       end
     end
@@ -214,6 +215,7 @@ Rails.application.routes.draw do
         collection do
           get 'curation_download'
           post 'curation_upload'
+          put 'update'
         end
       end
     end
