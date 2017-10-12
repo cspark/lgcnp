@@ -101,8 +101,10 @@
         });
 
         $("#edit_admin_user").click(function(){
-          var email = '<%= $user.email %>'
-          window.open("/admin/manager/edit_manager?email=" + email, "/users/manager/edit_manager?email=" + email, "scrollbars=1,resizable=1,height=400,width=600");
+          <% if $user.present? %>
+            var email = '<%= $user.email %>'
+            window.open("/admin/manager/edit_manager?email=" + email, "/users/manager/edit_manager?email=" + email, "scrollbars=1,resizable=1,height=400,width=600");
+          <% end %>
         });
 
         $("#logout").click(function(){
