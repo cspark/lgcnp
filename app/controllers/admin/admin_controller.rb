@@ -65,10 +65,14 @@ class Admin::AdminController < Admin::AdminApplicationController
     $user = user
     if user.present? && user.valid_password?(params[:password])
       session[:admin_user] = user
-      Rails.logger.info "Login success"
-      Rails.logger.info history.ip
+      if user.last_change_password_at < Time.now-3.month
+        render json: {password_change_at: true, email: user.email}, status: :ok
+      else
+        render json: {password_change_at: false}, status: :ok
+      end
     else
-      render json: {}, status: :ok
+      Rails.logger.info "Login ERROR"
+      render json: {}, status: :bad_request
     end
   end
 

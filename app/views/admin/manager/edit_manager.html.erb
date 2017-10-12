@@ -52,7 +52,7 @@
               success: function (response) {
                 alert("관리자 정보를 수정하였습니다.");
                 window.opener.location.reload();
-                location.reload();
+                window.close();
               },
               error: function (response){
                 alert("실패");

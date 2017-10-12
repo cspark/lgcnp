@@ -31,11 +31,7 @@ class Admin::ManagerController < Admin::AdminApplicationController
   def create
     admin_user = AdminUser.new(permitted_params)
     admin_user.ch_cd = params[:ch_cd].upcase
-    serial = 1
-    if AdminUser.count > 1
-      serial = AdminUser.count + 1
-    end
-    admin_user.id = serial
+    admin_user.last_change_password_at = Time.now.strftime("%Y-%m-%d")
 
     if admin_user.save
       render json: {}, status: :ok
@@ -62,6 +58,10 @@ class Admin::ManagerController < Admin::AdminApplicationController
     admin_user.update(permitted_params)
     if params.has_key?(:ch_cd)
       admin_user.ch_cd = params[:ch_cd].upcase
+    end
+
+    if params.has_key?(:password)
+      admin_user.last_change_password_at = Time.now.strftime("%Y-%m-%d")
     end
 
     if admin_user.save
