@@ -113,18 +113,18 @@
       <div class="form-inline">
         <div style="display: block;">
           <font style="float:left;">Email</font><br>
-          <input class="form-control" type="text" id="email" style="float:left; width:600px;" readonly="">
+          <input class="form-control" type="text" id="email" style="float:left; width:560px;" readonly="">
         <div><br><br>
 
         <font>Password</font>
-        <input class="form-control" type="password" id="password" style="width:600px;" placeholder='최소 10자리 이상 : 영어 대&소문자, 숫자 및 특수문자(? < > ` " \ = & + 제외) 중 2종류 이상'>
+        <input class="form-control" type="password" id="password" style="width:560px;" placeholder='최소 10자리 이상 : 영어 대&소문자, 숫자 및 특수문자(? < > ` " \ = & + 제외) 중 2종류 이상'>
 
         <% if @admin_user.role != "admin" %>
         <font>채널 코드</font>
-        <input class="form-control" type="text" id="ch_cd" style="width:600px;" readonly="">
+        <input class="form-control" type="text" id="ch_cd" style="width:560px;" readonly="">
 
         <font>매장 코드</font>
-        <input class="form-control" type="text" id="shop_cd" style="width:600px;" readonly="">
+        <input class="form-control" type="text" id="shop_cd" style="width:560px;" readonly="">
         <% end %>
         <center>
           <button class="btn btn-warning" id="submit">수정</button>
