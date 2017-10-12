@@ -187,6 +187,6 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
 
   private
   def permitted_params
-    params.permit(:upload_date, :begin_date, :end_date, :file_name, :notice_comment, ch_cd: ch_cd)
+    params.permit(:upload_date, :begin_date, :end_date, :file_name, :notice_comment, :ch_cd)
   end
 end
