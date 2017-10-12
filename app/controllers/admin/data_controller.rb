@@ -34,7 +34,8 @@ class Admin::DataController < Admin::AdminApplicationController
     end_age = params[:end_age]
     name = params[:name]
     custserial = params[:custserial]
-    measureno = params[:measureno]
+    start_measureno = params[:start_measureno]
+    end_measureno = params[:end_measureno]
     start_birthyy = params[:start_birthyy]
     end_birthyy = params[:end_birthyy]
     start_birthmm = params[:start_birthmm]
@@ -56,7 +57,8 @@ class Admin::DataController < Admin::AdminApplicationController
     @end_age = end_age if !end_age.blank?
     @name = name
     @custserial = custserial
-    @measureno = measureno
+    @start_measureno = start_measureno
+    @end_measureno = end_measureno
     @start_birthyy = start_birthyy
     @end_birthyy = end_birthyy
     @start_birthmm = start_birthmm
@@ -202,7 +204,8 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-    scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
+    scoped = scoped.where("measureno >= ?", @start_measureno.to_i) if !@start_measureno.blank?
+    scoped = scoped.where("measureno <= ?", @end_measureno.to_i) if !@end_measureno.blank?
     scoped = scoped.where(faceno: @select_area) if !@select_area.blank? && @select_area.downcase != "all"
     Rails.logger.info "Fcdata scoped count!!!"
     Rails.logger.info scoped.count
@@ -576,7 +579,8 @@ class Admin::DataController < Admin::AdminApplicationController
     end_age = params[:end_age]
     name = params[:name]
     custserial = params[:custserial]
-    measureno = params[:measureno]
+    start_measureno = params[:start_measureno]
+    end_measureno = params[:end_measureno]
     start_birthyy = params[:start_birthyy]
     end_birthyy = params[:end_birthyy]
     start_birthmm = params[:start_birthmm]
@@ -599,7 +603,8 @@ class Admin::DataController < Admin::AdminApplicationController
     @end_age = end_age if !end_age.blank?
     @name = name
     @custserial = custserial
-    @measureno = measureno
+    @start_measureno = start_measureno
+    @end_measureno = end_measureno
     @start_birthyy = start_birthyy
     @end_birthyy = end_birthyy
     @start_birthmm = start_birthmm
@@ -718,7 +723,8 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-    scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
+    scoped = scoped.where("measureno >= ?", @start_measureno.to_i) if !@start_measureno.blank?
+    scoped = scoped.where("measureno <= ?", @end_measureno.to_i) if !@end_measureno.blank?
     scoped = scoped.where(faceno: @select_area) if !@select_area.blank? && @select_area.downcase != "all"
     scoped = scoped.where(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode == "F"
     scoped = scoped.where(m_skintype: [1,2,3]) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode == "T"
@@ -1036,7 +1042,8 @@ class Admin::DataController < Admin::AdminApplicationController
     end_age = params[:end_age]
     name = params[:name]
     custserial = params[:custserial]
-    measureno = params[:measureno]
+    start_measureno = params[:start_measureno]
+    end_measureno = params[:end_measureno]
     start_birthyy = params[:start_birthyy]
     end_birthyy = params[:end_birthyy]
     start_birthmm = params[:start_birthmm]
@@ -1058,7 +1065,8 @@ class Admin::DataController < Admin::AdminApplicationController
     @end_age = end_age if !end_age.blank?
     @name = name
     @custserial = custserial
-    @measureno = measureno
+    @start_measureno = start_measureno
+    @end_measureno = end_measureno
     @start_birthyy = start_birthyy
     @end_birthyy = end_birthyy
     @start_birthmm = start_birthmm
@@ -1217,7 +1225,8 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-    scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
+    scoped = scoped.where("measureno >= ?", @start_measureno.to_i) if !@start_measureno.blank?
+    scoped = scoped.where("measureno <= ?", @end_measureno.to_i) if !@end_measureno.blank?
     scoped = scoped.where(faceno: @select_area) if !@select_area.blank? && @select_area.downcase != "all"
     if @select_skin_type_device_final.blank?
       scoped = scoped.where(skintype: [100])

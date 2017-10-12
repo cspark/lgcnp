@@ -23,7 +23,8 @@ class Admin::ImageController < Admin::AdminApplicationController
     start_date = params[:start_date]
     end_date = params[:end_date]
     name = params[:name]
-    measureno = params[:measureno]
+    start_measureno = params[:start_measureno]
+    end_measureno = params[:end_measureno]
     select_channel = params[:select_channel]
     shop_cd = params[:shop_cd]
     custserial = params[:custserial]
@@ -31,7 +32,8 @@ class Admin::ImageController < Admin::AdminApplicationController
     @start_date = start_date if !start_date.blank?
     @end_date = end_date  if !end_date.blank?
     @name = name if !name.blank?
-    @measureno = measureno if !measureno.blank?
+    @start_measureno = start_measureno if !start_measureno.blank?
+    @end_measureno = end_measureno if !end_measureno.blank?
     @select_channel = select_channel if select_channel != "all"
     @shop_cd = shop_cd if !shop_cd.blank?
     @name = name if !name.blank?
@@ -51,7 +53,8 @@ class Admin::ImageController < Admin::AdminApplicationController
         scoped = Fcdata.all
         temp_end_date = @end_date.to_date + 1.day
         scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
-        scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
+        scoped = scoped.where("measureno >= ?", @start_measureno.to_i) if !@start_measureno.blank?
+        scoped = scoped.where("measureno <= ?", @end_measureno.to_i) if !@end_measureno.blank?
         scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank?
         scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
         scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
@@ -79,7 +82,8 @@ class Admin::ImageController < Admin::AdminApplicationController
       end
     else
       scoped = Fcdata.all
-      scoped = scoped.where(measureno: @measureno) if !@measureno.blank?
+      scoped = scoped.where("measureno >= ?", @start_measureno.to_i) if !@start_measureno.blank?
+      scoped = scoped.where("measureno <= ?", @end_measureno.to_i) if !@end_measureno.blank?
       scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank?
       scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?

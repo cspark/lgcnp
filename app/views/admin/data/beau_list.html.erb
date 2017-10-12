@@ -273,8 +273,12 @@
           document.getElementById("custserial").value = '<%= @custserial %>'
         <% end %>
 
-        <% if !@measureno.nil? %>
-          document.getElementById("measureno").value = '<%= @measureno %>'
+        <% if !@start_measureno.nil? %>
+          document.getElementById("start_measureno").value = '<%= @start_measureno %>'
+        <% end %>
+
+        <% if !@end_measureno.nil? %>
+          document.getElementById("end_measureno").value = '<%= @end_measureno %>'
         <% end %>
 
         <% if !@select_sex.nil? %>
@@ -408,7 +412,8 @@
         url += "&end_age=" + document.getElementById("end_age").value;
         url += "&name=" + encodeURI(encodeURI(document.getElementById("name").value));
         url += "&custserial=" + document.getElementById("custserial").value;
-        url += "&measureno=" + document.getElementById("measureno").value;
+        url += "&start_measureno=" + document.getElementById("start_measureno").value;
+        url += "&end_measureno=" + document.getElementById("end_measureno").value;
         url += "&start_birthyy=" + document.getElementById("start_birthyy").value;
         url += "&end_birthyy=" + document.getElementById("end_birthyy").value;
         url += "&start_birthmm=" + document.getElementById("start_birthmm").value;
@@ -493,7 +498,7 @@
         <p style="float:right; margin-right:20px;">
           Download:
           <%= link_to "Excel", admin_data_list_beau_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
-          :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial, :measureno => @measureno,
+          :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial, :start_measureno => @start_measureno, :end_measureno => @end_measureno,
           :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
           :select_mode => @select_mode, :select_makeup => @select_makeup, :select_area => @select_area,
           :select_skin_type_device => @select_skin_type_device, :select_skin_type_survey => @select_skin_type_survey, :select_senstive => @select_senstive,
@@ -509,7 +514,8 @@
         <input class="form-control" type="text" id="custserial" style="float:left; width:100px;">
 
         <p style="float:left; margin-top: 5px; margin-left:10px;">분석횟수:&nbsp;</p>
-        <input class="form-control" type="text" id="measureno" style="float:left; width:100px; style="float:left;"">
+        <input class="form-control" type="text" id="start_measureno" style="float:left; width:100px; style="float:left;"">
+        <input class="form-control" type="text" id="end_measureno" style="float:left; width:100px; style="float:left;"">
 
         <p style="float:left; margin-top: 5px; margin-left:10px;">성별:&nbsp;</p>
         <select class="form-control" id="select_sex" style="float:left;">

@@ -88,8 +88,12 @@
           document.getElementById("shop_cd").value = '<%= @shop_cd %>'
         <% end %>
 
-        <% if !@measureno.nil? %>
-          document.getElementById("measureno").value = '<%= @measureno %>'
+        <% if !@start_measureno.nil? %>
+          document.getElementById("start_measureno").value = '<%= @start_measureno %>'
+        <% end %>
+
+        <% if !@end_measureno.nil? %>
+          document.getElementById("end_measureno").value = '<%= @end_measureno %>'
         <% end %>
 
         <% if !@custserial.nil? %>
@@ -122,7 +126,8 @@
         url += "&name=" + encodeURI(encodeURI(document.getElementById("name").value));
         url += "&select_channel=" + select_channel;
         url += "&shop_cd=" + shop_cd;
-        url += "&measureno=" + document.getElementById("measureno").value;
+        url += "&start_measureno=" + document.getElementById("start_measureno").value;
+        url += "&end_measureno=" + document.getElementById("end_measureno").value;
         url += "&custserial=" + document.getElementById("custserial").value;
 
         location.href = url;
@@ -191,7 +196,7 @@
           Download:
           <%= link_to "Excel", admin_image_list_path(format: "xlsx", :name => @name,
           :custserial => @custserial, :select_channel => @select_channel, :shop_cd => @shop_cd,
-          :measureno => @measureno, :isExcel => true) %>
+          :start_measureno => @start_measureno, :end_measureno => @end_measureno, :isExcel => true) %>
         </p>
       </div>
 
@@ -211,7 +216,8 @@
         </select>
 
         분석횟수 :
-        <input class="form-control" type="text" id="measureno" style="width:100px;">
+        <input class="form-control" type="text" id="start_measureno" style="width:100px;">
+        <input class="form-control" type="text" id="end_measureno" style="width:100px;">
 
         매장 :
         <input class="form-control" type="text" id="shop_cd" style="width:100px;">
