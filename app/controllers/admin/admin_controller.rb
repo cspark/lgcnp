@@ -62,7 +62,7 @@ class Admin::AdminController < Admin::AdminApplicationController
     end
 
     user = AdminUser.where(email: params[:email]).first
-
+    $user = user
     if user.present? && user.valid_password?(params[:password])
       session[:admin_user] = user
       Rails.logger.info "Login success"

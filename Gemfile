@@ -33,6 +33,7 @@ gem 'rmagick', '~> 2.16.0'
 gem 'activerecord-oracle_enhanced-adapter', '= 1.7.7'
 gem 'ruby-oci8', '= 2.2.2' # only for CRuby users
 gem 'devise'
+gem 'devise-encryptable'
 gem 'bootstrap-datepicker-rails'
 gem 'iconv'
 gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'

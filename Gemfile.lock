@@ -133,6 +133,8 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    devise-encryptable (0.2.0)
+      devise (>= 2.1.0)
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.18)
@@ -319,6 +321,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   composite_primary_keys (= 9.0.6)
   devise
+  devise-encryptable
   iconv
   inherited_resources!
   jbuilder (~> 2.5)
@@ -346,4 +349,4 @@ DEPENDENCIES
   zip-zip
 
 BUNDLED WITH
-   1.14.6
+   1.15.4
