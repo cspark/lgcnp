@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
 
+    <style>
+    input::-webkit-input-placeholder {
+      font-size: 10px;
+      line-height: 3;
+    }
+    </style>
     <script>
     $ (function () {
       if ( '<%= @admin_user.role %>' != 'admin' && "<%= @admin_user %>" != null) {
