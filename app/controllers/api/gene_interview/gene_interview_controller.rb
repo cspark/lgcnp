@@ -38,7 +38,7 @@ class Api::GeneInterview::GeneInterviewController < Api::ApplicationController
         render :text => "Fail!!!", status: 404
       end
     else
-      render json: "FcgeneInterview is not exist!!!", status: 204
+      render :text => "FcgeneInterview is not exist!!!", status: 204
     end
   end
 
