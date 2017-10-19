@@ -62,13 +62,12 @@ class Admin::AdminController < Admin::AdminApplicationController
     end
 
     user = AdminUser.where(email: params[:email]).first
-    $user = user
     if user.present? && user.valid_password?(params[:password])
       session[:admin_user] = user
       if user.last_change_password_at < Time.now-3.month
         render json: {password_change_at: true, email: user.email}, status: :ok
       else
-        render json: {password_change_at: false}, status: :ok
+        render json: {password_change_at: false, email: user.email}, status: :ok
       end
     else
       Rails.logger.info "Login ERROR"

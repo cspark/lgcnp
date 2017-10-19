@@ -329,7 +329,7 @@ class Admin::ImageController < Admin::AdminApplicationController
     end
   end
 
-  def image_download(serial: nil, measureno: nil, number: nil, type: nil, ch_cd: image_download_ch_cd)
+  def image_download(serial: nil, measureno: nil, number: nil, type: nil, ch_cd: nil)
     #이미지 가져오기
     Rails.logger.info serial
     user = Custinfo.where(custserial: serial).first

@@ -80,13 +80,13 @@ class Api::Tablet::Cnprx::ImagesController < ApplicationController
     # 2. 파일 복사
     # Success!!!!!
     if Rails.env.production? || Rails.env.staging?
-      image_copy_ftp(custserial: custserial, ch_cd: ch_cd, measureno: measureno, number: number, type: type)
+      image_copy_to_ftp(custserial: custserial, ch_cd: ch_cd, measureno: measureno, number: number, type: type)
     end
     render :body => "Success!!!", status: 200
   end
 
-  def image_copy_ftp(custserial: nil, ch_cd: nil, measureno: nil, number: nil, type: nil)
-    Rails.logger.info "image_copy_ftp!!!"
+  def image_copy_to_ftp(custserial: nil, ch_cd: nil, measureno: nil, number: nil, type: nil)
+    Rails.logger.info "image_copy_to_ftp!!!"
     custserial = custserial
     ch_cd = ch_cd
     measureno = measureno
