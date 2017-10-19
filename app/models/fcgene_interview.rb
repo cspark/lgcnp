@@ -24,6 +24,8 @@ class FcgeneInterview < ApplicationRecord
       q12: q12,
       q13: q13,
       q14: q14,
+      q15_nation: q15_nation,
+      q15_birth_nation: q15_birth_nation,
       uptdate: uptdate
     }
   end

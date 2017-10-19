@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012074840) do
+ActiveRecord::Schema.define(version: 20171019065403) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                   default: "", null: false
@@ -287,9 +287,11 @@ ActiveRecord::Schema.define(version: 20171012074840) do
     t.string   "q13"
     t.string   "q14"
     t.string   "uptdate"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "q6"
+    t.string   "q15_nation"
+    t.string   "q15_birth_nation"
   end
 
   create_table "fcinterviews", force: :cascade do |t|
