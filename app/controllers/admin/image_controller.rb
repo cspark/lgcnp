@@ -154,104 +154,105 @@ class Admin::ImageController < Admin::AdminApplicationController
       @path << measureno.to_i.to_s
       @path << "_"
 
+      image_download_ch_cd = @fcdata.ch_cd
       begin
         if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"Sym_L_1.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"Sym_L_2.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"Sym_L_3.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"Sym_L_4.jpg")
-          image_download(serial: serial, measureno: measureno, number: "1", type: "_Sym_L_")
-          image_download(serial: serial, measureno: measureno, number: "2", type: "_Sym_L_")
-          image_download(serial: serial, measureno: measureno, number: "3", type: "_Sym_L_")
-          image_download(serial: serial, measureno: measureno, number: "4", type: "_Sym_L_")
+          image_download(serial: serial, measureno: measureno, number: "1", type: "_Sym_L_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "2", type: "_Sym_L_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "3", type: "_Sym_L_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "4", type: "_Sym_L_", ch_cd: image_download_ch_cd)
         end
 
         if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"Sym_R_1.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"Sym_R_2.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"Sym_R_3.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"Sym_R_4.jpg")
-          image_download(serial: serial, measureno: measureno, number: "1", type: "_Sym_R_")
-          image_download(serial: serial, measureno: measureno, number: "2", type: "_Sym_R_")
-          image_download(serial: serial, measureno: measureno, number: "3", type: "_Sym_R_")
-          image_download(serial: serial, measureno: measureno, number: "4", type: "_Sym_R_")
+          image_download(serial: serial, measureno: measureno, number: "1", type: "_Sym_R_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "2", type: "_Sym_R_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "3", type: "_Sym_R_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "4", type: "_Sym_R_", ch_cd: image_download_ch_cd)
         end
 
         if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UV_1.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UV_2.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UV_3.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UV_4.jpg")
-          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UV_")
-          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UV_")
-          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UV_")
-          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UV_")
+          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UV_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UV_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UV_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UV_", ch_cd: image_download_ch_cd)
         end
 
         if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_PWC_1.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_PWC_2.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_PWC_3.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_PWC_4.jpg")
-          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_WH_PWC_")
-          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_WH_PWC_")
-          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_WH_PWC_")
-          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_WH_PWC_")
+          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_WH_PWC_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_WH_PWC_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_WH_PWC_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_WH_PWC_", ch_cd: image_download_ch_cd)
         end
 
         if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_1.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_2.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_3.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_4.jpg")
-          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_WH_")
-          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_WH_")
-          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_WH_")
-          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_WH_")
+          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_WH_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_WH_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_WH_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_WH_", ch_cd: image_download_ch_cd)
         end
 
         if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UVGR_SBC_1.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UVGR_SBC_2.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UVGR_SBC_3.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UVGR_SBC_4.jpg")
-          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UVGR_SBC_")
-          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UVGR_SBC_")
-          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UVGR_SBC_")
-          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UVGR_SBC_")
+          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UVGR_SBC_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UVGR_SBC_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UVGR_SBC_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UVGR_SBC_", ch_cd: image_download_ch_cd)
         end
 
         if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UV_GR_1.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UV_GR_2.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UV_GR_3.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UV_GR_4.jpg")
-          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UV_GR_")
-          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UV_GR_")
-          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UV_GR_")
-          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UV_GR_")
+          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UV_GR_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UV_GR_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UV_GR_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UV_GR_", ch_cd: image_download_ch_cd)
         end
 
         if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_PL_PLC_1.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_PL_PLC_2.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_PL_PLC_3.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_PL_PLC_4.jpg")
-          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_PL_PLC_")
-          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_PL_PLC_")
-          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_PL_PLC_")
-          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_PL_PLC_")
+          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_PL_PLC_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_PL_PLC_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_PL_PLC_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_PL_PLC_", ch_cd: image_download_ch_cd)
         end
 
         if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UVGR_UVC_1.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UVGR_UVC_2.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UVGR_UVC_3.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UVGR_UVC_4.jpg")
-          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UVGR_UVC_")
-          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UVGR_UVC_")
-          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UVGR_UVC_")
-          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UVGR_UVC_")
+          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UVGR_UVC_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UVGR_UVC_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UVGR_UVC_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UVGR_UVC_", ch_cd: image_download_ch_cd)
         end
 
         if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_PL_1.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_PL_2.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_PL_3.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_PL_4.jpg")
-          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_PL_")
-          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_PL_")
-          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_PL_")
-          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_PL_")
+          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_PL_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_PL_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_PL_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_PL_", ch_cd: image_download_ch_cd)
         end
 
         if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_PL_UVC_1.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_PL_UVC_2.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_PL_UVC_3.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_PL_UVC_4.jpg")
-          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_PL_UVC_")
-          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_PL_UVC_")
-          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_PL_UVC_")
-          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_PL_UVC_")
+          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_PL_UVC_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_PL_UVC_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_PL_UVC_", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_PL_UVC_", ch_cd: image_download_ch_cd)
         end
 
         if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_PWC_W.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_E.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"Sp_Pore_Cust.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"Sp_Spot_Cust.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"Sp_Wr_Cust.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_PW_SK_L_SIDE.jpg")
-          image_download(serial: serial, measureno: measureno, number: nil, type: "_F_FM_WH_PWC_W")
-          image_download(serial: serial, measureno: measureno, number: nil, type: "_F_FM_WH_E")
-          image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Pore_Cust")
-          image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Spot_Cust")
-          image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Wr_Cust")
-          image_download(serial: serial, measureno: measureno, number: nil, type: "_F_PW_SK_L_SIDE")
+          image_download(serial: serial, measureno: measureno, number: nil, type: "_F_FM_WH_PWC_W", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: nil, type: "_F_FM_WH_E", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Pore_Cust", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Spot_Cust", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Wr_Cust", ch_cd: image_download_ch_cd)
+          image_download(serial: serial, measureno: measureno, number: nil, type: "_F_PW_SK_L_SIDE", ch_cd: image_download_ch_cd)
         end
 
-        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "Sym_L_")
-        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "Sym_R_")
-        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UV_")
-        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_WH_PWC_")
-        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_WH_")
-        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UVGR_SBC_")
-        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UV_GR_")
-        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_PLC_")
-        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UVGR_UVC_")
-        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_")
-        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_UVC_")
+        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "Sym_L_", ch_cd: image_download_ch_cd)
+        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "Sym_R_", ch_cd: image_download_ch_cd)
+        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UV_", ch_cd: image_download_ch_cd)
+        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_WH_PWC_", ch_cd: image_download_ch_cd)
+        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_WH_", ch_cd: image_download_ch_cd)
+        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UVGR_SBC_", ch_cd: image_download_ch_cd)
+        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UV_GR_", ch_cd: image_download_ch_cd)
+        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_PLC_", ch_cd: image_download_ch_cd)
+        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UVGR_UVC_", ch_cd: image_download_ch_cd)
+        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_", ch_cd: image_download_ch_cd)
+        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_PL_UVC_", ch_cd: image_download_ch_cd)
 
         zip_path = @path.split("/")[0] +"/"+ @path.split("/")[1]
         generate_tgz(relation: @fcdata, path: @path)
@@ -328,7 +329,7 @@ class Admin::ImageController < Admin::AdminApplicationController
     end
   end
 
-  def image_download(serial: nil, measureno: nil, number: nil, type: nil)
+  def image_download(serial: nil, measureno: nil, number: nil, type: nil, ch_cd: image_download_ch_cd)
     #이미지 가져오기
     Rails.logger.info serial
     user = Custinfo.where(custserial: serial).first
@@ -338,9 +339,9 @@ class Admin::ImageController < Admin::AdminApplicationController
     Rails.logger.info sub_folder_name
 
     ftp_path = ""
-    if !user.ch_cd.nil?
+    if !ch_cd.nil?
       ftp_path = "ftp://165.244.88.27/"
-      ftp_path << user.ch_cd.to_s
+      ftp_path << ch_cd.to_s
       ftp_path << "/"
     else
       ftp_path = "ftp://165.244.88.27/CNP/"
@@ -368,9 +369,9 @@ class Admin::ImageController < Admin::AdminApplicationController
 
     make_dir_command = "mkdir "
     # make_dir_command << "public/CNP/"
-    if !user.ch_cd.nil?
+    if !ch_cd.nil?
       make_dir_command << "public/"
-      make_dir_command << user.ch_cd.to_s
+      make_dir_command << ch_cd.to_s
       make_dir_command << "/"
     else
       make_dir_command << "public/CNP/"
@@ -391,9 +392,9 @@ class Admin::ImageController < Admin::AdminApplicationController
     system(make_dir_command)
 
     # file_get_command << "public/CNP/"
-    if !user.ch_cd.nil?
+    if !ch_cd.nil?
       file_get_command << "public/"
-      file_get_command << user.ch_cd.to_s
+      file_get_command << ch_cd.to_s
       file_get_command << "/"
     else
       file_get_command << "public/CNP/"
