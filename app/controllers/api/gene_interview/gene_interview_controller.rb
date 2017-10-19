@@ -10,7 +10,7 @@ class Api::GeneInterview::GeneInterviewController < Api::ApplicationController
 
   def create
     if params[:gene_barcode] != "0000000000000" && FcgeneInterview.where(gene_barcode: params[:gene_barcode]).count > 0
-      render :text => "FcgeneInterview is exist!!!", status: 204
+      render :text => "gene_barcode is exist!!!", status: 204
     else
       interview = FcgeneInterview.new(permitted_params)
 
@@ -28,14 +28,18 @@ class Api::GeneInterview::GeneInterviewController < Api::ApplicationController
   def update
     interview = FcgeneInterview.where(custserial: params[:custserial], measureno: params[:measureno].to_i).first
     if !interview.nil?
-      interview.update(permitted_params)
-      t = Time.now
-      interview.uptdate = t.to_s.split(" ")[0]
-
-      if interview.save
-        render json: interview.to_api_hash, status: :ok
+      if interview.gene_barcode != params[:gene_barcode] && params[:gene_barcode] != "0000000000000" && FcgeneInterview.where(gene_barcode: params[:gene_barcode]).count > 0
+        render :text => "gene_barcode is exist!!!", status: 204
       else
-        render :text => "Fail!!!", status: 404
+        interview.update(permitted_params)
+        t = Time.now
+        interview.uptdate = t.to_s.split(" ")[0]
+
+        if interview.save
+          render json: interview.to_api_hash, status: :ok
+        else
+          render :text => "Fail!!!", status: 404
+        end
       end
     else
       render :text => "FcgeneInterview is not exist!!!", status: 204
