@@ -154,6 +154,7 @@ class UpdateController < ApplicationController
     file_exist_command << ".zip"
 
     Rails.logger.info file_exist_command
+    Rails.logger.info File.exist?(file_exist_command)
     if File.exist?(file_exist_command)
       render :text => "Success!!!", status: :ok
     else
