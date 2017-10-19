@@ -178,7 +178,9 @@ class Api::Tablet::Cnprx::ImagesController < ApplicationController
     file_copy_command << file_path
     file_copy_command << "' --ftp-create-dirs"
     Rails.logger.info file_copy_command
-    system(file_copy_command)
+    (0..10).each do |i|
+      break if system(file_copy_command)
+    end
     # "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/public/CNP/900-P/839-1/839-1_Sym_L_1.jpg' --ftp-create-dirs"
     #  ls_command = "curl -l 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' --ftp-create-dirs"
   end

@@ -231,7 +231,10 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     # file_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' -Q '-DELE 839-1_Sym_L_1.jpg' --ftp-create-dirs"
     # folder_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1' -u 'janus:pielgahn2012#1' -Q '-RMD 839-1' --ftp-create-dirs"
     Rails.logger.info file_delete_command
-    system(file_delete_command)
+    (0..10).each do |i|
+      break if system(file_delete_command)
+    end
+
     if type == "_END"
       folder_delete_command = "curl -p --insecure "
       folder_delete_command << ftp_path_delete_folder + "/'"
@@ -240,7 +243,9 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       folder_delete_command << "' --ftp-create-dirs"
       Rails.logger.info "FTP FOLDER DELETE!!"
       Rails.logger.info folder_delete_command
-      system(folder_delete_command)
+      (0..10).each do |i|
+        break if system(folder_delete_command)
+      end
 
       rm_rf_command = "rm -rf "
       if !ch_cd.nil?

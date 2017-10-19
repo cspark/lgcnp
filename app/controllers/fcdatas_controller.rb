@@ -262,7 +262,9 @@ class FcdatasController < ApplicationController
     file_get_command << "-"
     file_get_command << measureno.to_i.to_s
     Rails.logger.info file_get_command
-    system(file_get_command)
+    (0..10).each do |i|
+      break if system(file_get_command)
+    end
   end
 
   def permitted_param

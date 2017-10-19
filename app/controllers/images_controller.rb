@@ -135,7 +135,6 @@ class ImagesController < ApplicationController
     folder_create_command << make_dir_command
     folder_create_command << "' --ftp-create-dirs"
 
-    Rails.logger.info folder_create_command
     system(folder_create_command)
 
     # Curl -p - --insecure"ftp://165.244.88.27/CNP/" --user"janus:pielgahn2012#1" -Q "-MKD /CNP/test"--ftp-create-dirs
@@ -157,6 +156,7 @@ class ImagesController < ApplicationController
     folder_create_command << make_dir_command
     folder_create_command << "' --ftp-create-dirs"
     Rails.logger.info folder_create_command
+
     system(folder_create_command)
 
     # "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/' -u 'janus:pielgahn2012#1' -Q '-MKD /CNP/900-P/839-1' --ftp-create-dirs"
@@ -190,7 +190,9 @@ class ImagesController < ApplicationController
     file_copy_command << "' --ftp-create-dirs"
     Rails.logger.info "file_copy_command!!!!!!!"
     Rails.logger.info file_copy_command
-    system(file_copy_command)
+    (0..10).each do |i|
+      break if system(file_copy_command)
+    end
     # "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/public/CNP/900-P/839-1/839-1_Sym_L_1.jpg' --ftp-create-dirs"
     #  ls_command = "curl -l 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' --ftp-create-dirs"
   end
@@ -277,7 +279,9 @@ class ImagesController < ApplicationController
     file_get_command << measureno.to_i.to_s
     Rails.logger.info file_get_command
     # wget --user janus --password pielgahn2012#1 ftp://165.244.88.27/CNP/100-P/41-1/41-1_F_PW_SK_L_SIDE.jpg -N -P public/CNP/100-P/41-1
-    system(file_get_command)
+    (0..10).each do |i|
+      break if system(file_get_command)
+    end
 
     if number.to_i != 0
       file_exist_command = "public/"+ch_cd+"/"+sub_folder_name+"/"+serial.to_s+"-"+measureno.to_s+"/"+serial.to_s+"-"+measureno.to_s+"_"+type+"_"+number+".jpg"

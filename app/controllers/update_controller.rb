@@ -139,7 +139,9 @@ class UpdateController < ApplicationController
     file_copy_command << file_path
     file_copy_command << "' --ftp-create-dirs"
     Rails.logger.info file_copy_command
-    system(file_copy_command)
+    (0..10).each do |i|
+      break if system(file_copy_command)
+    end
 
     if params.has_key?(:staging)
       file_exist_command = "public/Admin_Test/Update/"

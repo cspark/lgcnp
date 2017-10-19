@@ -73,7 +73,9 @@ class Api::Curation::CurationHistoryController < Api::ApplicationController
 
     Rails.logger.info file_get_command
     # wget --user janus --password pielgahn2012#1 ftp://165.244.88.27/CNP/100-P/41-1/41-1_F_PW_SK_L_SIDE.jpg -N -P public/CNP/100-P/41-1
-    system(file_get_command)
+    (0..10).each do |i|
+      break if system(file_get_command)
+    end
 
     if params.has_key?(:staging)
       file_exist_command = "public/Admin_Test/Curation/"
@@ -141,7 +143,9 @@ class Api::Curation::CurationHistoryController < Api::ApplicationController
     file_copy_command << file_path
     file_copy_command << "' --ftp-create-dirs"
     Rails.logger.info file_copy_command
-    system(file_copy_command)
+    (0..10).each do |i|
+      break if system(file_copy_command)
+    end
 
     if params.has_key?(:staging)
       file_exist_command = "public/Admin_Test/Curation/"
