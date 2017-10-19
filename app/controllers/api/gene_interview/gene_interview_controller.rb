@@ -10,7 +10,7 @@ class Api::GeneInterview::GeneInterviewController < Api::ApplicationController
 
   def create
     if params[:gene_barcode] != "0000000000000" && FcgeneInterview.where(gene_barcode: params[:gene_barcode]).count > 0
-      render json: "FcgeneInterview is exist!!!", status: 204
+      render :text => "FcgeneInterview is exist!!!", status: 204
     else
       interview = FcgeneInterview.new(permitted_params)
 
