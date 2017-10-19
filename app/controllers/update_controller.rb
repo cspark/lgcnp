@@ -140,6 +140,7 @@ class UpdateController < ApplicationController
     file_copy_command << "' --ftp-create-dirs"
     Rails.logger.info file_copy_command
     (0..10).each do |i|
+      Rails.logger.info i
       break if system(file_copy_command)
     end
 
