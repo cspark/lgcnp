@@ -408,6 +408,7 @@ class Admin::ImageController < Admin::AdminApplicationController
     Rails.logger.info "final"
     Rails.logger.info file_get_command
     (0..10).each do |i|
+      Rails.logger.info i
       break if system(file_get_command)
     end
   end
