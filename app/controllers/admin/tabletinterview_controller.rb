@@ -109,6 +109,9 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     temp_serial_array5 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 4000, 5001).pluck(:custserial).uniq
     temp_serial_array6 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 5000, 6001).pluck(:custserial).uniq
     temp_serial_array7 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 7001).pluck(:custserial).uniq
+    temp_serial_array8 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 7000, 8001).pluck(:custserial).uniq
+    temp_serial_array9 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 8000, 9001).pluck(:custserial).uniq
+    temp_serial_array10 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 9000, 10001).pluck(:custserial).uniq
     temp_measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     tablet_interviews = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array).where(fcdata_id: temp_measureno_array)
@@ -118,7 +121,10 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     tablet_interviews5 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array5).where(fcdata_id: temp_measureno_array)
     tablet_interviews6 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array6).where(fcdata_id: temp_measureno_array)
     tablet_interviews7 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array7).where(fcdata_id: temp_measureno_array)
-    tablet_interviews = tablet_interviews.or(tablet_interviews2).or(tablet_interviews3).or(tablet_interviews4).or(tablet_interviews5).or(tablet_interviews6).or(tablet_interviews7)
+    tablet_interviews8 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array8).where(fcdata_id: temp_measureno_array)
+    tablet_interviews9 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array9).where(fcdata_id: temp_measureno_array)
+    tablet_interviews10 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array10).where(fcdata_id: temp_measureno_array)
+    tablet_interviews = tablet_interviews.or(tablet_interviews2).or(tablet_interviews3).or(tablet_interviews4).or(tablet_interviews5).or(tablet_interviews6).or(tablet_interviews7).or(tablet_interviews8).or(tablet_interviews9).or(tablet_interviews10)
 
     scoped = tablet_interviews
     temp_end_date = @end_date.to_date+1.day
@@ -414,10 +420,13 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     serial_array5 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 4000, 5001).pluck(:custserial).uniq
     serial_array6 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 5000, 6001).pluck(:custserial).uniq
     serial_array7 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 7001).pluck(:custserial).uniq
+    serial_array8 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 8001).pluck(:custserial).uniq
+    serial_array9 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 9001).pluck(:custserial).uniq
+    serial_array10 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 10001).pluck(:custserial).uniq
     measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     scoped = Fcinterview.where(custserial: serial_array).where(measureno: measureno_array)
-    scoped = scoped.or(Fcinterview.where(custserial: serial_array2).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array3).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array4).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array5).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array6).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array7).where(measureno: measureno_array))
+    scoped = scoped.or(Fcinterview.where(custserial: serial_array2).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array3).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array4).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array5).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array6).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array7).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array8).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array9).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array10).where(measureno: measureno_array))
     temp_end_date = @end_date.to_date+1.day
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
@@ -601,10 +610,13 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     serial_array5 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 4000, 5001).pluck(:custserial).uniq
     serial_array6 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 5000, 6001).pluck(:custserial).uniq
     serial_array7 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 7001).pluck(:custserial).uniq
+    serial_array8 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 7000, 8001).pluck(:custserial).uniq
+    serial_array9 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 8000, 9001).pluck(:custserial).uniq
+    serial_array10 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 9000, 10001).pluck(:custserial).uniq
     measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
 
     scoped = Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array).where(fcdata_id: measureno_array)
-    scoped = scoped.or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array2).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array3).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array4).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array5).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array6).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array7).where(fcdata_id: measureno_array))
+    scoped = scoped.or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array2).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array3).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array4).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array5).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array6).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array7).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array8).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array9).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array10).where(fcdata_id: measureno_array))
     Rails.logger.info "scoped.count!!!"
     Rails.logger.info scoped.count
 

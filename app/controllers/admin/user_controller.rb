@@ -57,6 +57,9 @@ class Admin::UserController < Admin::AdminApplicationController
         custserial_array5 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 4000, 5001).pluck(:custserial).uniq
         custserial_array6 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 5000, 6001).pluck(:custserial).uniq
         custserial_array7 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 7001).pluck(:custserial).uniq
+        custserial_array8 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 7000, 8001).pluck(:custserial).uniq
+        custserial_array9 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 8000, 9001).pluck(:custserial).uniq
+        custserial_array10 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 9000, 10001).pluck(:custserial).uniq
 
         array_result = scoped.where(custserial: custserial_array)
         array_result2 = scoped.where(custserial: custserial_array2)
@@ -65,10 +68,13 @@ class Admin::UserController < Admin::AdminApplicationController
         array_result5 = scoped.where(custserial: custserial_array5)
         array_result6 = scoped.where(custserial: custserial_array6)
         array_result7 = scoped.where(custserial: custserial_array7)
+        array_result8 = scoped.where(custserial: custserial_array8)
+        array_result9 = scoped.where(custserial: custserial_array9)
+        array_result10 = scoped.where(custserial: custserial_array10)
 
         Rails.logger.info "======="
         Rails.logger.info array_result7
-        scoped = array_result.or(array_result2).or(array_result3).or(array_result4).or(array_result5).or(array_result6).or(array_result7)
+        scoped = array_result.or(array_result2).or(array_result3).or(array_result4).or(array_result5).or(array_result6).or(array_result7).or(array_result8).or(array_result9).or(array_result10)
       else
         scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
       end
