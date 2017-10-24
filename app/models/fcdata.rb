@@ -175,7 +175,8 @@ class Fcdata < ApplicationRecord
        el_cnt_7: el_cnt_7,
        el_cnt_8: el_cnt_8,
        worry_skin_new_1: worry_skin_new_1,
-       worry_skin_new_2: worry_skin_new_2
+       worry_skin_new_2: worry_skin_new_2,
+       shop_cd: shop_cd
     }
   end
 
