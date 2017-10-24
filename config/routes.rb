@@ -243,6 +243,9 @@ Rails.application.routes.draw do
         resources :fcinterviews do
         end
 
+        resources :fcgeneinterviews do
+        end
+
         resources :fcposs do
         end
 
