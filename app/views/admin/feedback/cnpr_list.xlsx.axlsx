@@ -13,15 +13,20 @@ wb.add_worksheet(name: "Feedback") do |sheet|
             userName = URI.decode(custinfo.custname)
             tempUserName = ""
             i = 0
-            userName.each_char do |character|
-              if i == 0
-                tempUserName += userName.slice(0, 1)
-              elsif i == userName.length - 1
-                tempUserName += userName.slice(userName.length - 1, userName.length)
-              else
-                tempUserName += "*"
+            if userName.length == 2
+              tempUserName += userName.slice(0, 1)
+              tempUserName += "*"
+            else
+              userName.each_char do |character|
+                if i == 0
+                  tempUserName += userName.slice(0, 1)
+                elsif i == userName.length - 1
+                  tempUserName += userName.slice(userName.length - 1, userName.length)
+                else
+                  tempUserName += "*"
+                end
+                i += 1
               end
-              i += 1
             end
             userName = tempUserName
           rescue
