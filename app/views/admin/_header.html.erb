@@ -262,7 +262,7 @@
           <% end %>
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "semi_admin") %>
           <li id="image_list"><a class="top-list" id="point_image_list" href="#">고객 이미지</a></li>
-          <li id="minimum_image_list"><a class="top-list" id="point_minimum_image_list" href="#">고객 이미지 minimum</a></li>
+          <li id="minimum_image_list"><a class="top-list" id="point_minimum_image_list" href="#">고객 대표 이미지</a></li>
           <% end %>
           <li id="fcschedule_list"><a class="top-list" id="point_schedule_list" href="#">예약 스케줄</a></li>
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
