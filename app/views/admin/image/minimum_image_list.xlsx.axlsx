@@ -1,0 +1,36 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Fcdata") do |sheet|
+    sheet.add_row ["시리얼","이름","진단 날짜","채널","매장","분석 횟수"]
+    @fcdatas_excel.each do |fcdata|
+        custinfo = Custinfo.where(custserial: fcdata.custserial).first
+        if !custinfo.custname.nil?
+          begin
+            userName = URI.decode(custinfo.custname)
+            tempUserName = ""
+            i = 0
+            if userName.length == 2
+              tempUserName += userName.slice(0, 1)
+              tempUserName += "*"
+            else
+              userName.each_char do |character|
+                if i == 0
+                  tempUserName += userName.slice(0, 1)
+                elsif i == userName.length - 1
+                  tempUserName += userName.slice(userName.length - 1, userName.length)
+                else
+                  tempUserName += "*"
+                end
+                i += 1
+              end
+            end
+            userName = tempUserName
+          rescue
+            userName = user.custname
+          end
+        else
+         userName = ""
+        end
+
+        sheet.add_row [fcdata.custserial.to_i ,userName, fcdata.measuredate, fcdata.ch_cd, fcdata.shop_cd, fcdata.measureno.to_i]
+    end
+end

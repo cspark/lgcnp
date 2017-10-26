@@ -80,7 +80,9 @@ Rails.application.routes.draw do
     get "fcschedule_list" => "schedule#list"
     get "fcschedule/detail" => "schedule#show"
     get "image_list" => "image#index"
+    get "minimum_image_list" => "image#minimum_image_list"
     get "image/detail" => "image#show"
+    get "image/minimum_detail" => "image#minimum_show"
     get "upload_test" => "image#upload_test"
 
     get "manager_list" => "manager#index"

@@ -1,0 +1,151 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+    $ (function () {
+        <% user = Custinfo.where(custserial: @fcdata.custserial).first %>
+        <% if !user.nil? %>
+          try
+          {
+            var userName = decode_utf8('<%= user.custname %>')
+            tempUserName = ""
+            if (userName.length == 2){
+              tempUserName += userName.slice(0, 1)
+              tempUserName += "*"
+            } else {
+              for(var i = 0; i < userName.length; i++){
+                if(i == 0)
+                  tempUserName += userName.slice(0, 1)
+                else if(i == userName.length - 1)
+                  tempUserName += userName.slice(userName.length - 1, userName.length)
+                else
+                  tempUserName += "*"
+              }
+            }
+            $('#name_<%= @fcdata.custserial.to_i %>').append(tempUserName);
+          }
+          catch(err)
+          {
+            $('#name_<%= @fcdata.custserial.to_i %>').append('<%= user.custname %>');
+          }
+        <% end %>
+
+        $(".download").click(function(){
+          var formData = new FormData($(this)[0]);
+
+          $.ajax({
+              url: "/admin/save_privacy_access_image",
+              type: 'get',
+              data: formData,
+              async: false,
+              cache: false,
+              contentType: false,
+              processData: false,
+              success: function (returndata) {},
+              error: function (returndata) {}
+          });
+        });
+      });
+
+      function decode_utf8(s) {
+        return decodeURI(s);
+      }
+
+    </script>
+  </head>
+
+  <body style="padding: 10px;">
+    <h2>고객 이미지 정보</h2>
+
+    <font size="5"><div id="name_<%= @fcdata.custserial.to_i %>"></div></font>
+    <font size="5">시리얼 : <%= @fcdata.custserial.to_i %></div></font><br>
+    <font size="5">진단 날짜 : <%= @fcdata.measuredate %></div></font><br>
+    <font size="5">채널 : <%= @fcdata.ch_cd %></div></font><br>
+    <font size="5">매장 : <%= @fcdata.shop_cd %></div></font>
+    <a href='/<%= @fcdata.ch_cd %>/<%= @path %>all_image_merge.zip' download><button class="btn btn-custom-2 download" style="float: right; margin-right:50px;display: inline; cursor: pointer;">전체 다운로드</button></a><br><br>
+    <div>
+      <center>
+        <font size="4">
+          <div style="border: 1px solid darkgrey; width:100%; height:700px;">
+            <div style="width:100%; height:30px;">
+              <b><font size="6">클렌징 상태(자외선 원본 이미지)</font></b>
+            </div>
+            <div style="width:100%; height:40px;">
+              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_merge.jpg' download><button class="btn btn-custom-2 download" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_1.jpg" style="float: right; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_2.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_3.jpg" style="float: right; width: 300px; height: 300px; cursor: pointer;">
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_UV_4.jpg" style="float: left; width: 300px; height: 300px; cursor: pointer;">
+            </div>
+          </div>
+
+          <div style="border: 1px solid darkgrey; width:100%; height:700px;">
+            <div style="width:100%; height:30px;">
+              <b><font size="6">모공(일반광 이미지)</font></b>
+            </div>
+            <div style="width:100%; height:40px;">
+              <a style="margin-left:10px; " href='/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_merge.jpg' download><button class="btn btn-custom-2 download" style="float: right; margin-right:150px;display: inline; cursor: pointer;">다운로드</button></a>
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_1.jpg" style="float: right; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_2.jpg" style="float: left; width: 300px; height: 300px; margin-top: 10px; cursor: pointer;">
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_3.jpg" style="float: right; width: 300px; height: 300px; cursor: pointer;">
+            </div>
+            <div style="float:left; width:50%;">
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>F_FM_WH_4.jpg" style="float: left; width: 300px; height: 300px; cursor: pointer;">
+            </div>
+          </div>
+
+          <div style="width:100%; height:300px;">
+            <div style="float:left; width:32%;">
+              <b><font size="4">모공 추출 이미지(일부)</font></b>
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>Sp_Pore_Cust.jpg" style="float: left; margin-top: 10px; cursor: pointer; "></img><br>
+              <center>
+                <a href='/<%= @fcdata.ch_cd %>/<%= @path %>Sp_Pore_Cust.jpg' download>
+                  <button class="btn btn-custom-2 download" style="display: inline; cursor: pointer;">다운로드</button>
+                </a>
+              </center>
+            </div>
+            <div style="float:left; width:32%; margin-left:10px;">
+              <b><font size="4">색소침착 추출 이미지(일부)</font></b>
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>Sp_Spot_Cust.jpg" style="float: left; margin-top: 10px; cursor: pointer;"></img><br>
+              <center>
+                <a href='/<%= @fcdata.ch_cd %>/<%= @path %>Sp_Spot_Cust.jpg' download>
+                  <button class="btn btn-custom-2 download" style="display: inline; cursor: pointer;">다운로드</button>
+                </a>
+              </center>
+            </div>
+            <div style="float:left; width:32%; margin-left:10px;">
+              <b><font size="4">주름 추출 이미지(일부)</font></b>
+              <img src="/<%= @fcdata.ch_cd %>/<%= @path %>Sp_Wr_Cust.jpg" style="float: left; margin-top: 10px; cursor: pointer;"></img><br>
+              <center>
+                <a href='/<%= @fcdata.ch_cd %>/<%= @path %>Sp_Wr_Cust.jpg' download>
+                  <button class="btn btn-custom-2 download" style="display: inline; cursor: pointer;">다운로드</button>
+                </a>
+              </center>
+            </div>
+          </div>
+
+        </font>
+      </center>
+    </div>
+  </body>
+</html>

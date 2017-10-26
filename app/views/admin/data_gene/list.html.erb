@@ -282,11 +282,9 @@
           document.getElementById("end_birthmm").value = '<%= @max_birthmm %>';
         });
 
-        // $(document).on("click", ".table_tr", function (e) {
-        //   var userId = $(this).attr('id').split("/")[0]
-        //   var measureno = $(this).attr('id').split("/")[1]
-        //   window.open("/admin/data/detail?userId=" +userId+ "&measureno=" +measureno, "/admin/data/detail?userId=" +userId+ "&measureno=" +measureno, "scrollbars=1,resizable=1,height=500,width=600");
-        // });
+        $('#show_interview').click(function(){
+          window.open("/admin/geneinterview/show_interview", "/admin/geneinterview/show_interview", "scrollbars=1,resizable=1,height=650,width=650");
+        });
 
         $('#submit').click(function(){
           load();
@@ -513,6 +511,8 @@
         <font style="margin-left:10px;"><유효 데이터> 예: </font><input type="checkbox" name="is_flag" id="is_flag_true" value="T">
         <font style="margin-left:10px;">아니오: </font><input type="checkbox" name="is_flag" id="is_flag_false" value="F">
         <button class="btn btn-warning" id="submit">조회</button>
+
+        <button class="btn btn-warning" style="float:right; margin-right:20px;" id="show_interview">설문조사</button>
       </div>
     </div>
 
