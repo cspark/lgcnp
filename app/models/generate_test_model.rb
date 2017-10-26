@@ -155,12 +155,12 @@ class GenerateTestModel < ApplicationRecord
     num = 10
     (1..num).each do |i|
        f = Fcdata.new
-       f.custserial = 1311.to_s
-       f.ch_cd = "RLAB"
+       f.custserial = 1.to_s
+       f.ch_cd = "CNP"
        f.faceno = "M"
-       f.measuredate = "2017-08-21-18-00-00"
-       f.measureno = 2
-       f.uptdate = "2017-08-21"
+       f.measuredate = "2017-10-21-18-00-00"
+       f.measureno = 3
+       f.uptdate = "2017-10-21"
        f.mo_1 = 1.0
        f.mo_7 = 1.0
        f.mo_8 = 1.0
@@ -249,7 +249,7 @@ class GenerateTestModel < ApplicationRecord
        f.score_r = 1
        f.score_l = 1
        f.m_skintype = 1
-       f.shop_cd = "1005"
+       f.shop_cd = "1004"
        f.worry_skin_1 = "1"
        f.worry_skin_2 = "2"
        f.save
@@ -589,12 +589,12 @@ class GenerateTestModel < ApplicationRecord
   def self.generate_test_fcgene_interviews
     f = FcgeneInterview.new
     f.custserial = 2.to_s
-    f.gene_barcode = "0000000000000"
+    f.gene_barcode = "1234567890222"
     f.ch_cd = "BEAU"
-    f.measureno = 6
+    f.measureno = 2
     f.shop_cd = "505415"
     f.q1_height = "165"
-    f.q1_weight = "50"
+    f.q1_weight = "47"
     f.q2 = "1"
     f.q3 = "2"
     f.q4 = "3"
@@ -608,7 +608,11 @@ class GenerateTestModel < ApplicationRecord
     f.q12 = "2"
     f.q13 = "3"
     f.q13 = "1"
-    f.uptdate = "2017-08-21"
+    f.q13 = "5"
+    f.q14 = "1"
+    f.q15_nation = "1"
+    f.q15_birth_nation = "1"
+    f.uptdate = "2017-08-08"
     f.save
   end
 

@@ -67,6 +67,11 @@ Rails.application.routes.draw do
     get "data_list_cnp" => "data#list"
     get "data_list_cnpr" => "data#cnpr_list"
     get "data_list_beau" => "data#beau_list"
+
+    get "data_and_gene_list_cnp" => "data_gene#list"
+    get "data_and_gene_list_beau" => "data_gene#beau_list"
+    post "data_and_gene_update" => "data_gene#update"
+
     get "data/detail" => "data#show"
     get "data/filter_check" => "data#filter_check"
     get "fcpos_list" => "pos#list"

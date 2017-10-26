@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+  </head>
+
+    <script>
+      $(function () {
+          $(".top-list").css('color', '#9d9d9d');
+          $("#point_data_and_gene_list").css('color', 'hotpink');
+
+          var flag = undefined;
+          var custserial = undefined;
+          var ch_cd = undefined;
+          var measureno = undefined;
+
+          $('input[name=flag_check_box]').change(function(){
+            custserial = $(this).attr('id').split("/")[0]
+            ch_cd = $(this).attr('id').split("/")[1]
+            measureno = $(this).attr('id').split("/")[2]
+            if($(this).is(':checked')) {
+              console.log("checked!!!");
+              flag = "T"
+            } else {
+              console.log("unchecked!!!");
+              flag = "F"
+            }
+
+            var formData = new FormData($(this)[0]);
+            formData.append("custserial", custserial);
+            formData.append("ch_cd", ch_cd);
+            formData.append("measureno", measureno);
+            formData.append("flag", flag);
+
+            $.ajax({
+                url: "/admin/data_and_gene_update",
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                  console.log(response);
+                },
+                error: function (response){
+                  console.log(response);
+                }
+            });
+          });
+
+          <% if @is_init == true %>
+            document.getElementById("is_flag_true").checked = true
+            document.getElementById("is_flag_false").checked = true
+          <% elsif @is_flag.present? && @is_flag == "F" %>
+            document.getElementById("is_flag_false").checked = true
+          <% elsif @is_flag.present? && @is_flag == "T,F" %>
+            document.getElementById("is_flag_true").checked = true
+            document.getElementById("is_flag_false").checked = true
+          <% elsif @is_flag.present? && @is_flag == "T" %>
+            document.getElementById("is_flag_true").checked = true
+          <% elsif @is_init != true && !@is_flag.present? %>
+            document.getElementById("is_flag_true").checked = false
+            document.getElementById("is_flag_false").checked = false
+          <% end %>
+
+          <% if !@select_address.nil? && @select_address != ""%>
+            $('select[id="select_address"]').val('<%= @select_address %>');
+          <% end %>
+
+          <% if @ch_cd.include?("BEAU") %>
+            $("input:checkbox[value=BEAU]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=BEAU]").prop("checked", false);
+          <% end %>
+
+          <% if @ch_cd.include?("TMR") %>
+            $("input:checkbox[value=TMR]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=TMR]").prop("checked", false);
+          <% end %>
+
+          <% if @ch_cd.include?("MART") %>
+            $("input:checkbox[value=MART]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=MART]").prop("checked", false);
+          <% end %>
+
+          <% if @ch_cd.include?("LABO") %>
+            $("input:checkbox[value=LABO]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=LABO]").prop("checked", false);
+          <% end %>
+
+          <% if @ch_cd.include?("ONEP") %>
+            $("input:checkbox[value=ONEP]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=ONEP]").prop("checked", false);
+          <% end %>
+
+          <% if @ch_cd == "" && @custserial.nil? %>
+            $("input:checkbox[name=check_box]").prop("checked", true);
+          <% end %>
+
+          <% if @skin_type_device_array.include?("gunsung") %>
+            $("input:checkbox[value=gunsung]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=gunsung]").prop("checked", false);
+          <% end %>
+
+          <% if @skin_type_device_array.include?("jungsung") %>
+            $("input:checkbox[value=jungsung]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=jungsung]").prop("checked", false);
+          <% end %>
+
+          <% if @skin_type_device_array.include?("jisung") %>
+            $("input:checkbox[value=jisung]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=jisung]").prop("checked", false);
+          <% end %>
+
+          <% if @skin_type_device_array.include?("t_zone_boghab") %>
+            $("input:checkbox[value=t_zone_boghab]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=t_zone_boghab]").prop("checked", false);
+          <% end %>
+
+          <% if @skin_type_device_array.include?("u_zone_boghab") %>
+            $("input:checkbox[value=u_zone_boghab]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=u_zone_boghab]").prop("checked", false);
+          <% end %>
+
+          <% if @skin_type_device_array == [] && @custserial.nil? %>
+            $("input:checkbox[name=skin_type_device_check_box]").prop("checked", true);
+          <% end %>
+
+          <% if @skin_type_survey_array.include?(0) %>
+            $("input:checkbox[value=0]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=0]").prop("checked", false);
+          <% end %>
+
+          <% if @skin_type_survey_array.include?(1) %>
+            $("input:checkbox[value=1]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=1]").prop("checked", false);
+          <% end %>
+
+          <% if @skin_type_survey_array.include?(2) %>
+            $("input:checkbox[value=2]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=2]").prop("checked", false);
+          <% end %>
+
+          <% if @skin_type_survey_array.include?(3) %>
+            $("input:checkbox[value=3]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=3]").prop("checked", false);
+          <% end %>
+
+          <% if @skin_type_survey_array == [] && @custserial.nil? %>
+            $("input:checkbox[name=skin_type_survey_check_box]").prop("checked", true);
+          <% end %>
+
+          $("#start_date").datepicker({
+                  dateFormat: 'yy-mm-dd',
+                  dayNamesMin: [
+                      '일',
+                      '월',
+                      '화',
+                      '수',
+                      '목',
+                      '금',
+                      '토'
+                  ],
+                  monthNamesShort: [
+                      '1월',
+                      '2월',
+                      '3월',
+                      '4월',
+                      '5월',
+                      '6월',
+                      '7월',
+                      '8월',
+                      '9월',
+                      '10월',
+                      '11월',
+                      '12월'
+                  ],
+                  currentText: '오늘 날짜',
+                  changeMonth: true
+              });
+          $("#end_date").datepicker({
+                      dateFormat: 'yy-mm-dd',
+                      dayNamesMin: [
+                          '일',
+                          '월',
+                          '화',
+                          '수',
+                          '목',
+                          '금',
+                          '토'
+                      ],
+                      monthNamesShort: [
+                          '1월',
+                          '2월',
+                          '3월',
+                          '4월',
+                          '5월',
+                          '6월',
+                          '7월',
+                          '8월',
+                          '9월',
+                          '10월',
+                          '11월',
+                          '12월'
+                      ],
+                      currentText: '오늘 날짜',
+                      changeMonth: true
+                  });
+
+        <% if @start_date.nil? %>
+          $("#start_date").datepicker('setDate', '2017-01-25');
+        <% else %>
+          $("#start_date").datepicker('setDate', '<%= @start_date %>');
+        <% end %>
+        $("#end_date").datepicker('setDate', '<%= @end_date %>');
+
+        <% if !@shop_cd.nil? && @shop_cd != "" && %>
+          document.getElementById("select_shop").value = '<%= @shop_cd %>'
+        <% end %>
+
+        <% if !@gene_barcode.nil? && @gene_barcode != "" && %>
+          document.getElementById("gene_barcode").value = '<%= @gene_barcode %>'
+        <% end %>
+
+        <% if !@name.nil? %>
+          document.getElementById("name").value = decode_utf8('<%= @name %>')
+        <% end %>
+
+        <% if !@custserial.nil? %>
+          document.getElementById("custserial").value = '<%= @custserial %>'
+        <% end %>
+
+        <% if !@start_measureno.nil? %>
+          document.getElementById("start_measureno").value = '<%= @start_measureno %>'
+        <% end %>
+
+        <% if !@end_measureno.nil? %>
+          document.getElementById("end_measureno").value = '<%= @end_measureno %>'
+        <% end %>
+
+        <% if !@select_sex.nil? %>
+          $('select[id="select_sex"]').val('<%= @select_sex %>');
+        <% end %>
+
+        <% if !@start_birthyy.nil? %>
+          document.getElementById("start_birthyy").value = '<%= @start_birthyy %>'
+        <% end %>
+        <% if !@end_birthyy.nil? %>
+          document.getElementById("end_birthyy").value = '<%= @end_birthyy %>'
+        <% end %>
+
+        <% if !@start_birthmm.nil? %>
+          document.getElementById("start_birthmm").value = '<%= @start_birthmm %>'
+        <% end %>
+        <% if !@end_birthmm.nil? %>
+          document.getElementById("end_birthmm").value = '<%= @end_birthmm %>'
+        <% end %>
+
+        <% if !@select_mode.nil? %>
+          $('select[id="select_mode"]').val('<%= @select_mode %>');
+        <% end %>
+
+        <% if !@select_area.nil? %>
+          $('select[id="select_area"]').val('<%= @select_area %>');
+        <% end %>
+
+        <% if !@select_skin_type_device.nil? %>
+          $('select[id="select_skin_type_device"]').val('<%= @select_skin_type_device %>');
+        <% end %>
+
+        $("#date_init").click(function(){
+          $("#start_date").datepicker('setDate', '2017-01-25');
+          $("#end_date").datepicker('setDate', '<%= @today %>');
+        });
+
+        $("#age_init").click(function(){
+          document.getElementById("start_age").value = '<%= @min_age %>';
+          document.getElementById("end_age").value = '<%= @max_age %>';
+        });
+
+        $("#birthyy_init").click(function(){
+          document.getElementById("start_birthyy").value = '<%= @max_birthyy %>';
+          document.getElementById("end_birthyy").value = '<%= @min_birthyy %>';
+        });
+
+        $("#birthmm_init").click(function(){
+          document.getElementById("start_birthmm").value = '<%= @min_birthmm %>';
+          document.getElementById("end_birthmm").value = '<%= @max_birthmm %>';
+        });
+
+        $('#submit').click(function(){
+          load();
+        });
+      });
+
+      function load(){
+        var select_sex = document.getElementById("select_sex").options[document.getElementById("select_sex").selectedIndex].value;
+        var select_mode = document.getElementById("select_mode").options[document.getElementById("select_mode").selectedIndex].value;
+        var select_area = document.getElementById("select_area").options[document.getElementById("select_area").selectedIndex].value;
+        var select_channel = []
+        $('input:checkbox[name="check_box"]').each(function() {
+            if(this.checked){
+              select_channel.push(this.value)
+            }
+        });
+        var select_skin_type_device = []
+        $('input:checkbox[name="skin_type_device_check_box"]').each(function() {
+            if(this.checked){
+              select_skin_type_device.push(this.value)
+            }
+        });
+        var select_skin_type_survey = []
+        $('input:checkbox[name="skin_type_survey_check_box"]').each(function() {
+            if(this.checked){
+              select_skin_type_survey.push(this.value)
+            }
+        });
+
+        var is_flag = []
+        $('input:checkbox[name="is_flag"]').each(function() {
+            if(this.checked){
+              is_flag.push(this.value)
+            }
+        });
+
+        url = ""
+        url += "/admin/data_and_gene_list_beau?start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
+        url += "&select_sex=" + select_sex;
+        url += "&start_age=" + document.getElementById("start_age").value;
+        url += "&end_age=" + document.getElementById("end_age").value;
+        url += "&name=" + encodeURI(encodeURI(document.getElementById("name").value));
+        url += "&custserial=" + document.getElementById("custserial").value;
+        url += "&start_measureno=" + document.getElementById("start_measureno").value;
+        url += "&end_measureno=" + document.getElementById("end_measureno").value;
+        url += "&start_birthyy=" + document.getElementById("start_birthyy").value;
+        url += "&end_birthyy=" + document.getElementById("end_birthyy").value;
+        url += "&start_birthmm=" + document.getElementById("start_birthmm").value;
+        url += "&end_birthmm=" + document.getElementById("end_birthmm").value;
+        url += "&select_channel=" + select_channel;
+        url += "&select_mode=" + select_mode;
+        url += "&select_area=" + select_area;
+        url += "&select_skin_type_device=" + select_skin_type_device;
+        url += "&select_skin_type_survey=" + select_skin_type_survey;
+        url += "&select_shop=" +$("#select_shop").val();
+        url += "&is_flag=" +is_flag;
+        url += "&gene_barcode=" +$("#gene_barcode").val();
+
+        location.href = url;
+      }
+
+      function decode_utf8(s) {
+        try{
+          return decodeURI(s);
+        }catch(err){
+          console.log(err);
+          return s;
+        }
+      }
+
+      function showDetail(userId, measureno){
+        window.open("/admin/data/detail?userId=" +userId+ "&measureno=" +measureno, "/admin/data/detail?userId=" +userId+ "&measureno=" +measureno, "scrollbars=1,resizable=1,height=500,width=600");
+      }
+    </script>
+
+    <style>
+    td {
+      width: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0 auto;
+      text-align: center !important;
+    }
+
+    .fixed-table-body {
+      max-height: 280px;
+    }
+
+    .text-center {
+        margin: 0 auto;
+        text-align: center !important;
+    }
+
+    th {
+      font-size: 15px;
+      text-align: center !important;
+    }
+    </style>
+
+  <body>
+    <%= render "admin/header" %>
+    <div id="filter" style="background: #b1cbbb; padding: 8px;">
+        <div class="form-inline">
+        <p style="float:left; margin-top: 7px;">분석일:&nbsp;</p>
+        <input class="form-control" type="text" id="start_date" style="float:left; width:100px;">
+        <input class="form-control" type="text" id="end_date" style="float:left; width:100px;">
+        <button id="date_init" class="btn btn-primary" style="float:left;">전체</button>
+
+        <p style="float:left; margin-left: 20px; margin-top: 5px;">채널:&nbsp;</p>
+        <p style="float:left; margin-left: 5px; margin-top: 5px;">BEAU&nbsp;</p>
+        <input type="checkbox" name="check_box" value="BEAU" id="BEAU" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">NC&nbsp;</p>
+        <input type="checkbox" name="check_box" value="TMR" id="TMR" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">MART&nbsp;</p>
+        <input type="checkbox" name="check_box" value="MART" id="MART" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">LABO&nbsp;</p>
+        <input type="checkbox" name="check_box" value="LABO" id="LABO" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">방판&nbsp;</p>
+        <input type="checkbox" name="check_box" value="ONEP" id="ONEP" style="float:left; margin-top:9px;">
+
+        <p style="float:left; margin-left: 20px; margin-top: 7px;">매장코드:&nbsp;</p>
+        <input class="form-control" type="text" name="select_shop" id="select_shop" style="float:left; width: 70px;">
+
+        <p style="float:left; margin-left: 20px; margin-top: 7px;">유전자 바코드:&nbsp;</p>
+        <input class="form-control" type="text" name="gene_barcode" id="gene_barcode" style="float:left; width: 130px;">
+
+        <p style="float:right; margin-right:20px;">
+          Download:
+          <%= link_to "Excel", admin_data_and_gene_list_beau_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
+          :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial, :start_measureno => @start_measureno, :end_measureno => @end_measureno,
+          :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
+          :select_mode => @select_mode, :select_area => @select_area,
+          :select_skin_type_device => @select_skin_type_device, :select_skin_type_survey => @select_skin_type_survey,
+          :select_channel => @ch_cd, :select_shop => @shop_cd, :is_flag => @is_flag, :gene_barcode => @gene_barcode, :isExcel => true) %>
+        </p>
+      </div><br><br>
+
+      <div class="form-inline">
+        이름:
+        <input class="form-control" type="text" id="name" style="width:100px;">
+
+        시리얼키:
+        <input class="form-control" type="text" id="custserial" style="width:100px;">
+
+        분석횟수:
+        <input class="form-control" type="text" id="start_measureno" style="width:100px;"> ~
+        <input class="form-control" type="text" id="end_measureno" style="width:100px; margin-right: 10px;">
+
+        성별:
+        <select class="form-control" id="select_sex" style="margin-right:10px;">
+          <option value="all">전체</option>
+          <option value="F">여자</option>
+          <option value="M">남자</option>
+        </select>
+
+        모드:
+        <select class="form-control" id="select_mode" style="margin-right:10px;">
+          <option value="all">전체</option>
+          <option value="F">종합 모드</option>
+          <option value="T">메이크업 모드</option>
+          <option value="">설문 모드</option>
+        </select>
+
+        측정부위:
+        <select class="form-control" id="select_area" style="margin-right:10px;">
+          <option value="all">전체</option>
+          <option value="F">전면</option>
+          <option value="L">좌</option>
+          <option value="R">우</option>
+        </select>
+      </div>
+
+      <div class="form-inline">
+        <p style="float:left; margin-top: 5px;">피부타입(기기):&nbsp;</p>
+        <p style="float:left; margin-left: 5px; margin-top: 5px;">건성&nbsp;</p>
+        <input type="checkbox" name="skin_type_device_check_box" value="gunsung" id="gunsung" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">중성&nbsp;</p>
+        <input type="checkbox" name="skin_type_device_check_box" value="jungsung" id="jungsung" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">지성&nbsp;</p>
+        <input type="checkbox" name="skin_type_device_check_box" value="jisung" id="jisung" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">T존 복합&nbsp;</p>
+        <input type="checkbox" name="skin_type_device_check_box" value="t_zone_boghab" id="t_zone_boghab" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">U존 복합&nbsp;</p>
+        <input type="checkbox" name="skin_type_device_check_box" value="u_zone_boghab" id="u_zone_boghab" style="float:left; margin-top:9px;">
+
+        <p style="float:left; margin-left: 40px; margin-top: 5px;">피부타입(설문):&nbsp;</p>
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">종합모드&nbsp;</p>
+        <input type="checkbox" name="skin_type_survey_check_box" value="0" id="skin_type_total_mode" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">건성&nbsp;</p>
+        <input type="checkbox" name="skin_type_survey_check_box" value="1" id="skin_type_gunsung" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">중성&nbsp;</p>
+        <input type="checkbox" name="skin_type_survey_check_box" value="2" id="skin_type_jungsung" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">복합성&nbsp;</p>
+        <input type="checkbox" name="skin_type_survey_check_box" value="3" id="skin_type_jisung" style="float:left; margin-top:9px;">
+      </div><br>
+
+      <div class="form-inline" style="margin-top:15px;">
+        나이 :
+        <input class="form-control" type="text" id="start_age" style="width:100px;">
+        <input class="form-control" type="text" id="end_age" style="width:100px;">
+        <button id="age_init" class="btn btn-primary">전체</button>
+
+        출생연도 :
+        <input class="form-control" type="text" id="start_birthyy" style="width:100px;">
+        <input class="form-control" type="text" id="end_birthyy" style="width:100px;">
+        <button id="birthyy_init" class="btn btn-primary">전체</button>
+
+        생월 :
+        <input class="form-control" type="text" id="start_birthmm" style="width:100px;">
+        <input class="form-control" type="text" id="end_birthmm" style="width:100px;">
+        <button id="birthmm_init" class="btn btn-primary">전체</button>
+      </div>
+
+      <div class="form-inline" style="margin-top:15px;">
+        <font style="margin-left:10px;"><유효 데이터> 예: </font><input type="checkbox" name="is_flag" id="is_flag_true" value="T">
+        <font style="margin-left:10px;">아니오: </font><input type="checkbox" name="is_flag" id="is_flag_false" value="F">
+        <button class="btn btn-warning" id="submit">조회</button>
+      </div>
+    </div>
+
+    <div id="avr" style="background: #eea29a; padding: 8px;">
+      총 인원 수 : <%= @count %>
+    </div>
+
+    <table data-toggle="table">
+      <thead style="width: 100%;">
+        <tr>
+        <th>FLAG</th>
+        <th>시리얼</th>
+        <th>이름</th>
+        <th>측정 당시 만 나이</th>
+        <th>성별</th>
+        <th>바코드</th>
+        <th>매장코드</th>
+        <th>생년월일</th>
+        <th>분석 횟수</th>
+        <th>채널</th>
+        <th>측정 부위</th>
+        <th>진단 날짜</th>
+        <th>업데이트 일</th>
+        <th>주소</th>
+        <th>설문1(키)</th>
+        <th>설문1(몸무게)</th>
+        <th>설문2</th>
+        <th>설문3</th>
+        <th>설문4</th>
+        <th>설문5</th>
+        <th>설문6</th>
+        <th>설문7</th>
+        <th>설문8</th>
+        <th>설문9</th>
+        <th>설문10</th>
+        <th>설문11</th>
+        <th>설문12</th>
+        <th>설문13</th>
+        <th>설문14</th>
+        <th>설문15(거주지)</th>
+        <th>설문16(출생지)</th>
+        <th>수분 측정 이마</th>
+        <th>수분 측정 우측 볼</th>
+        <th>수분 측정 좌측 볼</th>
+        <th>모공 측정 이마</th>
+        <th>모공 측정 코</th>
+        <th>모공 측정 우측 볼</th>
+        <th>모공 측정 좌측 볼</th>
+        <th>모공 측정 평균</th>
+        <th>주름 측정 우측 눈옆</th>
+        <th>주름 측정 우측 눈밑</th>
+        <th>주름 측정 좌측 눈옆</th>
+        <th>주름 측정 좌측 눈밑</th>
+        <th>주름 측정 평균</th>
+        <th>탄력 측정 우측 볼</th>
+        <th>탄력 측정 좌측 볼</th>
+        <th>탄력 측정 평균</th>
+        <th>탄력 각도 우측 볼</th>
+        <th>탄력 각도 좌측 볼</th>
+        <th>피지 개수 이마</th>
+        <th>피지 개수 코</th>
+        <th>피지 개수 우측 볼</th>
+        <th>피지 개수 좌측 볼</th>
+        <th>피지 개수 평균</th>
+        <th>포피린 개수 이마</th>
+        <th>포피린 개수 코</th>
+        <th>포피린 개수 우측 볼</th>
+        <th>포피린 개수 좌측 볼</th>
+        <th>포피린 개수 평균</th>
+        <th>포피린 비 이마</th>
+        <th>포피린 비 코</th>
+        <th>포피린 비 우측 볼</th>
+        <th>포피린 비 좌측 볼</th>
+        <th>포피린 비 평균</th>
+        <th>편광 색소침착 측정 이마</th>
+        <th>편광 색소침착 측정 코</th>
+        <th>편광 색소침착 측정 우측 눈옆</th>
+        <th>편광 색소침착 측정 우측 눈밑</th>
+        <th>편광 색소침착 측정 좌측 눈옆</th>
+        <th>편광 색소침착 측정 좌측 눈밑</th>
+        <th>편광 색소침착 측정 우측 볼</th>
+        <th>편광 색소침착 측정 좌측 볼</th>
+        <th>편광 색소침착 측정 평균</th>
+        <th>UV광 색소침착 측정 이마</th>
+        <th>UV광 색소침착 측정 코</th>
+        <th>UV광 색소침착 측정 우측 눈옆</th>
+        <th>UV광 색소침착 측정 우측 눈밑</th>
+        <th>UV광 색소침착 측정 좌측 눈옆</th>
+        <th>UV광 색소침착 측정 좌측 눈밑</th>
+        <th>UV광 색소침착 측정 우측 볼</th>
+        <th>UV광 색소침착 측정 좌측 볼</th>
+        <th>UV광 색소침착 측정 평균</th>
+        <th>피부톤 측정 이마</th>
+        <th>피부톤 측정 코</th>
+        <th>피부톤 측정 우측 눈밑</th>
+        <th>피부톤 측정 좌측 눈밑</th>
+        <th>피부톤 측정 우측 볼</th>
+        <th>피부톤 측정 좌측 볼</th>
+        <th>피부톤 측정 평균</th>
+        <th>피부톤 Red 이마</th>
+        <th>피부톤 Red 코</th>
+        <th>피부톤 Red 우측 눈밑</th>
+        <th>피부톤 Red 좌측 눈밑</th>
+        <th>피부톤 Red 우측 볼</th>
+        <th>피부톤 Red 좌측 볼</th>
+        <th>피부톤 Red 평균</th>
+        <th>피부톤 Green 이마</th>
+        <th>피부톤 Green 코</th>
+        <th>피부톤 Green 우측 눈밑</th>
+        <th>피부톤 Green 좌측 눈밑</th>
+        <th>피부톤 Green 우측 볼</th>
+        <th>피부톤 Green 좌측 볼</th>
+        <th>피부톤 Green 평균</th>
+        <th>피부톤 Blue 이마</th>
+        <th>피부톤 Blue 코</th>
+        <th>피부톤 Blue 우측 눈밑</th>
+        <th>피부톤 Blue 좌측 눈밑</th>
+        <th>피부톤 Blue 우측 볼</th>
+        <th>피부톤 Blue 좌측 볼</th>
+        <th>피부톤 Blue 평균</th>
+        <th>피부색 L 값</th>
+        <th>피부색 a 값</th>
+        <th>피부색 b 값</th>
+        <th>피지 E 값 (T 존)</th>
+        <th>피지 E 값 (U 존)</th>
+        <th>피부톤</th>
+        <th>선 민감도</th>
+        <th>피부타입(야누스 측정)</th>
+        <th>피부타입(설문 로직)</th>
+        <th>동안각도 점수 우측</th>
+        <th>동안각도 점수 좌측</th>
+        <th>포피린 E 값(T존)</th>
+        <th>포피린 E 값(U존)</th>
+        <th>피부고민 1순위</th>
+        <th>피부고민 2순위</th>
+        <th>피부고민 1순위 최근</th>
+        <th>피부고민 2순위 최근</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if !@is_admin_init %>
+          <% @fcdatas.each do |fcdata| %>
+            <%= render partial: "admin/data_gene/item", locals: { fcdata: fcdata } %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div>
+      <%= paginate @fcdatas %>
+    </div>
+  </body>
+</html>
