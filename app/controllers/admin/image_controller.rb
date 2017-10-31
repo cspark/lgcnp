@@ -474,12 +474,13 @@ class Admin::ImageController < Admin::AdminApplicationController
         scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
         scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
 
-        scoped = scoped.where(flag: @is_flag) if @is_flag == "T"
-        flag_f_scoped = scoped.where(flag: @is_flag) if @is_flag == "F"
-        flag_nil_scoped = scoped.where(flag: nil) if @is_flag == "F"
-        scoped = flag_f_scoped.or(flag_nil_scoped) if @is_flag == "F"
-        scoped = scoped.where(custserial: 0) if @is_flag.blank?
+        if !@is_flag.nil?
+          scoped = scoped.where(flag: @is_flag) if @is_flag == "T"
+          scoped = scoped.where("flag LIKE ? OR flag LIKE ?", nil, "F") if @is_flag == "F"
+        end
+
         scoped.joins(:custinfo).where("custinfos.custname LIKE ?", "%#{@name}%") if !@name.nil?
+
         scoped = scoped.order("measuredate desc")
         @fcdatas = scoped
 

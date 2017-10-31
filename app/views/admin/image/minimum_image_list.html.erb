@@ -100,6 +100,21 @@
           document.getElementById("custserial").value = '<%= @custserial %>'
         <% end %>
 
+        <% if @is_init == true %>
+          document.getElementById("is_flag_true").checked = true
+          document.getElementById("is_flag_false").checked = true
+        <% elsif @is_flag.present? && @is_flag == "F" %>
+          document.getElementById("is_flag_false").checked = true
+        <% elsif @is_flag.present? && @is_flag == "T,F" %>
+          document.getElementById("is_flag_true").checked = true
+          document.getElementById("is_flag_false").checked = true
+        <% elsif @is_flag.present? && @is_flag == "T" %>
+          document.getElementById("is_flag_true").checked = true
+        <% elsif @is_init != true && !@is_flag.present? %>
+          document.getElementById("is_flag_true").checked = false
+          document.getElementById("is_flag_false").checked = false
+        <% end %>
+        
         $("#date_init").click(function(){
           $("#start_date").datepicker('setDate', '<%= @start_date %>');
           $("#end_date").datepicker('setDate', '<%= @today %>');
