@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 20171025054303) do
 
   create_table "custinfos", force: :cascade do |t|
     t.string   "custserial",                 null: false
-    t.string   "n_cust_id"
     t.string   "custname"
     t.string   "sex"
     t.string   "birthyy"
@@ -120,17 +119,17 @@ ActiveRecord::Schema.define(version: 20171025054303) do
     t.datetime "updated_at",      null: false
     t.integer  "n_index"
     t.string   "age"
-    t.integer  "pore"
-    t.integer  "wrinkle"
-    t.integer  "spot_pl"
-    t.integer  "spot_uv"
-    t.integer  "elasticity"
-    t.integer  "porphyrin_ratio"
+    t.float    "pore"
+    t.float    "wrinkle"
+    t.float    "spot_pl"
+    t.float    "spot_uv"
+    t.float    "elasticity"
+    t.float    "porphyrin_ratio"
     t.float    "e_sebum_t"
     t.float    "e_sebum_u"
-    t.integer  "moisture"
-    t.float    "e_porphyrin_t"
-    t.float    "e_porphyrin_u"
+    t.float    "moisture"
+    t.integer  "e_porphyrin_t"
+    t.integer  "e_porphyrin_u"
   end
 
   create_table "fccuration_histories", force: :cascade do |t|

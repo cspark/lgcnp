@@ -441,6 +441,7 @@ class Admin::ImageController < Admin::AdminApplicationController
     shop_cd = params[:shop_cd]
     custserial = params[:custserial]
 
+
     @start_date = start_date if !start_date.blank?
     @end_date = end_date  if !end_date.blank?
     @name = name if !name.blank?
@@ -450,6 +451,8 @@ class Admin::ImageController < Admin::AdminApplicationController
     @shop_cd = shop_cd if !shop_cd.blank?
     @name = name if !name.blank?
     @custserial = custserial
+
+    @is_flag = params[:is_flag] if !params[:is_flag].blank?
 
     @is_admin_init = false
     if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && !params.has_key?(:select_channel)
@@ -470,24 +473,15 @@ class Admin::ImageController < Admin::AdminApplicationController
         scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank?
         scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
         scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
+
+        scoped = scoped.where(flag: @is_flag) if @is_flag == "T"
+        flag_f_scoped = scoped.where(flag: @is_flag) if @is_flag == "F"
+        flag_nil_scoped = scoped.where(flag: nil) if @is_flag == "F"
+        scoped = flag_f_scoped.or(flag_nil_scoped) if @is_flag == "F"
+        scoped = scoped.where(custserial: 0) if @is_flag.blank?
+        scoped.joins(:custinfo).where("custinfos.custname LIKE ?", "%#{@name}%") if !@name.nil?
         scoped = scoped.order("measuredate desc")
-
-        scoped.each do |fcdata|
-          custinfo = Custinfo.where(custserial: fcdata.custserial).first
-          is_contain = true
-
-          if !custinfo.nil?
-            if !custinfo.custname.nil? && !@name.blank?
-              if !custinfo.custname.include? @name
-                is_contain = false
-              end
-            end
-          end
-
-          if is_contain == true
-            @fcdatas << fcdata
-          end
-        end
+        @fcdatas = scoped
 
         @fcdatas_excel = @fcdatas
         @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
