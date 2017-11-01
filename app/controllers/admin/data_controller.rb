@@ -176,46 +176,25 @@ class Admin::DataController < Admin::AdminApplicationController
       end
     end
 
-    # if @select_skin_anxiety1_array.blank? || @skin_type_survey_array.blank?
-    #   serial_array = Fctabletinterview.where(before_solution_1: ["!!"]).pluck(:custserial).uniq
-    # else
-    #   serial_array = Fctabletinterview.where(before_solution_1: @select_skin_anxiety1_array).where(skin_type: @skin_type_survey_array).where.not(before_solution_1: nil).where.not(before_solution_2: nil).pluck(:custserial).uniq
-    # end
-    #
-    # if @select_skin_anxiety2_array.blank? || @skin_type_survey_array.blank?
-    #   serial_array2 = Fctabletinterview.where(before_solution_2: ["!!"]).pluck(:custserial).uniq
-    # else
-    #   serial_array2 = Fctabletinterview.where(before_solution_2: @select_skin_anxiety2_array).where(skin_type: @skin_type_survey_array).where.not(before_solution_1: nil).where.not(before_solution_2: nil).pluck(:custserial).uniq
-    # end
-    # serial_array = serial_array & serial_array2
-    #
-    # Rails.logger.info "serial_array.count!!!"
-    # Rails.logger.info serial_array.count
-
     @fcdatas = []
     @fcdatas_final = []
     scoped = Fcdata.where(ch_cd: @ch_array)
     scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
-    Rails.logger.info "serial_array Fcdata scoped count!!!"
-    Rails.logger.info scoped.count
-
+    
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
-      scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
+      scoped = scoped.where("to_date(fcdata.uptdate) >= ? AND to_date(fcdata.uptdate) < ?", @start_date.to_date, temp_end_date)
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-    scoped = scoped.where("measureno >= ?", @start_measureno.to_i) if !@start_measureno.blank?
-    scoped = scoped.where("measureno <= ?", @end_measureno.to_i) if !@end_measureno.blank?
+    scoped = scoped.where("fcdata.measureno >= ?", @start_measureno.to_i) if !@start_measureno.blank?
+    scoped = scoped.where("fcdata.measureno <= ?", @end_measureno.to_i) if !@end_measureno.blank?
     scoped = scoped.where(faceno: @select_area) if !@select_area.blank? && @select_area.downcase != "all"
-    Rails.logger.info "Fcdata scoped count!!!"
-    Rails.logger.info scoped.count
+
     if @select_skin_type_device_final.blank?
       scoped = scoped.where(skintype: [100])
     else
       scoped = scoped.where(skintype: @select_skin_type_device_final)
     end
-    Rails.logger.info "select_skin_type_device_final Fcdata scoped count!!!"
-    Rails.logger.info scoped.count
 
     if @select_filter == []
       @excel_name = ["시리얼","이름","측정 당시 만 나이","성별","바코드","생년월일","분석 횟수","채널","측정 부위","진단 날짜","업데이트 일","수분 측정 이마","수분 측정 우측 볼","수분 측정 좌측 볼","모공 측정 이마","모공 측정 코","모공 측정 우측 볼","모공 측정 좌측 볼","모공 측정 평균","주름 측정 우측 눈옆", "주름 측정 우측 눈밑", "주름 측정 좌측 눈옆","주름 측정 좌측 눈밑", "주름 측정 평균",
@@ -423,66 +402,22 @@ class Admin::DataController < Admin::AdminApplicationController
       end
     end
 
-    scoped = scoped.order("measuredate desc")
-    Rails.logger.info "fcdata scoped.count!!!!"
-    Rails.logger.info scoped.count
-
-    scoped.each do |fcdata|
-      custinfo = Custinfo.where(custserial: fcdata.custserial).first
-      is_contain = true
-      if custinfo != nil
-        if custinfo.is_agree_thirdparty_info != nil && params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] != "T,F"
-          if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("T") && custinfo.is_agree_thirdparty_info == "F"
-            is_contain = false
-          end
-          if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("F") && custinfo.is_agree_thirdparty_info == "T"
-            is_contain = false
-          end
-        end
-
-        if (params.has_key?(:is_agree_thirdparty_info) != nil && params[:is_agree_thirdparty_info] == "") && !custinfo.is_agree_thirdparty_info.nil?
-          is_contain = false
-        end
-
-        if !@name.blank?
-          if !custinfo.custname.include? @name
-            is_contain = false
-          end
-        end
-
-        if @select_sex != "all"
-          if custinfo.sex != @select_sex
-            is_contain = false
-          end
-        end
-
-        if !@start_age.blank? && !@end_age.blank?
-          temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
-          if temp_age < @start_age.to_i || temp_age > @end_age.to_i
-            is_contain = false
-          end
-        end
-
-        if !@start_birthyy.blank? && !@end_birthyy.blank?
-          if custinfo.birthyy.to_i < @start_birthyy.to_i || custinfo.birthyy.to_i > @end_birthyy.to_i
-            is_contain = false
-          end
-        end
-
-        if !@start_birthmm.blank? && !@end_birthmm.blank?
-          if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
-            is_contain = false
-          end
-        end
-      else
-        is_contain = false
+    if Rails.env.production? || Rails.env.staging?
+      scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
+      scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sec}%") if @select_sex != "all"
+      if !@start_age.blank? && !@end_age.blank?
+        start_birthyy = Time.current.year.to_i - @start_age.to_i
+        end_birthyy = Time.current.year.to_i - @end_age.to_i
+        scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthyy) >= ? AND to_number(custinfo.birthyy) < ?", end_birthyy, start_birthyy)
       end
 
-      if is_contain == true
-        @fcdatas << fcdata
-      end
+      scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthyy) >= ? AND to_number(custinfo.birthyy) < ?", @start_birthyy, @end_birthyy) if !@start_birthyy.blank? && !@end_birthyy.blank?
+      scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthmm) >= ? AND to_number(custinfo.birthmm) < ?", @start_birthmm, @end_birthmm) if !@start_birthmm.blank? && !@end_birthmm.blank?
+
+      scoped = scoped.joins(:custinfo).where("custinfo.is_agree_thirdparty_info LIKE ?", "%#{params[:is_agree_thirdparty_info]}%") if params.has_key?(:is_agree_thirdparty_info)
     end
-
+    scoped = scoped.order("fcdata.measuredate desc")
+    @fcdatas = scoped
     @fcdatas.each do |fcdata|
       fctabletinterview = Fctabletinterview.where.not(skin_type: nil).where.not(before_solution_1: nil).where.not(before_solution_2: nil).where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno.to_i).first
       is_contain = true
@@ -967,7 +902,7 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthmm) >= ? AND to_number(custinfo.birthmm) < ?", @start_birthmm, @end_birthmm) if !@start_birthmm.blank? && !@end_birthmm.blank?
     end
     scoped = scoped.order("fcdata.measuredate desc")
-    
+
     @fcdatas = scoped
     @count = @fcdatas.count
     @fcdatas_excel = @fcdatas
