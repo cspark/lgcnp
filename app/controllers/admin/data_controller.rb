@@ -957,7 +957,7 @@ class Admin::DataController < Admin::AdminApplicationController
     scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{URI.decode(@name)}%") if !@name.nil?
     scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sec}%") if @select_sex != "all"
 
-    scoped = scoped.order("measuredate desc")
+    scoped = scoped.order("fcdata.measuredate desc")
     Rails.logger.info scoped.count
 
     scoped.each do |fcdata|
