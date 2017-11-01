@@ -481,7 +481,7 @@ class Admin::ImageController < Admin::AdminApplicationController
 
       scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{URI.decode(@name)}%") if !@name.nil?
 
-      scoped = scoped.order("measuredate desc")
+      scoped = scoped.order("fcdata.measuredate desc")
       @fcdatas = scoped
 
       @fcdatas_excel = @fcdatas
