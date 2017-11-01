@@ -954,7 +954,7 @@ class Admin::DataController < Admin::AdminApplicationController
       end
     end
 
-    scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{URI.decode(@name)}%") if !@name.nil?
+    scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
     scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sec}%") if @select_sex != "all"
 
     scoped = scoped.order("fcdata.measuredate desc")
