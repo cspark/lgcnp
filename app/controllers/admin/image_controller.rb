@@ -481,7 +481,7 @@ class Admin::ImageController < Admin::AdminApplicationController
       end
 
       Rails.logger.info "!!!!!!!!!!!!!!!!!! #{@name}"
-      scoped = scoped.joins(:custinfo).where("custinfos.custname LIKE ?", "%#{@name}%") if !@name.nil?
+      scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
 
       scoped = scoped.order("measuredate desc")
       @fcdatas = scoped
