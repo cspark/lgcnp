@@ -720,7 +720,7 @@ class Admin::DataController < Admin::AdminApplicationController
     scoped = scoped.where(custserial: serial_array) if @select_senstive != "all"
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
-      scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
+      scoped = scoped.where("to_date(fcdata.uptdate) >= ? AND to_date(fcdata.uptdate) < ?", @start_date.to_date, temp_end_date)
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where("measureno >= ?", @start_measureno.to_i) if !@start_measureno.blank?
