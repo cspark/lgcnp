@@ -466,7 +466,7 @@ class Admin::ImageController < Admin::AdminApplicationController
       scoped = Fcdata.all
       temp_end_date = @end_date.to_date + 1.day
 
-      scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date) if Rails.env.production? || Rails.env.staging?
+      scoped = scoped.where("to_date(fcdata.uptdate) >= ? AND to_date(fcdata.uptdate) < ?", @start_date.to_date, temp_end_date) if Rails.env.production? || Rails.env.staging?
 
       scoped = scoped.where("measureno >= ?", @start_measureno.to_i) if !@start_measureno.blank?
       scoped = scoped.where("measureno <= ?", @end_measureno.to_i) if !@end_measureno.blank?
@@ -476,7 +476,11 @@ class Admin::ImageController < Admin::AdminApplicationController
 
       if !@is_flag.nil?
         scoped = scoped.where(flag: @is_flag) if @is_flag == "T"
-        scoped = scoped.where("flag LIKE ? OR flag LIKE ?", nil, "F") if @is_flag == "F"
+        if Rails.env.production? || Rails.env.staging?
+          scoped = scoped.where("flag IS NULL OR flag LIKE F") if @is_flag == "F"
+        else
+          scoped = scoped.where("flag LIKE ? OR flag LIKE ?", nil, "F") if @is_flag == "F"
+        end
       end
 
       scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{URI.decode(@name)}%") if !@name.nil?
