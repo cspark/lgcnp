@@ -954,24 +954,15 @@ class Admin::DataController < Admin::AdminApplicationController
       end
     end
 
+    scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{URI.decode(@name)}%") if !@name.nil?
+    scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sec}%") if @select_sex != "all"
+
     scoped = scoped.order("measuredate desc")
     Rails.logger.info scoped.count
 
     scoped.each do |fcdata|
       custinfo = Custinfo.where(custserial: fcdata.custserial).first
       is_contain = true
-
-      if !@name.blank?
-        if !custinfo.custname.include? @name
-          is_contain = false
-        end
-      end
-
-      if @select_sex != "all"
-        if custinfo.sex != @select_sex
-          is_contain = false
-        end
-      end
 
       if !@start_age.blank? && !@end_age.blank?
         temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
