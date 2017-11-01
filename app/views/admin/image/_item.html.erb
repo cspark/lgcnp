@@ -116,9 +116,9 @@
         <% if @is_show_flag %>
           <td class="text-center">
             <% if fcdata.flag == "T" %>
-              <input type="checkbox" name="flag_check_box<%= fcdata.custserial.to_i %>/<%= fcdata.ch_cd %>/<%= fcdata.measureno %>" value="T" onClick="changeFlag(<%= fcdata.custserial.to_i %>,<%= fcdata.ch_cd %>,<%= fcdata.measureno %>)" checked/>
+              <input type="checkbox" name="flag_check_box<%= fcdata.custserial.to_i %>/<%= fcdata.ch_cd %>/<%= fcdata.measureno %>" value="T" onClick="changeFlag("<%= fcdata.custserial.to_i %>", "<%= fcdata.ch_cd %>", "<%= fcdata.measureno %>")" checked/>
             <% else %>
-              <input type="checkbox" name="flag_check_box<%= fcdata.custserial.to_i %>/<%= fcdata.ch_cd %>/<%= fcdata.measureno %>" value="T" onClick="changeFlag(<%= fcdata.custserial.to_i %>,<%= fcdata.ch_cd %>,<%= fcdata.measureno %>)"/>
+              <input type="checkbox" name="flag_check_box<%= fcdata.custserial.to_i %>/<%= fcdata.ch_cd %>/<%= fcdata.measureno %>" value="T" onClick="changeFlag("<%= fcdata.custserial.to_i %>", "<%= fcdata.ch_cd %>", "<%= fcdata.measureno %>")"/>
             <% end %>
           </td>
         <% end %>
