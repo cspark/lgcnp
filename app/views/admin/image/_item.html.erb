@@ -80,6 +80,13 @@
         <td class="text-center"><%= fcdata.ch_cd %></td>
         <td class="text-center"><%= fcdata.shop_cd %></td>
         <td class="text-center"><%= fcdata.measureno.to_i %></td>
+        <td class="text-center">
+          <% if fcdata.flag == "T" %>
+            <input type="checkbox" name="flag_check_box" value="T" checked disabled/>
+          <% else %>
+            <input type="checkbox" name="flag_check_box" value="T" disabled/>
+          <% end %>
+        </td>
       </tr>
     </body>
 </html>

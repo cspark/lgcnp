@@ -441,7 +441,6 @@ class Admin::ImageController < Admin::AdminApplicationController
     shop_cd = params[:shop_cd]
     custserial = params[:custserial]
 
-
     @start_date = start_date if !start_date.blank?
     @end_date = end_date  if !end_date.blank?
     @name = name if !name.blank?
@@ -480,8 +479,7 @@ class Admin::ImageController < Admin::AdminApplicationController
         scoped = scoped.where("flag LIKE ? OR flag LIKE ?", nil, "F") if @is_flag == "F"
       end
 
-      Rails.logger.info "!!!!!!!!!!!!!!!!!! #{@name}"
-      scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
+      scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{URI.decode(@name)}%") if !@name.nil?
 
       scoped = scoped.order("measuredate desc")
       @fcdatas = scoped

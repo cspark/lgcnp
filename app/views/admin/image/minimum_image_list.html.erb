@@ -114,7 +114,7 @@
           document.getElementById("is_flag_true").checked = false
           document.getElementById("is_flag_false").checked = false
         <% end %>
-        
+
         $("#date_init").click(function(){
           $("#start_date").datepicker('setDate', '<%= @start_date %>');
           $("#end_date").datepicker('setDate', '<%= @today %>');
@@ -266,6 +266,7 @@
           <th>채널</th>
           <th>매장</th>
           <th>분석횟수</th>
+          <th>FLAG</th>
         </tr>
       </thead>
       <tbody>
