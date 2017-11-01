@@ -13,6 +13,46 @@
 
     <script>
       $(function () {
+          var flag = undefined;
+          var custserial = undefined;
+          var ch_cd = undefined;
+          var measureno = undefined;
+
+          $('input[name=flag_check_box]').change(function(){
+            custserial = $(this).attr('id').split("/")[0]
+            ch_cd = $(this).attr('id').split("/")[1]
+            measureno = $(this).attr('id').split("/")[2]
+            if($(this).is(':checked')) {
+              console.log("checked!!!");
+              flag = "T"
+            } else {
+              console.log("unchecked!!!");
+              flag = "F"
+            }
+
+            var formData = new FormData($(this)[0]);
+            formData.append("custserial", custserial);
+            formData.append("ch_cd", ch_cd);
+            formData.append("measureno", measureno);
+            formData.append("flag", flag);
+
+            $.ajax({
+                url: "/admin/data_and_gene_update",
+                type: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                  console.log(response);
+                },
+                error: function (response){
+                  console.log(response);
+                }
+            });
+          });
+
           $(".top-list").css('color', '#9d9d9d');
           $("#point_minimum_image_list").css('color', 'hotpink');
 
