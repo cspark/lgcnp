@@ -477,7 +477,7 @@ class Admin::ImageController < Admin::AdminApplicationController
       if !@is_flag.nil?
         scoped = scoped.where(flag: @is_flag) if @is_flag == "T"
         if Rails.env.production? || Rails.env.staging?
-          scoped = scoped.where("flag IS NULL OR flag LIKE F") if @is_flag == "F"
+          scoped = scoped.where("flag IS NULL OR flag LIKE 'F'") if @is_flag == "F"
         else
           scoped = scoped.where("flag LIKE ? OR flag LIKE ?", nil, "F") if @is_flag == "F"
         end
