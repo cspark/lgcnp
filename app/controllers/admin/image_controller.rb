@@ -2,6 +2,7 @@ class Admin::ImageController < Admin::AdminApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
+    @is_show_flag = false
     if params.has_key?(:isExcel) && params[:isExcel] && session[:admin_user] != "user" && !session[:admin_user].nil?
       history = Privacyaccesshistory.new
       serial = 1
@@ -414,6 +415,7 @@ class Admin::ImageController < Admin::AdminApplicationController
 
 # 최소의 이미지만 보여주는 리스트
   def minimum_image_list
+    @is_show_flag = true
     if params.has_key?(:isExcel) && params[:isExcel] && session[:admin_user] != "user" && !session[:admin_user].nil?
       history = Privacyaccesshistory.new
       serial = 1

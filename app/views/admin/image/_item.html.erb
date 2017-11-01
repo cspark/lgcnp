@@ -69,6 +69,41 @@
             return s;
           }
         }
+
+        $('input[name=flag_check_box]').change(function(){
+          custserial = $(this).attr('id').split("/")[0]
+          ch_cd = $(this).attr('id').split("/")[1]
+          measureno = $(this).attr('id').split("/")[2]
+          if($(this).is(':checked')) {
+            console.log("checked!!!");
+            flag = "T"
+          } else {
+            console.log("unchecked!!!");
+            flag = "F"
+          }
+
+          var formData = new FormData($(this)[0]);
+          formData.append("custserial", custserial);
+          formData.append("ch_cd", ch_cd);
+          formData.append("measureno", measureno);
+          formData.append("flag", flag);
+
+          $.ajax({
+              url: "/admin/data_and_gene_update",
+              type: 'POST',
+              data: formData,
+              async: false,
+              cache: false,
+              contentType: false,
+              processData: false,
+              success: function (response) {
+                console.log(response);
+              },
+              error: function (response){
+                console.log(response);
+              }
+          });
+        });
       </script>
     </head>
     <body>
@@ -80,13 +115,15 @@
         <td class="text-center"><%= fcdata.ch_cd %></td>
         <td class="text-center"><%= fcdata.shop_cd %></td>
         <td class="text-center"><%= fcdata.measureno.to_i %></td>
-        <td class="text-center">
-          <% if fcdata.flag == "T" %>
-            <input type="checkbox" name="flag_check_box" value="T" checked disabled/>
-          <% else %>
-            <input type="checkbox" name="flag_check_box" value="T" disabled/>
-          <% end %>
-        </td>
+        <% @is_show_flag %>
+          <td class="text-center">
+            <% if fcdata.flag == "T" %>
+              <input type="checkbox" name="flag_check_box" value="T" id="<%= fcdata.custserial.to_i %>/<%= fcdata.ch_cd %>/<%= fcdata.measureno %>" checked/>
+            <% else %>
+              <input type="checkbox" name="flag_check_box" value="T" id="<%= fcdata.custserial.to_i %>/<%= fcdata.ch_cd %>/<%= fcdata.measureno %>"/>
+            <% end %>
+          </td>
+        <% end %>
       </tr>
     </body>
 </html>
