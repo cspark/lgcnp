@@ -317,7 +317,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     @beau_interviews = []
     # if Rails.env.production? || Rails.env.staging?
-    scoped = Fctabletinterview.all
+    scoped = Fcinterview.all
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.joins(:fcdata).where("fcdata.faceno LIKE ?", "%#{@select_area}%") if !@select_area.blank? && @select_area != "all"
       scoped = scoped.joins(:fcdata).where("fcdata.shop_cd LIKE ?",  "#{@shop_cd}") if !@shop_cd.blank?
