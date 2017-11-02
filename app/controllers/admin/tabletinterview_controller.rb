@@ -327,7 +327,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
-      scoped = scoped.where("to_date(fctabletinterview.uptdate) >= ? AND to_date(fctabletinterview.uptdate) < ?", @start_date.to_date, temp_end_date)
+      scoped = scoped.where("to_date(fcinterview.uptdate) >= ? AND to_date(fcinterview.uptdate) < ?", @start_date.to_date, temp_end_date)
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(ch_cd: @ch_array) if !@ch_array.blank? && @ch_array != ""
@@ -347,7 +347,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       scoped = scoped.joins(:custinfo).where("custinfo.is_agree_thirdparty_info LIKE ?", "%#{params[:is_agree_thirdparty_info]}%") if params.has_key?(:is_agree_thirdparty_info)
     end
 
-    scoped = scoped.order("fctabletinterview.uptdate desc")
+    scoped = scoped.order("fcinterview.uptdate desc")
     @beau_interviews = scoped
 
     Rails.logger.info "@beau_interviews.count!!!"
