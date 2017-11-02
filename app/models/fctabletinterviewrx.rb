@@ -1,6 +1,8 @@
 class Fctabletinterviewrx < ApplicationRecord
   self.table_name = "fctabletinterviewrx" if Rails.env.production? || Rails.env.staging?
   self.primary_key = :tablet_interview_id if Rails.env.production?  || Rails.env.staging?
+  belongs_to :custinfo, class_name: 'Custinfo', foreign_key: 'custserial'
+  belongs_to :fcdata, class_name: 'Fcdata', foreign_key: 'fcdata_id'
 
   def to_api_hash
     {

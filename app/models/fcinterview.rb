@@ -1,6 +1,6 @@
 class Fcinterview < ApplicationRecord
   self.table_name = "fcinterview" if Rails.env.production? || Rails.env.staging?
-
+  
   def to_api_hash
     {
       custserial: custserial,

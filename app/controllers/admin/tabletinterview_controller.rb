@@ -317,42 +317,100 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     @beau_interviews = []
     # if Rails.env.production? || Rails.env.staging?
-    scoped = Fcinterview.all
+    Rails.logger.info @select_mode
+    scoped = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array)
+    scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
+    scoped = scoped.where(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "total"
+    scoped = scoped.where.not(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "makeup"
+    fcdata_list = scoped
+
+    serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
+    serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
+    serial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
+    serial_array4 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 3000, 4001).pluck(:custserial).uniq
+    serial_array5 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 4000, 5001).pluck(:custserial).uniq
+    serial_array6 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 5000, 6001).pluck(:custserial).uniq
+    serial_array7 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 7001).pluck(:custserial).uniq
+    serial_array8 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 8001).pluck(:custserial).uniq
+    serial_array9 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 9001).pluck(:custserial).uniq
+    serial_array10 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 10001).pluck(:custserial).uniq
+    measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
+
+    scoped = Fcinterview.where(custserial: serial_array).where(measureno: measureno_array)
+    scoped = scoped.or(Fcinterview.where(custserial: serial_array2).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array3).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array4).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array5).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array6).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array7).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array8).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array9).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array10).where(measureno: measureno_array))
+
+
+    scoped = Fctabletinterview.where(ch_cd: @ch_array)
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.joins(:fcdata).where("fcdata.faceno LIKE ?", "%#{@select_area}%") if !@select_area.blank? && @select_area != "all"
       scoped = scoped.joins(:fcdata).where("fcdata.shop_cd LIKE ?",  "#{@shop_cd}") if !@shop_cd.blank?
-      scoped = scoped.joins(:fcdata).where("fcdata.m_skintype LIKE 0") if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "total"
-      scoped = scoped.joins(:fcdata).where("fcdata.m_skintype NOT LIKE 0") if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "makeup"
+      scoped = scoped.where("fcdata.m_skintype LIKE 0") if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "total"
+      scoped = scoped.where("fcdata.m_skintype NOT LIKE 0") if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "makeup"
     end
 
-    temp_end_date = @end_date.to_date + 1.day
+
+
+    temp_end_date = @end_date.to_date+1.day
     if Rails.env.production? || Rails.env.staging?
-      scoped = scoped.where("to_date(fcinterview.uptdate) >= ? AND to_date(fcinterview.uptdate) < ?", @start_date.to_date, temp_end_date)
+      scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(ch_cd: @ch_array) if !@ch_array.blank? && @ch_array != ""
 
-    if Rails.env.production? || Rails.env.staging?
-      scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
-      scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sec}%") if @select_sex != "all"
-      if !@start_age.blank? && !@end_age.blank?
-        start_birthyy = Time.current.year.to_i - @start_age.to_i
-        end_birthyy = Time.current.year.to_i - @end_age.to_i
-        scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthyy) >= ? AND to_number(custinfo.birthyy) < ?", end_birthyy, start_birthyy)
+    scoped = scoped.order("uptdate desc")
+
+    Rails.logger.info "scoped.count!!!!!!"
+    Rails.logger.info scoped.count
+    scoped.each do |tabletinterview|
+      custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
+      Rails.logger.info custinfo.custname
+      is_contain = true
+
+      if !@name.blank?
+        if !custinfo.custname.include? @name
+          Rails.logger.info "NAME FALSE"
+          is_contain = false
+        end
       end
 
-      scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthyy) >= ? AND to_number(custinfo.birthyy) < ?", @start_birthyy, @end_birthyy) if !@start_birthyy.blank? && !@end_birthyy.blank?
-      scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthmm) >= ? AND to_number(custinfo.birthmm) < ?", @start_birthmm, @end_birthmm) if !@start_birthmm.blank? && !@end_birthmm.blank?
+      if @select_sex != "all"
+        if custinfo.sex != @select_sex
+          Rails.logger.info "SEX FALSE"
+          is_contain = false
+        end
+      end
 
-      scoped = scoped.joins(:custinfo).where("custinfo.is_agree_thirdparty_info LIKE ?", "%#{params[:is_agree_thirdparty_info]}%") if params.has_key?(:is_agree_thirdparty_info)
+      if !@start_age.blank? && !@end_age.blank?
+        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
+        if temp_age < @start_age.to_i || temp_age > @end_age.to_i
+          Rails.logger.info "AGE FALSE"
+          is_contain = false
+        end
+      end
+
+      if !@start_birthyy.blank? && !@end_birthyy.blank?
+        if custinfo.birthyy.to_i < @start_birthyy.to_i || custinfo.birthyy.to_i > @end_birthyy.to_i
+          Rails.logger.info "BIRTHYY FALSE"
+          is_contain = false
+        end
+      end
+
+      if !@start_birthmm.blank? && !@end_birthmm.blank?
+        if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
+          Rails.logger.info "BIRTHMM FALSE"
+          is_contain = false
+        end
+      end
+
+      if is_contain == true
+        @beau_interviews << tabletinterview
+        Rails.logger.info "INSERT to array"
+        Rails.logger.info @beau_interviews.count
+      end
     end
-
-    scoped = scoped.order("fcinterview.uptdate desc")
-    @beau_interviews = scoped
 
     Rails.logger.info "@beau_interviews.count!!!"
     Rails.logger.info @beau_interviews.count
-
     @count = @beau_interviews.count
     @beau_interviews_excel = @beau_interviews
     @beau_interviews = Kaminari.paginate_array(@beau_interviews).page(params[:page]).per(5)
@@ -464,38 +522,22 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @tabletinterviews = []
     is_contain = true
 
-    scoped = Fcdata.where(ch_cd: @ch_array)
-    scoped = scoped.where("faceno LIKE ?", "%#{@select_area}%") if !@select_area.blank? && @select_area != "all"
-    scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
-    fcdata_list = scoped
-    serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
-    serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
-    serial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
-    serial_array4 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 3000, 4001).pluck(:custserial).uniq
-    serial_array5 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 4000, 5001).pluck(:custserial).uniq
-    serial_array6 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 5000, 6001).pluck(:custserial).uniq
-    serial_array7 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 7001).pluck(:custserial).uniq
-    serial_array8 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 7000, 8001).pluck(:custserial).uniq
-    serial_array9 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 8000, 9001).pluck(:custserial).uniq
-    serial_array10 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 9000, 10001).pluck(:custserial).uniq
-    measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
-
-    scoped = Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array).where(fcdata_id: measureno_array)
-    scoped = scoped.or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array2).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array3).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array4).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array5).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array6).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array7).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array8).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array9).where(fcdata_id: measureno_array)).or(Fctabletinterviewrx.where(ch_cd: @ch_array).where(custserial: serial_array10).where(fcdata_id: measureno_array))
-    Rails.logger.info "scoped.count!!!"
-    Rails.logger.info scoped.count
+    scoped = Fctabletinterviewrx.where(ch_cd: @ch_array)
+    if Rails.env.production? || Rails.env.staging?
+      scoped = scoped.joins(:fcdata).where("fcdata.faceno LIKE ?", "%#{@select_area}%") if !@select_area.blank? && @select_area != "all"
+      scoped = scoped.joins(:fcdata).where("fcdata.shop_cd LIKE ?",  "#{@shop_cd}") if !@shop_cd.blank?
+    end
 
     temp_end_date = @end_date.to_date+1.day
     if Rails.env.production? || Rails.env.staging?
-      scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
+      scoped = scoped.where("to_date(fctabletinterviewrx.uptdate) >= ? AND to_date(fctabletinterviewrx.uptdate) < ?", @start_date.to_date, temp_end_date)
     end
+
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(mmode: @select_mode) if !@select_mode.blank? && @select_mode.downcase != "all"
     scoped = scoped.where.not(before_overlap: nil).where.not(before_overlap: "null") if !@before_overlap.blank? && @before_overlap == "T"
     scoped = scoped.where.not(after_overlap: nil).where.not(after_overlap: "null") if !@after_overlap.blank? && @after_overlap == "T"
 
-    Rails.logger.info "scoped.count!!!"
-    Rails.logger.info scoped.count
     if @select_filter == []
       @excel_name = ["이름","시리얼","채널","진단 날짜","진단횟수","생년월일","A1","A2","A3","B1","B2","B3","B4","B5","B6","C1","D1","D2","D3","D4","D5","D6",
       "피부타입","진단으로 나온 솔루션 1(최근)","진단으로 나온 솔루션 2(최근)","진단으로 나온 솔루션 1","진단으로 나온 솔루션 2","최종으로 선택된 솔루션 1","최종으로 선택된 솔루션 2","추천 프로그램","최종 선택 프로그램",
@@ -561,59 +603,25 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       end
     end
 
-    scoped = scoped.order("uptdate desc")
+    if Rails.env.production? || Rails.env.staging?
+      scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
+      scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sec}%") if @select_sex != "all"
+      if !@start_age.blank? && !@end_age.blank?
+        start_birthyy = Time.current.year.to_i - @start_age.to_i
+        end_birthyy = Time.current.year.to_i - @end_age.to_i
+        scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthyy) >= ? AND to_number(custinfo.birthyy) < ?", end_birthyy, start_birthyy)
+      end
+
+      scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthyy) >= ? AND to_number(custinfo.birthyy) < ?", @start_birthyy, @end_birthyy) if !@start_birthyy.blank? && !@end_birthyy.blank?
+      scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthmm) >= ? AND to_number(custinfo.birthmm) < ?", @start_birthmm, @end_birthmm) if !@start_birthmm.blank? && !@end_birthmm.blank?
+
+      scoped = scoped.joins(:custinfo).where("custinfo.is_agree_thirdparty_info LIKE ?", "%#{params[:is_agree_thirdparty_info]}%") if params.has_key?(:is_agree_thirdparty_info)
+    end
+
+    scoped = scoped.order("fctabletinterviewrx.uptdate desc")
     Rails.logger.info scoped.count
 
-    scoped.each do |tabletinterview|
-      custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
-      is_contain = true
-
-      if !custinfo.nil?
-        if !@name.blank?
-          if !custinfo.custname.include? @name
-            Rails.logger.info "NAME FALSE"
-            is_contain = false
-          end
-        end
-
-        if @select_sex != "all"
-          if custinfo.sex != @select_sex
-            Rails.logger.info "SEX FALSE"
-            is_contain = false
-          end
-        end
-
-        if !@start_age.blank? && !@end_age.blank?
-          temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
-          if temp_age < @start_age.to_i || temp_age > @end_age.to_i
-            Rails.logger.info "AGE FALSE"
-            is_contain = false
-          end
-        end
-
-        if !@start_birthyy.blank? && !@end_birthyy.blank?
-          if custinfo.birthyy.to_i < @start_birthyy.to_i || custinfo.birthyy.to_i > @end_birthyy.to_i
-            Rails.logger.info "BIRTHYY FALSE"
-            is_contain = false
-          end
-        end
-
-        if !@start_birthmm.blank? && !@end_birthmm.blank?
-          if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
-            Rails.logger.info "BIRTHMM FALSE"
-            is_contain = false
-          end
-        end
-      else
-        is_contain = false
-      end
-
-      if is_contain == true
-        @tabletinterviews << tabletinterview
-        Rails.logger.info "INSERT to array"
-        Rails.logger.info @tabletinterviews.count
-      end
-    end
+    @tabletinterviews = scoped
 
     @count = @tabletinterviews.count
     @tabletinterviews_excel = @tabletinterviews
