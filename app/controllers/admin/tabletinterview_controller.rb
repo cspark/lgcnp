@@ -126,7 +126,9 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     # tablet_interviews10 = Fctabletinterview.where(ch_cd: @ch_array).where(custserial: temp_serial_array10).where(fcdata_id: temp_measureno_array)
     # tablet_interviews = tablet_interviews.or(tablet_interviews2).or(tablet_interviews3).or(tablet_interviews4).or(tablet_interviews5).or(tablet_interviews6).or(tablet_interviews7).or(tablet_interviews8).or(tablet_interviews9).or(tablet_interviews10)
 
+    Rails.logger.info "Start fcinterviews"
     scoped = Fctabletinterview.where(ch_cd: @ch_array)
+    Rails.logger.info "Start fcinterviews #{scoped.count}"
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.joins(:fcdata).where("fcdata.faceno LIKE ?", "%#{@select_area}%") if !@select_area.blank? && @select_area != "all"
       scoped = scoped.joins(:fcdata).where("fcdata.shop_cd LIKE ?",  "#{@shop_cd}") if !@shop_cd.blank?
