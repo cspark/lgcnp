@@ -321,8 +321,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.joins(:fcdata).where("fcdata.faceno LIKE ?", "%#{@select_area}%") if !@select_area.blank? && @select_area != "all"
       scoped = scoped.joins(:fcdata).where("fcdata.shop_cd LIKE ?",  "#{@shop_cd}") if !@shop_cd.blank?
-      scoped = scoped.where("fcdata.m_skintype LIKE 0") if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "total"
-      scoped = scoped.where("fcdata.m_skintype NOT LIKE 0") if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "makeup"
+      scoped = scoped.joins(:fcdata).where("fcdata.m_skintype LIKE 0") if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "total"
+      scoped = scoped.joins(:fcdata).where("fcdata.m_skintype NOT LIKE 0") if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "makeup"
     end
 
     temp_end_date = @end_date.to_date + 1.day
