@@ -179,7 +179,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     @is_agree_thirdparty_info = params[:is_agree_thirdparty_info] if !params[:is_agree_thirdparty_info].blank?
     @is_init = true
-
     @is_init = false if params[:select_channel].present?
 
     @after_interviews = []
@@ -190,7 +189,8 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       scoped = scoped.joins(:fcdata).where("fcdata.ch_cd LIKE ?",  "#{ch_cd}") if !ch_cd.blank?
       scoped = scoped.joins(:fcdata).where("fcdata.custserial LIKE ?",  "#{custserial}") if !custserial.blank?
     end
-    scoped = scoped.order("fcafterinterviewafter_interview_id desc")
+    scoped = scoped.order("fcafterinterview.after_interview_id desc")
+
     if select_interview != "all"
       if select_interview == "today"
         temp_after_interviews = scoped.where(order: 0)
