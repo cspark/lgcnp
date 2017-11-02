@@ -213,10 +213,10 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       end
       scoped = scoped.joins(:custinfo).where("custinfo.is_agree_thirdparty_info LIKE ?", "%#{params[:is_agree_thirdparty_info]}%") if params.has_key?(:is_agree_thirdparty_info)
 
-      scoped = scoped.joins(:tabletinterview).where("to_date(fctabletinterview.uptdate) >= ? AND to_date(fctabletinterview.uptdate) < ?", @start_date, @end_date.to_date)
-      scoped = scoped.joins(:tabletinterview).where("fctabletinterview.after_serum LIKE ?", "#{select_base}") if select_base != "all"
-      scoped = scoped.joins(:tabletinterview).where("fctabletinterview.after_ample_1 LIKE ?", "#{select_ample1}") if select_ample1 != "all"
-      scoped = scoped.joins(:tabletinterview).where("fctabletinterview.after_ample_2 LIKE ?", "#{select_ample2}") if select_ample2 != "all"
+      scoped = scoped.joins(:fctabletinterview).where("to_date(fctabletinterview.uptdate) >= ? AND to_date(fctabletinterview.uptdate) < ?", @start_date, @end_date.to_date)
+      scoped = scoped.joins(:fctabletinterview).where("fctabletinterview.after_serum LIKE ?", "#{select_base}") if select_base != "all"
+      scoped = scoped.joins(:fctabletinterview).where("fctabletinterview.after_ample_1 LIKE ?", "#{select_ample1}") if select_ample1 != "all"
+      scoped = scoped.joins(:fctabletinterview).where("fctabletinterview.after_ample_2 LIKE ?", "#{select_ample2}") if select_ample2 != "all"
     end
     @after_interviews = scoped
 
