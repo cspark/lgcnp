@@ -53,16 +53,17 @@ class Admin::ImageController < Admin::AdminApplicationController
     else
       scoped = Fcdata.all
       temp_end_date = @end_date.to_date + 1.day
-      scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
-      scoped = scoped.where("measureno >= ?", @start_measureno.to_i) if !@start_measureno.blank?
-      scoped = scoped.where("measureno <= ?", @end_measureno.to_i) if !@end_measureno.blank?
+      scoped = scoped.where("to_date(fcdata.uptdate) >= ? AND to_date(fcdata.uptdate) < ?", @start_date.to_date, temp_end_date)
+      scoped = scoped.where("fcdata.measureno >= ?", @start_measureno.to_i) if !@start_measureno.blank?
+      scoped = scoped.where("fcdata.measureno <= ?", @end_measureno.to_i) if !@end_measureno.blank?
       scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank?
       scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-      scoped = scoped.order("measuredate desc")
 
       scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
+      scoped = scoped.order("fcdata.measuredate desc")
 
+      @fcdatas = scoped
       @fcdatas_excel = @fcdatas
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
     end
