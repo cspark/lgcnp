@@ -11,9 +11,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @date_3months_ago = (@date - 3.months).strftime("%F")
 
     @is_admin_init = false
-    if session[:admin_user]['role'] == "admin" || session[:admin_user] == "user" && (!params.has_key?(:select_channel) && !params.has_key?(:select_shop))
-      @is_admin_init = true
-    end
+    @is_admin_init = true if session[:admin_user]['role'] == "admin" || session[:admin_user] == "user" && (!params.has_key?(:select_channel) && !params.has_key?(:select_shop))
 
     if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin")
       ch_cd = ""
@@ -29,17 +27,18 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @ch_cd = ch_cd
 
     scoped = Fctabletinterview.where("ch_cd LIKE ?", "%#{ch_cd}%")
-    
+
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.joins(:fcdata).where("fcdata.shop_cd LIKE ?",  "#{@shop_cd}") if !@shop_cd.blank?
       @tablet_interviews_today = scoped.where("to_char(to_date(fctabletinterview.uptdate), 'YYYY-MM-DD') LIKE ?", (@date.to_s)).order("fctabletinterview.uptdate desc")
       @tablet_interviews_2_weeks_ago = scoped.where("to_char(to_date(fctabletinterview.uptdate), 'YYYY-MM-DD') LIKE ?",  ((@date - 2.weeks).to_s)).order("fctabletinterview.uptdate desc")
-      @tablet_interviews_3_months_ago = scoped.where("to_char(to_date(fctabletinterview.uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s).order("fctabletinterview.uptdate desc")
+      @tablet_interviews_3_months_ago = scoped.where("to_char(to_date(fctabletinterview.uptdate), 'YYYY-MM-DD') LIKE ?", ((@date - 3.months).to_s)).order("fctabletinterview.uptdate desc")
+    else
+      @tablet_interviews_today = scoped.order("fctabletinterview.uptdate desc")
+      @tablet_interviews_2_weeks_ago = scoped.order("fctabletinterview.uptdate desc")
+      @tablet_interviews_3_months_ago = scoped.order("fctabletinterview.uptdate desc")
     end
 
-    @tablet_interviews_today = scoped.order("fctabletinterview.uptdate desc")
-    @tablet_interviews_2_weeks_ago = scoped.order("fctabletinterview.uptdate desc")
-    @tablet_interviews_3_months_ago = scoped.order("fctabletinterview.uptdate desc")
 
     create_new_fcafterservice(@tablet_interviews_today)
     create_new_fcafterservice(@tablet_interviews_2_weeks_ago)
