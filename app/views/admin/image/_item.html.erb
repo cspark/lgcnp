@@ -105,7 +105,6 @@
       </script>
     </head>
     <body>
-      <% custinfo = Custinfo.where(custserial: fcdata.custserial).first %>
       <tr class="table_tr text-center" id="<%= fcdata.custserial.to_i %>/<%= fcdata.ch_cd %>/<%= fcdata.measureno %>">
         <td class="text-center"><%= fcdata.custserial.to_i %></td>
         <td class="text-center" id="name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno.to_i %>"></td>
