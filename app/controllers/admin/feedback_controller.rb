@@ -184,22 +184,20 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     @after_interviews = []
 
-    tablet_interviews = Fctabletinterview.where.not(before_serum: nil)
+    scoped = Fcafterinterview.where.not(a1: nil)
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.joins(:fcdata).where("fcdata.shop_cd LIKE ?",  "#{shop_cd}") if !shop_cd.blank?
       scoped = scoped.joins(:fcdata).where("fcdata.ch_cd LIKE ?",  "#{ch_cd}") if !ch_cd.blank?
       scoped = scoped.joins(:fcdata).where("fcdata.custserial LIKE ?",  "#{custserial}") if !custserial.blank?
     end
-
-    temp_after_interviews = Fcafterinterview.where.not(a1: nil).where(tablet_interview: scoped).order("fcafterinterviewafter_interview_id desc")
-    Rails.logger.info temp_after_interviews.count
+    scoped = scoped.order("fcafterinterviewafter_interview_id desc")
     if select_interview != "all"
       if select_interview == "today"
-        temp_after_interviews = temp_after_interviews.where(order: 0)
+        temp_after_interviews = scoped.where(order: 0)
       elsif select_interview == "2weeks_ago"
-        temp_after_interviews = temp_after_interviews.where(order: 1)
+        temp_after_interviews = scoped.where(order: 1)
       elsif select_interview == "3months_ago"
-        temp_after_interviews = temp_after_interviews.where(order: 2)
+        temp_after_interviews = scoped.where(order: 2)
       end
     end
 
