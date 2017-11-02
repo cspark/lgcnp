@@ -448,7 +448,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       end
       scoped = scoped.joins(:custinfo).where("custinfo.is_agree_thirdparty_info LIKE ?", "%#{params[:is_agree_thirdparty_info]}%") if params.has_key?(:is_agree_thirdparty_info)
 
-      scoped = scoped.joins(:fctabletinterview).where("to_date(fctabletinterviewrx.uptdate) >= ? AND to_date(fctabletinterviewrx.uptdate) < ?", @start_date, @end_date.to_date)
+      scoped = scoped.joins(:fctabletinterviewrx).where("to_date(fctabletinterviewrx.uptdate) >= ? AND to_date(fctabletinterviewrx.uptdate) < ?", @start_date, @end_date.to_date)
     end
     @after_interviews = scoped
 
