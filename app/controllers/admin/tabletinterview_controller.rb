@@ -225,10 +225,8 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end
 
     scoped = scoped.order("fctabletinterview.uptdate desc")
-
-    Rails.logger.info "@tabletinterviews.count!!!"
-    Rails.logger.info @tabletinterviews.count
-
+    @tabletinterviews = scoped
+    
     @count = @tabletinterviews.count
     @tabletinterviews_excel = @tabletinterviews
     @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(5)
