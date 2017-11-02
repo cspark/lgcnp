@@ -21,7 +21,6 @@ class FctabletinterviewsController < ApplicationController
   def find_interviews
     serial = params[:custserial].to_s
     tabletinterviews = Fctabletinterview.where(custserial: serial).where(is_quick_mode: "F")
-    Rails.logger.info tabletinterviews.count
     if tabletinterviews.count.to_i > 0
       render json: api_hash_for_list(tabletinterviews), status: :ok
     else
@@ -63,7 +62,6 @@ class FctabletinterviewsController < ApplicationController
   end
 
   def fctabletinterviews_update_lots
-    Rails.logger.info params[:tablet_interview_id]
     existed_interview = Fctabletinterview.where(tablet_interview_id: params[:tablet_interview_id]).last
     if existed_interview.update(permitted_param)
       user = Custinfo.where(custserial: existed_interview.custserial).first
@@ -118,7 +116,6 @@ class FctabletinterviewsController < ApplicationController
   end
 
   def update_interviews
-    Rails.logger.info params[:tablet_interview_id]
     existed_interview = Fctabletinterview.where(tablet_interview_id: params[:tablet_interview_id]).last
     if existed_interview.update(permitted_param)
       user = Custinfo.where(custserial: existed_interview.custserial).first

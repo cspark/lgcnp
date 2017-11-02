@@ -508,7 +508,6 @@ class Fcdata < ApplicationRecord
       if ch_cd == "CNPR" || ch_cd == "RLAB"
         tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first
         if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
-          Rails.logger.info "pp Customer!!!"
           my_position = sp_pl_avr+7
         end
       end
@@ -706,16 +705,6 @@ class Fcdata < ApplicationRecord
   end
 
   def convert_graph_max_100(type: nil, value: nil, first_split_point: nil, second_split_point: nil, min_value: nil, max_value: nil, is_avr: false, tablet_ch_cd: nil)
-    Rails.logger.info "convert_graph_max_100!!"
-    Rails.logger.info tablet_ch_cd
-    Rails.logger.info is_avr
-    Rails.logger.info type
-    Rails.logger.info value
-    Rails.logger.info min_value
-    Rails.logger.info first_split_point
-    Rails.logger.info second_split_point
-    Rails.logger.info max_value
-
     if value.to_f < first_split_point.to_f
       denominator = (first_split_point.to_f - min_value.to_f)
       denominator = 1 if denominator == 0
@@ -729,8 +718,6 @@ class Fcdata < ApplicationRecord
       denominator = 1 if denominator == 0
       value = (((value.to_f - second_split_point.to_f) / denominator) * 33.3) + 66.6
     end
-
-    Rails.logger.info value
 
     if value > 99.9
       value = 99.9
@@ -749,7 +736,6 @@ class Fcdata < ApplicationRecord
       end
     end
 
-    Rails.logger.info value
 
     # if (type == 'pore' || type == 'sb' || type == 'wr' || type == 'el' || type == 'pp') && !is_avr
     #   if get_graph_data(type: type) == 2
@@ -775,7 +761,6 @@ class Fcdata < ApplicationRecord
 
     if type == "pore"
       avr = self.pr_avr
-      Rails.logger.info avg_grade_1_field_name
       avr1 = Fcavgdata.where(age: avg_grade_1_field_name).first.pore.to_i
       avr2 = Fcavgdata.where(age: avg_grade_2_field_name).first.pore.to_i
       avr3 = Fcavgdata.where(age: avg_grade_3_field_name).first.pore.to_i
@@ -822,7 +807,6 @@ class Fcdata < ApplicationRecord
       if ch_cd == "CNPR" || ch_cd == "RLAB"
         tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: self.ch_cd).where(custserial: self.custserial).where(fcdata_id: self.measureno).first
         if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
-          Rails.logger.info "pp Customer!!!"
           avr = self.sp_pl_avr+7
         end
       end
@@ -830,9 +814,6 @@ class Fcdata < ApplicationRecord
       avr2 = Fcavgdata.where(age: avg_grade_2_field_name).first.spot_pl.to_i
       avr3 = Fcavgdata.where(age: avg_grade_3_field_name).first.spot_pl.to_i
       avr4 = Fcavgdata.where(age: avg_grade_4_field_name).first.spot_pl.to_i
-      Rails.logger.info "PPPP"
-      Rails.logger.info avr2
-      Rails.logger.info avr3
 
       return convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
     end

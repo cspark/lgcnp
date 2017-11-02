@@ -3,10 +3,7 @@ class ImagesController < ApplicationController
     # 폴더 만들기
     # 디스크 크기 확인 후 삭제
     spaceMb_i = `df -m /dev/mapper/DATAVG-lv_data`.split(/\b/)[28].to_i
-    Rails.logger.info "spaceMb_i !!!!!"
-    Rails.logger.info spaceMb_i
     if spaceMb_i < 2048
-      Rails.logger.info "spaceMb_i < 2048 !!!!"
       system("rm -rf public/BEAU/*")
       system("rm -rf public/CNP/*")
       system("rm -rf public/CLAB/*")
@@ -92,7 +89,6 @@ class ImagesController < ApplicationController
   end
 
   def image_copy_to_ftp(custserial: nil, ch_cd: nil, measureno: nil, number: nil, type: nil)
-    Rails.logger.info "image_copy_to_ftp!!!"
     custserial = custserial
     ch_cd = ch_cd
     measureno = measureno
@@ -123,10 +119,7 @@ class ImagesController < ApplicationController
       make_dir_command << "/CNP/"
     end
 
-    Rails.logger.info make_dir_command
-
     make_dir_command << sub_folder_name
-    Rails.logger.info make_dir_command
 
     system("echo folder Create")
     folder_create_command = "curl -p --insecure "
@@ -155,7 +148,6 @@ class ImagesController < ApplicationController
     folder_create_command << "' -u 'janus:pielgahn2012#1' -Q '-MKD "
     folder_create_command << make_dir_command
     folder_create_command << "' --ftp-create-dirs"
-    Rails.logger.info folder_create_command
 
     system(folder_create_command)
 
@@ -188,8 +180,6 @@ class ImagesController < ApplicationController
     file_copy_command << "' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/public"
     file_copy_command << file_path
     file_copy_command << "' --ftp-create-dirs"
-    Rails.logger.info "file_copy_command!!!!!!!"
-    Rails.logger.info file_copy_command
     (0..10).each do |i|
       break if system(file_copy_command)
     end
@@ -211,13 +201,11 @@ class ImagesController < ApplicationController
     type = params[:type]
 
     #이미지 가져오기
-    Rails.logger.info serial
     sub_folder_name = (((serial.to_i / 100) * 100) + 100).to_s
     if type.include?("F_PL") || type.include?("F_UV") || type.include?("F_WH")
     else
       sub_folder_name << "-P"
     end
-    Rails.logger.info sub_folder_name
 
     ftp_path = ""
     ftp_path = "ftp://165.244.88.27/"
@@ -241,7 +229,6 @@ class ImagesController < ApplicationController
       ftp_path << number
     end
     ftp_path << ".jpg"
-    Rails.logger.info ftp_path
 
     system("echo FILE Download")
     file_get_command = "wget --user janus --password pielgahn2012#1 "
@@ -253,18 +240,15 @@ class ImagesController < ApplicationController
     make_dir_command << ch_cd
     make_dir_command << "/"
 
-    Rails.logger.info make_dir_command
     system(make_dir_command)
 
     make_dir_command << sub_folder_name
-    Rails.logger.info make_dir_command
     system(make_dir_command)
 
     make_dir_command << "/"
     make_dir_command << serial.to_i.to_s
     make_dir_command << "-"
     make_dir_command << measureno.to_i.to_s
-    Rails.logger.info make_dir_command
     system(make_dir_command)
 
     # file_get_command << "public/CNP/"
@@ -277,7 +261,6 @@ class ImagesController < ApplicationController
     file_get_command << serial.to_i.to_s
     file_get_command << "-"
     file_get_command << measureno.to_i.to_s
-    Rails.logger.info file_get_command
     # wget --user janus --password pielgahn2012#1 ftp://165.244.88.27/CNP/100-P/41-1/41-1_F_PW_SK_L_SIDE.jpg -N -P public/CNP/100-P/41-1
     (0..10).each do |i|
       break if system(file_get_command)

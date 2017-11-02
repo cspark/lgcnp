@@ -301,10 +301,8 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
   def create_new_fcafterservice_rx(relation)
     relation.each do |tabletinterview|
-      Rails.logger.info tabletinterview.custserial
       custinfo = Custinfo.where(custserial: tabletinterview.custserial).last
       if Fcafterinterviewrx.where(custserial: tabletinterview.custserial).where(rx_tablet_interview_id: tabletinterview.tablet_interview_id).where(order: 1).count == 0 && (custinfo.ch_cd == "CNPR" || custinfo.ch_cd == "RLAB")
-        Rails.logger.info "Fcafterinterviewrx create!!!"
         after_interview = Fcafterinterviewrx.new
         after_interview.custserial = tabletinterview.custserial
         after_interview.rx_tablet_interview_id = tabletinterview.tablet_interview_id

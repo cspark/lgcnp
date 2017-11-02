@@ -82,10 +82,7 @@ class Admin::ImageController < Admin::AdminApplicationController
 
     # 디스크 크기 확인 후 삭제
     spaceMb_i = `df -m /dev/mapper/DATAVG-lv_data`.split(/\b/)[28].to_i
-    Rails.logger.info "spaceMb_i !!!!!"
-    Rails.logger.info spaceMb_i
     if spaceMb_i < 2048
-      Rails.logger.info "spaceMb_i < 2048 !!!!"
       system("rm -rf public/BEAU/*")
       system("rm -rf public/CNP/*")
       system("rm -rf public/CLAB/*")
@@ -216,7 +213,6 @@ class Admin::ImageController < Admin::AdminApplicationController
         zip_path = @path.split("/")[0] +"/"+ @path.split("/")[1]
         generate_tgz(relation: @fcdata, path: @path)
 
-        Rails.logger.info params[:is_api]
         if params.has_key?(:is_api)
           render json: "", status: :ok
         else
@@ -289,12 +285,10 @@ class Admin::ImageController < Admin::AdminApplicationController
 
   def image_download(serial: nil, measureno: nil, number: nil, type: nil, ch_cd: nil)
     #이미지 가져오기
-    Rails.logger.info serial
     user = Custinfo.where(custserial: serial).first
     sub_folder_name = (((user.custserial.to_i / 100) * 100) + 100).to_s
     # sub_folder_name = "100"
     sub_folder_name << "-P"
-    Rails.logger.info sub_folder_name
 
     ftp_path = ""
     if !ch_cd.nil?
@@ -318,7 +312,6 @@ class Admin::ImageController < Admin::AdminApplicationController
     ftp_path << type
     ftp_path << number if !number.nil?
     ftp_path << ".jpg"
-    Rails.logger.info ftp_path
 
     system("echo FILE Download")
     file_get_command = "wget --user janus --password pielgahn2012#1 "
@@ -335,18 +328,15 @@ class Admin::ImageController < Admin::AdminApplicationController
       make_dir_command << "public/CNP/"
     end
 
-    Rails.logger.info make_dir_command
     system(make_dir_command)
 
     make_dir_command << sub_folder_name
-    Rails.logger.info make_dir_command
     system(make_dir_command)
 
     make_dir_command << "/"
     make_dir_command << user.custserial.to_i.to_s
     make_dir_command << "-"
     make_dir_command << measureno.to_i.to_s
-    Rails.logger.info make_dir_command
     system(make_dir_command)
 
     # file_get_command << "public/CNP/"
@@ -363,10 +353,7 @@ class Admin::ImageController < Admin::AdminApplicationController
     file_get_command << user.custserial.to_i.to_s
     file_get_command << "-"
     file_get_command << measureno.to_i.to_s
-    Rails.logger.info "final"
-    Rails.logger.info file_get_command
     (0..10).each do |i|
-      Rails.logger.info i
       break if system(file_get_command)
     end
   end
@@ -467,10 +454,7 @@ class Admin::ImageController < Admin::AdminApplicationController
     if Rails.env.production? || Rails.env.staging?
       # 디스크 크기 확인 후 삭제
       spaceMb_i = `df -m /dev/mapper/DATAVG-lv_data`.split(/\b/)[28].to_i
-      Rails.logger.info "spaceMb_i !!!!!"
-      Rails.logger.info spaceMb_i
       if spaceMb_i < 2048
-        Rails.logger.info "spaceMb_i < 2048 !!!!"
         system("rm -rf public/BEAU/*")
         system("rm -rf public/CNP/*")
         system("rm -rf public/CLAB/*")
@@ -525,7 +509,6 @@ class Admin::ImageController < Admin::AdminApplicationController
         zip_path = @path.split("/")[0] +"/"+ @path.split("/")[1]
         generate_tgz(relation: @fcdata, path: @path)
 
-        Rails.logger.info params[:is_api]
         if params.has_key?(:is_api)
           render json: "", status: :ok
         else
@@ -561,8 +544,6 @@ class Admin::ImageController < Admin::AdminApplicationController
       @path << measureno.to_i.to_s
       @path << "_"
 
-      Rails.logger.info ""
-      Rails.logger.info @fcdata.ch_cd
       AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UV_")
       AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_WH_")
 
@@ -581,7 +562,6 @@ class Admin::ImageController < Admin::AdminApplicationController
       end
 
       user = session[:admin_user]
-      Rails.logger.info user
       history.id = serial
       history.email = user['email']
       history.ip = session[:ip].to_s

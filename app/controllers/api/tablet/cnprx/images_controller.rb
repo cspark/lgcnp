@@ -2,10 +2,7 @@ class Api::Tablet::Cnprx::ImagesController < ApplicationController
   def create
     # 디스크 크기 확인 후 삭제
     spaceMb_i = `df -m /dev/mapper/DATAVG-lv_data`.split(/\b/)[28].to_i
-    Rails.logger.info "spaceMb_i !!!!!"
-    Rails.logger.info spaceMb_i
     if spaceMb_i < 2048
-      Rails.logger.info "spaceMb_i < 2048 !!!!"
       system("rm -rf public/BEAU/*")
       system("rm -rf public/CNP/*")
       system("rm -rf public/CLAB/*")
@@ -86,7 +83,6 @@ class Api::Tablet::Cnprx::ImagesController < ApplicationController
   end
 
   def image_copy_to_ftp(custserial: nil, ch_cd: nil, measureno: nil, number: nil, type: nil)
-    Rails.logger.info "image_copy_to_ftp!!!"
     custserial = custserial
     ch_cd = ch_cd
     measureno = measureno
@@ -114,10 +110,8 @@ class Api::Tablet::Cnprx::ImagesController < ApplicationController
       make_dir_command << "/CNPR/"
     end
 
-    Rails.logger.info make_dir_command
 
     make_dir_command << sub_folder_name
-    Rails.logger.info make_dir_command
 
     system("echo folder Create")
     folder_create_command = "curl -p --insecure "
@@ -125,8 +119,6 @@ class Api::Tablet::Cnprx::ImagesController < ApplicationController
     folder_create_command << "' -u 'janus:pielgahn2012#1' -Q '-MKD "
     folder_create_command << make_dir_command
     folder_create_command << "' --ftp-create-dirs"
-
-    Rails.logger.info folder_create_command
     system(folder_create_command)
 
     # Curl -p - --insecure"ftp://165.244.88.27/CNP/" --user"janus:pielgahn2012#1" -Q "-MKD /CNP/test"--ftp-create-dirs
@@ -147,7 +139,6 @@ class Api::Tablet::Cnprx::ImagesController < ApplicationController
     folder_create_command << "' -u 'janus:pielgahn2012#1' -Q '-MKD "
     folder_create_command << make_dir_command
     folder_create_command << "' --ftp-create-dirs"
-    Rails.logger.info folder_create_command
     system(folder_create_command)
 
     # "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/' -u 'janus:pielgahn2012#1' -Q '-MKD /CNP/900-P/839-1' --ftp-create-dirs"
@@ -177,7 +168,6 @@ class Api::Tablet::Cnprx::ImagesController < ApplicationController
     file_copy_command << "' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/public"
     file_copy_command << file_path
     file_copy_command << "' --ftp-create-dirs"
-    Rails.logger.info file_copy_command
     (0..10).each do |i|
       break if system(file_copy_command)
     end

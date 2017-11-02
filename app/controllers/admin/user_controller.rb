@@ -72,8 +72,6 @@ class Admin::UserController < Admin::AdminApplicationController
         array_result9 = scoped.where(custserial: custserial_array9)
         array_result10 = scoped.where(custserial: custserial_array10)
 
-        Rails.logger.info "======="
-        Rails.logger.info array_result7
         scoped = array_result.or(array_result2).or(array_result3).or(array_result4).or(array_result5).or(array_result6).or(array_result7).or(array_result8).or(array_result9).or(array_result10)
       else
         scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?

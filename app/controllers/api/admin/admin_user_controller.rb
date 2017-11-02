@@ -84,16 +84,13 @@ class Api::Admin::AdminUserController < Api::ApplicationController
   end
 
   def destroy
-    Rails.logger.info "destroy!!!"
     serial = params[:id]
 
     measureno = 0
     user_list = Custinfo.where(custserial: serial)
-    Rails.logger.info user_list.count
     if user_list.count > 0
       if user_list.count > 0 && Rails.env.production? || Rails.env.staging?
         fcdata_list = Fcdata.where(custserial: serial)
-        Rails.logger.info fcdata_list.count
         fcdata_list.each do |fcdata|
           image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: "1", type: "_Sym_L_",  ch_cd: fcdata.ch_cd)
           image_remove(serial: fcdata.custserial.to_i, measureno: fcdata.measureno.to_s, number: "2", type: "_Sym_L_",  ch_cd: fcdata.ch_cd)
@@ -184,14 +181,12 @@ class Api::Admin::AdminUserController < Api::ApplicationController
 
   def image_remove(serial: nil, measureno: nil, number: nil, type: nil, ch_cd: nil)
     #이미지 삭제하기
-    Rails.logger.info serial
     # serial = "839"
     # measureno = "1"
     # number = "1"
     # type = "_Sym_L_"
     sub_folder_name = (((serial.to_i / 100) * 100) + 100).to_s
     sub_folder_name << "-P"
-    Rails.logger.info sub_folder_name
 
     ftp_path = ""
     if !ch_cd.nil?
@@ -220,7 +215,6 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     delete_file << number if !number.nil?
     delete_file << ".jpg"
 
-    Rails.logger.info ftp_path
     system("echo FILE Delete")
     file_delete_command = "curl -p --insecure "
     file_delete_command << ftp_path
@@ -230,7 +224,6 @@ class Api::Admin::AdminUserController < Api::ApplicationController
 
     # file_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' -Q '-DELE 839-1_Sym_L_1.jpg' --ftp-create-dirs"
     # folder_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1' -u 'janus:pielgahn2012#1' -Q '-RMD 839-1' --ftp-create-dirs"
-    Rails.logger.info file_delete_command
     (0..10).each do |i|
       break if system(file_delete_command)
     end
@@ -241,8 +234,6 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       folder_delete_command << " -u 'janus:pielgahn2012#1' -Q '-RMD "
       folder_delete_command << serial.to_i.to_s+ "-" +measureno.to_i.to_s
       folder_delete_command << "' --ftp-create-dirs"
-      Rails.logger.info "FTP FOLDER DELETE!!"
-      Rails.logger.info folder_delete_command
       (0..10).each do |i|
         break if system(folder_delete_command)
       end
@@ -256,14 +247,11 @@ class Api::Admin::AdminUserController < Api::ApplicationController
         rm_rf_command << "public/CNP/"
       end
 
-      Rails.logger.info rm_rf_command
-
       rm_rf_command << sub_folder_name
       rm_rf_command << "/"
       rm_rf_command << serial.to_s
       rm_rf_command << "-"
       rm_rf_command << measureno.to_i.to_s
-      Rails.logger.info rm_rf_command
       system(rm_rf_command)
     end
   end

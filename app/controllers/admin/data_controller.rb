@@ -105,8 +105,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     @skin_type_survey_array = []
-    Rails.logger.info "@select_senstive!!!!"
-    Rails.logger.info @select_senstive
+
     if !select_skin_type_survey.blank?
       if @select_senstive == "all"
         select_skin_type_survey.split(",").each do |skin_type|
@@ -180,7 +179,7 @@ class Admin::DataController < Admin::AdminApplicationController
     @fcdatas_final = []
     scoped = Fcdata.where(ch_cd: @ch_array)
     scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
-    
+
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.where("to_date(fcdata.uptdate) >= ? AND to_date(fcdata.uptdate) < ?", @start_date.to_date, temp_end_date)
@@ -452,8 +451,6 @@ class Admin::DataController < Admin::AdminApplicationController
             is_contain = false
           end
         end
-
-        Rails.logger.info @select_mode if !@select_mode.blank?
 
         if !@select_mode.blank? && @select_mode != "all"
           if fctabletinterview.is_quick_mode != @select_mode
@@ -1015,8 +1012,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     @skin_type_survey_array = []
-    Rails.logger.info "@select_senstive!!!!"
-    Rails.logger.info @select_senstive
+
     if !select_skin_type_survey.blank?
       if @select_senstive == "all"
         select_skin_type_survey.split(",").each do |skin_type|
@@ -1090,12 +1086,6 @@ class Admin::DataController < Admin::AdminApplicationController
         @select_skin_type_device_final.push(9)
       end
     end
-    Rails.logger.info "@select_skin_type_device_final!!"
-    Rails.logger.info @select_skin_type_device_final
-    Rails.logger.info @ch_array
-    Rails.logger.info @select_skin_anxiety1_array
-    Rails.logger.info @select_skin_anxiety2_array
-    Rails.logger.info @skin_type_survey_array
 
     # if !@select_skin_anxiety1_array.blank?
     #   serial_array = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_1: @select_skin_anxiety1_array).pluck(:custserial).uniq
@@ -1120,8 +1110,6 @@ class Admin::DataController < Admin::AdminApplicationController
     @fcdatas_final = []
 
     scoped = Fcdata.where(ch_cd: @ch_array)
-    Rails.logger.info "init scoped.count!!!"
-    Rails.logger.info scoped.count
     scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
@@ -1342,25 +1330,20 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     scoped = scoped.order("measuredate desc")
-    Rails.logger.info "scoped.count!!!"
-    Rails.logger.info scoped.count
 
     scoped.each do |fcdata|
       custinfo = Custinfo.where(custserial: fcdata.custserial).first
-      Rails.logger.info fcdata.custserial.to_i
       is_contain = true
 
       if !custinfo.nil?
         if !@name.blank? && !custinfo.custname.nil?
           if !custinfo.custname.include? @name
-            Rails.logger.info "NAME FALSE"
             is_contain = false
           end
         end
 
         if @select_sex != "all"
           if custinfo.sex != @select_sex
-            Rails.logger.info "SEX FALSE"
             is_contain = false
           end
         end
@@ -1368,27 +1351,23 @@ class Admin::DataController < Admin::AdminApplicationController
         if !@start_age.blank? && !@end_age.blank?
           temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
           if temp_age < @start_age.to_i || temp_age > @end_age.to_i
-            Rails.logger.info "AGE FALSE"
             is_contain = false
           end
         end
 
         if !@start_birthyy.blank? && !@end_birthyy.blank?
           if custinfo.birthyy.to_i < @start_birthyy.to_i || custinfo.birthyy.to_i > @end_birthyy.to_i
-            Rails.logger.info "BIRTHYY FALSE"
             is_contain = false
           end
         end
 
         if !@start_birthmm.blank? && !@end_birthmm.blank?
           if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
-            Rails.logger.info "BIRTHMM FALSE"
             is_contain = false
           end
         end
 
         if custinfo.nil?
-          Rails.logger.info "custinfo.nil?"
           is_contain = false
         end
       else
@@ -1399,9 +1378,6 @@ class Admin::DataController < Admin::AdminApplicationController
         @fcdatas << fcdata
       end
     end
-
-    Rails.logger.info "@fcdatas.count"
-    Rails.logger.info @fcdatas.count if !@fcdatas.nil? || @fcdatas.count > 0
 
     @fcdatas.each do |fcdata|
       fctabletinterview = Fctabletinterviewrx.where.not(skin_type: nil).where.not(before_solution_1: nil).where.not(before_solution_2: nil).where(ch_cd: @ch_array).where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno.to_i).first

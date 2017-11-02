@@ -53,7 +53,6 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
   end
 
   def update_reservation
-    Rails.logger.info "update_reservation!!!"
     schedule = Fcschedule.list(ch_cd: params[:ch_cd], shop_cd: params[:shop_cd], reserve_yyyy: params[:reserve_yyyy], reserve_mmdd: params[:reserve_mmdd], reserve_hhmm: params[:reserve_hhmm]).first
 
     if !schedule.nil?
@@ -118,7 +117,6 @@ class Api::Schedule::ScheduleFcscheduleController < Api::ApplicationController
       anal_dd = params[:anal_mmdd][2,4]
       measuredate = params[:anal_yyyy].concat("-").concat(anal_mm).concat("-").concat(anal_dd)
     end
-    Rails.logger.info measuredate
     list = Fcdata.fcdata_month_list(shop_cd: params[:shop_cd], measuredate: measuredate)
     if list.count > 0
       render json: api_hash_for_list_fcdata_join_custinfo(list), status: :ok

@@ -186,13 +186,10 @@ class FcdatasController < ApplicationController
 
   def image_download(serial: nil, measureno: nil, number: nil, type: nil)
     #이미지 가져오기
-    Rails.logger.info serial
     user = Custinfo.where(custserial: serial).first
     sub_folder_name = (((user.custserial.to_i / 100) * 100) + 100).to_s
     # sub_folder_name = "100"
     sub_folder_name << "-P"
-    Rails.logger.info sub_folder_name
-
 
     ftp_path = ""
     if !user.ch_cd.nil?
@@ -216,7 +213,6 @@ class FcdatasController < ApplicationController
     ftp_path << type
     ftp_path << number if !number.nil?
     ftp_path << ".jpg"
-    Rails.logger.info ftp_path
 
     system("echo FILE Download")
     file_get_command = "wget --user janus --password pielgahn2012#1 "
@@ -233,18 +229,15 @@ class FcdatasController < ApplicationController
       make_dir_command << "public/CNP/"
     end
 
-    Rails.logger.info make_dir_command
     system(make_dir_command)
 
     make_dir_command << sub_folder_name
-    Rails.logger.info make_dir_command
     system(make_dir_command)
 
     make_dir_command << "/"
     make_dir_command << user.custserial.to_i.to_s
     make_dir_command << "-"
     make_dir_command << measureno.to_i.to_s
-    Rails.logger.info make_dir_command
     system(make_dir_command)
 
     # file_get_command << "public/CNP/"
@@ -261,7 +254,6 @@ class FcdatasController < ApplicationController
     file_get_command << user.custserial.to_i.to_s
     file_get_command << "-"
     file_get_command << measureno.to_i.to_s
-    Rails.logger.info file_get_command
     (0..10).each do |i|
       break if system(file_get_command)
     end

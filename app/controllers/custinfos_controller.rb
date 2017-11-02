@@ -15,8 +15,6 @@ class CustinfosController < ApplicationController
 
   def find_user
     name = params[:name]
-    Rails.logger.info "Find User!"
-    Rails.logger.info name
     yy = params[:birthyy]
     mm = params[:birthmm]
     dd = params[:birthdd]
@@ -163,7 +161,6 @@ class CustinfosController < ApplicationController
   end
 
   def create
-    Rails.logger.info params.inspect
     name = params[:name]
     sex = params[:sex]
     age = params[:age]

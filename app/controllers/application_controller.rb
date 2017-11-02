@@ -18,8 +18,6 @@ class ApplicationController < ActionController::Base
 
   protected
   def authenticate
-    Rails.logger.info "authenticate!!!!"
-    Rails.logger.info request.headers['Authorization']
     if request.headers['Authorization'] != "5I04JE4EMH"
       authenticate_token
     end
@@ -27,8 +25,6 @@ class ApplicationController < ActionController::Base
 
   def authenticate_token
     authenticate_or_request_with_http_token do |token, options|
-      Rails.logger.info "! authenticate"
-      Rails.logger.info token
     end
   end
 

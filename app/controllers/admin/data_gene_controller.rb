@@ -167,8 +167,6 @@ class Admin::DataGeneController < Admin::AdminApplicationController
     "포피린 E 값(T존)","포피린 E 값(U존)"]
 
     scoped = scoped.order("measuredate desc")
-    Rails.logger.info "fcdata scoped.count!!!!"
-    Rails.logger.info scoped.count
 
     scoped.each do |fcdata|
       custinfo = Custinfo.where(custserial: fcdata.custserial).first
@@ -454,7 +452,6 @@ class Admin::DataGeneController < Admin::AdminApplicationController
     "포피린 E 값(T존)","포피린 E 값(U존)","피부고민 1순위","피부고민 2순위","피부고민 1순위 최근","피부고민 2순위 최근"]
 
     scoped = scoped.order("measuredate desc")
-    Rails.logger.info scoped.count
 
     scoped.each do |fcdata|
       custinfo = Custinfo.where(custserial: fcdata.custserial).first

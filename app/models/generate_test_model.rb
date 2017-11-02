@@ -455,7 +455,6 @@ class GenerateTestModel < ApplicationRecord
       # measureno = 6
       face_data = Fcdata.where(custserial: serial).where(measureno: measureno).last
       data = face_data.to_api_hash_for_admin
-      Rails.logger.info data
       sb = data[:sb_graph]
       pp = data[:pp_graph]
       el = data[:el_graph]

@@ -35,9 +35,7 @@ class UpdateController < ApplicationController
   def update_launcher_download
     check_was_disk
 
-    Rails.logger.info "update_launcher_download!!!"
     filename = params[:filename]
-    Rails.logger.info filename
 
     make_dir_command = "mkdir "
     if params.has_key?(:staging)
@@ -45,7 +43,6 @@ class UpdateController < ApplicationController
     else
       make_dir_command << "public/Admin"
     end
-    Rails.logger.info make_dir_command
     system(make_dir_command)
     make_dir_command << "/Update"
     system(make_dir_command)
@@ -68,7 +65,6 @@ class UpdateController < ApplicationController
       file_get_command << "public/Admin/Update"
     end
 
-    Rails.logger.info file_get_command
     # wget --user janus --password pielgahn2012#1 ftp://165.244.88.27/CNP/100-P/41-1/41-1_F_PW_SK_L_SIDE.jpg -N -P public/CNP/100-P/41-1
     system(file_get_command)
 
@@ -79,7 +75,6 @@ class UpdateController < ApplicationController
     end
     file_exist_command << filename
 
-    Rails.logger.info file_exist_command
     if File.exist?(file_exist_command)
       render :text => "Success!!!", status: :ok
     else
@@ -92,7 +87,6 @@ class UpdateController < ApplicationController
   def update_launcher_upload
     check_was_disk
 
-    Rails.logger.info "update_launcher_upload!!!"
     filename = params[:filename]
 
     make_dir_command = "mkdir "
@@ -138,9 +132,7 @@ class UpdateController < ApplicationController
     file_copy_command << "' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/"
     file_copy_command << file_path
     file_copy_command << "' --ftp-create-dirs"
-    Rails.logger.info file_copy_command
     (0..10).each do |i|
-      Rails.logger.info i
       break if system(file_copy_command)
     end
 
@@ -153,8 +145,6 @@ class UpdateController < ApplicationController
     file_exist_command << filename
     file_exist_command << ".zip"
 
-    Rails.logger.info file_exist_command
-    Rails.logger.info File.exist?(file_exist_command)
     if File.exist?(file_exist_command)
       render :text => "Success!!!", status: :ok
     else
@@ -164,10 +154,7 @@ class UpdateController < ApplicationController
 
   def check_was_disk
     spaceMb_i = `df -m /dev/mapper/DATAVG-lv_data`.split(/\b/)[28].to_i
-    Rails.logger.info "spaceMb_i !!!!!"
-    Rails.logger.info spaceMb_i
     if spaceMb_i < 2048
-      Rails.logger.info "spaceMb_i < 2048 !!!!"
       system("rm -rf public/BEAU/*")
       system("rm -rf public/CNP/*")
       system("rm -rf public/CLAB/*")

@@ -78,7 +78,6 @@ class Admin::ManagerController < Admin::AdminApplicationController
 
   def delete
     admin_user = AdminUser.where(email: params[:email]).first
-    Rails.logger.info admin_user
     if admin_user.delete
       render json: {}, status: :ok
     else

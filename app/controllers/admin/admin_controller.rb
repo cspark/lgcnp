@@ -24,25 +24,15 @@ class Admin::AdminController < Admin::AdminApplicationController
     allow = false
 
     Allowaccess.all.each do |range|
-      Rails.logger.info range.low_ip
-      Rails.logger.info range.high_ip
-      Rails.logger.info ip
-
       low = IPAddr.new(range.low_ip).to_i
       high = IPAddr.new(range.high_ip).to_i
       translate_ip = IPAddr.new(ip).to_i
-
-      Rails.logger.info low
-      Rails.logger.info high
-      Rails.logger.info translate_ip
 
       if translate_ip >= low && translate_ip <= high
         allow = true
       end
     end
 
-    Rails.logger.info "allow!!!!!!"
-    Rails.logger.info allow
     if allow != true
       render json: {}, status: :bad_request
     end
@@ -70,7 +60,6 @@ class Admin::AdminController < Admin::AdminApplicationController
         render json: {password_change_at: false, email: user.email}, status: :ok
       end
     else
-      Rails.logger.info "Login ERROR"
       render json: {}, status: :bad_request
     end
   end

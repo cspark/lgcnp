@@ -65,8 +65,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @shop_cd = shop_cd if !shop_cd.blank?
     @ch_cd = ch_cd
 
-    Rails.logger.info @ch_cd
-    Rails.logger.info @shop_cd
     @select_filter = []
     if !@params_filter.blank?
       @params_filter.split(',').each do |filter|
@@ -215,9 +213,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
   end
 
   def cnpr_show
-    Rails.logger.info params[:userId]
-    Rails.logger.info params[:ch_cd]
-    Rails.logger.info params[:fcdata_id]
     @tabletinterview = Fctabletinterviewrx.where(custserial: params[:userId]).where(ch_cd: params[:ch_cd]).where(fcdata_id: params[:fcdata_id]).first
   end
 
@@ -317,7 +312,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     @beau_interviews = []
     # if Rails.env.production? || Rails.env.staging?
-    Rails.logger.info @select_mode
     scoped = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array)
     scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
     scoped = scoped.where(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "total"
@@ -363,13 +357,10 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     scoped = scoped.order("fcinterview.uptdate desc")
     @beau_interviews = scoped
 
-    Rails.logger.info "@beau_interviews.count!!!"
-    Rails.logger.info @beau_interviews.count
     @count = @beau_interviews.count
     @beau_interviews_excel = @beau_interviews
     @beau_interviews = Kaminari.paginate_array(@beau_interviews).page(params[:page]).per(5)
 
-    Rails.logger.info @beau_interviews_excel.count
     respond_to do |format|
       format.html
       format.xlsx
@@ -573,16 +564,12 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end
 
     scoped = scoped.order("fctabletinterviewrx.uptdate desc")
-    Rails.logger.info scoped.count
 
     @tabletinterviews = scoped
 
     @count = @tabletinterviews.count
     @tabletinterviews_excel = @tabletinterviews
     @tabletinterviews = Kaminari.paginate_array(@tabletinterviews).page(params[:page]).per(5)
-
-    Rails.logger.info "@excel_name!!!!"
-    Rails.logger.info @excel_name
 
     respond_to do |format|
       format.html

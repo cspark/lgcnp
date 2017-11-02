@@ -23,7 +23,6 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
     ch_cd = params[:ch_cd]
     tabletinterviews = Fctabletinterviewrx.where(custserial: serial).where(ch_cd: ch_cd)
 
-    Rails.logger.info tabletinterviews.count
     if tabletinterviews.count.to_i > 0
       render json: api_hash_for_list(tabletinterviews), status: :ok
     else
@@ -65,7 +64,6 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   end
 
   def fctabletinterviews_update_lots
-    Rails.logger.info params[:tablet_interview_id]
     existed_interview = Fctabletinterviewrx.where(tablet_interview_id: params[:tablet_interview_id]).last
     if existed_interview.update(permitted_param)
       user = Custinfo.where(custserial: existed_interview.custserial).first
@@ -120,7 +118,6 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   end
 
   def update_interviews
-    Rails.logger.info params[:tablet_interview_id]
     existed_interview = Fctabletinterviewrx.where(tablet_interview_id: params[:tablet_interview_id]).last
     if existed_interview.update(permitted_param)
       render json: existed_interview.to_api_hash, status: :ok
@@ -222,9 +219,6 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   # after
   def find_lcare_user
     name = params[:cust_hnm]
-    Rails.logger.info "find_lcare_user!!!"
-    Rails.logger.info name
-    Rails.logger.info URI.encode(name)
     ch_cd = "CNPR"
     if params.has_key?(:ch_cd)
       ch_cd = params[:ch_cd]
@@ -233,14 +227,12 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
     lcare_user = LcareUser.where(cust_hnm: name, birth_year: params[:birth_year], birth_mmdd: params[:birth_mmdd], cell_phnno: params[:cell_phnno], u_cust_yn: "Y").first
 
     if !lcare_user.nil?
-      Rails.logger.info lcare_user.n_cust_id
       custinfo = Custinfo.where(n_cust_id: lcare_user.n_cust_id).order("UPTDATE desc").first
       if !custinfo.nil?
         custinfo.phone = params[:cell_phnno]
         custinfo.save
         render json: custinfo.to_api_hash, status: :ok
       else
-        Rails.logger.info "NOT EXIST!!!"
         name = URI.encode(name)
 
         birthyy = params[:birth_year]
@@ -251,8 +243,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
 
         n_cust_id = lcare_user.n_cust_id
         sex = lcare_user.sex_cd
-        Rails.logger.info lcare_user.sex_cd
-
+      
         time = Time.now
         uptdate = time.strftime("%Y/%m/%d")
 

@@ -179,7 +179,6 @@ wb.add_worksheet(name: "tabletinterview") do |sheet|
             end
           rescue
           end
-          Rails.logger.info "3333"
           after_serum = ""
           begin
             if !tabletinterview.after_serum.nil?
