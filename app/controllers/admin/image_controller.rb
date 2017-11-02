@@ -46,70 +46,27 @@ class Admin::ImageController < Admin::AdminApplicationController
     end
 
     @fcdatas = []
-    if Rails.env.production? || Rails.env.staging?
-      if @is_admin_init
-        @fcdatas_excel = @fcdatas
-        @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
-      else
-        scoped = Fcdata.all
-        temp_end_date = @end_date.to_date + 1.day
-        scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
-        scoped = scoped.where("measureno >= ?", @start_measureno.to_i) if !@start_measureno.blank?
-        scoped = scoped.where("measureno <= ?", @end_measureno.to_i) if !@end_measureno.blank?
-        scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank?
-        scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
-        scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-        scoped = scoped.order("measuredate desc")
 
-        scoped.each do |fcdata|
-          custinfo = Custinfo.where(custserial: fcdata.custserial).first
-          is_contain = true
-
-          if !custinfo.nil?
-            if !custinfo.custname.nil? && !@name.blank?
-              if !custinfo.custname.include? @name
-                is_contain = false
-              end
-            end
-          end
-
-          if is_contain == true
-            @fcdatas << fcdata
-          end
-        end
-
-        @fcdatas_excel = @fcdatas
-        @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
-      end
+    if @is_admin_init
+      @fcdatas_excel = @fcdatas
+      @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
     else
       scoped = Fcdata.all
+      temp_end_date = @end_date.to_date + 1.day
+      scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
       scoped = scoped.where("measureno >= ?", @start_measureno.to_i) if !@start_measureno.blank?
       scoped = scoped.where("measureno <= ?", @end_measureno.to_i) if !@end_measureno.blank?
       scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank?
       scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-      scoped = scoped.order("uptdate desc")
+      scoped = scoped.order("measuredate desc")
 
-      scoped.each do |fcdata|
-        custinfo = Custinfo.where(custserial: fcdata.custserial).first
-        is_contain = true
-
-        if !custinfo.nil?
-          if !custinfo.custname.nil? && !@name.blank?
-            if !custinfo.custname.include? @name
-              is_contain = false
-            end
-          end
-        end
-
-        if is_contain == true
-          @fcdatas << fcdata
-        end
-      end
+      scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
 
       @fcdatas_excel = @fcdatas
       @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
     end
+
 
     respond_to do |format|
       format.html
