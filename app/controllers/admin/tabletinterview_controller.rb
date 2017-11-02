@@ -339,75 +339,29 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     scoped = Fcinterview.where(custserial: serial_array).where(measureno: measureno_array)
     scoped = scoped.or(Fcinterview.where(custserial: serial_array2).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array3).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array4).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array5).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array6).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array7).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array8).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array9).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array10).where(measureno: measureno_array))
 
-
-    scoped = Fctabletinterview.where(ch_cd: @ch_array)
-    if Rails.env.production? || Rails.env.staging?
-      scoped = scoped.joins(:fcdata).where("fcdata.faceno LIKE ?", "%#{@select_area}%") if !@select_area.blank? && @select_area != "all"
-      scoped = scoped.joins(:fcdata).where("fcdata.shop_cd LIKE ?",  "#{@shop_cd}") if !@shop_cd.blank?
-      scoped = scoped.where("fcdata.m_skintype LIKE 0") if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "total"
-      scoped = scoped.where("fcdata.m_skintype NOT LIKE 0") if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "makeup"
-    end
-
-
-
     temp_end_date = @end_date.to_date+1.day
     if Rails.env.production? || Rails.env.staging?
-      scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
+      scoped = scoped.where("to_date(fcinterview.uptdate) >= ? AND to_date(fcinterview.uptdate) < ?", @start_date.to_date, temp_end_date)
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(ch_cd: @ch_array) if !@ch_array.blank? && @ch_array != ""
 
-    scoped = scoped.order("uptdate desc")
-
-    Rails.logger.info "scoped.count!!!!!!"
-    Rails.logger.info scoped.count
-    scoped.each do |tabletinterview|
-      custinfo = Custinfo.where(custserial: tabletinterview.custserial).first
-      Rails.logger.info custinfo.custname
-      is_contain = true
-
-      if !@name.blank?
-        if !custinfo.custname.include? @name
-          Rails.logger.info "NAME FALSE"
-          is_contain = false
-        end
-      end
-
-      if @select_sex != "all"
-        if custinfo.sex != @select_sex
-          Rails.logger.info "SEX FALSE"
-          is_contain = false
-        end
-      end
-
+    if Rails.env.production? || Rails.env.staging?
+      scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
+      scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sec}%") if @select_sex != "all"
       if !@start_age.blank? && !@end_age.blank?
-        temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
-        if temp_age < @start_age.to_i || temp_age > @end_age.to_i
-          Rails.logger.info "AGE FALSE"
-          is_contain = false
-        end
+        start_birthyy = Time.current.year.to_i - @start_age.to_i
+        end_birthyy = Time.current.year.to_i - @end_age.to_i
+        scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthyy) >= ? AND to_number(custinfo.birthyy) < ?", end_birthyy, start_birthyy)
       end
 
-      if !@start_birthyy.blank? && !@end_birthyy.blank?
-        if custinfo.birthyy.to_i < @start_birthyy.to_i || custinfo.birthyy.to_i > @end_birthyy.to_i
-          Rails.logger.info "BIRTHYY FALSE"
-          is_contain = false
-        end
-      end
+      scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthyy) >= ? AND to_number(custinfo.birthyy) < ?", @start_birthyy, @end_birthyy) if !@start_birthyy.blank? && !@end_birthyy.blank?
+      scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthmm) >= ? AND to_number(custinfo.birthmm) < ?", @start_birthmm, @end_birthmm) if !@start_birthmm.blank? && !@end_birthmm.blank?
 
-      if !@start_birthmm.blank? && !@end_birthmm.blank?
-        if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
-          Rails.logger.info "BIRTHMM FALSE"
-          is_contain = false
-        end
-      end
-
-      if is_contain == true
-        @beau_interviews << tabletinterview
-        Rails.logger.info "INSERT to array"
-        Rails.logger.info @beau_interviews.count
-      end
+      scoped = scoped.joins(:custinfo).where("custinfo.is_agree_thirdparty_info LIKE ?", "%#{params[:is_agree_thirdparty_info]}%") if params.has_key?(:is_agree_thirdparty_info)
     end
+    scoped = scoped.order("fcinterview.uptdate desc")
+    @beau_interviews = scoped
 
     Rails.logger.info "@beau_interviews.count!!!"
     Rails.logger.info @beau_interviews.count
