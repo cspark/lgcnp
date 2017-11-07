@@ -72,11 +72,13 @@ end
 group :staging, :development do
   gem 'rack-cors', :require => 'rack/cors'
   gem 'unicorn', '~> 5.2.0'
+  gem 'unicorn-worker-killer'
 end
 
 group :production, :development do
   gem 'rack-cors', :require => 'rack/cors'
   gem 'unicorn', '~> 5.2.0'
+  gem 'unicorn-worker-killer'
 end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
