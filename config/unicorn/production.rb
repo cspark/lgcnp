@@ -1,4 +1,4 @@
-worker_processes 8
+worker_processes 6
 APP_PATH = "/home/janustabuser/lgcare/"
 working_directory APP_PATH + "current/"
 
