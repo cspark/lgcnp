@@ -85,6 +85,7 @@ class ImagesController < ApplicationController
     if Rails.env.production? || Rails.env.staging?
       image_copy_to_ftp(custserial: custserial, ch_cd: ch_cd, measureno: measureno, number: number, type: type)
     end
+
     render :body => "Success!!!", status: 200
   end
 
@@ -272,6 +273,7 @@ class ImagesController < ApplicationController
       file_exist_command = "public/"+ch_cd+"/"+sub_folder_name+"/"+serial.to_s+"-"+measureno.to_s+"/"+serial.to_s+"-"+measureno.to_s+"_"+type+".jpg"
     end
 
+    sleep 2
     if File.exist?(file_exist_command)
       render :text => "Success!!!", status: :ok
     else
