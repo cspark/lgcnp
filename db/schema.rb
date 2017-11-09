@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171025054303) do
+ActiveRecord::Schema.define(version: 20171109035756) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                   default: "", null: false
@@ -130,6 +130,24 @@ ActiveRecord::Schema.define(version: 20171025054303) do
     t.float    "moisture"
     t.integer  "e_porphyrin_t"
     t.integer  "e_porphyrin_u"
+  end
+
+  create_table "fcavgdata_histories", force: :cascade do |t|
+    t.string  "his_start_date"
+    t.integer "n_index"
+    t.string  "age"
+    t.integer "pore"
+    t.integer "wrinkle"
+    t.integer "spot_pl"
+    t.integer "spot_uv"
+    t.integer "elasticity"
+    t.integer "porphyrin_ratio"
+    t.float   "e_sebum_t"
+    t.float   "e_sebum_u"
+    t.integer "moisture"
+    t.float   "e_porphyrin_t"
+    t.float   "e_porphyrin_u"
+    t.string  "his_end_date"
   end
 
   create_table "fccuration_histories", force: :cascade do |t|
