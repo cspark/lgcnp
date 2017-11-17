@@ -170,6 +170,6 @@ class UpdateController < ApplicationController
 
   private
   def permitted_params
-    params.permit(:release_date, :version_name, :launcher_yn, :upt_entry_num, :upt_total_filesize, :upt_comment)
+    params.permit(:release_date, :version_name, :launcher_yn, :upt_entry_num, :upt_total_filesize, :upt_comment. :ch_cd)
   end
 end

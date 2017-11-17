@@ -213,6 +213,7 @@ Rails.application.routes.draw do
           get 'notice_download'
           post 'notice_upload'
           put 'update'
+          get 'delete'
         end
       end
     end
