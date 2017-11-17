@@ -43,7 +43,7 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
   def delete
     fcnotice_history = FcnoticeHistory.where(upload_date: params[:upload_date]).first
     if !fcnotice_history.nil?
-      remove_notice
+      remove_notice(notice: fcnotice_history)
       # fcnotice_history.delete
     else
       render json: "FcnoticeHistory is not exist!!!", status: 204
@@ -139,9 +139,9 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     end
   end
 
-  def remove_notice
+  def remove_notice(notice: nil)
     check_was_disk
-    filename = params[:filename]
+    filename = notice.file_name
 
     make_dir_command = "mkdir "
     if params.has_key?(:staging)
