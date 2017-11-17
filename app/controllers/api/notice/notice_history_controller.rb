@@ -197,7 +197,7 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     file_copy_command = "curl -p --insecure '"
     file_copy_command << ftp_path
     file_copy_command << "' -u 'janus:pielgahn2012#1' -Q '-DELE "
-    file_copy_command << notice.filename
+    file_copy_command << filename
     file_copy_command << "' --ftp-create-dirs"
     (0..10).each do |i|
       break if system(file_copy_command)
