@@ -44,7 +44,7 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     fcnotice_history = FcnoticeHistory.where(upload_date: params[:upload_date]).first
     if !fcnotice_history.nil?
       remove_notice(notice: fcnotice_history)
-      # fcnotice_history.delete
+      fcnotice_history.delete
     else
       render json: "FcnoticeHistory is not exist!!!", status: 204
     end
