@@ -273,6 +273,8 @@ class ImagesController < ApplicationController
       file_exist_command = "public/"+ch_cd+"/"+sub_folder_name+"/"+serial.to_s+"-"+measureno.to_s+"/"+serial.to_s+"-"+measureno.to_s+"_"+type+".jpg"
     end
 
+    sleep 2
+
     if File.exist?(file_exist_command)
       render :text => "Success!!!", status: :ok
     else
