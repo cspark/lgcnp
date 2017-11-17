@@ -185,9 +185,9 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     scoped = Fcafterinterview.where.not(a1: nil)
     if Rails.env.production? || Rails.env.staging?
-      scoped = scoped.joins(:fcdata).where("fcdata.shop_cd LIKE ?",  "#{shop_cd}") if !shop_cd.blank?
-      scoped = scoped.joins(:fcdata).where("fcdata.ch_cd LIKE ?",  "#{ch_cd}") if !ch_cd.blank?
-      scoped = scoped.joins(:fcdata).where("fcdata.custserial LIKE ?",  "#{custserial}") if !custserial.blank?
+      scoped = scoped.joins(:fctabletinterview).where("fctabletinterview.shop_cd LIKE ?",  "#{shop_cd}") if !shop_cd.blank?
+      scoped = scoped.joins(:fctabletinterview).where("fctabletinterview.ch_cd LIKE ?",  "#{ch_cd}") if !ch_cd.blank?
+      scoped = scoped.joins(:fctabletinterview).where("fctabletinterview.custserial LIKE ?",  "#{custserial}") if !custserial.blank?
     end
     scoped = scoped.order("fcafterinterview.after_interview_id desc")
 
