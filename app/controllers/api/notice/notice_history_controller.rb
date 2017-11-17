@@ -108,41 +108,6 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     check_was_disk
     filename = params[:filename]
 
-    ftp_path = ""
-
-    if params.has_key?(:staging)
-      ftp_path << "ftp://165.244.88.27/Admin_Test/Notice/"
-    else
-      ftp_path << "ftp://165.244.88.27/Admin/Notice/"
-    end
-
-    file_path = ""
-    if params.has_key?(:staging)
-      file_path << "public/Admin_Test/Notice/"
-    else
-      file_path << "public/Admin/Notice/"
-    end
-    file_path << filename
-    file_path << ".zip"
-
-    file_copy_command = ""
-    file_copy_command = "curl -p --insecure '"
-    file_copy_command << ftp_path
-    file_copy_command << "' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/"
-    file_copy_command << file_path
-    file_copy_command << "' --ftp-create-dirs"
-
-    if File.exist?(file_exist_command)
-      render :text => "Success!!!", status: :ok
-    else
-      render :text => "Fail!!!", status: 404
-    end
-  end
-
-  def remove_notice(notice: nil)
-    check_was_disk
-    filename = notice.file_name
-
     make_dir_command = "mkdir "
     if params.has_key?(:staging)
       make_dir_command << "public/Admin_Test"
@@ -171,6 +136,7 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
       ftp_path << "ftp://165.244.88.27/Admin/Notice/"
     end
 
+
     file_path = ""
     if params.has_key?(:staging)
       file_path << "public/Admin_Test/Notice/"
@@ -183,8 +149,55 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     file_copy_command = ""
     file_copy_command = "curl -p --insecure '"
     file_copy_command << ftp_path
-    file_copy_command << "' -u 'janus:pielgahn2012#1' -Q '-DELE '/home/janustabuser/lgcare/current/"
+    file_copy_command << "' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/"
     file_copy_command << file_path
+    file_copy_command << "' --ftp-create-dirs"
+    (0..10).each do |i|
+      break if system(file_copy_command)
+    end
+
+    if params.has_key?(:staging)
+      file_exist_command = "public/Admin_Test/Notice/"
+    else
+      file_exist_command = "public/Admin/Notice/"
+    end
+    file_exist_command << filename
+    file_exist_command << ".zip"
+
+    if File.exist?(file_exist_command)
+      render :text => "Success!!!", status: :ok
+    else
+      render :text => "Fail!!!", status: 404
+    end
+  end
+
+
+  def remove_notice(notice: nil)
+    check_was_disk
+    filename = notice.file_name
+
+    ftp_path = ""
+
+    if params.has_key?(:staging)
+      ftp_path << "ftp://165.244.88.27/Admin_Test/Notice/"
+    else
+      ftp_path << "ftp://165.244.88.27/Admin/Notice/"
+    end
+
+    file_path = ""
+    if params.has_key?(:staging)
+      file_path << "public/Admin_Test/Notice/"
+    else
+      file_path << "public/Admin/Notice/"
+    end
+    file_path << filename
+    file_path << ".zip"
+
+    file_copy_command = ""
+    file_copy_command = "curl -p --insecure '"
+    file_copy_command << ftp_path
+    file_copy_command << "' -u 'janus:pielgahn2012#1' -Q '-DELE "
+    file_copy_command << notice.filename
     file_copy_command << "' --ftp-create-dirs"
     (0..10).each do |i|
       break if system(file_copy_command)
