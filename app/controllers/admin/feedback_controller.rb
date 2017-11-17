@@ -209,7 +209,14 @@ class Admin::FeedbackController < Admin::AdminApplicationController
         end_birthyy = Time.current.year.to_i - @end_age.to_i
         scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthyy) >= ? AND to_number(custinfo.birthyy) < ?", end_birthyy, start_birthyy)
       end
-      scoped = scoped.joins(:custinfo).where("custinfo.is_agree_thirdparty_info LIKE ?", "%#{params[:is_agree_thirdparty_info]}%") if params.has_key?(:is_agree_thirdparty_info)
+
+      if params.has_key?(:is_agree_thirdparty_info)
+        if params[:is_agree_thirdparty_info].empty?
+          scoped = scoped.joins(:custinfo).where("custinfo.is_agree_thirdparty_info LIKE ?", nil)
+        else
+          scoped = scoped.joins(:custinfo).where("custinfo.is_agree_thirdparty_info LIKE ?", "%#{params[:is_agree_thirdparty_info]}%") if params[:is_agree_thirdparty_info] != "T,F"
+        end
+      end
 
       scoped = scoped.joins(:fctabletinterview).where("to_date(fctabletinterview.uptdate) >= ? AND to_date(fctabletinterview.uptdate) < ?", @start_date, @end_date.to_date)
 

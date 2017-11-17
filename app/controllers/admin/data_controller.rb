@@ -413,7 +413,13 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthyy) >= ? AND to_number(custinfo.birthyy) < ?", @start_birthyy, @end_birthyy) if !@start_birthyy.blank? && !@end_birthyy.blank?
       scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthmm) >= ? AND to_number(custinfo.birthmm) < ?", @start_birthmm, @end_birthmm) if !@start_birthmm.blank? && !@end_birthmm.blank?
 
-      scoped = scoped.joins(:custinfo).where("custinfo.is_agree_thirdparty_info LIKE ?", "%#{params[:is_agree_thirdparty_info]}%") if params.has_key?(:is_agree_thirdparty_info)
+      if params.has_key?(:is_agree_thirdparty_info)
+        if params[:is_agree_thirdparty_info].empty?
+          scoped = scoped.joins(:custinfo).where("custinfo.is_agree_thirdparty_info LIKE ?", nil)
+        else
+          scoped = scoped.joins(:custinfo).where("custinfo.is_agree_thirdparty_info LIKE ?", "%#{params[:is_agree_thirdparty_info]}%") if params[:is_agree_thirdparty_info] != "T,F"
+        end
+      end
     end
     scoped = scoped.order("fcdata.measuredate desc")
     @fcdatas = scoped
