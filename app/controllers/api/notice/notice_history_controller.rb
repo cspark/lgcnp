@@ -171,7 +171,6 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
       ftp_path << "ftp://165.244.88.27/Admin/Notice/"
     end
 
-
     file_path = ""
     if params.has_key?(:staging)
       file_path << "public/Admin_Test/Notice/"
@@ -191,15 +190,18 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
       break if system(file_copy_command)
     end
 
+    file_delete_command = "rm -rf "
     if params.has_key?(:staging)
       file_exist_command = "public/Admin_Test/Notice/"
     else
       file_exist_command = "public/Admin/Notice/"
     end
     file_exist_command << filename
-    file_exist_command << ".zip"
 
-    if File.exist?(file_exist_command)
+    file_delete_command << file_exist_command
+    system(file_delete_command)
+
+    if !File.exist?(file_exist_command)
       render :text => "Success!!!", status: :ok
     else
       render :text => "Fail!!!", status: 404
