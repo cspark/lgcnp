@@ -324,11 +324,10 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     @beau_interviews = []
     # if Rails.env.production? || Rails.env.staging?
-    scoped = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array)
-    scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
-    scoped = scoped.where(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "total"
-    scoped = scoped.where.not(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "makeup"
-    fcdata_list = scoped
+    fcdata_list = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array)
+    fcdata_list = fcdata_list.where(shop_cd: @shop_cd) if !@shop_cd.blank?
+    fcdata_list = fcdata_list.where(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "total"
+    fcdata_list = fcdata_list.where.not(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "makeup"
 
     # serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
     # serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
