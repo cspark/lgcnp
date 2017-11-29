@@ -1,7 +1,8 @@
 class Fcinterview < ApplicationRecord
   self.table_name = "fcinterview" if Rails.env.production? || Rails.env.staging?
   belongs_to :custinfo, class_name: 'Custinfo', foreign_key: 'custserial'
-  
+  belongs_to :fcdata, class_name: 'Fcdata', foreign_key: [:custserial, :measureno]
+
   def to_api_hash
     {
       custserial: custserial,
