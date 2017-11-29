@@ -178,7 +178,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
-      scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sec}%") if @select_sex != "all"
+      scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sex}%") if @select_sex != "all"
       if !@start_age.blank? && !@end_age.blank?
         start_birthyy = Time.current.year.to_i - @start_age.to_i
         end_birthyy = Time.current.year.to_i - @end_age.to_i
@@ -354,7 +354,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
-      scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sec}%") if @select_sex != "all"
+      scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sex}%") if @select_sex != "all"
       if !@start_age.blank? && !@end_age.blank?
         start_birthyy = Time.current.year.to_i - @start_age.to_i
         end_birthyy = Time.current.year.to_i - @end_age.to_i
@@ -561,7 +561,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
-      scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sec}%") if @select_sex != "all"
+      scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sex}%") if @select_sex != "all"
       if !@start_age.blank? && !@end_age.blank?
         start_birthyy = Time.current.year.to_i - @start_age.to_i
         end_birthyy = Time.current.year.to_i - @end_age.to_i

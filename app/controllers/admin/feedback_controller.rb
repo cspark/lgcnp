@@ -203,7 +203,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
-      scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sec}%") if @sex != "all"
+      scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sex}%") if @sex != "all"
       if !@start_age.blank? && !@end_age.blank?
         start_birthyy = Time.current.year.to_i - @start_age.to_i
         end_birthyy = Time.current.year.to_i - @end_age.to_i
@@ -445,7 +445,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
 
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
-      scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sec}%") if @sex != "all"
+      scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sex}%") if @sex != "all"
       if !@start_age.blank? && !@end_age.blank?
         start_birthyy = Time.current.year.to_i - @start_age.to_i
         end_birthyy = Time.current.year.to_i - @end_age.to_i
