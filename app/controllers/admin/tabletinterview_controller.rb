@@ -256,7 +256,13 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       history.save
     end
 
-    @start_date = Fcinterview.all.order('uptdate asc').first.uptdate[0,10]
+    fcinterview = Fcinterview.all
+    if fcinterview.count > 0
+      fcinterview = fcinterview.order('uptdate asc')
+      @start_date = fcinterview.first.uptdate[0,10]
+    else
+      @start_date = Date.today
+    end
     @end_date = Date.today
     @today = Date.today
 
@@ -309,10 +315,10 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       min_age_custinfo = Custinfo.where(ch_cd: "BEAU").where.not(birthyy: nil).order("birthyy desc").first
       max_age_custinfo = Custinfo.where(ch_cd: "BEAU").order("birthyy asc").first
     end
-    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i
-    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i
-    @min_birthyy = min_age_custinfo.birthyy
-    @max_birthyy = max_age_custinfo.birthyy
+    @min_age = Time.current.year - min_age_custinfo.birthyy.to_i if !min_age_custinfo.nil?
+    @max_age = Time.current.year - max_age_custinfo.birthyy.to_i if !max_age_custinfo .nil?
+    @min_birthyy = min_age_custinfo.birthyy if !min_age_custinfo.nil?
+    @max_birthyy = max_age_custinfo.birthyy if !max_age_custinfo .nil?
     @min_birthmm = 1
     @max_birthmm = 12
 
@@ -341,7 +347,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     temp_end_date = @end_date.to_date+1.day
     if Rails.env.production? || Rails.env.staging?
-      scoped = scoped.where("to_date(fcinterview.uptdate) >= ? AND to_date(fcinterview.uptdate) < ?", @start_date.to_date, temp_end_date)
+      scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(ch_cd: @ch_array) if !@ch_array.blank? && @ch_array != ""
@@ -357,7 +363,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
       scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthyy) >= ? AND to_number(custinfo.birthyy) < ?", @start_birthyy, @end_birthyy) if !@start_birthyy.blank? && !@end_birthyy.blank?
       scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthmm) >= ? AND to_number(custinfo.birthmm) < ?", @start_birthmm, @end_birthmm) if !@start_birthmm.blank? && !@end_birthmm.blank?
-
       scoped = scoped.joins(:custinfo).where("custinfo.is_agree_thirdparty_info LIKE ?", "%#{params[:is_agree_thirdparty_info]}%") if params.has_key?(:is_agree_thirdparty_info)
     end
     scoped = scoped.order("fcinterview.uptdate desc")
