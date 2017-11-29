@@ -343,8 +343,10 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     # scoped = Fcinterview.where(custserial: serial_array).where(measureno: measureno_array)
     # scoped = scoped.or(Fcinterview.where(custserial: serial_array2).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array3).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array4).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array5).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array6).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array7).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array8).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array9).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array10).where(measureno: measureno_array))
-
-    scoped = Fcinterview.where("fcinterview.custserial IN (?) AND fcinterview.measureno IN (?)", fcdata_list.pluck(:custserial), fcdata_list.pluck(:measureno))
+    subquery = fcdata_list.select(:custserial)
+    subquery_measureno = fcdata_list.select(:measureno)
+    # scoped = Fcinterview.where("fcinterview.custserial IN (?) AND fcinterview.measureno IN (?)", fcdata_list.pluck(:custserial), fcdata_list.pluck(:measureno))
+    scoped = Fcinterview.where("fcinterview.custserial IN (#{subquery.to_sql}) AND fcinterview.measureno IN (#{subquery_measureno.to_sql})")
 
     temp_end_date = @end_date.to_date+1.day
     if Rails.env.production? || Rails.env.staging?
