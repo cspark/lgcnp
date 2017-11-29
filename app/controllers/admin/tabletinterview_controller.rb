@@ -347,7 +347,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     temp_end_date = @end_date.to_date+1.day
     if Rails.env.production? || Rails.env.staging?
-      scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
+      scoped = scoped.where("to_date(fcinterview.uptdate) >= ? AND to_date(fcinterview.uptdate) < ?", @start_date.to_date, temp_end_date)
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(ch_cd: @ch_array) if !@ch_array.blank? && @ch_array != ""
