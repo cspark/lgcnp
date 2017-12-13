@@ -329,20 +329,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     fcdata_list = fcdata_list.where(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "total"
     fcdata_list = fcdata_list.where.not(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "makeup"
 
-    # serial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
-    # serial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
-    # serial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
-    # serial_array4 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 3000, 4001).pluck(:custserial).uniq
-    # serial_array5 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 4000, 5001).pluck(:custserial).uniq
-    # serial_array6 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 5000, 6001).pluck(:custserial).uniq
-    # serial_array7 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 7001).pluck(:custserial).uniq
-    # serial_array8 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 8001).pluck(:custserial).uniq
-    # serial_array9 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 9001).pluck(:custserial).uniq
-    # serial_array10 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 10001).pluck(:custserial).uniq
-    # measureno_array = fcdata_list.pluck(:measureno).map(&:to_i).uniq
-
-    # scoped = Fcinterview.where(custserial: serial_array).where(measureno: measureno_array)
-    # scoped = scoped.or(Fcinterview.where(custserial: serial_array2).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array3).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array4).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array5).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array6).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array7).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array8).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array9).where(measureno: measureno_array)).or(Fcinterview.where(custserial: serial_array10).where(measureno: measureno_array))
     subquery = fcdata_list.select(:custserial)
     subquery_measureno = fcdata_list.select(:measureno)
     # scoped = Fcinterview.where("fcinterview.custserial IN (?) AND fcinterview.measureno IN (?)", fcdata_list.pluck(:custserial), fcdata_list.pluck(:measureno))
