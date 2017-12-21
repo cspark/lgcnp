@@ -25,7 +25,7 @@ class LcareUser < ApplicationRecord
     scoped = scoped.where(birth_year: birth_year) if birth_year.present?
     scoped = scoped.where(birth_mmdd: birth_mmdd) if birth_mmdd.present?
     scoped = scoped.where(cell_phnno: cell_phnno) if cell_phnno.present?
-    scoped = scoped.where.not(cell_phnno: nil)
+    scoped = scoped.where.not(cell_phnno: nil).where(active_mobile_yn: "Y")
     scoped.order('updt_dtm DESC').page(page).per(per)
   end
 end

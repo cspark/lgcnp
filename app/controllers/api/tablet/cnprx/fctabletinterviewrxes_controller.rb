@@ -224,7 +224,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
       ch_cd = params[:ch_cd]
     end
 
-    lcare_user = LcareUser.where(cust_hnm: name, birth_year: params[:birth_year], birth_mmdd: params[:birth_mmdd], cell_phnno: params[:cell_phnno], u_cust_yn: "Y").first
+    lcare_user = LcareUser.where(cust_hnm: name, birth_year: params[:birth_year], birth_mmdd: params[:birth_mmdd], cell_phnno: params[:cell_phnno], u_cust_yn: "Y").where(active_mobile_yn: "Y").first
 
     if !lcare_user.nil?
       custinfo = Custinfo.where(n_cust_id: lcare_user.n_cust_id).order("UPTDATE desc").first
@@ -243,7 +243,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
 
         n_cust_id = lcare_user.n_cust_id
         sex = lcare_user.sex_cd
-      
+
         time = Time.now
         uptdate = time.strftime("%Y/%m/%d")
 
