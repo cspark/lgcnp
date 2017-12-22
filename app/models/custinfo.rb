@@ -78,7 +78,7 @@ class Custinfo < ApplicationRecord
     }
   end
 
-  def active_mobile_yn
+  def get_active_mobile_yn
     if !n_cust_id.nil?
       lcare_users = LcareUser.where(n_cust_id: n_cust_id)
       if lcare_users.count > 0
