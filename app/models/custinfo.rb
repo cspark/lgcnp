@@ -25,7 +25,8 @@ class Custinfo < ApplicationRecord
       is_agree_privacy_residence: is_agree_privacy_residence,
       address: address,
       gene_barcode: gene_barcode.to_s,
-      shop_cd: shop_cd
+      shop_cd: shop_cd,
+      active_mobile_yn: get_active_mobile_yn
     }
   end
 
@@ -75,6 +76,17 @@ class Custinfo < ApplicationRecord
       gene_barcode: gene_barcode,
       shop_cd: shop_cd
     }
+  end
+
+  def active_mobile_yn
+    if !n_cust_id.nil?
+      lcare_users = LcareUser.where(n_cust_id: n_cust_id)
+      if lcare_users.count > 0
+        lcare_user = lcare_users.first
+        return lcare_user.active_mobile_yn
+      end
+    end
+    return ""
   end
 
   def increase_measureno
