@@ -47,38 +47,12 @@ class Admin::UserController < Admin::AdminApplicationController
 
     if !@is_admin_init
       scoped = Custinfo.all
-      if (@ch_cd == "CNP" || @ch_cd == "CLAB" || @ch_cd == "CNPR" || @ch_cd == "RLAB")
-        fcdata_list = Fcdata.all
-        fcdata_list = fcdata_list.where(shop_cd: @shop_cd) if !@shop_cd.blank?
-        custserial_array = fcdata_list.where("CAST(custserial AS INT) < ? ", 1001).pluck(:custserial).uniq
-        custserial_array2 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 1000, 2001).pluck(:custserial).uniq
-        custserial_array3 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 2000, 3001).pluck(:custserial).uniq
-        custserial_array4 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 3000, 4001).pluck(:custserial).uniq
-        custserial_array5 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 4000, 5001).pluck(:custserial).uniq
-        custserial_array6 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 5000, 6001).pluck(:custserial).uniq
-        custserial_array7 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 6000, 7001).pluck(:custserial).uniq
-        custserial_array8 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 7000, 8001).pluck(:custserial).uniq
-        custserial_array9 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 8000, 9001).pluck(:custserial).uniq
-        custserial_array10 = fcdata_list.where("CAST(custserial AS INT) > ? AND CAST(custserial AS INT) < ? ", 9000, 10001).pluck(:custserial).uniq
 
-        array_result = scoped.where(custserial: custserial_array)
-        array_result2 = scoped.where(custserial: custserial_array2)
-        array_result3 = scoped.where(custserial: custserial_array3)
-        array_result4 = scoped.where(custserial: custserial_array4)
-        array_result5 = scoped.where(custserial: custserial_array5)
-        array_result6 = scoped.where(custserial: custserial_array6)
-        array_result7 = scoped.where(custserial: custserial_array7)
-        array_result8 = scoped.where(custserial: custserial_array8)
-        array_result9 = scoped.where(custserial: custserial_array9)
-        array_result10 = scoped.where(custserial: custserial_array10)
-
-        scoped = array_result.or(array_result2).or(array_result3).or(array_result4).or(array_result5).or(array_result6).or(array_result7).or(array_result8).or(array_result9).or(array_result10)
-      else
-        scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
-      end
+      scoped = scoped.joins(:fcdatas).where("fcdata.shop_cd LIKE ?", @shop_cd) if !@shop_cd.blank?
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
       scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank? && @ch_cd != "ALL"
       scoped = scoped.where(address: @select_address) if !@select_address.blank?
+
       @search = ""
       @search = params[:search] if params.has_key?(:search) && params[:search].length != 0
       scoped = scoped.where("custname LIKE ?", "%#{@search}%") if !@search.blank?
@@ -96,7 +70,6 @@ class Admin::UserController < Admin::AdminApplicationController
 
     respond_to do |format|
       format.html
-      # format.csv { send_data Custinfo.to_csv(@users) }
       format.xlsx
     end
   end
