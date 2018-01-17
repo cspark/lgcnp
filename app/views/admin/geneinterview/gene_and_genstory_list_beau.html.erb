@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+    <style>
+    td {
+      width: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0 auto;
+      text-align: center !important;
+    }
+
+    .fixed-table-body {
+      max-height: 280px;
+    }
+
+    .text-center {
+        margin: 0 auto;
+        text-align: center !important;
+    }
+
+    th {
+      font-size: 15px;
+      margin: 0 auto;
+      text-align: center !important;
+    }
+    </style>
+  </head>
+
+  <body>
+    <%= render "admin/header" %>
+    <div id="filter" style="background: #b1cbbb; padding: 8px;">
+      <div>
+        <p style="float:left; margin-top: 7px;">업데이트일:&nbsp;</p>
+        <input class="form-control" type="text" id="start_date" style="float:left; width:100px;">
+        <input class="form-control" type="text" id="end_date" style="float:left; width:100px;">
+        <button id="date_init" class="btn btn-primary" style="float:left;">전체</button>
+
+        <p style="float:left; margin-left: 20px; margin-top: 5px;">채널:&nbsp;</p>
+        <p style="float:left; margin-left: 5px; margin-top: 5px;">BEAU&nbsp;</p>
+        <input type="checkbox" name="check_box" value="BEAU" id="BEAU" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">NC&nbsp;</p>
+        <input type="checkbox" name="check_box" value="TMR" id="TMR" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">MART&nbsp;</p>
+        <input type="checkbox" name="check_box" value="MART" id="MART" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">LABO&nbsp;</p>
+        <input type="checkbox" name="check_box" value="LABO" id="LABO" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">방판&nbsp;</p>
+        <input type="checkbox" name="check_box" value="ONEP" id="ONEP" style="float:left; margin-top:9px;">
+
+        <p style="float:right; margin-right:20px; margin-top:10px;">
+          Download:
+          <%= link_to "Excel", admin_geneinterview_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
+          :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial,
+          :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
+          :select_channel => @ch_cd, :select_shop => @shop_cd, :gene_barcode => @gene_barcode, :isExcel => true) %>
+        </p>
+      </div><br><br>
+
+      <div>
+        <p style="float:left; margin-top: 7px;">매장 코드:&nbsp;</p>
+        <input class="form-control" type="text" name="select_shop" id="select_shop" style="float:left; width: 200px;">
+
+        <p style="float:left; margin-left: 20px; margin-top: 7px;">유전자 바코드:&nbsp;</p>
+        <input class="form-control" type="text" name="gene_barcode" id="gene_barcode" style="float:left; width: 200px;">
+      </div><br><br>
+
+      <div>
+        <p style="float:left; margin-top:7px;">이름: &nbsp;</p>
+        <input class="form-control" type="text" id="name" placeholder="이름으로 검색" style="float:left; width: 150px;">
+
+        <p style="float:left; margin-left: 20px; margin-top: 7px;">시리얼키:&nbsp;</p>
+        <input class="form-control" type="text" id="custserial" style="float:left; width:100px;">
+
+        <p style="float:left; margin-left: 20px; margin-top:7px;">성별: &nbsp;</p>
+        <select class="form-control" id="select_sex" style="width:70px;">
+          <option value="all">전체</option>
+          <option value="F">여자</option>
+          <option value="M">남자</option>
+        </select>
+      </div>
+
+      <div style="margin-top:5px; height:40px;">
+        <p style="float:left; margin-top:7px;">측정 당시 나이: &nbsp;</p>
+        <input class="form-control" type="text" id="start_age" style="float:left; width:100px;">
+        <input class="form-control" type="text" id="end_age" style="float:left; width:100px;">
+        <button id="age_init" class="btn btn-primary" style="float:left;">전체</button>
+
+        <p style="float:left; margin-left: 20px; margin-top:7px;">출생연도: &nbsp;</p>
+        <input class="form-control" type="text" id="start_birthyy" style="float:left; width:100px;">
+        <input class="form-control" type="text" id="end_birthyy" style="float:left; width:100px;">
+        <button id="birthyy_init" class="btn btn-primary" style="float:left;">전체</button>
+      </div>
+
+      <div>
+        <p style="float:left; margin-top:7px;">생월: &nbsp;</p>
+        <input class="form-control" type="text" id="start_birthmm" style="float:left; width:100px;">
+        <input class="form-control" type="text" id="end_birthmm" style="float:left; width:100px;">
+        <button id="birthmm_init" class="btn btn-primary" style="float:left;">전체</button>
+        <button class="btn btn-warning" id="submit" style="margin-left: 20px; ">조회</button>
+
+        <button class="btn btn-warning" style="float:right; margin-right:20px;" id="show_interview">설문조사</button>
+      </div>
+    </div>
+
+    <div id="avr" style="background: #eea29a; padding: 8px;">
+      총 인원 수 : <%= @count %>
+    </div>
+
+    <table data-toggle="table">
+      <thead style="width: 100%;">
+        <tr>
+          <th>고객번호</th>
+          <th>이름</th>
+          <th>유전자 바코드</th>
+          <th>채널코드</th>
+          <th>야누스 측정 횟수</th>
+          <th>매장 코드</th>
+          <th>설문1(키)</th>
+          <th>설문1(몸무게)</th>
+          <th>설문2</th>
+          <th>설문3</th>
+          <th>설문4</th>
+          <th>설문5</th>
+          <th>설문6</th>
+          <th>설문7</th>
+          <th>설문8</th>
+          <th>설문9</th>
+          <th>설문10</th>
+          <th>설문11</th>
+          <th>설문12</th>
+          <th>설문13</th>
+          <th>설문14</th>
+          <th>유전자 진단날짜</th>
+          <th>생년월일</th>
+          <th>성별</th>
+          <th>측정 당시 만 나이</th>
+        </tr>
+    </thead>
+      <tbody>
+        <% @fcgene_interviews.each do |interview| %>
+          <%= render partial: "admin/geneinterview/item", locals: { interview: interview } %>
+        <% end %>
+      </tbody>
+    </table>
+    <div>
+      <%= paginate @fcgene_interviews %>
+    </div>
+
+    <script>
+      $(function () {
+          $(".top-list").css('color', '#9d9d9d');
+          $("#gene_interview_list").css('color', 'hotpink');
+
+          <% name = "" %>
+          <% if !@name.nil? && @name != "" %>
+            document.getElementById("name").value = decode_utf8('<%= @name %>')
+          <% end %>
+
+          <% if @ch_cd.include?("BEAU") %>
+            $("input:checkbox[value=BEAU]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=BEAU]").prop("checked", false);
+          <% end %>
+
+          <% if @ch_cd.include?("TMR") %>
+            $("input:checkbox[value=TMR]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=TMR]").prop("checked", false);
+          <% end %>
+
+          <% if @ch_cd.include?("MART") %>
+            $("input:checkbox[value=MART]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=MART]").prop("checked", false);
+          <% end %>
+
+          <% if @ch_cd.include?("LABO") %>
+            $("input:checkbox[value=LABO]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=LABO]").prop("checked", false);
+          <% end %>
+
+          <% if @ch_cd.include?("ONEP") %>
+            $("input:checkbox[value=ONEP]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=ONEP]").prop("checked", false);
+          <% end %>
+
+          <% if @ch_cd == "" && @custserial.nil? %>
+            $("input:checkbox[name=check_box]").prop("checked", true);
+          <% end %>
+
+          $("#start_date").datepicker({
+                  dateFormat: 'yy-mm-dd',
+                  dayNamesMin: [
+                      '일',
+                      '월',
+                      '화',
+                      '수',
+                      '목',
+                      '금',
+                      '토'
+                  ],
+                  monthNamesShort: [
+                      '1월',
+                      '2월',
+                      '3월',
+                      '4월',
+                      '5월',
+                      '6월',
+                      '7월',
+                      '8월',
+                      '9월',
+                      '10월',
+                      '11월',
+                      '12월'
+                  ],
+                  currentText: '오늘 날짜',
+                  changeMonth: true
+              });
+          $("#end_date").datepicker({
+                      dateFormat: 'yy-mm-dd',
+                      dayNamesMin: [
+                          '일',
+                          '월',
+                          '화',
+                          '수',
+                          '목',
+                          '금',
+                          '토'
+                      ],
+                      monthNamesShort: [
+                          '1월',
+                          '2월',
+                          '3월',
+                          '4월',
+                          '5월',
+                          '6월',
+                          '7월',
+                          '8월',
+                          '9월',
+                          '10월',
+                          '11월',
+                          '12월'
+                      ],
+                      currentText: '오늘 날짜',
+                      changeMonth: true
+                  });
+
+        <% if @start_date.nil? %>
+          $("#start_date").datepicker('setDate', '2017-01-25');
+        <% else %>
+          $("#start_date").datepicker('setDate', '<%= @start_date %>');
+        <% end %>
+        $("#end_date").datepicker('setDate', '<%= @end_date %>');
+
+        <% if !@shop_cd.nil? && @shop_cd != "" && %>
+          document.getElementById("select_shop").value = '<%= @shop_cd %>'
+        <% end %>
+
+        <% if !@name.nil? %>
+          document.getElementById("name").value = decode_utf8('<%= @name %>')
+        <% end %>
+
+        <% if !@custserial.nil? %>
+          document.getElementById("custserial").value = '<%= @custserial %>'
+        <% end %>
+
+        <% if !@select_sex.nil? %>
+          $('select[id="select_sex"]').val('<%= @select_sex %>');
+        <% end %>
+
+        <% if !@start_birthyy.nil? %>
+          document.getElementById("start_birthyy").value = '<%= @start_birthyy %>'
+        <% end %>
+        <% if !@end_birthyy.nil? %>
+          document.getElementById("end_birthyy").value = '<%= @end_birthyy %>'
+        <% end %>
+
+        <% if !@start_birthmm.nil? %>
+          document.getElementById("start_birthmm").value = '<%= @start_birthmm %>'
+        <% end %>
+        <% if !@end_birthmm.nil? %>
+          document.getElementById("end_birthmm").value = '<%= @end_birthmm %>'
+        <% end %>
+
+        <% if !@gene_barcode.nil? %>
+          document.getElementById("gene_barcode").value = '<%= @gene_barcode %>'
+        <% end %>
+
+        $("#date_init").click(function(){
+          $("#start_date").datepicker('setDate', '2017-01-25');
+          $("#end_date").datepicker('setDate', '<%= @today %>');
+        });
+
+        $("#age_init").click(function(){
+          document.getElementById("start_age").value = '<%= @min_age %>';
+          document.getElementById("end_age").value = '<%= @max_age %>';
+        });
+
+        $("#birthyy_init").click(function(){
+          document.getElementById("start_birthyy").value = '<%= @max_birthyy %>';
+          document.getElementById("end_birthyy").value = '<%= @min_birthyy %>';
+        });
+
+        $("#birthmm_init").click(function(){
+          document.getElementById("start_birthmm").value = '<%= @min_birthmm %>';
+          document.getElementById("end_birthmm").value = '<%= @max_birthmm %>';
+        });
+
+        $(document).on("click", ".table_tr", function (e) {
+          var userId = $(this).attr('id').split("/")[0]
+          var measureno = $(this).attr('id').split("/")[1]
+          var ch_cd = $(this).attr('id').split("/")[2]
+          window.open("/admin/geneinterview/detail?userId=" +userId+ "&measureno=" +measureno+ "&ch_cd=" +ch_cd, "/admin/geneinterview/detail?userId=" +userId+ "&measureno=" +measureno+ "&ch_cd=" +ch_cd, "scrollbars=1,resizable=1,height=500,width=600");
+        });
+
+        $('#submit').click(function(){
+          load();
+        });
+
+        $(document).keyup(function (e) {
+          console.log(e.keyCode)
+          if (e.keyCode == 13) {
+            load();
+          }
+        });
+
+        $('#show_interview').click(function(){
+          window.open("/admin/geneinterview/show_interview", "/admin/geneinterview/show_interview", "scrollbars=1,resizable=1,height=650,width=650");
+        });
+      });
+      function selectFilter(select_filter){
+        filterStr = select_filter
+      }
+
+      function load(){
+        var select_sex = document.getElementById("select_sex").options[document.getElementById("select_sex").selectedIndex].value;
+        var select_channel = []
+        $('input:checkbox[name="check_box"]').each(function() {
+            if(this.checked){
+              select_channel.push(this.value)
+            }
+        });
+
+        url = ""
+        url = "/admin/geneinterview?name=" + encodeURI(encodeURI($("#name").val()));
+        url += "&start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
+        url += "&select_sex=" + select_sex;
+        url += "&start_age=" + document.getElementById("start_age").value;
+        url += "&end_age=" + document.getElementById("end_age").value;
+        url += "&name=" + encodeURI(encodeURI(document.getElementById("name").value));
+        url += "&custserial=" + document.getElementById("custserial").value;
+        url += "&start_birthyy=" + document.getElementById("start_birthyy").value;
+        url += "&end_birthyy=" + document.getElementById("end_birthyy").value;
+        url += "&start_birthmm=" + document.getElementById("start_birthmm").value;
+        url += "&end_birthmm=" + document.getElementById("end_birthmm").value;
+        url += "&select_channel=" + select_channel;
+        url += "&select_shop=" +$("#select_shop").val();
+        url += "&gene_barcode=" +$("#gene_barcode").val();
+
+        location.href = url;
+      }
+
+      function decode_utf8(s) {
+        try{
+          return decodeURI(s);
+        }catch(err){
+          console.log(err);
+          return s;
+        }
+      }
+
+    </script>
+  </body>
+</html>

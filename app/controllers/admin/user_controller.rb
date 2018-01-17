@@ -61,7 +61,11 @@ class Admin::UserController < Admin::AdminApplicationController
       lastanaldate_nil_user = scoped.where(lastanaldate: nil).order("lastanaldate desc")
       @users = lastanaldate_not_nil_user + lastanaldate_nil_user
     else
-      @users = Custinfo.where(ch_cd: @ch_cd)
+      scoped = Custinfo.where(ch_cd: @ch_cd)
+      
+      lastanaldate_not_nil_user = scoped.where.not(lastanaldate: nil).order("lastanaldate desc")
+      lastanaldate_nil_user = scoped.where(lastanaldate: nil).order("lastanaldate desc")
+      @users = lastanaldate_not_nil_user + lastanaldate_nil_user
     end
 
     @all_users = @users

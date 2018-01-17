@@ -88,6 +88,7 @@ Rails.application.routes.draw do
     get "manager_list" => "manager#index"
     get "allow_list" => "allowaccess#index"
 
+    get "gene_and_genstory_list_beau" => "geneinterview#gene_and_genstory_list_beau"
     resources :user do
     end
 

@@ -69,12 +69,24 @@
           location.href = "/admin/data_list_beau"
         });
 
+        $("#fcdata_list_cnp").click(function(){
+          location.href = "/admin/data_list_cnp"
+        });
+
         $("#fcdata_and_gene_list_cnp").click(function(){
           location.href = "/admin/data_and_gene_list_cnp"
         });
 
         $("#fcdata_and_gene_list_cnpr").click(function(){
           location.href = "/admin/data_and_gene_list_cnpr"
+        });
+
+        $("#gene_and_genstory_list_cnp").click(function(){
+          location.href = "/admin/data_and_gene_list_cnp"
+        });
+
+        $("#gene_and_genstory_list_beau").click(function(){
+          location.href = "/admin/gene_and_genstory_list_beau"
         });
 
         $("#fcdata_and_gene_list_beau").click(function(){
@@ -238,27 +250,34 @@
             </div>
           </li>
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
-          <li class="dropdown dropbtn"><a class="top-list" id="gene_interview_list" href="#">유전자 진단</a>
+          <li class="dropdown dropbtn"><a class="top-list" id="gene_interview_list" href="#">유전자 설문</a>
           </li>
           <% end %>
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
-          <li id="fcavg_list"><a class="top-list" id="point_avg_list" href="#">연령별 성별 평균</a></li>
-          <li class="dropdown dropbtn"><a class="top-list" id="point_data_list" href="#">야누스 측정 데이터</a>
-            <div class="dropdown-content">
-              <a id="fcdata_list_cnp" href="#">CNP</a>
-              <a id="fcdata_list_beau" href="#">보떼</a>
-              <a id="fcdata_list_cnpr" href="#">CNP RX</a>
-            </div>
-          </li>
+            <li id="fcavg_list"><a class="top-list" id="point_avg_list" href="#">연령별 성별 평균</a></li>
+            <li class="dropdown dropbtn"><a class="top-list" id="point_data_list" href="#">야누스 측정 데이터</a>
+              <div class="dropdown-content">
+                <a id="fcdata_list_cnp" href="#">CNP</a>
+                <a id="fcdata_list_beau" href="#">보떼</a>
+                <a id="fcdata_list_cnpr" href="#">CNP RX</a>
+              </div>
+            </li>
 
-          <li class="dropdown dropbtn"><a class="top-list" id="point_data_and_gene_list" href="#">측정 데이터&유전자 인터뷰</a>
-            <div class="dropdown-content">
-              <a id="fcdata_and_gene_list_cnp" href="#">CNP</a>
-              <a id="fcdata_and_gene_list_beau" href="#">보떼</a>
-            </div>
-          </li>
+            <!-- <li class="dropdown dropbtn"><a class="top-list" id="point_gene_and_genestory_list" href="#">유전자설문&젠스토리앱 설문</a>
+              <div class="dropdown-content">
+                <a id="gene_and_genstory_list_cnp" href="#">CNP</a>
+                <a id="gene_and_genstory_list_beau" href="#">보떼</a>
+              </div>
+            </li> -->
 
-          <li id="fcpos_list"><a class="top-list" id="point_pos_list" href="#">야누스 분석 영역 정보</a></li>
+            <li class="dropdown dropbtn"><a class="top-list" id="point_data_and_gene_list" href="#">측정데이터&유전자설문</a>
+              <div class="dropdown-content">
+                <a id="fcdata_and_gene_list_cnp" href="#">CNP</a>
+                <a id="fcdata_and_gene_list_beau" href="#">보떼</a>
+              </div>
+            </li>
+
+            <li id="fcpos_list"><a class="top-list" id="point_pos_list" href="#">야누스 분석 영역 정보</a></li>
           <% end %>
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "semi_admin") %>
           <li id="image_list"><a class="top-list" id="point_image_list" href="#">고객 이미지</a></li>
