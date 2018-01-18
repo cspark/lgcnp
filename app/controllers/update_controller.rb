@@ -75,6 +75,8 @@ class UpdateController < ApplicationController
     end
     file_exist_command << filename
 
+    Rails.logger.info "file command : #{file_exist_command}"
+
     if File.exist?(file_exist_command)
       render :text => "Success!!!", status: :ok
     else
