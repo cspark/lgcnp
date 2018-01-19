@@ -117,8 +117,27 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
     end
   end
 
+  # CNPRx 최종 업데이트
   def update_interviews
     existed_interview = Fctabletinterviewrx.where(tablet_interview_id: params[:tablet_interview_id]).last
+
+    fcdata = Fcdata.where(custserial: existed_interview.custserial).where(measureno: existed_interview.fcdata_id).last
+    user = Custinfo.where(custserial: fcdata.custserial).first
+    if existed_interview.mmode == "Makeup"
+      # 메이크업모드 일 때
+      if user.sex == "F"
+        # 여자일때
+        fcdata.sp_pl_avr = fcdata.sp_pl_avr + 6
+        fcdata.mo_1 = fcdata.mo_1 + 3
+        fcdata.mo_7 = fcdata.mo_7 + 3
+        fcdata.mo_8 = fcdata.mo_8 + 3
+      else
+        # 남자일때
+        fcdata.sp_pl_avr = fcdata.sp_pl_avr + 3
+      end
+      fcdata.save
+    end
+
     if existed_interview.update(permitted_param)
       render json: existed_interview.to_api_hash, status: :ok
     else

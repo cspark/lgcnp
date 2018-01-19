@@ -517,12 +517,6 @@ class Fcdata < ApplicationRecord
 
     if type == "pp"
       my_position = sp_pl_avr
-      if ch_cd == "CNPR" || ch_cd == "RLAB"
-        tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first
-        if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
-          my_position = sp_pl_avr+7
-        end
-      end
 
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
@@ -816,12 +810,7 @@ class Fcdata < ApplicationRecord
     if type == "pp"
       # 색소침착 SPOT_PL
       avr = self.sp_pl_avr
-      if ch_cd == "CNPR" || ch_cd == "RLAB"
-        tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: self.ch_cd).where(custserial: self.custserial).where(fcdata_id: self.measureno).first
-        if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
-          avr = self.sp_pl_avr + 7
-        end
-      end
+
       avr1 = Fcavgdata.where(age: avg_grade_1_field_name).first.spot_pl.to_i
       avr2 = Fcavgdata.where(age: avg_grade_2_field_name).first.spot_pl.to_i
       avr3 = Fcavgdata.where(age: avg_grade_3_field_name).first.spot_pl.to_i
@@ -842,12 +831,6 @@ class Fcdata < ApplicationRecord
     end
 
     avr = ((self.mo_1.to_f + self.mo_7.to_f + self.mo_8.to_f) / 3).round
-    if ch_cd == "CNPR" || ch_cd == "RLAB"
-      tabletinterviewrx = Fctabletinterviewrx.where(ch_cd: ch_cd).where(custserial: custserial).where(fcdata_id: measureno).first
-      if !tabletinterviewrx.nil? && tabletinterviewrx.mmode == "Customer"
-        avr = ((self.mo_1.to_f + self.mo_7.to_f + self.mo_8.to_f) / 3).round + 4
-      end
-    end
 
     avr1 = Fcavgdata.where(age: "AgeALL_Grade1").first.moisture.to_i
     avr2 = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.moisture.to_i

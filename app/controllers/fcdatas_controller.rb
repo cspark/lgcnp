@@ -24,15 +24,6 @@ class FcdatasController < ApplicationController
     else
       render :text => "cannot check yanus status", status: 404
     end
-
-    #Test
-    # render :text => "Success", status: 200
-    # fcdata = Fcdata.all.first
-    # if fcdata.present?
-    #   render json: fcdata.to_api_hash, status: 200
-    # else
-    #   render json: "", status:404
-    # end
   end
 
   def face_data
@@ -180,7 +171,6 @@ class FcdatasController < ApplicationController
   def create
     fcdata = Fcdata.new(permitted_param)
     fcdata.save
-
     render :text => "create Complete", status: 200
   end
 
