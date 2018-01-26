@@ -443,7 +443,7 @@ class Fcdata < ApplicationRecord
     end
 
     if type == "dry_u"
-      my_position = (mo_7 + mo_8) / 2 #25
+      my_position = ((mo_7 + mo_8) / 2).round #25
       min_value = get_vertical_graph_min(type: "moisture")
       max_value = get_vertical_graph_max(type: "moisture")
       first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.moisture.to_f #28.0
@@ -492,7 +492,7 @@ class Fcdata < ApplicationRecord
     end
 
     if type == "sb"
-      my_position = (e_porphyrin_u.to_f + e_porphyrin_t.to_f) / 2
+      my_position = ((e_porphyrin_u.to_f + e_porphyrin_t.to_f) / 2).round
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
       first_split_point = (Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_u.to_f + Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_t.to_f) / 2
@@ -714,7 +714,7 @@ class Fcdata < ApplicationRecord
     if value.to_f < first_split_point.to_f
       denominator = (first_split_point.to_f - min_value.to_f)
       denominator = 1 if denominator == 0
-      value = ((value.to_f - min_value.to_f) / denominator) * 32.3
+      value = ((value.to_f - min_value.to_f) / denominator) * 33.3
     elsif value.to_f >= first_split_point.to_f && value.to_f < second_split_point.to_f
       denominator = (second_split_point.to_f - first_split_point.to_f)
       denominator = 1 if denominator == 0
@@ -732,22 +732,15 @@ class Fcdata < ApplicationRecord
       if type != 'moisture' && type != 'dry_t' && type != 'dry_u'
         value = 99.9 - value
       end
-      if value <= 32.3
-        value = value + 1
-      end
-      value = (value * 0.85) + 15
+      value = ((value * 0.85) + 15).round
+      value = 99 if value > 99
+      value = 15 if value < 15
     else
       if type != 'moisture' && type != 'pore' && type != 'sb' && type != 'pp' && type != 'dry_t' && type != 'dry_u'
         value = 99.9 - value
       end
     end
 
-
-    # if (type == 'pore' || type == 'sb' || type == 'wr' || type == 'el' || type == 'pp') && !is_avr
-    #   if get_graph_data(type: type) == 2
-    #     value = get_vertical_graph_avr(type: type)
-    #   end
-    # end
     return value
   end
 
