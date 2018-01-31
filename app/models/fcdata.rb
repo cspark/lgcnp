@@ -893,7 +893,7 @@ class Fcdata < ApplicationRecord
     end
   end
 
-  def convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
+  def convert_avg_to_five(avr: nil, avr1: nil, avr2: nil, avr3: nil, avr4: nil)
     #avr2 = 0.3 / avr3 = 0.7
     if avr < avr1
       return 4
@@ -918,7 +918,7 @@ class Fcdata < ApplicationRecord
     return 0
   end
 
-  def generate_age_data_field(age: age)
+  def generate_age_data_field(age: nil)
     user = Custinfo.where(custserial: self.custserial).first
     if user.sex == "M"
       field_name = "Male_Age"
@@ -979,7 +979,7 @@ class Fcdata < ApplicationRecord
     end
   end
 
-  def get_mo_to_five(value: value)
+  def get_mo_to_five(value: nil)
     # AVG Data 의 Moisture Grade 3, 2 번을 참고
     scoped = Fcavgdata.all
 
