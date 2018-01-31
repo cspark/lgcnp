@@ -166,6 +166,7 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
 
     @is_init = true
     @is_init = false if params[:select_sex].present?
+    @is_flag = nil
     @is_flag = params[:is_flag] if !params[:is_flag].blank?
 
     ch_cd = ""
