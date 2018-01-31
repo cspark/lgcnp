@@ -211,7 +211,7 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(gene_barcode: @gene_barcode) if !@gene_barcode.blank?
 
-    scoped = scoped.where(flag: @is_flag) if @is_flag == "T"
+    scoped = scoped.joins(:fcdatas).where("fcdatas.flag = ? OR fcdatas.flag IS NULL", @is_flag) if !@is_flag.empty?
 
     # scoped = scoped.where(flag: @is_flag) if @is_flag == "T"
     # flag_f_scoped = scoped.where(flag: @is_flag) if @is_flag == "F"
