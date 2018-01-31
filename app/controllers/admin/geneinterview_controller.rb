@@ -197,9 +197,7 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     @min_birthmm = 1
     @max_birthmm = 12
 
-    if !@is_flag.empty?
-      Fcdata.where(flag: @is_flag)
-    end
+    Fcdata.where(flag: @is_flag) if !@is_flag.empty? && !@is_flag.nil?
 
     @fcgene_interviews = []
     scoped = FcgeneInterview.where(ch_cd: @ch_array).order("uptdate desc")
@@ -211,7 +209,9 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(gene_barcode: @gene_barcode) if !@gene_barcode.blank?
 
-    scoped = scoped.joins(:fcdatas).where("fcdatas.flag = ? OR fcdatas.flag IS NULL", @is_flag) if !@is_flag.empty?
+    if Rails.env.production? || Rails.env.staging?
+      scoped = scoped.joins(:fcdatas).where("fcdatas.flag = ? OR fcdatas.flag IS NULL", @is_flag) if !@is_flag.empty? && !@is_flag.nil?
+    end
 
     # scoped = scoped.where(flag: @is_flag) if @is_flag == "T"
     # flag_f_scoped = scoped.where(flag: @is_flag) if @is_flag == "F"

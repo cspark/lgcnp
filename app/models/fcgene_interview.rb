@@ -4,7 +4,7 @@ class FcgeneInterview < ApplicationRecord
   belongs_to :custinfo, class_name: 'Custinfo', foreign_key: 'custserial'
   # has_many :fcdatas, class_name: 'Custinfo', foreign_key: 'custserial'
   # has_and_belongs_to_many :fcdatas, -> { includes :custserial, :measurno }
-  has_many :fcdatas, ->(gene_interview){ Fcdata.unscope(where: :fcgene_interview_id).where("custserial = ? AND measureno = ?", gene_interview.custserial, gene_interview.measureno) }
+  has_many :fcdatas, ->(gene_interview){ Fcdata.unscope(where: :fcgene_interview_id).where("custserial = ? AND measureno = ?", gene_interview.custserial, gene_interview.measureno) } if Rails.env.production?  || Rails.env.staging?
 
   def to_api_hash
     {
