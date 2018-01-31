@@ -323,88 +323,100 @@ class Fcdata < ApplicationRecord
 
   #Vertical / Horizontal Graph
   def get_vertical_graph_min(type: nil)
+    scoped = Fcavgdata.all
+
+    his_date = self.uptdate.to_date
+    fcavgdata_histories = FcavgdataHistory.where("? BETWEEN to_date(his_start_date) AND to_date(his_end_date)", his_date).order("n_index asc")
+    scoped = FcavgdataHistory.where("? BETWEEN to_date(his_start_date) AND to_date(his_end_date)", his_date).order("n_index asc") if fcavgdata_histories.count > 0
+
     if type == "moisture"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Min")).first.moisture.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Min")).first.moisture.to_f
     end
 
     if type == "e_sebum_t"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Min")).first.e_sebum_t.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Min")).first.e_sebum_t.to_f
     end
 
     if type == "e_sebum_u"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Min")).first.e_sebum_u.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Min")).first.e_sebum_u.to_f
     end
 
     if type == "e_porphyrin_t"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Min")).first.e_porphyrin_t.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Min")).first.e_porphyrin_t.to_f
     end
 
     if type == "e_porphyrin_u"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Min")).first.e_porphyrin_u.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Min")).first.e_porphyrin_u.to_f
     end
 
     if type == "pore"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Min")).first.pore.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Min")).first.pore.to_f
     end
 
     if type == "sb"
       # 트러블
-      return (Fcavgdata.where(age: is_male_title(str: "AgeALL_Min")).first.e_porphyrin_u.to_f + Fcavgdata.where(age: is_male_title(str: "AgeALL_Min")).first.e_porphyrin_t.to_f) / 2
+      return (scoped.where(age: is_male_title(str: "AgeALL_Min")).first.e_porphyrin_u.to_f + scoped.where(age: is_male_title(str: "AgeALL_Min")).first.e_porphyrin_t.to_f) / 2
     end
 
     if type == "wr"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Min")).first.wrinkle.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Min")).first.wrinkle.to_f
     end
 
     if type == "el"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Min")).first.elasticity.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Min")).first.elasticity.to_f
     end
 
     if type == "pp"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Min")).first.spot_pl.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Min")).first.spot_pl.to_f
     end
   end
 
   def get_vertical_graph_max(type: nil)
+    scoped = Fcavgdata.all
+
+    his_date = self.uptdate.to_date
+    fcavgdata_histories = FcavgdataHistory.where("? BETWEEN to_date(his_start_date) AND to_date(his_end_date)", his_date).order("n_index asc")
+    scoped = FcavgdataHistory.where("? BETWEEN to_date(his_start_date) AND to_date(his_end_date)", his_date).order("n_index asc") if fcavgdata_histories.count > 0
+
     if type == "moisture"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Max")).first.moisture.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Max")).first.moisture.to_f
     end
 
     if type == "e_sebum_t"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Max")).first.e_sebum_t.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Max")).first.e_sebum_t.to_f
     end
 
     if type == "e_sebum_u"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Max")).first.e_sebum_u.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Max")).first.e_sebum_u.to_f
     end
 
     if type == "e_porphyrin_t"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Max")).first.e_porphyrin_t.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Max")).first.e_porphyrin_t.to_f
     end
 
     if type == "e_porphyrin_u"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Max")).first.e_porphyrin_u.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Max")).first.e_porphyrin_u.to_f
     end
 
     if type == "pore"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Max")).first.pore.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Max")).first.pore.to_f
     end
 
     if type == "sb"
       # 트러블
-      return (Fcavgdata.where(age: is_male_title(str: "AgeALL_Max")).first.e_porphyrin_u.to_f + Fcavgdata.where(age: is_male_title(str: "AgeALL_Max")).first.e_porphyrin_t.to_f) / 2
+      return (scoped.where(age: is_male_title(str: "AgeALL_Max")).first.e_porphyrin_u.to_f + scoped.where(age: is_male_title(str: "AgeALL_Max")).first.e_porphyrin_t.to_f) / 2
     end
 
     if type == "wr"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Max")).first.wrinkle.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Max")).first.wrinkle.to_f
     end
 
     if type == "el"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Max")).first.elasticity.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Max")).first.elasticity.to_f
     end
 
     if type == "pp"
-      return Fcavgdata.where(age: is_male_title(str: "AgeALL_Max")).first.spot_pl.to_f
+      return scoped.where(age: is_male_title(str: "AgeALL_Max")).first.spot_pl.to_f
     end
   end
 
@@ -412,6 +424,12 @@ class Fcdata < ApplicationRecord
     if self.custserial.nil?
       return 0
     end
+
+    scoped = Fcavgdata.all
+
+    his_date = self.uptdate.to_date
+    fcavgdata_histories = FcavgdataHistory.where("? BETWEEN to_date(his_start_date) AND to_date(his_end_date)", his_date).order("n_index asc")
+    scoped = FcavgdataHistory.where("? BETWEEN to_date(his_start_date) AND to_date(his_end_date)", his_date).order("n_index asc") if fcavgdata_histories.count > 0
 
     user = Custinfo.where(custserial: self.custserial).first
     age = Date.current.year - user.birthyy.to_i - 1
@@ -430,40 +448,40 @@ class Fcdata < ApplicationRecord
       my_position = sp_pl_avr
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.moisture.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.moisture.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.moisture.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.moisture.to_f
     end
 
     if type == "dry_t"
       my_position = mo_1
       min_value = get_vertical_graph_min(type: "moisture")
       max_value = get_vertical_graph_max(type: "moisture")
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.moisture.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.moisture.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.moisture.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.moisture.to_f
     end
 
     if type == "dry_u"
       my_position = ((mo_7 + mo_8) / 2).round #25
       min_value = get_vertical_graph_min(type: "moisture")
       max_value = get_vertical_graph_max(type: "moisture")
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.moisture.to_f #28.0
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.moisture.to_f #38.0
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.moisture.to_f #28.0
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.moisture.to_f #38.0
     end
 
     if type == "e_sebum_t"
       my_position = e_sebum_t
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_sebum_t.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_sebum_t.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_sebum_t.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_sebum_t.to_f
     end
 
     if type == "e_sebum_u"
       my_position = e_sebum_u
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_sebum_u.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_sebum_u.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_sebum_u.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_sebum_u.to_f
     end
 
     if type == "e_porphyrin_t"
@@ -471,48 +489,48 @@ class Fcdata < ApplicationRecord
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
 
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_t.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_t.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_t.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_t.to_f
     end
 
     if type == "e_porphyrin_u"
       my_position = e_porphyrin_u
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_u.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_u.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_u.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_u.to_f
     end
 
     if type == "pore"
       my_position = pr_avr
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.pore.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.pore.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.pore.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.pore.to_f
     end
 
     if type == "sb"
       my_position = ((e_porphyrin_u.to_f + e_porphyrin_t.to_f) / 2).round
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = (Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_u.to_f + Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_t.to_f) / 2
-      second_split_point = (Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_u.to_f + Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_t.to_f) / 2
+      first_split_point = (scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_u.to_f + scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_t.to_f) / 2
+      second_split_point = (scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_u.to_f + scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_t.to_f) / 2
     end
 
     if type == "wr"
       my_position = wr_avr
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.wrinkle.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.wrinkle.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.wrinkle.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.wrinkle.to_f
     end
 
     if type == "el"
       my_position = el_avr
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.elasticity.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.elasticity.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.elasticity.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.elasticity.to_f
     end
 
     if type == "pp"
@@ -520,8 +538,8 @@ class Fcdata < ApplicationRecord
 
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.spot_pl.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.spot_pl.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.spot_pl.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.spot_pl.to_f
     end
 
     tablet_ch_cd = "CNP"
@@ -544,6 +562,12 @@ class Fcdata < ApplicationRecord
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
     avg_grade_4_field_name = generate_age_data_field(age: age).concat("4")
 
+    scoped = Fcavgdata.all
+
+    his_date = self.uptdate.to_date
+    fcavgdata_histories = FcavgdataHistory.where("? BETWEEN to_date(his_start_date) AND to_date(his_end_date)", his_date).order("n_index asc")
+    scoped = FcavgdataHistory.where("? BETWEEN to_date(his_start_date) AND to_date(his_end_date)", his_date).order("n_index asc") if fcavgdata_histories.count > 0
+
     age_avr = 0
     min_value = 0
     max_value = 100
@@ -551,85 +575,85 @@ class Fcdata < ApplicationRecord
     second_split_point = 66
 
     if type == "moisture"
-      age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.moisture.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.moisture.to_f) / 2
+      age_avr = (scoped.where(age: avg_grade_2_field_name).first.moisture.to_f + scoped.where(age: avg_grade_3_field_name).first.moisture.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.moisture.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.moisture.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.moisture.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.moisture.to_f
     end
 
     if type == "e_sebum_t"
-      age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_sebum_t.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_sebum_t.to_f) / 2
+      age_avr = (scoped.where(age: avg_grade_2_field_name).first.e_sebum_t.to_f + scoped.where(age: avg_grade_3_field_name).first.e_sebum_t.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_sebum_t.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_sebum_t.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_sebum_t.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_sebum_t.to_f
     end
 
     if type == "e_sebum_u"
-      age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_sebum_u.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_sebum_u.to_f) / 2
+      age_avr = (scoped.where(age: avg_grade_2_field_name).first.e_sebum_u.to_f + scoped.where(age: avg_grade_3_field_name).first.e_sebum_u.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_sebum_u.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_sebum_u.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_sebum_u.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_sebum_u.to_f
     end
 
     if type == "e_porphyrin_t"
-      age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_f) / 2
+      age_avr = (scoped.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_f + scoped.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_t.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_t.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_t.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_t.to_f
     end
 
     if type == "e_porphyrin_u"
-      age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_f) / 2
+      age_avr = (scoped.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_f + scoped.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_u.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_u.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_u.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_u.to_f
     end
 
     if type == "pore"
-      age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.pore.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.pore.to_f) / 2
+      age_avr = (scoped.where(age: avg_grade_2_field_name).first.pore.to_f + scoped.where(age: avg_grade_3_field_name).first.pore.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.pore.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.pore.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.pore.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.pore.to_f
     end
 
     if type == "sb"
-      avr_e_porphyrin_u = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_f) / 2
-      avr_e_porphyrin_t = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_f) / 2
+      avr_e_porphyrin_u = (scoped.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_f + scoped.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_f) / 2
+      avr_e_porphyrin_t = (scoped.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_f + scoped.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_f) / 2
       age_avr = (avr_e_porphyrin_u + avr_e_porphyrin_t) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = (Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_u.to_f + Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_t.to_f ) / 2
-      second_split_point = (Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_u.to_f + Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_t.to_f ) / 2
+      first_split_point = (scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_u.to_f + scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_t.to_f ) / 2
+      second_split_point = (scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_u.to_f + scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_t.to_f ) / 2
     end
 
     if type == "wr"
-      age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.wrinkle.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.wrinkle.to_f) / 2
+      age_avr = (scoped.where(age: avg_grade_2_field_name).first.wrinkle.to_f + scoped.where(age: avg_grade_3_field_name).first.wrinkle.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.wrinkle.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.wrinkle.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.wrinkle.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.wrinkle.to_f
     end
 
     if type == "el"
-      age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.elasticity.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.elasticity.to_f) / 2
+      age_avr = (scoped.where(age: avg_grade_2_field_name).first.elasticity.to_f + scoped.where(age: avg_grade_3_field_name).first.elasticity.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.elasticity.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.elasticity.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.elasticity.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.elasticity.to_f
     end
 
     if type == "pp"
-      age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.spot_pl.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.spot_pl.to_f) / 2
+      age_avr = (scoped.where(age: avg_grade_2_field_name).first.spot_pl.to_f + scoped.where(age: avg_grade_3_field_name).first.spot_pl.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.spot_pl.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.spot_pl.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.spot_pl.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.spot_pl.to_f
     end
 
     tablet_ch_cd = "CNP"
@@ -652,6 +676,12 @@ class Fcdata < ApplicationRecord
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
     avg_grade_4_field_name = generate_age_data_field(age: age).concat("4")
 
+    scoped = Fcavgdata.all
+
+    his_date = self.uptdate.to_date
+    fcavgdata_histories = FcavgdataHistory.where("? BETWEEN to_date(his_start_date) AND to_date(his_end_date)", his_date).order("n_index asc")
+    scoped = FcavgdataHistory.where("? BETWEEN to_date(his_start_date) AND to_date(his_end_date)", his_date).order("n_index asc") if fcavgdata_histories.count > 0
+
     my_position = 0
     age_avr = 0
     min_value = 0
@@ -665,38 +695,38 @@ class Fcdata < ApplicationRecord
 
     if type.to_s == "e_sebum_t"
       my_position = e_sebum_t
-      age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_sebum_t.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_sebum_t.to_f) / 2
+      age_avr = (scoped.where(age: avg_grade_2_field_name).first.e_sebum_t.to_f + scoped.where(age: avg_grade_3_field_name).first.e_sebum_t.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_sebum_t.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_sebum_t.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_sebum_t.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_sebum_t.to_f
     end
 
     if type.to_s == "e_sebum_u"
       my_position = e_sebum_u
-      age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_sebum_u.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_sebum_u.to_f) / 2
+      age_avr = (scoped.where(age: avg_grade_2_field_name).first.e_sebum_u.to_f + scoped.where(age: avg_grade_3_field_name).first.e_sebum_u.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_sebum_u.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_sebum_u.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_sebum_u.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_sebum_u.to_f
     end
 
     if type.to_s == "e_porphyrin_t"
       my_position = e_porphyrin_t
-      age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_f) / 2
+      age_avr = (scoped.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_f + scoped.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_t.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_t.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_t.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_t.to_f
     end
 
     if type.to_s == "e_porphyrin_u"
       my_position = e_porphyrin_u
-      age_avr = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_f) / 2
+      age_avr = (scoped.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_f + scoped.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_f) / 2
       min_value = get_vertical_graph_min(type: type)
       max_value = get_vertical_graph_max(type: type)
-      first_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_u.to_f
-      second_split_point = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_u.to_f
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.e_porphyrin_u.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.e_porphyrin_u.to_f
     end
 
     description << "평균값은 "
@@ -758,32 +788,38 @@ class Fcdata < ApplicationRecord
     avg_grade_4_field_name = generate_age_data_field(age: age).concat("4")
     #abcd123456!
 
+    scoped = Fcavgdata.all
+
+    his_date = self.uptdate.to_date
+    fcavgdata_histories = FcavgdataHistory.where("? BETWEEN to_date(his_start_date) AND to_date(his_end_date)", his_date).order("n_index asc")
+    scoped = FcavgdataHistory.where("? BETWEEN to_date(his_start_date) AND to_date(his_end_date)", his_date).order("n_index asc") if fcavgdata_histories.count > 0
+
     if type == "pore"
       avr = self.pr_avr
-      avr1 = Fcavgdata.where(age: avg_grade_1_field_name).first.pore.to_i
-      avr2 = Fcavgdata.where(age: avg_grade_2_field_name).first.pore.to_i
-      avr3 = Fcavgdata.where(age: avg_grade_3_field_name).first.pore.to_i
-      avr4 = Fcavgdata.where(age: avg_grade_4_field_name).first.pore.to_i
+      avr1 = scoped.where(age: avg_grade_1_field_name).first.pore.to_i
+      avr2 = scoped.where(age: avg_grade_2_field_name).first.pore.to_i
+      avr3 = scoped.where(age: avg_grade_3_field_name).first.pore.to_i
+      avr4 = scoped.where(age: avg_grade_4_field_name).first.pore.to_i
 
       return convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
     end
 
     if type == "wr"
       avr = self.wr_avr
-      avr1 = Fcavgdata.where(age: avg_grade_1_field_name).first.wrinkle.to_i
-      avr2 = Fcavgdata.where(age: avg_grade_2_field_name).first.wrinkle.to_i
-      avr3 = Fcavgdata.where(age: avg_grade_3_field_name).first.wrinkle.to_i
-      avr4 = Fcavgdata.where(age: avg_grade_4_field_name).first.wrinkle.to_i
+      avr1 = scoped.where(age: avg_grade_1_field_name).first.wrinkle.to_i
+      avr2 = scoped.where(age: avg_grade_2_field_name).first.wrinkle.to_i
+      avr3 = scoped.where(age: avg_grade_3_field_name).first.wrinkle.to_i
+      avr4 = scoped.where(age: avg_grade_4_field_name).first.wrinkle.to_i
 
       return convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
     end
 
     if type == "el"
       avr = self.el_avr
-      avr1 = Fcavgdata.where(age: avg_grade_1_field_name).first.elasticity.to_i
-      avr2 = Fcavgdata.where(age: avg_grade_2_field_name).first.elasticity.to_i
-      avr3 = Fcavgdata.where(age: avg_grade_3_field_name).first.elasticity.to_i
-      avr4 = Fcavgdata.where(age: avg_grade_4_field_name).first.elasticity.to_i
+      avr1 = scoped.where(age: avg_grade_1_field_name).first.elasticity.to_i
+      avr2 = scoped.where(age: avg_grade_2_field_name).first.elasticity.to_i
+      avr3 = scoped.where(age: avg_grade_3_field_name).first.elasticity.to_i
+      avr4 = scoped.where(age: avg_grade_4_field_name).first.elasticity.to_i
 
       return convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
     end
@@ -792,10 +828,10 @@ class Fcdata < ApplicationRecord
       # 트러블
       # E_PORPHYTRIN_T	E_PORPHYTRIN_U 평균값
       avr = (self.e_porphyrin_u.to_f + self.e_porphyrin_t.to_f) / 2
-      avr1 = (Fcavgdata.where(age: avg_grade_1_field_name).first.e_porphyrin_u.to_f + Fcavgdata.where(age: avg_grade_1_field_name).first.e_porphyrin_t.to_f) / 2
-      avr2 = (Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_f + Fcavgdata.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_f) / 2
-      avr3 = (Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_f + Fcavgdata.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_f) / 2
-      avr4 = (Fcavgdata.where(age: avg_grade_4_field_name).first.e_porphyrin_u.to_f + Fcavgdata.where(age: avg_grade_4_field_name).first.e_porphyrin_t.to_f) / 2
+      avr1 = (scoped.where(age: avg_grade_1_field_name).first.e_porphyrin_u.to_f + scoped.where(age: avg_grade_1_field_name).first.e_porphyrin_t.to_f) / 2
+      avr2 = (scoped.where(age: avg_grade_2_field_name).first.e_porphyrin_u.to_f + scoped.where(age: avg_grade_2_field_name).first.e_porphyrin_t.to_f) / 2
+      avr3 = (scoped.where(age: avg_grade_3_field_name).first.e_porphyrin_u.to_f + scoped.where(age: avg_grade_3_field_name).first.e_porphyrin_t.to_f) / 2
+      avr4 = (scoped.where(age: avg_grade_4_field_name).first.e_porphyrin_u.to_f + scoped.where(age: avg_grade_4_field_name).first.e_porphyrin_t.to_f) / 2
 
       return convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
     end
@@ -804,10 +840,10 @@ class Fcdata < ApplicationRecord
       # 색소침착 SPOT_PL
       avr = self.sp_pl_avr
 
-      avr1 = Fcavgdata.where(age: avg_grade_1_field_name).first.spot_pl.to_i
-      avr2 = Fcavgdata.where(age: avg_grade_2_field_name).first.spot_pl.to_i
-      avr3 = Fcavgdata.where(age: avg_grade_3_field_name).first.spot_pl.to_i
-      avr4 = Fcavgdata.where(age: avg_grade_4_field_name).first.spot_pl.to_i
+      avr1 = scoped.where(age: avg_grade_1_field_name).first.spot_pl.to_i
+      avr2 = scoped.where(age: avg_grade_2_field_name).first.spot_pl.to_i
+      avr3 = scoped.where(age: avg_grade_3_field_name).first.spot_pl.to_i
+      avr4 = scoped.where(age: avg_grade_4_field_name).first.spot_pl.to_i
 
       return convert_avg_to_five(avr: avr, avr1: avr1, avr2: avr2, avr3: avr3, avr4: avr4)
     end
@@ -823,12 +859,18 @@ class Fcdata < ApplicationRecord
       return 0
     end
 
+    scoped = Fcavgdata.all
+
+    his_date = self.uptdate.to_date
+    fcavgdata_histories = FcavgdataHistory.where("? BETWEEN to_date(his_start_date) AND to_date(his_end_date)", his_date).order("n_index asc")
+    scoped = FcavgdataHistory.where("? BETWEEN to_date(his_start_date) AND to_date(his_end_date)", his_date).order("n_index asc") if fcavgdata_histories.count > 0
+
     avr = ((self.mo_1.to_f + self.mo_7.to_f + self.mo_8.to_f) / 3).round
 
-    avr1 = Fcavgdata.where(age: "AgeALL_Grade1").first.moisture.to_i
-    avr2 = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.moisture.to_i
-    avr3 = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.moisture.to_i
-    avr4 = Fcavgdata.where(age: "AgeALL_Grade4").first.moisture.to_i
+    avr1 = scoped.where(age: "AgeALL_Grade1").first.moisture.to_i
+    avr2 = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.moisture.to_i
+    avr3 = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.moisture.to_i
+    avr4 = scoped.where(age: "AgeALL_Grade4").first.moisture.to_i
 
     if avr > avr4
       return 4
@@ -939,9 +981,14 @@ class Fcdata < ApplicationRecord
 
   def get_mo_to_five(value: value)
     # AVG Data 의 Moisture Grade 3, 2 번을 참고
+    scoped = Fcavgdata.all
 
-    low = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade2")).first.moisture.to_i
-    high = Fcavgdata.where(age: is_male_title(str: "AgeALL_Grade3")).first.moisture.to_i
+    his_date = self.uptdate.to_date
+    fcavgdata_histories = FcavgdataHistory.where("? BETWEEN to_date(his_start_date) AND to_date(his_end_date)", his_date).order("n_index asc")
+    scoped = FcavgdataHistory.where("? BETWEEN to_date(his_start_date) AND to_date(his_end_date)", his_date).order("n_index asc") if fcavgdata_histories.count > 0
+
+    low = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.moisture.to_i
+    high = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.moisture.to_i
 
     if value.to_i < low
       return 0

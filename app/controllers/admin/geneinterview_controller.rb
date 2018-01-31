@@ -197,6 +197,10 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     @min_birthmm = 1
     @max_birthmm = 12
 
+    if !@is_flag.empty?
+      Fcdata.where(flag: @is_flag)
+    end
+
     @fcgene_interviews = []
     scoped = FcgeneInterview.where(ch_cd: @ch_array).order("uptdate desc")
     scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
@@ -206,6 +210,8 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(gene_barcode: @gene_barcode) if !@gene_barcode.blank?
+
+    scoped = scoped.where(flag: @is_flag) if @is_flag == "T"
 
     # scoped = scoped.where(flag: @is_flag) if @is_flag == "T"
     # flag_f_scoped = scoped.where(flag: @is_flag) if @is_flag == "F"
