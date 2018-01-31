@@ -113,6 +113,7 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
   end
 
   def gene_and_genstory_list_beau
+    # asdf
     if params.has_key?(:isExcel) && params[:isExcel] && session[:admin_user] != "user" && !session[:admin_user].nil?
       history = Privacyaccesshistory.new
       serial = 1
@@ -165,6 +166,7 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
 
     @is_init = true
     @is_init = false if params[:select_sex].present?
+    @is_flag = params[:is_flag] if !params[:is_flag].blank?
 
     ch_cd = ""
     shop_cd = ""
@@ -204,6 +206,11 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(gene_barcode: @gene_barcode) if !@gene_barcode.blank?
+
+    # scoped = scoped.where(flag: @is_flag) if @is_flag == "T"
+    # flag_f_scoped = scoped.where(flag: @is_flag) if @is_flag == "F"
+    # flag_nil_scoped = scoped.where(flag: nil) if @is_flag == "F"
+    # scoped = flag_f_scoped.or(flag_nil_scoped) if @is_flag == "F"
 
     scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil? && !@name.blank?
     scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sex}%") if @select_sex != "all" && !@select_sex.blank?

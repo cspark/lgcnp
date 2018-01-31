@@ -117,9 +117,9 @@
       <div style="margin-top:5px; height:40px;">
         <p style="float:left; margin-left: 0px; margin-top: 5px;"><유효 데이터>:&nbsp;</p>
         <p style="float:left; margin-left: 5px; margin-top: 5px;">예&nbsp;</p>
-        <input type="checkbox" name="check_box" value="BEAU" id="available_data_y" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="is_flag" value="T" id="available_data_y" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">아니요&nbsp;</p>
-        <input type="checkbox" name="check_box" value="TMR" id="available_data_n" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="is_flag" value="F" id="available_data_n" style="float:left; margin-top:9px;">
 
         <p style="float:left; margin-left: 20px; margin-top: 5px;"><젠스토리설문 완료여부>:&nbsp;</p>
         <p style="float:left; margin-left: 5px; margin-top: 5px;">예&nbsp;</p>
@@ -328,6 +328,21 @@
           document.getElementById("gene_barcode").value = '<%= @gene_barcode %>'
         <% end %>
 
+        <% if @is_init == true %>
+          document.getElementById("available_data_y").checked = true
+          document.getElementById("available_data_n").checked = true
+        <% elsif @is_flag.present? && @is_flag == "F" %>
+          document.getElementById("available_data_n").checked = true
+        <% elsif @is_flag.present? && @is_flag == "T,F" %>
+          document.getElementById("available_data_y").checked = true
+          document.getElementById("available_data_n").checked = true
+        <% elsif @is_flag.present? && @is_flag == "T" %>
+          document.getElementById("available_data_y").checked = true
+        <% elsif @is_init != true && !@is_flag.present? %>
+          document.getElementById("available_data_y").checked = false
+          document.getElementById("available_data_n").checked = false
+        <% end %>
+
         $("#date_init").click(function(){
           $("#start_date").datepicker('setDate', '2017-01-25');
           $("#end_date").datepicker('setDate', '<%= @today %>');
@@ -370,6 +385,7 @@
           window.open("/admin/geneinterview/show_interview", "/admin/geneinterview/show_interview", "scrollbars=1,resizable=1,height=650,width=650");
         });
       });
+
       function selectFilter(select_filter){
         filterStr = select_filter
       }
@@ -383,8 +399,15 @@
             }
         });
 
+        var is_flag = []
+        $('input:checkbox[name="is_flag"]').each(function() {
+            if(this.checked){
+              is_flag.push(this.value)
+            }
+        });
+        
         url = ""
-        url = "/admin/geneinterview?name=" + encodeURI(encodeURI($("#name").val()));
+        url = "/admin/gene_and_genstory_list_beau?name=" + encodeURI(encodeURI($("#name").val()));
         url += "&start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
         url += "&select_sex=" + select_sex;
         url += "&start_age=" + document.getElementById("start_age").value;
@@ -398,6 +421,7 @@
         url += "&select_channel=" + select_channel;
         url += "&select_shop=" +$("#select_shop").val();
         url += "&gene_barcode=" +$("#gene_barcode").val();
+        url += "&is_flag=" +is_flag;
 
         location.href = url;
       }

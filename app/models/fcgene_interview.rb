@@ -2,7 +2,8 @@ class FcgeneInterview < ApplicationRecord
   self.table_name = "fcgene_interview" if Rails.env.production? || Rails.env.staging?
   self.primary_key = :custserial,:gene_barcode,:measureno if Rails.env.production?  || Rails.env.staging?
   belongs_to :custinfo, class_name: 'Custinfo', foreign_key: 'custserial'
-  
+  belongs_to :fcdata, -> (fcgene_interview) { unscope(:where).where("custserial = :custserial OR measureno = :measureno", custserial: fcgene_interview.custseiral, measureno: fcgene_interview.measureno) }
+
   def to_api_hash
     {
       custserial: custserial,
