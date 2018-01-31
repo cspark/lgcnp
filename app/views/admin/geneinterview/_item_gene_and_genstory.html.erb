@@ -74,8 +74,13 @@
         <td id="name_interview_<%= interview.custserial.to_i %>_<%= interview.measureno.to_i %>"></td>
         <td><%= Date.current.year - custinfo.birthyy.to_i - 1 %></td>
         <td><%= custinfo.sex %></td>
+        <!-- 바코드 -->
         <td><%= interview.gene_barcode.to_s %></td>
+        <td><%= interview.shop_cd %></td>
+        <!-- 생년월일 -->
+        <td><%= custinfo.birthyy %>-<%= custinfo.birthmm %>-<%= custinfo.birthdd %></td>
         <td><%= interview.ch_cd %></td>
+
         <% address = "" %>
         <% if !user.address.nil? %>
           <% if user.address == "10" %>
@@ -120,6 +125,7 @@
         <td><%= interview.uptdate %></td>
         <td>
           <!-- 젠스토리 설문 완료 여부 -->
+          
         </td>
         <td>유전자 설문(16)</td>
         <td>피부 설문(22)</td>
