@@ -203,7 +203,7 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
-      scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
+      scoped = scoped.where("to_date(fcgeneinterview.uptdate) >= ? AND to_date(fcgeneinterview.uptdate) < ?", @start_date.to_date, temp_end_date)
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(gene_barcode: @gene_barcode) if !@gene_barcode.blank?
@@ -211,11 +211,6 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.joins("INNER JOIN fcdata ON (fcdata.flag LIKE '#{@is_flag}')") if !@is_flag.nil? && @is_flag != "T,F"
     end
-
-    # scoped = scoped.where(flag: @is_flag) if @is_flag == "T"
-    # flag_f_scoped = scoped.where(flag: @is_flag) if @is_flag == "F"
-    # flag_nil_scoped = scoped.where(flag: nil) if @is_flag == "F"
-    # scoped = flag_f_scoped.or(flag_nil_scoped) if @is_flag == "F"
 
     scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil? && !@name.blank?
     scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sex}%") if @select_sex != "all" && !@select_sex.blank?
