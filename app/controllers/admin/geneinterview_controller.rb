@@ -199,7 +199,7 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     @max_birthmm = 12
 
     @fcgene_interviews = []
-    scoped = FcgeneInterview.where(ch_cd: @ch_array).order("uptdate desc")
+    scoped = FcgeneInterview.where(ch_cd: @ch_array)
     scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
@@ -223,6 +223,8 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthyy) >= ? AND to_number(custinfo.birthyy) < ?", @start_birthyy, @end_birthyy) if !@start_birthyy.blank? && !@end_birthyy.blank?
     scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthmm) >= ? AND to_number(custinfo.birthmm) < ?", @start_birthmm, @end_birthmm) if !@start_birthmm.blank? && !@end_birthmm.blank?
 
+    scoped = scoped.order("fcgeneinterview.uptdate desc")
+    
     @fcgene_interviews = scoped
     @fcgene_interviews_excel = @fcgene_interviews
     @count = @fcgene_interviews.count
