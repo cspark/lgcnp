@@ -100,6 +100,7 @@ Rails.application.routes.draw do
     resources :manager do
       collection do
         get 'add_manager'
+        get 'add_sub_manager'
         get 'edit_manager'
         get 'login_history'
         post 'duplication'

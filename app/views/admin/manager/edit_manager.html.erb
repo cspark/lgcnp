@@ -22,6 +22,7 @@
         $("#email").val('<%= @admin_user.email %>');
         $("#shop_cd").val('<%= @admin_user.shop_cd %>');
         $("#ch_cd").val('<%= @admin_user.ch_cd %>');
+        $("#access_ip").val('<%= @admin_user.access_ip %>');
       }
 
       if ("<%= @admin_user %>" != null){
@@ -46,6 +47,7 @@
         if (chkPwd($("#password").val())){
           formData.append("email", $("#email").val());
           formData.append("password", $("#password").val());
+          formData.append("access_ip", $("#access_ip").val());
 
           $.ajax({
               url: "/admin/manager/update",
@@ -131,6 +133,10 @@
 
         <font>매장 코드</font>
         <input class="form-control" type="text" id="shop_cd" style="width:560px;" readonly="">
+
+        <font>허용 IP</font>
+        <input class="form-control" type="text" id="access_ip" style="width:560px;">
+
         <% end %>
         <center>
           <button class="btn btn-warning" id="submit">수정</button>

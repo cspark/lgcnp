@@ -81,7 +81,7 @@
         <p style="float:left; margin-top:7px;">이름: &nbsp;</p>
         <input class="form-control" type="text" id="name" placeholder="이름으로 검색" style="float:left; width: 150px;">
 
-        <p style="float:left; margin-left: 20px; margin-top: 7px;">시리얼키:&nbsp;</p>
+        <p style="float:left; margin-left: 20px; margin-top: 7px;">시리얼:&nbsp;</p>
         <input class="form-control" type="text" id="custserial" style="float:left; width:100px;">
 
         <p style="float:left; margin-left: 20px; margin-top:7px;">성별: &nbsp;</p>
@@ -113,6 +113,38 @@
 
         <button class="btn btn-warning" style="float:right; margin-right:20px;" id="show_interview">설문조사</button>
       </div>
+
+      <div style="margin-top:5px; height:40px;">
+        <p style="float:left; margin-left: 0px; margin-top: 5px;"><유효 데이터>:&nbsp;</p>
+        <p style="float:left; margin-left: 5px; margin-top: 5px;">예&nbsp;</p>
+        <input type="checkbox" name="check_box" value="BEAU" id="available_data_y" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">아니요&nbsp;</p>
+        <input type="checkbox" name="check_box" value="TMR" id="available_data_n" style="float:left; margin-top:9px;">
+
+        <p style="float:left; margin-left: 20px; margin-top: 5px;"><젠스토리설문 완료여부>:&nbsp;</p>
+        <p style="float:left; margin-left: 5px; margin-top: 5px;">예&nbsp;</p>
+        <input type="checkbox" name="check_box" value="BEAU" id="gen_complete_y" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">아니요&nbsp;</p>
+        <input type="checkbox" name="check_box" value="TMR" id="gen_complete_n" style="float:left; margin-top:9px;">
+      </div>
+
+      <div style="margin-top:5px; height:40px;">
+        <p style="float:left; margin-left: 0px; margin-top: 5px;"><필터링>:&nbsp;</p>
+        <p style="float:left; margin-left: 5px; margin-top: 5px;">유전자 전체&nbsp;</p>
+        <input type="checkbox" name="check_box" value="BEAU" id="filter_all" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">피부 전체&nbsp;</p>
+        <input type="checkbox" name="check_box" value="TMR" id="filter_all_skin" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">모발 두피 전체&nbsp;</p>
+        <input type="checkbox" name="check_box" value="TMR" id="filter_all_hair" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">구강 전체&nbsp;</p>
+        <input type="checkbox" name="check_box" value="TMR" id="filter_all_mouth" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">피로 전체&nbsp;</p>
+        <input type="checkbox" name="check_box" value="TMR" id="filter_all_tired" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">갱년기 전체&nbsp;</p>
+        <input type="checkbox" name="check_box" value="TMR" id="filter_all_climacteric" style="float:left; margin-top:9px;">
+        <p style="float:left; margin-left: 10px; margin-top: 5px;">관절 전체&nbsp;</p>
+        <input type="checkbox" name="check_box" value="TMR" id="filter_all_born" style="float:left; margin-top:9px;">
+      </div>
     </div>
 
     <div id="avr" style="background: #eea29a; padding: 8px;">
@@ -122,36 +154,31 @@
     <table data-toggle="table">
       <thead style="width: 100%;">
         <tr>
-          <th>고객번호</th>
+          <th>시리얼</th>
           <th>이름</th>
-          <th>유전자 바코드</th>
-          <th>채널코드</th>
-          <th>야누스 측정 횟수</th>
-          <th>매장 코드</th>
-          <th>설문1(키)</th>
-          <th>설문1(몸무게)</th>
-          <th>설문2</th>
-          <th>설문3</th>
-          <th>설문4</th>
-          <th>설문5</th>
-          <th>설문6</th>
-          <th>설문7</th>
-          <th>설문8</th>
-          <th>설문9</th>
-          <th>설문10</th>
-          <th>설문11</th>
-          <th>설문12</th>
-          <th>설문13</th>
-          <th>설문14</th>
-          <th>유전자 진단날짜</th>
-          <th>생년월일</th>
-          <th>성별</th>
           <th>측정 당시 만 나이</th>
+          <th>성별</th>
+          <th>바코드</th>
+          <th>매장코드</th>
+          <th>생년월일</th>
+          <th>채널</th>
+          <th>거주지</th>
+          <th>유전자설문업데이트일</th>
+          <th>젠스토리설문완료여부</th>
+          <th>유전자 설문(16)</th>
+          <th>피부 설문(22)</th>
+          <th>모발 두피 설문(37)</th>
+          <th>구강 설문(33)</th>
+          <th>피로 설문(19)</th>
+          <th>피로 점수</th>
+          <th>갱년기 설문(11)</th>
+          <th>갱년기 점수</th>
+          <th>관절 설문(9)</th>
         </tr>
     </thead>
       <tbody>
         <% @fcgene_interviews.each do |interview| %>
-          <%= render partial: "admin/geneinterview/item", locals: { interview: interview } %>
+          <%= render partial: "admin/geneinterview/item_gene_and_genstory", locals: { interview: interview } %>
         <% end %>
       </tbody>
     </table>
@@ -162,7 +189,7 @@
     <script>
       $(function () {
           $(".top-list").css('color', '#9d9d9d');
-          $("#gene_interview_list").css('color', 'hotpink');
+          $("#point_gene_and_genestory_list").css('color', 'hotpink');
 
           <% name = "" %>
           <% if !@name.nil? && @name != "" %>

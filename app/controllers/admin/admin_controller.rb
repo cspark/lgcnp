@@ -52,7 +52,15 @@ class Admin::AdminController < Admin::AdminApplicationController
     end
 
     user = AdminUser.where(email: params[:email]).first
+
     if user.present? && user.valid_password?(params[:password])
+      if !user.access_ip.nil? && !user.access_ip.empty?
+        if user.access_ip != session[:ip]
+          render json: { msg: "허용된 IP가 아닙니다." }, status: :bad_request
+          return
+        end
+      end
+
       session[:admin_user] = user
       if user.last_change_password_at < Time.now-3.month
         render json: {password_change_at: true, email: user.email}, status: :ok
@@ -60,7 +68,7 @@ class Admin::AdminController < Admin::AdminApplicationController
         render json: {password_change_at: false, email: user.email}, status: :ok
       end
     else
-      render json: {}, status: :bad_request
+      render json: { msg: "비밀번호가 틀립니다." }, status: :bad_request
     end
   end
 

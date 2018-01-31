@@ -28,9 +28,15 @@ class Admin::ManagerController < Admin::AdminApplicationController
   def add_manager
   end
 
+  def add_sub_manager
+  end
+
   def create
     admin_user = AdminUser.new(permitted_params)
-    admin_user.ch_cd = params[:ch_cd].upcase
+    if params.has_key?(:ch_cd)
+      admin_user.ch_cd = params[:ch_cd].upcase
+    end
+
     admin_user.last_change_password_at = Time.now.strftime("%Y-%m-%d")
 
     if admin_user.save
@@ -87,6 +93,6 @@ class Admin::ManagerController < Admin::AdminApplicationController
 
   private
   def permitted_params
-    params.permit(:email, :password, :ch_cd, :shop_cd)
+    params.permit(:email, :password, :ch_cd, :shop_cd, :role, :access_ip)
   end
 end

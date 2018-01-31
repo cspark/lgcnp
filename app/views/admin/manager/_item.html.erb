@@ -18,7 +18,9 @@
         <td class="text-center"><%= user.shop_cd %></td>
         <% role = "X" %>
         <% if user.role == "admin" %>
-        <% role = "O" %>
+          <% role = "O" %>
+        <% elsif user.role == "sub_admin" %>
+          <% role = "Sub Manager" %>
         <% end %>
         <td class="text-center"><%= role %></td>
         <td class="text-center">
