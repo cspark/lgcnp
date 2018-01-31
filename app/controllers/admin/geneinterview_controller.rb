@@ -197,8 +197,6 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     @min_birthmm = 1
     @max_birthmm = 12
 
-    Fcdata.where(flag: @is_flag) if !@is_flag.empty? && !@is_flag.nil?
-
     @fcgene_interviews = []
     scoped = FcgeneInterview.where(ch_cd: @ch_array).order("uptdate desc")
     scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
