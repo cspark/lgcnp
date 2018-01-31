@@ -209,7 +209,7 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     scoped = scoped.where(gene_barcode: @gene_barcode) if !@gene_barcode.blank?
 
     if Rails.env.production? || Rails.env.staging?
-      scoped = scoped.joins(:fcdatas).where("fcdatas.flag = ? OR fcdatas.flag IS NULL", @is_flag) if !@is_flag.nil?
+      scoped = scoped.joins("INNER JOIN fcdata ON (fcdata.flag = '?')", @is_flag) if !@is_flag.nil?
     end
 
     # scoped = scoped.where(flag: @is_flag) if @is_flag == "T"
