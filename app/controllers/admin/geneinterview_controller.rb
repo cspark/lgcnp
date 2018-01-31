@@ -223,8 +223,8 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthyy) >= ? AND to_number(custinfo.birthyy) < ?", @start_birthyy, @end_birthyy) if !@start_birthyy.blank? && !@end_birthyy.blank?
     scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthmm) >= ? AND to_number(custinfo.birthmm) < ?", @start_birthmm, @end_birthmm) if !@start_birthmm.blank? && !@end_birthmm.blank?
 
-    scoped = scoped.order("fcgeneinterview.uptdate desc")
-    
+    # scoped = scoped.order("fcgeneinterview.uptdate desc")
+
     @fcgene_interviews = scoped
     @fcgene_interviews_excel = @fcgene_interviews
     @count = @fcgene_interviews.count
