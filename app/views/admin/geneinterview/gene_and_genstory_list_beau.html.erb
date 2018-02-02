@@ -131,19 +131,19 @@
       <div style="margin-top:5px; height:40px;">
         <p style="float:left; margin-left: 0px; margin-top: 5px;"><필터링>:&nbsp;</p>
         <p style="float:left; margin-left: 5px; margin-top: 5px;">유전자 전체&nbsp;</p>
-        <input type="checkbox" name="check_box" value="filter_all_gene" id="filter_all_gene" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="filter_all_gene" value="filter_all_gene" id="filter_all_gene" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">피부 전체&nbsp;</p>
-        <input type="checkbox" name="check_box" value="filter_all_skin" id="filter_all_skin" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="filter_all_skin" value="filter_all_skin" id="filter_all_skin" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">모발 두피 전체&nbsp;</p>
-        <input type="checkbox" name="check_box" value="filter_all_hair" id="filter_all_hair" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="filter_all_hair" value="filter_all_hair" id="filter_all_hair" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">구강 전체&nbsp;</p>
-        <input type="checkbox" name="check_box" value="filter_all_mouth" id="filter_all_mouth" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="filter_all_mouth" value="filter_all_mouth" id="filter_all_mouth" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">피로 전체&nbsp;</p>
-        <input type="checkbox" name="check_box" value="filter_all_tired" id="filter_all_tired" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="filter_all_tired" value="filter_all_tired" id="filter_all_tired" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">갱년기 전체&nbsp;</p>
-        <input type="checkbox" name="check_box" value="filter_all_climacteric" id="filter_all_climacteric" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="filter_all_climacteric" value="filter_all_climacteric" id="filter_all_climacteric" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">관절 전체&nbsp;</p>
-        <input type="checkbox" name="check_box" value="filter_all_born" id="filter_all_born" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="filter_all_born" value="filter_all_born" id="filter_all_born" style="float:left; margin-top:9px;">
       </div>
     </div>
 
@@ -165,15 +165,29 @@
           <th>거주지</th>
           <th>유전자설문업데이트일</th>
           <th>젠스토리설문완료여부</th>
-          <th>유전자 설문(16)</th>
-          <th>피부 설문(22)</th>
-          <th>모발 두피 설문(37)</th>
-          <th>구강 설문(33)</th>
-          <th>피로 설문(19)</th>
-          <th>피로 점수</th>
-          <th>갱년기 설문(11)</th>
-          <th>갱년기 점수</th>
-          <th>관절 설문(9)</th>
+          <% if @filtering.include?("filter_all_gene") %>
+            <th>유전자 설문(16)</th>
+          <% end %>
+          <% if @filtering.include?("filter_all_skin") %>
+            <th>피부 설문(22)</th>
+          <% end %>
+          <% if @filtering.include?("filter_all_hair") %>
+            <th>모발 두피 설문(37)</th>
+          <% end %>
+          <% if @filtering.include?("filter_all_mouth") %>
+            <th>구강 설문(33)</th>
+          <% end %>
+          <% if @filtering.include?("filter_all_tired") %>
+            <th>피로 설문(19)</th>
+            <th>피로 점수</th>
+          <% end %>
+          <% if @filtering.include?("filter_all_climacteric") %>
+            <th>갱년기 설문(11)</th>
+            <th>갱년기 점수</th>
+          <% end %>
+          <% if @filtering.include?("filter_all_born") %>
+            <th>관절 설문(9)</th>
+          <% end %>
         </tr>
     </thead>
       <tbody>
@@ -453,6 +467,49 @@
             }
         });
 
+        var filtering = []
+        $('input:checkbox[name="filter_all_gene"]').each(function() {
+            if(this.checked){
+              filtering.push(this.value)
+            }
+        });
+
+        $('input:checkbox[name="filter_all_skin"]').each(function() {
+            if(this.checked){
+              filtering.push(this.value)
+            }
+        });
+
+        $('input:checkbox[name="filter_all_hair"]').each(function() {
+            if(this.checked){
+              filtering.push(this.value)
+            }
+        });
+
+        $('input:checkbox[name="filter_all_mouth"]').each(function() {
+            if(this.checked){
+              filtering.push(this.value)
+            }
+        });
+
+        $('input:checkbox[name="filter_all_tired"]').each(function() {
+            if(this.checked){
+              filtering.push(this.value)
+            }
+        });
+
+        $('input:checkbox[name="filter_all_climacteric"]').each(function() {
+            if(this.checked){
+              filtering.push(this.value)
+            }
+        });
+
+        $('input:checkbox[name="filter_all_born"]').each(function() {
+            if(this.checked){
+              filtering.push(this.value)
+            }
+        });
+
         url = ""
         url = "/admin/gene_and_genstory_list_beau?name=" + encodeURI(encodeURI($("#name").val()));
         url += "&start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();
@@ -468,7 +525,9 @@
         url += "&select_channel=" + select_channel;
         url += "&select_shop=" +$("#select_shop").val();
         url += "&gene_barcode=" +$("#gene_barcode").val();
-        url += "&is_flag=" +is_flag;
+        url += "&is_flag=" + is_flag;
+        url += "&filtering=" + filtering;
+
 
         location.href = url;
       }

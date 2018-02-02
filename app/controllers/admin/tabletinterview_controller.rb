@@ -197,7 +197,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       end
     end
 
-    scoped = scoped.order("fctabletinterview.uptdate desc")
+    scoped = scoped.order("fctabletinterview.uptdate desc") if Rails.env.production? || Rails.env.staging?
     @tabletinterviews = scoped
 
     @count = @tabletinterviews.count

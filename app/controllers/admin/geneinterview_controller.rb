@@ -170,7 +170,11 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     @is_flag = params[:is_flag] if !params[:is_flag].blank?
 
     @filtering = ""
-    @filtering = "filter_all_gene filter_all_skin filter_all_hair filter_all_mouth filter_all_tired filter_all_climacteric filter_all_born" if !params.has_key?(:filtering)
+    if !params.has_key?(:filtering) || params[:filtering].blank?
+      @filtering = "filter_all_gene filter_all_skin filter_all_hair filter_all_mouth filter_all_tired filter_all_climacteric filter_all_born"
+    else
+      @filtering = params[:filtering]
+    end
 
     ch_cd = ""
     shop_cd = ""

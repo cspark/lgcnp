@@ -36,7 +36,7 @@
             <% if !tabletinterview.fcdata_id.nil? %>
               $('#name_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.fcdata_id %>').append(tempUserName);
             <% else %>
-              $('#name_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>_<%= tabletinterview.measureno %>').append(tempUserName);
+              $('#name_<%= tabletinterview.custserial.to_i %>_<%= tabletinterview.ch_cd %>').append(tempUserName);
             <% end %>
           }
 

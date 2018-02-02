@@ -127,8 +127,9 @@
           <!-- 젠스토리 설문 완료 여부 -->
 
         </td>
-        <% if @filtering.
-        <td>유전자 설문(16)</td>
+        <% if @filtering.include?("filter_all_gene") %>
+          <td>유전자 설문(16)</td>
+        <% end %>
         <td>피부 설문(22)</td>
         <td>모발 두피 설문(37)</td>
         <td>구강 설문(33)</td>
