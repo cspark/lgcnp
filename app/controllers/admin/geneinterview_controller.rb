@@ -169,6 +169,9 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     @is_flag = nil
     @is_flag = params[:is_flag] if !params[:is_flag].blank?
 
+    @filtering = ""
+    @filtering = "filter_all_gene filter_all_skin filter_all_hair filter_all_mouth filter_all_tired filter_all_climacteric filter_all_born" if !params.has_key?(:filtering)
+
     ch_cd = ""
     shop_cd = ""
     ch_cd = params[:select_channel] if !params[:select_channel].nil? && params[:select_channel] != "ALL"
@@ -223,7 +226,7 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthyy) >= ? AND to_number(custinfo.birthyy) < ?", @start_birthyy, @end_birthyy) if !@start_birthyy.blank? && !@end_birthyy.blank?
     scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthmm) >= ? AND to_number(custinfo.birthmm) < ?", @start_birthmm, @end_birthmm) if !@start_birthmm.blank? && !@end_birthmm.blank?
 
-    scoped = scoped.order("fcgene_interview.uptdate desc")
+    scoped = scoped.order("fcgene_interview.uptdate desc") if Rails.env.production? || Rails.env.staging?
 
     @fcgene_interviews = scoped
     @fcgene_interviews_excel = @fcgene_interviews

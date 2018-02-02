@@ -131,19 +131,19 @@
       <div style="margin-top:5px; height:40px;">
         <p style="float:left; margin-left: 0px; margin-top: 5px;"><필터링>:&nbsp;</p>
         <p style="float:left; margin-left: 5px; margin-top: 5px;">유전자 전체&nbsp;</p>
-        <input type="checkbox" name="check_box" value="BEAU" id="filter_all" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="check_box" value="filter_all_gene" id="filter_all_gene" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">피부 전체&nbsp;</p>
-        <input type="checkbox" name="check_box" value="TMR" id="filter_all_skin" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="check_box" value="filter_all_skin" id="filter_all_skin" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">모발 두피 전체&nbsp;</p>
-        <input type="checkbox" name="check_box" value="TMR" id="filter_all_hair" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="check_box" value="filter_all_hair" id="filter_all_hair" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">구강 전체&nbsp;</p>
-        <input type="checkbox" name="check_box" value="TMR" id="filter_all_mouth" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="check_box" value="filter_all_mouth" id="filter_all_mouth" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">피로 전체&nbsp;</p>
-        <input type="checkbox" name="check_box" value="TMR" id="filter_all_tired" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="check_box" value="filter_all_tired" id="filter_all_tired" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">갱년기 전체&nbsp;</p>
-        <input type="checkbox" name="check_box" value="TMR" id="filter_all_climacteric" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="check_box" value="filter_all_climacteric" id="filter_all_climacteric" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">관절 전체&nbsp;</p>
-        <input type="checkbox" name="check_box" value="TMR" id="filter_all_born" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="check_box" value="filter_all_born" id="filter_all_born" style="float:left; margin-top:9px;">
       </div>
     </div>
 
@@ -228,6 +228,53 @@
 
           <% if @ch_cd == "" && @custserial.nil? %>
             $("input:checkbox[name=check_box]").prop("checked", true);
+          <% end %>
+
+          <% if @ch_cd == "" && @custserial.nil? %>
+            $("input:checkbox[name=check_box]").prop("checked", true);
+          <% end %>
+
+
+          <% if @filtering.include?("filter_all_gene") %>
+            $("input:checkbox[value=filter_all_gene]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=filter_all_gene]").prop("checked", false);
+          <% end %>
+
+          <% if @filtering.include?("filter_all_skin") %>
+            $("input:checkbox[value=filter_all_skin]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=filter_all_skin]").prop("checked", false);
+          <% end %>
+
+          <% if @filtering.include?("filter_all_hair") %>
+            $("input:checkbox[value=filter_all_hair]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=filter_all_hair]").prop("checked", false);
+          <% end %>
+
+          <% if @filtering.include?("filter_all_mouth") %>
+            $("input:checkbox[value=filter_all_mouth]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=filter_all_mouth]").prop("checked", false);
+          <% end %>
+
+          <% if @filtering.include?("filter_all_tired") %>
+            $("input:checkbox[value=filter_all_tired]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=filter_all_tired]").prop("checked", false);
+          <% end %>
+
+          <% if @filtering.include?("filter_all_climacteric") %>
+            $("input:checkbox[value=filter_all_climacteric]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=filter_all_climacteric]").prop("checked", false);
+          <% end %>
+
+          <% if @filtering.include?("filter_all_born") %>
+            $("input:checkbox[value=filter_all_born]").prop("checked", true);
+          <% else %>
+            $("input:checkbox[value=filter_all_born]").prop("checked", false);
           <% end %>
 
           $("#start_date").datepicker({
@@ -405,7 +452,7 @@
               is_flag.push(this.value)
             }
         });
-        
+
         url = ""
         url = "/admin/gene_and_genstory_list_beau?name=" + encodeURI(encodeURI($("#name").val()));
         url += "&start_date=" + $('#start_date').val() + "&end_date=" + $('#end_date').val();

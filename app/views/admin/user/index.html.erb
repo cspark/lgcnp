@@ -26,7 +26,7 @@
           $('select[id="select_address"]').val('<%= @select_address %>');
         <% end %>
 
-        <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
+        <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "sub_admin") %>
           <% if !@shop_cd.nil? && @shop_cd != "" && %>
             document.getElementById("select_shop").value = '<%= @shop_cd %>'
           <% end %>
@@ -133,7 +133,7 @@
     <div style="background: #b1cbbb; padding: 8px;">
       <p style="float:left; margin-top:7px;">이름: &nbsp;</p>
       <input class="form-control" type="text" id="search" placeholder="이름으로 검색" style="float:left; width: 150px;">
-      <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
+      <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "sub_admin") %>
       <p style="float:left; margin-left: 20px; margin-top: 5px;">채널:&nbsp;</p>
       <select class="form-control" id="select_channel" style="float:left; margin-left: 5px; width:100px;">
         <option value="ALL">전체</option>
