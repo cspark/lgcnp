@@ -165,67 +165,67 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
   def calculate
     Fctabletinterviewrx.all.each do |fctabletinterview|
       # if fctabletinterview.skin_type == nil || fctabletinterview.skin_type == "null"
-        calculate_value = 0
-        calculate_value = calculate_value + get_answer(value: fctabletinterview.d_1)
-        calculate_value = calculate_value + get_answer(value: fctabletinterview.d_2)
-        calculate_value = calculate_value + get_answer(value: fctabletinterview.d_3)
-        calculate_value = calculate_value + get_answer(value: fctabletinterview.d_4)
-        calculate_value = calculate_value + get_answer(value: fctabletinterview.d_5)
-
-        sensitive_value = 0
-        sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_6)
-        sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_7)
-        sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_8)
-        sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_9)
-        sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_10)
-
-        specially_sensitive = false
-        if (fctabletinterview.d_6 == 4 || fctabletinterview.d_7 == 4 || fctabletinterview.d_8 == 4 || fctabletinterview.d_9 == 4 || fctabletinterview.d_10 == 4)
-          specially_sensitive = true
-        end
-
-        fctabletinterview.skin_type = ""
-        if calculate_value >= 17
-          if sensitive_value >= 12 || specially_sensitive
-            fctabletinterview.skin_type = "skin_type_jisung_senstive"
-          else
-            fctabletinterview.skin_type = "skin_type_jisung"
-          end
-        end
-
-        if calculate_value >= 13 && calculate_value <= 16
-          if sensitive_value >= 12 || specially_sensitive
-            fctabletinterview.skin_type = "skin_type_jisung_boghab_senstive"
-          else
-            fctabletinterview.skin_type = "skin_type_jisung_boghab"
-          end
-        end
-
-        if calculate_value >= 10 && calculate_value <= 12
-          if sensitive_value >= 12 || specially_sensitive
-            fctabletinterview.skin_type = "skin_type_gun_boggab_senstive"
-          else
-            fctabletinterview.skin_type = "skin_type_gun_boggab"
-          end
-        end
-
-        if calculate_value >= 5 && calculate_value <= 9
-          if sensitive_value >= 12 || specially_sensitive
-            fctabletinterview.skin_type = "skin_type_gunsung_senstive"
-          else
-            fctabletinterview.skin_type = "skin_type_gunsung"
-          end
-        end
-
-        if (fctabletinterview.d_4 == 5 && fctabletinterview.d_5 == 5) || (fctabletinterview.a_2 == 4 && ((fctabletinterview.d_4 == 2 && fctabletinterview.d_5 == 3) || (fctabletinterview.d_4 == 2 && fctabletinterview.d_5 == 5) || (fctabletinterview.d_4 == 5 && fctabletinterview.d_5 == 2)))
-          if sensitive_value >= 12 || specially_sensitive
-            fctabletinterview.skin_type = "skin_type_jungsung_senstive"
-          else
-            fctabletinterview.skin_type = "skin_type_jungsung"
-          end
-        end
-
-        fctabletinterview.save
+        # calculate_value = 0
+        # calculate_value = calculate_value + get_answer(value: fctabletinterview.d_1)
+        # calculate_value = calculate_value + get_answer(value: fctabletinterview.d_2)
+        # calculate_value = calculate_value + get_answer(value: fctabletinterview.d_3)
+        # calculate_value = calculate_value + get_answer(value: fctabletinterview.d_4)
+        # calculate_value = calculate_value + get_answer(value: fctabletinterview.d_5)
+        #
+        # sensitive_value = 0
+        # sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_6)
+        # sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_7)
+        # sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_8)
+        # sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_9)
+        # sensitive_value = sensitive_value + get_sensitive_value(value: fctabletinterview.d_10)
+        #
+        # specially_sensitive = false
+        # if (fctabletinterview.d_6 == 4 || fctabletinterview.d_7 == 4 || fctabletinterview.d_8 == 4 || fctabletinterview.d_9 == 4 || fctabletinterview.d_10 == 4)
+        #   specially_sensitive = true
+        # end
+        #
+        # fctabletinterview.skin_type = ""
+        # if calculate_value >= 17
+        #   if sensitive_value >= 12 || specially_sensitive
+        #     fctabletinterview.skin_type = "skin_type_jisung_senstive"
+        #   else
+        #     fctabletinterview.skin_type = "skin_type_jisung"
+        #   end
+        # end
+        #
+        # if calculate_value >= 13 && calculate_value <= 16
+        #   if sensitive_value >= 12 || specially_sensitive
+        #     fctabletinterview.skin_type = "skin_type_jisung_boghab_senstive"
+        #   else
+        #     fctabletinterview.skin_type = "skin_type_jisung_boghab"
+        #   end
+        # end
+        #
+        # if calculate_value >= 10 && calculate_value <= 12
+        #   if sensitive_value >= 12 || specially_sensitive
+        #     fctabletinterview.skin_type = "skin_type_gun_boggab_senstive"
+        #   else
+        #     fctabletinterview.skin_type = "skin_type_gun_boggab"
+        #   end
+        # end
+        #
+        # if calculate_value >= 5 && calculate_value <= 9
+        #   if sensitive_value >= 12 || specially_sensitive
+        #     fctabletinterview.skin_type = "skin_type_gunsung_senstive"
+        #   else
+        #     fctabletinterview.skin_type = "skin_type_gunsung"
+        #   end
+        # end
+        #
+        # if (fctabletinterview.d_4 == 5 && fctabletinterview.d_5 == 5) || (fctabletinterview.a_2 == 4 && ((fctabletinterview.d_4 == 2 && fctabletinterview.d_5 == 3) || (fctabletinterview.d_4 == 2 && fctabletinterview.d_5 == 5) || (fctabletinterview.d_4 == 5 && fctabletinterview.d_5 == 2)))
+        #   if sensitive_value >= 12 || specially_sensitive
+        #     fctabletinterview.skin_type = "skin_type_jungsung_senstive"
+        #   else
+        #     fctabletinterview.skin_type = "skin_type_jungsung"
+        #   end
+        # end
+        #
+        # fctabletinterview.save
       # end
     end
   end

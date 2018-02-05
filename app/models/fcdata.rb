@@ -432,7 +432,11 @@ class Fcdata < ApplicationRecord
     scoped = FcavgdataHistory.where("? BETWEEN to_date(his_start_date) AND to_date(his_end_date)", his_date).order("n_index asc") if fcavgdata_histories.count > 0
 
     user = Custinfo.where(custserial: self.custserial).first
-    age = Date.current.year - user.birthyy.to_i - 1
+
+    age = Date.current.year - user.birthyy.to_i
+    if (Date.current.month < user.birthmm.to_i) || ((Date.current.month == user.birthmm.to_i) && (Date.current.day < user.birthdd.to_i))
+      age = age - 1
+    end
     avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
     avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
@@ -441,8 +445,8 @@ class Fcdata < ApplicationRecord
     my_position = 0
     min_value = 0
     max_value = 100
-    first_split_point = 33
-    second_split_point = 66
+    first_split_point = 33.3
+    second_split_point = 66.6
 
     if type == "moisture"
       my_position = sp_pl_avr
@@ -556,7 +560,11 @@ class Fcdata < ApplicationRecord
     end
 
     user = Custinfo.where(custserial: self.custserial).first
-    age = Date.current.year - user.birthyy.to_i - 1
+    age = Date.current.year - user.birthyy.to_i
+    if (Date.current.month < user.birthmm.to_i) || ((Date.current.month == user.birthmm.to_i) && (Date.current.day < user.birthdd.to_i))
+      age = age - 1
+    end
+
     avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
     avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
@@ -571,8 +579,8 @@ class Fcdata < ApplicationRecord
     age_avr = 0
     min_value = 0
     max_value = 100
-    first_split_point = 33
-    second_split_point = 66
+    first_split_point = 33.3
+    second_split_point = 66.6
 
     if type == "moisture"
       age_avr = (scoped.where(age: avg_grade_2_field_name).first.moisture.to_f + scoped.where(age: avg_grade_3_field_name).first.moisture.to_f) / 2
@@ -670,7 +678,11 @@ class Fcdata < ApplicationRecord
     end
 
     user = Custinfo.where(custserial: self.custserial).first
-    age = Date.current.year - user.birthyy.to_i - 1
+    age = Date.current.year - user.birthyy.to_i
+    if (Date.current.month < user.birthmm.to_i) || ((Date.current.month == user.birthmm.to_i) && (Date.current.day < user.birthdd.to_i))
+      age = age - 1
+    end
+
     avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
     avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
     avg_grade_3_field_name = generate_age_data_field(age: age).concat("3")
@@ -686,8 +698,8 @@ class Fcdata < ApplicationRecord
     age_avr = 0
     min_value = 0
     max_value = 100
-    first_split_point = 33
-    second_split_point = 66
+    first_split_point = 33.3
+    second_split_point = 66.6
 
     description = ""
     description << type
@@ -780,7 +792,10 @@ class Fcdata < ApplicationRecord
       return 0
     end
     user = Custinfo.where(custserial: self.custserial).first
-    age = Date.current.year - user.birthyy.to_i - 1
+    age = Date.current.year - user.birthyy.to_i
+    if (Date.current.month < user.birthmm.to_i) || ((Date.current.month == user.birthmm.to_i) && (Date.current.day < user.birthdd.to_i))
+      age = age - 1
+    end
 
     avg_grade_1_field_name = generate_age_data_field(age: age).concat("1")
     avg_grade_2_field_name = generate_age_data_field(age: age).concat("2")
