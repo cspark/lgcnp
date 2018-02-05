@@ -113,7 +113,6 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
   end
 
   def gene_and_genstory_list_beau
-    # asdf
     if params.has_key?(:isExcel) && params[:isExcel] && session[:admin_user] != "user" && !session[:admin_user].nil?
       history = Privacyaccesshistory.new
       serial = 1
