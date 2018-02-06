@@ -450,7 +450,7 @@ class Fcdata < ApplicationRecord
     second_split_point = 66.6
 
     if type == "mo_score"
-      my_position = fd.get_mo_avg
+      my_position = get_mo_avg
       min_value = get_vertical_graph_min(type: "moisture")
       max_value = get_vertical_graph_max(type: "moisture")
       first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.moisture.to_f
