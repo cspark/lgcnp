@@ -882,10 +882,10 @@ class Fcdata < ApplicationRecord
 
     avr = ((self.mo_1.to_f + self.mo_7.to_f + self.mo_8.to_f) / 3).round
 
-    avr1 = scoped.where(age: "AgeALL_Grade1").first.moisture.to_i
+    avr1 = scoped.where(age: is_male_title(str: "AgeALL_Grade1")).first.moisture.to_i
     avr2 = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.moisture.to_i
     avr3 = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.moisture.to_i
-    avr4 = scoped.where(age: "AgeALL_Grade4").first.moisture.to_i
+    avr4 = scoped.where(age: is_male_title(str: "AgeALL_Grade4")).first.moisture.to_i
 
     if avr > avr4
       return 4
