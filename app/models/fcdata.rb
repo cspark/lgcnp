@@ -25,6 +25,7 @@ class Fcdata < ApplicationRecord
        mo_8: get_mo_to_five(value: mo_8),
        mo_avg: get_mo_avg,
        mo_graph: get_graph_mo,
+       mo_score: get_vertical_graph_me(type: "mo_score"),
        pr_1: pr_1,
        pr_2: pr_2,
        pr_7: pr_7,
@@ -448,6 +449,14 @@ class Fcdata < ApplicationRecord
     first_split_point = 33.3
     second_split_point = 66.6
 
+    if type == "mo_score"
+      my_position = get_mo_avg
+      min_value = get_vertical_graph_min(type: type)
+      max_value = get_vertical_graph_max(type: type)
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.moisture.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.moisture.to_f
+    end
+
     if type == "moisture"
       my_position = sp_pl_avr
       min_value = get_vertical_graph_min(type: type)
@@ -530,11 +539,11 @@ class Fcdata < ApplicationRecord
     end
 
     if type == "el"
-      my_position = el_avr
-      min_value = get_vertical_graph_min(type: type)
-      max_value = get_vertical_graph_max(type: type)
-      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.elasticity.to_f
-      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.elasticity.to_f
+      my_position = el_avr # 45
+      min_value = get_vertical_graph_min(type: type) # 1.0
+      max_value = get_vertical_graph_max(type: type) # 70.0
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.elasticity.to_f # 22
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.elasticity.to_f # 29
     end
 
     if type == "pp"
