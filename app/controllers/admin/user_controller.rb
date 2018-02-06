@@ -66,6 +66,7 @@ class Admin::UserController < Admin::AdminApplicationController
       lastanaldate_not_nil_user = scoped.where.not(lastanaldate: nil).order("lastanaldate desc")
       lastanaldate_nil_user = scoped.where(lastanaldate: nil).order("lastanaldate desc")
       @users = lastanaldate_not_nil_user + lastanaldate_nil_user
+      @users = @users.uniq
     end
 
     @all_users = @users
