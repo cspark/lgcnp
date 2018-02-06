@@ -547,12 +547,12 @@ class Fcdata < ApplicationRecord
     end
 
     if type == "pp"
-      my_position = sp_pl_avr
+      my_position = fd.sp_pl_avr
 
-      min_value = get_vertical_graph_min(type: type)
-      max_value = get_vertical_graph_max(type: type)
-      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.spot_pl.to_f
-      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.spot_pl.to_f
+      min_value = fd.get_vertical_graph_min(type: type)
+      max_value = fd.get_vertical_graph_max(type: type)
+      first_split_point = scoped.where(age: fd.is_male_title(str: "AgeALL_Grade2")).first.spot_pl.to_f
+      second_split_point = scoped.where(age: fd.is_male_title(str: "AgeALL_Grade3")).first.spot_pl.to_f
     end
 
     tablet_ch_cd = "CNP"
@@ -776,14 +776,15 @@ class Fcdata < ApplicationRecord
       value = (((value.to_f - second_split_point.to_f) / denominator) * 33.3) + 66.6
     end
 
-    if value > 99.9
-      value = 99.9
-    end
+    Rails.logger.info "!!!!!! type : #{type}, value : #{value}"
+
     if tablet_ch_cd != "CNP"
-      if type != 'moisture' && type != 'dry_t' && type != 'dry_u'  && type != 'mo_score'
+      if ((type != 'moisture') && (type != 'dry_t') && (type != 'dry_u')  && (type != 'mo_score'))
+        Rails.logger.info "!!!!!! type : #{type}, 99-----"
         value = 99.9 - value
       end
       value = ((value * 0.85) + 15).round
+      Rails.logger.info "!!!!!! type : #{type}, calculate value : #{value}"
       value = 99 if value > 99
       value = 15 if value < 15
     else
