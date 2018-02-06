@@ -13,7 +13,7 @@ class Admin::ManagerController < Admin::AdminApplicationController
 
     scoped = AdminUser.all
     scoped = scoped.where("email LIKE?", "%#{@email}%") if !@email.blank?
-    scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
+    scoped = scoped.where("shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
     scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank?
 
     @users = scoped.order("shop_cd asc")

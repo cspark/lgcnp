@@ -178,7 +178,7 @@ class Admin::DataController < Admin::AdminApplicationController
     @fcdatas = []
     @fcdatas_final = []
     scoped = Fcdata.where(ch_cd: @ch_array)
-    scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
+    scoped = scoped.where("shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
 
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
@@ -654,7 +654,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     scoped = Fcdata.where(ch_cd: @ch_array)
-    scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
+    scoped = scoped.where("fcdata.shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
     scoped = scoped.where(custserial: serial_array) if @select_senstive != "all"
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
@@ -1117,7 +1117,7 @@ class Admin::DataController < Admin::AdminApplicationController
 
 
     scoped = Fcdata.where(ch_cd: @ch_array)
-    scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
+    scoped = scoped.where("fcdata.shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.where("to_date(fcdata.uptdate) >= ? AND to_date(fcdata.uptdate) < ?", @start_date.to_date, temp_end_date)

@@ -325,7 +325,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @beau_interviews = []
     # if Rails.env.production? || Rails.env.staging?
     fcdata_list = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array)
-    fcdata_list = fcdata_list.where(shop_cd: @shop_cd) if !@shop_cd.blank?
+    fcdata_list = fcdata_list.where("shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
     fcdata_list = fcdata_list.where(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "total"
     fcdata_list = fcdata_list.where.not(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "makeup"
 

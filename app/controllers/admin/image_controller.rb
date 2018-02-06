@@ -57,7 +57,7 @@ class Admin::ImageController < Admin::AdminApplicationController
       scoped = scoped.where("fcdata.measureno >= ?", @start_measureno.to_i) if !@start_measureno.blank?
       scoped = scoped.where("fcdata.measureno <= ?", @end_measureno.to_i) if !@end_measureno.blank?
       scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank?
-      scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
+      scoped = scoped.where("shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
 
       scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
@@ -418,7 +418,7 @@ class Admin::ImageController < Admin::AdminApplicationController
       scoped = scoped.where("measureno >= ?", @start_measureno.to_i) if !@start_measureno.blank?
       scoped = scoped.where("measureno <= ?", @end_measureno.to_i) if !@end_measureno.blank?
       scoped = scoped.where(ch_cd: @select_channel) if !@select_channel.blank?
-      scoped = scoped.where(shop_cd: @shop_cd) if !@shop_cd.blank?
+      scoped = scoped.where("shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
 
       if !@is_flag.nil?

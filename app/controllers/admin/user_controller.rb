@@ -48,7 +48,7 @@ class Admin::UserController < Admin::AdminApplicationController
     if !@is_admin_init
       scoped = Custinfo.all
 
-      scoped = scoped.joins(:fcdatas).where("fcdata.shop_cd LIKE ?", @shop_cd) if !@shop_cd.blank?
+      scoped = scoped.joins("INNER JOIN fcdata ON fcdata.custserial = custinfo.custserial WHERE (fcdata.shop_cd LIKE '%#{@shop_cd}%')") if !@shop_cd.blank?
       scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
       scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank? && @ch_cd != "ALL"
       scoped = scoped.where(address: @select_address) if !@select_address.blank?
@@ -62,7 +62,7 @@ class Admin::UserController < Admin::AdminApplicationController
       @users = lastanaldate_not_nil_user + lastanaldate_nil_user
     else
       scoped = Custinfo.where(ch_cd: @ch_cd)
-      
+
       lastanaldate_not_nil_user = scoped.where.not(lastanaldate: nil).order("lastanaldate desc")
       lastanaldate_nil_user = scoped.where(lastanaldate: nil).order("lastanaldate desc")
       @users = lastanaldate_not_nil_user + lastanaldate_nil_user

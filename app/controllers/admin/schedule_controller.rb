@@ -46,7 +46,7 @@ class Admin::ScheduleController < Admin::AdminApplicationController
     scoped = Fcschedule.where("reserve_yyyy = ?", select_year)
     scoped = scoped.where("reserve_mmdd = ?", select_mmdd)
     scoped = scoped.where(ch_cd: ch_cd) if !ch_cd.blank?
-    scoped = scoped.where(shop_cd: shop_cd) if !shop_cd.blank?
+    scoped = scoped.where("shop_cd LIKE '%#{@shop_cd}%'") if !shop_cd.blank?
     scoped = scoped.where("custname LIKE ?", "%#{@search}%")
     @fcschedules = scoped.order("reserve_hhmm asc")
 
