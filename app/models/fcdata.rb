@@ -547,12 +547,12 @@ class Fcdata < ApplicationRecord
     end
 
     if type == "pp"
-      my_position = fd.sp_pl_avr
+      my_position = sp_pl_avr
 
-      min_value = fd.get_vertical_graph_min(type: type)
-      max_value = fd.get_vertical_graph_max(type: type)
-      first_split_point = scoped.where(age: fd.is_male_title(str: "AgeALL_Grade2")).first.spot_pl.to_f
-      second_split_point = scoped.where(age: fd.is_male_title(str: "AgeALL_Grade3")).first.spot_pl.to_f
+      min_value = get_vertical_graph_min(type: type)
+      max_value = get_vertical_graph_max(type: type)
+      first_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade2")).first.spot_pl.to_f
+      second_split_point = scoped.where(age: is_male_title(str: "AgeALL_Grade3")).first.spot_pl.to_f
     end
 
     tablet_ch_cd = "CNP"
