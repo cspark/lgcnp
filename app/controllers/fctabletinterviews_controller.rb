@@ -55,7 +55,7 @@ class FctabletinterviewsController < ApplicationController
       tabletinterview.ch_cd = user.ch_cd
 
       fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).last
-      if user.sex == "F"
+      if user.sex == "F" && (params.has_key?(:is_history) && params[:is_history] == "false")
         # 여자일때
         fcdata.sp_pl_avr = fcdata.sp_pl_avr + 6
         fcdata.mo_1 = fcdata.mo_1 + 3

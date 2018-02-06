@@ -123,7 +123,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
 
     fcdata = Fcdata.where(custserial: existed_interview.custserial).where(measureno: existed_interview.fcdata_id).last
     user = Custinfo.where(custserial: fcdata.custserial).first
-    if existed_interview.mmode == "Makeup"
+    if existed_interview.mmode == "Makeup" && (params.has_key?(:is_history) && params[:is_history] == "false")
       # 메이크업모드 일 때
       if user.sex == "F"
         # 여자일때
