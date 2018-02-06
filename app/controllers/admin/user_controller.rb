@@ -48,10 +48,10 @@ class Admin::UserController < Admin::AdminApplicationController
     if !@is_admin_init
       scoped = Custinfo.all
 
-      scoped = scoped.joins("INNER JOIN fcdata ON fcdata.custserial = custinfo.custserial WHERE (fcdata.shop_cd LIKE '%#{@shop_cd}%')") if !@shop_cd.blank?
-      scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
+      scoped = scoped.joins("INNER JOIN fcdata ON fcdata.custserial = custinfo.custserial").where("fcdata.shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
       scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank? && @ch_cd != "ALL"
       scoped = scoped.where(address: @select_address) if !@select_address.blank?
+      scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
 
       @search = ""
       @search = params[:search] if params.has_key?(:search) && params[:search].length != 0
