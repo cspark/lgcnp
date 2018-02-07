@@ -374,14 +374,18 @@
           <% end %>
           <td><%= ampoule_2_lot %></td>
 
-          <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
-          <% if !fcdata.nil? %>
-            <% fcdata = fcdata.to_api_hash_for_admin %>
-            <td class="text-center"><%= 5-fcdata[:pr_graph].to_i %></td>
-            <td class="text-center"><%= 5-fcdata[:sb_graph].to_i %></td>
-            <td class="text-center"><%= 5-fcdata[:pp_graph].to_i %></td>
-            <td class="text-center"><%= 5-fcdata[:wr_graph].to_i %></td>
-            <td class="text-center"><%= 5-fcdata[:el_graph].to_i %></td>
+          <% begin %>
+            <% fcdata = Fcdata.where(custserial: tabletinterview.custserial).where(measureno: tabletinterview.fcdata_id).first %>
+            <% if !fcdata.nil? %>
+              <% fcdata = fcdata.to_api_hash_for_admin %>
+              <td class="text-center"><%= 5-fcdata[:pr_graph].to_i %></td>
+              <td class="text-center"><%= 5-fcdata[:sb_graph].to_i %></td>
+              <td class="text-center"><%= 5-fcdata[:pp_graph].to_i %></td>
+              <td class="text-center"><%= 5-fcdata[:wr_graph].to_i %></td>
+              <td class="text-center"><%= 5-fcdata[:el_graph].to_i %></td>
+            <% end %>
+          <% rescue %>
+            
           <% end %>
         <% end %>
       </tr>
