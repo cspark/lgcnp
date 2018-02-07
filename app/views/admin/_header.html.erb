@@ -202,18 +202,15 @@
     </style>
   </head>
 
-  <body style="padding:10px;">
+  <body>
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">맞춤형 화장품</a>
-        </div>
         <ul class="nav navbar-nav">
           <li><a href="#" class="top-list" id="custinfos">고객정보</a></li>
 
           <li class="dropdown dropbtn"><a class="top-list" id="point_input_feedback" href="#">피드백 입력</a>
             <div class="dropdown-content">
-              <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
+              <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && (session[:admin_user]['role'] == "admin" || session[:admin_user]['role'] == "sub_admin")) %>
                 <a id="input_feedback_cnp" href="#">CNP</a>
                 <a id="input_feedback_cnpr" href="#">CNP RX</a>
               <% elsif session[:admin_user]['ch_cd'] == "CNP" %>
@@ -292,7 +289,7 @@
           <% end %>
 
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
-            <li id="manager_list"><a class="top-list" id="point_manager_list" href="#">매장 관리자</a></li>
+            <li id="manager_list"><a class="top-list" id="point_manager_list" href="#">매장&연구소 아이디 관리</a></li>
           <% end %>
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
             <li id="allow_list"><a class="top-list" id="point_allow_list" href="#">허용 IP</a></li>
@@ -303,12 +300,9 @@
           <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
             <li id="privacy_access_history"><a class="top-list" id="point_privacy_access_history" href="#">개인정보 취급 기록</a></li>
           <% end %>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-           <li id="logout"><a href="#"><span class="glyphicon glyphicon-log-in"></span>로그아웃</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-           <li id="edit_admin_user"><a href="#"><span class="glyphicon glyphicon-log-in"></span>회원정보 수정</a></li>
+
+          <li id="logout"><a href="#" class="top-list"><font color="#5bc0de">로그아웃</font></a></li>
+          <li id="edit_admin_user"><a href="#" class="top-list"><font color="#5bc0de">회원정보 수정</font></a></li>
         </ul>
       </div>
     </nav>

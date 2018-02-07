@@ -258,7 +258,7 @@
     <div>
         <% user = Custinfo.where(custserial: @after_interview.custserial).first %>
         <% fctabletinterview = Fctabletinterview.where(custserial: @after_interview.custserial).where(tablet_interview_id: @after_interview.tablet_interview_id).first %>
-        <div style="background: #b1cbbb; padding: 8px;">
+        <div style="background: #9c9fa3; padding: 8px;">
           <font size="5"><b><div id="name_<%= user.custserial.to_i %>_<%= user.lastanaldate %>"></b></div></font>
 
           <div>

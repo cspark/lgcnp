@@ -206,7 +206,7 @@
   <body>
     <%= render "admin/header" %>
 
-    <div id="filter" style="background: #b1cbbb; padding: 8px;">
+    <div id="filter" style="background: #9c9fa3; padding: 8px;">
       <div class="form-inline">
         <p style="float:left; margin-top: 7px;">진단 날짜: </p>
         <input class="form-control" type="text" id="start_date" style="width:100px; float:left;">
@@ -225,10 +225,9 @@
         <% end %>
 
         <p style="float:right; margin-right:20px;">
-          Download:
           <%= link_to "Excel", admin_feedback_list_cnpr_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date, :sex => @sex, :start_age => @start_age, :end_age => @end_age,
           :select_interview => @select_interview,
-          :name => @name, :custserial => @custserial, :isExcel => true, :select_channel => @ch_cd, :select_shop => @shop_cd, :is_agree_thirdparty_info => @is_agree_thirdparty_info) %>
+          :name => @name, :custserial => @custserial, :isExcel => true, :select_channel => @ch_cd, :select_shop => @shop_cd, :is_agree_thirdparty_info => @is_agree_thirdparty_info), :class => "btn btn-success" %>
         </p>
       </div><br><br>
       <div class="form-inline">

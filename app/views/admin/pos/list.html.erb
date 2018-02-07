@@ -103,7 +103,7 @@
   <body>
     <%= render "admin/header" %>
 
-    <div style="background: #b1cbbb; padding: 8px;">
+    <div style="background: #9c9fa3; padding: 8px;">
       <input class="form-control" type="text" id="search" placeholder="이름으로 검색" style="float:left; width: 150px;">
       <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
       <p style="float:left; margin-left: 20px; margin-top: 5px;">채널 :</p>
@@ -123,11 +123,10 @@
       <button class="btn btn-warning" id="submit">조회</button>
       <button class="btn btn-warning" id="show_all" onclick="show_all()">전체보기</button>
       <p style="float:right; margin-right:20px;">
-        Download:
         <%= link_to "Excel", admin_fcpos_list_path(format: "xlsx", :search => @search, :select_filter => @params_filter,
-        :select_channel => @ch_cd, :isExcel => true) %>
+        :select_channel => @ch_cd, :isExcel => true), :class => "btn btn-success" %>
       </p><br>
-      <div style="background: #b1cbbb; padding: 8px;">
+      <div style="background: #9c9fa3; padding: 8px;">
         <div class="form-inline">
         <button id="filter-btn" class="btn btn-primary">필터링 선택</button>
         </div>

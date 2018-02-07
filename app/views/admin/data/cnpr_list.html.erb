@@ -451,7 +451,7 @@
 
   <body>
     <%= render "admin/header" %>
-    <div id="filter" style="background: #b1cbbb; padding: 8px;">
+    <div id="filter" style="background: #9c9fa3; padding: 8px;">
       <div class="form-inline">
         <p style="float:left; margin-top: 7px;">분석일:&nbsp;</p>
         <input class="form-control" type="text" id="start_date" style="float:left; width:100px;">
@@ -467,14 +467,13 @@
         <p style="float:left; margin-left: 20px; margin-top: 7px;">매장 코드:&nbsp;</p>
         <input class="form-control" type="text" name="select_shop" id="select_shop" style="float:left; width: 200px;">
         <p style="float:right; margin-right:20px;">
-          Download:
           <%= link_to "Excel", admin_data_list_cnpr_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
           :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial, :start_measureno => @start_measureno, :end_measureno => @end_measureno,
           :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
           :select_area => @select_area,
           :select_skin_type_device => @select_skin_type_device, :select_skin_type_survey => @select_skin_type_survey, :select_senstive => @select_senstive,
           :select_skin_anxiety1 => @select_skin_anxiety1, :select_skin_anxiety2 => @select_skin_anxiety2, :select_filter => @params_filter, :select_mode => @select_mode,
-          :select_channel => @ch_cd, :select_shop => @shop_cd, :isExcel => true) %>
+          :select_channel => @ch_cd, :select_shop => @shop_cd, :isExcel => true), :class => "btn btn-success" %>
         </p>
       </div><br><br>
 
@@ -591,7 +590,7 @@
       </div>
     </div>
 
-    <div style="background: #b1cbbb; padding-left:10px;">
+    <div style="background: #9c9fa3; padding-left:10px;">
       <button id="filter-btn" class="btn btn-primary">필터링 선택</button>
     </div>
 

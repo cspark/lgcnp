@@ -116,8 +116,8 @@
   </head>
 
   <body style="padding: 10px;">
-    <h2>매장 관리자 수정</h2>
-    <div id="filter" style="background: #b1cbbb; padding: 8px;">
+    <h2>매장용 아이디 수정</h2>
+    <div id="filter" style="background: #9c9fa3; padding: 8px;">
       <div class="form-inline">
         <div style="display: block;">
           <font style="float:left;">Email</font><br>
@@ -135,7 +135,11 @@
         <input class="form-control" type="text" id="shop_cd" style="width:560px;" readonly="">
 
         <font>허용 IP</font>
-        <input class="form-control" type="text" id="access_ip" style="width:560px;">
+        <% if (@admin_user.role == 'admin' ) %>
+          <input class="form-control" type="text" id="access_ip" style="width:560px;">
+        <% else %>
+          <input class="form-control" type="text" id="access_ip" style="width:560px;" readonly>
+        <% end %>
 
         <% end %>
         <center>

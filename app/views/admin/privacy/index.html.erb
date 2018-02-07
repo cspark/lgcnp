@@ -156,7 +156,7 @@
 
   <body>
     <%= render "admin/header" %>
-    <div style="background: #b1cbbb; padding: 8px;">
+    <div style="background: #9c9fa3; padding: 8px;">
       <p style="float:left; margin-top: 7px;">취급일:&nbsp;</p>
       <input class="form-control" type="text" id="start_date" style="float:left; width:100px;">
       <input class="form-control" type="text" id="end_date" style="float:left; width:100px;">
@@ -182,10 +182,9 @@
 
       <button style="margin-left: 10px;" class="btn btn-warning" id="submit">조회</button>
       <p style="float:right; margin-right:20px; margin-top:5px;">
-        Download:
         <!-- <%= link_to "CSV", admin_user_list_path(format: "csv") %> -->
         <%= link_to "Excel", admin_privacy_access_history_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
-        :search => @search, :select_channel => @ch_cd, :select_shop => @shop_cd, :isExcel => true) %>
+        :search => @search, :select_channel => @ch_cd, :select_shop => @shop_cd, :isExcel => true), :class => "btn btn-success" %>
       </p>
     </div>
     <div id="avr" style="background: #eea29a; padding: 8px;">

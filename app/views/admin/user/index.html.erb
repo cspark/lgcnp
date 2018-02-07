@@ -130,7 +130,8 @@
 
   <body>
     <%= render "admin/header" %>
-    <div style="background: #b1cbbb; padding: 8px;">
+
+    <div style="background: #9c9fa3; padding: 8px;">
       <p style="float:left; margin-top:7px;">이름: &nbsp;</p>
       <input class="form-control" type="text" id="search" placeholder="이름으로 검색" style="float:left; width: 150px;">
       <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "sub_admin") %>
@@ -177,11 +178,10 @@
       </select>
 
       <button style="margin-left: 10px;" class="btn btn-warning" id="submit">조회</button>
-      <p style="float:right; margin-right:20px; margin-top:5px;">
-        Download:
+      <p style="float:right; margin-right:20px;">
         <!-- <%= link_to "CSV", admin_user_list_path(format: "csv") %> -->
         <%= link_to "Excel", admin_user_list_path(format: "xlsx", :search => @search,
-        :custserial => @custserial, :select_channel => @ch_cd, :select_shop => @shop_cd, :select_address => @select_address, :isExcel => true) %>
+        :custserial => @custserial, :select_channel => @ch_cd, :select_shop => @shop_cd, :select_address => @select_address, :isExcel => true), :class => "btn btn-success" %>
       </p>
     </div>
     <div id="avr" style="background: #eea29a; padding: 8px;">

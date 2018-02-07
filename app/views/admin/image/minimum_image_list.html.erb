@@ -203,7 +203,7 @@
   <body>
     <%= render "admin/header" %>
 
-    <div id="filter" style="background: #b1cbbb; padding: 8px;">
+    <div id="filter" style="background: #9c9fa3; padding: 8px;">
       <div class="form-inline">
         이름 :
         <input class="form-control" type="text" id="name" style="width:100px;">
@@ -216,10 +216,9 @@
         <button id="date_init" class="btn btn-primary">전체</button>
 
         <p style="float:right; margin-right:20px;">
-          Download:
           <%= link_to "Excel", admin_minimum_image_list_path(format: "xlsx", :name => @name,
           :custserial => @custserial, :select_channel => @select_channel, :shop_cd => @shop_cd,
-          :start_measureno => @start_measureno, :end_measureno => @end_measureno, :isExcel => true) %>
+          :start_measureno => @start_measureno, :end_measureno => @end_measureno, :isExcel => true), :class => "btn btn-success" %>
         </p>
       </div>
 

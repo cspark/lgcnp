@@ -120,7 +120,7 @@
   <body>
     <%= render "admin/header" %>
 
-    <div id="filter" style="background: #b1cbbb; padding: 8px;">
+    <div id="filter" style="background: #9c9fa3; padding: 8px;">
       <div class="form-inline">
         <p style="float:left; margin-top:7px;">날짜: &nbsp;</p>
         <input class="form-control" type="text" id="select_date" style="float:left; width:100px;">
@@ -145,8 +145,7 @@
         <% end %>
         <button class="btn btn-warning" id="submit" style="margin-left:10px;">조회</button>
         <p style="float:right; margin-right:20px;">
-          Download:
-          <%= link_to "Excel", admin_fcschedule_list_path(format: "xlsx", :select_date => @select_date, :isExcel => true) %>
+          <%= link_to "Excel", admin_fcschedule_list_path(format: "xlsx", :select_date => @select_date, :isExcel => true), :class => "btn btn-success" %>
         </p>
       </div>
     </div>

@@ -393,7 +393,7 @@
 
   <body>
     <%= render "admin/header" %>
-    <div id="filter" style="background: #b1cbbb; padding: 8px;">
+    <div id="filter" style="background: #9c9fa3; padding: 8px;">
       <div class="form-inline">
         <p style="float:left; margin-top: 7px;">분석일:&nbsp;</p>
         <input class="form-control" type="text" id="start_date" style="float:left; width:100px;">
@@ -413,14 +413,13 @@
         <input class="form-control" type="text" name="gene_barcode" id="gene_barcode" style="float:left; width: 130px;">
 
         <p style="float:right; margin-right:20px;">
-          Download:
           <%= link_to "Excel", admin_data_and_gene_list_cnp_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
           :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial,
           :start_measureno => @start_measureno, :end_measureno => @end_measureno,
           :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
           :select_area => @select_area, :select_address => @select_address, :select_skin_type_device => @select_skin_type_device,
           :select_channel => @ch_cd, :select_shop => @shop_cd, :gene_barcode => @gene_barcode, :is_agree_thirdparty_info => @is_agree_thirdparty_info,
-          :is_flag => @is_flag, :isExcel => true) %>
+          :is_flag => @is_flag, :isExcel => true), :class => "btn btn-success" %>
         </p>
       </div><br><br>
 

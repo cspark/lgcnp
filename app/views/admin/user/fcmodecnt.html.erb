@@ -53,12 +53,11 @@
 
   <body>
     <%= render "admin/header" %>
-    <div style="background: #b1cbbb; padding: 8px;">
+    <div style="background: #9c9fa3; padding: 8px;">
       <button style="margin-left: 10px;" class="btn btn-warning" id="submit">조회</button>
-      <p style="float:right; margin-right:20px; margin-top:5px;">
-        Download:
+      <p style="float:right; margin-right:20px;">
         <!-- <%= link_to "CSV", admin_user_list_path(format: "csv") %> -->
-        <%= link_to "Excel", admin_fcmodecnt_path(format: "xlsx") %>
+        <%= link_to "Excel", admin_fcmodecnt_path(format: "xlsx"), :class => "btn btn-success" %>
       </p>
     </div>
     <table data-toggle="table">
