@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180205050618) do
+ActiveRecord::Schema.define(version: 20180208002552) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                   default: "", null: false
@@ -620,6 +620,20 @@ ActiveRecord::Schema.define(version: 20180205050618) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "category"
+  end
+
+  create_table "tb_survey_answers", force: :cascade do |t|
+    t.integer  "question_serial"
+    t.integer  "answer_serial"
+    t.string   "answer_type"
+    t.integer  "answer_point"
+    t.string   "answer_contents"
+    t.string   "answer_img_url"
+    t.datetime "create_dt"
+    t.string   "create_id"
+    t.datetime "update_dt"
+    t.string   "update_id"
+    t.integer  "answer_order"
   end
 
   create_table "tb_user_surveys", force: :cascade do |t|

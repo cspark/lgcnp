@@ -33,4 +33,12 @@ class FcgeneInterview < ApplicationRecord
       uptdate: uptdate
     }
   end
+
+  def get_genstory_compeleted
+    is_completed = false
+
+    
+
+    return is_completed
+  end
 end
