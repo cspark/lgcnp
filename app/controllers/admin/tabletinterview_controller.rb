@@ -325,7 +325,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @beau_interviews = []
     # if Rails.env.production? || Rails.env.staging?
     fcdata_list = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array)
-    fcdata_list = fcdata_list.where("shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
+
     fcdata_list = fcdata_list.where(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "total"
     fcdata_list = fcdata_list.where.not(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "makeup"
 
@@ -343,6 +343,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
+      scoped = scoped.joins(:custinfo).where("custinfo.shop_cd LIKE ?", "%#{@shop_cd}%") if !@shop_cd.nil?
       scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sex}%") if @select_sex != "all"
       if !@start_age.blank? && !@end_age.blank?
         start_birthyy = Time.current.year.to_i - @start_age.to_i
