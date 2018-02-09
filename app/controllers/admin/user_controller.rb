@@ -62,7 +62,8 @@ class Admin::UserController < Admin::AdminApplicationController
       @users = lastanaldate_not_nil_user + lastanaldate_nil_user
     else
       scoped = Custinfo.where(ch_cd: @ch_cd)
-
+      scoped = scoped.joins("INNER JOIN fcdata ON fcdata.custserial = custinfo.custserial").where("fcdata.shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
+      
       lastanaldate_not_nil_user = scoped.where.not(lastanaldate: nil).order("lastanaldate desc")
       lastanaldate_nil_user = scoped.where(lastanaldate: nil).order("lastanaldate desc")
       @users = lastanaldate_not_nil_user + lastanaldate_nil_user
