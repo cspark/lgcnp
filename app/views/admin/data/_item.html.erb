@@ -28,14 +28,14 @@
                     tempUserName += "*"
                 }
               }
-              $('#name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno.to_i %>').append(tempUserName);
+              $('#name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno.to_i %>_<%= fcdata.ch_cd %>').append(tempUserName);
             <% else %>
-              $('#name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno.to_i %>').append("");
+              $('#name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno.to_i %>_<%= fcdata.ch_cd %>').append("");
             <% end %>
           }
           catch(err)
           {
-            $('#name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno.to_i %>').append('<%= user.custname %>');
+            $('#name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno.to_i %>_<%= fcdata.ch_cd %>').append('<%= user.custname %>');
           }
 
           try
@@ -76,7 +76,7 @@
       <% interview = FcgeneInterview.where(custserial: fcdata.custserial).where(measureno: fcdata.measureno).first %>
       <tr class="table_tr text-center" id="<%= fcdata.custserial.to_i %>/<%= fcdata.measureno %>">
         <td><%= fcdata.custserial.to_i %></td>
-        <td id="name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno.to_i %>"></td>
+        <td id="name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno.to_i %>_<%= fcdata.ch_cd %>"></td>
         <td><%= Date.current.year - custinfo.birthyy.to_i - 1 %></td>
         <td><%= custinfo.sex %></td>
         <% if (fcdata.ch_cd == "BEAU" || fcdata.ch_cd == "TMR" || fcdata.ch_cd == "MART" || fcdata.ch_cd == "LABO" || fcdata.ch_cd == "ONEP") && !interview.nil? %>
