@@ -322,8 +322,11 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @min_birthmm = 1
     @max_birthmm = 12
 
+https://customizing.lgcare.co.kr/admin/beau_interview?start_date=2017-01-13&end_date=2018-02-09
+&select_sex=all&start_age=&end_age=&name=&custserial=8725&start_birthyy=&end_birthyy=&start_birthmm=&end_birthmm=
+&select_channel=BEAU,TMR,MART,LABO,ONEP&select_mode=all&select_area=all&select_filter=&select_shop=
+
     @beau_interviews = []
-    # if Rails.env.production? || Rails.env.staging?
     fcdata_list = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array)
 
     fcdata_list = fcdata_list.where(m_skintype: 0) if !@select_mode.blank? && @select_mode.downcase != "all" && @select_mode.downcase == "total"
@@ -331,7 +334,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
 
     subquery = fcdata_list.select(:custserial)
     subquery_measureno = fcdata_list.select(:measureno)
-    # scoped = Fcinterview.where("fcinterview.custserial IN (?) AND fcinterview.measureno IN (?)", fcdata_list.pluck(:custserial), fcdata_list.pluck(:measureno))
+
     scoped = Fcinterview.where("fcinterview.custserial IN (#{subquery.to_sql}) AND fcinterview.measureno IN (#{subquery_measureno.to_sql})")
     scoped = scoped.where("fcinterview.shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
 
@@ -359,7 +362,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     end
     scoped = scoped.order("fcinterview.uptdate desc")
 
-    @beau_interviews = scoped
+    @beau_interviews = scoped.uniq
     @count = @beau_interviews.count
     @beau_interviews_excel = @beau_interviews
     @beau_interviews = Kaminari.paginate_array(@beau_interviews).page(params[:page]).per(5)
