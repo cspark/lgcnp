@@ -322,10 +322,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     @min_birthmm = 1
     @max_birthmm = 12
 
-https://customizing.lgcare.co.kr/admin/beau_interview?start_date=2017-01-13&end_date=2018-02-09
-&select_sex=all&start_age=&end_age=&name=&custserial=8725&start_birthyy=&end_birthyy=&start_birthmm=&end_birthmm=
-&select_channel=BEAU,TMR,MART,LABO,ONEP&select_mode=all&select_area=all&select_filter=&select_shop=
-
     @beau_interviews = []
     fcdata_list = Fcdata.where("faceno LIKE ?", "%#{select_area}%").where(ch_cd: @ch_array)
 
