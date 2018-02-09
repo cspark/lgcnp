@@ -338,12 +338,14 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.where("to_date(fcinterview.uptdate) >= ? AND to_date(fcinterview.uptdate) < ?", @start_date.to_date, temp_end_date)
     end
+    scoped = scoped.where("fcinterview.shop_cd LIKE ?", "%#{@shop_cd}%") if !@shop_cd.nil?
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(ch_cd: @ch_array) if !@ch_array.blank? && @ch_array != ""
 
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
-      scoped = scoped.joins(:custinfo).where("custinfo.shop_cd LIKE ?", "%#{@shop_cd}%") if !@shop_cd.nil?
+
+      fcdata_list = fcdata_list.where("shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
       scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sex}%") if @select_sex != "all"
       if !@start_age.blank? && !@end_age.blank?
         start_birthyy = Time.current.year.to_i - @start_age.to_i
