@@ -906,7 +906,7 @@ class Admin::DataController < Admin::AdminApplicationController
     end
     scoped = scoped.order("fcdata.measuredate desc")
 
-    @fcdatas = scoped
+    @fcdatas = scoped.uniq
     @count = @fcdatas.count
     @fcdatas_excel = @fcdatas
     @fcdatas = Kaminari.paginate_array(@fcdatas).page(params[:page]).per(5)
