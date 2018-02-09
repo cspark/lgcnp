@@ -358,7 +358,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
       scoped = scoped.joins(:custinfo).where("custinfo.is_agree_thirdparty_info LIKE ?", "%#{params[:is_agree_thirdparty_info]}%") if params.has_key?(:is_agree_thirdparty_info)
     end
     scoped = scoped.order("fcinterview.uptdate desc")
-    @beau_interviews = scoped
+    @beau_interviews = scoped.uniq
 
     @count = @beau_interviews.count
     @beau_interviews_excel = @beau_interviews
