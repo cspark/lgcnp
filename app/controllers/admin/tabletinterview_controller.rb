@@ -470,7 +470,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     scoped = Fctabletinterviewrx.where(ch_cd: @ch_array)
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.joins(:fcdata).where("fcdata.faceno LIKE ?", "%#{@select_area}%") if !@select_area.blank? && @select_area != "all"
-      scoped = scoped.joins(:fcdata).where("fcdata.shop_cd LIKE ?",  "#{@shop_cd}") if !@shop_cd.blank?
     end
 
     temp_end_date = @end_date.to_date+1.day
@@ -551,6 +550,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
       scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sex}%") if @select_sex != "all"
+      scoped = scoped.joins(:custinfo).where("custinfo.shop_cd LIKE ?",  "%#{@shop_cd}%") if !@shop_cd.blank?
       if !@start_age.blank? && !@end_age.blank?
         start_birthyy = Time.current.year.to_i - @start_age.to_i
         end_birthyy = Time.current.year.to_i - @end_age.to_i
