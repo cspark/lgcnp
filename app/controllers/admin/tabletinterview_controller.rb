@@ -333,6 +333,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     subquery_measureno = fcdata_list.select(:measureno)
     # scoped = Fcinterview.where("fcinterview.custserial IN (?) AND fcinterview.measureno IN (?)", fcdata_list.pluck(:custserial), fcdata_list.pluck(:measureno))
     scoped = Fcinterview.where("fcinterview.custserial IN (#{subquery.to_sql}) AND fcinterview.measureno IN (#{subquery_measureno.to_sql})")
+    scoped = scoped.where("fcinterview.shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
 
     temp_end_date = @end_date.to_date+1.day
     if Rails.env.production? || Rails.env.staging?
@@ -345,7 +346,6 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
 
-      fcdata_list = fcdata_list.where("shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
       scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sex}%") if @select_sex != "all"
       if !@start_age.blank? && !@end_age.blank?
         start_birthyy = Time.current.year.to_i - @start_age.to_i
