@@ -1127,7 +1127,8 @@ class Admin::DataController < Admin::AdminApplicationController
     end
 
     scoped = scoped.order("fcdata.measuredate desc")
-
+    @fcdatas = scoped
+    
     if @select_filter == []
       @excel_name = ["시리얼","이름","측정 당시 만 나이","성별","바코드","생년월일","분석 횟수","채널","측정 부위","진단 날짜","업데이트 일","수분 측정 이마","수분 측정 우측 볼","수분 측정 좌측 볼","모공 측정 이마","모공 측정 코","모공 측정 우측 볼","모공 측정 좌측 볼","모공 측정 평균","주름 측정 우측 눈옆", "주름 측정 우측 눈밑", "주름 측정 좌측 눈옆","주름 측정 좌측 눈밑", "주름 측정 평균",
       "탄력 측정 우측 볼", "탄력 측정 좌측 볼", "탄력 측정 평균", "탄력 각도 우측 볼", "탄력 각도 좌측 볼", "피지 개수 이마", "피지 개수 코", "피지 개수 우측 볼", "피지 개수 좌측 볼", "피지 개수 평균", "포피린 개수 이마", "포피린 개수 코", "포피린 개수 우측 볼", "포피린 개수 좌측 볼", "포피린 개수 평균",
@@ -1331,7 +1332,7 @@ class Admin::DataController < Admin::AdminApplicationController
         @excel_name << filter
       end
     end
-    
+
     @fcdatas.each do |fcdata|
       fctabletinterview = Fctabletinterviewrx.where.not(skin_type: nil).where.not(before_solution_1: nil).where.not(before_solution_2: nil).where(ch_cd: @ch_array).where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno.to_i).first
       is_contain = true
