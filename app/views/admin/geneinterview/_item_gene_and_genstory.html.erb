@@ -10,7 +10,7 @@
       <script>
         $(function () {
           <% user = Custinfo.where(custserial: interview.custserial).first %>
-          <% if !user.name.nil? %>
+          <% if !user.custname.nil? %>
             try
             {
               var userName = decode_utf8('<%= user.custname %>')
