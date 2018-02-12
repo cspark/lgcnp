@@ -1093,25 +1093,6 @@ class Admin::DataController < Admin::AdminApplicationController
       end
     end
 
-    # if !@select_skin_anxiety1_array.blank?
-    #   serial_array = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_1: @select_skin_anxiety1_array).pluck(:custserial).uniq
-    # else
-    #   serial_array = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_1: ["!!"]).pluck(:custserial).uniq
-    # end
-    #
-    # if !@select_skin_anxiety2_array.blank?
-    #   serial_array2 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_2: @select_skin_anxiety2_array).pluck(:custserial).uniq
-    # else
-    #   serial_array2 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(before_solution_2: ["!!"]).pluck(:custserial).uniq
-    # end
-    #
-    # if !@skin_type_survey_array.blank?
-    #   serial_array3 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(skin_type: @skin_type_survey_array).pluck(:custserial).uniq
-    # else
-    #   serial_array3 = Fctabletinterviewrx.where(ch_cd: @ch_array).where(skin_type: ["!!"]).pluck(:custserial).uniq
-    # end
-    # serial_array = serial_array & serial_array2 & serial_array3
-
     @fcdatas = []
     @fcdatas_final = []
 
@@ -1130,6 +1111,19 @@ class Admin::DataController < Admin::AdminApplicationController
       scoped = scoped.where(skintype: [100])
     else
       scoped = scoped.where(skintype: @select_skin_type_device_final)
+    end
+
+    if Rails.env.production? || Rails.env.staging?
+      scoped = scoped.joins(:custinfo).where("custinfo.custname LIKE ?", "%#{@name}%") if !@name.nil?
+      scoped = scoped.joins(:custinfo).where("custinfo.sex LIKE ?", "%#{@select_sex}%") if @select_sex != "all"
+      if !@start_age.blank? && !@end_age.blank?
+        start_birthyy = Time.current.year.to_i - @start_age.to_i
+        end_birthyy = Time.current.year.to_i - @end_age.to_i
+        scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthyy) >= ? AND to_number(custinfo.birthyy) < ?", end_birthyy, start_birthyy)
+      end
+
+      scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthyy) >= ? AND to_number(custinfo.birthyy) < ?", @start_birthyy, @end_birthyy) if !@start_birthyy.blank? && !@end_birthyy.blank?
+      scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthmm) >= ? AND to_number(custinfo.birthmm) < ?", @start_birthmm, @end_birthmm) if !@start_birthmm.blank? && !@end_birthmm.blank?
     end
 
     scoped = scoped.order("fcdata.measuredate desc")
@@ -1337,56 +1331,7 @@ class Admin::DataController < Admin::AdminApplicationController
         @excel_name << filter
       end
     end
-
-    scoped.each do |fcdata|
-      custinfo = Custinfo.where(custserial: fcdata.custserial).first
-      is_contain = true
-
-      if !custinfo.nil?
-        if !@name.blank? && !custinfo.custname.nil?
-          if !custinfo.custname.include? @name
-            is_contain = false
-          end
-        end
-
-        if @select_sex != "all"
-          if custinfo.sex != @select_sex
-            is_contain = false
-          end
-        end
-
-        if !@start_age.blank? && !@end_age.blank?
-          temp_age = Time.current.year.to_i - custinfo.birthyy.to_i
-          if temp_age < @start_age.to_i || temp_age > @end_age.to_i
-            is_contain = false
-          end
-        end
-
-        if !@start_birthyy.blank? && !@end_birthyy.blank?
-          if custinfo.birthyy.to_i < @start_birthyy.to_i || custinfo.birthyy.to_i > @end_birthyy.to_i
-            is_contain = false
-          end
-        end
-
-        if !@start_birthmm.blank? && !@end_birthmm.blank?
-          if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
-            is_contain = false
-          end
-        end
-
-        if custinfo.nil?
-          is_contain = false
-        end
-      else
-        is_contain = false
-      end
-
-      if is_contain == true
-        @fcdatas << fcdata
-      end
-    end
-
-
+    
     @fcdatas.each do |fcdata|
       fctabletinterview = Fctabletinterviewrx.where.not(skin_type: nil).where.not(before_solution_1: nil).where.not(before_solution_2: nil).where(ch_cd: @ch_array).where(custserial: fcdata.custserial.to_i).where(fcdata_id: fcdata.measureno.to_i).first
       is_contain = true
