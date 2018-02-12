@@ -35,9 +35,10 @@ class FcgeneInterview < ApplicationRecord
   end
 
   def get_genstory_compeleted
-    is_completed = false
+    is_completed = "X"
 
-    
+
+
 
     return is_completed
   end
