@@ -359,7 +359,7 @@ class Admin::TabletinterviewController < Admin::AdminApplicationController
     scoped = scoped.order("fcinterview.uptdate desc")
 
     @beau_interviews = scoped.uniq
-    @count = @beau_interviews.count(:uptdate)
+    @count = @beau_interviews.count(:measuredate)
     @beau_interviews_excel = @beau_interviews
     @beau_interviews = Kaminari.paginate_array(@beau_interviews).page(params[:page]).per(5)
 
