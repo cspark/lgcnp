@@ -128,6 +128,16 @@
           <% end %>
         <% end %>
         <td class="text-center"><%= is_agree_privacy %></td>
+        <% is_agree_privacy_residence = "-" %>
+        <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX"%>
+          <% if user.is_agree_privacy_residence == "T" %>
+            <% is_agree_privacy_residence = "O" %>
+          <% else %>
+            <% is_agree_privacy_residence = "X" %>
+          <% end %>
+        <% end %>
+        <td class="text-center"><%= is_agree_privacy_residence %></td>
+
         <% is_agree_thirdparty = "-" %>
         <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX"%>
           <% if user.is_agree_thirdparty_info == "T" %>
@@ -136,6 +146,7 @@
             <% is_agree_thirdparty = "X" %>
           <% end %>
         <% end %>
+
         <td class="text-center"><%= is_agree_thirdparty %></td>
         <% is_agree_marketing = "-" %>
         <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX" %>
