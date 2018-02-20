@@ -246,7 +246,7 @@ Rails.application.routes.draw do
   	    get "update_email" => "custinfos#update_email"
   	    get "update_after_service" => "custinfos#update_after_service"
   	    get "update_agreement" => "custinfos#update_agreement"
-
+        get "update_agree_privacy" => "custinfos#update_agree_privacy"
         resources :custinfos do
         end
 

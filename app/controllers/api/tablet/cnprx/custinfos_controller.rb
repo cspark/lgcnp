@@ -158,6 +158,23 @@ class Api::Tablet::Cnprx::CustinfosController < Api::ApplicationController
       end
   end
 
+  def update_agree_privacy
+    is_agree_privacy = params[:is_agree_privacy]
+    serial = params[:serial]
+    ch_cd = "CNPR"
+    if params.has_key?(:ch_cd)
+      ch_cd = params[:ch_cd]
+    end
+
+    custinfo = Custinfo.where(custserial: serial).where(ch_cd: ch_cd).first
+    custinfo.is_agree_privacy = is_agree_privacy
+    if custinfo.save
+      render json: custinfo.to_api_hash, status: 200
+    else
+      render json: "", status: 404
+    end
+  end
+
   def create
     name = params[:name]
     sex = params[:sex]
