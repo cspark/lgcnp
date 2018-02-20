@@ -160,6 +160,7 @@ class Api::Tablet::Cnprx::CustinfosController < Api::ApplicationController
 
   def update_agree_privacy
     is_agree_privacy = params[:is_agree_privacy]
+    is_agree_privacy_residence = params[:is_agree_privacy_residence]
     serial = params[:serial]
     ch_cd = "CNPR"
     if params.has_key?(:ch_cd)
@@ -168,6 +169,7 @@ class Api::Tablet::Cnprx::CustinfosController < Api::ApplicationController
 
     custinfo = Custinfo.where(custserial: serial).where(ch_cd: ch_cd).first
     custinfo.is_agree_privacy = is_agree_privacy
+    custinfo.is_agree_privacy_residence = is_agree_privacy_residence
     if custinfo.save
       render json: custinfo.to_api_hash, status: 200
     else
