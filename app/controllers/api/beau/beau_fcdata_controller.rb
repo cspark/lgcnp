@@ -26,6 +26,9 @@ class Api::Beau::BeauFcdataController < Api::ApplicationController
       if user.sex == "F"
         # 여자일때
         fcdata.sp_pl_avr = fcdata.sp_pl_avr + 6
+        fcdata.mo_1 = fcdata.mo_1 + 3
+        fcdata.mo_7 = fcdata.mo_7 + 3
+        fcdata.mo_8 = fcdata.mo_8 + 3
       else
         # 남자일때
         fcdata.sp_pl_avr = fcdata.sp_pl_avr + 3
