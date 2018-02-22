@@ -294,7 +294,7 @@
           </thead>
           <tbody>
             <% @after_interviews.each do |after_interview| %>
-            <%= render partial: "admin/feedback/after_item_rx", locals: { after_interview: after_interview } %>
+              <%= render partial: "admin/feedback/after_item_rx", locals: { after_interview: after_interview } %>
             <% end %>
           </tbody>
         </table>

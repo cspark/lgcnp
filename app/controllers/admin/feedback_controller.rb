@@ -399,6 +399,9 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @select_interview = select_interview if !select_interview.blank?
     @name = name if !name.blank?
 
+    @is_init = true
+    @is_init = false if params[:select_channel].present?
+
     if !Custinfo.where(ch_cd: "CNPR").where.not(birthyy: nil).order("birthyy desc").first.nil?
       min_age_custinfo = Custinfo.where(ch_cd: "CNPR").where.not(birthyy: nil).order("birthyy desc").first
       max_age_custinfo = Custinfo.where(ch_cd: "CNPR").order("birthyy asc").first
@@ -456,6 +459,9 @@ class Admin::FeedbackController < Admin::AdminApplicationController
       scoped = scoped.joins(:fctabletinterviewrx).where("to_date(fctabletinterviewrx.uptdate) >= ? AND to_date(fctabletinterviewrx.uptdate) < ?", @start_date, @end_date.to_date)
     end
     @after_interviews = scoped
+    if @is_init
+      @after_interviews = []
+    end
 
     @after_interviews.each do |interview|
       @average_a1 = @average_a1 + interview.a1.to_i
