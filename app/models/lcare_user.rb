@@ -19,9 +19,9 @@ class LcareUser < ApplicationRecord
       active_mobile_yn: active_mobile_yn
     }
   end
-
+# 2036821
   def self.list(cust_hnm: nil, birth_year: nil, birth_mmdd: nil, cell_phnno: nil, page: 1, per: 10)
-    scoped = LcareUser.where(u_cust_yn: "Y").where.not(join_type: "8")
+    scoped = LcareUser.where(u_cust_yn: "Y").where("join_type IS NULL OR (join_type IS NOT NULL AND join_type NOT LIKE '8')")
     scoped = scoped.where("lower(cust_hnm) LIKE lower(?)", "%#{cust_hnm}%") if cust_hnm.present?
     scoped = scoped.where(birth_year: birth_year) if birth_year.present?
     scoped = scoped.where(birth_mmdd: birth_mmdd) if birth_mmdd.present?
