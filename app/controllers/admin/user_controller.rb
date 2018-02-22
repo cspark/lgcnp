@@ -34,9 +34,10 @@ class Admin::UserController < Admin::AdminApplicationController
     end
 
     @is_admin_init = false
-    # if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") && params.has_key?(:select_channel) != true
-    @is_admin_init = true
-    # end
+    # if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") &&
+    if params.has_key?(:select_channel) != true
+      @is_admin_init = true
+    end
 
     ch_cd = params[:select_channel] if !params[:select_channel].nil?
     select_address = params[:select_address] if !params[:select_address].nil? && params[:select_address] != "ALL"
