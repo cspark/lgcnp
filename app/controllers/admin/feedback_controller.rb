@@ -400,7 +400,7 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @name = name if !name.blank?
 
     @is_init = true
-    @is_init = false if params[:select_channel].present?
+    @is_init = false if params[:start_date].present?
 
     if !Custinfo.where(ch_cd: "CNPR").where.not(birthyy: nil).order("birthyy desc").first.nil?
       min_age_custinfo = Custinfo.where(ch_cd: "CNPR").where.not(birthyy: nil).order("birthyy desc").first
@@ -414,10 +414,6 @@ class Admin::FeedbackController < Admin::AdminApplicationController
     @max_birthmm = 12
 
     @is_agree_thirdparty_info = params[:is_agree_thirdparty_info] if !params[:is_agree_thirdparty_info].blank?
-    @is_init = true
-    if params[:select_channel].present?
-      @is_init = false
-    end
 
     @after_interviews = []
 
