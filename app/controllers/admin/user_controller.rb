@@ -50,7 +50,7 @@ class Admin::UserController < Admin::AdminApplicationController
       Rails.logger.info "!is_admin_init"
 
       scoped = Custinfo.all
-
+      # scoped = scoped.where.not("delete_at IS NULL")
       scoped = scoped.where("shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
       scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank? && @ch_cd != "ALL"
       scoped = scoped.where(address: @select_address) if !@select_address.blank?
@@ -65,6 +65,7 @@ class Admin::UserController < Admin::AdminApplicationController
       @users = lastanaldate_not_nil_user + lastanaldate_nil_user
     else
       scoped = Custinfo.where(ch_cd: @ch_cd)
+      # scoped = scoped.where.not("delete_at IS NULL")
 
       lastanaldate_not_nil_user = scoped.where.not(lastanaldate: nil).order("lastanaldate desc")
       lastanaldate_nil_user = scoped.where(lastanaldate: nil).order("lastanaldate desc")
@@ -128,6 +129,31 @@ class Admin::UserController < Admin::AdminApplicationController
     respond_to do |format|
       format.html
       format.xlsx
+    end
+  end
+
+  def delete_at_added
+    user = Custinfo.where(custserial: params[:id], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
+
+    t = Time.now
+
+    time_string = t.strftime("%Y")[2,4]
+    time_string = time_string.concat("-")
+    time_string = time_string.concat(t.strftime("%m"))
+    time_string = time_string.concat("-")
+    time_string = time_string.concat(t.strftime("%d"))
+    time_string = time_string.concat("-")
+    time_string = time_string.concat(t.strftime("%H"))
+    time_string = time_string.concat("-")
+    time_string = time_string.concat(t.strftime("%M"))
+    time_string = time_string.concat("-")
+    time_string = time_string.concat(t.strftime("%S"))
+
+    user.delete_at = time_string
+    if user.save
+      render json: {}, status: :ok
+    else
+      render json: {}, status: :bad_request
     end
   end
 

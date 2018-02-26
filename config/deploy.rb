@@ -2,7 +2,7 @@
 lock '3.8.0'
 
 set :application, 'lgcare'
-set :repo_url, 'git@gitlab.mintech.kr:LGCNP/LG-CNP-SERVER.git'
+set :repo_url, 'https://shakejjj:1234kkkk@github.com/ShakeJ/LGCNP.git'
 
 # set :repo_tree, 'server/cnp'
 set :default_env, {

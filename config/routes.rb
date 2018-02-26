@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     get "user_list"  => "user#index"
     get "users/detail"  => "user#show"
     get "users/edit"  => "user#edit"
+    get "users/delete"  => "user#delete_at_added"
     get "input_cnp"  => "feedback#index"
     get "input_cnpr"  => "feedback#input_cnpr"
     get "feedback_list_cnp"  => "feedback#list"

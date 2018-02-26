@@ -69,6 +69,13 @@
           var measureno = $(this).attr('id').split("/")[2]
           location.href = "/admin/users/edit?userId=" +userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno;
         });
+
+        $(document).on("click", ".delete-user", function (e) {
+          var userId = $(this).attr('id').split("/")[0]
+          var ch_cd = $(this).attr('id').split("/")[1]
+          var measureno = $(this).attr('id').split("/")[2]
+          location.href = "/admin/users/delete?userId=" +userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno;
+        });
       });
 
       function decode_utf8(s) {
@@ -81,11 +88,12 @@
   <body style="padding: 10px;">
     <div style="display:inline;">
       <h2 style="float:left; width:45%;">고객정보</h2>
-      <% if @user.ch_cd == "CNP" || @user.ch_cd == "CLAB" %>
+
       <div style="float:right; width:45%; margin-top:30px;">
         <button id="<%= @user.custserial %>/<%= @user.ch_cd %>/<%= @user.measureno.to_i %>" style="float:right; margin-right:50px;" class="btn btn-warning edit-user">수정</button>
+        <button id="<%= @user.custserial %>/<%= @user.ch_cd %>/<%= @user.measureno.to_i %>" style="float:right; margin-right:50px;" class="btn btn-danger delete-user">삭제</button>
       </div>
-      <% end %>
+
     </div><br><br>
 
     <font size="5"><b><div style="margin-top:25px;" id="name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>"></div></b></font>
