@@ -35,7 +35,7 @@ class Admin::UserController < Admin::AdminApplicationController
 
     @is_admin_init = false
     # if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") &&
-    if params.has_key?(:select_channel) != true
+    if params.has_key?(:select_address) != true
       @is_admin_init = true
     end
 
