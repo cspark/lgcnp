@@ -133,7 +133,7 @@ class Admin::UserController < Admin::AdminApplicationController
   end
 
   def delete_at_added
-    user = Custinfo.where(custserial: params[:id], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
+    user = Custinfo.where(custserial: params[:userId], ch_cd: params[:ch_cd], measureno: params[:measureno]).first
 
     t = Time.now
 

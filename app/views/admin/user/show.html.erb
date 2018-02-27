@@ -71,10 +71,13 @@
         });
 
         $(document).on("click", ".delete-user", function (e) {
-          var userId = $(this).attr('id').split("/")[0]
-          var ch_cd = $(this).attr('id').split("/")[1]
-          var measureno = $(this).attr('id').split("/")[2]
-          location.href = "/admin/users/delete?userId=" +userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno;
+          var r = confirm("정말 삭제 하시겠습니까?");
+          if (r){
+            var userId = $(this).attr('id').split("/")[0]
+            var ch_cd = $(this).attr('id').split("/")[1]
+            var measureno = $(this).attr('id').split("/")[2]
+            location.href = "/admin/users/delete?userId=" +userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno;
+          }
         });
       });
 
