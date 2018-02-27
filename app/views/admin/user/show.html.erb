@@ -76,7 +76,21 @@
             var userId = $(this).attr('id').split("/")[0]
             var ch_cd = $(this).attr('id').split("/")[1]
             var measureno = $(this).attr('id').split("/")[2]
-            location.href = "/admin/users/delete?userId=" +userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno;
+
+            $.ajax({
+                url: "/admin/users/delete?userId=" +userId+ "&ch_cd=" +ch_cd+ "&measureno=" +measureno,
+                type: 'GET',
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (returndata) {
+                  location.reload();
+                },
+                error: function (returndata) {
+                  alert("삭제가 실패했습니다.");
+                }
+            });
           }
         });
       });
