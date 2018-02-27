@@ -85,55 +85,55 @@ namespace :deploy do
       invoke 'unicorn:legacy_restart'
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
-      execute "rm -rf #{current_path}/public/TEST"
-      execute "rm -rf #{shared_path}/public/uploads/TEST"
-      execute "mkdir #{shared_path}/public/uploads/TEST"
-      execute "ln -s #{shared_path}/public/uploads/TEST #{current_path}/public/"
-
-      execute "rm -rf #{current_path}/public/BEAU"
-      execute "rm -rf #{shared_path}/public/uploads/BEAU"
-      execute "mkdir #{shared_path}/public/uploads/BEAU"
-      execute "ln -s #{shared_path}/public/uploads/BEAU #{current_path}/public/"
-
-      execute "rm -rf #{current_path}/public/CNP"
-      execute "rm -rf #{shared_path}/public/uploads/CNP"
-      execute "mkdir #{shared_path}/public/uploads/CNP"
-      execute "ln -s #{shared_path}/public/uploads/CNP #{current_path}/public/"
-
-      execute "rm -rf #{current_path}/public/CLAB"
-      execute "rm -rf #{shared_path}/public/uploads/CLAB"
-      execute "mkdir #{shared_path}/public/uploads/CLAB"
-      execute "ln -s #{shared_path}/public/uploads/CLAB #{current_path}/public/"
-
-      execute "rm -rf #{current_path}/public/CNPR"
-      execute "rm -rf #{shared_path}/public/uploads/CNPR"
-      execute "mkdir #{shared_path}/public/uploads/CNPR"
-      execute "ln -s #{shared_path}/public/uploads/CNPR #{current_path}/public/"
-
-      execute "rm -rf #{current_path}/public/RLAB"
-      execute "rm -rf #{shared_path}/public/uploads/RLAB"
-      execute "mkdir #{shared_path}/public/uploads/RLAB"
-      execute "ln -s #{shared_path}/public/uploads/RLAB #{current_path}/public/"
-
-      execute "rm -rf #{current_path}/public/LABO"
-      execute "rm -rf #{shared_path}/public/uploads/LABO"
-      execute "mkdir #{shared_path}/public/uploads/LABO"
-      execute "ln -s #{shared_path}/public/uploads/LABO #{current_path}/public/"
-
-      execute "rm -rf #{current_path}/public/MART"
-      execute "rm -rf #{shared_path}/public/uploads/MART"
-      execute "mkdir #{shared_path}/public/uploads/MART"
-      execute "ln -s #{shared_path}/public/uploads/MART #{current_path}/public/"
-
-      execute "rm -rf #{current_path}/public/TMR"
-      execute "rm -rf #{shared_path}/public/uploads/TMR"
-      execute "mkdir #{shared_path}/public/uploads/TMR"
-      execute "ln -s #{shared_path}/public/uploads/TMR #{current_path}/public/"
-
-      execute "rm -rf #{current_path}/public/ONEP"
-      execute "rm -rf #{shared_path}/public/uploads/ONEP"
-      execute "mkdir #{shared_path}/public/uploads/ONEP"
-      execute "ln -s #{shared_path}/public/uploads/ONEP #{current_path}/public/"
+      # execute "rm -rf #{current_path}/public/TEST"
+      # execute "rm -rf #{shared_path}/public/uploads/TEST"
+      # execute "mkdir #{shared_path}/public/uploads/TEST"
+      # execute "ln -s #{shared_path}/public/uploads/TEST #{current_path}/public/"
+      #
+      # execute "rm -rf #{current_path}/public/BEAU"
+      # execute "rm -rf #{shared_path}/public/uploads/BEAU"
+      # execute "mkdir #{shared_path}/public/uploads/BEAU"
+      # execute "ln -s #{shared_path}/public/uploads/BEAU #{current_path}/public/"
+      #
+      # execute "rm -rf #{current_path}/public/CNP"
+      # execute "rm -rf #{shared_path}/public/uploads/CNP"
+      # execute "mkdir #{shared_path}/public/uploads/CNP"
+      # execute "ln -s #{shared_path}/public/uploads/CNP #{current_path}/public/"
+      #
+      # execute "rm -rf #{current_path}/public/CLAB"
+      # execute "rm -rf #{shared_path}/public/uploads/CLAB"
+      # execute "mkdir #{shared_path}/public/uploads/CLAB"
+      # execute "ln -s #{shared_path}/public/uploads/CLAB #{current_path}/public/"
+      #
+      # execute "rm -rf #{current_path}/public/CNPR"
+      # execute "rm -rf #{shared_path}/public/uploads/CNPR"
+      # execute "mkdir #{shared_path}/public/uploads/CNPR"
+      # execute "ln -s #{shared_path}/public/uploads/CNPR #{current_path}/public/"
+      #
+      # execute "rm -rf #{current_path}/public/RLAB"
+      # execute "rm -rf #{shared_path}/public/uploads/RLAB"
+      # execute "mkdir #{shared_path}/public/uploads/RLAB"
+      # execute "ln -s #{shared_path}/public/uploads/RLAB #{current_path}/public/"
+      #
+      # execute "rm -rf #{current_path}/public/LABO"
+      # execute "rm -rf #{shared_path}/public/uploads/LABO"
+      # execute "mkdir #{shared_path}/public/uploads/LABO"
+      # execute "ln -s #{shared_path}/public/uploads/LABO #{current_path}/public/"
+      #
+      # execute "rm -rf #{current_path}/public/MART"
+      # execute "rm -rf #{shared_path}/public/uploads/MART"
+      # execute "mkdir #{shared_path}/public/uploads/MART"
+      # execute "ln -s #{shared_path}/public/uploads/MART #{current_path}/public/"
+      #
+      # execute "rm -rf #{current_path}/public/TMR"
+      # execute "rm -rf #{shared_path}/public/uploads/TMR"
+      # execute "mkdir #{shared_path}/public/uploads/TMR"
+      # execute "ln -s #{shared_path}/public/uploads/TMR #{current_path}/public/"
+      #
+      # execute "rm -rf #{current_path}/public/ONEP"
+      # execute "rm -rf #{shared_path}/public/uploads/ONEP"
+      # execute "mkdir #{shared_path}/public/uploads/ONEP"
+      # execute "ln -s #{shared_path}/public/uploads/ONEP #{current_path}/public/"
     end
   end
 
