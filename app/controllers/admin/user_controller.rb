@@ -33,10 +33,10 @@ class Admin::UserController < Admin::AdminApplicationController
       shop_cd = session[:admin_user]['shop_cd']
     end
 
-    @is_admin_init = false
+    @is_admin_init = true
     # if (session[:admin_user]['role'] == "admin" || session[:admin_user] == "user") &&
-    if params.has_key?(:select_address) != true
-      @is_admin_init = true
+    if params.has_key?(:select_address)
+      @is_admin_init = false
     end
 
     ch_cd = params[:select_channel] if !params[:select_channel].nil?
