@@ -22,15 +22,15 @@ class Api::Beau::BeauFcdataController < Api::ApplicationController
 
     user = Custinfo.where(custserial: fcdata.custserial).first
     if fcdata.m_skintype != 0 && (fcdata.ch_cd == "BEAU" || fcdata.ch_cd == "TMR" || fcdata.ch_cd == "MART" || fcdata.ch_cd == "LABO" || fcdata.ch_cd == "ONEP")
-      # # 메이크업모드 일 때
-      # if user.sex == "F"
-      #   # 여자일때
-      #   fcdata.sp_pl_avr = fcdata.sp_pl_avr + 6
-      # else
-      #   # 남자일때
-      #   fcdata.sp_pl_avr = fcdata.sp_pl_avr + 3
-      # end
-      fcdata.sp_pl_avr = fcdata.sp_pl_avr + 6
+      # 메이크업모드 일 때
+      if user.sex == "F"
+        # 여자일때
+        fcdata.sp_pl_avr = fcdata.sp_pl_avr + 6
+      else
+        # 남자일때
+        fcdata.sp_pl_avr = fcdata.sp_pl_avr + 3
+      end
+      # fcdata.sp_pl_avr = fcdata.sp_pl_avr + 6
     end
 
     if fcdata.save
