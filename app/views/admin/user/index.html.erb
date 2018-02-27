@@ -210,7 +210,7 @@
         <tbody>
           <% if !@is_admin_init %>
             <% @users.each do |user| %>
-            <%= render partial: "admin/user/item", locals: { user: user } %>
+              <%= render partial: "admin/user/item", locals: { user: user } %>
             <% end %>
           <% end %>
         </tbody>
