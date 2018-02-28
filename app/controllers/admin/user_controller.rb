@@ -163,6 +163,14 @@ class Admin::UserController < Admin::AdminApplicationController
     user.is_agree_marketing = "F"
     user.is_agree_thirdparty_info = "F"
     user.is_agree_privacy_residence = "F"
+    user.n_cust_id = nil
+    user.address = ""
+    user.uptdate = ""
+    user.measureno = ""
+    user.gene_barcode = ""
+    user.ch_cd = ""
+    user.shop_cd = ""
+
 
     if user.save
       render json: {}, status: :ok
