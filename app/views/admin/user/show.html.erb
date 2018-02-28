@@ -52,7 +52,7 @@
             else
               tempPhone += "*"
           }
-          if ('<%= @user.ch_cd %>' == "CNP") {
+          if ㅇ('<%= @user.ch_cd %>' == "CNP") {
             $('#phone_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append(phone);
           } else {
               $('#phone_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append(tempPhone);
@@ -131,6 +131,13 @@
        <% is_agree_privacy = "O" %>
       <% end %>
       <b>개인정보 이용동의</b> <%= is_agree_privacy %> <br>
+
+      <% is_agree_privacy_residence = "X" %>
+      <% if @user.is_agree_privacy_residence== "T" %>
+       <% is_agree_privacy_residence = "O" %>
+      <% end %>
+      <b>개인정보 이용동의 (선택)</b> <%= is_agree_privacy_residence %> <br>
+
       <% is_agree_thirdparty_info = "X" %>
       <% if @user.is_agree_thirdparty_info== "T" %>
        <% is_agree_thirdparty_info = "O" %>

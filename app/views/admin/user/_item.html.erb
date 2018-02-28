@@ -119,42 +119,36 @@
         <% end %>
         <td class="text-center"><%= measureno %></td>
         <td><%= user.uptdate %></td>
+
         <% is_agree_privacy = "-" %>
-        <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX"%>
-          <% if user.is_agree_privacy == "T" %>
-            <% is_agree_privacy = "O" %>
-          <% else %>
-            <% is_agree_privacy = "X" %>
-          <% end %>
+        <% if user.is_agree_privacy == "T" %>
+          <% is_agree_privacy = "O" %>
+        <% else %>
+          <% is_agree_privacy = "X" %>
         <% end %>
         <td class="text-center"><%= is_agree_privacy %></td>
+
         <% is_agree_privacy_residence = "-" %>
-        <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX"%>
-          <% if user.is_agree_privacy_residence == "T" %>
-            <% is_agree_privacy_residence = "O" %>
-          <% else %>
-            <% is_agree_privacy_residence = "X" %>
-          <% end %>
+        <% if user.is_agree_privacy_residence == "T" %>
+          <% is_agree_privacy_residence = "O" %>
+        <% else %>
+          <% is_agree_privacy_residence = "X" %>
         <% end %>
         <td class="text-center"><%= is_agree_privacy_residence %></td>
 
         <% is_agree_thirdparty = "-" %>
-        <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX"%>
-          <% if user.is_agree_thirdparty_info == "T" %>
-            <% is_agree_thirdparty = "O" %>
-          <% else %>
-            <% is_agree_thirdparty = "X" %>
-          <% end %>
+        <% if user.is_agree_thirdparty_info == "T" %>
+          <% is_agree_thirdparty = "O" %>
+        <% else %>
+          <% is_agree_thirdparty = "X" %>
         <% end %>
 
         <td class="text-center"><%= is_agree_thirdparty %></td>
         <% is_agree_marketing = "-" %>
-        <% if user.ch_cd == "CNP" || user.ch_cd == "CNPRX" %>
-          <% if user.is_agree_marketing == "T" %>
-            <% is_agree_marketing = "O" %>
-          <% else %>
-            <% is_agree_marketing = "X" %>
-          <% end %>
+        <% if user.is_agree_marketing == "T" %>
+          <% is_agree_marketing = "O" %>
+        <% else %>
+          <% is_agree_marketing = "X" %>
         <% end %>
         <td class="text-center"><%= is_agree_marketing %></td>
         <% shop_cd = "-" %>
