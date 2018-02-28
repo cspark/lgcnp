@@ -168,7 +168,7 @@ class Admin::UserController < Admin::AdminApplicationController
     user.uptdate = ""
     user.measureno = ""
     user.gene_barcode = ""
-    user.ch_cd = ""
+    user.ch_cd = " "
     user.shop_cd = ""
 
 
