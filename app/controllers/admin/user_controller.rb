@@ -170,7 +170,7 @@ class Admin::UserController < Admin::AdminApplicationController
     user.gene_barcode = ""
     user.ch_cd = " "
     user.shop_cd = ""
-
+    user.sex = ""
 
     if user.save
       render json: {}, status: :ok
