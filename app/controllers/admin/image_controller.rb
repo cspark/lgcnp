@@ -284,6 +284,8 @@ class Admin::ImageController < Admin::AdminApplicationController
       file_path+'Sym_L_merge.jpg',
       file_path+'F_FM_PL_PLC_merge.jpg',
       file_path+'F_FM_UV_merge.jpg',
+      file_path+'F_FM_WH_E.jpg',
+      file_path+'F_FM_WH_PWC_W.jpg',
       file_path+'Sym_R_merge.jpg',]
 
     zipfile_name = "public/"+relation.ch_cd+"/"+path+"all_image_merge.zip"
@@ -291,6 +293,7 @@ class Admin::ImageController < Admin::AdminApplicationController
     if !File.exist?("public/"+relation.ch_cd+"/"+path+"all_image_merge.zip")
       Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
         input_filenames.each do |filename|
+          Rails.logger.info "!!! filename : #{filename}"
           zipfile.add(filename, folder + '/' + filename)
         end
       end
