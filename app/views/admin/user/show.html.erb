@@ -52,7 +52,7 @@
             else
               tempPhone += "*"
           }
-          if ㅇ('<%= @user.ch_cd %>' == "CNP") {
+          if ('<%= @user.ch_cd %>' == "CNP") {
             $('#phone_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append(phone);
           } else {
               $('#phone_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>').append(tempPhone);
