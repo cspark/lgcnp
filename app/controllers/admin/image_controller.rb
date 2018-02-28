@@ -278,13 +278,13 @@ class Admin::ImageController < Admin::AdminApplicationController
       file_path+'F_FM_PL_UVC_merge.jpg',
       file_path+'F_FM_PL_merge.jpg',
       file_path+'F_FM_UVGR_SBC_merge.jpg',
+      file_path+'F_FM_UVGR_UVC_merge.jpg'
       file_path+'F_FM_UV_GR_merge.jpg',
       file_path+'F_FM_WH_PWC_merge.jpg',
       file_path+'Sym_L_merge.jpg',
       file_path+'F_FM_PL_PLC_merge.jpg',
       file_path+'F_FM_UV_merge.jpg',
-      file_path+'Sym_R_merge.jpg',
-      file_path+'F_FM_UVGR_UVC_merge.jpg' ]
+      file_path+'Sym_R_merge.jpg', ]
 
     zipfile_name = "public/"+relation.ch_cd+"/"+path+"all_image_merge.zip"
 
