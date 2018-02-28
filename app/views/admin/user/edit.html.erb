@@ -121,7 +121,8 @@
             var is_agree_thirdparty_info = $(':radio[name="is_agree_thirdparty_info"]:checked').val();
             var is_agree_marketing = $(':radio[name="is_agree_marketing"]:checked').val();
             var is_agree_after = $(':radio[name="is_agree_after"]:checked').val();
-
+            var is_agree_privacy_residence = $(':radio[name="is_agree_privacy_residence"]:checked').val();
+            
             var userId = $(this).attr('id').split("/")[0]
             var ch_cd = $(this).attr('id').split("/")[1]
             var measureno = $(this).attr('id').split("/")[2]
@@ -134,6 +135,8 @@
             formData.append("birthmm", $("#birthmm").val());
             formData.append("birthdd", $("#birthdd").val());
             formData.append("email", $("#email").val());
+
+            formData.append("is_agree_privacy_residence", is_agree_privacy_residence);
             formData.append("is_agree_privacy", is_agree_privacy);
             formData.append("is_agree_thirdparty_info", is_agree_thirdparty_info);
             formData.append("is_agree_marketing", is_agree_marketing);
@@ -201,6 +204,14 @@
         <input style="margin-left:20px;" type="radio" name="is_agree_privacy" class="is_agree_privacy" id="is_agree_privacy_t" value="T"> 예
   			<input style="margin-left:20px;" type="radio" name="is_agree_privacy" class="is_agree_privacy" id="is_agree_privacy_f" value="F" checked="checked"> 아니오 <br>
       </div><br>
+      <div style="width:200px; height:30px; float:left;">
+        <b>개인정보 이용동의(선택)</b>
+      </div>
+      <div style="width:200px; height:30px; float:left;">
+        <input style="margin-left:20px;" type="radio" name="is_agree_privacy_residence" class="is_agree_privacy_residence" id="is_agree_privacy_residence_t" value="T"> 예
+  			<input style="margin-left:20px;" type="radio" name="is_agree_privacy_residence" class="is_agree_privacy_residence" id="is_agree_privacy_residence_f" value="F" checked="checked"> 아니오 <br>
+      </div><br>
+
       <div style="width:200px; height:30px; float:left;">
         <b>제 3자 정보 제공 동의</b>
       </div>
