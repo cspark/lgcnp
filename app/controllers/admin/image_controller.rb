@@ -270,8 +270,12 @@ class Admin::ImageController < Admin::AdminApplicationController
     file_path = path.split("/")[2]
 
     folder = "public/"+relation.ch_cd+"/"+zip_path
-    input_filenames = [ file_path+'F_FM_UV_merge.jpg',
+    input_filenames = [
+      file_path+'F_FM_UV_merge.jpg',
       file_path+'F_FM_WH_merge.jpg',
+      file_path+'F_FM_WH_E.jpg',
+      file_path+'F_FM_WH_PWC_W.jpg',
+      file_path+'Sym_R_merge.jpg',
       file_path+'Sp_Pore_Cust.jpg',
       file_path+'Sp_Spot_Cust.jpg',
       file_path+'Sp_Wr_Cust.jpg',
@@ -283,10 +287,7 @@ class Admin::ImageController < Admin::AdminApplicationController
       file_path+'F_FM_WH_PWC_merge.jpg',
       file_path+'Sym_L_merge.jpg',
       file_path+'F_FM_PL_PLC_merge.jpg',
-      file_path+'F_FM_UV_merge.jpg',
-      file_path+'F_FM_WH_E.jpg',
-      file_path+'F_FM_WH_PWC_W.jpg',
-      file_path+'Sym_R_merge.jpg',]
+      file_path+'F_FM_UV_merge.jpg',]
 
     zipfile_name = "public/"+relation.ch_cd+"/"+path+"all_image_merge.zip"
 
