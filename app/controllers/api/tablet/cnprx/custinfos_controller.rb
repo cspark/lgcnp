@@ -204,7 +204,7 @@ class Api::Tablet::Cnprx::CustinfosController < Api::ApplicationController
 
     custinfo.ch_cd = ch_cd
     custinfo.custname = name
-    custinfo.is_agree_privacy = "T"
+    custinfo.is_agree_privacy = "F"
     custinfo.is_agree_thirdparty_info = is_agree_thirdparty_info
     custinfo.is_agree_marketing = is_agree_marketing
     custinfo.is_agree_after = is_agree_after
