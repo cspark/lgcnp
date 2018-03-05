@@ -1,6 +1,6 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "User") do |sheet|
-    sheet.add_row ["시리얼","채널","이름","성별","생년월일","전화번호","거주지","마지막 진단 날짜","측정 횟수","가입날짜","개인정보 이용동의","제3자 정보 제공 동의","마케팅 정보 동의","매장코드"]
+    sheet.add_row ["시리얼","채널","이름","성별","생년월일","전화번호","거주지","마지막 진단 날짜","측정 횟수","가입날짜","개인정보 이용동의","개인정보 이용동의(선택)","제3자 정보 제공 동의","마케팅 정보 동의","매장코드"]
     @all_users.each do |user|
       begin
         userName = URI.decode(user.custname)
@@ -122,8 +122,13 @@ wb.add_worksheet(name: "User") do |sheet|
         measureno = user.measureno.to_i
       end
 
-      sheet.add_row [user.custserial.to_i, user.ch_cd, userName, translate_sex, user.birthyy+"-"+user.birthmm+"-"+user.birthdd,
+      birthday = ""
+      if !user.birthyy.empty? && !user.birthmm.empty? && !user.birthdd.empty?
+        birthday = "#{user.birthyy}-#{user.birthmm}-#{user.birthdd}"
+      end
+
+      sheet.add_row [user.custserial.to_i, user.ch_cd, userName, translate_sex, birthday,
       userPhone, address, lastanaldate, measureno, user.uptdate,
-      is_agree_privacy, is_agree_thirdparty, is_agree_marketing, shop_cd], :types => [nil, :string, :string, :string, :string]
+      is_agree_privacy, is_agree_privacy_residence, is_agree_thirdparty, is_agree_marketing, shop_cd], :types => [nil, :string, :string, :string, :string]
     end
 end
