@@ -71,10 +71,10 @@ class Admin::UserController < Admin::AdminApplicationController
     #   lastanaldate_nil_user = scoped.where(lastanaldate: nil).order("lastanaldate desc")
     #   @users = lastanaldate_not_nil_user + lastanaldate_nil_user
     # end
-
-    @users = @users.uniq
     @all_users = @users
     Rails.logger.info "All users count : #{@all_users.count}"
+
+    @users = @users.uniq
     @count = @users.count
     @users = Kaminari.paginate_array(@users).page(params[:page]).per(10)
 
