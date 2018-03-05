@@ -127,6 +127,12 @@ wb.add_worksheet(name: "User") do |sheet|
         birthday = "#{user.birthyy}-#{user.birthmm}-#{user.birthdd}"
       end
 
+      is_agree_privacy_residence = ""
+      begin
+        is_agree_privacy_residence = user.is_agree_privacy_residence 
+      rescue
+      end
+
       sheet.add_row [user.custserial.to_i, user.ch_cd, userName, translate_sex, birthday,
       userPhone, address, lastanaldate, measureno, user.uptdate,
       is_agree_privacy, is_agree_privacy_residence, is_agree_thirdparty, is_agree_marketing, shop_cd], :types => [nil, :string, :string, :string, :string]
