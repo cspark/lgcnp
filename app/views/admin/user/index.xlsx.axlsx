@@ -123,13 +123,16 @@ wb.add_worksheet(name: "User") do |sheet|
       end
 
       birthday = ""
-      if !user.birthyy.empty? && !user.birthmm.empty? && !user.birthdd.empty?
-        birthday = "#{user.birthyy}-#{user.birthmm}-#{user.birthdd}"
+      begin
+        if !user.birthyy.empty? && !user.birthmm.empty? && !user.birthdd.empty?
+          birthday = "#{user.birthyy}-#{user.birthmm}-#{user.birthdd}"
+        end
+      rescue
       end
 
       is_agree_privacy_residence = ""
       begin
-        is_agree_privacy_residence = user.is_agree_privacy_residence 
+        is_agree_privacy_residence = user.is_agree_privacy_residence
       rescue
       end
 
