@@ -71,6 +71,8 @@ class Admin::UserController < Admin::AdminApplicationController
     #   lastanaldate_nil_user = scoped.where(lastanaldate: nil).order("lastanaldate desc")
     #   @users = lastanaldate_not_nil_user + lastanaldate_nil_user
     # end
+    Rails.logger.info "users count : #{@users.count}"
+
     @all_users = @users
     Rails.logger.info "All users count : #{@all_users.count}"
 
