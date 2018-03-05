@@ -47,7 +47,7 @@ class Admin::UserController < Admin::AdminApplicationController
     @select_address = select_address if !select_address.blank?
 
     # if !@is_admin_init
-    Rails.logger.info "!is_admin_init"
+    Rails.logger.info "!is_admin_init  2"
 
     scoped = Custinfo.all
     # scoped = scoped.where("delete_at IS NULL")
@@ -71,7 +71,7 @@ class Admin::UserController < Admin::AdminApplicationController
     #   lastanaldate_nil_user = scoped.where(lastanaldate: nil).order("lastanaldate desc")
     #   @users = lastanaldate_not_nil_user + lastanaldate_nil_user
     # end
-    Rails.logger.info "user count!!"
+    Rails.logger.info "users count!!"
     Rails.logger.info "users count : #{@users.count}"
 
     @all_users = @users
