@@ -273,7 +273,7 @@ class Api::Tablet::Cnprx::FctabletinterviewrxesController < Api::ApplicationCont
 
         custinfo.ch_cd = ch_cd
         custinfo.custname = name
-        custinfo.is_agree_privacy = "T"
+        custinfo.is_agree_privacy = "F"
         custinfo.birthyy = birthyy
         custinfo.birthmm = birthmm
         custinfo.birthdd = birthdd
