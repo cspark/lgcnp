@@ -19,6 +19,10 @@
 
 https://customizing.lgcare.co.kr/admin/admin_login
 
+* ID: mint
+* PW : mint
+
+
 # README
 
 This README would normally document whatever steps are necessary to get the
