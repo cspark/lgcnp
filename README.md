@@ -15,6 +15,9 @@
 * ID : janustabuser
 * PW : 인증서
 
+# 운영 사이트
+
+https://customizing.lgcare.co.kr/admin/admin_login
 
 # README
 
