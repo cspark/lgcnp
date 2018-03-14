@@ -22,6 +22,19 @@ https://customizing.lgcare.co.kr/admin/admin_login
 * ID: mint
 * PW : mint
 
+# 기타
+
+테스트 서버 : 203.247.132.106
+http://203.247.132.106/admin/manager_2017
+
+
+### 디플로이 시간 (언제 보통 하는지?)
+
+유동적으로 늦은 밤에 미리 이야기한 뒤
+
+* 실서버 : wjdckdghkswjdckdghks > rlatnalsrlatnals
+* 개발서버 : wjdckdghkswjdckdghks
+
 
 # README
 
