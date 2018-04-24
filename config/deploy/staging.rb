@@ -10,7 +10,6 @@ set :unicorn_pid, '/home/janustabuser/lgcare/shared/pids/unicorn.pid'
 set :unicorn_config_path, '/home/janustabuser/lgcare/current/config/unicorn/staging.rb'
 set :unicorn_restart_sleep_time, 5
 
-
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
