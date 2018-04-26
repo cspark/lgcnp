@@ -20,7 +20,7 @@ class Api::Beau::FcAgreeMigenController < Api::ApplicationController
 
   def create
     agree_migen = FcAgreeMigen.new(permitted_params)
-    if aggree_migen.save
+    if agree_migen.save
       render json: agree_migen.to_api_hash, status: :ok
     else
       render text: "FcAgreeMigen was not created", status: 404
