@@ -121,6 +121,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :beau do
+      resources :fc_agree_migen
       resources :beau_user do
         collection do
           get 'lcare_user_list'
