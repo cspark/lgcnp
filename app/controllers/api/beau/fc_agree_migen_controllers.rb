@@ -1,4 +1,4 @@
-class Api::Beau::FcAgreeMigen < Api::ApplicationController
+class Api::Beau::FcAgreeMigenController < Api::ApplicationController
   def index
     agree_migen = FcAgreeMigen.where(custserial: params[:custserial]).first
     if user.present?
