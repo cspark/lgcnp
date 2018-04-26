@@ -2,7 +2,7 @@
 lock '3.8.0'
 
 set :application, 'lgcare'
-set :repo_url, 'git@gitlab2.wangsy.com:wangsy/lgcnp.git'
+set :repo_url, 'git@github.com:wangsy/lgcnp.git'
 
 # set :repo_tree, 'server/cnp'
 set :default_env, {
