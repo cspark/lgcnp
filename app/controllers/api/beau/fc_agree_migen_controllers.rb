@@ -1,7 +1,7 @@
 class Api::Beau::FcAgreeMigenController < Api::ApplicationController
   def index
     agree_migen = FcAgreeMigen.where(custserial: params[:custserial]).first
-    if user.present?
+    if agree_migen.present?
       render json: agree_migen.to_api_hash, status: :ok
     else
       render text: "FcAgreeMigen not found", status: 404
