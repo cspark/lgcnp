@@ -239,6 +239,9 @@ Rails.application.routes.draw do
 
     #CNP RX
     namespace :tablet do
+      namespace :cnp do
+        get "find_lcare_user" => "fctabletinterviewrxes#find_lcare_user"
+      end
       namespace :cnprx do
   	    get "get_api_key" => "custinfos#get_api_key"
   	    get "find_user" => "custinfos#find_user"
