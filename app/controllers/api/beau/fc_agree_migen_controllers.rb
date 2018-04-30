@@ -4,7 +4,7 @@ class Api::Beau::FcAgreeMigenController < Api::ApplicationController
     if agree_migen.present?
       render json: agree_migen.to_api_hash, status: :ok
     else
-      render text: "FcAgreeMigen not found", status: 404
+      render text: "FcAgreeMigen not found", status: 204
     end
   end
 

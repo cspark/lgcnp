@@ -31,7 +31,6 @@ gem 'rmagick', '~> 2.16.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'activerecord-oracle_enhanced-adapter', '= 1.7.7'
-gem 'ruby-oci8', '= 2.2.2' # only for CRuby users
 gem 'devise'
 gem 'devise-encryptable'
 gem 'bootstrap-datepicker-rails'
@@ -67,6 +66,10 @@ group :development do
   gem 'capistrano-rbenv'
   gem 'capistrano3-unicorn'
   gem 'capistrano-sidekiq'
+end
+
+group :production, :staging do
+    gem 'ruby-oci8', '= 2.2.2' # only for CRuby user
 end
 
 group :staging, :development do
