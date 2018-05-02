@@ -245,7 +245,7 @@ class Api::Tablet::Cnprx::FcdatasController < Api::ApplicationController
     ftp_path << ".jpg"
 
     system("echo FILE Download")
-    file_get_command = "wget --user janus --password pielgahn2012#1 "
+    file_get_command = "wget --user janus --password pielgahn2012! "
     file_get_command << ftp_path
     file_get_command << " -N -P "
 

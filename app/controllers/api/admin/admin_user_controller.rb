@@ -218,12 +218,12 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     system("echo FILE Delete")
     file_delete_command = "curl -p --insecure "
     file_delete_command << ftp_path
-    file_delete_command << " -u 'janus:pielgahn2012#1' -Q '-DELE "
+    file_delete_command << " -u 'janus:pielgahn2012!' -Q '-DELE "
     file_delete_command << delete_file
     file_delete_command << "' --ftp-create-dirs"
 
-    # file_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012#1' -Q '-DELE 839-1_Sym_L_1.jpg' --ftp-create-dirs"
-    # folder_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1' -u 'janus:pielgahn2012#1' -Q '-RMD 839-1' --ftp-create-dirs"
+    # file_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1/' -u 'janus:pielgahn2012!' -Q '-DELE 839-1_Sym_L_1.jpg' --ftp-create-dirs"
+    # folder_delete_command = "curl -p --insecure 'ftp://165.244.88.27/CNP/900-P/839-1' -u 'janus:pielgahn2012!' -Q '-RMD 839-1' --ftp-create-dirs"
     (0..10).each do |i|
       break if system(file_delete_command)
     end
@@ -231,7 +231,7 @@ class Api::Admin::AdminUserController < Api::ApplicationController
     if type == "_END"
       folder_delete_command = "curl -p --insecure "
       folder_delete_command << ftp_path_delete_folder + "/'"
-      folder_delete_command << " -u 'janus:pielgahn2012#1' -Q '-RMD "
+      folder_delete_command << " -u 'janus:pielgahn2012!' -Q '-RMD "
       folder_delete_command << serial.to_i.to_s+ "-" +measureno.to_i.to_s
       folder_delete_command << "' --ftp-create-dirs"
       (0..10).each do |i|

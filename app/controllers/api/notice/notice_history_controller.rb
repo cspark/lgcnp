@@ -74,7 +74,7 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
 
     ftp_path << filename
 
-    file_get_command = "wget --user janus --password pielgahn2012#1 "
+    file_get_command = "wget --user janus --password pielgahn2012! "
     file_get_command << ftp_path
     file_get_command << " -N -P "
     if params.has_key?(:staging)
@@ -84,7 +84,7 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     end
 
 
-    # wget --user janus --password pielgahn2012#1 ftp://165.244.88.27/CNP/100-P/41-1/41-1_F_PW_SK_L_SIDE.jpg -N -P public/CNP/100-P/41-1
+    # wget --user janus --password pielgahn2012! ftp://165.244.88.27/CNP/100-P/41-1/41-1_F_PW_SK_L_SIDE.jpg -N -P public/CNP/100-P/41-1
     (0..10).each do |i|
       break if system(file_get_command)
     end
@@ -149,7 +149,7 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     file_copy_command = ""
     file_copy_command = "curl -p --insecure '"
     file_copy_command << ftp_path
-    file_copy_command << "' -u 'janus:pielgahn2012#1' -T '/home/janustabuser/lgcare/current/"
+    file_copy_command << "' -u 'janus:pielgahn2012!' -T '/home/janustabuser/lgcare/current/"
     file_copy_command << file_path
     file_copy_command << "' --ftp-create-dirs"
     (0..10).each do |i|
@@ -196,7 +196,7 @@ class Api::Notice::NoticeHistoryController < Api::ApplicationController
     file_copy_command = ""
     file_copy_command = "curl -p --insecure '"
     file_copy_command << ftp_path
-    file_copy_command << "' -u 'janus:pielgahn2012#1' -Q '-DELE "
+    file_copy_command << "' -u 'janus:pielgahn2012!' -Q '-DELE "
     file_copy_command << filename
     file_copy_command << "' --ftp-create-dirs"
     (0..10).each do |i|
