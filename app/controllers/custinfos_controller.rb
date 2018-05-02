@@ -149,7 +149,8 @@ class CustinfosController < ApplicationController
         ch_cd = params[:ch_cd]
       end
 
-      custinfo = Custinfo.where(custserial: serial).where(ch_cd: ch_cd).first
+      # custinfo = Custinfo.where(custserial: serial).where(ch_cd: ch_cd).first
+      custinfo = Custinfo.where(custserial: serial).first
       custinfo.is_agree_marketing = is_agree_marketing
       custinfo.is_agree_privacy_residence = is_agree_privacy_residence
       custinfo.is_agree_thirdparty_info = is_agree_thirdparty_info
