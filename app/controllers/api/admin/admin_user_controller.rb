@@ -66,6 +66,10 @@ class Api::Admin::AdminUserController < Api::ApplicationController
       if params.has_key?(:is_agree_privacy_residence)
         user.is_agree_privacy_residence = params[:is_agree_privacy_residence]
       end
+      if params.has_key?(:is_agree_privacy)
+        user.is_agree_privacy = params[:is_agree_privacy]
+      end
+
       if params.has_key?(:address)
         user.address = params[:address]
       end

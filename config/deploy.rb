@@ -43,6 +43,16 @@ set :linked_dirs, fetch(:linked_dirs, []).push('public/Admin/Curation')
 set :linked_dirs, fetch(:linked_dirs, []).push('public/Admin_Test/Update')
 set :linked_dirs, fetch(:linked_dirs, []).push('public/Admin_Test/Notice')
 set :linked_dirs, fetch(:linked_dirs, []).push('public/Admin_Test/Curation')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/ONEP')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/BEAU')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/CNP')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/CLAB')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/CNPR')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/RLAB')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/LABO')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/MART')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/TMR')
+set :linked_dirs, fetch(:linked_dirs, []).push('public/TEST')
 
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
