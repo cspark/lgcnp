@@ -11,17 +11,26 @@
     $ (function () {
         window.resizeTo(500, 700);
 
-          <% if @user.is_agree_privacy== "T" %>
-            $('input:radio[name=is_agree_privacy]:input[value=T]').attr("checked", true);
+          <% if @migen_agree.is_private== "T" %>
+            $('input:radio[name=is_private]:input[value=T]').attr("checked", true);
           <% end %>
-          <% if @user.is_agree_thirdparty_info== "T" %>
-            $('input:radio[name=is_agree_thirdparty_info]:input[value=T]').attr("checked", true);
+          <% if @migen_agree.is_consignment== "T" %>
+            $('input:radio[name=is_consignment]:input[value=T]').attr("checked", true);
           <% end %>
-          <% if @user.is_agree_marketing== "T" %>
-            $('input:radio[name=is_agree_marketing]:input[value=T]').attr("checked", true);
+          <% if @migen_agree.is_skin_residence== "T" %>
+            $('input:radio[name=is_skin_residence]:input[value=T]').attr("checked", true);
           <% end %>
-          <% if @user.is_agree_after== "T" %>
-            $('input:radio[name=is_agree_after]:input[value=T]').attr("checked", true);
+          <% if @migen_agree.is_sensitive== "T" %>
+            $('input:radio[name=is_sensitive]:input[value=T]').attr("checked", true);
+          <% end %>
+          <% if @migen_agree.is_private_third== "T" %>
+            $('input:radio[name=is_private_third]:input[value=T]').attr("checked", true);
+          <% end %>
+          <% if @migen_agree.is_sensitive_third== "T" %>
+            $('input:radio[name=is_sensitive_third]:input[value=T]').attr("checked", true);
+          <% end %>
+          <% if @migen_agree.is_marketing== "T" %>
+            $('input:radio[name=is_marketing]:input[value=T]').attr("checked", true);
           <% end %>
 
           $(document).on("click", ".edit-user", function (e) {
@@ -33,18 +42,8 @@
             var is_sensitive_third = $(':radio[name="is_sensitive_third"]:checked').val();
             var is_marketing = $(':radio[name="is_marketing"]:checked').val();
 
-            var userId = $(this).attr('id').split("/")[0]
-            var ch_cd = $(this).attr('id').split("/")[1]
-            var measureno = $(this).attr('id').split("/")[2]
-
+            var custserial = <%= @migen_agree.custserial %>
             var formData = new FormData($(this)[0]);
-            formData.append("ch_cd", ch_cd);
-            formData.append("measureno", measureno);
-            formData.append("phone", $("#phone").val());
-            formData.append("birthyy", $("#birthyy").val());
-            formData.append("birthmm", $("#birthmm").val());
-            formData.append("birthdd", $("#birthdd").val());
-            formData.append("email", $("#email").val());
 
             formData.append("is_private", is_private);
             formData.append("is_consignment", is_consignment);
@@ -84,20 +83,20 @@
   <body style="padding: 10px;">
     <h2>고객정보</h2>
 
-    <font size="5"><b><div id="name_<%= @user.custserial.to_i %>_<%= @user.lastanaldate %>"></b></div></font>
+    <font size="5"><b><div id="name_<%= @migen_agree.custserial.to_i %>"></b></div></font>
 
     <div style="width:100%; height:400px;">
       <font size="4">
 
 
-      <div style="width:200px; height:30px; float:left;">
+      <div style="width:400px; height:30px; float:left;">
         <b>개인정보 동의 여부</b>
       </div>
       <div style="width:200px; height:30px; float:left;">
         <input style="margin-left:20px;" type="radio" name="is_private" class="is_private" id="is_private_t" value="T"> 예
   			<input style="margin-left:20px;" type="radio" name="is_private" class="is_private" id="is_private_f" value="F" checked="checked"> 아니오 <br>
       </div><br>
-      <div style="width:200px; height:30px; float:left;">
+      <div style="width:400px; height:30px; float:left;">
         <b>개인정보 위수탁 동의 여부</b>
       </div>
       <div style="width:200px; height:30px; float:left;">
@@ -105,35 +104,35 @@
   			<input style="margin-left:20px;" type="radio" name="is_consignment" class="is_consignment" id="is_consignment_f" value="F" checked="checked"> 아니오 <br>
       </div><br>
 
-      <div style="width:200px; height:30px; float:left;">
+      <div style="width:400px; height:30px; float:left;">
         <b>신체정보,생활습관 등 개인정보 동의 여부</b>
       </div>
       <div style="width:200px; height:30px; float:left;">
         <input style="margin-left:20px;" type="radio" name="is_skin_residence" value="T"> 예
   			<input style="margin-left:20px;" type="radio" name="is_skin_residence" value="F" checked="checked"> 아니오 <br>
       </div>
-      <div style="width:200px; height:30px; float:left;">
+      <div style="width:400px; height:30px; float:left;">
         <b>건강정보, 치료 이력 등 민감정보 동의 여부</b>
       </div>
       <div style="width:200px; height:30px; float:left;">
         <input style="margin-left:20px;" type="radio" name="is_sensitive" value="T"> 예
         <input style="margin-left:20px;" type="radio" name="is_sensitive" value="F" checked="checked"> 아니오 <br>
       </div>
-      <div style="width:200px; height:30px; float:left;">
+      <div style="width:400px; height:30px; float:left;">
         <b>개인정보 제3자 제공 동의 여부</b>
       </div>
       <div style="width:200px; height:30px; float:left;">
         <input style="margin-left:20px;" type="radio" name="is_private_third" value="T"> 예
   			<input style="margin-left:20px;" type="radio" name="is_private_third" value="F" checked="checked"> 아니오 <br>
       </div>
-      <div style="width:200px; height:30px; float:left;">
+      <div style="width:400px; height:30px; float:left;">
         <b>민감정보 제3자 제동 동의 여부</b>
       </div>
       <div style="width:200px; height:30px; float:left;">
         <input style="margin-left:20px;" type="radio" name="is_sensitive_third" value="T"> 예
         <input style="margin-left:20px;" type="radio" name="is_sensitive_third" value="F" checked="checked"> 아니오 <br>
       </div>
-      <div style="width:200px; height:30px; float:left;">
+      <div style="width:400px; height:30px; float:left;">
         <b>마케팅 정보 수신 동의 여부</b>
       </div>
       <div style="width:200px; height:30px; float:left;">
@@ -144,7 +143,7 @@
       </font>
     </div><br>
     <center>
-      <button id="<%= @user.custserial %>/<%= @user.ch_cd %>/<%= @user.measureno %>" class="btn btn-warning edit-user">저장</button>
+      <button id="<%= @migen_agree.custserial %>" class="btn btn-warning edit-user">저장</button>
     </center>
 
   </body>
