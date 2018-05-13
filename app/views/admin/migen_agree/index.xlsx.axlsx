@@ -1,0 +1,8 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "User") do |sheet|
+    sheet.add_row ["고객 시리얼 넘버", "채널 코드", "매장 코드", "개인정보 동의 여부", "개인정보 동의 확인 날짜", "개인정보 동의 철회 날짜", "개인정보 위수탁 동의 여부", "개인정보 위수탁 동의 확인 날짜", "개인정보 위수탁 동의 철회 날짜", "신체정보,생활습관 등 개인정보 동의 여부", "신체정보,생활습관 등 개인정보 동의 확인 날짜", "신체정보,생활습관 등 개인정보 동의 철회 날짜", "건강정보, 치료 이력 등 민감정보 동의 여부", "건강정보, 치료 이력 등 민감정보 동의 확인 날짜", "건강정보, 치료 이력 등 민감정보 동의 철회 날짜", "개인정보 제3자 제공 동의 여부", "개인정보 제3자 제공 동의 여부 확인 날짜", "개인정보 제3자 제공 동의 여부 철회 날짜", "민감정보 제3자 제동 동의 여부", "민감정보 제3자 제동 동의 여부 확인 날짜", "민감정보 제3자 제동 동의 여부 철회 날짜", "마케팅 정보 수신 동의 여부", "마케팅 정보 수신 동의 여부 확인 날짜", "마케팅 정보 수신 동의 여부 철회 날짜"]
+
+    @all.each do |migen_agree|
+      sheet.add_row [migen_agree.custserial, migen_agree.ch_cd, migen_agree.shop_cd, migen_agree.is_private, migen_agree.private_agree_dt, migen_agree.private_retract_dt, migen_agree.is_consignment, migen_agree.consignment_agree_dt, migen_agree.consignment_retract_dt, migen_agree.is_skin_residence, migen_agree.skin_residence_agree_dt, migen_agree.skin_residence_retract_dt, migen_agree.is_sensitive, migen_agree.sensitive_agree_dt, migen_agree.sensitive_retract_dt, migen_agree.is_private_third, migen_agree.private_third_agree_dt, migen_agree.private_third_retract_dt, migen_agree.is_sensitive_third, migen_agree.sensitive_third_agree_dt, migen_agree.sensitive_third_retract_dt, migen_agree.is_marketing, migen_agree.marketing_agree_dt, migen_agree.marketing_retract_dt]
+    end
+end

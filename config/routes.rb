@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     get "save_privacy_access_image" => "image#save_privacy_access"
 
     get "migen_agree_list" => "migen_agree#index"
+    get "migen_agree_detail" => "migen_agree#show"
+
     get "user_list"  => "user#index"
     get "users/detail"  => "user#show"
     get "users/edit"  => "user#edit"

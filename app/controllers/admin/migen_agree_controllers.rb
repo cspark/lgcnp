@@ -22,6 +22,12 @@ class Admin::MigenAgreeController < Admin::AdminApplicationController
     scoped = scoped.where("custname LIKE ?", "%#{@search}%") if !@search.blank?
 
     @count = scoped.count
+    @all = scoped
     @migen_agree = scoped.page(params[:page]).per(10)
+
+    respond_to do |format|
+      format.html
+      format.xlsx
+    end
   end
 end
