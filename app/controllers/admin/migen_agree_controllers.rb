@@ -34,4 +34,11 @@ class Admin::MigenAgreeController < Admin::AdminApplicationController
   def show
     @migen_agree = FcAgreeMigen.where(custserial: params[:custserial]).first
   end
+
+  def edit
+    @migen_agree = FcAgreeMigen.where(custserial: params[:custserial]).first
+  end
+
+  def update
+  end
 end
