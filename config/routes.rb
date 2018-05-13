@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     get "privacy_access_history" => "privacy#index"
     get "save_privacy_access_image" => "image#save_privacy_access"
 
+    get "migen_agree_list" => "migen_agree#index"
     get "user_list"  => "user#index"
     get "users/detail"  => "user#show"
     get "users/edit"  => "user#edit"
