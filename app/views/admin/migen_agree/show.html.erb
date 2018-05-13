@@ -1,0 +1,136 @@
+<html>
+  <head>
+    <script type="text/javascript" src="../../js/jquery.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.js"></script>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" type="text/css"/>
+    <script src="https://code.jquery.com/ui/1.10.0/jquery-ui.min.js"></script>
+
+    <script>
+    $ (function () {
+      });
+
+      function decode_utf8(s) {
+        return decodeURI(s);
+      }
+
+    </script>
+  </head>
+
+  <body style="padding: 10px;">
+    <div style="display:inline;">
+      <h2 style="float:left; width:45%;">고객정보</h2>
+
+      <div style="float:right; width:45%; margin-top:30px;">
+        <button id="" style="float:right; margin-right:50px;" class="btn btn-warning edit-user">수정</button>
+      </div>
+
+    </div><br><br>
+
+    <font size="5"><b><div style="margin-top:25px;" id="name_"></div></b></font>
+
+    <font size="4">
+<table>
+<tr>
+  <th>고객 시리얼 넘버</th>
+  <td><%= migen_agree.custserial %></td>
+</tr>
+<tr>
+  <th>채널 코드</th>
+  <td><%= migen_agree.ch_cd %></td>
+</tr>
+<tr>
+  <th>매장 코드</th>
+  <td><%= migen_agree.shop_cd %></td>
+</tr>
+<tr>
+  <th>개인정보 동의 여부</th>
+  <td><%= migen_agree.is_private %></td>
+</tr>
+<tr>
+  <th>개인정보 동의 확인 날짜</th>
+  <td><%= migen_agree.private_agree_dt %></td>
+</tr>
+<tr>
+  <th>개인정보 동의 철회 날짜</th>
+  <td><%= migen_agree.private_retract_dt %></td>
+</tr>
+<tr>
+  <th>개인정보 위수탁 동의 여부</th>
+  <td><%= migen_agree.is_consignment %></td>
+</tr>
+<tr>
+  <th>개인정보 위수탁 동의 확인 날짜</th>
+  <td><%= migen_agree.consignment_agree_dt %></td>
+</tr>
+<tr>
+  <th>개인정보 위수탁 동의 철회 날짜</th>
+  <td><%= migen_agree.consignment_retract_dt %></td>
+</tr>
+<tr>
+  <th>신체정보,생활습관 등 개인정보 동의 여부</th>
+  <td><%= migen_agree.is_skin_residence %></td>
+</tr>
+<tr>
+  <th>신체정보,생활습관 등 개인정보 동의 확인 날짜</th>
+  <td><%= migen_agree.skin_residence_agree_dt %></td>
+</tr>
+<tr>
+  <th>신체정보,생활습관 등 개인정보 동의 철회 날짜</th>
+  <td><%= migen_agree.skin_residence_retract_dt %></td>
+</tr>
+<tr>
+  <th>건강정보, 치료 이력 등 민감정보 동의 여부</th>
+  <td><%= migen_agree.is_sensitive %></td>
+</tr>
+<tr>
+  <th>건강정보, 치료 이력 등 민감정보 동의 확인 날짜</th>
+  <td><%= migen_agree.sensitive_agree_dt %></td>
+</tr>
+<tr>
+  <th>건강정보, 치료 이력 등 민감정보 동의 철회 날짜</th>
+  <td><%= migen_agree.sensitive_retract_dt %></td>
+</tr>
+<tr>
+  <th>개인정보 제3자 제공 동의 여부</th>
+  <td><%= migen_agree.is_private_third %></td>
+</tr>
+<tr>
+  <th>개인정보 제3자 제공 동의 여부 확인 날짜</th>
+  <td><%= migen_agree.private_third_agree_dt %></td>
+</tr>
+<tr>
+  <th>개인정보 제3자 제공 동의 여부 철회 날짜</th>
+  <td><%= migen_agree.private_third_retract_dt %></td>
+</tr>
+<tr>
+  <th>민감정보 제3자 제동 동의 여부</th>
+  <td><%= migen_agree.is_sensitive_third %></td>
+</tr>
+<tr>
+  <th>민감정보 제3자 제동 동의 여부 확인 날짜</th>
+  <td><%= migen_agree.sensitive_third_agree_dt %></td>
+</tr>
+<tr>
+  <th>민감정보 제3자 제동 동의 여부 철회 날짜</th>
+  <td><%= migen_agree.sensitive_third_retract_dt %></td>
+</tr>
+<tr>
+  <th>마케팅 정보 수신 동의 여부</th>
+  <td><%= migen_agree.is_marketing %></td>
+</tr>
+<tr>
+  <th>마케팅 정보 수신 동의 여부 확인 날짜</th>
+  <td><%= migen_agree.marketing_agree_dt %></td>
+</tr>
+<tr>
+  <th>마케팅 정보 수신 동의 여부 철회 날짜  </th>
+  <td><%= migen_agree.marketing_retract_dt %></td>
+</tr>
+</table>
+    </font>
+
+
+  </body>
+</html>

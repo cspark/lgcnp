@@ -30,4 +30,8 @@ class Admin::MigenAgreeController < Admin::AdminApplicationController
       format.xlsx
     end
   end
+
+  def show
+    @migen_agree = FcAgreeMigen.where(custserial: params[:custserial]).first
+  end
 end

@@ -33,6 +33,11 @@
           document.getElementById("custserial").value = '<%= @custserial %>'
         <% end %>
 
+        $(document).on("click", ".table_tr", function (e) {
+          var custserial = $(this).attr('id')
+          window.open("/admin/migen_agree_detail?custserial=" + custserial, "migen_agree_detail"+custserial, "scrollbars=1,resizable=1,height=500,width=500");
+        });
+
         $('#submit').click(function(){
 
           if (document.getElementById("select_channel") != null) {
