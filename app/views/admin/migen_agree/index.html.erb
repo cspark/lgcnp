@@ -14,6 +14,41 @@
       $(function () {
         $(".top-list").css('color', '#9d9d9d');
         $("#migen_agree").css('color', 'hotpink');
+
+        <% if !@ch_cd.nil? && @ch_cd != ""%>
+          $('select[id="select_channel"]').val('<%= @ch_cd %>');
+        <% end %>
+
+        <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "sub_admin") %>
+          <% if !@shop_cd.nil? && @shop_cd != "" %>
+            document.getElementById("select_shop").value = '<%= @shop_cd %>'
+          <% end %>
+
+          <% if !@search.nil? && @search != "" %>
+            document.getElementById("search").value = decode_utf8('<%= @search %>')
+          <% end %>
+        <% end %>
+
+        <% if !@custserial.nil? %>
+          document.getElementById("custserial").value = '<%= @custserial %>'
+        <% end %>
+
+        $('#submit').click(function(){
+
+          if (document.getElementById("select_channel") != null) {
+            var ch_cd = document.getElementById("select_channel").options[document.getElementById("select_channel").selectedIndex].value;
+
+            url = "/admin/migen_agree_list?search=" + encodeURI(encodeURI($("#search").val()));
+            url += "&select_channel=" +ch_cd
+            url += "&select_shop=" +$("#select_shop").val();
+            url += "&custserial=" + document.getElementById("custserial").value;
+          } else {
+            url = "/admin/migen_agree_list?search=" + encodeURI(encodeURI($("#search").val()));
+            url += "&custserial=" + document.getElementById("custserial").value;
+          }
+          location.href = url;
+        });
+
       });
 
       function decode_utf8(s) {
@@ -50,6 +85,37 @@
   <body>
     <%= render "admin/header" %>
 
+    <div style="background: #9c9fa3; padding: 8px;">
+      <p style="float:left; margin-top:7px;">이름: &nbsp;</p>
+      <input class="form-control" type="text" id="search" placeholder="이름으로 검색" style="float:left; width: 150px;">
+      <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "sub_admin") %>
+      <p style="float:left; margin-left: 20px; margin-top: 5px;">채널:&nbsp;</p>
+      <select class="form-control" id="select_channel" style="float:left; margin-left: 5px; width:100px;">
+        <option value="ALL">전체</option>
+        <option value="CNP">CNP</option>
+        <option value="CLAB">CNP TEST</option>
+        <option value="CNPR">CNPR</option>
+        <option value="RLAB">CNPR TEST</option>
+        <option value="MART">마트</option>
+        <option value="TMR">NC</option>
+        <option value="BEAU">보떼</option>
+        <option value="LABO">LABO</option>
+        <option value="ONEP">방판</option>
+      </select>
+      <p style="float:left; margin-left: 20px; margin-top: 7px;">매장 코드:&nbsp;</p>
+      <input class="form-control" type="text" id="select_shop" style="float:left; width: 100px;">
+      <% end %>
+      <p style="float:left; margin-left: 20px; margin-top: 7px;">시리얼키:&nbsp;</p>
+      <input class="form-control" type="text" id="custserial" style="float:left; width:100px;">
+
+      <button style="margin-left: 10px;" class="btn btn-warning" id="submit">조회</button>
+      <p style="float:right; margin-right:20px;">
+        <!-- <%= link_to "CSV", admin_user_list_path(format: "csv") %> -->
+        <%= link_to "Excel", admin_migen_agree_list_path(format: "xlsx", :search => @search,
+        :custserial => @custserial, :select_channel => @ch_cd, :select_shop => @shop_cd, :isExcel => true), :class => "btn btn-success" %>
+      </p>
+    </div>
+
     <div id="avr" style="background: #eea29a; padding: 8px;">
       총 인원 수 : <%= @count %> 명<br>
     </div>
@@ -84,7 +150,7 @@
         </thead>
         <tbody>
           <% @migen_agree.each do |migen_agree| %>
-            <%= render partial: "admin/migen_agree/item", locals: { user: migen_agree } %>
+            <%= render partial: "admin/migen_agree/item", locals: { migen_agree: migen_agree } %>
           <% end %>
         </tbody>
       </table>

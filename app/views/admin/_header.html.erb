@@ -308,7 +308,9 @@
 
           <li id="logout"><a href="#" class="top-list"><font color="#5bc0de">로그아웃</font></a></li>
           <li id="edit_admin_user"><a href="#" class="top-list"><font color="#5bc0de">회원정보 수정</font></a></li>
-          <li><a href="#" class="top-list" id="migen_agree">미젠스토리 서비스 동의 정보</a></li>
+          <% if session[:admin_user] == "user" || (!session[:admin_user]['role'].nil? && session[:admin_user]['role'] == "admin") %>
+            <li><a href="#" class="top-list" id="migen_agree">미젠스토리 서비스 동의 정보</a></li>
+          <% end %>
         </ul>
       </div>
     </nav>
