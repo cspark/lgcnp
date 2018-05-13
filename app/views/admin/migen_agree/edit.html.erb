@@ -54,7 +54,7 @@
             formData.append("is_marketing", is_marketing);
 
               $.ajax({
-                  url: "/admin/migen_agree_update?custserial"+custserial,
+                  url: "/admin/migen_agree_update?custserial="+custserial,
                   type: 'PUT',
                   data: formData,
                   async: false,

@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     get "migen_agree_list" => "migen_agree#index"
     get "migen_agree_detail" => "migen_agree#show"
     get "migen_agree_edit" => "migen_agree#edit"
-    get "migen_agree_update" => "migen_agree#update"
+    put "migen_agree_update" => "migen_agree#update"
 
     get "user_list"  => "user#index"
     get "users/detail"  => "user#show"
