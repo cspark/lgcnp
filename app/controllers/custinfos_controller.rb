@@ -139,21 +139,22 @@ class CustinfosController < ApplicationController
   end
 
   def update_agreement
+    #is_agree_thirdparty_info
+    #is_agree_marketing
+    #is_agree_privacy_residence
+    #is_agree_privacy
       is_agree_marketing = params[:is_agree_marketing]
       is_agree_thirdparty_info = params[:is_agree_thirdparty_info]
       is_agree_privacy_residence = params[:is_agree_privacy_residence]
+      is_agree_privacy = params[:is_agree_privacy]
       serial = params[:serial]
-
-      ch_cd = "CNP"
-      if params.has_key?(:ch_cd)
-        ch_cd = params[:ch_cd]
-      end
 
       # custinfo = Custinfo.where(custserial: serial).where(ch_cd: ch_cd).first
       custinfo = Custinfo.where(custserial: serial).first
       custinfo.is_agree_marketing = is_agree_marketing
       custinfo.is_agree_privacy_residence = is_agree_privacy_residence
       custinfo.is_agree_thirdparty_info = is_agree_thirdparty_info
+      custinfo.is_agree_privacy = is_agree_privacy
       if custinfo.save
         render json: custinfo.to_api_hash, status: 200
       else
