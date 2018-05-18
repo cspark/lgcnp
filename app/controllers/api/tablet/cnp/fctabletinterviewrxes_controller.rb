@@ -268,21 +268,29 @@ class Api::Tablet::Cnp::FctabletinterviewrxesController < Api::ApplicationContro
         time = Time.now
         uptdate = time.strftime("%Y/%m/%d")
 
-        custinfo = Custinfo.new
-        custinfo.custserial = Custinfo.all.order('custserial ASC').last.custserial + 1
+        custinfo = Custinfo.where(custname: name, birthyy: birthyy, birthmm: birthmm, birthdd:birthdd, phone: phone).order("UPTDATE desc").first
+        if custinfo.present?
+          custinfo.n_cust_id = n_cust_id
+          custinfo.uptdate = uptdate
+          custinfo.phone = phone
+        else
+          custinfo = Custinfo.new
+          custinfo.custserial = Custinfo.all.order('custserial ASC').last.custserial + 1
 
-        custinfo.ch_cd = ch_cd
-        custinfo.custname = name
-        custinfo.is_agree_privacy = "F"
-        custinfo.birthyy = birthyy
-        custinfo.birthmm = birthmm
-        custinfo.birthdd = birthdd
-        custinfo.phone = phone
-        custinfo.uptdate = uptdate
-        custinfo.n_cust_id = n_cust_id
-        custinfo.measureno = "0"
-        custinfo.sex = sex
-        custinfo.age = age
+          custinfo.ch_cd = ch_cd
+          custinfo.custname = name
+          custinfo.is_agree_privacy = "F"
+          custinfo.birthyy = birthyy
+          custinfo.birthmm = birthmm
+          custinfo.birthdd = birthdd
+          custinfo.phone = phone
+          custinfo.uptdate = uptdate
+          custinfo.n_cust_id = n_cust_id
+          custinfo.measureno = "0"
+          custinfo.sex = sex
+          custinfo.age = age
+        end
+
 
         if custinfo.save
           render json: custinfo.to_api_hash, status: 200
