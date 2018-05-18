@@ -5,7 +5,7 @@
  *  Name : janusadmin05
  *  Server URL : https://vpn.lgcare.co.kr/sup
  *  ID : janusadmin05
- *  PW : wjdckdghks2 (정창환2)
+ *  PW : MintShop9#
  
 # SSH 접속
 
@@ -14,6 +14,17 @@
 * IP : 203.247.132.107
 * ID : janustabuser
 * PW : 인증서
+* root : su - root
+ * PW : abcd123456! 
+
+## Development
+
+* IP : 203.247.132.106
+* ID : janustabuser
+* PW : 인증서
+* root : su - root
+ * PW : abcd123456! 
+
 
 # 운영 사이트
 
