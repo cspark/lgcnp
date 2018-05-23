@@ -95,10 +95,10 @@ class FctabletinterviewsController < ApplicationController
     tabletinterview.uptdate = t.strftime("%Y-%m-%d-%H-%M")
     tabletinterview.is_agree_after = "T"
 
-    user = Custinfo.where(custserial: tabletinterview.custserial).first
-    if !user.nil?
-      tabletinterview.ch_cd = user.ch_cd
-    end
+    # user = Custinfo.where(custserial: tabletinterview.custserial).first
+    # if !user.nil?
+    #   tabletinterview.ch_cd = user.ch_cd
+    # end
 
     if tabletinterview.save
       render json: tabletinterview.to_api_hash, status: :ok
