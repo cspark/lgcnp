@@ -50,10 +50,10 @@ class FctabletinterviewsController < ApplicationController
       tabletinterview.is_make_up = "F"
     end
 
-    user = Custinfo.where(custserial: tabletinterview.custserial).first
-    if !user.nil?
-      tabletinterview.ch_cd = user.ch_cd
-    end
+    # user = Custinfo.where(custserial: tabletinterview.custserial).first
+    # if !user.nil?
+    #   tabletinterview.ch_cd = user.ch_cd
+    # end
 
 
     if tabletinterview.save
