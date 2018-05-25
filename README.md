@@ -13,7 +13,7 @@
 
 * IP : 203.247.132.107
 * ID : janustabuser
-* PW : 인증서
+* PW : 인증서 / MintShop9#
 * root : su - root
  * PW : abcd123456! 
 
@@ -43,7 +43,6 @@ http://203.247.132.106/admin/manager_2017
 
 유동적으로 늦은 밤에 미리 이야기한 뒤
 
-* 실서버 : wjdckdghkswjdckdghks > rlatnalsrlatnals
 * 개발서버 : wjdckdghkswjdckdghks
 
 
