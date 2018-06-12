@@ -27,6 +27,7 @@
 
       if ("<%= @admin_user %>" != null){
         $("#email").val('<%= @admin_user.email %>');
+        $("#access_ip").val('<%= @admin_user.access_ip %>');
       }
 
       $('#submit').click(function(){
