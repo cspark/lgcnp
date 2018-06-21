@@ -39,25 +39,25 @@ class Admin::MigenAgreeController < Admin::AdminApplicationController
     @migen_agree.assign_attributes(permitted_params)
 
     if @migen_agree.is_private_changed? and @migen_agree.is_private == "F"
-      @migen_agree.private_retract_dt = Time.zone.now()
+      @migen_agree.private_retract_dt = Time.now()
     end
     if @migen_agree.is_consignment_changed? and @migen_agree.is_consignment == "F"
-      @migen_agree.consignment_retract_dt = Time.zone.now()
+      @migen_agree.consignment_retract_dt = Time.now()
     end
     if @migen_agree.is_skin_residence_changed? and @migen_agree.is_skin_residence == "F"
-      @migen_agree.skin_residence_retract_dt = Time.zone.now()
+      @migen_agree.skin_residence_retract_dt = Time.now()
     end
     if @migen_agree.is_sensitive_changed? and @migen_agree.is_sensitive == "F"
-      @migen_agree.sensitive_retract_dt = Time.zone.now()
+      @migen_agree.sensitive_retract_dt = Time.now()
     end
     if @migen_agree.is_private_third_changed? and @migen_agree.is_private_third == "F"
-      @migen_agree.private_third_retract_dt = Time.zone.now()
+      @migen_agree.private_third_retract_dt = Time.now()
     end
     if @migen_agree.is_sensitive_third_changed? and @migen_agree.is_sensitive_third == "F"
-      @migen_agree.sensitive_third_retract_dt = Time.zone.now()
+      @migen_agree.sensitive_third_retract_dt = Time.now()
     end
     if @migen_agree.is_marketing_changed? and @migen_agree.is_marketing == "F"
-      @migen_agree.marketing_retract_dt = Time.zone.now()
+      @migen_agree.marketing_retract_dt = Time.now()
     end
 
     if @migen_agree.save
