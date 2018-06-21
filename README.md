@@ -16,6 +16,7 @@
 * PW : 인증서 / MintShop9#
 * root : su - root
  * PW : abcd123456! 
+* SSL : 1234
 
 ## Development
 
