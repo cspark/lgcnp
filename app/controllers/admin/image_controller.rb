@@ -591,8 +591,8 @@ class Admin::ImageController < Admin::AdminApplicationController
           image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Wr_Cust", ch_cd: image_download_ch_cd)
         end
 
-        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UV_")
-        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_WH_")
+        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_UV_")
+        AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_WH_")
 
         zip_path = @path.split("/")[0] +"/"+ @path.split("/")[1]
         generate_tgz(relation: @fcdata, path: @path)
