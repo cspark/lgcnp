@@ -139,8 +139,8 @@ wb.add_worksheet(name: "User") do |sheet|
 
       sheet.add_row [user.custserial.to_i, user.ch_cd, userName, translate_sex, birthday,
       userPhone, address, lastanaldate, measureno, user.uptdate,
-      is_agree_privacy,privacy_agree_dt,privacy_retract_dt,is_agree_privacy_residence,residence_agree_dt,residence_retract_dt,
-      is_agree_thirdparty,thirdparty_agree_dt,thirdparty_retract_dt,is_agree_marketing,marketing_agree_dt,marketing_retract_dt,
-      is_delete_cust,delete_cust_dt,shop_cd], :types => [nil, :string, :string, :string, :string]
+      is_agree_privacy,user.privacy_agree_dt,user.privacy_retract_dt,is_agree_privacy_residence,user.residence_agree_dt,user.residence_retract_dt,
+      is_agree_thirdparty,user.thirdparty_agree_dt,user.thirdparty_retract_dt,is_agree_marketing,user.marketing_agree_dt,user.marketing_retract_dt,
+      user.is_delete_cust,user.delete_cust_dt,shop_cd], :types => [nil, :string, :string, :string, :string]
     end
 end

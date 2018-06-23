@@ -127,8 +127,8 @@
           <% is_agree_privacy = "X" %>
         <% end %>
         <td class="text-center"><%= is_agree_privacy %></td>
-        <td><%= privacy_agree_dt %></td>
-        <td><%= privacy_retract_dt %></td>
+        <td><%= user.privacy_agree_dt %></td>
+        <td><%= user.privacy_retract_dt %></td>
 
         <% is_agree_privacy_residence = "-" %>
         <% if user.is_agree_privacy_residence == "T" %>
@@ -137,8 +137,8 @@
           <% is_agree_privacy_residence = "X" %>
         <% end %>
         <td class="text-center"><%= is_agree_privacy_residence %></td>
-        <td><%= residence_agree_dt %></td>
-        <td><%= residence_retract_dt %></td>
+        <td><%= user.residence_agree_dt %></td>
+        <td><%= user.residence_retract_dt %></td>
 
         <% is_agree_thirdparty = "-" %>
         <% if user.is_agree_thirdparty_info == "T" %>
@@ -146,20 +146,23 @@
         <% else %>
           <% is_agree_thirdparty = "X" %>
         <% end %>
-        <td><%= thirdparty_agree_dt %></td>
-        <td><%= thirdparty_retract_dt %></td>
-
         <td class="text-center"><%= is_agree_thirdparty %></td>
+        <td><%= user.thirdparty_agree_dt %></td>
+        <td><%= user.thirdparty_retract_dt %></td>
+
         <% is_agree_marketing = "-" %>
         <% if user.is_agree_marketing == "T" %>
           <% is_agree_marketing = "O" %>
         <% else %>
           <% is_agree_marketing = "X" %>
         <% end %>
-        <td><%= marketing_agree_dt %></td>
-        <td><%= marketing_retract_dt %></td>
-
         <td class="text-center"><%= is_agree_marketing %></td>
+        <td><%= user.marketing_agree_dt %></td>
+        <td><%= user.marketing_retract_dt %></td>
+        <td><%= user.is_delete_cust %></td>
+        <td><%= user.delete_cust_dt %></td>
+
+
         <% shop_cd = "-" %>
         <% if !user.shop_cd.nil? %>
           <% shop_cd = user.shop_cd %>
