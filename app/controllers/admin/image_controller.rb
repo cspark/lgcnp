@@ -556,19 +556,34 @@ class Admin::ImageController < Admin::AdminApplicationController
 
       image_download_ch_cd = @fcdata.ch_cd
       begin
-        if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UV_1.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UV_2.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UV_3.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UV_4.jpg")
-          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UV_", ch_cd: image_download_ch_cd)
-          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UV_", ch_cd: image_download_ch_cd)
-          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UV_", ch_cd: image_download_ch_cd)
-          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UV_", ch_cd: image_download_ch_cd)
+        # if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UV_1.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UV_2.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UV_3.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_UV_4.jpg")
+        #   image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_UV_", ch_cd: image_download_ch_cd)
+        #   image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_UV_", ch_cd: image_download_ch_cd)
+        #   image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_UV_", ch_cd: image_download_ch_cd)
+        #   image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_UV_", ch_cd: image_download_ch_cd)
+        # end
+
+        if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_UV_1.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_UV_2.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_UV_3.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_UV_4.jpg")
+          image_download2(serial: serial, measureno: measureno, number: "1", type: "_F_UV_", ch_cd: image_download_ch_cd)
+          image_download2(serial: serial, measureno: measureno, number: "2", type: "_F_UV_", ch_cd: image_download_ch_cd)
+          image_download2(serial: serial, measureno: measureno, number: "3", type: "_F_UV_", ch_cd: image_download_ch_cd)
+          image_download2(serial: serial, measureno: measureno, number: "4", type: "_F_UV_", ch_cd: image_download_ch_cd)
         end
 
-        if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_1.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_2.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_3.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_4.jpg")
-          image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_WH_", ch_cd: image_download_ch_cd)
-          image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_WH_", ch_cd: image_download_ch_cd)
-          image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_WH_", ch_cd: image_download_ch_cd)
-          image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_WH_", ch_cd: image_download_ch_cd)
+        # if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_1.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_2.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_3.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_4.jpg")
+        #   image_download(serial: serial, measureno: measureno, number: "1", type: "_F_FM_WH_", ch_cd: image_download_ch_cd)
+        #   image_download(serial: serial, measureno: measureno, number: "2", type: "_F_FM_WH_", ch_cd: image_download_ch_cd)
+        #   image_download(serial: serial, measureno: measureno, number: "3", type: "_F_FM_WH_", ch_cd: image_download_ch_cd)
+        #   image_download(serial: serial, measureno: measureno, number: "4", type: "_F_FM_WH_", ch_cd: image_download_ch_cd)
+        # end
+
+        if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_WH_1.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_WH_2.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_WH_3.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_WH_4.jpg")
+          image_download2(serial: serial, measureno: measureno, number: "1", type: "_F_WH_", ch_cd: image_download_ch_cd)
+          image_download2(serial: serial, measureno: measureno, number: "2", type: "_F_WH_", ch_cd: image_download_ch_cd)
+          image_download2(serial: serial, measureno: measureno, number: "3", type: "_F_WH_", ch_cd: image_download_ch_cd)
+          image_download2(serial: serial, measureno: measureno, number: "4", type: "_F_WH_", ch_cd: image_download_ch_cd)
         end
+
 
         if !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_PWC_W.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_FM_WH_E.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"Sp_Pore_Cust.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"Sp_Spot_Cust.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"Sp_Wr_Cust.jpg") || !File.exist?("public/"+@fcdata.ch_cd+"/"+@path+"F_PW_SK_L_SIDE.jpg")
           image_download(serial: serial, measureno: measureno, number: nil, type: "_Sp_Pore_Cust", ch_cd: image_download_ch_cd)
@@ -617,8 +632,8 @@ class Admin::ImageController < Admin::AdminApplicationController
       @path << measureno.to_i.to_s
       @path << "_"
 
-      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_UV_")
-      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_FM_WH_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_UV_")
+      AdminFcdata.image_combine(relation: @fcdata, path: @path, type: "F_WH_")
 
       zip_path = @path.split("/")[0] +"/"+ @path.split("/")[1]
       generate_tgz(relation: @fcdata, path: @path)
