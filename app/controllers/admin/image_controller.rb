@@ -293,8 +293,8 @@ class Admin::ImageController < Admin::AdminApplicationController
 
     folder = "public/"+relation.ch_cd+"/"+zip_path
     input_filenames = [
-      file_path+'F_FM_UV_merge.jpg',
-      file_path+'F_FM_WH_merge.jpg',
+      file_path+'F_UV_merge.jpg',
+      file_path+'F_WH_merge.jpg',
       file_path+'F_FM_WH_E.jpg',
       file_path+'F_FM_WH_PWC_W.jpg',
       file_path+'Sym_R_merge.jpg',
@@ -302,7 +302,7 @@ class Admin::ImageController < Admin::AdminApplicationController
       file_path+'Sp_Spot_Cust.jpg',
       file_path+'Sp_Wr_Cust.jpg',
       file_path+'F_FM_PL_UVC_merge.jpg',
-      file_path+'F_FM_PL_merge.jpg',
+      file_path+'F_PL_merge.jpg',
       file_path+'F_FM_UVGR_SBC_merge.jpg',
       file_path+'F_FM_UVGR_UVC_merge.jpg',
       file_path+'F_FM_UV_GR_merge.jpg',
