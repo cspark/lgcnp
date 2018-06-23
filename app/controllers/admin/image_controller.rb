@@ -399,9 +399,7 @@ class Admin::ImageController < Admin::AdminApplicationController
   end
 
   def image_download2(serial: nil, measureno: nil, number: nil, type: nil, ch_cd: nil)
-    #이미지 가져오기
-    user = Custinfo.where(custserial: serial).first
-    sub_folder_name = (((user.custserial.to_i / 100) * 100) + 100).to_s
+    sub_folder_name = (((serial.to_i / 100) * 100) + 100).to_s
 
     ftp_path = ""
     if ch_cd.present?
@@ -409,7 +407,7 @@ class Admin::ImageController < Admin::AdminApplicationController
     else
       ftp_path = "ftp://165.244.88.27/CNP/"
     end
-    ftp_path += "#{sub_folder_name.to_s}/#{user.custserial.to_i.to_s}-#{measureno.to_i.to_s}/#{user.custserial.to_i.to_s}-#{measureno.to_i.to_s}#{type}#{number if !number.nil?}.jpg"
+    ftp_path += "#{sub_folder_name.to_s}/#{serial.to_i.to_s}-#{measureno.to_i.to_s}/#{serial.to_i.to_s}-#{measureno.to_i.to_s}#{type}#{number if !number.nil?}.jpg"
 
     system("echo FILE Download")
     file_get_command = "wget --user janus --password pielgahn2012! #{ftp_path}  -N -P "
@@ -417,17 +415,17 @@ class Admin::ImageController < Admin::AdminApplicationController
     make_dir_command = "mkdir -p "
     # make_dir_command << "public/CNP/"
     if ch_cd.present?
-      make_dir_command += "public/#{ch_cd.to_s}/#{sub_folder_name}/#{user.custserial.to_i.to_s}-#{measureno.to_i.to_s}"
+      make_dir_command += "public/#{ch_cd.to_s}/#{sub_folder_name}-P/#{serial.to_i.to_s}-#{measureno.to_i.to_s}"
     else
-      make_dir_command += "public/CNP/#{sub_folder_name}/#{user.custserial.to_i.to_s}-#{measureno.to_i.to_s}"
+      make_dir_command += "public/CNP/#{sub_folder_name}-P/#{serial.to_i.to_s}-#{measureno.to_i.to_s}"
     end
     system(make_dir_command)
 
     # file_get_command << "public/CNP/"
     if ch_cd.present?
-      file_get_command << "public/#{ch_cd.to_s}/#{sub_folder_name}/#{user.custserial.to_i.to_s}-#{measureno.to_i.to_s}"
+      file_get_command << "public/#{ch_cd.to_s}/#{sub_folder_name}-P/#{serial.to_i.to_s}-#{measureno.to_i.to_s}"
     else
-      file_get_command << "public/CNP//#{sub_folder_name}/#{user.custserial.to_i.to_s}-#{measureno.to_i.to_s}"
+      file_get_command << "public/CNP//#{sub_folder_name}-P/#{serial.to_i.to_s}-#{measureno.to_i.to_s}"
     end
     (0..10).each do |i|
       break if system(file_get_command)
