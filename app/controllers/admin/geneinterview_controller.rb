@@ -90,7 +90,7 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     scoped = scoped.where("shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
-      scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
+      scoped = scoped.where("to_date('FCGENE_INTERVIEW'.'uptdate') >= ? AND to_date('FCGENE_INTERVIEW'.'uptdate') < ?", @start_date.to_date, temp_end_date)
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(gene_barcode: @gene_barcode) if !@gene_barcode.blank?
