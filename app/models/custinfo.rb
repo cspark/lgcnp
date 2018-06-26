@@ -2,7 +2,9 @@ require 'uri'
 class Custinfo < ApplicationRecord
   self.table_name = "custinfo" if Rails.env.production? || Rails.env.staging?
   self.primary_key = :custserial if Rails.env.production? || Rails.env.staging?
+
   has_many :fcdatas
+  has_many :fcinterviews, class_name: 'Fcinterview', foreign_key: 'custserial'
   
   def to_api_hash
     {

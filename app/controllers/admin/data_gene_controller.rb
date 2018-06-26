@@ -105,7 +105,6 @@ class Admin::DataGeneController < Admin::AdminApplicationController
     @min_birthmm = 1
     @max_birthmm = 12
 
-
     @select_skin_type_device_final = []
     if !@skin_type_device_array.blank?
       if @skin_type_device_array.include?("gunsung")
@@ -130,17 +129,44 @@ class Admin::DataGeneController < Admin::AdminApplicationController
     end
 
     @fcdatas = []
-    @fcdatas_final = []
-    scoped = Fcdata.where(ch_cd: @ch_array)
-    scoped = scoped.where("shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
+
+    #-- Custinfo where
+    custinfo_where = []
+    # - name
+    custinfo_where << "custinfo.name = '#{name}'" if name.present?
+    # - select_sex
+    custinfo_where << "custinfo.select_sex = '#{select_sex}'" if select_sex.present? and select_sex != 'all'
+    # - select_address
+    custinfo_where << "custinfo.select_address = '#{select_address}'" if select_address.present?
+    # - start_age, end_age
+    custinfo_where << "custinfo.start_age = '#{start_age}'" if start_age.present?
+    custinfo_where << "custinfo.end_age = '#{end_age}'" if end_age.present?
+    # - start_birthyy, end_birthyy
+    custinfo_where << "custinfo.start_birthyy = '#{start_birthyy}'" if start_birthyy.present?
+    custinfo_where << "custinfo.end_age = '#{end_birthyy}'" if end_birthyy.present?
+    # - start_birthmm, end_birthmm
+    custinfo_where << "custinfo.start_birthmm = '#{start_birthmm}'" if start_birthmm.present?
+    custinfo_where << "custinfo.end_birthmm = '#{end_birthmm}'" if end_birthmm.present?
+    # - is_agree_thirdparty_info
+    custinfo_where << "custinfo.is_agree_thirdparty_info = '#{@is_agree_thirdparty_info}'" if @is_agree_thirdparty_info.present?
+    custinfo_where_str = custinfo_where.present? ? " AND #{custinfo_where.join(' AND ')}" : ""
+    #-- Custinfo.where
+
+    fcinterview_where_str = gene_barcode.present? ? " AND fcgene_interview.gene_barcode = '#{gene_barcode}'" : ""
+
+    scoped = Fcdata.joins("INNER JOIN custinfo ON custinfo.custserial = fcdata.custserial #{custinfo_where_str}")
+    scoped = scoped.joins("INNER JOIN fcgene_interview ON fcgene_interview.custserial = fcdata.custserial #{fcinterview_where_str}")
+
+    scoped = scoped.where(ch_cd: @ch_array)
+    scoped = scoped.where("fcdata.shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
 
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
-      scoped = scoped.where("to_date(uptdate) >= ? AND to_date(uptdate) < ?", @start_date.to_date, temp_end_date)
+      scoped = scoped.where("to_date(fcdata.uptdate) >= ? AND to_date(fcdata.uptdate) < ?", @start_date.to_date, temp_end_date)
     end
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-    scoped = scoped.where("measureno >= ?", @start_measureno.to_i) if !@start_measureno.blank?
-    scoped = scoped.where("measureno <= ?", @end_measureno.to_i) if !@end_measureno.blank?
+    scoped = scoped.where("fcdata.measureno >= ?", @start_measureno.to_i) if !@start_measureno.blank?
+    scoped = scoped.where("fcdata.measureno <= ?", @end_measureno.to_i) if !@end_measureno.blank?
     scoped = scoped.where(faceno: @select_area) if !@select_area.blank? && @select_area.downcase != "all"
 
     scoped = scoped.where(flag: @is_flag) if @is_flag == "T"
@@ -166,97 +192,97 @@ class Admin::DataGeneController < Admin::AdminApplicationController
     "피부톤 Blue 이마","피부톤 Blue 코","피부톤 Blue 우측 눈밑","피부톤 Blue 좌측 눈밑","피부톤 Blue 우측 볼","피부톤 Blue 좌측 볼","피부톤 Blue 평균","피부색 L 값","피부색 a 값","피부색 b 값","피지 E 값 (T 존)","피지 E 값 (U 존)","피부톤","선 민감도","피부타입(야누스 측정)","피부타입(설문 로직)","동안각도 점수 우측","동안각도 점수 좌측",
     "포피린 E 값(T존)","포피린 E 값(U존)"]
 
-    scoped = scoped.order("measuredate desc")
+    scoped = scoped.order("fcdata.measuredate desc")
 
-    scoped.each do |fcdata|
-      custinfo = Custinfo.where(custserial: fcdata.custserial).first
-      is_contain = true
-      if custinfo != nil
-        if custinfo.is_agree_thirdparty_info != nil && params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] != "T,F"
-          if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("T") && custinfo.is_agree_thirdparty_info == "F"
-            is_contain = false
-          end
-          if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("F") && custinfo.is_agree_thirdparty_info == "T"
-            is_contain = false
-          end
-        end
+    @count = scoped.count
+    @fcdatas = Kaminari.paginate_array(scoped).page(params[:page]).per(5)
+    @fcdatas_excel = scoped
 
-        if (params.has_key?(:is_agree_thirdparty_info) != nil && params[:is_agree_thirdparty_info] == "") && !custinfo.is_agree_thirdparty_info.nil?
-          is_contain = false
-        end
-
-        if !@name.blank?
-          if !custinfo.custname.include? @name
-            is_contain = false
-          end
-        end
-
-        if @select_sex != "all"
-          if custinfo.sex != @select_sex
-            is_contain = false
-          end
-        end
-
-        if !@start_age.blank? && !@end_age.blank?
-          temp_age = Time.current.year.to_i - custinfo.birthyy.to_i - 1
-          if temp_age < @start_age.to_i || temp_age > @end_age.to_i
-            is_contain = false
-          end
-        end
-
-        if !@start_birthyy.blank? && !@end_birthyy.blank?
-          if custinfo.birthyy.to_i < @start_birthyy.to_i || custinfo.birthyy.to_i > @end_birthyy.to_i
-            is_contain = false
-          end
-        end
-
-        if !@start_birthmm.blank? && !@end_birthmm.blank?
-          if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
-            is_contain = false
-          end
-        end
-
-        if !@select_address.blank?
-          if custinfo.address != @select_address
-            is_contain = false
-          end
-        end
-      else
-        is_contain = false
-      end
-
-      if is_contain == true
-        @fcdatas << fcdata
-      end
-    end
-
-    @fcdatas.each do |fcdata|
-      fcgene_interviews = FcgeneInterview.where(custserial: fcdata.custserial.to_i).where(measureno: fcdata.measureno.to_i)
-      is_contain = true
-      if fcgene_interviews.count > 1
-        is_contain = false
-      else
-        fcgene_interview = fcgene_interviews.first
-        if !fcgene_interview.nil?
-          if !@gene_barcode.blank?
-            if fcgene_interview.gene_barcode != @gene_barcode
-              is_contain = false
-            end
-          end
-
-        else
-          is_contain = false
-        end
-      end
-
-      if is_contain == true
-        @fcdatas_final << fcdata
-      end
-    end
-
-    @count = @fcdatas_final.count
-    @fcdatas_excel = @fcdatas_final
-    @fcdatas = Kaminari.paginate_array(@fcdatas_final).page(params[:page]).per(5)
+    # scoped.each do |fcdata|
+    #   custinfo = Custinfo.where(custserial: fcdata.custserial).first
+    #   is_contain = true
+    #   if custinfo != nil
+    #     if custinfo.is_agree_thirdparty_info != nil && params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info] != "T,F"
+    #       if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("T") && custinfo.is_agree_thirdparty_info == "F"
+    #         is_contain = false
+    #       end
+    #       if params.has_key?(:is_agree_thirdparty_info) && params[:is_agree_thirdparty_info].include?("F") && custinfo.is_agree_thirdparty_info == "T"
+    #         is_contain = false
+    #       end
+    #     end
+    #
+    #     if (params.has_key?(:is_agree_thirdparty_info) != nil && params[:is_agree_thirdparty_info] == "") && !custinfo.is_agree_thirdparty_info.nil?
+    #       is_contain = false
+    #     end
+    #
+    #     if !@name.blank?
+    #       if !custinfo.custname.include? @name
+    #         is_contain = false
+    #       end
+    #     end
+    #
+    #     if @select_sex != "all"
+    #       if custinfo.sex != @select_sex
+    #         is_contain = false
+    #       end
+    #     end
+    #
+    #     if !@start_age.blank? && !@end_age.blank?
+    #       temp_age = Time.current.year.to_i - custinfo.birthyy.to_i - 1
+    #       if temp_age < @start_age.to_i || temp_age > @end_age.to_i
+    #         is_contain = false
+    #       end
+    #     end
+    #
+    #     if !@start_birthyy.blank? && !@end_birthyy.blank?
+    #       if custinfo.birthyy.to_i < @start_birthyy.to_i || custinfo.birthyy.to_i > @end_birthyy.to_i
+    #         is_contain = false
+    #       end
+    #     end
+    #
+    #     if !@start_birthmm.blank? && !@end_birthmm.blank?
+    #       if custinfo.birthmm.to_i < @start_birthmm.to_i || custinfo.birthmm.to_i > @end_birthmm.to_i
+    #         is_contain = false
+    #       end
+    #     end
+    #
+    #     if !@select_address.blank?
+    #       if custinfo.address != @select_address
+    #         is_contain = false
+    #       end
+    #     end
+    #   else
+    #     is_contain = false
+    #   end
+    #
+    #   if is_contain == true
+    #     @fcdatas << fcdata
+    #   end
+    # end
+    #
+    # @fcdatas.each do |fcdata|
+    #   fcgene_interviews = FcgeneInterview.where(custserial: fcdata.custserial.to_i).where(measureno: fcdata.measureno.to_i)
+    #   is_contain = true
+    #   if fcgene_interviews.count > 1
+    #     is_contain = false
+    #   else
+    #     fcgene_interview = fcgene_interviews.first
+    #     if !fcgene_interview.nil?
+    #       if !@gene_barcode.blank?
+    #         if fcgene_interview.gene_barcode != @gene_barcode
+    #           is_contain = false
+    #         end
+    #       end
+    #
+    #     else
+    #       is_contain = false
+    #     end
+    #   end
+    #
+    #   if is_contain == true
+    #     @fcdatas_final << fcdata
+    #   end
+    # end
 
     respond_to do |format|
       format.html

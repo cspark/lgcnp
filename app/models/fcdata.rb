@@ -4,8 +4,10 @@ require 'composite_primary_keys'
 class Fcdata < ApplicationRecord
   self.table_name = "fcdata" if Rails.env.production? || Rails.env.staging?
   self.primary_key = :custserial,:ch_cd,:measureno if Rails.env.production? || Rails.env.staging?
-  belongs_to :custinfo, class_name: 'Custinfo', foreign_key: 'custserial'
 
+  belongs_to :custinfo, class_name: 'Custinfo', foreign_key: 'custserial'
+  has_many :fcinterviews, class_name: 'Fcinterview', foreign_key: 'custserial'
+  has_many :fcgene_interviews, class_name: "FcgeneInterview", foreign_key: 'custserial'
   # TZone 1 이마 2 코
   # UZone 7 오른쪽 볼 8 왼쪽 볼
   # 3 오른쪽 눈옆 4 오른쪽 눈밑 5 왼쪽 눈옆 6 왼쪽 눈밑
