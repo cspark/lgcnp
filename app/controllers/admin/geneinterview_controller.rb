@@ -87,7 +87,7 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
 
     @fcgene_interviews = []
     scoped = FcgeneInterview.where(ch_cd: @ch_array).order('"FCGENE_INTERVIEW"."UPTDATE" desc')
-    scoped = scoped.where("shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
+    scoped = scoped.where("fcgene_interview.shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?
     temp_end_date = @end_date.to_date + 1.day
     if Rails.env.production? || Rails.env.staging?
       scoped = scoped.where('to_date("FCGENE_INTERVIEW"."UPTDATE") >= ? AND to_date("FCGENE_INTERVIEW"."UPTDATE") < ?', @start_date.to_date, temp_end_date)
