@@ -2,7 +2,7 @@ wb = xlsx_package.workbook
 wb.add_worksheet(name: "Fcdata") do |sheet|
     sheet.add_row @excel_name
     @fcdatas_excel.each do |fcdata|
-        interview = FcgeneInterview.where(custserial: fcdata.custserial).where(measureno: fcdata.measureno).first
+        interview = fcdata.fcgene_interviews.first
         custinfo = Custinfo.where(custserial: fcdata.custserial).first
 
         if !custinfo.nil?
@@ -80,8 +80,8 @@ wb.add_worksheet(name: "Fcdata") do |sheet|
             flag = "T"
           end
 
-          sheet.add_row [flag, fcdata.custserial.to_i, userName, Date.current.year - custinfo.birthyy.to_i - 1, custinfo.sex, interview.gene_barcode.to_i, fcdata.shop_cd, custinfo.birthyy+"-"+custinfo.birthmm+"-"+custinfo.birthdd, fcdata.measureno.to_i, fcdata.ch_cd, fcdata.faceno, fcdata.measuredate, fcdata.uptdate,
-          address, interview.q1_height, interview.q1_weight, interview.q2, interview.q3, interview.q4, interview.q5, interview.q6, interview.q7, interview.q8, interview.q9, interview.q10, interview.q11, interview.q12, interview.q13, interview.q14, interview.q15_nation, interview.q15_birth_nation,
+          sheet.add_row [flag, fcdata.custserial.to_i, userName, Date.current.year - custinfo.birthyy.to_i - 1, custinfo.sex, interview.try(:gene_barcode).to_i, fcdata.shop_cd, custinfo.birthyy+"-"+custinfo.birthmm+"-"+custinfo.birthdd, fcdata.measureno.to_i, fcdata.ch_cd, fcdata.faceno, fcdata.measuredate, fcdata.uptdate,
+          address, interview.try(:q1_height), interview.try(:q1_weight), interview.try(:q2), interview.try(:q3), interview.try(:q4), interview.try(:q5), interview.try(:q6), interview.try(:q7), interview.try(:q8), interview.try(:q9), interview.try(:q10), interview.try(:q11), interview.try(:q12), interview.try(:q13), interview.try(:q14), interview.try(:q15_nation), interview.try(:q15_birth_nation),
           fcdata.mo_1, fcdata.mo_7, fcdata.mo_8,
           fcdata.pr_1.to_i, fcdata.pr_2.to_i, fcdata.pr_7.to_i, fcdata.pr_8.to_i, fcdata.pr_avr.to_i, fcdata.wr_3.to_i, fcdata.wr_4.to_i, fcdata.wr_5.to_i, fcdata.wr_6.to_i, fcdata.wr_avr.to_i,
           fcdata.el_7.to_i, fcdata.el_8.to_i, fcdata.el_avr.to_i, fcdata.el_angle_7, fcdata.el_angle_8, fcdata.sb_1.to_i, fcdata.sb_2.to_i, fcdata.sb_7.to_i, fcdata.sb_8.to_i,

@@ -78,14 +78,14 @@
     </head>
     <body>
       <% custinfo = Custinfo.where(custserial: fcdata.custserial).first %>
-      <% interview = FcgeneInterview.where(custserial: fcdata.custserial).where(measureno: fcdata.measureno).first %>
+      <% interview = fcdata.fcgene_interviews.first %>
       <tr class="table_tr text-center" id="<%= fcdata.custserial.to_i %>/<%= fcdata.measureno %>">
         <td><input type="checkbox" name="flag_check_box" value="T" id="<%= fcdata.custserial.to_i %>/<%= fcdata.ch_cd %>/<%= fcdata.measureno %>"/></td>
         <td><%= fcdata.custserial.to_i %></td>
         <td id="name_fcdata_<%= fcdata.custserial.to_i %>_<%= fcdata.measureno.to_i %>"></td>
         <td><%= Date.current.year - custinfo.birthyy.to_i - 1 %></td>
         <td><%= custinfo.sex %></td>
-        <td><%= fcdata.fcgene_interviews.first.gene_barcode %></td>
+        <td><%= interview.try(:gene_barcode) %></td>
         <td><%= fcdata.shop_cd %></td>
         <td><%= custinfo.birthyy %>-<%= custinfo.birthmm %>-<%= custinfo.birthdd %></td>
         <td><%= fcdata.measureno.to_i %></td>
@@ -134,23 +134,23 @@
           <% end %>
         <% end %>
         <td class="text-center"><%= address %></td>
-        <td><%= interview.q1_height %></td>
-        <td><%= interview.q1_weight %></td>
-        <td><%= interview.q2 %></td>
-        <td><%= interview.q3 %></td>
-        <td><%= interview.q4 %></td>
-        <td><%= interview.q5 %></td>
-        <td><%= interview.q6 %></td>
-        <td><%= interview.q7 %></td>
-        <td><%= interview.q8 %></td>
-        <td><%= interview.q9 %></td>
-        <td><%= interview.q10 %></td>
-        <td><%= interview.q11 %></td>
-        <td><%= interview.q12 %></td>
-        <td><%= interview.q13 %></td>
-        <td><%= interview.q14 %></td>
-        <td><%= interview.q15_nation %></td>
-        <td><%= interview.q15_birth_nation %></td>
+        <td><%= interview.try(:q1_height) %></td>
+        <td><%= interview.try(:q1_weight) %></td>
+        <td><%= interview.try(:q2) %></td>
+        <td><%= interview.try(:q3) %></td>
+        <td><%= interview.try(:q4) %></td>
+        <td><%= interview.try(:q5) %></td>
+        <td><%= interview.try(:q6) %></td>
+        <td><%= interview.try(:q7) %></td>
+        <td><%= interview.try(:q8) %></td>
+        <td><%= interview.try(:q9) %></td>
+        <td><%= interview.try(:q10) %></td>
+        <td><%= interview.try(:q11) %></td>
+        <td><%= interview.try(:q12) %></td>
+        <td><%= interview.try(:q13) %></td>
+        <td><%= interview.try(:q14) %></td>
+        <td><%= interview.try(:q15_nation) %></td>
+        <td><%= interview.try(:q15_birth_nation) %></td>
 
         <td><%= fcdata.mo_1 %></td>
         <td><%= fcdata.mo_7 %></td>
