@@ -194,7 +194,7 @@
       <button style="margin-left: 10px;" class="btn btn-warning" id="submit">조회</button>
       <p style="float:right; margin-right:20px;">
         <!-- <%= link_to "CSV", admin_user_list_path(format: "csv") %> -->
-        <%= link_to "Excel", admin_user_list_path(format: "xlsx", :search => @search,
+        <%= link_to "Excel", admin_user_list_path(format: "xlsx", :is_delete_cust => (@is_delete_cust ? "T" : ""), :search => @search,
         :custserial => @custserial, :select_channel => @ch_cd, :select_shop => @shop_cd, :select_address => @select_address, :isExcel => true), :class => "btn btn-success" %>
       </p>
     </div>
