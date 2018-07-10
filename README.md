@@ -22,7 +22,7 @@
 
 * IP : 203.247.132.106
 * ID : janustabuser
-* PW : 인증서 / MintShop9#
+* PW : 인증서 / WangChaeMin9
 * root : su - root
  * PW : abcd123456! 
 
