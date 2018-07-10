@@ -40,6 +40,9 @@
           document.getElementById("custserial").value = '<%= @custserial %>'
         <% end %>
 
+        <% if @is_delete_cust %>
+          $("input:checkbox[name=check_box]").prop("checked", true);
+        <% end %>
         $(document).keyup(function (e) {
             if ($("#search").is(":focus") && (e.keyCode == 13)) {
                 console.log(encodeURI($("#search").val()));
@@ -70,6 +73,12 @@
         });
 
         $('#submit').click(function(){
+          var is_delete_cust = "";
+          $('input:checkbox[name="check_box"]').each(function() {
+            if(this.checked) {
+              is_delete_cust = "T"
+            }
+          });
           var address = document.getElementById("select_address").options[document.getElementById("select_address").selectedIndex].value;
 
           if (document.getElementById("select_channel") != null) {
@@ -80,10 +89,12 @@
             url += "&select_shop=" +$("#select_shop").val();
             url += "&custserial=" + document.getElementById("custserial").value;
             url += "&select_address=" +address;
+            url += "&is_delete_cust=" +is_delete_cust;
           } else {
             url = "/admin/user_list?search=" + encodeURI(encodeURI($("#search").val()));
             url += "&custserial=" + document.getElementById("custserial").value;
             url += "&select_address=" +address;
+            url += "&is_delete_cust=" +is_delete_cust;
           }
           location.href = url;
         });
@@ -176,6 +187,9 @@
         <option value="26">제주도</option>
         <option value="27">기타</option>
       </select>
+
+      <p style="float:left; margin-left: 20px; margin-top: 5px;">FLAG:&nbsp;</p>
+      <input type="checkbox" name="check_box" value="is_delete_cust" id="is_delete_cust" style="float:left; margin-top:9px;"/>
 
       <button style="margin-left: 10px;" class="btn btn-warning" id="submit">조회</button>
       <p style="float:right; margin-right:20px;">

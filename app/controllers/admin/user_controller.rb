@@ -39,6 +39,10 @@ class Admin::UserController < Admin::AdminApplicationController
       @is_admin_init = false
     end
 
+    if params.has_key? :is_delete_cust and params[:is_delete_cust] == "Y"
+      @is_delete_cust = true
+    end
+
     ch_cd = params[:select_channel] if !params[:select_channel].nil?
     select_address = params[:select_address] if !params[:select_address].nil? && params[:select_address] != "ALL"
     shop_cd = params[:select_shop]
@@ -55,13 +59,15 @@ class Admin::UserController < Admin::AdminApplicationController
     scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank? && @ch_cd != "ALL"
     scoped = scoped.where(address: @select_address) if !@select_address.blank?
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-
+    scoped = scoped.where(is_delete_cust: "Y") if @is_delete_cust
     @search = ""
     @search = params[:search] if params.has_key?(:search) && params[:search].length != 0
     scoped = scoped.where("custname LIKE ?", "%#{@search}%") if !@search.blank?
 
     lastanaldate_not_nil_user = scoped.where.not(lastanaldate: nil).order("lastanaldate desc")
     lastanaldate_nil_user = scoped.where(lastanaldate: nil).order("lastanaldate desc")
+
+
     @users = lastanaldate_not_nil_user + lastanaldate_nil_user
     # else
     #   scoped = Custinfo.where(ch_cd: @ch_cd)
