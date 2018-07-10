@@ -8,7 +8,7 @@ namespace :custinfo_lcareuser do
       end
     end
     n_cust_ids.each do |n_cust_id|
-      Custinfo.where(n_cust_id: n_cust_id).update_all(is_delete_cust: "Y", delete_cust_dt: Time.now().strftime("%Y-%m-%d %H:%M"))
+      Custinfo.where(n_cust_id: n_cust_id).update_all(is_delete_cust: "T", delete_cust_dt: Time.now().strftime("%Y-%m-%d %H:%M"))
     end
   end
 end

@@ -39,7 +39,7 @@ class Admin::UserController < Admin::AdminApplicationController
       @is_admin_init = false
     end
 
-    if params.has_key? :is_delete_cust and params[:is_delete_cust] == "Y"
+    if params.has_key? :is_delete_cust and params[:is_delete_cust] == "T"
       @is_delete_cust = true
     end
 
@@ -59,7 +59,7 @@ class Admin::UserController < Admin::AdminApplicationController
     scoped = scoped.where(ch_cd: @ch_cd) if !@ch_cd.blank? && @ch_cd != "ALL"
     scoped = scoped.where(address: @select_address) if !@select_address.blank?
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
-    scoped = scoped.where(is_delete_cust: "Y") if @is_delete_cust
+    scoped = scoped.where(is_delete_cust: "T") if @is_delete_cust
     @search = ""
     @search = params[:search] if params.has_key?(:search) && params[:search].length != 0
     scoped = scoped.where("custname LIKE ?", "%#{@search}%") if !@search.blank?
