@@ -1,5 +1,5 @@
 namespace :custinfo_lcareuser do
-  task :sync do
+  task :sync => [:environment] do
     n_cust_ids = []
     Custinfo.where(is_delete_cust: ["F",nil]).pluck(:n_cust_id).each do |n_cust_id|
       next if n_cust_id.nil?
