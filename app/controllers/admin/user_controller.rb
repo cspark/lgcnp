@@ -59,7 +59,7 @@ class Admin::UserController < Admin::AdminApplicationController
     scoped = scoped.where(address: @select_address) if !@select_address.blank?
     scoped = scoped.where(custserial: @custserial) if !@custserial.blank?
     scoped = scoped.where(is_delete_cust: "T") if @is_delete_cust_y == 'y'
-    scoped = scoped.where(is_delete_cust: "F") if @is_delete_cust_n == 'n'
+    scoped = scoped.where(is_delete_cust: ["F",nil]) if @is_delete_cust_n == 'n'
     @search = ""
     @search = params[:search] if params.has_key?(:search) && params[:search].length != 0
     scoped = scoped.where("custname LIKE ?", "%#{@search}%") if !@search.blank?
