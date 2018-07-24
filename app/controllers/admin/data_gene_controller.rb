@@ -152,10 +152,10 @@ class Admin::DataGeneController < Admin::AdminApplicationController
     custinfo_where_str = custinfo_where.present? ? " AND #{custinfo_where.join(' AND ')}" : ""
     #-- Custinfo.where
 
-    fcinterview_where_str = gene_barcode.present? ? " AND fcgene_interview.gene_barcode = '#{gene_barcode}'" : ""
+    # fcinterview_where_str = gene_barcode.present? ? " AND fcgene_interview.gene_barcode = '#{gene_barcode}'" : ""
 
     scoped = Fcdata.joins("INNER JOIN custinfo ON custinfo.custserial = fcdata.custserial #{custinfo_where_str}")
-    scoped = scoped.joins("INNER JOIN fcgene_interview ON fcgene_interview.custserial = fcdata.custserial #{fcinterview_where_str}")
+    # scoped = scoped.joins("INNER JOIN fcgene_interview ON fcgene_interview.custserial = fcdata.custserial #{fcinterview_where_str}")
 
     scoped = scoped.where(ch_cd: @ch_array)
     scoped = scoped.where("fcdata.shop_cd LIKE '%#{@shop_cd}%'") if !@shop_cd.blank?

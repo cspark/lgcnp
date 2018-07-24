@@ -1,98 +1,98 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "Fcdata") do |sheet|
-    sheet.add_row @excel_name
-    @fcdatas_excel.each do |fcdata|
-        interview = fcdata.fcgene_interviews.first
-        custinfo = Custinfo.where(custserial: fcdata.custserial).first
+  sheet.add_row @excel_name
+  @fcdatas_excel.each do |fcdata|
+    interview = fcdata.fcgene_interviews.first
+    custinfo = Custinfo.where(custserial: fcdata.custserial).first
 
-        if !custinfo.nil?
-          if !custinfo.custname.nil?
-            begin
-              userName = URI.decode(custinfo.custname)
-              tempUserName = ""
-              i = 0
-              if userName.length == 2
-                tempUserName += userName.slice(0, 1)
-                tempUserName += "*"
-              else
-                userName.each_char do |character|
-                  if i == 0
-                    tempUserName += userName.slice(0, 1)
-                  elsif i == userName.length - 1
-                    tempUserName += userName.slice(userName.length - 1, userName.length)
-                  else
-                    tempUserName += "*"
-                  end
-                  i += 1
-                end
-              end
-              userName = tempUserName
-            rescue
-              userName = user.custname
-            end
+    if !custinfo.nil?
+      if !custinfo.custname.nil?
+        begin
+          userName = URI.decode(custinfo.custname)
+          tempUserName = ""
+          i = 0
+          if userName.length == 2
+            tempUserName += userName.slice(0, 1)
+            tempUserName += "*"
           else
-           userName = ""
-          end
-
-          address = ""
-          if !custinfo.address.nil?
-            if custinfo.address == "10"
-              address = "서울특별시"
-            elsif custinfo.address == "11"
-              address = "인천광역시"
-            elsif custinfo.address == "12"
-              address = "경기도"
-            elsif custinfo.address == "13"
-              address = "강원도"
-            elsif custinfo.address == "14"
-              address = "대전광역시"
-            elsif custinfo.address == "15"
-              address = "세종특별자치시"
-            elsif custinfo.address == "16"
-              address = "충청북도"
-            elsif custinfo.address == "17"
-              address = "충청남도"
-            elsif custinfo.address == "18"
-              address = "대구광역시"
-            elsif custinfo.address == "19"
-              address = "경상북도"
-            elsif custinfo.address == "20"
-              address = "울산광역시"
-            elsif custinfo.address == "21"
-              address = "부산광역시"
-            elsif custinfo.address == "22"
-              address = "경상남도"
-            elsif custinfo.address == "23"
-              address = "광주광역시"
-            elsif custinfo.address == "24"
-              address = "전라남도"
-            elsif custinfo.address == "25"
-              address = "전라북도"
-            elsif custinfo.address == "26"
-              address = "제주도"
-            elsif custinfo.address == "27"
-              address = "기타"
+            userName.each_char do |character|
+              if i == 0
+                tempUserName += userName.slice(0, 1)
+              elsif i == userName.length - 1
+                tempUserName += userName.slice(userName.length - 1, userName.length)
+              else
+                tempUserName += "*"
+              end
+              i += 1
             end
           end
-
-          flag = "F"
-          if fcdata.flag == "T"
-            flag = "T"
-          end
-
-          sheet.add_row [flag, fcdata.custserial.to_i, userName, Date.current.year - custinfo.birthyy.to_i - 1, custinfo.sex, interview.try(:gene_barcode).to_i, fcdata.shop_cd, custinfo.birthyy+"-"+custinfo.birthmm+"-"+custinfo.birthdd, fcdata.measureno.to_i, fcdata.ch_cd, fcdata.faceno, fcdata.measuredate, fcdata.uptdate,
-          address, interview.try(:q1_height), interview.try(:q1_weight), interview.try(:q2), interview.try(:q3), interview.try(:q4), interview.try(:q5), interview.try(:q6), interview.try(:q7), interview.try(:q8), interview.try(:q9), interview.try(:q10), interview.try(:q11), interview.try(:q12), interview.try(:q13), interview.try(:q14), interview.try(:q15_nation), interview.try(:q15_birth_nation),
-          fcdata.mo_1, fcdata.mo_7, fcdata.mo_8,
-          fcdata.pr_1.to_i, fcdata.pr_2.to_i, fcdata.pr_7.to_i, fcdata.pr_8.to_i, fcdata.pr_avr.to_i, fcdata.wr_3.to_i, fcdata.wr_4.to_i, fcdata.wr_5.to_i, fcdata.wr_6.to_i, fcdata.wr_avr.to_i,
-          fcdata.el_7.to_i, fcdata.el_8.to_i, fcdata.el_avr.to_i, fcdata.el_angle_7, fcdata.el_angle_8, fcdata.sb_1.to_i, fcdata.sb_2.to_i, fcdata.sb_7.to_i, fcdata.sb_8.to_i,
-          fcdata.sb_avr.to_i, fcdata.pp_1.to_i, fcdata.pp_2.to_i, fcdata.pp_7.to_i, fcdata.pp_8.to_i, fcdata.pp_avr.to_i, fcdata.pp_ratio_1.to_i, fcdata.pp_ratio_2.to_i, fcdata.pp_ratio_7.to_i, fcdata.pp_ratio_8.to_i,
-          fcdata.pp_ratio_avr.to_i, fcdata.sp_pl_1.to_i, fcdata.sp_pl_2.to_i, fcdata.sp_pl_3.to_i, fcdata.sp_pl_4.to_i, fcdata.sp_pl_5.to_i, fcdata.sp_pl_6.to_i, fcdata.sp_pl_7.to_i, fcdata.sp_pl_8.to_i, fcdata.sp_pl_avr.to_i,
-          fcdata.sp_uv_1.to_i, fcdata.sp_uv_2.to_i, fcdata.sp_uv_3.to_i, fcdata.sp_uv_4.to_i, fcdata.sp_uv_5.to_i, fcdata.sp_uv_6.to_i, fcdata.sp_uv_7.to_i, fcdata.sp_uv_8.to_i, fcdata.sp_uv_avr.to_i,
-          fcdata.sk_c_1.to_i, fcdata.sk_c_2.to_i, fcdata.sk_c_4.to_i, fcdata.sk_c_6.to_i, fcdata.sk_c_7.to_i, fcdata.sk_c_8.to_i, fcdata.sk_c_avr.to_i,
-          fcdata.sk_r_1.to_i, fcdata.sk_r_2.to_i, fcdata.sk_r_4.to_i, fcdata.sk_r_6.to_i, fcdata.sk_r_7.to_i, fcdata.sk_r_8.to_i, fcdata.sk_r_avr.to_i, fcdata.sk_g_1.to_i, fcdata.sk_g_2.to_i, fcdata.sk_g_4.to_i, fcdata.sk_g_6.to_i, fcdata.sk_g_7.to_i, fcdata.sk_g_8.to_i,
-          fcdata.sk_g_avr.to_i, fcdata.sk_b_1.to_i, fcdata.sk_b_2.to_i, fcdata.sk_b_4.to_i, fcdata.sk_b_6.to_i, fcdata.sk_b_7.to_i, fcdata.sk_b_8.to_i, fcdata.sk_b_avr.to_i,
-          fcdata.lab_l, fcdata.lab_a, fcdata.lab_b, fcdata.e_sebum_t, fcdata.e_sebum_u,
-          fcdata.colortype.to_i, fcdata.suntype.to_i, fcdata.skintype, fcdata.m_skintype, fcdata.score_r, fcdata.score_l, fcdata.e_porphyrin_t.to_i, fcdata.e_porphyrin_u.to_i]
+          userName = tempUserName
+        rescue
+          userName = user.custname
         end
+      else
+       userName = ""
+      end
+
+      address = ""
+      if !custinfo.address.nil?
+        if custinfo.address == "10"
+          address = "서울특별시"
+        elsif custinfo.address == "11"
+          address = "인천광역시"
+        elsif custinfo.address == "12"
+          address = "경기도"
+        elsif custinfo.address == "13"
+          address = "강원도"
+        elsif custinfo.address == "14"
+          address = "대전광역시"
+        elsif custinfo.address == "15"
+          address = "세종특별자치시"
+        elsif custinfo.address == "16"
+          address = "충청북도"
+        elsif custinfo.address == "17"
+          address = "충청남도"
+        elsif custinfo.address == "18"
+          address = "대구광역시"
+        elsif custinfo.address == "19"
+          address = "경상북도"
+        elsif custinfo.address == "20"
+          address = "울산광역시"
+        elsif custinfo.address == "21"
+          address = "부산광역시"
+        elsif custinfo.address == "22"
+          address = "경상남도"
+        elsif custinfo.address == "23"
+          address = "광주광역시"
+        elsif custinfo.address == "24"
+          address = "전라남도"
+        elsif custinfo.address == "25"
+          address = "전라북도"
+        elsif custinfo.address == "26"
+          address = "제주도"
+        elsif custinfo.address == "27"
+          address = "기타"
+        end
+      end
+
+      flag = "F"
+      if fcdata.flag == "T"
+        flag = "T"
+      end
+
+      sheet.add_row [flag, fcdata.custserial.to_i, userName, Date.current.year - custinfo.birthyy.to_i - 1, custinfo.sex, interview.try(:gene_barcode).to_i, fcdata.shop_cd, "#{custinfo.birthyy}-#{custinfo.birthmm}-#{custinfo.birthdd}", fcdata.measureno.to_i, fcdata.ch_cd, fcdata.faceno, fcdata.measuredate, fcdata.uptdate,
+      address, interview.try(:q1_height), interview.try(:q1_weight), interview.try(:q2), interview.try(:q3), interview.try(:q4), interview.try(:q5), interview.try(:q6), interview.try(:q7), interview.try(:q8), interview.try(:q9), interview.try(:q10), interview.try(:q11), interview.try(:q12), interview.try(:q13), interview.try(:q14), interview.try(:q15_nation), interview.try(:q15_birth_nation),
+      fcdata.mo_1, fcdata.mo_7, fcdata.mo_8,
+      fcdata.pr_1.to_i, fcdata.pr_2.to_i, fcdata.pr_7.to_i, fcdata.pr_8.to_i, fcdata.pr_avr.to_i, fcdata.wr_3.to_i, fcdata.wr_4.to_i, fcdata.wr_5.to_i, fcdata.wr_6.to_i, fcdata.wr_avr.to_i,
+      fcdata.el_7.to_i, fcdata.el_8.to_i, fcdata.el_avr.to_i, fcdata.el_angle_7, fcdata.el_angle_8, fcdata.sb_1.to_i, fcdata.sb_2.to_i, fcdata.sb_7.to_i, fcdata.sb_8.to_i,
+      fcdata.sb_avr.to_i, fcdata.pp_1.to_i, fcdata.pp_2.to_i, fcdata.pp_7.to_i, fcdata.pp_8.to_i, fcdata.pp_avr.to_i, fcdata.pp_ratio_1.to_i, fcdata.pp_ratio_2.to_i, fcdata.pp_ratio_7.to_i, fcdata.pp_ratio_8.to_i,
+      fcdata.pp_ratio_avr.to_i, fcdata.sp_pl_1.to_i, fcdata.sp_pl_2.to_i, fcdata.sp_pl_3.to_i, fcdata.sp_pl_4.to_i, fcdata.sp_pl_5.to_i, fcdata.sp_pl_6.to_i, fcdata.sp_pl_7.to_i, fcdata.sp_pl_8.to_i, fcdata.sp_pl_avr.to_i,
+      fcdata.sp_uv_1.to_i, fcdata.sp_uv_2.to_i, fcdata.sp_uv_3.to_i, fcdata.sp_uv_4.to_i, fcdata.sp_uv_5.to_i, fcdata.sp_uv_6.to_i, fcdata.sp_uv_7.to_i, fcdata.sp_uv_8.to_i, fcdata.sp_uv_avr.to_i,
+      fcdata.sk_c_1.to_i, fcdata.sk_c_2.to_i, fcdata.sk_c_4.to_i, fcdata.sk_c_6.to_i, fcdata.sk_c_7.to_i, fcdata.sk_c_8.to_i, fcdata.sk_c_avr.to_i,
+      fcdata.sk_r_1.to_i, fcdata.sk_r_2.to_i, fcdata.sk_r_4.to_i, fcdata.sk_r_6.to_i, fcdata.sk_r_7.to_i, fcdata.sk_r_8.to_i, fcdata.sk_r_avr.to_i, fcdata.sk_g_1.to_i, fcdata.sk_g_2.to_i, fcdata.sk_g_4.to_i, fcdata.sk_g_6.to_i, fcdata.sk_g_7.to_i, fcdata.sk_g_8.to_i,
+      fcdata.sk_g_avr.to_i, fcdata.sk_b_1.to_i, fcdata.sk_b_2.to_i, fcdata.sk_b_4.to_i, fcdata.sk_b_6.to_i, fcdata.sk_b_7.to_i, fcdata.sk_b_8.to_i, fcdata.sk_b_avr.to_i,
+      fcdata.lab_l, fcdata.lab_a, fcdata.lab_b, fcdata.e_sebum_t, fcdata.e_sebum_u,
+      fcdata.colortype.to_i, fcdata.suntype.to_i, fcdata.skintype, fcdata.m_skintype, fcdata.score_r, fcdata.score_l, fcdata.e_porphyrin_t.to_i, fcdata.e_porphyrin_u.to_i]
     end
+  end
 end

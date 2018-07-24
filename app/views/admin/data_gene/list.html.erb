@@ -648,16 +648,16 @@
         </tr>
       </thead>
       <tbody>
-        <% if !@is_admin_init %>
-          <% @fcdatas.each do |fcdata| %>
-            <%= render partial: "admin/data_gene/item", locals: { fcdata: fcdata } %>
+        <% if !@is_admin_init and false %>
+          <% @fcdatas.each do |fcdata| %-->
+            < % render partial: "admin/data_gene/item", locals: { fcdata: fcdata } %>
           <% end %>
         <% end %>
       </tbody>
     </table>
 
     <div>
-      <%= paginate @fcdatas %>
+      <% #= paginate @fcdatas %>
     </div>
   </body>
 </html>
