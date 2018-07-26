@@ -1,13 +1,13 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "FcgeneInterview") do |sheet|
-  survey = TbSurvey.last
+  survey = TbSurvey.second
   groupnames = []
   question_ids = []
   TbSurveyGroup.where(survey_serial: survey.survey_serial).order(:group_order).each do |group|
     count = 1
     TbSurveyQuestion.where(group_serial: group.group_serial).order(:question_order).each do |q|
       groupnames << "#{group.group_title} (#{count})"
-      question_ids = q.id
+      question_ids << q.id
       count = count + 1
     end
   end
@@ -44,9 +44,10 @@ wb.add_worksheet(name: "FcgeneInterview") do |sheet|
     end
 
     answers = []
-    if TbUserSurvey.where(custserial: custinfo.custserial).count > 0
+    custserial = custinfo.custserial.to_i
+    if TbUserSurvey.where(custserial: custserial).count > 0
       question_ids.each do |qid|
-        usurvey = TbUserSurvey.where(custserial: custinfo.custserial, question_serial: qid).first
+        usurvey = TbUserSurvey.where(custserial: custserial, question_serial: qid).first
         if usurvey.nil?
           answers << ""
         else

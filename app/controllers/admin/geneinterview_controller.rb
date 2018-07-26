@@ -238,7 +238,7 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthmm) >= ? AND to_number(custinfo.birthmm) < ?", @start_birthmm, @end_birthmm) if !@start_birthmm.blank? && !@end_birthmm.blank?
 
     if @gen_complete_y == "y"
-      scoped = scoped.joins("INNER JOIN tb_user_survey ON tb_user_survey.custserial = fcgene_interview.custserial")
+      scoped = scoped.joins("INNER JOIN tb_user_survey ON tb_user_survey.custserial = to_char(fcgene_interview.custserial)")
     end
     scoped = scoped.order("fcgene_interview.uptdate desc") if Rails.env.production? || Rails.env.staging?
 
