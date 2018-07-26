@@ -1,0 +1,65 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "FcgeneInterview") do |sheet|
+  survey = TbSurvey.last
+  groupnames = []
+  question_ids = []
+  TbSurveyGroup.where(survey_serial: survey.survey_serial).order(:group_order).each do |group|
+    count = 1
+    TbSurveyQuestion.where(group_serial: group.group_serial).order(:question_order).each do |q|
+      groupnames << "#{group.group_title} (#{count})"
+      question_ids = q.id
+      count = count + 1
+    end
+  end
+  sheet.add_row ["고객번호","이름","바코드","매장코드","채널","생년월일","설문1(키)","설문1(몸무게)""설문2","설문3","설문4","설문5","설문6","설문7","설문8","설문9","설문10","설문11","설문12","설문13","설문14","설문15(국가)","설문16(출생지)"]+groupnames
+  @fcgene_interviews.each do |interview|
+    custinfo = Custinfo.where(custserial: interview.custserial).first
+    next if custinfo.nil?
+    if !custinfo.nil? && !custinfo.custname.nil?
+      begin
+        userName = URI.decode(custinfo.custname)
+        tempUserName = ""
+        i = 0
+        if userName.length == 2
+          tempUserName += userName.slice(0, 1)
+          tempUserName += "*"
+        else
+          userName.each_char do |character|
+            if i == 0
+              tempUserName += userName.slice(0, 1)
+            elsif i == userName.length - 1
+              tempUserName += userName.slice(userName.length - 1, userName.length)
+            else
+              tempUserName += "*"
+            end
+            i += 1
+          end
+        end
+        userName = tempUserName
+      rescue
+        userName = user.custname
+      end
+    else
+     userName = ""
+    end
+
+    answers = []
+    if TbUserSurvey.where(custserial: custinfo.custserial).count > 0
+      question_ids.each do |qid|
+        usurvey = TbUserSurvey.where(custserial: custinfo.custserial, question_serial: qid).first
+        if usurvey.nil?
+          answers << ""
+        else
+          answer = TbSurveyAnswer.where(answer_serial:usurvey.answer_serial).first
+          if answer.nil?
+            answers << ""
+          else
+            answers << answer.answer_type
+          end
+        end
+      end
+    end
+
+    sheet.add_row [interview.custserial.to_i, userName,interview.gene_barcode,interview.shop_cd,interview.ch_cd,"#{custinfo.birthyy}-#{custinfo.birthmm}-#{custinfo.birth}",interview.q1_height,interview.q1_weight,interview.q2,interview.q3,interview.q4,interview.q5,interview.q6,interview.q7,interview.q8,interview.q9,interview.q10,interview.q11,interview.q12,interview.q13,interview.q14,interview.q15_nation,interview.q15_birth_nation] + answers
+  end
+end

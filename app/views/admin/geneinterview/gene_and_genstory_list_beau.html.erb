@@ -61,7 +61,7 @@
         <input type="checkbox" name="check_box" value="ONEP" id="ONEP" style="float:left; margin-top:9px;">
 
         <p style="float:right; margin-right:20px;">
-          <%= link_to "Excel", admin_geneinterview_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
+          <%= link_to "Excel", admin_gene_and_genstory_list_beau_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
           :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial,
           :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
           :select_channel => @ch_cd, :select_shop => @shop_cd, :gene_barcode => @gene_barcode, :isExcel => true), :class => "btn btn-success" %>

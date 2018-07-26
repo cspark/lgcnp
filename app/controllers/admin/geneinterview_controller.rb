@@ -232,9 +232,9 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     scoped = scoped.order("fcgene_interview.uptdate desc") if Rails.env.production? || Rails.env.staging?
 
     @fcgene_interviews = scoped
-    @fcgene_interviews_excel = @fcgene_interviews
+    @fcgene_interviews_excel = scoped
     @count = @fcgene_interviews.count
-    @fcgene_interviews = Kaminari.paginate_array(@fcgene_interviews).page(params[:page]).per(5)
+    @fcgene_interviews = []
   end
 
   def show
