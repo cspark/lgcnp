@@ -168,6 +168,14 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     @is_flag = nil
     @is_flag = params[:is_flag] if !params[:is_flag].blank?
 
+    @gen_complete_y = ""
+    @gen_complete_n = ""
+    if params.has_key?(:gen_complete_y) and params[:gen_complete_y] == "y"
+      @gen_complete_y = "y"
+    end
+    if params.has_key?(:gen_complete_n) and params[:gen_complete_n] == "n"
+      @gen_complete_n = "n"
+    end
     @filtering = ""
     if !params.has_key?(:filtering) || params[:filtering].blank?
       @filtering = "filter_all_gene filter_all_skin filter_all_hair filter_all_mouth filter_all_tired filter_all_climacteric filter_all_born"
@@ -229,6 +237,9 @@ class Admin::GeneinterviewController < Admin::AdminApplicationController
     scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthyy) >= ? AND to_number(custinfo.birthyy) < ?", @start_birthyy, @end_birthyy) if !@start_birthyy.blank? && !@end_birthyy.blank?
     scoped = scoped.joins(:custinfo).where("to_number(custinfo.birthmm) >= ? AND to_number(custinfo.birthmm) < ?", @start_birthmm, @end_birthmm) if !@start_birthmm.blank? && !@end_birthmm.blank?
 
+    if @gen_complete_y == "y"
+      scoped = scoped.joins("INNER JOIN tb_user_survey ON tb_user_survey.custserial = fcgene_interview.custserial")
+    end
     scoped = scoped.order("fcgene_interview.uptdate desc") if Rails.env.production? || Rails.env.staging?
 
     @fcgene_interviews = scoped

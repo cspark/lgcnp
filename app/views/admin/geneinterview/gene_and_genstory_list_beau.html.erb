@@ -64,7 +64,7 @@
           <%= link_to "Excel", admin_gene_and_genstory_list_beau_path(format: "xlsx", :start_date => @start_date, :end_date => @end_date,
           :select_sex => @select_sex, :start_age => @start_age, :end_age => @end_age, :name => @name, :custserial => @custserial,
           :start_birthyy => @start_birthyy, :end_birthyy => @end_birthyy, :start_birthmm => @start_birthmm, :end_birthmm => @end_birthmm,
-          :select_channel => @ch_cd, :select_shop => @shop_cd, :gene_barcode => @gene_barcode, :isExcel => true), :class => "btn btn-success" %>
+          :select_channel => @ch_cd, :select_shop => @shop_cd, :gene_barcode => @gene_barcode, :isExcel => true, :gen_complete_y => @gen_complete_y, :gen_complete_n => @gen_complete_n), :class => "btn btn-success" %>
         </p>
       </div><br><br>
 
@@ -122,9 +122,9 @@
 
         <p style="float:left; margin-left: 20px; margin-top: 5px;"><젠스토리설문 완료여부>:&nbsp;</p>
         <p style="float:left; margin-left: 5px; margin-top: 5px;">예&nbsp;</p>
-        <input type="checkbox" name="check_box" value="BEAU" id="gen_complete_y" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="gen_complete_y" value="y" id="gen_complete_y" style="float:left; margin-top:9px;">
         <p style="float:left; margin-left: 10px; margin-top: 5px;">아니요&nbsp;</p>
-        <input type="checkbox" name="check_box" value="TMR" id="gen_complete_n" style="float:left; margin-top:9px;">
+        <input type="checkbox" name="gen_complete_n" value="n" id="gen_complete_n" style="float:left; margin-top:9px;">
       </div>
 
       <div style="margin-top:5px; height:40px;">
@@ -236,14 +236,6 @@
             $("input:checkbox[value=ONEP]").prop("checked", true);
           <% else %>
             $("input:checkbox[value=ONEP]").prop("checked", false);
-          <% end %>
-
-          <% if @ch_cd == "" && @custserial.nil? %>
-            $("input:checkbox[name=check_box]").prop("checked", true);
-          <% end %>
-
-          <% if @ch_cd == "" && @custserial.nil? %>
-            $("input:checkbox[name=check_box]").prop("checked", true);
           <% end %>
 
 
@@ -387,6 +379,14 @@
           document.getElementById("gene_barcode").value = '<%= @gene_barcode %>'
         <% end %>
 
+        <% if @gen_complete_y.present? and @gen_complete_y == "y" %>
+          $("input:checkbox[id=gen_complete_y]").prop("checked", true);
+        <% end %>
+        <% if @gen_complete_n.present? and @gen_complete_n == "n" %>
+          $("input:checkbox[id=gen_complete_n]").prop("checked", true);
+        <% end %>
+
+
         <% if @is_init == true %>
           document.getElementById("available_data_y").checked = true
           document.getElementById("available_data_n").checked = true
@@ -507,6 +507,19 @@
               filtering.push(this.value)
             }
         });
+        var gen_complete_y = ""
+        $('input:checkbox[id="gen_complete_y"]').each(function() {
+            if(this.checked){
+              gen_complete_y="y"
+            }
+        });
+
+        var gen_complete_n = ""
+        $('input:checkbox[id="gen_complete_n"]').each(function() {
+            if(this.checked){
+              gen_complete_n="n"
+            }
+        });
 
         url = ""
         url = "/admin/gene_and_genstory_list_beau?name=" + encodeURI(encodeURI($("#name").val()));
@@ -525,6 +538,8 @@
         url += "&gene_barcode=" +$("#gene_barcode").val();
         url += "&is_flag=" + is_flag;
         url += "&filtering=" + filtering;
+        url += "&gen_complete_y=" + gen_complete_y;
+        url += "&gen_complete_n=" + gen_complete_n;
 
 
         location.href = url;
