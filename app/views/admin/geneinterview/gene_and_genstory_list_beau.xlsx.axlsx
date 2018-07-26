@@ -12,7 +12,7 @@ wb.add_worksheet(name: "FcgeneInterview") do |sheet|
     end
   end
   sheet.add_row ["고객번호","이름","바코드","매장코드","채널","생년월일","설문1(키)","설문1(몸무게)""설문2","설문3","설문4","설문5","설문6","설문7","설문8","설문9","설문10","설문11","설문12","설문13","설문14","설문15(국가)","설문16(출생지)"]+groupnames
-  @fcgene_interviews.each do |interview|
+  @fcgene_interviews_excel.each do |interview|
     custinfo = Custinfo.where(custserial: interview.custserial).first
     next if custinfo.nil?
     if !custinfo.nil? && !custinfo.custname.nil?
@@ -60,6 +60,6 @@ wb.add_worksheet(name: "FcgeneInterview") do |sheet|
       end
     end
 
-    sheet.add_row [interview.custserial.to_i, userName,interview.gene_barcode,interview.shop_cd,interview.ch_cd,"#{custinfo.birthyy}-#{custinfo.birthmm}-#{custinfo.birth}",interview.q1_height,interview.q1_weight,interview.q2,interview.q3,interview.q4,interview.q5,interview.q6,interview.q7,interview.q8,interview.q9,interview.q10,interview.q11,interview.q12,interview.q13,interview.q14,interview.q15_nation,interview.q15_birth_nation] + answers
+    sheet.add_row [interview.custserial.to_i, userName,interview.gene_barcode,interview.shop_cd,interview.ch_cd,"#{custinfo.birthyy}-#{custinfo.birthmm}-#{custinfo.birthdd}",interview.q1_height,interview.q1_weight,interview.q2,interview.q3,interview.q4,interview.q5,interview.q6,interview.q7,interview.q8,interview.q9,interview.q10,interview.q11,interview.q12,interview.q13,interview.q14,interview.q15_nation,interview.q15_birth_nation] + answers
   end
 end
