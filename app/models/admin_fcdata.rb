@@ -122,7 +122,15 @@ class AdminFcdata < ApplicationRecord
        worry_skin_new_1: worry_skin_new_1,
        worry_skin_new_2: worry_skin_new_2,
        uf_l0: uf_l0,
-       uf_l_total: uf_l_total
+       uf_l_total: uf_l_total,
+       pd_serial: pd_serial,
+       pd_camera: pd_camera,
+       pd_model: pd_model,
+       is_anal_update: is_anal_update,
+       err_flash: err_flash,
+       el_new_7: el_new_7,
+       el_new_8: el_new_8,
+       el_new_avr: el_new_avr
     }
   end
 
