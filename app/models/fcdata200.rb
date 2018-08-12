@@ -135,4 +135,5 @@ class Fcdata200 < ApplicationRecord
       el_new_8: el_new_8,
       el_new_avr: el_new_avr
     }
+  end
 end
