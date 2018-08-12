@@ -134,8 +134,8 @@ Rails.application.routes.draw do
           put 'gene_barcode_update'
         end
       end
-      resources :beau_fcdata do
-      end
+      resources :beau_fcdata
+      resources :beau_fcdata200
       resources :beau_fcinterview do
       end
       resources :beau_fcpos do

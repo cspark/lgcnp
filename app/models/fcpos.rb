@@ -59,4 +59,11 @@ class Fcpos < ApplicationRecord
       shop_cd: shop_cd
     }
   end
+
+  def self.list(custserial: nil, measureno: nil)
+    scoped = Fcpos.all
+    scoped = scoped.where(custserial: custserial) if custserial.present?
+    scoped = scoped.where(measureno: measureno) if measureno.present?
+    scoped.order('measureno DESC')
+  end
 end

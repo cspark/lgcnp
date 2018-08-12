@@ -1,4 +1,13 @@
 class Api::Beau::BeauFcposController < Api::ApplicationController
+  def show
+    list = Fcpos.list(custserial: params[:id], measureno: params[:measureno])
+    if list.count > 0
+      render json: api_hash_for_list(list), status: :ok
+    else
+      render :text => "AdminFcdata is not exist!!!", status: 204
+    end
+  end
+
   def create
     # Data 분석이 완료 된 후 해당 고객 설문값 Insert
     if !Fcpos.where(custserial: params[:custserial], ch_cd: params[:ch_cd], measureno: params[:measureno]).first.nil?
