@@ -18,9 +18,12 @@ class Api::Beau::BeauFcdataController < Api::ApplicationController
     t = Time.now
     fcdata.uptdate = t.to_s.split(" ")[0]
 
-    Rails.logger.info "!! 23 !! #{permitted_params}"
-
     user = Custinfo.where(custserial: fcdata.custserial).first
+    if user.nil?
+      render text: "Custinfo not found. custserial = #{fcdata.custserial}", status: 204
+      return
+    end
+
     if fcdata.m_skintype != 0 && (fcdata.ch_cd == "BEAU" || fcdata.ch_cd == "TMR" || fcdata.ch_cd == "MART" || fcdata.ch_cd == "LABO" || fcdata.ch_cd == "ONEP")
       # 메이크업모드 일 때
       if user.sex == "F"
