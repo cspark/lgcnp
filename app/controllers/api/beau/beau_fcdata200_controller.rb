@@ -41,7 +41,7 @@ class Api::Beau::BeauFcdata200Controller < Api::ApplicationController
   end
 
   def update
-    fcdata = Fcdata200.find_by(custserial: params[:custserial],ch_cd:params[:ch_cd],measureno:params[:measureno])
+    fcdata = Fcdata200.find_by(custserial: params[:id],ch_cd:params[:ch_cd],measureno:params[:measureno])
     if fcdata.present?
       if fcdata.update permitted_params
         render json: fcdata.to_api_hash, status: :ok
