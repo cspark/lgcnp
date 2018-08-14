@@ -2,6 +2,7 @@ require 'rmagick'
 
 class AdminFcdata < ApplicationRecord
   self.table_name = "fcdata"
+  self.primary_key = :custserial,:ch_cd,:measureno if Rails.env.production? || Rails.env.staging?
 
   def to_api_hash
     {
