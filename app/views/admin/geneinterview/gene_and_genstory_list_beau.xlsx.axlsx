@@ -1,6 +1,6 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "FcgeneInterview") do |sheet|
-  survey = TbSurvey.second
+  survey = TbSurvey.where("survey_st_dt < ?", Time.zone.now.to_s).where("survey_ed_dt > ?",Time.zone.now.to_s).first
   groupnames = []
   question_ids = []
   TbSurveyGroup.where(survey_serial: survey.survey_serial).order(:group_order).each do |group|
